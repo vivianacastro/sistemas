@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<div id="divBusqueda">
+    <div class="solicitud_requerid">Campos obligatorios (<font color="red">*</font>) </div>
+    <br>
+    <div id="divLabelConsulta"><font color="red">*</font>Nombre del usuario: </div>
+
+    <div id="divTextConsulta">
+        <input type="text" id="search" name="search" title="Ingrese el nombre del usuario ó login" placeholder="Ingrese el nombre o login"/>
+    </div>
+</div>
+
+<div id="divCrearNuevoUsuario">
+
+    <div id="divFormUsuarioNuevo">
+        
+        <div class="solicitud_requerid">Campos obligatorios (<font color="red">*</font>) </div>
+        
+        <div class="solicitud_requerid"><font color="red">*</font>Nombre completo del usuario: </div>
+        <div class="form_requerid">
+            <input class="camp_text" type="text" name="nombre_usuario" id="nombre_usuario" value="" placeholder="Ingrese el nombre del usuario" maxlength="100" />
+        </div>         
+
+        <div class="solicitud_requerid"><font color="red">*</font>Usuario: </div>
+        <div class="form_requerid">
+            <input class="camp_text" type="text" name="login" id="login" value="" placeholder="Ingrese el login de usuario" maxlength="60" />
+        </div> 
+
+        <div class="solicitud_requerid"><font color="red">*</font>Contrase&ntilde;a: </div>
+        <div class="form_requerid">
+            <input class="camp_text" type="password" name="password" id="password" value="" placeholder="*********" />
+        </div>
+
+        <div class="solicitud_requerid" id="div_r_password"><font color="red">*</font>Repita la contrase&ntilde;a: </div>
+        <div class="form_requerid">
+            <input class="camp_text" type="password" name="r_password" id="r_password" value="" placeholder="*********" />
+        </div>             
+
+        <div class="solicitud_requerid"><font color="red">*</font>Perf&iacute;l del usuario: </div>
+        <div class="form_requerid">
+            <select name="perfil" id="perfil">
+                <option value="normal" title="Perfil para usuarios/empleados">normal</option>
+                <option value="super" title="Perfil para jefes de sección">super</option>
+                <option value="admin" title="Perfil para administradores">admin</option>
+            </select>            
+        </div>  
+        
+        <div class="solicitud_requerid"><font color="red">*</font>Correo el&eacute;ctronico: </div>
+        <div class="fomr_requerid">
+            <input class="camp_text" type="email" name="correo" id="correo" value="" placeholder="Ingrese el correo eléctronico" />
+        </div>
+        <div class="solicitud_requerid"><font color="red">*</font>Tel&eacute;fono: </div>
+        <div class="fomr_requerid">
+            <input class="camp_text" type="text" name="telefono" id="telefono" value="" maxlength="10"/ placeholder="ingrese su número teléfonico">
+        </div>
+        <div class="solicitud_requerid"><font color="red">*</font>Extensi&oacute;n: </div>
+        <div class="fomr_requerid">
+            <input class="camp_text" type="text" name="extension" id="extension" value="" maxlength="4"/ placeholder="Ingrese su estensión">
+        </div>           
+
+        <div class="form_button">
+            <input type="submit" name="crear_usuario" id="crear_usuario" value="Crear" title="Crear usuario nuevo"/>
+        </div>  
+    </div>
+</div>
+
+<div id="divDialogModificacion">
+    
+    <div id="divModificacion">
+        <div class="solicitud_requerid"><b>Información del tipo de usuario</b></div>
+        <div class="solicitud_requerid">Campos obligatorios (<font color="red">*</font>) </div>
+        
+        <div class="solicitud_requerid">Id: </div>
+        <div id="campId">
+        </div>  
+        
+        <div class="solicitud_requerid">Nombre del Usuario: </div>
+        <div id="campUsuario">
+        </div>        
+        
+        <div class="solicitud_requerid">Login: </div>
+        <div id="campLogin">
+        </div>        
+        
+        <div class="solicitud_requerid"><font color="red">*</font>Perfil &oacute; Privilegios: </div>
+        <div class="form_requerid">
+            <select name="mod_perfil" id="mod_perfil">
+                <option value="normal" title="Usuarios de dependecias">normal</option>
+                <option value="super" title="Usuario administradores y jefes de la sección">super</option>
+            </select>            
+        </div>     
+        
+        <div class="divBotonMod">
+            <button id="btGuardarModUsuarioAutorizado">Guardar</button>        
+        </div>     
+    </div>   
+</div>
+    
+<div id="divOpciones">
+    <div class="divBotonOpcionU">
+        <button id="crearUsuarioAutorizado">Crear</button>        
+    </div>
+
+    <div class="divBotonOpcion">
+        <button id="buscarUsuarioAutorizado">Buscar</button>        
+    </div>
+
+    <div class="divBotonOpcion">
+        <button id="eliminarUsuarioAutorizado">Eliminar</button>        
+    </div>
+
+    <div class="divBotonOpcion">
+        <button id="modificarUsuarioAutorizado">Modificar</button>        
+    </div>     
+</div>   
+    
+<div id="divTabla">
+
+    <table class="tablaDeDatos" id="tablaUsuarios" >             
+        <thead>
+            <tr> 
+                <th></th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Login</th> 
+                <th>Perfil</th>
+                <th>Correo</th>
+                <th>Tel&eacute;fono</th>
+                <th>Extensi&oacute;n</th>
+            </tr> 
+        </thead> 
+        <tbody>  
+        </tbody> 
+    </table>        
+</div>
+    
+
+ 

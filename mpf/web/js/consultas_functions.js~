@@ -1,0 +1,1719 @@
+$(document).ready(function() {
+	
+	var arregloNumSolicitudes = []; 
+    /*
+     * Tabla que muestra todos las ordenes que hay en el sistema
+     */    
+    $("#tablaOrdenes").jqGrid({
+        colNames:['#Solicitud','Usuario', 'Sede', 'Campus','Edificio',
+            'Piso','Espacio', 'Novedad 1', 'Cantidad 1', 'Novedad 2',
+            'Cantidad 2','Novedad 3','Cantidad 3', 'Contacto', 
+            'Estado', 'Fecha', 'Impreso'],
+        colModel:[ 
+            {name:'numero_solicitud',index:'numero_solicitud', width:40, align:"center"}, 
+            {name:'usuario',index:'usuario', width:55, align:"center"}, 
+            {name:'cod_sede',index:'cod_sede', width:30, align:"center"}, 
+            {name:'codigo_campus',index:'codigo_campus', width:40, align:"center"}, 
+            {name:'codigo_edificio',index:'codigo_edificio', width:40, align:"center"}, 
+            {name:'piso',index:'piso', width:25, align:"center"},
+            {name:'espacio',index:'espacio', width:45, align:"center"},
+            {name:'cantidad1',index:'cantidad1', width:30, align:"center"},
+            {name:'descripcion1',index:'descripcion1', width:45, align:"center"},
+            {name:'cantidad2',index:'cantidad2', width:30, align:"center"},
+            {name:'descripcion2',index:'descripcion2', width:45, align:"center"},
+            {name:'cantidad3',index:'cantidad3', width:30, align:"center"},
+            {name:'descripcion3',index:'descripcion3', width:45, align:"center"},
+            {name:'contacto',index:'contacto', width:45, align:"center"},
+            {name:'estado',index:'estado', width:45, align:"center"},
+            {name:'fecha',index:'fecha', width:45, align:"center"},
+            {name:'impreso',index:'impreso', width:45, align:"center"}],
+	multiselect: true, 
+        caption: "Solicitudes de Mantenimiento"  ,
+        width: 760,
+        height: 400
+    });
+
+    /*
+     * Tabla que muestra todos las ordenes que hay en el sistema
+     */    
+    $("#tablaOrdenes2").jqGrid({
+        colNames:['#Solicitud','Usuario', 'Sede', 'Campus','Edificio',
+            'Piso', 'Cantidad 1', 'Novedad 1','Cantidad 2',
+            'Novedad 2','Cantidad 3','Novedad 3','Sistema','Estado', 'Fecha', 'Impreso'],
+        colModel:[
+            {name:'numero_solicitud',index:'numero_solicitud', width:40, align:"center"}, 
+            {name:'usuario',index:'usuario', width:55, align:"center"}, 
+            {name:'cod_sede',index:'cod_sede', width:30, align:"center"}, 
+            {name:'codigo_campus',index:'codigo_campus', width:30, align:"center"}, 
+            {name:'codigo_edificio',index:'codigo_edificio', width:30, align:"center"}, 
+            {name:'piso',index:'piso', width:25, align:"center"},
+            {name:'cantidad1',index:'cantidad1', width:30, align:"center"},
+            {name:'descripcion1',index:'descripcion1', width:45, align:"center"},
+            {name:'cantidad2',index:'cantidad2', width:30, align:"center"},
+            {name:'descripcion2',index:'descripcion2', width:45, align:"center"},
+            {name:'cantidad3',index:'cantidad3', width:30, align:"center"},
+            {name:'descripcion3',index:'descripcion3', width:45, align:"center"},
+            {name:'cod_sistema',index:'cod_sistema', width:15, align:"center"},
+            {name:'estado',index:'estado', width:45, align:"center"},
+            {name:'fecha',index:'fecha', width:45, align:"center"},
+            {name:'impreso',index:'impreso', width:45, align:"center"}],
+    multiselect: true, 
+        caption: "Solicitudes de Mantenimiento"  ,
+        width: 760,
+        height: 400
+    });  
+    
+    /*
+     * Tabla que muestra todos las ordenes que hay en el sistema
+     */    
+    $("#tablaOrdenes3").jqGrid({
+        colNames:['#Solicitud','Usuario', 'Sede', 'Campus','Edificio',
+            'Piso', 'Cantidad 1', 'Novedad 1','Cantidad 2',
+            'Novedad 2','Cantidad 3','Novedad 3','Sistema','Estado', 'Fecha', 'Impreso'],
+        colModel:[
+            {name:'numero_solicitud',index:'numero_solicitud', width:40, align:"center"}, 
+            {name:'usuario',index:'usuario', width:55, align:"center"}, 
+            {name:'cod_sede',index:'cod_sede', width:30, align:"center"}, 
+            {name:'codigo_campus',index:'codigo_campus', width:30, align:"center"}, 
+            {name:'codigo_edificio',index:'codigo_edificio', width:30, align:"center"}, 
+            {name:'piso',index:'piso', width:25, align:"center"},
+            {name:'cantidad1',index:'cantidad1', width:30, align:"center"},
+            {name:'descripcion1',index:'descripcion1', width:45, align:"center"},
+            {name:'cantidad2',index:'cantidad2', width:30, align:"center"},
+            {name:'descripcion2',index:'descripcion2', width:45, align:"center"},
+            {name:'cantidad3',index:'cantidad3', width:30, align:"center"},
+            {name:'descripcion3',index:'descripcion3', width:45, align:"center"},
+            {name:'cod_sistema',index:'cod_sistema', width:15, align:"center"},
+            {name:'estado',index:'estado', width:45, align:"center"},
+            {name:'fecha',index:'fecha', width:45, align:"center"},
+            {name:'impreso',index:'impreso', width:45, align:"center"}],
+    multiselect: true, 
+        caption: "Solicitudes de Mantenimiento"  ,
+        width: 760,
+        height: 400
+    });  
+    
+    /*
+     * Tabla que muestra todos las ordenes que hay en el sistema
+     */    
+    $("#tablaHistorial").jqGrid({
+        colNames:['#', 'Usuario', 'Sede', 'Campus','Edificio',
+            'Piso','Espacio', 'Novedad 1', 'Cantidad 1', 'Novedad 2',
+            'Cantidad 2','Novedad 3','Cantidad 3', 'Contacto', 
+            'Estado', 'Fecha'],
+        colModel:[ 
+            {name:'numero_solicitud',index:'numero_solicitud', width:28, align:"center"}, 
+            {name:'usuario',index:'usuario', width:35, align:"center"}, 
+            {name:'cod_sede',index:'cod_sede', width:30, align:"center"}, 
+            {name:'codigo_campus',index:'codigo_campus', width:40, align:"center"}, 
+            {name:'codigo_edificio',index:'codigo_edificio', width:40, align:"center"}, 
+            {name:'piso',index:'piso', width:25, align:"center"},
+            {name:'espacio',index:'espacio', width:45, align:"center"},
+            {name:'cantidad1',index:'cantidad1', width:40, align:"center"},
+            {name:'descripcion1',index:'descripcion1', width:50, align:"center"},
+            {name:'cantidad2',index:'cantidad2', width:40, align:"center"},
+            {name:'descripcion2',index:'descripcion2', width:50, align:"center"},
+            {name:'cantidad3',index:'cantidad3', width:40, align:"center"},
+            {name:'descripcion3',index:'descripcion3', width:50, align:"center"},
+            {name:'contacto',index:'contacto', width:45, align:"center"},
+            {name:'estado',index:'estado', width:45, align:"center"},
+            {name:'fecha',index:'fecha', width:35, align:"center"}],
+	multiselect: true, 
+        caption: "Solicitudes de Mantenimiento"  ,
+        width: 760,
+        height: 400
+    });
+
+
+$("#loader").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 100,
+    height: 100
+});
+
+/***********************************Funciones de los formularios de consulta consultas*********************************************/
+    /**
+    * Función que realiza la consulta de una orden por medio de ajax.
+    * @param {string} consulta, Cadena que representa la palabra clave.
+    * @returns {data}
+    **/
+    function buscarOrdenes(consulta) {
+        var dataResult;
+
+        try
+        {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=buscar_orden",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function(error){
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                beforeSend: function() {
+                    $("#loader").dialog("open");
+                    $('#loader').html('<img id="" src="../web/images/loading.gif"/>');
+                // $("#loader").dialog("close");   
+                },
+                success: function(data){
+                    dataResult = data;
+                    mostrarMensaje(dataResult.mensaje);
+                    $("#loader").dialog("close");
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+
+    /**
+    * Función que realiza la consulta de una orden por medio de ajax.
+    * @param {string} consulta, Cadena que representa la palabra clave.
+    * @returns {data}
+    **/
+    function buscarOrdenesParametros(consulta) {
+        var dataResult;
+        var dataSave = {};
+
+        var campus = $.trim(consulta[0]);
+        var sistema = $.trim(consulta[1]);
+        var fecha = $.trim(consulta[2]);
+
+        dataSave['campus']= campus;
+        dataSave['sistema'] = sistema;
+        dataSave['fecha'] = fecha;
+
+        var jObject = JSON.stringify(dataSave);
+
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=buscar_orden_parametros",
+                data: {jObject:  jObject},
+                dataType: "json",
+                async: false,
+                error: function(error){
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function(data){  	
+                    dataResult = data;
+                    console.log(dataResult);
+                    mostrarMensaje(dataResult.mensaje);
+                }
+            });
+            return dataResult;
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+    
+    /**
+    * Función que realiza la consulta de una orden por medio de ajax.
+    * @param {string} consulta, Cadena que representa la palabra clave.
+    * @returns {data}
+    **/
+    function obtenerEstadisticas(consulta) {
+        var dataResult;
+
+        try
+        {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=obtener_estadisticas",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function(error){
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function(data){
+                    dataResult = data;
+                    mostrarMensaje(dataResult.mensaje);
+                    console.log(dataResult);
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+
+    /**
+    * Función que realiza la consulta de una orden por medio de ajax.
+    * @param {string} consulta, Cadena que representa la palabra clave.
+    * @returns {data}
+    **/
+    function buscarOrdenesParametrosAvanzados(consulta)
+    {
+        var dataResult;
+        var dataSave = {};
+
+        var campus = $.trim(consulta[0]);
+        var edificio = $.trim(consulta[1]);
+        var sistema = $.trim(consulta[2]);
+        var fechaInicial = $.trim(consulta[3]);
+        var fechaFinal = $.trim(consulta[4]);
+
+        dataSave['campus']= campus;
+        dataSave['edificio'] = edificio;
+        dataSave['sistema'] = sistema;
+        dataSave['fechaInicio'] = fechaInicial;
+        dataSave['fechaFin'] = fechaFinal;
+
+        var jObject = JSON.stringify(dataSave);
+
+        console.log(dataSave);
+
+        try
+        {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=buscar_orden_parametros_avanzados",
+                data: {jObject:  jObject},
+                dataType: "json",
+                async: false,
+                error: function(error){
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function(data){
+                    dataResult = data;
+                    mostrarMensaje(dataResult.mensaje);
+                }
+            });
+            return dataResult;
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los edificios 
+     * con base en una palabra clave.
+     * @param {type} consulta, palabra clave para realizar la consulta.
+     * @returns {data} object json
+    **/
+    function buscarEdificio(consulta)
+    {
+        var dataResult;
+
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=obtener_edificio",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function(data){  
+                    dataResult = data;
+                    console.log(dataResult);
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            alert("ERROR: Ocurrio un error " + ex);
+        }          
+    }
+    
+	 /**
+     * Función que realiza una consulta de las ordenes dado
+     un usuario
+     * @param {type} consulta, palabra clave para realizar la consulta.
+     * @returns {data} object json
+    **/
+    function buscarOrdenesSistema(consulta)
+    {
+        var dataResult;
+
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=obtener_ordenes_sistema",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function(data){  
+                    dataResult = data;
+                    console.log(dataResult);
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            alert("ERROR: Ocurrio un error " + ex);
+        }          
+    }
+
+    /**
+     * funcion que permite recuperar los datos del usuario asociados a una orden/solicitud
+     * @param  {string} consulta [nombre de login del usuario]
+     * @return {object}          [Objeto json con los datos del usuario]
+     */
+    function buscarDatosUsuario(consulta)
+    {
+        var dataResult;
+
+        try{
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=obtener_datos_usuario",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function (data){
+                    dataResult = data;
+                    console.log(dataResult);
+                }
+            });
+            return dataResult;
+        }
+        catch(ex){
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+    
+	 /**
+     * funcion que permite recuperar los datos del usuario asociados a una orden/solicitud
+     * @param  {string} consulta [nombre de login del usuario]
+     * @return {object}          [Objeto json con los datos del usuario]
+     */
+    function buscarHistorialUsuario(consulta)
+    {
+        var dataResult;
+
+        try{
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=obtener_historial",
+                data: "buscar=" + consulta,
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    alert("error petición ajax");
+                    console.log(error.toString());
+                },
+                success: function (data){
+                    dataResult = data;
+                    console.log(dataResult);
+                }
+            });
+            return dataResult;
+        }
+        catch(ex){
+            alert("ERROR: Ocurrio un error " + ex);
+        }
+    }
+    
+    /**
+     * Función que actualiza la tabla en donde se muestran las ordenes
+     * en el sistema.
+     */
+    function actualizarTablaHistorial() {
+
+        $("#tablaHistorial").clearGridData();
+        data = buscarHistorialUsuario("historial");
+        $.each(data, function(index, record) {            
+            if($.isNumeric(index)) {
+                $("#tablaHistorial").jqGrid('addRowData',index,record);
+            }
+        });
+        var numeroFilas = $("#tablaHistorial").getGridParam("reccount");
+        $("#divConteo").html("Número de registros: "+numeroFilas);          
+    } 
+    
+    /**
+     * Función que actualiza la tabla en donde se muestran las ordenes
+     * en el sistema.
+     */
+    function actualizarTablaOrdenes(data) {
+
+        $("#tablaOrdenes").clearGridData();
+        $.each(data, function(index, record) {            
+            if($.isNumeric(index)) {
+                $("#tablaOrdenes").jqGrid('addRowData',index,record);
+            }
+        });
+        var numeroFilas = $("#tablaOrdenes").getGridParam("reccount");
+        $("#divConteo").html("Número de registros: "+numeroFilas);          
+    }
+
+    /**
+     * Función que actualiza la tabla en donde se muestran las ordenes
+     * en el sistema.
+     */
+    function actualizarTablaOrdenes2(data) {
+
+        $("#tablaOrdenes2").clearGridData();
+        $.each(data, function(index, record) {            
+            if($.isNumeric(index)) {
+                $("#tablaOrdenes2").jqGrid('addRowData',index,record);
+            }
+        });
+        var numeroFilas = $("#tablaOrdenes2").getGridParam("reccount");
+        $("#divConteo").html("Número de registros: "+numeroFilas);     
+    }
+    
+    /**
+     * Función que actualiza la tabla en donde se muestran las ordenes
+     * en el sistema.
+     */
+    function actualizarTablaOrdenes3() {
+    	var URLactual = window.location;
+    	if(URLactual == 'http://192.168.46.53/mantenimiento/web/index.php?action=listar_ordenes'){
+
+        	$("#tablaOrdenes3").clearGridData();
+        	data = buscarOrdenesSistema('consulta');
+        	$.each(data, function(index, record) {            
+            	if($.isNumeric(index)) {
+                	$("#tablaOrdenes3").jqGrid('addRowData',index,record);
+            	}
+	        });
+        	var numeroFilas = $("#tablaOrdenes3").getGridParam("reccount");
+        	$("#divConteo2").html("Número de registros: "+numeroFilas); 
+        }         
+    }
+    
+    /**
+     * Función que actualiza la tabla en donde se muestran las ordenes
+     * en el sistema.
+     */
+    function actualizarTablaHistorial() {
+    	var URLactual = window.location;
+    	
+    	if(URLactual == 'http://192.168.46.53/mantenimiento/web/index.php?action=listar_historial'){
+
+        	$("#tablaHistorial").clearGridData();
+        	data = buscarHistorialUsuario('consulta');
+        	$.each(data, function(index, record) {            
+            	if($.isNumeric(index)) {
+                	$("#tablaHistorial").jqGrid('addRowData',index,record);
+            	}
+        	});
+        	var numeroFilas = $("#tablaHistorial").getGridParam("reccount");
+        	$("#divConteo").html("Número de registros: "+numeroFilas); 
+        }                 
+    }
+    
+    /**
+    *funcion axuliar que actualiza el campo impreso de una solicitud
+    */
+    function actualizarImpreso(numeroSolicitud){
+    	
+		  var dataResult;
+		          
+        console.log("Actualizar Impreso "+numeroSolicitud);
+
+        $.ajax({
+            type: "POST",
+            url: 'index.php?action=actualizar_impreso',
+            data: "buscar=" + numeroSolicitud,
+            dataType: "json",
+            async: false,
+            error: function(error){
+                alert("Error petición ajax");
+                console.log(error.toString());
+            },
+            success: function(data){
+                dataResult = data;
+            }
+        });
+        return dataResult;
+    }
+
+     /**
+     * Función que llena y actualiza el selector de Edificio.
+     * @param {array} data, datos que se van a actualizar en el selector.
+     * @returns {undefined}
+    **/    
+    function actualizarSelectEdificio(idSelect)
+    {
+        var data = buscarEdificio(idSelect);
+        console.log(data);
+
+        $("#edificioSearch").empty();
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+            	 if(index == 1){
+            		var todos = "TODOS";
+            		var row2 = $("<option value='" + todos + "'/>");
+                	row2.text(todos);
+                	row2.appendTo("#edificioSearch");
+                }
+                var row = $("<option value='" + record.codigo + "'/>");
+                row.text(record.codigo + " - " + record.nombre);
+                row.appendTo("#edificioSearch");                            
+            }
+        });        
+    }
+
+    /** funcion auxiliar que permite devolver el nombre del campus 
+    */
+    function getNombreCampus(data){
+        if(data == 1){
+            return "Meléndez";
+        }
+        else if(data == 2){
+            return "San Fernando";
+        }
+        else if(data == 3){
+            return "Otro"
+        }
+        else{
+            return "";  
+        }
+    }
+
+    /**
+    *funcion auxiliar que devuelve el nombre del sistema
+    */
+    function getNombreSistema(data){
+        if(data == 1){
+            return "Sistema Hidráulico y Sanitario";
+        }
+        else if(data == 2){
+            return "Sistema Eléctrico";
+        }
+        else if(data == 3){
+            return "Sistema Planta Física ";
+        }
+        else if(data == 4){
+            return "Sistema Mobiliario y Equipos";
+        }
+        else{
+            return "";
+        }  
+    }
+    /**
+    *funcion axuliar que permite recuperar el nombre de un edificio
+    */
+    function getNombreEdficio(campus, edificio){
+
+        var dataResult;
+        var dataSave = {};
+        dataSave['campus'] = campus;
+        dataSave['edificio']= edificio;
+
+        var jObject = JSON.stringify(dataSave);
+
+        $.ajax({
+            type: "POST",
+            url: 'index.php?action=obtener_nombre_edificio',
+            dataType: "json",
+            data: {jObject:  jObject},
+            async: false,
+            error: function(error){
+                alert("Error petición ajax");
+                console.log(error.toString());
+            },
+            success: function(data){
+                dataResult = data;
+            }
+        });
+        return dataResult;
+    }
+    
+/*********************************Funciones de Impresion**************************************/    
+    /**
+     * funcion que genera el archivo pdf usando la libreria BytescoutPDF.js
+     *se utiliza la libreria bytescoutpdf para la generacion del pdf documentacion ->https://bytescout.com/products/developer/pdfgeneratorsdkjs/index.html
+     */
+    function generarPDF(data, numeroSolicitudes)
+    {
+    	  var arregloSolicitudes = data[0];
+        var arregloUsers = data[1];
+		  var arregloCampus = data[2];
+        var arregloEdificios = data[3];
+        
+        var pdf = new BytescoutPDF();      
+ 
+        //Definir el tipo de documento
+        pdf.pageSetSize(BytescoutPDF.A4);
+ 
+        //Definir la orientacion del pdf
+        pdf.pageSetOrientation(false);
+        
+    	  for(i=0;i<numeroSolicitudes;i++){
+    	  	var dataOrder = buscarOrdenes(arregloSolicitudes[i]);
+         var dataUser = buscarDatosUsuario(arregloUsers[i]);
+         var dataEdificio = getNombreEdficio(arregloCampus[i], arregloEdificios[i]);
+         var dataCampus = getNombreCampus(arregloCampus[i]);
+         
+
+         // Agregar la nueva pagina
+         pdf.pageAdd();
+ 
+         // configurar fuente
+         pdf.fontSetName('Helvetica');
+ 
+         // Agregar configuraciones
+         pdf.fontSetStyle(true, false, false);
+         //header
+         pdf.imageLoadFromUrl('images/logouv.png');
+         pdf.imagePlace(50, 25);
+         pdf.fontSetSize(15);
+         pdf.textAdd(50, 65, 'ORDEN DE MANTENIMIENTO', 0);
+         pdf.graphicsSetLineWidth(0.5);
+         //cuerpo del archivo pdf
+         pdf.graphicsDrawLine(49, 75, 570, 75);
+         pdf.fontSetSize(10);
+         pdf.fontSetStyle(false, false, false);
+         pdf.graphicsDrawRectangle(50, 84, 175, 20);
+
+         //informacion del usuario
+         $.each(dataOrder, function(index, record)
+         {
+             if($.isNumeric(index))
+             {
+                 pdf.textAdd(52, 100, 'Número Solicitud:   '+record.numero_solicitud);
+                 arregloNumSolicitudes.push(record.numero_solicitud);
+                 pdf.graphicsDrawRectangle(225, 84, 175, 20);
+                 pdf.textAdd(227, 100, 'Fecha:  '+record.fecha);
+                 pdf.graphicsDrawRectangle(400, 84, 145, 20);
+                 pdf.textAdd(402, 100, 'Estado:  '+record.estado);
+                 pdf.graphicsDrawRectangle(50, 104, 235, 20);
+             }
+         });
+
+         //campus
+         pdf.graphicsDrawRectangle(50, 124, 115, 20);
+         pdf.textAdd(51, 140, "Campus: "+dataCampus);
+ 
+         //datos del usuario
+         $.each(dataUser, function(index, record)
+         {
+             if($.isNumeric(index))
+             {
+ 
+                 pdf.textAdd(51, 120, 'Solicitante: '+record.nombre_usuario);
+                 pdf.graphicsDrawRectangle(285, 104, 115, 20);
+                 pdf.textAdd(287, 120, 'Teléfono: '+record.telefono);
+                 pdf.graphicsDrawRectangle(400, 104, 145, 20);
+                 pdf.textAdd(402, 120, 'Extensión:  '+record.extension);
+             }
+         });
+
+         //datos del espacio de la orden
+         $.each(dataOrder, function(index, record)
+         {
+             if($.isNumeric(index))
+             {
+                 pdf.graphicsDrawRectangle(165, 124, 75, 20);
+                 pdf.textAdd(167, 140, 'Piso: '+record.piso);
+ 
+                 //validar si hay datos null en la consulta
+                 if(record.espacio == "" || record.espacio == null){
+                     pdf.graphicsDrawRectangle(240, 124, 305, 20);
+                     pdf.textAdd(242,140,"Espacio: " + "No se registró espacio en la orden");
+                 }
+                 else{
+                    pdf.graphicsDrawRectangle(240, 124, 305, 20);
+                    pdf.textAdd(242,140,"Espacio: " + record.espacio);
+                 }
+                 
+
+                 if(record.contacto == "" || record.contacto == null){
+                     pdf.graphicsDrawRectangle(50, 144, 495, 20);
+                     pdf.textAdd(51, 160, "Contacto: " + "No se registró contacto en la orden");
+                 }
+                 else{
+                     pdf.graphicsDrawRectangle(50, 144, 495, 20);
+                     pdf.textAdd(51, 160, "Contacto: "+record.contacto);
+                 }
+                 
+                 
+             }
+         });
+         $.each(dataEdificio, function(index, record){
+             if($.isNumeric(index)){
+                 pdf.graphicsDrawRectangle(50, 164, 495, 20);
+                 pdf.textAdd(51, 180, 'Edificio: '+record.codigo+" / "+record.nombre);
+             }
+         });
+ 
+         //datos de la novedad
+         $.each(dataOrder, function(index, record){
+             if($.isNumeric(index)){
+                 pdf.graphicsDrawRectangle(50,184,415,20);
+                 pdf.graphicsDrawRectangle(50,204,495,20);
+                 pdf.textAdd(51, 200, "Tarea 1: "+record.descripcion1);
+                 pdf.textAdd(51, 220, "Descripción Tarea 1: "+record.descripcion_novedad);                 
+             }
+         });
+ 
+         $.each(dataOrder, function(index, record){
+             if($.isNumeric(index)){
+                 pdf.graphicsDrawRectangle(465,184,80,20);
+                 pdf.textAdd(467, 200, "Cantidad: "+record.cantidad1);
+             }
+         });
+ 
+         $.each(dataOrder, function(index,record){
+             if($.isNumeric(index)){
+                 if(record.descripcion2 == '' || record.descripcion2 == null){
+                     pdf.graphicsDrawRectangle(50,224,415,20);
+                     pdf.graphicsDrawRectangle(50,244,495,20);
+                     pdf.textAdd(51, 240, "Tarea 2: "+"----------");
+                     pdf.textAdd(51, 260, "Descripción Tarea 2: "+"----------");
+                 }
+                 else{
+                     pdf.graphicsDrawRectangle(50,224,415,20);
+                     pdf.graphicsDrawRectangle(50,244,495,20);
+                     pdf.textAdd(51, 240, "Tarea 2: "+record.descripcion2); 
+                     pdf.textAdd(51, 260, "Descripción Tarea 2: "+record.descripcion_novedad2);     
+                 }
+             }            
+         });
+ 
+         $.each(dataOrder, function(index,record){
+             if($.isNumeric(index)){
+                 if(record.descripcion3 == '' || record.descripcion3 == null)
+                 {
+                     pdf.graphicsDrawRectangle(465,224,80,20);
+                     pdf.textAdd(467, 240,  "Cantidad: "+"-----");
+                 }
+                 else{
+                     pdf.graphicsDrawRectangle(465,224,80,20);
+                     pdf.textAdd(467, 240,  "Cantidad: "+record.cantidad2);
+                 }
+             }
+         });
+         
+         $.each(dataOrder, function(index,record){
+             if($.isNumeric(index)){
+                 if(record.descripcion3 == '' || record.descripcion3 == null){
+                     pdf.graphicsDrawRectangle(50,264,415,20);
+                     pdf.graphicsDrawRectangle(50,284,495,20);
+                     pdf.textAdd(51, 280, "Tarea 3: "+"----------");
+                     pdf.textAdd(51, 300, "Descripción Tarea 3: "+"----------");
+                 }
+                 else{
+                     pdf.graphicsDrawRectangle(50,264,415,20);
+                     pdf.graphicsDrawRectangle(50,284,495,20);
+                     pdf.textAdd(51, 280, "Tarea 3: "+record.descripcion3);    
+                     pdf.textAdd(51, 300, "Descripción Tarea 3: "+record.descripcion_novedad3);  
+                 }
+             }            
+         });
+ 
+         $.each(dataOrder, function(index,record){
+             if($.isNumeric(index)){
+                 if(record.descripcion3 == '' || record.descripcion3 == null)
+                 {
+                     pdf.graphicsDrawRectangle(465,264,80,20);
+                     pdf.textAdd(467, 280,  "Cantidad: "+"-----");
+                 }
+                 else{
+                     pdf.graphicsDrawRectangle(465,264,80,20);
+                     pdf.textAdd(467, 280,  "Cantidad: "+record.cantidad3);
+                 }
+             }
+         });
+ 
+         //informacion adicional 329
+         pdf.graphicsDrawRectangle(50, 304, 175, 85);
+         pdf.textAdd(52, 320, 'Trabajo Realizado:');
+         pdf.graphicsDrawRectangle(225, 304, 175, 85);
+         pdf.textAdd(227, 320, 'Materiales utilizados: ');
+         pdf.graphicsDrawRectangle(400, 304, 145, 85);
+         pdf.textAdd(402, 320, 'Fecha de ejecución:  ');
+         
+         pdf.graphicsDrawRectangle(50, 389, 175, 35);
+         pdf.textAdd(52, 400, 'Solicitante:');
+         pdf.graphicsDrawRectangle(225, 389, 175, 35);
+         pdf.textAdd(227, 400, 'Realizado por:  ');
+         pdf.graphicsDrawRectangle(400, 389, 145, 35);
+         pdf.textAdd(402, 400, 'Revisado:  ');
+         pdf.textSetAlign(BytescoutPDF.LEFT);
+        }
+ 
+     return pdf;
+    
+    }
+
+    /**
+     * funcion que permite generar el link de descargar de la orden en formato pdf en del div de mensajes de la aplicacion 
+     * @param {[type]} PDFContentBase64 [description]
+     */
+    function generarLinkDescarga(PDFContentBase64)
+    {
+        var pdfdiv = document.getElementById("divMensaje");
+        for(i=0;i<arregloNumSolicitudes.length;i++){
+        	actualizarImpreso(arregloNumSolicitudes[i]);
+        }
+        pdfdiv.innerHTML ='<h4><a title=\"Archivo PDF \" target=\"_blank \" href=\"data:application/pdf;base64,' + PDFContentBase64 + '\">Se generó de forma correcta el pdf. Haga click para visualizarlo.<\/a></h4>';
+    }
+    
+
+    
+/********************************Eventos de los componentes del frm de consultas***********************************************/
+    /*
+    cargar los datepicker de jQuery UI y su configuración para idioma español
+     */
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '<Ant',
+        nextText: 'Sig>',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+        dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $(function () {
+        $("#searchFecha").datepicker();
+        $("#searchFechaInicial").datepicker();
+        $("#searchFechaFinal").datepicker();
+        actualizarTablaOrdenes3();
+        actualizarTablaHistorial();
+        
+    });
+
+    /**
+     * Se captura el evento cuando de da click en el boton buscar y se
+     * realiza la operacion correspondiente.
+     */
+    $("#buscarOrdenes").click(function () {
+        var vlrinput = $("#search").val();
+        $("#tablaOrdenes").clearGridData();
+        
+        if(vlrinput != ""){
+            var data =  buscarOrdenes(vlrinput);
+            actualizarTablaOrdenes(data);
+            $("#search").val("");
+            $("#btImprimir").removeAttr('Disabled');
+        }
+        else{
+            mostrarMensaje("Ingrese un valor en el campo de búsqueda");
+            $("#btImprimir").prop('disabled', true);
+				//$("#tablaOrdenes").clearGridData();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de da click en el boton buscar y se
+     * realiza la operacion correspondiente.
+     */
+    $("#visualizarEstadistica").click(function () {
+        // Get context with jQuery - using jQuery's .get() method.
+        var estadisticas = obtenerEstadisticas('consulta');
+		  var ctx = $("#myChart").get(0).getContext("2d");
+		  // This will get the first returned node in the jQuery collection.
+		  
+		  /*var data = {
+		  		labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+    			datasets: [{
+            	label: "My First dataset",
+            	fillColor: "rgba(220,220,220,0.2)",
+            	strokeColor: "rgba(220,220,220,1)",
+            	pointColor: "rgba(220,220,220,1)",
+            	pointStrokeColor: "#fff",
+            	pointHighlightFill: "#fff",
+            	pointHighlightStroke: "rgba(220,220,220,1)",
+            	data: [65, 59, 90, 81, 56, 55, 40]
+        		},
+        		{
+            	label: "My Second dataset",
+            	fillColor: "rgba(151,187,205,0.2)",
+            	strokeColor: "rgba(151,187,205,1)",
+            	pointColor: "rgba(151,187,205,1)",
+            	pointStrokeColor: "#fff",
+            	pointHighlightFill: "#fff",
+            	pointHighlightStroke: "rgba(151,187,205,1)",
+            	data: [28, 48, 40, 19, 96, 27, 100]
+        		}
+    		]
+		};*/
+		label = [], informacion = [];
+		
+		$.each(estadisticas, function(posicion, info){
+			label.push(info.codigo_edificio);
+			informacion.push(info.conteosolicitudes);
+		});
+		
+		console.log(informacion);
+		
+		var data = {
+				labels: label,
+				datasets: [{
+            label: "My First dataset",
+           	fillColor: "rgba(220,220,220,0.2)",
+           	strokeColor: "rgba(220,220,220,1)",
+           	pointColor: "rgba(220,220,220,1)",
+           	pointStrokeColor: "#fff",
+           	pointHighlightFill: "#fff",
+           	pointHighlightStroke: "rgba(220,220,220,1)",
+           	data: informacion
+        		}
+			};		
+		
+		var options = {
+    		//Boolean - Whether to show lines for each scale point
+    		scaleShowLine : true,
+
+    		//Boolean - Whether we show the angle lines out of the radar
+    		angleShowLineOut : true,
+
+    		//Boolean - Whether to show labels on the scale
+    		scaleShowLabels : false,
+
+    		// Boolean - Whether the scale should begin at zero
+    		scaleBeginAtZero : true,
+
+    		//String - Colour of the angle line
+    		angleLineColor : "rgba(0,0,0,.1)",
+
+    		//Number - Pixel width of the angle line
+    		angleLineWidth : 1,
+
+    		//String - Point label font declaration
+    		pointLabelFontFamily : "'Arial'",
+
+    		//String - Point label font weight
+    		pointLabelFontStyle : "normal",
+	
+    		//Number - Point label font size in pixels
+    		pointLabelFontSize : 10,
+
+    		//String - Point label font colour
+    		pointLabelFontColor : "#666",
+
+    		//Boolean - Whether to show a dot for each point
+    		pointDot : true,
+
+    		//Number - Radius of each point dot in pixels
+    		pointDotRadius : 3,
+
+    		//Number - Pixel width of point dot stroke
+    		pointDotStrokeWidth : 1,
+
+    		//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+    		pointHitDetectionRadius : 20,
+
+    		//Boolean - Whether to show a stroke for datasets
+    		datasetStroke : true,
+
+    		//Number - Pixel width of dataset stroke
+    		datasetStrokeWidth : 2,
+
+    		//Boolean - Whether to fill the dataset with a colour
+    		datasetFill : true,
+	
+    		//String - A legend template
+    		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+		}
+		var myRadarChart = new Chart(ctx).Radar(data, options);
+
+    });
+
+    /**
+     * Se captura el evento cuando de da click en el boton buscar y se
+     * realiza la operacion correspondiente.
+     */
+    $("#buscarOrdenes2").click(function () {
+        var campus = $("#campusSearch").find(':selected').val();
+        var sistema = $("#sistemaSearch").find(':selected').val();
+        var fecha = $("#searchFecha").val();
+        $("#tablaOrdenes2").clearGridData();
+        
+        if(campus != 0 & sistema != 0 & fecha != "")
+        {
+            saveData = [campus,sistema,fecha];
+            var data =  buscarOrdenesParametros(saveData);
+            actualizarTablaOrdenes2(data);
+            $("#btImprimir2").removeAttr('Disabled');
+            //$('#campusSearch').prop('selectedIndex',0);
+            //$('#sistemaSearch').prop('selectedIndex',0);
+            //$('#searchFecha').val("dd/mm/aaaa");
+        }
+        else{
+            mostrarMensaje("Error. No puede dejar selectores sin opciones validas seleccionada.");
+            $("#btImprimir2").prop('disabled', true);
+            //$("#tablaOrdenes2").clearGridData();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de da click en el boton buscar y se
+     * realiza la operacion correspondiente.
+     */
+    $("#buscarOrdenes3").click(function () {
+        var campus = $("#campusSearch").find(':selected').val();
+        var edificio = $("#edificioSearch").find(':selected').val();
+        var sistema = $("#sistemaSearch").find(':selected').val();
+        var fechaInicial = $("#searchFechaInicial").val();
+        var fechaFinal = $("#searchFechaFinal").val();
+        $("#tablaOrdenes2").clearGridData();
+
+        if(fechaInicial <= fechaFinal){
+        
+        	if(campus != 0 & sistema != 0 & edificio != "--" & fechaInicial != "" & fechaFinal != "")
+        	{
+        	      saveData = [campus,edificio,sistema,fechaInicial,fechaFinal];
+       	      var data =  buscarOrdenesParametrosAvanzados(saveData);
+      	      actualizarTablaOrdenes2(data);
+               $("#btImprimir3").removeAttr('Disabled');
+            	$('#campusSearch').prop('selectedIndex',0);
+         	   $("#edificioSearch").prop('selectedIndex',"--");
+      	      $('#sistemaSearch').prop('selectedIndex',0);
+      	      $('#searchFechaInicial').val("dd/mm/aaaa");
+     	         $('#searchFechaFinal').val("dd/mm/aaaa");
+  	
+     	   }
+     	   else{
+   	         mostrarMensaje("Error. No puede dejar selectores sin opciones validas seleccionada.");
+            	$("#btImprimir3").prop('disabled', true);
+          	  //$("#tablaOrdenes2").clearGridData();
+        	}
+        }else{
+        	mostrarMensaje("Error. La fecha inicio no puede ser mayor que la fecha final.");
+         $("#btImprimir3").prop('disabled', true);
+        }
+    });
+    
+    /**
+     * Evento que permite imprimir una o más ordenes o solicitudes de mantenimiento
+     */
+    $("#btImprimir").click(function (e) {
+
+        if(confirm("¿Está seguro que desea imprimir la orden de mantenimiento?")){
+            var idElementSelect = $("#tablaOrdenes").jqGrid('getGridParam','selarrrow');
+            var elementSelect = []
+            var numeroSolicitudes = idElementSelect.length;
+            var solicitud = [];
+            var usuario = [];
+            var campus = [];
+            var edificio = [];
+            
+            for(i=0;i<numeroSolicitudes;i++){
+            	elementSelect[i] = $("#tablaOrdenes").jqGrid('getRowData',idElementSelect[i]);
+            	solicitud[i] = elementSelect[i].numero_solicitud;
+            	usuario[i] = elementSelect[i].usuario;
+            	campus[i] = elementSelect[i].codigo_campus;
+            	edificio[i] = elementSelect[i].codigo_edificio;
+
+            }
+            
+            var data = [solicitud,usuario,campus,edificio];
+
+            console.log(data);
+
+                
+            var pdf = generarPDF(data, numeroSolicitudes);
+                
+            pdf.onload(function() {
+            	var PDFContentBase64 = pdf.getBase64Text();
+               generarLinkDescarga(PDFContentBase64);
+            });
+        }
+    });
+
+    /**
+     * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
+     */
+    $("#btImprimir2").click(function () {
+        if(confirm("¿Está seguro que desea imprimir la orden de mantenimiento?")){
+
+            var idElementSelect = $("#tablaOrdenes2").jqGrid('getGridParam','selarrrow');
+            var elementSelect = []
+            var numeroSolicitudes = idElementSelect.length;
+            var solicitud = [];
+            var usuario = [];
+            var campus = [];
+            var edificio = [];
+            var estado = [];
+            
+            for(i=0;i<numeroSolicitudes;i++){
+            	elementSelect[i] = $("#tablaOrdenes2").jqGrid('getRowData',idElementSelect[i]);
+            	solicitud[i] = elementSelect[i].numero_solicitud;
+           	   usuario[i] = elementSelect[i].usuario;
+           		campus[i] = elementSelect[i].codigo_campus;
+           		edificio[i] = elementSelect[i].codigo_edificio;
+           		estado[i] = elementSelect[i].estado;
+            }
+            
+            var data = [solicitud,usuario,campus,edificio];
+
+            console.log(data);
+
+                
+            var pdf = generarPDF(data, numeroSolicitudes);
+                
+            pdf.onload(function() {
+            	var PDFContentBase64 = pdf.getBase64Text();
+               generarLinkDescarga(PDFContentBase64);
+            });
+        }
+    });
+
+    /**
+     * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
+     */
+    $("#btImprimir3").click(function () {
+        if(confirm("¿Está seguro que desea imprimir la orden de mantenimiento?")){
+            
+            var idElementSelect = $("#tablaOrdenes2").jqGrid('getGridParam','selarrrow');
+            var elementSelect = []
+            var numeroSolicitudes = idElementSelect.length;
+            var solicitud = [];
+            var usuario = [];
+            var campus = [];
+            var edificio = [];
+            var estado = [];
+            
+            for(i=0;i<numeroSolicitudes;i++){
+            	elementSelect[i] = $("#tablaOrdenes2").jqGrid('getRowData',idElementSelect[i]);
+            	solicitud[i] = elementSelect[i].numero_solicitud;
+           	   usuario[i] = elementSelect[i].usuario;
+           		campus[i] = elementSelect[i].codigo_campus;
+           		edificio[i] = elementSelect[i].codigo_edificio;
+           		estado[i] = elementSelect[i].estado;
+            }
+            
+            var data = [solicitud,usuario,campus,edificio];
+
+            console.log(data);
+
+                
+            var pdf = generarPDF(data, numeroSolicitudes);
+                
+            pdf.onload(function() {
+            	var PDFContentBase64 = pdf.getBase64Text();
+               generarLinkDescarga(PDFContentBase64);
+            });
+        }
+    });
+    
+    /**
+     * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
+     */
+    $("#btImprimir4").click(function () {
+        if(confirm("¿Está seguro que desea imprimir la orden de mantenimiento?")){
+            
+            var idElementSelect = $("#tablaHistorial").jqGrid('getGridParam','selarrrow');
+            var elementSelect = []
+            var numeroSolicitudes = idElementSelect.length;
+            var solicitud = [];
+            var usuario = [];
+            var campus = [];
+            var edificio = [];
+            var estado = [];
+            
+            for(i=0;i<numeroSolicitudes;i++){
+            	elementSelect[i] = $("#tablaHistorial").jqGrid('getRowData',idElementSelect[i]);
+            	solicitud[i] = elementSelect[i].numero_solicitud;
+           	   usuario[i] = elementSelect[i].usuario;
+           		campus[i] = elementSelect[i].codigo_campus;
+           		edificio[i] = elementSelect[i].codigo_edificio;
+           		estado[i] = elementSelect[i].estado;
+            }
+            
+            var data = [solicitud,usuario,campus,edificio];
+
+            console.log(data);
+
+                
+            var pdf = generarPDF(data, numeroSolicitudes);
+                
+            pdf.onload(function() {
+            	var PDFContentBase64 = pdf.getBase64Text();
+               generarLinkDescarga(PDFContentBase64);
+            });
+        }
+    });
+    
+    /**
+     * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
+     */
+    $("#btImprimir5").click(function () {
+        if(confirm("¿Está seguro que desea imprimir la orden de mantenimiento?")){
+            
+            var idElementSelect = $("#tablaOrdenes3").jqGrid('getGridParam','selarrrow');
+            var elementSelect = []
+            var numeroSolicitudes = idElementSelect.length;
+            var solicitud = [];
+            var usuario = [];
+            var campus = [];
+            var edificio = [];
+            var estado = [];
+            
+            for(i=0;i<numeroSolicitudes;i++){
+            	elementSelect[i] = $("#tablaOrdenes3").jqGrid('getRowData',idElementSelect[i]);
+            	solicitud[i] = elementSelect[i].numero_solicitud;
+           	   usuario[i] = elementSelect[i].usuario;
+           		campus[i] = elementSelect[i].codigo_campus;
+           		edificio[i] = elementSelect[i].codigo_edificio;
+           		estado[i] = elementSelect[i].estado;
+            }
+            
+            var data = [solicitud,usuario,campus,edificio];
+
+            console.log(data);
+
+                
+            var pdf = generarPDF(data, numeroSolicitudes);
+                
+            pdf.onload(function() {
+            	var PDFContentBase64 = pdf.getBase64Text();
+               generarLinkDescarga(PDFContentBase64);
+            });
+        }
+    });
+    
+    /**
+     * Se captura el evento cuando se da click en el boton visualizarOrdenes y se
+     * realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
+     */    
+    $("#visualizarOrdenes").click(function (e) {
+        try
+        {
+            var idElementSelect = $("#tablaOrdenes").jqGrid('getGridParam','selarrrow');
+
+            if(idElementSelect.length > 1)
+            {
+                alert("Sólo puede ser visualizar un elemento a la vez");
+            }
+            else if(idElementSelect.length == 0)
+            {
+                alert("Seleccione un elemento");
+            }
+            else
+            {
+                var elementSelect = $("#tablaOrdenes").jqGrid('getRowData',idElementSelect);
+                
+                var data = buscarOrdenes(elementSelect.numero_solicitud);
+
+                var campus = getNombreCampus(elementSelect.codigo_campus);
+
+                var dataUsuario = buscarDatosUsuario(elementSelect.usuario);
+
+                var dataEdificio = getNombreEdficio(elementSelect.codigo_campus, elementSelect.codigo_edificio);
+
+                $.each(data, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#divDialogVisualizacion").dialog("open");
+                        $("#divDialogVisualizacion").dialog("option", "height", 725);
+                        $("#campNumeroSolicitud").html(elementSelect.numero_solicitud);
+                        $("#sede").val("Cali");
+                        $("#campus").val(campus);
+                        $("#espacio").val(record.espacio);
+                        $("#cantidad1").val(record.cantidad1);
+                        $("#novedad1").val(record.descripcion1);
+                        $("#descripcion_novedad").val(record.descripcion_novedad);
+                        $("#cantidadN2").val(record.cantidad2);
+                        $("#novedad2").val(record.descripcion2);
+                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
+                        $("#cantidadN3").val(record.cantidad3);
+                        $("#novedad3").val(record.descripcion3);
+                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
+                        $("#contacto").val(record.contacto);
+                        $("#estado").val(record.estado);
+                        $("#fecha").val(record.fecha);
+                    }
+                });
+                
+
+                $.each(dataUsuario, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#usuario").val(record.nombre_usuario);
+                    }
+                });
+
+                $.each(dataEdificio, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                    }
+                });
+            }
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error"+ex);
+        }
+    });
+    
+    /**
+     * Se captura el evento cuando se da click en el boton visualizarHistorial y se
+     * realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
+     */    
+    $("#visualizarHistorial").click(function (e) {
+        try
+        {
+            var idElementSelect = $("#tablaHistorial").jqGrid('getGridParam','selarrrow');
+
+            if(idElementSelect.length > 1)
+            {
+                alert("Sólo puede ser visualizar un elemento a la vez");
+            }
+            else if(idElementSelect.length == 0)
+            {
+                alert("Seleccione un elemento");
+            }
+            else
+            {
+                var elementSelect = $("#tablaHistorial").jqGrid('getRowData',idElementSelect);
+                
+                var data = buscarOrdenes(elementSelect.numero_solicitud);
+
+                var campus = getNombreCampus(elementSelect.codigo_campus);
+
+                var dataUsuario = buscarDatosUsuario(elementSelect.usuario);
+
+                var dataEdificio = getNombreEdficio(elementSelect.codigo_campus, elementSelect.codigo_edificio);
+
+                $.each(data, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#divDialogVisualizacion").dialog("open");
+                        $("#divDialogVisualizacion").dialog("option", "height", 725);
+                        $("#campNumeroSolicitud").html(elementSelect.numero_solicitud);
+                        $("#sede").val("Cali");
+                        $("#campus").val(campus);
+                        $("#espacio").val(record.espacio);
+                        $("#cantidad1").val(record.cantidad1);
+                        $("#novedad1").val(record.descripcion1);
+                        $("#descripcion_novedad").val(record.descripcion_novedad);
+                        $("#cantidadN2").val(record.cantidad2);
+                        $("#novedad2").val(record.descripcion2);
+                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
+                        $("#cantidadN3").val(record.cantidad3);
+                        $("#novedad3").val(record.descripcion3);
+                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
+                        $("#contacto").val(record.contacto);
+                        $("#estado").val(record.estado);
+                        $("#fecha").val(record.fecha);
+                    }
+                });
+
+                $.each(dataEdificio, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                    }
+                });
+            }
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error"+ex);
+        }
+    });
+    
+    /**
+     * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
+     *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
+     */    
+    $("#visualizarOrdenes2").click(function (e) {
+        try
+        {
+            var idElementSelect = $("#tablaOrdenes2").jqGrid('getGridParam','selarrrow');
+
+                    
+            if(idElementSelect.length > 1)
+            {
+                alert("Sólo puede ser visualizar un elemento a la vez");
+            }
+            else if(idElementSelect.length == 0)
+            {
+                alert("Seleccione un elemento");
+            }
+            else
+            {
+                var elementSelect = $("#tablaOrdenes2").jqGrid('getRowData',idElementSelect);
+                
+                var data = buscarOrdenes(elementSelect.numero_solicitud);
+
+                var campus = getNombreCampus(elementSelect.codigo_campus);
+
+                var dataEdificio = getNombreEdficio(elementSelect.codigo_campus, elementSelect.codigo_edificio);
+
+                var sistema = getNombreSistema(elementSelect.cod_sistema);
+
+                $.each(data, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#divDialogVisualizacion2").dialog("open");
+                        $("#divDialogVisualizacion2").dialog("option", "height", 725);
+                        $("#campNumeroSolicitud").html(elementSelect.numero_solicitud);
+                        $("#usuario").val(record.usuario);
+                        $("#sede").val("Cali");
+                        $("#campus").val(campus);
+                        $("#espacio").val(record.espacio);
+                        $("#cantidad1").val(record.cantidad1);
+                        $("#novedad1").val(record.descripcion1);
+                        $("#descripcion_novedad").val(record.descripcion_novedad);
+                        $("#cantidadN2").val(record.cantidad2);
+                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
+                        $("#novedad2").val(record.descripcion2);
+                        $("#cantidadN3").val(record.cantidad3);
+                        $("#novedad3").val(record.descripcion3);
+                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
+                        $("#contacto").val(record.contacto);
+                        $("#estado").val(record.estado);
+                        $("#fecha").val(record.fecha);
+                        $("#sistema").val(sistema);
+                    }
+                });
+
+                $.each(dataEdificio, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#edificio").val(record.codigo+" "+record.nombre);
+                    }
+                });   
+            }
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error");
+        }
+    });
+    
+    /**
+     * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
+     *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
+     */    
+    $("#visualizarOrdenes3").click(function() {
+        try
+        {
+            var idElementSelect = $("#tablaOrdenes2").jqGrid('getGridParam','selarrrow');
+
+                    
+            if(idElementSelect.length > 1)
+            {
+                alert("Sólo puede ser visualizar un elemento a la vez");
+            }
+            else if(idElementSelect.length == 0)
+            {
+                alert("Seleccione un elemento");
+            }
+            else
+            {
+                var elementSelect = $("#tablaOrdenes2").jqGrid('getRowData',idElementSelect);
+
+                console.log(elementSelect.numero_solicitud);
+                
+                var data = buscarOrdenes(elementSelect.numero_solicitud);
+
+                var campus = getNombreCampus(elementSelect.codigo_campus);
+
+                var dataEdificio = getNombreEdficio(elementSelect.codigo_campus, elementSelect.codigo_edificio);
+
+                var sistema = getNombreSistema(elementSelect.cod_sistema);
+
+                $.each(data, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#divDialogVisualizacion2").dialog("open");
+                        $("#divDialogVisualizacion2").dialog("option", "height", 725);
+                        $("#campNumeroSolicitud").html(elementSelect.numero_solicitud);
+                        $("#usuario").val(record.usuario);
+                        $("#sede").val("Cali");
+                        $("#campus").val(campus);
+                        $("#espacio").val(record.espacio);
+                        $("#cantidad1").val(record.cantidad1);
+                        $("#novedad1").val(record.descripcion1);
+                        $("#descripcion_novedad").val(record.descripcion_novedad);
+                        $("#cantidadN2").val(record.cantidad2);
+                        $("#novedad2").val(record.descripcion2);
+                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
+                        $("#cantidadN3").val(record.cantidad3);
+                        $("#novedad3").val(record.descripcion3);
+                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
+                        $("#contacto").val(record.contacto);
+                        $("#estado").val(record.estado);
+                        $("#fecha").val(record.fecha);
+                        $("#sistema").val(sistema);
+                    }
+                });
+
+                $.each(dataEdificio, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#edificio").val(record.codigo+" "+record.nombre);
+                    }
+                });
+            }
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error");
+        }
+    });
+    
+    /**
+     * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
+     *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
+     */    
+    $("#visualizarOrdenes4").click(function() {
+        try
+        {
+            var idElementSelect = $("#tablaOrdenes3").jqGrid('getGridParam','selarrrow');
+
+                    
+            if(idElementSelect.length > 1)
+            {
+                alert("Sólo puede ser visualizar un elemento a la vez");
+            }
+            else if(idElementSelect.length == 0)
+            {
+                alert("Seleccione un elemento");
+            }
+            else
+            {
+                var elementSelect = $("#tablaOrdenes3").jqGrid('getRowData',idElementSelect);
+
+                console.log(elementSelect.numero_solicitud);
+                
+                var data = buscarOrdenes(elementSelect.numero_solicitud);
+
+                var campus = getNombreCampus(elementSelect.codigo_campus);
+
+                var dataEdificio = getNombreEdficio(elementSelect.codigo_campus, elementSelect.codigo_edificio);
+
+                var sistema = getNombreSistema(elementSelect.cod_sistema);
+
+                $.each(data, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#divDialogVisualizacion2").dialog("open");
+                        $("#divDialogVisualizacion2").dialog("option", "height", 725);
+                        $("#campNumeroSolicitud").html(elementSelect.numero_solicitud);
+                        $("#usuario").val(record.usuario);
+                        $("#sede").val("Cali");
+                        $("#campus").val(campus);
+                        $("#espacio").val(record.espacio);
+                        $("#cantidad1").val(record.cantidad1);
+                        $("#novedad1").val(record.descripcion1);
+                        $("#descripcion_novedad").val(record.descripcion_novedad);
+                        $("#cantidadN2").val(record.cantidad2);
+                        $("#novedad2").val(record.descripcion2);
+                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
+                        $("#cantidadN3").val(record.cantidad3);
+                        $("#novedad3").val(record.descripcion3);
+                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
+                        $("#contacto").val(record.contacto);
+                        $("#estado").val(record.estado);
+                        $("#fecha").val(record.fecha);
+                        $("#sistema").val(sistema);
+                    }
+                });
+
+                $.each(dataEdificio, function(index, record)
+                {
+                    if($.isNumeric(index))
+                    {
+                        $("#edificio").val(record.codigo+" "+record.nombre);
+                    }
+                });
+            }
+        }
+        catch(ex)
+        {
+            alert("ERROR: Ocurrio un error");
+        }
+    });
+
+    /**
+     * Validad que el usuario selecciones una opcion valida del selector 
+     */
+    $("#sistemaSearch").change(function (e) {
+        var vlr = $("#sistemaSearch").find(':selected').val();
+
+        if(vlr == 0){
+            mostrarMensaje("Seleccione una opcion validad en el selector sistema");
+        }
+    });
+
+     /**
+     * captura el elemento seleccionado del select campus y de acuerdo a la seleccion actualiza el select de edificios
+     */
+    $("#campusSearch").change(function (e) {
+
+        var vlr = $("#campusSearch").find(':selected').val();
+        
+        if(vlr == 0){
+            $("#edificioSearch").empty();
+        }
+   
+        if(vlr == 1){
+            var id = 01;
+            $("#edificioSearch").empty();
+            actualizarSelectEdificio(id);
+
+        }
+        else if(vlr == 2){
+            var id = 02;
+            $("#edificioSearch").empty();
+            actualizarSelectEdificio(id);
+
+        }
+        else if(vlr == 3){
+            var id = 03;
+            $("#edificioSearch").empty();
+            actualizarSelectEdificio(id);
+        }
+        else
+        {
+            mostrarMensaje("Error no selecciono un campus de la lista");
+        }    
+    });
+
+    /**
+     * Valida que se seleccione una opcion valida del selector edificio
+     */
+    $("#edificioSearch").change(function (e) {
+        var vlr = $("#edificioSearch").find(':selected').val();
+
+        if(vlr == "--"){
+            mostrarMensaje("Error. Seleccione una opción valida");
+        }
+    });
+     
+});
