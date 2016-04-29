@@ -154,35 +154,27 @@ class Controlador_vista
         
         global $diccionario;
         
-        if(strcmp($module, USUARIO) == 0 & 
-                (strcmp($operation, INICIAR_SESION) == 0 || strcmp($operation, OLVIDO_CONTRASENIA) == 0))
-        {
+        if(strcmp($module, USUARIO) == 0 & (strcmp($operation, INICIAR_SESION) == 0 || strcmp($operation, OLVIDO_CONTRASENIA) == 0)){
             $html = $this->conseguir_plantilla('template1', '');
-            $html = str_replace('{contenido}', 
-                    $this->conseguir_plantilla($module, $operation), $html);
+            $html = str_replace('{contenido}', $this->conseguir_plantilla($module, $operation), $html);
             $html = str_replace('{librerias_adicionales}', '', $html);
-            $html = $this->representar_datos_dinamica($html, 
-            $diccionario['form_actions']);
+            $html = $this->representar_datos_dinamica($html, $diccionario['form_actions']);
+            $html = $this->representar_datos_dinamica($html, $data);            
+        }/*elseif(strcmp($module, USUARIO) == 0 & (strcmp($operation, MENU_PRINCIPAL) == 0) {
+            $html = $this->conseguir_plantilla('template1', '');
+            $html = str_replace('{contenido}', $this->conseguir_plantilla($module, $operation), $html);
+            $html = str_replace('{librerias_adicionales}', '', $html);
+            $html = $this->representar_datos_dinamica($html, $diccionario['form_actions']);
             $html = $this->representar_datos_dinamica($html, $data);
-            
-        }
-        else
-        {
+        }*/else{
             $html = $this->conseguir_plantilla('template2', '');
-            $html = str_replace('{operaciones}', 
-                    $this->conseguir_operaciones_add($perfil), $html);
-            $html = str_replace('{librerias_adicionales}', 
-                    $this->crear_enlace_libreria($module), 
-                    $html);
-            $html = str_replace('{contenido}', 
-                    $this->conseguir_plantilla($module, $operation), $html);
-            $html = $this->representar_datos_dinamica($html, 
-                    $diccionario['form_actions']);
-            $html = $this->representar_datos_dinamica($html, 
-                    $diccionario['links_menu']);
+            $html = str_replace('{operaciones}', $this->conseguir_operaciones_add($perfil), $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($module), $html);
+            $html = str_replace('{contenido}', $this->conseguir_plantilla($module, $operation), $html);
+            $html = $this->representar_datos_dinamica($html, $diccionario['form_actions']);
+            $html = $this->representar_datos_dinamica($html, $diccionario['links_menu']);
             $html = $this->representar_datos_dinamica($html, $data);    
-        }
-        
+        }        
         print $html;
     }
 }

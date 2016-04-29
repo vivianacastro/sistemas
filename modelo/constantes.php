@@ -19,6 +19,9 @@ const EMAILSISTMOBILIARIO = '';
 
 const INICIAR_SESION = 'iniciar_sesion';
 const OLVIDO_CONTRASENIA = 'olvido_contrasenia';
+const MENU_PRINCIPAL = 'menu_principal';
+
+
 const OPERATION_LIST_ELECTRICO = 'listar_electrico';
 const OPERATION_LIST_HIDRAULICO = 'listar_hidraulico';
 const OPERATION_LIST_MOBILIARIO = 'listar_mobiliario';

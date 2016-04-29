@@ -266,14 +266,18 @@ class Controlador_usuario {
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password']))
-            {
+            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
                 $_SESSION["autorizado"] = true;
                 session_regenerate_id();
                 $_SESSION["userid"] = session_id();
-                $_SESSION["perfil"] = $infoResult["perfil"];
-                $_SESSION["login"] = $infoResult["login"];
+                $_SESSION["usuario"] = $infoResult["usuario"];
                 $_SESSION["nombre_usuario"] = $infoResult["nombre_usuario"];
+                $_SESSION["modulo_planta"] = $infoResult["modulo_planta"];
+                $_SESSION["modulo_inventario"] = $infoResult["modulo_inventario"];
+                $_SESSION["modulo_aires"] = $infoResult["modulo_aires"];
+                $_SESSION["creacion_planta"] = $infoResult["creacion_planta"];
+                $_SESSION["creacion_inventario"] = $infoResult["creacion_inventario"];
+                $_SESSION["creacion_aires"] = $infoResult["creacion_aires"];
                 $_SESSION["id_db_user"] = $infoResult["id"];
                 $_SESSION["ultimoAcceso"] = time();
                 
@@ -283,30 +287,29 @@ class Controlador_usuario {
 
                 $m->actualizarUltimoAcceso($_SESSION["login"]);
 
-                if($_SESSION["perfil"] == 'admin'){
+                if($_SESSION["modulo_planta"]){
                     $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
-                }else if($_SESSION["perfil"] == 'hidraulico' || $_SESSION["perfil"] == 'electrico' || $_SESSION["perfil"] == 'planta' || $_SESSION["perfil"] == 'mobiliario'){
+                }if($_SESSION["modulo_inventario"]){
                     $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST_DIA, $data);
-                }else if($_SESSION["perfil"] == 'sanfernando'){
+                }if($_SESSION["modulo_aires"]){
                     $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
                 }else{
                     $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
                 }
-            } else {
+            }else{
                 $data = array(
                     'mensaje' => 'Intentelo de nuevo. Puede que haya '
                     . 'escrito mal su usuario o contraseña'
                 );
-
-                $v->retornar_vista($_SESSION["perfil"],USUARIO, INICIAR_SESION, $data);                 
+                $v->retornar_vista($_SESSION["perfil"],USUARIO, INICIAR_SESION, $data);
             }
-        } else {
+        }else{
             if($_SESSION["autorizado"] & isset($_SESSION['userid']) 
                     & isset($_SESSION['perfil'])) {
                 $data = array('mensaje' => 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"],);
 
                 $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
-            } else {
+            }else {
                 $this->salir_sesion();
             }
         }

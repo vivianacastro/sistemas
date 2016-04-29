@@ -37,7 +37,7 @@ class Modelo_usuario {
     function comprobarExistenciaDeUsuario($l) {
         $l = htmlspecialchars($l);
 
-        $sql = "SELECT * FROM usuarios_autorizados_sistema "
+        $sql = "SELECT * FROM usuarios "
                 . " WHERE login = '".$l."';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -69,7 +69,7 @@ class Modelo_usuario {
     function comprobarEmailUsuario($e) {
         $e = htmlspecialchars($e);
 
-        $sql = "SELECT * FROM usuarios_autorizados_sistema "
+        $sql = "SELECT * FROM usuarios "
                 . " WHERE correo = '".$e."';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -102,7 +102,7 @@ class Modelo_usuario {
     /*function buscarCorreoUsuario($e) {
         $e = htmlspecialchars($e);
 
-        $sql = "SELECT login FROM usuarios_autorizados_sistema "
+        $sql = "SELECT login FROM usuarios "
                 . " WHERE correo = '".$e."';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -133,7 +133,7 @@ class Modelo_usuario {
     function retornarContrasena($l) {
         $l = htmlspecialchars($l);
 
-        $sql = "SELECT password FROM usuarios_autorizados_sistema "
+        $sql = "SELECT password FROM usuarios "
                 . " WHERE login = '".$l."';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -213,7 +213,7 @@ class Modelo_usuario {
         
         $c = $this->encriptarPassword($c);
 
-        $sql = "INSERT INTO usuarios_autorizados_sistema (nombre_usuario, perfil, correo, telefono, extension, login, password) 
+        $sql = "INSERT INTO usuarios (nombre_usuario, perfil, correo, telefono, extension, login, password) 
                 VALUES ('".$n."','".$p."','".$em."','".$t."','".$e."','".$l."','".$c."');";
                 
         $l_stmt = $this->conexion->prepare($sql);
@@ -248,7 +248,7 @@ class Modelo_usuario {
         
         $c = $this->encriptarPassword($c);
 
-        $sql = "INSERT INTO usuarios_autorizados_sistema "
+        $sql = "INSERT INTO usuarios "
                 . "(nombre_usuario, perfil, correo, telefono, extension, login, password) VALUES ('".
                 $n."', '".$l. "','".$c. "','" . $p ."','".$em."','".$t."','".$e."');";
                 
@@ -281,12 +281,12 @@ class Modelo_usuario {
 
         if($key == ""){
             $sql = "SELECT id,nombre_usuario,login,perfil,correo,telefono,extension
-                FROM usuarios_autorizados_sistema
+                FROM usuarios
                 WHERE estado = 'ACTIVO' AND CAST(id AS text) like '%".$key."%'
                 ORDER BY id;";
         }else{
             $sql = "SELECT id,nombre_usuario,login,perfil,correo,telefono,extension
-                FROM usuarios_autorizados_sistema
+                FROM usuarios
                 WHERE estado = 'ACTIVO' AND login = '".$key."'
                 ORDER BY id;";
         }        
@@ -321,7 +321,7 @@ class Modelo_usuario {
         $key = ucwords($key);
         
         $sql = "SELECT id,nombre_usuario,login,perfil,correo,telefono,extension
-                FROM usuarios_autorizados_sistema
+                FROM usuarios
                 WHERE estado = 'ACTIVO' AND nombre_usuario LIKE '%".$key."%';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -367,7 +367,7 @@ class Modelo_usuario {
             return false;            
         }
 
-        $sql = "UPDATE usuarios_autorizados_sistema SET "
+        $sql = "UPDATE usuarios SET "
                 . "perfil = '".$p."'"
                 . " WHERE login = '".$login."';";
 
@@ -462,7 +462,7 @@ class Modelo_usuario {
             }
         }
 
-        $sql = "UPDATE usuarios_autorizados_sistema SET ".$pass.$correo.$tel.$ext. 
+        $sql = "UPDATE usuarios SET ".$pass.$correo.$tel.$ext. 
         //"password = '".$cn."',"." correo = '".$crn."',"." telefono = '".$tln."',"." extension = '".$xtn."'". 
         " WHERE login = '".$l."';";
 
@@ -496,7 +496,7 @@ class Modelo_usuario {
      */
     public function eliminarUsuarioAutorizado($login) {
 
-        $sql = "UPDATE usuarios_autorizados_sistema "
+        $sql = "UPDATE usuarios "
                 . "SET estado = 'ELIMINADO' "
                 . "WHERE login = '".$login."';";
         
@@ -567,7 +567,7 @@ class Modelo_usuario {
         
         $password = $this->retornarContrasena($login);
         
-        $sql = "SELECT id,nombre_usuario,login,perfil,correo,telefono,extension FROM usuarios_autorizados_sistema WHERE login = '".$login."' AND 
+        $sql = "SELECT * FROM usuarios WHERE login = '".$login."' AND 
                 password = '".$password."' AND estado = 'ACTIVO';";
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -591,14 +591,14 @@ class Modelo_usuario {
 
         $GLOBALS['mensaje'] = MJ_CONSULTA_EXITOSA;
 
-        return $result[0];        
+        return $result[0];
     }
 
     public function actualizarUltimoAcceso($login){
 
         $fecha = date("Y-m-d H:i:s");
 
-        $sql = "UPDATE usuarios_autorizados_sistema SET "
+        $sql = "UPDATE usuarios SET "
                 . "ultimo_acceso = '".$fecha."'"
                 . " WHERE login = '".$login."';";
 
