@@ -29,6 +29,7 @@ const OPERATION_MOD_AIRES = 'modulo_aires';
 const OPERATION_MOD_USUARIO = 'modificar_usuario';
 
 const OPERATION_CREAR_SEDE = 'crear_sede';
+const OPERATION_CREAR_CAMPUS = 'crear_campus';
 const OPERATION_BUSQ_PLANTA = 'buscar_planta';
 
 

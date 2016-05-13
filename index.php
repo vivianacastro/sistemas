@@ -33,6 +33,7 @@ $map = array(
 
     //Acciones Módulo Planta Física
     'crear_sede' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sede'),
+    'crear_campus' => array('controlador' =>'controlador_creacion', 'action' =>'crear_campus'),
     'guardar_sede' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_sede'),
 
     //Acciones Módulo Inventario

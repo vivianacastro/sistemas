@@ -16,7 +16,6 @@ $(document).ready(function() {
                 async: false,
                 error: function(xhr, status, error) {
                     //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    console.log(status);
                     //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);

@@ -5,8 +5,8 @@
 class controlador_creacion
 {
 	/**
-    * Función que despliega el panel que permite consultar
-    * los espacios que se encuentran registrados en el sistema
+    * Función que despliega el panel que permite crear
+    * una sede en el sistema.
     **/
     public function crear_sede() {        
         $GLOBALS['mensaje'] = "";
@@ -18,6 +18,26 @@ class controlador_creacion
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SEDE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un campus en el sistema.
+    **/
+    public function crear_campus() {        
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $data = array(
+            'mensaje' => 'Crear Campus',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CAMPUS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
