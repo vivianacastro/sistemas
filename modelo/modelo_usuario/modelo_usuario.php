@@ -1,6 +1,6 @@
 <?php
 
-class Modelo_usuario {
+class modelo_usuario {
     protected $conexion;
 
     /**

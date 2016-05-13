@@ -2,24 +2,27 @@
 <html lang="es">
 
 <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Sistemas de la Sección de Sostenibilidad y Mantenimiento de la Universidad del Valle"/>
+    <meta name="author" content="Juan Camilo López Espitia"/>
+    <link href='vistas/images/univalle.png' rel='shortcut icon' type='image/png'/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href='vistas/images/univalle.png' rel='shortcut icon' type='image/png'>
-
-    <link rel="stylesheet" href="vistas/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="vistas/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="vistas/css/bootstrap-datepicker3.min.css">
-    <link rel="stylesheet" href="vistas/css/buttons.dataTables.min.css">
-    <link href="vistas/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vistas/css/estilosApp.css?v=2.1" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="vistas/css/jquery-ui.css"/>
-    <link rel="stylesheet" type="text/css" href="vistas/css/ui.jqgrid.css">
+    <!--<link rel="stylesheet" href="vistas/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="vistas/css/responsive.dataTables.min.css"/>
+    <link rel="stylesheet" href="vistas/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="vistas/css/buttons.dataTables.min.css"/>
+    <link href="vistas/css/jquery-ui.css" rel="stylesheet"/>
+    <link href="vistas/css/ui.jqgrid.css" rel="stylesheet"/>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vistas/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="vistas/css/estilosApp" rel="stylesheet"/>
 
     <title>Sistema de Informaci&oacute;n del Mantenimiento Institucional</title>
 
@@ -51,7 +54,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="brand"><img src="vistas/images/idx-logouv.gif" alt="Matenimiento de la Universidad del Valle" title="Mantenimiento de la Universidad del Valle"/></div>
-            <div class="address-bar">Sistema de Informaci&oacute;n del Mantenimiento Institucional</div><br>
+            <div class="address-bar">Sección de Sostenibilidad y Mantenimiento</div><br>
             <div id="divMensaje" class="nav navbar-nav">
                 {mensaje}
             </div><br>
@@ -86,11 +89,7 @@
         </div>
     </footer>
 
-    <script src="vistas/plugins/jquery.js"></script>
-    <script src="vistas/plugins/bootstrap.min.js"></script>
-    <script src="vistas/global_functions?v=1.0.js"></script>
-    <script type="text/javascript" src="vistas/plugins/jquery-ui.js"></script>
-    <script type="text/javascript" src="vistas/plugins/grid.locale-es.js"></script>
+    <!--<script type="text/javascript" src="vistas/plugins/grid.locale-es.js"></script>
     <script type="text/javascript" src="vistas/plugins/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="vistas/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="vistas/plugins/dataTables.bootstrap.js"></script>
@@ -107,9 +106,16 @@
     <script type="text/javascript" src="vistas/plugins/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="vistas/plugins/BytescoutPDF.js"></script>
     <script type="text/javascript" src="vistas/plugins/highcharts.js"></script>
-    <script type="text/javascript" src="vistas/plugins/exporting.js"></script>
+    <script type="text/javascript" src="vistas/plugins/exporting.js"></script>-->
+
+        <!-- jQuery -->
+    <script src="controlador/plugins/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="controlador/plugins/bootstrap.min.js"></script>
 
     <!-- Librerias Adicionales -->
+    <script src="controlador/global_functions?v=1.0.js"></script>
     {librerias_adicionales}
 
 </body>

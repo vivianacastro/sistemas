@@ -6,51 +6,31 @@ const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 600;
 
 const ESTILO     = 'estilo.css';
 const USUARIO = 'usuario';
-const REGISTROS = 'registros';
-const MODIFICACION = 'modificacion';
 const CONSULTAS = 'consultas';
+const CREACION = 'creacion';
+const MODIFICACION = 'modificacion';
+const REGISTROS = 'registros';
 
 const EMAIL = 'mantenimiento.univalle@gmail.com';
 const PASS = 'ManteUnivalle';
-const EMAILSISTHIDRAULICO = '';
-const EMAILSISTELECTRICO = '';
-const EMAILSISTPLANTAFISICA = '';
-const EMAILSISTMOBILIARIO = '';
 
 const INICIAR_SESION = 'iniciar_sesion';
+const CERRAR_SESION = 'cerrar_sesion';
 const OLVIDO_CONTRASENIA = 'olvido_contrasenia';
 const MENU_PRINCIPAL = 'menu_principal';
 
+const MOD_PLANTA = 'mod_planta';
+const MOD_PLANTA = 'mod_inventario';
+const MOD_PLANTA = 'mod_aires';
 
-const OPERATION_LIST_ELECTRICO = 'listar_electrico';
-const OPERATION_LIST_HIDRAULICO = 'listar_hidraulico';
-const OPERATION_LIST_MOBILIARIO = 'listar_mobiliario';
-const OPERATION_LIST_PLANTA = 'listar_planta';
-const BUSCAR_DINAMICO = 'buscar_dinamico';
-const OPERATION_BUSCAR = 'buscar_dinamicamente';
-const OPERATION_SET = 'insertar';
-const OPERATION_GET = 'buscar';
-const OPERATION_DELETE = 'borrar';
-const OPERATION_EDIT = 'modificar';
-const OPERATION_LIST = 'listar';
-const OPERATION_LIST_F = 'listarf';
-const OPERATION_LIST_N = 'listarn';
-const OPERATION_LIST_MULTIPLE = 'listar_multiple';
-const OPERATION_LIST_DIA = 'listardia';
-const OPERATION_LIST_NORMAL = 'listar_normal';
-const OPERATION_LIST_HISTORIAL = 'listar_historial';
-const OPERATION_LIST_ORDENES = 'listar_ordenes';
-const OPERATION_LIST_NOVEDADES = 'novedades';
-const OPERATION_SALIR_SESION = 'salir_sesion';
-const OPERATION_ADM_SUPERV = 'administrar_autorizado';
-const OPERATION_NEW_USER = 'crear_nuevo_usuario';
-const OPERATION_EDIT_DATA = 'cambiar_datos';
-const OPERATION_ESTADISTICAS = 'estadisticas';
-const OPERATION_ESTADISTICAS_EDIFICIOS = 'estadisticas_edificios';
-const OPERATION_ESTADISTICAS_ESPACIOS = 'estadisticas_espacios';
-const OPERATION_ESTADISTICAS_SISTEMA = 'estadisticas_sistema';
-const OPERATION_ESTADISTICAS_OPERADOR = 'estadisticas_operador';
-const OPERATION_NOVEDAD = 'novedades';
+const OPERATION_MOD_PLANTA = 'modulo_planta';
+const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
+const OPERATION_MOD_AIRES = 'modulo_aires';
+const OPERATION_MOD_USUARIO = 'modificar_usuario';
+
+const OPERATION_CREAR_SEDE = 'crear_sede';
+const OPERATION_BUSQ_PLANTA = 'buscar_planta';
+
 
 /*******************Mensajes******************/
 const MJ_CONSULTA_EXITOSA = 'Se realizó correctamente la consulta ';

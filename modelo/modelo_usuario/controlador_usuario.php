@@ -1,9 +1,106 @@
 <?php
 
-class Controlador_usuario {
+class controlador_usuario {
+
+    /**
+     * Función que permite iniciar una sesion por un usuario, ademas esta
+     * función se encarga de desplegar el panel de logeo o el mostrar la pagina
+     * de inicio de la aplicación web.
+     */    
+    public function iniciar_sesion() {
+        session_start();
+        
+        //instaciar el objeto de la clase modelo
+        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);  
+        
+        $v = new Controlador_vista();
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
+                $_SESSION["autorizado"] = true;
+                session_regenerate_id();
+                $_SESSION["userid"] = session_id();
+                $_SESSION["login"] = $infoResult["login"];
+                $_SESSION["perfil"] = $infoResult["perfil"];
+                $_SESSION["nombre_usuario"] = $infoResult["nombre_usuario"];
+                $_SESSION["modulo_planta"] = $infoResult["modulo_planta"];
+                $_SESSION["modulo_inventario"] = $infoResult["modulo_inventario"];
+                $_SESSION["modulo_aires"] = $infoResult["modulo_aires"];
+                $_SESSION["creacion_planta"] = $infoResult["creacion_planta"];
+                $_SESSION["creacion_inventario"] = $infoResult["creacion_inventario"];
+                $_SESSION["creacion_aires"] = $infoResult["creacion_aires"];
+                $_SESSION["id_db_user"] = $infoResult["id"];
+                $_SESSION["ultimoAcceso"] = time();
+                
+                $data = array(
+                    'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
+                );
+
+                $m->actualizarUltimoAcceso($_SESSION["login"]);
+
+                $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+
+                /*if($_SESSION["modulo_planta"]){
+                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
+                }if($_SESSION["modulo_inventario"]){
+                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST_DIA, $data);
+                }if($_SESSION["modulo_aires"]){
+                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
+                }else{
+                    $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
+                }*/
+            }else{
+                $data = array(
+                    'mensaje' => 'Intentelo de nuevo. Puede que haya '
+                    . 'escrito mal su usuario o contraseña'
+                );
+                $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
+            }
+        }else{
+            if($_SESSION["autorizado"] & isset($_SESSION['userid']) 
+                    & isset($_SESSION['perfil'])) {
+                $data = array(
+                    'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
+                );
+
+                $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+            }else {
+                $this->cerrar_sesion();
+            }
+        }
+    }
+
+
+    /**
+     * Función que permite cerrar una sesion de un usuario.
+    */
+    public function cerrar_sesion() {
+        session_start();
+        
+        //eliminar informacion almacenada de la sesion
+        session_unset();
+        //finalizar sesion
+        session_destroy ();
+        
+        $data = array(
+            'mensaje' => 'Bienvenido  '. date('d-m-y  h:i A'),
+        );
+        
+        $v = new Controlador_vista();
+        $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
+    }
+
+
+
+
+
+
+
     
     /**
-     * Función despliega el panel que permite crear, visualizar y modificar los 
+     * Función que despliega el panel que permite crear, visualizar y modificar los 
      * usuarios con acceso al sistema.
      */     
     public function administrar_usuario_autorizado() {
@@ -15,19 +112,6 @@ class Controlador_usuario {
         $v = new Controlador_vista();
         $v->retornar_vista($_SESSION["perfil"],USUARIO, OPERATION_ADM_SUPERV, $data);        
     }
-
-        /**
-     * Función que despliega la página de recuperación de la contraseña
-     */     
-    /*public function olvido_contrasenia() {
-        $GLOBALS['mensaje'] = "";
-        $data = array(
-            'mensaje' => 'Recuperar contraseña',
-        );  
-        
-        $v = new Controlador_vista();
-        $v->retornar_vista("",USUARIO, OLVIDO_CONTRASENIA, $data);        
-    }*/
     
     /**
      * Función que permite crear un usuario con acceso al sistema.
@@ -208,24 +292,7 @@ class Controlador_usuario {
 
     
     /*-------------------------------Operaciones del Index-----------------------------------------*/
-    /**
-     * Función que permite cerrar una sesion de un usuario.
-    */
-    public function salir_sesion() {
-        session_start();
-        
-        //eliminar informacion almacenada de la sesion
-        session_unset();
-        //finalizar sesion
-        session_destroy ();
-        
-        $data = array(
-            'mensaje' => 'Bienvenido  '. date('d-m-y  h:i A'),
-        );
-        
-        $v = new Controlador_vista();
-        $v->retornar_vista($_SESSION["perfil"],USUARIO, INICIAR_SESION, $data);
-    }    
+    
     
     /**
      * Función que permite chekear si hay una sesion iniciada.
@@ -250,119 +317,7 @@ class Controlador_usuario {
         return false;
     }
 
-    /**
-     * Función que permite iniciar una sesion por un usuario, ademas esta
-     * función se encarga de desplegar el panel de logeo o el mostrar la pagina
-     * de inicio de la aplicación web.
-     */    
-    public function iniciar_sesion() {
-        session_start();
-        
-        //instaciar el objeto de la clase modelo
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);  
-        
-        $v = new Controlador_vista();
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
-                $_SESSION["autorizado"] = true;
-                session_regenerate_id();
-                $_SESSION["userid"] = session_id();
-                $_SESSION["usuario"] = $infoResult["usuario"];
-                $_SESSION["nombre_usuario"] = $infoResult["nombre_usuario"];
-                $_SESSION["modulo_planta"] = $infoResult["modulo_planta"];
-                $_SESSION["modulo_inventario"] = $infoResult["modulo_inventario"];
-                $_SESSION["modulo_aires"] = $infoResult["modulo_aires"];
-                $_SESSION["creacion_planta"] = $infoResult["creacion_planta"];
-                $_SESSION["creacion_inventario"] = $infoResult["creacion_inventario"];
-                $_SESSION["creacion_aires"] = $infoResult["creacion_aires"];
-                $_SESSION["id_db_user"] = $infoResult["id"];
-                $_SESSION["ultimoAcceso"] = time();
-                
-                $data = array(
-                    'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
-                );
-
-                $m->actualizarUltimoAcceso($_SESSION["login"]);
-
-                if($_SESSION["modulo_planta"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
-                }if($_SESSION["modulo_inventario"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST_DIA, $data);
-                }if($_SESSION["modulo_aires"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
-                }else{
-                    $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
-                }
-            }else{
-                $data = array(
-                    'mensaje' => 'Intentelo de nuevo. Puede que haya '
-                    . 'escrito mal su usuario o contraseña'
-                );
-                $v->retornar_vista($_SESSION["perfil"],USUARIO, INICIAR_SESION, $data);
-            }
-        }else{
-            if($_SESSION["autorizado"] & isset($_SESSION['userid']) 
-                    & isset($_SESSION['perfil'])) {
-                $data = array('mensaje' => 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"],);
-
-                $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
-            }else {
-                $this->salir_sesion();
-            }
-        }
-    }
-
-    /**
-     * Función que genera una contraseña aleatoria y la envía por mail
-     *al usuario.
-     */    
-    /*public function reestablecer_contrasenia() {
-        
-        //instaciar el objeto de la clase modelo
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);  
-        
-        $v = new Controlador_vista();
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if ($infoResult = $m->buscarCorreoUsuario($_POST['correo']))
-            {
-                $_SESSION["autorizado"] = true;
-                session_regenerate_id();   
-                $_SESSION["userid"] = session_id();
-                $_SESSION["perfil"] = $infoResult["perfil"];
-                $_SESSION["login"] = $infoResult["login"];
-                $_SESSION["nombre_usuario"] = $infoResult["nombre_usuario"];
-                $_SESSION["id_db_user"] = $infoResult["id"];
-                $_SESSION["ultimoAcceso"] = time();
-                
-                $data = array(
-                    'mensaje' => 'Se ha enviado un correo a '.$_POST['correo'].' con las instrucciones para reestablecer la contraseña.',
-                );  
-
-                $v->retornar_vista("",USUARIO, OLVIDO_CONTRASENIA, $data);
-            } else {
-                $data = array(
-                    'mensaje' => 'El correo no se encuentra asociado a una cuenta en el sistema.'
-                );
-
-                $v->retornar_vista("",USUARIO, OLVIDO_CONTRASENIA, $data);                 
-            }
-        } else {
-            if($_SESSION["autorizado"] & isset($_SESSION['userid']) 
-                    & isset($_SESSION['perfil'])) {
-                $data = array('mensaje' => 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"],);
-
-                $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);                
-            } else {
-                $this->salir_sesion();
-            }
-        }
-    } */
+    
 }
 
 ?>

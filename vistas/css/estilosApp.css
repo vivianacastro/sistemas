@@ -47,7 +47,6 @@ caption{
 }
 
 .navbar-nav {
-    /*text-transform: capitalize;*/
     font-weight: 400;
     letter-spacing: 3px;
 }
@@ -269,12 +268,29 @@ caption{
     text-align: center;
 }
 
-.form_inicio_sesion{
-
-}
-
 .opciones{
     font-size: 130%;
+}
+
+.img_boton{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boton{
+    font-weight: bold;
+    color: #e60013;
+}
+
+.img_boton:hover{
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+.boton:hover{
+    color: #e15661;
+    font-size 100%;
 }
 
 input[type=date]::-webkit-inner-spin-button {
@@ -301,10 +317,6 @@ input[type=date]::-webkit-inner-spin-button {
 #divSolicitud{
     width: 80%;
 }
-
-/*#divTablas{
-    width: 95%;
-}*/
 
 #divBusqueda, #divCampus, #divEdificio, #divPiso, #divSistema, #divPeriodo{
     resize: none;
@@ -370,7 +382,6 @@ footer p {
         padding: 2% 2% 2%;
         text-align: center;
         text-shadow: 1px 1px 2px rgba(0,0,0,0);
-        /*text-transform: capitalize;*/
         font-size: 200%;
         font-weight: 400;
         background: #e60013;
@@ -413,6 +424,14 @@ footer p {
         background: #e60013;
         width: 100%;
         height: auto;
+    }
+
+    .img_boton{
+        width: 35%;
+    }
+
+    .img_boton_menu{
+        width: 2%;
     }
 
     #divMensaje{
@@ -570,6 +589,10 @@ footer p {
     .modal-dialog{
         width: 80%;
     }
+
+    .img_boton{
+        width: 25%;
+    }
 }
 
 @media screen and (max-width:767px) {
@@ -589,6 +612,9 @@ footer p {
         padding-right: 1%;
     }
 
+    .img_boton{
+        width: 20%;
+    }
 
     #divMensaje{
         padding: 0 0% 0;

@@ -6,6 +6,12 @@ define('__ROOT__', dirname(__FILE__));
 require_once __ROOT__.'/modelo/config.php'; 
 require_once __ROOT__.'/modelo/constantes.php';
 require_once __ROOT__.'/controlador_vista.php';
+require_once __ROOT__.'/modelo/modelo_consultas/controlador_consultas.php';
+require_once __ROOT__.'/modelo/modelo_consultas/modelo_consultas.php';
+require_once __ROOT__.'/modelo/modelo_creacion/controlador_creacion.php';
+require_once __ROOT__.'/modelo/modelo_creacion/modelo_creacion.php';
+require_once __ROOT__.'/modelo/modelo_modificacion/controlador_modificacion.php';
+//require_once __ROOT__.'/modelo/modelo_modificacion/modelo_modificacion.php';
 require_once __ROOT__.'/modelo/modelo_usuario/controlador_usuario.php';
 require_once __ROOT__.'/modelo/modelo_usuario/modelo_usuario.php';
 
@@ -14,11 +20,27 @@ global $mesaje;
 
 //mapa de enrutamiento
 $map = array(
-    'administrar_autorizado_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'administrar_usuario_autorizado'),
-    'buscar_autorizados_manejar_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'buscar_autorizados_manejar_sistema'),    
+    //Acciones usuario
     'iniciar_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'iniciar_sesion'),
-    'salir_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'salir_sesion'),
+    'cerrar_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'cerrar_sesion'),
     'crear_usuario_autorizado_para_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario_autorizado_para_adm_sistema'),
+
+    //Acciones Página Principal
+    'menu_principal' => array('controlador' =>'controlador_usuario', 'action' =>'iniciar_sesion'),
+    'modulo_planta' => array('controlador' =>'controlador_consultas', 'action' =>'modulo_planta'),
+    'modulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'modulo_inventario'),
+    'modulo_aires' => array('controlador' =>'controlador_consultas', 'action' =>'modulo_aires'),
+
+    //Acciones Módulo Planta Física
+    'crear_sede' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sede'),
+    'guardar_sede' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_sede'),
+
+    //Acciones Módulo Inventario
+    
+    //Acciones Módulo Aires Acondicionados
+
+    'administrar_autorizado_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'administrar_usuario_autorizado'),
+    'buscar_autorizados_manejar_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'buscar_autorizados_manejar_sistema'),
     'eliminar_usuario_autorizado_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'eliminar_usuario_autorizado_adm_sistema'),
     'modificar_perfil_usuario_autorizado_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_perfil_usuario_autorizado_adm_sistema'),
     'buscar_usuario_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'buscarUsuario'),
