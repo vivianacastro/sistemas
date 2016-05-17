@@ -10,7 +10,7 @@ class controlador_usuario {
     public function iniciar_sesion() {
         session_start();
         
-        //instaciar el objeto de la clase modelo
+        //instaciar el objeto de la clase Modelo
         $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);  
         

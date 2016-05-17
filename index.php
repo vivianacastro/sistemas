@@ -11,7 +11,7 @@ require_once __ROOT__.'/modelo/modelo_consultas/modelo_consultas.php';
 require_once __ROOT__.'/modelo/modelo_creacion/controlador_creacion.php';
 require_once __ROOT__.'/modelo/modelo_creacion/modelo_creacion.php';
 require_once __ROOT__.'/modelo/modelo_modificacion/controlador_modificacion.php';
-//require_once __ROOT__.'/modelo/modelo_modificacion/modelo_modificacion.php';
+require_once __ROOT__.'/modelo/modelo_modificacion/modelo_modificacion.php';
 require_once __ROOT__.'/modelo/modelo_usuario/controlador_usuario.php';
 require_once __ROOT__.'/modelo/modelo_usuario/modelo_usuario.php';
 
@@ -34,6 +34,8 @@ $map = array(
     //Acciones Módulo Planta Física
     'crear_sede' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sede'),
     'crear_campus' => array('controlador' =>'controlador_creacion', 'action' =>'crear_campus'),
+    'consultar_sede' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_sede'),
+    'guardar_campus' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_campus'),
     'guardar_sede' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_sede'),
 
     //Acciones Módulo Inventario

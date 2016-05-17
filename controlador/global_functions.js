@@ -18,7 +18,7 @@ function mostrarMensaje(texto) {
  * @param {string} cadena, Cadena a convertir a minúsculas.
  * @returns {string} cadenaMinus, Cadena convertida.
  */
-function cadenaMinusculas(cadena) {
+function limpiarCadena(cadena) {
 	var cadenaMinus = cadena.toLowerCase();
 	cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
 	cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,"");
@@ -30,7 +30,7 @@ function cadenaMinusculas(cadena) {
  * @param {string} cadena, Cadena a convertir.
  * @returns {string} cadenaMostrar, Cadena para mostrar (primera letra de cada palabra en mayúsculas).
  */
-function cadenaMostrar(cadena) {
-	var cadenaMostrar = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {return letter.toUpperCase();});
+function cadenaMayusculas(cadena) {
+	var cadenaMostrar = cadena.toLowerCase().replace(/\b[a-z]/g, function(letter) {return letter.toUpperCase();});
 	return cadenaMostrar;
 }

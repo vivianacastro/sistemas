@@ -2,7 +2,7 @@
 /**
  * Clase que guarda la información para conectarse a la base de datos.
  */
-class Config
+class config
 {
     static public $mvc_bd_hostname = "localhost";
     static public $mvc_bd_nombre   = "sistemas_pruebas"; //solicitudes_mantenimiento

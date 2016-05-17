@@ -51,12 +51,31 @@ class controlador_creacion
     public function guardar_sede(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             if($m->verificarSede($info['nombre_sede'])){
                 $m->guardarSede($info['nombre_sede']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite guardar un campus en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_campus(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            if($m->verificarCampus($info['nombre_sede'],$info['nombre_campus'])){
+                $m->guardarCampus($info['nombre_sede'],$info['nombre_campus']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
