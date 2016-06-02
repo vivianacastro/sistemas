@@ -162,6 +162,22 @@ caption{
     margin-left: auto;
     margin-right: auto;
     text-align: left;
+    text-transform: capitalize;
+}
+
+.panel-heading{
+    font-weight:bold;
+}
+
+.panel-externo{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panel-interno{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .div_izquierda{
@@ -192,6 +208,12 @@ caption{
     padding: 0.5% 0.5% 0.5%;
 }
 
+.btn-agregar{
+    width: 10%;
+    text-align: center;
+    padding: 0.5% 0.5% 0.5%;
+}
+
 .btn-block{
     width: 100%;
     margin-left: auto;
@@ -205,6 +227,12 @@ caption{
 }
 
 .btn-formulario:disabled{
+    color: white;
+    background-color: #e60013;
+    border: none;
+}
+
+.btn-agregar:disabled{
     color: white;
     background-color: #e60013;
     border: none;
@@ -426,6 +454,10 @@ footer p {
         height: auto;
     }
 
+    .btn-agregar{
+        font-size: 80%;
+    }
+
     .img_boton{
         width: 35%;
     }
@@ -583,6 +615,10 @@ footer p {
         display: table;
         clear: both;
     }
+
+    .btn-agregar{
+        font-size: 100%;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -600,6 +636,12 @@ footer p {
         text-align: center;
         font-size: 80%;
         padding: 2% 2% 2%;
+    }
+
+    .btn-agregar{
+        text-align: center;
+        padding: 2% 2% 2%;
+        width: 30%;
     }
 
     .modal-dialog{

@@ -26,20 +26,68 @@ class controlador_consultas
     }
     
     /**
-     * Función que permite consultar los campus
-     * almacenados en el sistema.
+     * Función que permite consultar las sedes
+     * almacenadas en el sistema.
      */
-    public function consultar_sede() {
+    public function consultar_sedes() {
         $GLOBALS['mensaje'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $dataNew = array();
-            $data = $m->buscarSede();
+            $data = $m->buscarSedes();
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_sede' => $valor['nombre'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar los campus
+     * almacenados en el sistema.
+     */
+    public function consultar_campus() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCampus($info["nombre_sede"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre_campus' => $valor['nombre'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar los edificios de un campus
+     * almacenados en el sistema.
+     */
+    public function consultar_edificios() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarEdificios($info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre_edificio' => $valor['nombre'],
                     );
                 array_push($dataNew, $arrayAux);
             }

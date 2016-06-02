@@ -28,10 +28,10 @@ class controlador_vista
             'links_planta'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'CREAR_CAMPUS'=>'index.php?action='.OPERATION_CREAR_CAMPUS,
-                'CREAR_EDIFICIO'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                'CREAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_SEDE,
+                'CREAR_EDIFICIO'=>'index.php?action='.OPERATION_CREAR_EDIFICIO,
+                'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_ESPACIO,
+                'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_TIPO_MATERIAL,
+                'CREAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CREAR_TIPO_OBJETO,
                 ),
             'links_inventario'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,

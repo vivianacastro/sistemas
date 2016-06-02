@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<div>
+    <div class="panel panel-default panel-externo">
+        <div class="panel-heading">Crear Espacio</div>
+    <div class="panel-body">
+        <!--<div><b><h2>Crear Espacio</h2></b><br></div>-->
+        <div><h4><b>Informaci&oacute;n del Espacio</b></h4></div>
+        <div>Campos obligatorios (<font color="red">*</font>)</div>
+        <div class="div_izquierda"><b>Sede a la que Pertenece<font color="red">*</font>:</b></div>
+        <select class="form-control formulario" name="nombre_sede" id="nombre_sede" required></select><br>
+        <div class="div_izquierda"><b>Nombre del Campus<font color="red">*</font>:</b></div>
+        <select class="form-control formulario" name="nombre_campus" id="nombre_campus" required></select><br>
+        <div class="div_izquierda"><b>Edificio<font color="red">*</font>:</b></div>
+        <input class="form-control formulario" type="text" name="edificio" id="edificio" value="" required/><br>
+        <div class="div_izquierda"><b>N&uacute;mero del Espacio<font color="red">*</font>:</b></div>
+        <input class="form-control formulario" type="number" min="1" name="id_espacio" id="id_espacio" value="" required/><br>
+        <div class="div_izquierda"><b>Uso del Espacio<font color="red">*</font>:</b></div>
+        <select class="form-control formulario" name="uso_espacio" id="uso_espacio" required></select><br>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información de las Paredes del Espacio</div>
+        <div class="panel-body">
+            <!--<div><b>Información de las Paredes del Espacio</b></div>-->
+            <div class="div_izquierda"><b>Altura de las paredes<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="altura_pared" id="altura_pared" value="" required/><br>
+            <div class="div_izquierda"><b>Ancho de las paredes<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="ancho_pared" id="ancho_pared" value="" required/><br>
+            <div class="div_izquierda"><b>Material de las paredes<font color="red">*</font>:</b></div>
+            <select class="form-control formulario" name="material_pared" id="material_pared" required></select><br>
+        </div>
+        </div>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información del Techo del Espacio</div>
+        <div class="panel-body">
+            <div class="div_izquierda"><b>Largo del techo<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="largo_techo" id="largo_techo" value="" required/><br>
+            <div class="div_izquierda"><b>Ancho del techo<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="ancho_techo" id="ancho_techo" value="" required/><br>
+            <div class="div_izquierda"><b>Material del techo<font color="red">*</font>:</b></div>
+            <select class="form-control formulario" name="material_techo" id="material_techo" required></select><br>
+        </div>
+        </div>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información del Pido del Espacio</div>
+        <div class="panel-body">
+            <div class="div_izquierda"><b>Largo del piso<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="largo_piso" id="largo_piso" value="" required/><br>
+            <div class="div_izquierda"><b>Ancho del piso<font color="red">*</font>:</b></div>
+            <input class="form-control formulario" type="number" min="1" name="ancho_piso" id="ancho_piso" value="" required/><br>
+            <div class="div_izquierda"><b>Material de las paredes<font color="red">*</font>:</b></div>
+            <select class="form-control formulario" name="material_piso" id="material_piso" required></select><br>
+        </div>
+        </div>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información de la Iluminación del Espacio</div>
+        <div class="panel-body">
+            <div id="iluminacion">
+                <div class="div_izquierda"><b>Tipo de lámpara<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion" required></select><br>
+                <div class="div_izquierda"><b>Cantidad de lámparas del tipo<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion" value="" required/><br>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_iluminacion" id="añadir_iluminacion" value="Añadir Tipo" title="Añadir Tipo de Iluminación"/>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_iluminacion" id="eliminar_iluminacion" value="Eliminar Tipo" title="Eliminar Tipo de Iluminación" disabled/>
+        </div>
+        </div><br>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información del Suministro de Energía del Espacio</div>
+        <div class="panel-body">
+            <div id="suministro_energia">
+                <div class="div_izquierda"><b>Tipo de suministro de energía<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_tomacorriente" id="tipo_tomacorriente" required></select><br>
+                <div class="div_izquierda"><b>Tomacorriente<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tomacorriente" id="tomacorriente" required>
+                    <option value="seleccionar" selected="selected">--Seleccionar--</option>
+                    <option value="regulado">Regulado</option>
+                    <option value="no regulado">No Regulado</option>
+                </select><br>
+                <div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes" value="" required/><br>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tomacorriente" id="añadir_tomacorriente" value="Añadir Tipo" title="Añadir Tipo Suministro de Energía"/>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tomacorriente" id="eliminar_tomacorriente" value="Eliminar Tipo" title="Eliminar Tipo Suministro de Energía" disabled/>
+        </div>
+        </div><br>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información de las Puertas del Espacio</div>
+        <div class="panel-body">
+            <div id="puertas">
+                <div class="div_izquierda"><b>Tipo de puerta<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_puerta" id="tipo_puerta" required></select><br>
+                <div class="div_izquierda"><b>Cantidad de puertas del tipo<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="cantidad_puertas" id="cantidad_puertas" value="" required/><br>
+                <div class="div_izquierda"><b>Material de la puerta<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="material_puerta" id="material_puerta" required></select><br>
+                <div class="div_izquierda"><b>Tipo de cerradura<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura" required></select><br>
+                <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>
+                <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>
+                <div class="div_izquierda"><b>¿La Puerta tiene gato?<font color="red">*</font>:</b></div>
+                <label class="radio-inline"><input type="radio" name="gato_puerta" value="true">S&iacute;</label>
+                <label class="radio-inline"><input type="radio" name="gato_puerta" value="false">No</label><br>
+                <div class="div_izquierda"><b>Material del marco<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>
+                <div class="div_izquierda"><b>Ancho puerta<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="ancho_puerta" id="ancho_puerta" value="" required/><br>
+                <div class="div_izquierda"><b>Alto puerta<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="alto_puerta" id="alto_puerta" value="" required/><br>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_puerta" id="añadir_puerta" value="Añadir Tipo" title="Añadir Tipo Puerta"/>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_puerta" id="eliminar_puerta" value="Eliminar Tipo" title="Eliminar Tipo Puerta" disabled/>
+        </div>
+        </div><br>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información de las Ventanas del Espacio</div>
+        <div class="panel-body">
+            <div id="ventanas">
+                <div class="div_izquierda"><b>Tipo de ventana<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_ventana" id="tipo_ventana" required></select><br>
+                <div class="div_izquierda"><b>Cantidad de ventanas del tipo<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="cantidad_ventanas" id="cantidad_ventanas" value="" required/><br>
+                <div class="div_izquierda"><b>Material de la ventana<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="material_ventana" id="material_ventana" required></select><br>
+                <div class="div_izquierda"><b>Ancho ventana<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="ancho_ventana" id="ancho_ventana" value="" required/><br>
+                <div class="div_izquierda"><b>Alto ventana<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="alto_ventana" id="alto_ventana" value="" required/><br>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_ventana" id="añadir_ventana" value="Añadir Tipo" title="Añadir Tipo Ventana"/>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_ventana" id="eliminar_ventana" value="Eliminar Tipo" title="Eliminar Tipo Ventana" disabled/>
+        </div>
+        </div><br>
+        <div class="panel panel-default panel-interno">
+            <div class="panel-heading">Información de los Interruptores del Espacio</div>
+        <div class="panel-body">
+            <div id="interruptores">
+                <div class="div_izquierda"><b>Tipo de interruptor<font color="red">*</font>:</b></div>
+                <select class="form-control formulario" name="tipo_ventana" id="tipo_ventana" required></select><br>
+                <div class="div_izquierda"><b>Cantidad de interruptores<font color="red">*</font>:</b></div>
+                <input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores" value="" required/><br>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_interruptor" id="añadir_interruptor" value="Añadir Tipo" title="Añadir Tipo Interruptor"/>
+            <input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_interruptor" id="eliminar_interruptor" value="Eliminar Tipo" title="Eliminar Tipo Interruptor" disabled/>
+        </div>
+        </div><br>
+        <div class="div_izquierda"><b>¿El Espacio está dentro de otro?<font color="red">*</font></b></div>
+        <label class="radio-inline"><input type="radio" name="tiene_espacio_padre" value="true">S&iacute;</label>
+        <label class="radio-inline"><input type="radio" name="tiene_espacio_padre" value="false">No</label><br>
+        <div class="div_izquierda" style="display:none"><b>¿Cuál es el número del Espacio que esta dentro del que se va a crear?<font color="red">*</font></b></div>
+        <input class="form-control formulario" style="display:none" type="number" min="1" name="espacio_padre" id="espacio_padre" value="" required/><!--<br>
+        <div class="div_izquierda"><b>Planos Edificio</b></div>
+        <input class="form-control formulario" type="file" id="planos" multiple=true accept=".dwg,.dxf"><br>
+        <div class="div_izquierda"><b>Fotos Edificio</b></div>
+        <input class="form-control formulario" type="file" id="fotos" multiple=true accept="image/*">-->
+        <div>
+        <div class="form_button">
+            <input type="submit" class="btn btn-primary btn-lg btn-formulario" name="guardar_edificio" id="guardar_edificio" value="Crear Edificio" title="Guardar información del Edificio"/>
+    </div>
+    </div>
+</div>

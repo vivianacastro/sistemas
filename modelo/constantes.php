@@ -30,6 +30,10 @@ const OPERATION_MOD_USUARIO = 'modificar_usuario';
 
 const OPERATION_CREAR_SEDE = 'crear_sede';
 const OPERATION_CREAR_CAMPUS = 'crear_campus';
+const OPERATION_CREAR_EDIFICIO = 'crear_edificio';
+const OPERATION_CREAR_ESPACIO = 'crear_espacio';
+const OPERATION_CREAR_TIPO_MATERIAL = 'crear_tipo_material';
+const OPERATION_CREAR_TIPO_OBJETO = 'crear_tipo_objeto';
 const OPERATION_BUSQ_PLANTA = 'buscar_planta';
 
 

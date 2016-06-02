@@ -14,7 +14,7 @@ function mostrarMensaje(texto) {
 }
 
 /**
- * Función que devuelve la cadena de entrada en minúsculas, sin espacios dobles y sin espacios al comienzo y al final de ésta..
+ * Función que devuelve la cadena de entrada en minúsculas, sin espacios dobles y sin espacios al comienzo y al final de ésta.
  * @param {string} cadena, Cadena a convertir a minúsculas.
  * @returns {string} cadenaMinus, Cadena convertida.
  */
@@ -26,11 +26,18 @@ function limpiarCadena(cadena) {
 }
 
 /**
- * Función que devuelve la cadena de entrada con la primera letra de cada palabra en mayúsculas.
- * @param {string} cadena, Cadena a convertir.
- * @returns {string} cadenaMostrar, Cadena para mostrar (primera letra de cada palabra en mayúsculas).
+ * Función que añade un componente a un div.
+ * @param {string} divPadre, nombre del div al que se añadirá el componente.
+ * @param {string} componente, cadena con el componente a añadir.
  */
-function cadenaMayusculas(cadena) {
-	var cadenaMostrar = cadena.toLowerCase().replace(/\b[a-z]/g, function(letter) {return letter.toUpperCase();});
-	return cadenaMostrar;
+function añadirComponente(divPadre,componente) {
+	$("#"+divPadre).append(componente);
+}
+
+/**
+ * Función que elimina un componente a un div.
+ * @param {string} componente, cadena con el componente a eliminar.
+ */
+function eliminarComponente(idComponente) {
+	$("#"+idComponente).remove();
 }

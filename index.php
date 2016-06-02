@@ -34,9 +34,18 @@ $map = array(
     //Acciones Módulo Planta Física
     'crear_sede' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sede'),
     'crear_campus' => array('controlador' =>'controlador_creacion', 'action' =>'crear_campus'),
-    'consultar_sede' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_sede'),
-    'guardar_campus' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_campus'),
+    'crear_edificio' => array('controlador' =>'controlador_creacion', 'action' =>'crear_edificio'),
+    'crear_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'crear_espacio'),
+    'crear_tipo_material' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_material'),
+    'crear_tipo_objeto' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_objeto'),
+    'consultar_sedes' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_sedes'),
+    'consultar_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_campus'),
+    'consultar_edificios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_edificios'),
     'guardar_sede' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_sede'),
+    'guardar_campus' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_campus'),
+    'guardar_edificio' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_edificio'),
+    'guardar_tipo_material' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_tipo_material'),
+    'guardar_tipo_objeto' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_tipo_objeto'),
 
     //Acciones Módulo Inventario
     
