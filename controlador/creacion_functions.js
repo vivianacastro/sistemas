@@ -13,25 +13,25 @@ $(document).ready(function() {
             actualizarSelectSede();
         }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
-            //actualizarSelectUsoEspacio();
-            //actualizarSelectMaterialPared();
-            //actualizarSelectMaterialTecho();
-            //actualizarSelectMaterialPiso();
-            //actualizarSelectTipoLampara();
-            //actualizarSelectTipoSuministroEnergia();
-            //actualizarSelectTipoPuerta();
-            //actualizarSelectMaterialPuerta();
-            //actualizarSelectTipoCerradura();
-            //actualizarSelectMaterialMarco();
-            //actualizarSelectTipoVetana();
-            //actualizarSelectMaterialVentana();
-            //actualizarSelectTipoInt();
+            actualizarSelectUsosEspacios();
+            actualizarSelectMaterial("material_pared");
+            actualizarSelectMaterial("material_techo");
+            actualizarSelectMaterial("material_piso");
+            actualizarSelectMaterial("material_puerta");
+            actualizarSelectMaterial("material_marco");
+            actualizarSelectMaterial("material_ventana");
+            actualizarSelectTipoObjeto("tipo_cerradura");
+            actualizarSelectTipoObjeto("tipo_iluminacion");
+            actualizarSelectTipoObjeto("tipo_interruptor");
+            actualizarSelectTipoObjeto("tipo_puerta");
+            actualizarSelectTipoObjeto("tipo_suministro_energia");
+            actualizarSelectTipoObjeto("tipo_ventana");
         }
     })();
     
     /**
      * Función que permite crear una sede
-     * @param {string} consulta, información de la sede 
+     * @param {string} consulta, información de la sede
      * @returns {data}
      */
     function guardarSede(informacion){
@@ -167,7 +167,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un tipo de objeto
-     * @param {string} informacion, información del tipo de objeto 
+     * @param {string} informacion, información del tipo de objeto
      * @returns {data}
      */
     function guardarTipoObjeto(informacion){
@@ -289,6 +289,97 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de las sedes presentes en el sistema
+     * @returns {data} object json
+    **/
+    function buscarUsosEspacios(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_usos_espacios",
+                data: "buscar=",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){  
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los materiales presentes en el sistema
+     * @param {string} informacion, arreglo que contiene el tipo de material a buscar
+     * @returns {data} object json
+    **/
+    function buscarMateriales(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_materiales",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){  
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los objetos presentes en el sistema
+     * @param {string} informacion, arreglo que contiene el tipo de objeto a buscar
+     * @returns {data} object json
+    **/
+    function buscarTipoObjetos(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_tipo_objetos",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){  
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que llena y actualiza el selector de campus.
      * @returns {undefined}
     **/
@@ -304,6 +395,72 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#nombre_sede");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de campus.
+     * @returns {undefined}
+    **/
+    function actualizarSelectUsosEspacios(){
+        var data = buscarUsosEspacios();
+        $("#uso_espacio").empty();
+        var row = $("<option value='seleccionar'/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#uso_espacio");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.uso_espacio;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#uso_espacio");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de material que se ingresa.
+     * @param {string} material, nombre del selector a actualizar y tipo de material.
+     * @returns {undefined}
+    **/
+    function actualizarSelectMaterial(material){
+        var informacion = {};
+        informacion['tipo_material'] = material;
+        var data = buscarMateriales(informacion);
+        $("#"+material).empty();
+        var row = $("<option value='seleccionar'/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#"+material);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre_material;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#"+material);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de tipo de objeto.
+     * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
+     * @returns {undefined}
+    **/
+    function actualizarSelectTipoObjeto(tipo_objeto){
+        var informacion = {};
+        informacion['tipo_objeto'] = tipo_objeto;
+        var data = buscarTipoObjetos(informacion);
+        $("#"+tipo_objeto).empty();
+        var row = $("<option value='seleccionar'/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#"+tipo_objeto);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.tipo_objeto;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#"+tipo_objeto);
             }
         });
     }

@@ -92,5 +92,73 @@ class modelo_consultas
         }
         return $result;
     }
+
+    /**
+     * funcion que permite buscar los diferentes usos de espacio creados en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarUsosEspacios(){
+        $sql = "SELECT id,uso from uso_espacio ORDER BY uso;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Usos Espacios 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Usos Espacios 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Usos de Espacios presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los materiales que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarMateriales($tipo_material){
+        $tipo_material = htmlspecialchars(trim($tipo_material));
+        $sql = "SELECT id,material from ".$tipo_material." ORDER BY material;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Materiales 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Materiales 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Materiales presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los tipo de objetos que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarTipoObjetos($tipo_objeto){
+        $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
+        $sql = "SELECT id,tipo from ".$tipo_objeto." ORDER BY tipo;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
+            }
+        }
+        return $result;
+    }
 }
 ?>

@@ -95,5 +95,76 @@ class controlador_consultas
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
+
+    /**
+     * Función que permite consultar los diferentes usos de un espacio
+     * almacenados en el sistema.
+     */
+    public function consultar_usos_espacios() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $data = $m->buscarUsosEspacios();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'uso_espacio' => $valor['uso'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar los diferentes materiales
+     * almacenados en el sistema.
+     */
+    public function consultar_materiales() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarMateriales($info["tipo_material"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre_material' => $valor['material'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar los diferentes tipos de objetos
+     * almacenados en el sistema.
+     */
+    public function consultar_tipo_objetos() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarTipoObjetos($info["tipo_objeto"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'tipo_objeto' => $valor['tipo'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
 }
 ?>
