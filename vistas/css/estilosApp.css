@@ -321,6 +321,10 @@ caption{
     font-size 100%;
 }
 
+.form_button{
+    text-align: center;
+}
+
 input[type=date]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     display: none;

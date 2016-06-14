@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var iluminacionCont = 0,tomacorrientesCont = 0,puertasCont = 0;
+    var iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0;
 
     /**
      * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -14,18 +14,18 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
             actualizarSelectUsosEspacios();
-            actualizarSelectMaterial("material_pared");
-            actualizarSelectMaterial("material_techo");
-            actualizarSelectMaterial("material_piso");
-            actualizarSelectMaterial("material_puerta");
-            actualizarSelectMaterial("material_marco");
-            actualizarSelectMaterial("material_ventana");
-            actualizarSelectTipoObjeto("tipo_cerradura");
-            actualizarSelectTipoObjeto("tipo_iluminacion");
-            actualizarSelectTipoObjeto("tipo_interruptor");
-            actualizarSelectTipoObjeto("tipo_puerta");
-            actualizarSelectTipoObjeto("tipo_suministro_energia");
-            actualizarSelectTipoObjeto("tipo_ventana");
+            actualizarSelectMaterial("material_pared",0);
+            actualizarSelectMaterial("material_techo",0);
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectMaterial("material_puerta",0);
+            actualizarSelectMaterial("material_marco",0);
+            actualizarSelectMaterial("material_ventana",0);
+            actualizarSelectTipoObjeto("tipo_cerradura",0);
+            actualizarSelectTipoObjeto("tipo_iluminacion",0);
+            actualizarSelectTipoObjeto("tipo_interruptor",0);
+            actualizarSelectTipoObjeto("tipo_puerta",0);
+            actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+            actualizarSelectTipoObjeto("tipo_ventana",0);
         }
     })();
     
@@ -259,7 +259,8 @@ $(document).ready(function() {
     }
 
     /**
-     * unción que realiza una consulta de los campus presentes en el sistema
+     * unción que realiza una consulta de los edificios del campus seleccionado
+     * presentes en el sistema
      * @returns {data} object json
     **/
     function buscarEdificios(campus){
@@ -269,6 +270,36 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=consultar_edificios",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){  
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        } 
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * unción que realiza una consulta el número de pisos de un edificio
+     * @returns {data} object json
+    **/
+    function buscarPisosEdificio(edificio){
+        var jObject = JSON.stringify(edificio);
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_pisos_edificio",
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -424,20 +455,23 @@ $(document).ready(function() {
      * @param {string} material, nombre del selector a actualizar y tipo de material.
      * @returns {undefined}
     **/
-    function actualizarSelectMaterial(material){
+    function actualizarSelectMaterial(material,id){
+        if (id == 0) {
+            id = "";
+        }
         var informacion = {};
         informacion['tipo_material'] = material;
         var data = buscarMateriales(informacion);
-        $("#"+material).empty();
+        $("#"+material+id).empty();
         var row = $("<option value='seleccionar'/>");
         row.text("--Seleccionar--");
-        row.appendTo("#"+material);
+        row.appendTo("#"+material+id);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre_material;
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
-                row.appendTo("#"+material);
+                row.appendTo("#"+material+id);
             }
         });
     }
@@ -447,20 +481,23 @@ $(document).ready(function() {
      * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
      * @returns {undefined}
     **/
-    function actualizarSelectTipoObjeto(tipo_objeto){
+    function actualizarSelectTipoObjeto(tipo_objeto,id){
+        if (id == 0) {
+            id = "";
+        }
         var informacion = {};
         informacion['tipo_objeto'] = tipo_objeto;
         var data = buscarTipoObjetos(informacion);
-        $("#"+tipo_objeto).empty();
+        $("#"+tipo_objeto+id).empty();
         var row = $("<option value='seleccionar'/>");
         row.text("--Seleccionar--");
-        row.appendTo("#"+tipo_objeto);
+        row.appendTo("#"+tipo_objeto+id);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.tipo_objeto;
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
-                row.appendTo("#"+tipo_objeto);
+                row.appendTo("#"+tipo_objeto+id);
             }
         });
     }
@@ -485,16 +522,17 @@ $(document).ready(function() {
                 row.appendTo("#nombre_campus");
             }
         });
+        $("#nombre_edificio").empty();
+        $("#pisos").empty();
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector nombre_sede
-     * y se actualiza el selector de campus.
+     * Se captura el evento cuando se modifica el valor del selector nombre_campus
+     * y se actualiza el selector de edificios.
      */
     $("#nombre_campus").change(function (e) {
         var campus = {};
         campus["nombre_campus"] = limpiarCadena($("#nombre_campus").val());
-        console.log(campus);
         var data = buscarEdificios(campus);
         $("#nombre_edificio").empty();
         var row = $("<option value='seleccionar'/>");
@@ -502,13 +540,67 @@ $(document).ready(function() {
         row.appendTo("#nombre_edificio");
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
-                console.log(record);
                 aux = record.id + " - " + record.nombre_edificio;
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#nombre_edificio");
             }
         });
+        $("#pisos").empty();
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector nombre_edificio
+     * y se actualiza el selector de pisos.
+     */
+    $("#nombre_edificio").change(function (e) {
+        var edificio = {};
+        var numeroPisos, terraza, sotano;
+        edificio["nombre_edificio"] = limpiarCadena($("#nombre_edificio").val());
+        edificio["nombre_campus"] = limpiarCadena($("#nombre_campus").val());
+        var data = buscarPisosEdificio(edificio);
+        $("#pisos").empty();
+        var row = $("<option value='seleccionar'/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#pisos");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                numeroPisos = record.numero_pisos;
+                terraza = record.terraza;
+                sotano = record.sotano;
+            }
+        });
+        for (var i=0; i<numeroPisos;i++) {
+            if (i == 0 && sotano == 'true') {
+                aux = "Sotano";
+                row = $("<option value='sotano'/>");
+                row.text(aux);
+                row.appendTo("#pisos");
+            }
+            aux = i+1;
+            row = $("<option value='" + aux + "'/>");
+            row.text(aux);
+            row.appendTo("#pisos");
+            if (i == (numeroPisos-1) && terraza == 'true') {
+                aux = "Terraza";
+                row = $("<option value='terraza'/>");
+                row.text(aux);
+                row.appendTo("#pisos");
+            }
+        };
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
+     * y se actualiza el selector de pisos.
+     */
+    $("#form_espacio_padre").change(function (e) {
+        var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
+        if (espacioPadre == "true") {
+            $('#div_espacio_padre').show();
+        }else{
+            $('#div_espacio_padre').hide();
+        }
     });
     
     /**
@@ -642,6 +734,230 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando de dar click en el boton guardar_edificio y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_espacio").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información del espacio?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var nombreEdificio = $("#nombre_edificio").val();
+                var piso = $("#pisos").val();
+                var numeroEspacio = $("#id_espacio").val();
+                var usoEspacio = $("#uso_espacio").val();
+                var alturaPared = $("#altura_pared").val();
+                var anchoPared = $("#ancho_pared").val();
+                var materialPared = $("#material_pared").val();
+                var largoTecho = $("#largo_techo").val();
+                var anchoTecho = $("#ancho_techo").val();
+                var materialTecho = $("#material_techo").val();
+                var largoPiso = $("#largo_piso").val();
+                var anchoPiso = $("#ancho_piso").val();
+                var materialPiso = $("#material_piso").val();
+                var tipoIluminacion = [];
+                var cantidadIluminacion = [];
+                var tipoSuministroEnergia = [];
+                var tomacorriente = [];
+                var cantidadTomacorrientes = [];
+                var tipoPuerta = [];
+                var cantidadPuertas = [];
+                var materialPuerta = [];
+                var tipoCerradura = [];
+                var gatoPuerta = [];
+                var materialMarco = [];
+                var anchoPuerta = [];
+                var altoPuerta = [];
+                var tipoVentana = [];
+                var cantidadVentanas = [];
+                var materialVentana = [];
+                var anchoVentana = [];
+                var altoVentana = [];
+                var tipoInterruptor = [];
+                var cantidadInterruptores = [];
+
+                for (var i=0;i<=iluminacionCont;i++) {
+                    if (i==0) {
+                        tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                    }else{
+                        tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                    }
+                }
+                for (var i=0;i<=tomacorrientesCont;i++) {
+                    if (i==0) {
+                        tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
+                        tomacorriente[i] = $("#tomacorriente").val();
+                        cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
+                    }else{
+                        tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
+                        tomacorriente[i] = $("#tomacorriente"+i).val();
+                        cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
+                    }
+                }
+                for (var i=0;i<=puertasCont;i++) {
+                    if (i==0) {
+                        tipoPuerta[i] = $("#tipo_puerta").val();
+                        cantidadPuertas[i] = $("#cantidad_puertas").val();
+                        materialPuerta[i] = $("#material_puerta").val();
+                        tipoCerradura[i] = $("#tipo_cerradura").val();
+                        gatoPuerta[i] = $("#gato_puerta").val();
+                        materialMarco[i] = $("#material_marco").val();
+                        anchoPuerta[i] = $("#ancho_puerta").val();
+                        altoPuerta[i] = $("#alto_puerta").val();
+                    }else{
+                        tipoPuerta[i] = $("#tipo_puerta"+i).val();
+                        cantidadPuertas[i] = $("#cantidad_puertas"+i).val();
+                        materialPuerta[i] = $("#material_puerta"+i).val();
+                        tipoCerradura[i] = $("#tipo_cerradura"+i).val();
+                        gatoPuerta[i] = $("#gato_puerta"+i).val();
+                        materialMarco[i] = $("#material_marco"+i).val();
+                        anchoPuerta[i] = $("#ancho_puerta"+i).val();
+                        altoPuerta[i] = $("#alto_puerta"+i).val();
+                    }
+                }
+                for (var i=0;i<=ventanasCont;i++) {
+                    if (i==0) {
+                        tipoVentana[i] = $("#tipo_ventana").val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                        materialVentana[i] = $("#material_ventana").val();
+                        anchoVentana[i] = $("#ancho_ventana").val();
+                        altoVentana[i] = $("#alto_ventana").val();
+                    }else{
+                        tipoVentana[i] = $("#tipo_ventana"+i).val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                        materialVentana[i] = $("#material_ventana"+i).val();
+                        anchoVentana[i] = $("#ancho_ventana"+i).val();
+                        altoVentana[i] = $("#alto_ventana"+i).val();
+                    }
+                }
+                for (var i=0;i<=interruptoresCont;i++) {
+                    if (i==0) {
+                        tipoInterruptor[i] = $("#tipo_interruptor").val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                    }else{
+                        tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                    }
+                }
+
+                var informacion = {};
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['nombre_edificio'] = nombreEdificio;
+                informacion['piso'] = piso;
+                informacion['numero_espacio'] = numeroEspacio;
+                informacion['uso_espacio'] = usoEspacio;
+                informacion['altura_pared'] = alturaPared;
+                informacion['ancho_pared'] = anchoPared;
+                informacion['material_pared'] = materialPared;
+                informacion['largo_techo'] = largoTecho;
+                informacion['ancho_techo'] = anchoTecho;
+                informacion['material_techo'] = materialTecho;
+                informacion['largo_piso'] = largoPiso;
+                informacion['ancho_piso'] = anchoPiso;
+                informacion['material_piso'] = materialPiso;
+                informacion["tipo_iluminacion"] = tipoIluminacion;
+                informacion["cantidad_iluminacion"] = cantidadIluminacion;
+                informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
+                informacion['tomacorriente'] = tomacorriente;
+                informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
+                informacion['tipo_puerta'] = tipoPuerta;
+                informacion['cantidad_puertas'] = cantidadPuertas;
+                informacion['material_puerta'] = materialPuerta;
+                informacion['tipo_cerradura'] = tipoCerradura;
+                informacion['gato_puerta'] = gatoPuerta;
+                informacion['material_marco'] = materialMarco;
+                informacion['ancho_puerta'] = anchoPuerta;
+                informacion['alto_puerta'] = altoPuerta;
+                informacion['tipo_ventana'] = tipoVentana;
+                informacion['cantidad_ventanas'] = cantidadVentanas;
+                informacion['material_ventana'] = materialVentana;
+                informacion['ancho_ventana'] = anchoVentana;
+                informacion['alto_ventana'] = altoVentana;
+                informacion['tipo_interruptor'] = tipoInterruptor;
+                informacion['cantidad_interruptores'] = cantidadInterruptores;
+
+                console.log(informacion);
+
+                if (usoEspacio == '1') { //Salón
+                    eliminarComponente("informacion");
+                    var componente = '<div id="informacion">'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos de red<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>Capacidad<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>¿El salón tiene punto(s) de red?<font color="red">*</font>:</b></div>'
+                    +'<label class="radio-inline"><input type="radio" name="punto_red" value="true">S&iacute;</label>'
+                    +'<label class="radio-inline"><input type="radio" name="punto_red" value="false">No</label><br>'
+                    +'</div>';
+                }else if(usoEspacio == '2'){ //Auditorio
+                    eliminarComponente("informacion");
+                    var componente = '<div id="informacion">'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos de red<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>Capacidad<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>¿El auditorio tiene punto(s) de red?<font color="red">*</font>:</b></div>'
+                    +'<label class="radio-inline"><input type="radio" name="punto_red" value="true">S&iacute;</label>'
+                    +'<label class="radio-inline"><input type="radio" name="punto_red" value="false">No</label><br>'
+                    +'</div>';
+                }else if(usoEspacio == '3'){ //Laboratorio
+                    eliminarComponente("informacion");
+                    var componente = '<div id="informacion">'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos de red<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>Capacidad<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+                    +'</div>';
+                }else if(usoEspacio == '4'){ //Sala de Cómputo
+                    
+                }else if(usoEspacio == '5'){ //Oficina
+                    
+                }else if(usoEspacio == '6'){ //Baño
+                    
+                }else if(usoEspacio == '7'){ //Cuarto Técnico
+                    
+                }else if(usoEspacio == '8'){ //Bodega/Almacen
+                    
+                }else if(usoEspacio == '9'){ //Cuarto Eléctrico
+                    
+                }else if(usoEspacio == '10'){ //Cuarto de Plantas
+                    
+                }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+                    
+                }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+                    
+                }else if(usoEspacio == '13'){ //Unidad de Almacenamiento de Residuos
+                    
+                }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+                    
+                }else if(usoEspacio == '15'){ //Cafetería
+                    
+                }else if(usoEspacio == '16'){ //Ascensor
+                    
+                }else if(usoEspacio == '17'){ //Cuarto de Bombas
+                    
+                }else if(usoEspacio == '18'){ //Buitrón
+                    
+                }else if(usoEspacio == '19'){ //Cocineta
+                    
+                }
+                añadirComponente("informacionEspacio",componente);
+                $('#divDialogCreacionSalon').modal('show');
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
      * Se captura el evento cuando de dar click en el boton guardar_tipo_material y se
      * realiza la operacion correspondiente.
      */
@@ -726,6 +1042,7 @@ $(document).ready(function() {
         +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("iluminacion",componente);
+        actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
         $('#eliminar_iluminacion').removeAttr("disabled");
     });
 
@@ -749,7 +1066,7 @@ $(document).ready(function() {
         tomacorrientesCont++;
         var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
         +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_tomacorriente" id="tipo_tomacorriente'+tomacorrientesCont+'" required></select><br>'
+        +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
         +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
@@ -760,6 +1077,7 @@ $(document).ready(function() {
         +'<input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("suministro_energia",componente);
+        actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
         $('#eliminar_tomacorriente').removeAttr("disabled");
     });
 
@@ -790,8 +1108,8 @@ $(document).ready(function() {
         +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
-        +'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
-        +'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
+        //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
+        //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
         +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
@@ -802,7 +1120,9 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<input class="form-control formulario" type="number" min="1" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
         +'</div>';
-        añadirComponente("puertas",componente);
+        añadirComponente("puerta",componente);
+        actualizarSelectMaterial("material_puerta",puertasCont);
+        actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
         $('#eliminar_puerta').removeAttr("disabled");
     });
 
@@ -815,6 +1135,71 @@ $(document).ready(function() {
         puertasCont--;
         if(puertasCont == 0){
             $("#eliminar_puerta").attr('disabled','disabled');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton añadir_ventana y se
+     * realiza la operacion correspondiente.
+     */
+    $("#añadir_ventana").click(function (e){
+        ventanasCont++;
+        var componente = '<div id="ventana'+ventanasCont+'">'
+        +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
+        +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" min="1" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
+        +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" min="1" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
+        +'</div>';
+        añadirComponente("ventana",componente);
+        actualizarSelectMaterial("material_ventana",ventanasCont);
+        actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
+        $('#eliminar_ventana').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_ventana y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_ventana").click(function (e){
+        eliminarComponente("ventana"+ventanasCont);
+        ventanasCont--;
+        if(ventanasCont == 0){
+            $("#eliminar_ventana").attr('disabled','disabled');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton añadir_interruptor y se
+     * realiza la operacion correspondiente.
+     */
+    $("#añadir_interruptor").click(function (e){
+        interruptoresCont++;
+        var componente = '<div id="interruptor'+interruptoresCont+'">'
+        +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
+        +'</div>';
+        añadirComponente("interruptor",componente);
+        actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
+        $('#eliminar_interruptor').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_interruptor y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_interruptor").click(function (e){
+        eliminarComponente("interruptor"+interruptoresCont);
+        interruptoresCont--;
+        if(interruptoresCont == 0){
+            $("#eliminar_interruptor").attr('disabled','disabled');
         }
     });
 });

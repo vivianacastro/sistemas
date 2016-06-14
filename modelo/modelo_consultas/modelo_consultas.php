@@ -94,6 +94,30 @@ class modelo_consultas
     }
 
     /**
+     * funcion que permite buscar el número de pisos de un edificio que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarPisosEdificio($nombre_campus,$nombre_edificio){
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $sql = "SELECT id,numero_pisos,terraza,sotano from edificio WHERE id_campus = '".$nombre_campus."' AND id = '".$nombre_edificio."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Pisos Edificio 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Pisos Edificio 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Número de pisos del edificio";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * funcion que permite buscar los diferentes usos de espacio creados en el sistema.
      * @return metadata con elresultado de la busqueda.
      */

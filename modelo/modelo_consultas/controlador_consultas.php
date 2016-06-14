@@ -97,6 +97,32 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar el número de pisos de un edificio
+     * almacenado en el sistema.
+     */
+    public function consultar_pisos_edificio() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarPisosEdificio($info["nombre_campus"],$info["nombre_edificio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'numero_pisos' => $valor['numero_pisos'],
+                    'terraza' => $valor['terraza'],
+                    'sotano' => $valor['sotano'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
      * Función que permite consultar los diferentes usos de un espacio
      * almacenados en el sistema.
      */

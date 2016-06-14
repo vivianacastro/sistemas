@@ -2,7 +2,7 @@
 /**
  * Constantes del sistema 
  */
-const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 600;
+const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 6000000000000000;//600;
 
 const ESTILO     = 'estilo.css';
 const USUARIO = 'usuario';

@@ -41,6 +41,7 @@ $map = array(
     'consultar_sedes' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_sedes'),
     'consultar_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_campus'),
     'consultar_edificios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_edificios'),
+    'consultar_pisos_edificio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_pisos_edificio'),
     'consultar_usos_espacios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_usos_espacios'),
     'consultar_materiales' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_materiales'),
     'consultar_tipo_objetos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_objetos'),
