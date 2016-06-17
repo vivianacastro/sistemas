@@ -9,8 +9,83 @@ $(document).ready(function () {});
  * @returns {undefined}
  */
 function mostrarMensaje(texto) {
-    $("#divMensaje").empty();
-    $("#divMensaje").text(texto);
+    $('#divMensaje').empty();
+    $('#divMensaje').text(texto);
+}
+
+/**
+ * Función que valida si una cadena no esta vacía.
+ * @param {string} cadena, Cadena a validar.
+ * @returns {boolean} valido, booleano.
+ */
+function validarCadena(cadena) {
+	var valido = true;
+	if (cadena == '' || cadena == null) {
+		valido = false;
+	}else if(cadena == 'seleccionar'){
+		valido = false;
+	}
+	return valido;
+}
+
+/**
+ * Función que valida si las cadenas de un arreglo no están vacías.
+ * @param {array} arreglo, Arreglo a validar.
+ * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró la cadena que no cumple.
+ */
+function validarArregloCadenas(arreglo) {
+	var posicion = null;
+	for (var i=0;i<arreglo.length;i++) {
+		if (arreglo[i] == '' || arreglo[i] == null) {
+			posicion = i;
+			break;
+		}else if(arreglo[i] == 'seleccionar'){
+			posicion = i;
+			if(posicion == 0){
+				posicion = '';
+			}
+			break;
+		}
+	}
+	return posicion;
+}
+
+/**
+ * Función que valida si un número es mayor que cero.
+ * @param {string} numero, Número a validar.
+ * @returns {boolean} valido, booleano.
+ */
+function validarNumero(numero) {
+	var numero = parseInt(numero);
+	var valido = true;
+	if (numero == '' || isNaN(numero)) {
+		valido = false;
+	}else if(numero < 0){
+		valido = false;
+	}
+	return valido;
+}
+
+/**
+ * Función que valida si los numeros de un arreglo son números mayores que cero.
+ * @param {array} arreglo, Arreglo a validar.
+ * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró el número que no cumple.
+ */
+function validarArregloNumeros(arreglo) {
+	var posicion = null;
+	for (var i=0;i<arreglo.length;i++) {
+		if (arreglo[i] == '' || isNaN(arreglo[i])) {
+			posicion = i;
+			break;
+		}else if(arreglo[i] < 0){
+			posicion = i;
+			if(posicion == 0){
+				posicion = '';
+			}
+			break;
+		}
+	}
+	return posicion;
 }
 
 /**
@@ -21,7 +96,7 @@ function mostrarMensaje(texto) {
 function limpiarCadena(cadena) {
 	var cadenaMinus = cadena.toLowerCase();
 	cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
-	cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,"");
+	cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,'');
 	return cadenaMinus;
 }
 
@@ -31,7 +106,7 @@ function limpiarCadena(cadena) {
  * @param {string} componente, cadena con el componente a añadir.
  */
 function añadirComponente(divPadre,componente) {
-	$("#"+divPadre).append(componente);
+	$('#'+divPadre).append(componente);
 }
 
 /**
@@ -39,5 +114,5 @@ function añadirComponente(divPadre,componente) {
  * @param {string} componente, cadena con el componente a eliminar.
  */
 function eliminarComponente(idComponente) {
-	$("#"+idComponente).remove();
+	$('#'+idComponente).remove();
 }

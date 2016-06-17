@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var usuario = "";
+    var usuario = '';
     
     var arregloNumSolicitudes = [];
 
@@ -21,32 +21,32 @@ $(document).ready(function() {
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_orden",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=buscar_orden',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
                 beforeSend: function() {
-                    $("#loader").dialog("open");
-                    $('#loader').html('<img id="" src="../web/images/loading.gif"/>');
-                // $("#loader").dialog("close");   
+                    $('#loader').dialog('open');
+                    $('#loader').html('<img id='' src='../web/images/loading.gif'/>');
+                // $('#loader').dialog('close');   
                 },
                 success: function(data){
                     dataResult = data;
                     mostrarMensaje(dataResult.mensaje);
-                    $("#loader").dialog("close");
+                    $('#loader').dialog('close');
                 }
             });
             return dataResult;
         }
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -61,13 +61,13 @@ $(document).ready(function() {
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_solicitudes_mantenimiento",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=buscar_solicitudes_mantenimiento',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -80,7 +80,7 @@ $(document).ready(function() {
         }
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -100,21 +100,21 @@ $(document).ready(function() {
 
         dataSave['campus']= campus;
         dataSave['sistema'] = sistema;
-        dataSave['fechaInicio'] = fechaInicio + " 00:00:00";
-        dataSave['fechaFin'] = fechaFin + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicio + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFin + ' 23:59:59';
 
 
         var jObject = JSON.stringify(dataSave);
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_orden_parametros",
+                type: 'POST',
+                url: 'index.php?action=buscar_orden_parametros',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -128,7 +128,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
     
@@ -148,21 +148,21 @@ $(document).ready(function() {
 
         dataSave['campus']= campus;
         dataSave['sistema'] = sistema;
-        dataSave['fechaInicio'] = fechaInicial + " 00:00:00";
-        dataSave['fechaFin'] = fechaFinal + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicial + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFinal + ' 23:59:59';
 
         var jObject = JSON.stringify(dataSave);
 
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_estadisticas_edificios",
+                type: 'POST',
+                url: 'index.php?action=obtener_estadisticas_edificios',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -176,7 +176,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -196,21 +196,21 @@ $(document).ready(function() {
 
         dataSave['campus']= campus;
         dataSave['sistema'] = sistema;
-        dataSave['fechaInicio'] = fechaInicial + " 00:00:00";
-        dataSave['fechaFin'] = fechaFinal + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicial + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFinal + ' 23:59:59';
 
         var jObject = JSON.stringify(dataSave);
 
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_estadisticas_espacios",
+                type: 'POST',
+                url: 'index.php?action=obtener_estadisticas_espacios',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -224,7 +224,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -244,21 +244,21 @@ $(document).ready(function() {
 
         dataSave['campus']= campus;
         dataSave['sistema'] = sistema;
-        dataSave['fechaInicio'] = fechaInicial + " 00:00:00";
-        dataSave['fechaFin'] = fechaFinal + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicial + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFinal + ' 23:59:59';
 
         var jObject = JSON.stringify(dataSave);
 
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_estadisticas_sistema",
+                type: 'POST',
+                url: 'index.php?action=buscar_estadisticas_sistema',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -272,7 +272,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -292,21 +292,21 @@ $(document).ready(function() {
 
         dataSave['campus']= campus;
         dataSave['sistema'] = sistema;
-        dataSave['fechaInicio'] = fechaInicial + " 00:00:00";
-        dataSave['fechaFin'] = fechaFinal + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicial + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFinal + ' 23:59:59';
 
         var jObject = JSON.stringify(dataSave);
 
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_estadisticas_operador",
+                type: 'POST',
+                url: 'index.php?action=obtener_estadisticas_operador',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -320,7 +320,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -344,21 +344,21 @@ $(document).ready(function() {
         dataSave['edificio'] = edificio;
         dataSave['sistema'] = sistema;
         dataSave['piso'] = piso;
-        dataSave['fechaInicio'] = fechaInicial + " 00:00:00";
-        dataSave['fechaFin'] = fechaFinal + " 23:59:59";
+        dataSave['fechaInicio'] = fechaInicial + ' 00:00:00';
+        dataSave['fechaFin'] = fechaFinal + ' 23:59:59';
 
         var jObject = JSON.stringify(dataSave);
 
         try
         {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_orden_parametros_avanzados",
+                type: 'POST',
+                url: 'index.php?action=buscar_orden_parametros_avanzados',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -372,7 +372,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -387,13 +387,13 @@ $(document).ready(function() {
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_edificio",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_edificio',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -405,7 +405,7 @@ $(document).ready(function() {
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }          
     }
     
@@ -420,13 +420,13 @@ $(document).ready(function() {
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_ordenes_sistema",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_ordenes_sistema',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -438,7 +438,7 @@ $(document).ready(function() {
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }          
     }
 
@@ -452,13 +452,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_datos_usuario",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_datos_usuario',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -470,7 +470,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
     
@@ -484,13 +484,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_historial",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_historial',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -502,7 +502,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     } 
 
@@ -516,13 +516,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_ordenes_electrico",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_ordenes_electrico',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -534,7 +534,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -548,13 +548,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_ordenes_hidraulico",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_ordenes_hidraulico',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -566,7 +566,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -580,13 +580,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_ordenes_mobiliario",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_ordenes_mobiliario',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -598,7 +598,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -612,13 +612,13 @@ $(document).ready(function() {
 
         try{
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_ordenes_planta",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_ordenes_planta',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function (request, status, error) {
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -630,7 +630,7 @@ $(document).ready(function() {
         }
         catch(ex){
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -644,17 +644,17 @@ $(document).ready(function() {
 
         if (primeraVez) {
             var tablaOrdenes = $('#tablaOrdenes').DataTable({
-                "info":             false,
-                "bFilter":          false,
-                "bInfo":            false,
-                "bLengthChange":    false,
-                "bPaginate":        false,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'info':             false,
+                'bFilter':          false,
+                'bInfo':            false,
+                'bLengthChange':    false,
+                'bPaginate':        false,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                             },
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             $('#tablaOrdenes tbody').on( 'click', 'tr', function () {
                 $(this).toggleClass('selected');
@@ -698,18 +698,18 @@ $(document).ready(function() {
 
         if(primeraVez2){
             var tablaSolicitado = $('#tablaSolicitado2').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -724,21 +724,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRevisado = $('#tablaRevisado2').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -753,21 +753,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRealizado = $('#tablaRealizado2').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -782,7 +782,7 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             $('#tablaSolicitado2 tbody').on( 'click', 'tr', function () {
                 $(this).toggleClass('selected');
@@ -875,18 +875,18 @@ $(document).ready(function() {
 
         if(primeraVez3){
             var tablaSolicitado = $('#tablaSolicitado3').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -901,21 +901,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRevisado = $('#tablaRevisado3').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -930,21 +930,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRealizado = $('#tablaRealizado3').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -959,7 +959,7 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             $('#tablaSolicitado3 tbody').on( 'click', 'tr', function () {
                 $(this).toggleClass('selected');
@@ -1053,18 +1053,18 @@ $(document).ready(function() {
 
         if (primeraVez4) {
             var tablaSolicitado = $('#tablaSolicitado4').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -1079,21 +1079,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRevisado = $('#tablaRevisado4').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -1108,21 +1108,21 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             var tablaRealizado = $('#tablaRealizado4').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "responsive":       true,
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'responsive':       true,
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "dom":              'Bfrtip',
-                "select":           true,
-                "buttons": [
+                'dom':              'Bfrtip',
+                'select':           true,
+                'buttons': [
                     {
                         text: 'Seleccionar todo',
                         action: function () {
@@ -1137,7 +1137,7 @@ $(document).ready(function() {
                     },
                     'excel'
                 ],
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             $('#tablaSolicitado4 tbody').on( 'click', 'tr', function () {
                 $(this).toggleClass('selected');
@@ -1231,19 +1231,19 @@ $(document).ready(function() {
 
             data = buscarHistorialUsuario();
             var tabla = $('#tablaHistorial').DataTable({
-                "paging":           true,
-                "info":             true,
-                "bFilter":          true,
-                "bInfo":            true,
-                "bDestroy":         true,
-                "select":           true,
-                "responsive":       true,
-                "columnDefs":       [{className: "dt-body-center"},
-                                    {className: "dt-head-center"}], 
-                "language": {
-                    "url":          "js/plugins/Espanol.json",
+                'paging':           true,
+                'info':             true,
+                'bFilter':          true,
+                'bInfo':            true,
+                'bDestroy':         true,
+                'select':           true,
+                'responsive':       true,
+                'columnDefs':       [{className: 'dt-body-center'},
+                                    {className: 'dt-head-center'}], 
+                'language': {
+                    'url':          'js/plugins/Espanol.json',
                 },
-                "order": [[ 0, "desc" ]]
+                'order': [[ 0, 'desc' ]]
             });
             $('#tablaHistorial').dataTable().fnClearTable();
             $('#tablaHistorial').show();
@@ -1269,7 +1269,7 @@ $(document).ready(function() {
                         usuario = record.usuario;
                 }
             });
-            $("#divTablas").show();
+            $('#divTablas').show();
         }
     }
 
@@ -1282,16 +1282,16 @@ $(document).ready(function() {
 
         if(URLactual['href'].indexOf('listar_electrico_consultas') >= 0){
 
-            $("#tablaOrdenes3").clearGridData();
+            $('#tablaOrdenes3').clearGridData();
             numColumnas = $('#tablaOrdenes3').find('tr')[0].cells.length;
             data = buscarOrdenesElectrico('consulta');
             $.each(data, function(index, record) {            
                 if($.isNumeric(index)) {
-                    $("#tablaOrdenes3").jqGrid('addRowData',index,record);
+                    $('#tablaOrdenes3').jqGrid('addRowData',index,record);
                 }
             });
-            var numeroFilas = $("#tablaOrdenes3").getGridParam("reccount");
-            $("#divConteo2").html("Número de registros: "+numeroFilas); 
+            var numeroFilas = $('#tablaOrdenes3').getGridParam('reccount');
+            $('#divConteo2').html('Número de registros: '+numeroFilas); 
         }                 
     }
 
@@ -1304,16 +1304,16 @@ $(document).ready(function() {
 
         if(URLactual['href'].indexOf('listar_hidraulico_consultas') >= 0){
 
-            $("#tablaOrdenes3").clearGridData();
+            $('#tablaOrdenes3').clearGridData();
             numColumnas = $('#tablaOrdenes3').find('tr')[0].cells.length;
             data = buscarOrdenesHidraulico('consulta');
             $.each(data, function(index, record) {            
                 if($.isNumeric(index)) {
-                    $("#tablaOrdenes3").jqGrid('addRowData',index,record);
+                    $('#tablaOrdenes3').jqGrid('addRowData',index,record);
                 }
             });
-            var numeroFilas = $("#tablaOrdenes3").getGridParam("reccount");
-            $("#divConteo2").html("Número de registros: "+numeroFilas); 
+            var numeroFilas = $('#tablaOrdenes3').getGridParam('reccount');
+            $('#divConteo2').html('Número de registros: '+numeroFilas); 
         }                 
     }
 
@@ -1326,16 +1326,16 @@ $(document).ready(function() {
 
         if(URLactual['href'].indexOf('listar_mobiliario_consultas') >= 0){
 
-            $("#tablaOrdenes3").clearGridData();
+            $('#tablaOrdenes3').clearGridData();
             numColumnas = $('#tablaOrdenes3').find('tr')[0].cells.length;
             data = buscarOrdenesMobiliario('consulta');
             $.each(data, function(index, record) {            
                 if($.isNumeric(index)) {
-                    $("#tablaOrdenes3").jqGrid('addRowData',index,record);
+                    $('#tablaOrdenes3').jqGrid('addRowData',index,record);
                 }
             });
-            var numeroFilas = $("#tablaOrdenes3").getGridParam("reccount");
-            $("#divConteo2").html("Número de registros: "+numeroFilas); 
+            var numeroFilas = $('#tablaOrdenes3').getGridParam('reccount');
+            $('#divConteo2').html('Número de registros: '+numeroFilas); 
         }                 
     }
 
@@ -1348,16 +1348,16 @@ $(document).ready(function() {
 
         if(URLactual['href'].indexOf('listar_planta_consultas') >= 0){
 
-            $("#tablaOrdenes3").clearGridData();
+            $('#tablaOrdenes3').clearGridData();
             numColumnas = $('#tablaOrdenes3').find('tr')[0].cells.length;
             data = buscarOrdenesPlanta('consulta');
             $.each(data, function(index, record) {            
                 if($.isNumeric(index)) {
-                    $("#tablaOrdenes3").jqGrid('addRowData',index,record);
+                    $('#tablaOrdenes3').jqGrid('addRowData',index,record);
                 }
             });
-            var numeroFilas = $("#tablaOrdenes3").getGridParam("reccount");
-            $("#divConteo2").html("Número de registros: "+numeroFilas); 
+            var numeroFilas = $('#tablaOrdenes3').getGridParam('reccount');
+            $('#divConteo2').html('Número de registros: '+numeroFilas); 
         }                 
     }
     
@@ -1369,13 +1369,13 @@ $(document).ready(function() {
         var dataResult;
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: 'index.php?action=actualizar_impreso',
-            data: "buscar=" + numeroSolicitud,
-            dataType: "json",
+            data: 'buscar=' + numeroSolicitud,
+            dataType: 'json',
             async: false,
             error: function(error){
-                alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                 console.log(error.toString());
                 location.reload(true);
             },
@@ -1393,18 +1393,18 @@ $(document).ready(function() {
     **/    
     function actualizarSelectEdificio(idSelect){
         dataEdificios = buscarEdificio(idSelect);
-        $("#edificioSearch").empty();
+        $('#edificioSearch').empty();
         $.each(dataEdificios, function(index, record) {
             if($.isNumeric(index)) {
                  if(index == 1){
-                    var todos = "TODOS";
-                    var row2 = $("<option value='" + todos + "'/>");
+                    var todos = 'TODOS';
+                    var row2 = $('<option value='' + todos + ''/>');
                     row2.text(todos);
-                    row2.appendTo("#edificioSearch");
+                    row2.appendTo('#edificioSearch');
                 }
-                var row = $("<option value='" + record.codigo + "'/>");
-                row.text(record.codigo + " - " + record.nombre);
-                row.appendTo("#edificioSearch");                            
+                var row = $('<option value='' + record.codigo + ''/>');
+                row.text(record.codigo + ' - ' + record.nombre);
+                row.appendTo('#edificioSearch');                            
             }
         });
     }
@@ -1416,38 +1416,38 @@ $(document).ready(function() {
     **/    
     function actualizarSelectPiso(edificio){
         var numeroPisos;
-        var mensaje = "Seleccionar Piso", sotano = "Sótano", terraza = "Terraza";
+        var mensaje = 'Seleccionar Piso', sotano = 'Sótano', terraza = 'Terraza';
 
-        var row = $("<option value='" + mensaje + "'/>");
+        var row = $('<option value='' + mensaje + ''/>');
         row.text(mensaje);
-        row.appendTo("#pisoSearch");
+        row.appendTo('#pisoSearch');
         
         $.each(dataEdificios, function(index, record) {
             if(dataEdificios[index].codigo == edificio) {
                 numeroPisos = record.pisos;
             }
             if (index == 1) {
-                var todos = "TODOS";
-                var row2 = $("<option value='" + todos + "'/>");
+                var todos = 'TODOS';
+                var row2 = $('<option value='' + todos + ''/>');
                 row2.text(todos);
-                row2.appendTo("#pisoSearch");
+                row2.appendTo('#pisoSearch');
             }
         });
         
         if(edificiosSotano.indexOf(edificio) != -1){
-            var row3 = $("<option value='" + sotano + "'/>");
+            var row3 = $('<option value='' + sotano + ''/>');
             row3.text(sotano);
-            row3.appendTo("#pisoSearch");
+            row3.appendTo('#pisoSearch');
         }
         for(i=1;i<=numeroPisos;i++){
-            var row4 = $("<option value='" + i + "'/>");
+            var row4 = $('<option value='' + i + ''/>');
             row4.text(i);
-            row4.appendTo("#pisoSearch");
+            row4.appendTo('#pisoSearch');
         }
         if(edificiosTerraza.indexOf(edificio) != -1){
-            var row5 = $("<option value='" + terraza + "'/>");
+            var row5 = $('<option value='' + terraza + ''/>');
             row5.text(terraza);
-            row5.appendTo("#pisoSearch");
+            row5.appendTo('#pisoSearch');
         }
     }
 
@@ -1455,31 +1455,31 @@ $(document).ready(function() {
     */
     function getNombreCampus(data){
         if(data == 1){
-            return "Meléndez";
+            return 'Meléndez';
         }
         else if(data == 2){
-            return "San Fernando";
+            return 'San Fernando';
         }
         else if(data == 3){
-            return "Otro";
+            return 'Otro';
         }
         else{
-            return "";  
+            return '';  
         }
     }
 
     function getCodCampus(data){
-        if(data == "Meléndez"){
+        if(data == 'Meléndez'){
             return 1;
         }
-        else if(data == "San Fernando"){
+        else if(data == 'San Fernando'){
             return 2;
         }
-        else if(data == "Otro"){
+        else if(data == 'Otro'){
             return 3;
         }
         else{
-            return "";  
+            return '';  
         }
     }
 
@@ -1555,19 +1555,19 @@ $(document).ready(function() {
     */
     function getNombreSistema(data){
         if(data == 1){
-            return "Sistema Hidráulico y Sanitario";
+            return 'Sistema Hidráulico y Sanitario';
         }
         else if(data == 2){
-            return "Sistema Eléctrico";
+            return 'Sistema Eléctrico';
         }
         else if(data == 3){
-            return "Sistema Planta Física ";
+            return 'Sistema Planta Física ';
         }
         else if(data == 4){
-            return "Sistema Mobiliario y Equipos";
+            return 'Sistema Mobiliario y Equipos';
         }
         else{
-            return "";
+            return '';
         }  
     }
     /**
@@ -1584,13 +1584,13 @@ $(document).ready(function() {
         var jObject = JSON.stringify(dataSave);
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: 'index.php?action=obtener_nombre_edificio',
-            dataType: "json",
+            dataType: 'json',
             data: {jObject:  jObject},
             async: false,
             error: function(error){
-                alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                 console.log(error.toString());
                 location.reload(true);
             },
@@ -1608,16 +1608,16 @@ $(document).ready(function() {
     function guardarModOrdenes(idTabla,id)
     {
         try {
-            if(id == ""){
+            if(id == ''){
                 aux = 2;
             }else{
                 aux = id;
             }
 
-            if($.trim($("#selectEstado").val()) == "Seleccionar"){
-                alert("Error, seleccione un estado");
-            }else if($.trim($("#descripcion"+aux).val()) == ""){
-                alert("Error, la descripción no puede estar vacía");
+            if($.trim($('#selectEstado').val()) == 'Seleccionar'){
+                alert('Error, seleccione un estado');
+            }else if($.trim($('#descripcion'+aux).val()) == ''){
+                alert('Error, la descripción no puede estar vacía');
             }else{
 
                 var tablaOrdenes = $('#'+idTabla).DataTable();
@@ -1634,31 +1634,31 @@ $(document).ready(function() {
                     conteo++;
                 });
 
-                saveData["solicitud"] = solicitud;
-                saveData["usuario"] = usuario;
+                saveData['solicitud'] = solicitud;
+                saveData['usuario'] = usuario;
 
-                if($.trim($("#selectEstado").find(':selected').val()) == 'Cerrado'){
-                    saveData["estado"] = $.trim($("#selectTipoCerrado").find(':selected').val());
+                if($.trim($('#selectEstado').find(':selected').val()) == 'Cerrado'){
+                    saveData['estado'] = $.trim($('#selectTipoCerrado').find(':selected').val());
                 }else{
-                    saveData["estado"] = $.trim($("#selectEstado").find(':selected').val());
+                    saveData['estado'] = $.trim($('#selectEstado').find(':selected').val());
                 }
-                saveData["descripcion"] = $.trim($("#descripcion"+aux).val());
+                saveData['descripcion'] = $.trim($('#descripcion'+aux).val());
 
-                if ($.trim($("#selectEstado").find(':selected').val()) == 'Cerrado' && $.trim($("#selectTipoCerrado").find(':selected').val()) == 'Realizado') {
-                    saveData["operario"] = $.trim($("#selectOperario").find(':selected').val());
+                if ($.trim($('#selectEstado').find(':selected').val()) == 'Cerrado' && $.trim($('#selectTipoCerrado').find(':selected').val()) == 'Realizado') {
+                    saveData['operario'] = $.trim($('#selectOperario').find(':selected').val());
                 }else{
-                    saveData["operario"] = null;
+                    saveData['operario'] = null;
                 }
 
                 var jObject = JSON.stringify(saveData);
 
                 $.ajax({
-                    type: "POST",
-                    url: "index.php?action=actualizar_orden_varios",
+                    type: 'POST',
+                    url: 'index.php?action=actualizar_orden_varios',
                     data: {jObject:  jObject},
-                    dataType: "json",
+                    dataType: 'json',
                     error: function(error){
-                        alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                        alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                         console.log(error.toString());
                         location.reload(true);
                     },
@@ -1678,7 +1678,7 @@ $(document).ready(function() {
                                 .draw();
                         }
                         else {
-                            alert("Error");
+                            alert('Error');
                             console.log(result.mensaje);
                         }
                     }
@@ -1688,7 +1688,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -1700,16 +1700,16 @@ $(document).ready(function() {
     {
         try {
 
-            if(id == ""){
+            if(id == ''){
                 aux = 2;
             }else{
                 aux = id;
             }
 
-            if($.trim($("#selectEstado").val()) == "Seleccionar"){
-                alert("Error, seleccione un estado");
-            }else if($.trim($("#descripcion"+aux).val()) == ""){
-                alert("Error, la descripción no puede estar vacía");
+            if($.trim($('#selectEstado').val()) == 'Seleccionar'){
+                alert('Error, seleccione un estado');
+            }else if($.trim($('#descripcion'+aux).val()) == ''){
+                alert('Error, la descripción no puede estar vacía');
             }else{
 
                 var tablaSolicitado = $('#tablaSolicitado'+aux).DataTable();
@@ -1742,31 +1742,31 @@ $(document).ready(function() {
                     conteo++;
                 });
 
-                saveData["solicitud"] = solicitud;
-                saveData["usuario"] = usuario;
+                saveData['solicitud'] = solicitud;
+                saveData['usuario'] = usuario;
 
-                if($.trim($("#selectEstado").find(':selected').val()) == 'Cerrado'){
-                    saveData["estado"] = $.trim($("#selectTipoCerrado").find(':selected').val());
+                if($.trim($('#selectEstado').find(':selected').val()) == 'Cerrado'){
+                    saveData['estado'] = $.trim($('#selectTipoCerrado').find(':selected').val());
                 }else{
-                    saveData["estado"] = $.trim($("#selectEstado").find(':selected').val());
+                    saveData['estado'] = $.trim($('#selectEstado').find(':selected').val());
                 }
-                saveData["descripcion"] = $.trim($("#descripcion"+aux).val());
+                saveData['descripcion'] = $.trim($('#descripcion'+aux).val());
 
-                if ($.trim($("#selectEstado").find(':selected').val()) == 'Cerrado' && $.trim($("#selectTipoCerrado").find(':selected').val()) == 'Realizado') {
-                    saveData["operario"] = $.trim($("#selectOperario").find(':selected').val());
+                if ($.trim($('#selectEstado').find(':selected').val()) == 'Cerrado' && $.trim($('#selectTipoCerrado').find(':selected').val()) == 'Realizado') {
+                    saveData['operario'] = $.trim($('#selectOperario').find(':selected').val());
                 }else{
-                    saveData["operario"] = null;
+                    saveData['operario'] = null;
                 }
 
                 var jObject = JSON.stringify(saveData);
 
                 $.ajax({
-                    type: "POST",
-                    url: "index.php?action=actualizar_orden_varios",
+                    type: 'POST',
+                    url: 'index.php?action=actualizar_orden_varios',
                     data: {jObject:  jObject},
-                    dataType: "json",
+                    dataType: 'json',
                     error: function(error){
-                        alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                        alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                         console.log(error.toString());
                         location.reload(true);
                     },
@@ -1807,7 +1807,7 @@ $(document).ready(function() {
 
                         }
                         else {
-                            alert("Error");
+                            alert('Error');
                             console.log(result.mensaje);
                         }
                     }
@@ -1817,7 +1817,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
     
@@ -1885,7 +1885,7 @@ $(document).ready(function() {
 
             //campus
             pdf.graphicsDrawRectangle(50, 100, 115, 20);
-            pdf.textAdd(51, 116, "Campus: "+dataCampus);
+            pdf.textAdd(51, 116, 'Campus: '+dataCampus);
 
             //datos del usuario
             $.each(dataUser, function(index, record){
@@ -1907,23 +1907,23 @@ $(document).ready(function() {
                  pdf.textAdd(472, 116, 'Piso: '+record.piso);
 
                  //validar si hay datos null en la consulta
-                 if(record.espacio == "" || record.espacio == null){
+                 if(record.espacio == '' || record.espacio == null){
                      pdf.graphicsDrawRectangle(50, 105, 495, 20);
-                     pdf.textAdd(51, 136,"Espacio: " + "No se registró espacio en la orden");
+                     pdf.textAdd(51, 136,'Espacio: ' + 'No se registró espacio en la orden');
                  }
                  else{
                     pdf.graphicsDrawRectangle(50, 120, 495, 20);
-                    pdf.textAdd(51, 136,"Espacio: " + record.espacio);
+                    pdf.textAdd(51, 136,'Espacio: ' + record.espacio);
                  }
                  
 
-                 if(record.contacto == "" || record.contacto == null){
+                 if(record.contacto == '' || record.contacto == null){
                      pdf.graphicsDrawRectangle(50, 120, 495, 20);
-                     pdf.textAdd(51, 136, "Contacto: " + "No se registró contacto en la orden");
+                     pdf.textAdd(51, 136, 'Contacto: ' + 'No se registró contacto en la orden');
                  }
                  else{
                      pdf.graphicsDrawRectangle(50, 140, 495, 20);
-                     pdf.textAdd(51, 156, "Contacto: "+record.contacto);
+                     pdf.textAdd(51, 156, 'Contacto: '+record.contacto);
                  }
                  
                  
@@ -1936,7 +1936,7 @@ $(document).ready(function() {
                  if(nombre.length > 40){
                     nombre = nombre.substr(0,40);
                  }
-                 pdf.textAdd(167,116, 'Edificio: '+record.codigo+" / "+nombre);
+                 pdf.textAdd(167,116, 'Edificio: '+record.codigo+' / '+nombre);
              }
             });
 
@@ -1945,15 +1945,15 @@ $(document).ready(function() {
              if($.isNumeric(index)){
                  pdf.graphicsDrawRectangle(50,160,415,20);
                  pdf.graphicsDrawRectangle(50,180,495,20);
-                 pdf.textAdd(51, 176, "Tarea 1: "+record.descripcion1);
-                 pdf.textAdd(51, 196, "Descripción Tarea 1: "+record.descripcion_novedad);
+                 pdf.textAdd(51, 176, 'Tarea 1: '+record.descripcion1);
+                 pdf.textAdd(51, 196, 'Descripción Tarea 1: '+record.descripcion_novedad);
              }
             });
 
             $.each(dataOrder, function(index, record){
              if($.isNumeric(index)){
                  pdf.graphicsDrawRectangle(465,160,80,20);
-                 pdf.textAdd(467, 175, "Cantidad: "+record.cantidad1);
+                 pdf.textAdd(467, 175, 'Cantidad: '+record.cantidad1);
              }
             });
 
@@ -1962,14 +1962,14 @@ $(document).ready(function() {
                  if(record.descripcion2 == '' || record.descripcion2 == null){
                      pdf.graphicsDrawRectangle(50,200,415,20);
                      pdf.graphicsDrawRectangle(50,220,495,20);
-                     pdf.textAdd(51, 216, "Tarea 2: "+"----------");
-                     pdf.textAdd(51, 236, "Descripción Tarea 2: "+"----------");
+                     pdf.textAdd(51, 216, 'Tarea 2: '+'----------');
+                     pdf.textAdd(51, 236, 'Descripción Tarea 2: '+'----------');
                  }
                  else{
                      pdf.graphicsDrawRectangle(50,200,415,20);
                      pdf.graphicsDrawRectangle(50,220,495,20);
-                     pdf.textAdd(51, 216, "Tarea 2: "+record.descripcion2); 
-                     pdf.textAdd(51, 236, "Descripción Tarea 2: "+record.descripcion_novedad2);     
+                     pdf.textAdd(51, 216, 'Tarea 2: '+record.descripcion2); 
+                     pdf.textAdd(51, 236, 'Descripción Tarea 2: '+record.descripcion_novedad2);     
                  }
              }            
             });
@@ -1979,11 +1979,11 @@ $(document).ready(function() {
                  if(record.descripcion3 == '' || record.descripcion3 == null)
                  {
                      pdf.graphicsDrawRectangle(465,200,80,20);
-                     pdf.textAdd(467, 216,  "Cantidad: "+"-----");
+                     pdf.textAdd(467, 216,  'Cantidad: '+'-----');
                  }
                  else{
                      pdf.graphicsDrawRectangle(465,200,80,20);
-                     pdf.textAdd(467, 216,  "Cantidad: "+record.cantidad2);
+                     pdf.textAdd(467, 216,  'Cantidad: '+record.cantidad2);
                  }
              }
             });
@@ -1993,14 +1993,14 @@ $(document).ready(function() {
                  if(record.descripcion3 == '' || record.descripcion3 == null){
                      pdf.graphicsDrawRectangle(50,240,415,20);
                      pdf.graphicsDrawRectangle(50,260,495,20);
-                     pdf.textAdd(51, 256, "Tarea 3: "+"----------");
-                     pdf.textAdd(51, 276, "Descripción Tarea 3: "+"----------");
+                     pdf.textAdd(51, 256, 'Tarea 3: '+'----------');
+                     pdf.textAdd(51, 276, 'Descripción Tarea 3: '+'----------');
                  }
                  else{
                      pdf.graphicsDrawRectangle(50,240,415,20);
                      pdf.graphicsDrawRectangle(50,260,495,20);
-                     pdf.textAdd(51, 256, "Tarea 3: "+record.descripcion3);    
-                     pdf.textAdd(51, 276, "Descripción Tarea 3: "+record.descripcion_novedad3);  
+                     pdf.textAdd(51, 256, 'Tarea 3: '+record.descripcion3);    
+                     pdf.textAdd(51, 276, 'Descripción Tarea 3: '+record.descripcion_novedad3);  
                  }
              }            
             });
@@ -2010,11 +2010,11 @@ $(document).ready(function() {
                  if(record.descripcion3 == '' || record.descripcion3 == null)
                  {
                      pdf.graphicsDrawRectangle(465,240,80,20);
-                     pdf.textAdd(467, 256,  "Cantidad: "+"-----");
+                     pdf.textAdd(467, 256,  'Cantidad: '+'-----');
                  }
                  else{
                      pdf.graphicsDrawRectangle(465,240,80,20);
-                     pdf.textAdd(467, 256,  "Cantidad: "+record.cantidad3);
+                     pdf.textAdd(467, 256,  'Cantidad: '+record.cantidad3);
                  }
                  descripcion = record.descripcion;
                 }
@@ -2050,32 +2050,32 @@ $(document).ready(function() {
      */
     function generarLinkDescarga(PDFContentBase64)
     {
-        var pdfdiv = document.getElementById("divMensaje");
+        var pdfdiv = document.getElementById('divMensaje');
         for(i=0;i<arregloNumSolicitudes.length;i++){
             actualizarImpreso(arregloNumSolicitudes[i]);
         }
-        //pdfdiv.innerHTML ='<h4><a title=\"Archivo PDF \" target=\"_blank \" style="color:black" href=\"data:application/pdf;base64,' + PDFContentBase64 + '\">Se generó de forma correcta el pdf. Haga click para visualizarlo.<\/a></h4>';
-        //window.open("data:application/pdf;base64, " + PDFContentBase64);
-        newWindow.location = "data:application/pdf;base64, " + PDFContentBase64;
+        //pdfdiv.innerHTML ='<h4><a title=\'Archivo PDF \' target=\'_blank \' style='color:black' href=\'data:application/pdf;base64,' + PDFContentBase64 + '\'>Se generó de forma correcta el pdf. Haga click para visualizarlo.<\/a></h4>';
+        //window.open('data:application/pdf;base64, ' + PDFContentBase64);
+        newWindow.location = 'data:application/pdf;base64, ' + PDFContentBase64;
     }
 
     
 /********************************Eventos de los componentes del frm de consultas***********************************************/
     $(function () {
         $('#divSelectRangoFechas .input-daterange').datepicker({
-            endDate: "today",
-            todayBtn: "linked",
-            language: "es",
+            endDate: 'today',
+            todayBtn: 'linked',
+            language: 'es',
             autoclose: true,
-            orientation: "auto"
+            orientation: 'auto'
         });
 
         $('#divSelectFecha input').datepicker({
-            endDate: "today",
-            todayBtn: "linked",
-            language: "es",
+            endDate: 'today',
+            todayBtn: 'linked',
+            language: 'es',
             autoclose: true,
-            orientation: "auto"
+            orientation: 'auto'
         });
 
         actualizarTablaHistorial();
@@ -2090,23 +2090,23 @@ $(document).ready(function() {
      * Se captura el evento cuando se da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#visualizarEstadisticas").click(function () {
+    $('#visualizarEstadisticas').click(function () {
 
         var URLactual = window.location;
         var totalSolicitudes = 0;
-        var campus = $("#campusSearch").find(':selected').val();
-        var sistema = $("#sistemaSearch").find(':selected').val();
-        var fechaInicial = $("#searchFechaInicial").val();
-        var fechaFinal = $("#searchFechaFinal").val();
-        var nombreSistema = "";
+        var campus = $('#campusSearch').find(':selected').val();
+        var sistema = $('#sistemaSearch').find(':selected').val();
+        var fechaInicial = $('#searchFechaInicial').val();
+        var fechaFinal = $('#searchFechaFinal').val();
+        var nombreSistema = '';
 
-        if(campus != 0 & sistema != 0 & fechaInicial != "" & fechaFinal != ""){
+        if(campus != 0 & sistema != 0 & fechaInicial != '' & fechaFinal != ''){
             saveData = [campus,sistema,fechaInicial,fechaFinal];
 
             if(URLactual['href'].indexOf('estadisticas_edificios') >= 0){
                 estadisticas = obtenerEstadisticasEdificios(saveData);
                 label = [], informacion = [];
-                tipo = "Edificios";
+                tipo = 'Edificios';
                 
                 $.each(estadisticas, function(posicion, info){
                     if(!isNaN(info.codigo_edificio)){
@@ -2170,8 +2170,8 @@ $(document).ready(function() {
                         info.push(parseInt(informacion[9]));
                     }
 
-                    var titulo = tipo+" con más solicitudes";
-                    var subtitulo = 'Desde: '+fechaInicial+" hasta: "+fechaFinal;
+                    var titulo = tipo+' con más solicitudes';
+                    var subtitulo = 'Desde: '+fechaInicial+' hasta: '+fechaFinal;
                     var xTitulo = tipo;
                     var yTitulo = 'Número de Solicitudes (Total: '+totalSolicitudes+')';
 
@@ -2180,11 +2180,11 @@ $(document).ready(function() {
             }else if(URLactual['href'].indexOf('estadisticas_espacios') >= 0){
                 estadisticas = obtenerEstadisticasEspacios(saveData);
                 label = [], informacion = [];
-                tipo = "Espacios";
+                tipo = 'Espacios';
                 
                 $.each(estadisticas, function(posicion, info){
                     if(!isNaN(info.codigo_edificio)){
-                        label.push(info.codigo_edificio + ":" + info.espacio);
+                        label.push(info.codigo_edificio + ':' + info.espacio);
                         informacion.push(info.conteosolicitudes);
                     }
                 });
@@ -2245,8 +2245,8 @@ $(document).ready(function() {
                         info.push(parseInt(informacion[9]));
                     }
 
-                    var titulo = tipo+" con más solicitudes";
-                    var subtitulo = 'Desde: '+fechaInicial+" hasta: "+fechaFinal;
+                    var titulo = tipo+' con más solicitudes';
+                    var subtitulo = 'Desde: '+fechaInicial+' hasta: '+fechaFinal;
                     var xTitulo = tipo;
                     var yTitulo = 'Número de Solicitudes (Total: '+totalSolicitudes+')';
 
@@ -2333,21 +2333,21 @@ $(document).ready(function() {
                 console.log(label,infoSolicitud);
 
                 if (sistema == 1) {
-                    nombreSistema = "Sistema Hidráulico y Sanitario";
+                    nombreSistema = 'Sistema Hidráulico y Sanitario';
                 }if (sistema == 2) {
-                    nombreSistema = "Sistema Eléctrico";
+                    nombreSistema = 'Sistema Eléctrico';
                 }if (sistema == 3) {
-                    nombreSistema = "Sistema Planta Física";
+                    nombreSistema = 'Sistema Planta Física';
                 }if (sistema == 4) {
-                    nombreSistema = "Sistema Mobiliario y Equipos";
+                    nombreSistema = 'Sistema Mobiliario y Equipos';
                 }if (sistema == 5) {
-                    nombreSistema = "Todos los Sistemas";
+                    nombreSistema = 'Todos los Sistemas';
                 }
 
                 var titulo = 'Estadísticas '+nombreSistema;
-                var subtitulo = 'Desde: '+fechaInicial+" hasta: "+fechaFinal;
+                var subtitulo = 'Desde: '+fechaInicial+' hasta: '+fechaFinal;
                 var categorias = ['Solicitado','Revisado','Realizado','No Aplica','Duplicado'];
-                var xTitulo = "Estado solicitud";
+                var xTitulo = 'Estado solicitud';
                 var yTitulo = 'Número de Solicitudes (Total: '+totalSolicitudes+')';
                 var info = [infoSolicitud[0],infoSolicitud[1],infoSolicitud[2],infoSolicitud[3],infoSolicitud[4]];
 
@@ -2396,28 +2396,28 @@ $(document).ready(function() {
                 }
 
                 if (sistema == 1) {
-                    nombreSistema = "Sistema Hidráulico y Sanitario";
+                    nombreSistema = 'Sistema Hidráulico y Sanitario';
                 }if (sistema == 2) {
-                    nombreSistema = "Sistema Eléctrico";
+                    nombreSistema = 'Sistema Eléctrico';
                 }if (sistema == 3) {
-                    nombreSistema = "Sistema Planta Física";
+                    nombreSistema = 'Sistema Planta Física';
                 }if (sistema == 4) {
-                    nombreSistema = "Sistema Mobiliario y Equipos";
+                    nombreSistema = 'Sistema Mobiliario y Equipos';
                 }if (sistema == 5) {
-                    nombreSistema = "Todos los Sistemas";
+                    nombreSistema = 'Todos los Sistemas';
                 }
 
                 var titulo = 'Estadísticas '+nombreSistema;
-                var subtitulo = 'Desde: '+fechaInicial+" hasta: "+fechaFinal;
+                var subtitulo = 'Desde: '+fechaInicial+' hasta: '+fechaFinal;
                 var categorias = ['Contratista','Propio'];
-                var xTitulo = "Operario";
+                var xTitulo = 'Operario';
                 var yTitulo = 'Número de Solicitudes (Total: '+totalSolicitudes+')';
                 var info = [infoSolicitud[0],infoSolicitud[1]];
 
                 generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
             }
         }else{
-            alert("Error. Por favor rellene todos los campos")
+            alert('Error. Por favor rellene todos los campos')
         }
     });
 
@@ -2426,23 +2426,23 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#buscarOrdenes").click(function () {
-        var vlrinput = $("#search").val();        
-        if(vlrinput != ""){
+    $('#buscarOrdenes').click(function () {
+        var vlrinput = $('#search').val();        
+        if(vlrinput != ''){
             var data =  buscarOrdenes(vlrinput);
             actualizarTablaOrdenes(data);
-            $("#divTablas").show();
-            $("#btImprimir").removeAttr('Disabled');
-            $("#visualizarOrdenes").removeAttr('Disabled');
-            $("#modificarOrdenes").removeAttr('Disabled');
+            $('#divTablas').show();
+            $('#btImprimir').removeAttr('Disabled');
+            $('#visualizarOrdenes').removeAttr('Disabled');
+            $('#modificarOrdenes').removeAttr('Disabled');
             primeraVez = false;
         }
         else{
-            alert("Ingrese un valor en el campo de búsqueda");
-            $("#search").focus();
-            $("#btImprimir").prop('disabled', true);
-            $("#visualizarOrdenes").prop('disabled', true);
-            $("#modificarOrdenes").prop('disabled', true);
+            alert('Ingrese un valor en el campo de búsqueda');
+            $('#search').focus();
+            $('#btImprimir').prop('disabled', true);
+            $('#visualizarOrdenes').prop('disabled', true);
+            $('#modificarOrdenes').prop('disabled', true);
         }
     });
 
@@ -2450,40 +2450,40 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#buscarOrdenes2").click(function () {
-        var campus = $("#campusSearch").find(':selected').val();
-        var sistema = $("#sistemaSearch").find(':selected').val();
-        var fechaInicio = $("#searchFechaInicial").val();
-        var fechaFin = $("#searchFechaFinal").val();
+    $('#buscarOrdenes2').click(function () {
+        var campus = $('#campusSearch').find(':selected').val();
+        var sistema = $('#sistemaSearch').find(':selected').val();
+        var fechaInicio = $('#searchFechaInicial').val();
+        var fechaFin = $('#searchFechaFinal').val();
         
-        if(campus != 0 & sistema != 0 & fechaInicio != "" & fechaFin != "")
+        if(campus != 0 & sistema != 0 & fechaInicio != '' & fechaFin != '')
         {
             saveData = [campus,sistema,fechaInicio,fechaFin];
             var data =  buscarOrdenesParametros(saveData);
             actualizarTablaOrdenes2(data);
-            $("#divTablas").show();
-            $("#btImprimir2").removeAttr('Disabled');
-            $("#visualizarOrdenes2").removeAttr('Disabled');
-            $("#modificarOrdenes2").removeAttr('Disabled');
+            $('#divTablas').show();
+            $('#btImprimir2').removeAttr('Disabled');
+            $('#visualizarOrdenes2').removeAttr('Disabled');
+            $('#modificarOrdenes2').removeAttr('Disabled');
             primeraVez2 = false;
         }
         else{          
             if(campus == 0){
-                alert("Error. Seleccione un campus.");
-                $("#campusSearch").focus();
+                alert('Error. Seleccione un campus.');
+                $('#campusSearch').focus();
             }else if(sistema == 0){
-                alert("Error. Seleccione un sistema.");
-                $("#sistemaSearch").focus();
+                alert('Error. Seleccione un sistema.');
+                $('#sistemaSearch').focus();
             }else if(fechaInicio == ''){
-                alert("Error. Ingrese una fecha de inicio.");
-                $("#searchFechaInicial").focus();
+                alert('Error. Ingrese una fecha de inicio.');
+                $('#searchFechaInicial').focus();
             }else{
-                alert("Error. Ingrese una fecha final.");
-                $("#searchFechaFinal").focus();
+                alert('Error. Ingrese una fecha final.');
+                $('#searchFechaFinal').focus();
             }
-            $("#btImprimir2").prop('disabled', true);
-            $("#visualizarOrdenes2").prop('disabled', true);
-            $("#modificarOrdenes2").prop('disabled', true);
+            $('#btImprimir2').prop('disabled', true);
+            $('#visualizarOrdenes2').prop('disabled', true);
+            $('#modificarOrdenes2').prop('disabled', true);
         }
     });
 
@@ -2491,16 +2491,16 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#buscarOrdenes3").click(function () {
-        var campus = $("#campusSearch").find(':selected').val();
-        var edificio = $("#edificioSearch").find(':selected').val();
-        var sistema = $("#sistemaSearch").find(':selected').val();
-        var piso = $("#pisoSearch").find(':selected').val();
-        var fechaInicial = $("#searchFechaInicial").val();
-        var fechaFinal = $("#searchFechaFinal").val();
+    $('#buscarOrdenes3').click(function () {
+        var campus = $('#campusSearch').find(':selected').val();
+        var edificio = $('#edificioSearch').find(':selected').val();
+        var sistema = $('#sistemaSearch').find(':selected').val();
+        var piso = $('#pisoSearch').find(':selected').val();
+        var fechaInicial = $('#searchFechaInicial').val();
+        var fechaFinal = $('#searchFechaFinal').val();
 
         if (campus == 0) {
-            campus = "-1";
+            campus = '-1';
         }
 
         if (edificio == undefined) {
@@ -2515,41 +2515,41 @@ $(document).ready(function() {
             piso = '-1';
         }
         
-        if(campus != 0 & sistema != 0 & edificio != "--" & fechaInicial != "" & fechaFinal != "")
+        if(campus != 0 & sistema != 0 & edificio != '--' & fechaInicial != '' & fechaFinal != '')
         {
             saveData = [campus,edificio,sistema,piso,fechaInicial,fechaFinal];
             //console.log(saveData);
             var data =  buscarOrdenesParametrosAvanzados(saveData);
             //console.log(data);
             actualizarTablaOrdenes2(data);
-            $("#divTablas").show();
-            $("#btImprimir3").removeAttr('Disabled');
-            $("#visualizarOrdenes3").removeAttr('Disabled');
-            $("#modificarOrdenes2").removeAttr('Disabled');
+            $('#divTablas').show();
+            $('#btImprimir3').removeAttr('Disabled');
+            $('#visualizarOrdenes3').removeAttr('Disabled');
+            $('#modificarOrdenes2').removeAttr('Disabled');
        }
        else{
             if(campus == 0){
-                alert("Error. Seleccione un campus.");
-                $("#campusSearch").focus();
+                alert('Error. Seleccione un campus.');
+                $('#campusSearch').focus();
             }else if(edificio == '--'){
-                alert("Error. Seleccione un edificio.");
-                $("#edificioSearch").focus();
+                alert('Error. Seleccione un edificio.');
+                $('#edificioSearch').focus();
             }else if(sistema == 0){
-                alert("Error. Seleccione un sistema.");
-                $("#sistemaSearch").focus();
+                alert('Error. Seleccione un sistema.');
+                $('#sistemaSearch').focus();
             }else if(piso == 0){
-                alert("Error. Seleccione un sistema.");
-                $("#sistemaSearch").focus();
+                alert('Error. Seleccione un sistema.');
+                $('#sistemaSearch').focus();
             }else if(fechaInicial == ''){
-                alert("Error. Ingrese una fecha de inicio.");
-                $("#searchFechaInicial").focus();
+                alert('Error. Ingrese una fecha de inicio.');
+                $('#searchFechaInicial').focus();
             }else{
-                alert("Error. Ingrese una fecha final.");
-                $("#searchFechaFinal").focus();
+                alert('Error. Ingrese una fecha final.');
+                $('#searchFechaFinal').focus();
             }
-            $("#btImprimir3").prop('disabled', true);
-            $("#visualizarOrdenes3").prop('disabled', true);
-            $("#modificarOrdenes2").prop('disabled', true);
+            $('#btImprimir3').prop('disabled', true);
+            $('#visualizarOrdenes3').prop('disabled', true);
+            $('#modificarOrdenes2').prop('disabled', true);
         }
     });
 
@@ -2557,14 +2557,14 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#buscarOrdenes4").click(function () {
+    $('#buscarOrdenes4').click(function () {
         var URLactual = window.location;
         var campus = '1';
         var edificio = 'TODOS';
         var sistema = '10';         //Significa que va a tomar todos los sistemas
         var piso = '-1';
-        var fechaInicial = $("#searchFechaInicial").val();
-        var fechaFinal = $("#searchFechaFinal").val();
+        var fechaInicial = $('#searchFechaInicial').val();
+        var fechaFinal = $('#searchFechaFinal').val();
 
         if(URLactual['href'].indexOf('listar_electrico_consultas') >= 0){
             sistema = '2';
@@ -2576,28 +2576,28 @@ $(document).ready(function() {
             sistema = '3';
         }
         
-        if(campus != 0 & sistema != 0 & edificio != "--" & fechaInicial != "" & fechaFinal != "")
+        if(campus != 0 & sistema != 0 & edificio != '--' & fechaInicial != '' & fechaFinal != '')
         {
             saveData = [campus,edificio,sistema,piso,fechaInicial,fechaFinal];
             var data =  buscarOrdenesParametrosAvanzados(saveData);
             actualizarTablaOrdenes3(data);
-            $("#divTablas").show();
-            $("#btImprimir5").removeAttr('Disabled');
-            $("#visualizarOrdenes4").removeAttr('Disabled');
-            $("#modificarOrdenes3").removeAttr('Disabled');
+            $('#divTablas').show();
+            $('#btImprimir5').removeAttr('Disabled');
+            $('#visualizarOrdenes4').removeAttr('Disabled');
+            $('#modificarOrdenes3').removeAttr('Disabled');
             primeraVez3 = false;
        }
        else{
             if(fechaInicial == ''){
-                alert("Error. Ingrese una fecha de inicio.");
-                $("#searchFechaInicial").focus();
+                alert('Error. Ingrese una fecha de inicio.');
+                $('#searchFechaInicial').focus();
             }else{
-                alert("Error. Ingrese una fecha final.");
-                $("#searchFechaFinal").focus();
+                alert('Error. Ingrese una fecha final.');
+                $('#searchFechaFinal').focus();
             }
-            $("#btImprimir5").prop('disabled', true);
-            $("#visualizarOrdenes4").prop('disabled', true);
-            $("#modificarOrdenes3").prop('disabled', true);
+            $('#btImprimir5').prop('disabled', true);
+            $('#visualizarOrdenes4').prop('disabled', true);
+            $('#modificarOrdenes3').prop('disabled', true);
         }
     });
 
@@ -2605,40 +2605,40 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton buscar y se
      * realiza la operacion correspondiente.
      */
-    $("#buscarOrdenes5").click(function () {
+    $('#buscarOrdenes5').click(function () {
 
         var campus = '-1';         //Significa que va a tomar todos los campus
         var edificio = 'TODOS';
         var sistema = '10';         //Significa que va a tomar todos los sistemas
         var piso = '-1';
-        var fechaInicial = $("#searchFecha").val();
-        var fechaFinal = $("#searchFecha").val();
+        var fechaInicial = $('#searchFecha').val();
+        var fechaFinal = $('#searchFecha').val();
         
-        if(campus != 0 & sistema != 0 & edificio != "--" & fechaInicial != "")
+        if(campus != 0 & sistema != 0 & edificio != '--' & fechaInicial != '')
         {
             saveData = [campus,edificio,sistema,piso,fechaInicial,fechaFinal];
             var data =  buscarOrdenesParametrosAvanzados(saveData);
             actualizarTablaOrdenes4(data);
-            $("#divTablas").show();
-            $("#btImprimir6").removeAttr('Disabled');
-            $("#visualizarOrdenes5").removeAttr('Disabled');
-            $("#modificarOrdenes5").removeAttr('Disabled');
+            $('#divTablas').show();
+            $('#btImprimir6').removeAttr('Disabled');
+            $('#visualizarOrdenes5').removeAttr('Disabled');
+            $('#modificarOrdenes5').removeAttr('Disabled');
             primeraVez4 = false;
        }
        else{
-            alert("Error. Seleccione una fecha.");
-            $("#searchFecha").focus();
-            $("#btImprimir6").prop('disabled', true);
-            $("#visualizarOrdenes5").prop('disabled', true);
-            $("#modificarOrdenes5").prop('disabled', true);
+            alert('Error. Seleccione una fecha.');
+            $('#searchFecha').focus();
+            $('#btImprimir6').prop('disabled', true);
+            $('#visualizarOrdenes5').prop('disabled', true);
+            $('#modificarOrdenes5').prop('disabled', true);
         }
     });
     
     /**
      * Evento que permite imprimir una o más ordenes o solicitudes de mantenimiento
      */
-    $("#btImprimir").click(function (e) {
-        if(confirm("¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?")){
+    $('#btImprimir').click(function (e) {
+        if(confirm('¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?')){
             var myWindow = window.open('');
             var tablaOrdenes = $('#tablaOrdenes').DataTable();
 
@@ -2671,7 +2671,7 @@ $(document).ready(function() {
                     //generarLinkDescarga(PDFContentBase64);
                 });
             }else{
-                alert("Error. Seleccione por lo menos una orden.");
+                alert('Error. Seleccione por lo menos una orden.');
             }
         }
     });
@@ -2679,8 +2679,8 @@ $(document).ready(function() {
     /**
      * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
      */
-    $("#btImprimir2").click(function () {
-        if(confirm("¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?")){
+    $('#btImprimir2').click(function () {
+        if(confirm('¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?')){
             var tablaSolicitado = $('#tablaSolicitado2').DataTable();
             var tablaRevisado = $('#tablaRevisado2').DataTable();
             var tablaRealizado = $('#tablaRealizado2').DataTable();
@@ -2733,7 +2733,7 @@ $(document).ready(function() {
                     //generarLinkDescarga(PDFContentBase64);
                 });
             }else{
-                alert("Error. Seleccione por lo menos una orden.");
+                alert('Error. Seleccione por lo menos una orden.');
             }
         }
     });
@@ -2741,8 +2741,8 @@ $(document).ready(function() {
     /**
      * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
      */
-    $("#btImprimir3").click(function () {
-        if(confirm("¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?")){
+    $('#btImprimir3').click(function () {
+        if(confirm('¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?')){
             var tablaSolicitado = $('#tablaSolicitado2').DataTable();
             var tablaRevisado = $('#tablaRevisado2').DataTable();
             var tablaRealizado = $('#tablaRealizado2').DataTable();
@@ -2795,7 +2795,7 @@ $(document).ready(function() {
                     //generarLinkDescarga(PDFContentBase64);
                 });
             }else{
-                alert("Error. Seleccione por lo menos una orden.");
+                alert('Error. Seleccione por lo menos una orden.');
             }
         }
     });
@@ -2803,8 +2803,8 @@ $(document).ready(function() {
     /**
      * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
      */
-    $("#btImprimir5").click(function () {
-        if(confirm("¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?")){
+    $('#btImprimir5').click(function () {
+        if(confirm('¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?')){
             var tablaSolicitado = $('#tablaSolicitado3').DataTable();
             var tablaRevisado = $('#tablaRevisado3').DataTable();
             var tablaRealizado = $('#tablaRealizado3').DataTable();
@@ -2857,7 +2857,7 @@ $(document).ready(function() {
                     //generarLinkDescarga(PDFContentBase64);
                 });
             }else{
-                alert("Error. Seleccione por lo menos una orden.");
+                alert('Error. Seleccione por lo menos una orden.');
             }
         }
     });
@@ -2865,8 +2865,8 @@ $(document).ready(function() {
     /**
      * Evento que permite imprimir una o varias ordenes o solicitudes de mantenimiento
      */
-    $("#btImprimir6").click(function () {
-        if(confirm("¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?")){
+    $('#btImprimir6').click(function () {
+        if(confirm('¿Está seguro que desea generar PDF con la(s) orden(es) de mantenimiento?')){
             var tablaSolicitado = $('#tablaSolicitado4').DataTable();
             var tablaRevisado = $('#tablaRevisado4').DataTable();
             var tablaRealizado = $('#tablaRealizado4').DataTable();
@@ -2919,7 +2919,7 @@ $(document).ready(function() {
                     //generarLinkDescarga(PDFContentBase64);
                 });
             }else{
-                alert("Error. Seleccione por lo menos una orden.");
+                alert('Error. Seleccione por lo menos una orden.');
             }
         }
     });
@@ -2928,7 +2928,7 @@ $(document).ready(function() {
      * Se captura el evento cuando se da click en el boton visualizarHistorial y se
      * realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarHistorial").click(function (e) {
+    $('#visualizarHistorial').click(function (e) {
         try
         {
             var tabla = $('#tablaHistorial').DataTable();
@@ -2959,25 +2959,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus").val(campus);
-                        $("#piso").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus').val(campus);
+                        $('#piso').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -2985,7 +2985,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                        $('#edificio').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -2993,20 +2993,20 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
 
             }else{
-                alert("Error. Seleccione una solicitud.")
+                alert('Error. Seleccione una solicitud.')
             }
         }
         catch(ex)
         {
-            alert("Error: Ocurrio un error"+ex);
+            alert('Error: Ocurrio un error'+ex);
         }
     });
     
@@ -3014,7 +3014,7 @@ $(document).ready(function() {
      * Se captura el evento cuando se da click en el boton visualizarOrdenes y se
      * realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarOrdenes").click(function (e) {
+    $('#visualizarOrdenes').click(function (e) {
         try
         {
             var tablaOrdenes = $('#tablaOrdenes').DataTable();
@@ -3044,25 +3044,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus").val(campus);
-                        $("#piso").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus').val(campus);
+                        $('#piso').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -3070,7 +3070,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                        $('#edificio').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -3078,22 +3078,22 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
             }else if(elementoSeleccionado > 1){
-                alert("Error. Sólo puede ser visualizar un elemento a la vez.");
+                alert('Error. Sólo puede ser visualizar un elemento a la vez.');
             }else{
-                alert("Error. Seleccione un elemento.");
+                alert('Error. Seleccione un elemento.');
             }
         }
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
     
@@ -3101,7 +3101,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
      *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarOrdenes2").click(function (e) {
+    $('#visualizarOrdenes2').click(function (e) {
         try
         {
             var tablaSolicitado = $('#tablaSolicitado2').DataTable();
@@ -3147,25 +3147,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion2").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus").val(campus);
-                        $("#piso").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion2').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus').val(campus);
+                        $('#piso').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -3173,7 +3173,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                        $('#edificio').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -3181,22 +3181,22 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
             }else if(elementosSeleccionados > 1){
-                alert("Error. Sólo puede ser visualizar un elemento a la vez.");
+                alert('Error. Sólo puede ser visualizar un elemento a la vez.');
             }else{
-                alert("Error. Seleccione un elemento.");
+                alert('Error. Seleccione un elemento.');
             }
         }
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
     
@@ -3204,7 +3204,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
      *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarOrdenes3").click(function() {
+    $('#visualizarOrdenes3').click(function() {
         try
         {
             var tablaSolicitado = $('#tablaSolicitado2').DataTable();
@@ -3250,25 +3250,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion2").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus2").val(campus);
-                        $("#piso2").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion2').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus2').val(campus);
+                        $('#piso2').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -3276,7 +3276,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio2").val(record.codigo+" - "+record.nombre);
+                        $('#edificio2').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -3284,22 +3284,22 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
             }else if(elementosSeleccionados > 1){
-                alert("Error. Sólo puede ser visualizar un elemento a la vez.");
+                alert('Error. Sólo puede ser visualizar un elemento a la vez.');
             }else{
-                alert("Error. Seleccione un elemento.");
+                alert('Error. Seleccione un elemento.');
             }
         }
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
     
@@ -3307,7 +3307,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
      *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarOrdenes4").click(function() {
+    $('#visualizarOrdenes4').click(function() {
         try
         {
             var tablaSolicitado = $('#tablaSolicitado3').DataTable();
@@ -3353,25 +3353,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion2").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus").val(campus);
-                        $("#piso").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion2').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus').val(campus);
+                        $('#piso').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -3379,7 +3379,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                        $('#edificio').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -3387,22 +3387,22 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
             }else if(elementosSeleccionados > 1){
-                alert("Error. Sólo puede ser visualizar un elemento a la vez.");
+                alert('Error. Sólo puede ser visualizar un elemento a la vez.');
             }else{
-                alert("Error. Seleccione un elemento.");
+                alert('Error. Seleccione un elemento.');
             }
         }
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -3410,7 +3410,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton visualizarOrdenes y se
      *  realiza la operacion correspondiente desplegar una ventana con los datos especificos de la orden .
      */    
-    $("#visualizarOrdenes5").click(function() {
+    $('#visualizarOrdenes5').click(function() {
         try
         {
             var tablaSolicitado = $('#tablaSolicitado4').DataTable();
@@ -3456,25 +3456,25 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#divDialogVisualizacion").modal('show');
-                        $("#campNumeroSolicitud").val(dataElemento[0]);
-                        $("#sede").val("Cali");
-                        $("#campus").val(campus);
-                        $("#piso").val(piso);
-                        $("#espacio").val(record.espacio);
-                        $("#cantidad1").val(record.cantidad1);
-                        $("#novedad1").val(record.descripcion1);
-                        $("#descripcion_novedad").val(record.descripcion_novedad);
-                        $("#cantidadN2").val(record.cantidad2);
-                        $("#novedad2").val(record.descripcion2);
-                        $("#descripcion_novedad2").val(record.descripcion_novedad2);
-                        $("#cantidadN3").val(record.cantidad3);
-                        $("#novedad3").val(record.descripcion3);
-                        $("#descripcion_novedad3").val(record.descripcion_novedad3);
-                        $("#contacto").val(record.contacto);
-                        $("#estado").val(record.estado);
-                        $("#descripcion").val(record.descripcion);
-                        $("#fecha").val(record.fecha);
+                        $('#divDialogVisualizacion').modal('show');
+                        $('#campNumeroSolicitud').val(dataElemento[0]);
+                        $('#sede').val('Cali');
+                        $('#campus').val(campus);
+                        $('#piso').val(piso);
+                        $('#espacio').val(record.espacio);
+                        $('#cantidad1').val(record.cantidad1);
+                        $('#novedad1').val(record.descripcion1);
+                        $('#descripcion_novedad').val(record.descripcion_novedad);
+                        $('#cantidadN2').val(record.cantidad2);
+                        $('#novedad2').val(record.descripcion2);
+                        $('#descripcion_novedad2').val(record.descripcion_novedad2);
+                        $('#cantidadN3').val(record.cantidad3);
+                        $('#novedad3').val(record.descripcion3);
+                        $('#descripcion_novedad3').val(record.descripcion_novedad3);
+                        $('#contacto').val(record.contacto);
+                        $('#estado').val(record.estado);
+                        $('#descripcion').val(record.descripcion);
+                        $('#fecha').val(record.fecha);
                     }
                 });
 
@@ -3482,7 +3482,7 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#edificio").val(record.codigo+" - "+record.nombre);
+                        $('#edificio').val(record.codigo+' - '+record.nombre);
                     }
                 });
 
@@ -3490,41 +3490,41 @@ $(document).ready(function() {
                 {
                     if($.isNumeric(index))
                     {
-                        $("#usuario").val(record.nombre_usuario);
-                        $("#telefono").val(record.telefono);
-                        $("#extension").val(record.extension);
-                        $("#correo").val(record.correo);
+                        $('#usuario').val(record.nombre_usuario);
+                        $('#telefono').val(record.telefono);
+                        $('#extension').val(record.extension);
+                        $('#correo').val(record.correo);
                     }
                 });
             }else if(elementosSeleccionados > 1){
-                alert("Error. Sólo puede ser visualizar un elemento a la vez.");
+                alert('Error. Sólo puede ser visualizar un elemento a la vez.');
             }else{
-                alert("Error. Seleccione un elemento.");
+                alert('Error. Seleccione un elemento.');
             }
         }
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
     /**
      * Validad que el usuario seleccione una opcion valida del selector 
      */
-    $("#sistemaSearch").change(function (e) {
-        var vlr = $("#sistemaSearch").find(':selected').val();
+    $('#sistemaSearch').change(function (e) {
+        var vlr = $('#sistemaSearch').find(':selected').val();
         var URLactual = window.location;
 
         if(vlr == 0){
-            alert("Seleccione una opcion validad en el selector sistema");
+            alert('Seleccione una opcion validad en el selector sistema');
         }
 
         if (URLactual['href'].indexOf('listar_multiple_consultas') >= 0) {
-            //$("#sistemaSearch option[value='TODOS']").remove();
+            //$('#sistemaSearch option[value='TODOS']').remove();
             $('#divCampus').css('display','block');
             if (vlr != -1) {                
-                $('#campusSearch').val("0");
+                $('#campusSearch').val('0');
             }else{       
                 $('#divEdificio').css('display','none');
                 $('#divPiso').css('display','none');
@@ -3535,49 +3535,49 @@ $(document).ready(function() {
      /**
      * captura el elemento seleccionado del select campus y de acuerdo a la seleccion actualiza el select de edificios
      */
-    $("#campusSearch").change(function (e) {
-        var vlr = $("#campusSearch").find(':selected').val();
+    $('#campusSearch').change(function (e) {
+        var vlr = $('#campusSearch').find(':selected').val();
         var URLactual = window.location;
         
         if(vlr == 0){
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
         }   
         if(vlr == 1){
             var id = 01;
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
             actualizarSelectEdificio(id);
 
         }
         else if(vlr == 2){
             var id = 02;
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
             actualizarSelectEdificio(id);
 
         }
         else if(vlr == 3){
             var id = 03;
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
             actualizarSelectEdificio(id);
         }
         else if(vlr == 4){
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
         }
         else if(vlr == -1){
-            $("#edificioSearch").empty();
+            $('#edificioSearch').empty();
         }
         else{
-            alert("Error. No selecciono un campus de la lista");
+            alert('Error. No selecciono un campus de la lista');
         }
 
         if (URLactual['href'].indexOf('listar_multiple_consultas') >= 0) {
-            //$("#edificioSearch option[value='TODOS']").remove();
+            //$('#edificioSearch option[value='TODOS']').remove();
             if (vlr != -1) {
                 $('#divEdificio').css('display','block');
-                $('#buscarOrdenes3').attr("disabled", true);
+                $('#buscarOrdenes3').attr('disabled', true);
             }else{
                 $('#divEdificio').css('display','none');
                 $('#divPiso').css('display','none');
-                $("#buscarOrdenes3").removeAttr('Disabled');
+                $('#buscarOrdenes3').removeAttr('Disabled');
             }
         }
     });
@@ -3585,23 +3585,23 @@ $(document).ready(function() {
     /**
      * Valida que se seleccione una opcion valida del selector edificio
      */
-    $("#edificioSearch").change(function (e) {
-        var edificio = $("#edificioSearch").find(':selected').val();
+    $('#edificioSearch').change(function (e) {
+        var edificio = $('#edificioSearch').find(':selected').val();
         var URLactual = window.location;
 
-        if(edificio == "--"){
-            alert("Error. Seleccione una opción valida");
+        if(edificio == '--'){
+            alert('Error. Seleccione una opción valida');
         }
         if (URLactual['href'].indexOf('listar_multiple_consultas') >= 0) {
             if (edificio != 'TODOS') {
-                $("#pisoSearch").empty();
-                var edificio = $("#edificioSearch").find(':selected').val();
+                $('#pisoSearch').empty();
+                var edificio = $('#edificioSearch').find(':selected').val();
                 actualizarSelectPiso(edificio);
                 $('#divPiso').css('display','block');
-                $('#buscarOrdenes3').attr("disabled", true);
+                $('#buscarOrdenes3').attr('disabled', true);
             }else{
                 $('#divPiso').css('display','none');
-                $("#buscarOrdenes3").removeAttr('Disabled');
+                $('#buscarOrdenes3').removeAttr('Disabled');
             }
         }
     });
@@ -3609,15 +3609,15 @@ $(document).ready(function() {
     /**
      * Valida que se seleccione una opcion valida del selector edificio
      */
-    $("#pisoSearch").change(function (e) {
-        var piso = $("#pisoSearch").find(':selected').val();
+    $('#pisoSearch').change(function (e) {
+        var piso = $('#pisoSearch').find(':selected').val();
         var URLactual = window.location;
 
-        if(piso == "Seleccionar Piso"){
-            alert("Error. Seleccione un piso");
-            $('#buscarOrdenes3').attr("disabled", true);
+        if(piso == 'Seleccionar Piso'){
+            alert('Error. Seleccione un piso');
+            $('#buscarOrdenes3').attr('disabled', true);
         }else{
-            $("#buscarOrdenes3").removeAttr('Disabled');
+            $('#buscarOrdenes3').removeAttr('Disabled');
         }
     });
 
@@ -3625,18 +3625,18 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#modificarOrdenes").click(function (e) {
+    $('#modificarOrdenes').click(function (e) {
         try {
             var tablaOrdenes = $('#tablaOrdenes').DataTable();
 
             var elementoSeleccionado = tablaOrdenes.rows('.selected').data();
             
             if(elementoSeleccionado.length <= 0) {
-                alert("Error. Seleccione por lo menos un elemento");
+                alert('Error. Seleccione por lo menos un elemento');
             }
             else {
                 actualizarSelectorEstado();
-                $("#divOperario").css('display','none');
+                $('#divOperario').css('display','none');
                 $('#divSelectOperario').css('display','none');
 
                 var data = [];
@@ -3647,16 +3647,16 @@ $(document).ready(function() {
 
                 $.each(data, function(index, record) {
                     if($.isNumeric(index)) {
-                        $("#divDialogModificacion").modal("show");
-                        $("#descripcion2").val(record.descripcion);
-                        $("#usuario").val(record.usuario);
+                        $('#divDialogModificacion').modal('show');
+                        $('#descripcion2').val(record.descripcion);
+                        $('#usuario').val(record.usuario);
                         if(record.estado == 'Duplicado' || record.estado == 'No Aplica' || record.estado == 'Realizado'){
                             $('#selectEstado').val('Cerrado');
-                            $("#selectTipoCerrado").val(record.estado);
+                            $('#selectTipoCerrado').val(record.estado);
                             if(record.estado == 'Realizado'){
                                 $('#divOperario').css('display','block');
                                 $('#divSelectOperario').css('display','block');
-                                $("#selectOperario").val(record.operario);
+                                $('#selectOperario').val(record.operario);
                             }
                             $('#divTipoCerrado').css('display','block');
                         }else{
@@ -3668,7 +3668,7 @@ $(document).ready(function() {
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -3676,7 +3676,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#modificarOrdenes2").click(function (e) {
+    $('#modificarOrdenes2').click(function (e) {
         try {
             var tablaSolicitado = $('#tablaSolicitado2').DataTable();
             var tablaRevisado = $('#tablaRevisado2').DataTable();
@@ -3689,11 +3689,11 @@ $(document).ready(function() {
             var totalElementos = elementosSeleccionadosSolicitado.length + elementosSeleccionadosRevisado.length + elementosSeleccionadosRealizado.length;
             
             if(totalElementos <= 0) {
-                alert("Error. Seleccione por lo menos un elemento");
+                alert('Error. Seleccione por lo menos un elemento');
             }
             else {
                 actualizarSelectorEstado();
-                $("#divOperario").css('display','none');
+                $('#divOperario').css('display','none');
                 $('#divSelectOperario').css('display','none');
 
                 if(totalElementos == 1){
@@ -3713,16 +3713,16 @@ $(document).ready(function() {
 
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
-                            $("#divDialogModificacion2").modal("show");
-                            $("#descripcion2").val(record.descripcion);
-                            $("#usuario").val(record.usuario);                            
+                            $('#divDialogModificacion2').modal('show');
+                            $('#descripcion2').val(record.descripcion);
+                            $('#usuario').val(record.usuario);                            
                             if(record.estado == 'Duplicado' || record.estado == 'No Aplica' || record.estado == 'Realizado'){
                                 $('#selectEstado').val('Cerrado');
-                                $("#selectTipoCerrado").val(record.estado);
+                                $('#selectTipoCerrado').val(record.estado);
                                 if(record.estado == 'Realizado'){
                                     $('#divOperario').css('display','block');
                                     $('#divSelectOperario').css('display','block');
-                                    $("#selectOperario").val(record.operario);
+                                    $('#selectOperario').val(record.operario);
                                 }
                                 $('#divTipoCerrado').css('display','block');
                             }else{
@@ -3731,15 +3731,15 @@ $(document).ready(function() {
                         }
                     });
                 }else{
-                    $("#divDialogModificacion2").modal("show");
+                    $('#divDialogModificacion2').modal('show');
                     $('#selectEstado').val('Seleccionar');
-                    $("#descripcion2").val("");
+                    $('#descripcion2').val('');
                 }
             }
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -3747,7 +3747,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#modificarOrdenes3").click(function (e) {
+    $('#modificarOrdenes3').click(function (e) {
         try {
             var tablaSolicitado = $('#tablaSolicitado3').DataTable();
             var tablaRevisado = $('#tablaRevisado3').DataTable();
@@ -3760,11 +3760,11 @@ $(document).ready(function() {
             var totalElementos = elementosSeleccionadosSolicitado.length + elementosSeleccionadosRevisado.length + elementosSeleccionadosRealizado.length;
             
             if(totalElementos <= 0) {
-                alert("Error. Seleccione por lo menos un elemento");
+                alert('Error. Seleccione por lo menos un elemento');
             }
             else {
                 actualizarSelectorEstado();
-                $("#divOperario").css('display','none');
+                $('#divOperario').css('display','none');
                 $('#divSelectOperario').css('display','none');
 
                 if(totalElementos == 1){
@@ -3784,16 +3784,16 @@ $(document).ready(function() {
 
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
-                            $("#divDialogModificacion3").modal("show");
-                            $("#descripcion3").val(record.descripcion);
-                            $("#usuario").val(record.usuario);                            
+                            $('#divDialogModificacion3').modal('show');
+                            $('#descripcion3').val(record.descripcion);
+                            $('#usuario').val(record.usuario);                            
                             if(record.estado == 'Duplicado' || record.estado == 'No Aplica' || record.estado == 'Realizado'){
                                 $('#selectEstado').val('Cerrado');
-                                $("#selectTipoCerrado").val(record.estado);
+                                $('#selectTipoCerrado').val(record.estado);
                                 if(record.estado == 'Realizado'){
                                     $('#divOperario').css('display','block');
                                     $('#divSelectOperario').css('display','block');
-                                    $("#selectOperario").val(record.operario);
+                                    $('#selectOperario').val(record.operario);
                                 }
                                 $('#divTipoCerrado').css('display','block');
                             }else{
@@ -3802,15 +3802,15 @@ $(document).ready(function() {
                         }
                     });
                 }else{
-                    $("#divDialogModificacion3").modal("show");
+                    $('#divDialogModificacion3').modal('show');
                     $('#selectEstado').val('Seleccionar');
-                    $("#descripcion3").val("");
+                    $('#descripcion3').val('');
                 }
             }
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -3818,7 +3818,7 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#modificarOrdenes5").click(function (e) {
+    $('#modificarOrdenes5').click(function (e) {
         try {
             var tablaSolicitado = $('#tablaSolicitado4').DataTable();
             var tablaRevisado = $('#tablaRevisado4').DataTable();
@@ -3831,11 +3831,11 @@ $(document).ready(function() {
             var totalElementos = elementosSeleccionadosSolicitado.length + elementosSeleccionadosRevisado.length + elementosSeleccionadosRealizado.length;
             
             if(totalElementos <= 0) {
-                alert("Error. Seleccione por lo menos un elemento");
+                alert('Error. Seleccione por lo menos un elemento');
             }
             else {
                 actualizarSelectorEstado();
-                $("#divOperario").css('display','none');
+                $('#divOperario').css('display','none');
                 $('#divSelectOperario').css('display','none');
 
                 if(totalElementos == 1){
@@ -3855,16 +3855,16 @@ $(document).ready(function() {
 
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
-                            $("#divDialogModificacion4").modal("show");
-                            $("#descripcion4").val(record.descripcion);
-                            $("#usuario").val(record.usuario);                            
+                            $('#divDialogModificacion4').modal('show');
+                            $('#descripcion4').val(record.descripcion);
+                            $('#usuario').val(record.usuario);                            
                             if(record.estado == 'Duplicado' || record.estado == 'No Aplica' || record.estado == 'Realizado'){
                                 $('#selectEstado').val('Cerrado');
-                                $("#selectTipoCerrado").val(record.estado);
+                                $('#selectTipoCerrado').val(record.estado);
                                 if(record.estado == 'Realizado'){
                                     $('#divOperario').css('display','block');
                                     $('#divSelectOperario').css('display','block');
-                                    $("#selectOperario").val(record.operario);
+                                    $('#selectOperario').val(record.operario);
                                 }
                                 $('#divTipoCerrado').css('display','block');
                             }else{
@@ -3875,9 +3875,9 @@ $(document).ready(function() {
                 }else{
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
-                            $("#divDialogModificacion3").modal("show");
+                            $('#divDialogModificacion3').modal('show');
                             $('#selectEstado').val('Seleccionar');
-                            $("#descripcion4").val("");
+                            $('#descripcion4').val('');
                         }
                     });
                 }
@@ -3885,7 +3885,7 @@ $(document).ready(function() {
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -4002,22 +4002,22 @@ $(document).ready(function() {
      */    
     function actualizarSelectorEstado() {
         $('#selectEstado').empty();
-        $('#selectEstado').append('<option value="Seleccionar">----Seleccionar----</option>');
-        $('#selectEstado').append('<option value="Solicitado">Solicitado</option>');
-        $('#selectEstado').append('<option value="Revisado">Revisado</option>');
-        $('#selectEstado').append('<option value="Cerrado">Cerrado</option>');
+        $('#selectEstado').append('<option value='Seleccionar'>----Seleccionar----</option>');
+        $('#selectEstado').append('<option value='Solicitado'>Solicitado</option>');
+        $('#selectEstado').append('<option value='Revisado'>Revisado</option>');
+        $('#selectEstado').append('<option value='Cerrado'>Cerrado</option>');
         $('#selectTipoCerrado').empty();
-        $('#selectTipoCerrado').append('<option value="Duplicado" selected="selected">Duplicado</option>');
-        $('#selectTipoCerrado').append('<option value="No Aplica">No Aplica</option>');
-        $('#selectTipoCerrado').append('<option value="Realizado">Realizado</option>');
+        $('#selectTipoCerrado').append('<option value='Duplicado' selected='selected'>Duplicado</option>');
+        $('#selectTipoCerrado').append('<option value='No Aplica'>No Aplica</option>');
+        $('#selectTipoCerrado').append('<option value='Realizado'>Realizado</option>');
         $('#divTipoCerrado').css('display','none');
     }
 
     /**
      * evento que permite guardar las modificaciones de las ordenes en la ventana modal
      */
-    $("#btGuardarModOrdenes").click(function() {  
-        if(confirm("Esta seguro(a) que desea guardar" + " los cambios realizados a la orden","Confirmación"))
+    $('#btGuardarModOrdenes').click(function() {  
+        if(confirm('Esta seguro(a) que desea guardar' + ' los cambios realizados a la orden','Confirmación'))
         {
             guardarModOrdenes('tablaOrdenes','');
             //enviarCorreo();
@@ -4027,8 +4027,8 @@ $(document).ready(function() {
     /**
      * evento que permite guardar las modificaciones de las ordenes en la ventana modal
      */
-    $("#btGuardarModOrdenes2").click(function() {  
-        if(confirm("Esta seguro(a) que desea guardar" + " los cambios realizados a la orden","Confirmación"))
+    $('#btGuardarModOrdenes2').click(function() {  
+        if(confirm('Esta seguro(a) que desea guardar' + ' los cambios realizados a la orden','Confirmación'))
         {
             guardarModOrdenes2('2');
             //enviarCorreo();
@@ -4038,8 +4038,8 @@ $(document).ready(function() {
     /**
      * evento que permite guardar las modificaciones de las ordenes en la ventana modal
      */
-    $("#btGuardarModOrdenes3").click(function() {  
-        if(confirm("Esta seguro(a) que desea guardar" + " los cambios realizados a la orden","Confirmación"))
+    $('#btGuardarModOrdenes3').click(function() {  
+        if(confirm('Esta seguro(a) que desea guardar' + ' los cambios realizados a la orden','Confirmación'))
         {
             guardarModOrdenes2('3');
             //enviarCorreo();
@@ -4049,16 +4049,16 @@ $(document).ready(function() {
     /**
      * evento que permite guardar las modificaciones de las ordenes en la ventana modal
      */
-    $("#btGuardarModOrdenes4").click(function() {  
-        if(confirm("Esta seguro(a) que desea guardar" + " los cambios realizados a la orden","Confirmación"))
+    $('#btGuardarModOrdenes4').click(function() {  
+        if(confirm('Esta seguro(a) que desea guardar' + ' los cambios realizados a la orden','Confirmación'))
         {
             guardarModOrdenes2('4');
             //enviarCorreo();
         }
     });
 
-    $("#selectEstado").change(function(){
-        if ($.trim($("#selectEstado").find(':selected').val()) == 'Cerrado') {
+    $('#selectEstado').change(function(){
+        if ($.trim($('#selectEstado').find(':selected').val()) == 'Cerrado') {
             $('#divTipoCerrado').css('display','block');
         }else{
             $('#divTipoCerrado').css('display','none');
@@ -4067,8 +4067,8 @@ $(document).ready(function() {
         }
     });
 
-    $("#selectTipoCerrado").change(function(){
-        if ($.trim($("#selectTipoCerrado").find(':selected').val()) == 'Realizado') {
+    $('#selectTipoCerrado').change(function(){
+        if ($.trim($('#selectTipoCerrado').find(':selected').val()) == 'Realizado') {
             $('#divOperario').css('display','block');
             $('#divSelectOperario').css('display','block');
         }else{

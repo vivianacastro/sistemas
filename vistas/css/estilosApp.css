@@ -214,6 +214,12 @@ caption{
     padding: 0.5% 0.5% 0.5%;
 }
 
+.btn-agregar-modal{
+    width: 18%;
+    text-align: center;
+    padding: 0.5% 0.5% 0.5%;
+}
+
 .btn-block{
     width: 100%;
     margin-left: auto;
@@ -232,7 +238,7 @@ caption{
     border: none;
 }
 
-.btn-agregar:disabled{
+.btn-agregar:disabled, .btn-agregar-modal:disabled{
     color: white;
     background-color: #e60013;
     border: none;

@@ -2,15 +2,15 @@
 $(document).ready(function() {
 
     var tablaNovedades = $('#tablaNovedades').DataTable({
-        "paging":           true,
-        "info":             true,
-        "bFilter":          true,
-        "bInfo":            true,
-        "bDestroy":         true,
-        "select":           true,
-        "responsive":       true,
-        "language": {
-            "url":          "js/plugins/Espanol.json",
+        'paging':           true,
+        'info':             true,
+        'bFilter':          true,
+        'bInfo':            true,
+        'bDestroy':         true,
+        'select':           true,
+        'responsive':       true,
+        'language': {
+            'url':          'js/plugins/Espanol.json',
         }
     });
 
@@ -26,13 +26,13 @@ $(document).ready(function() {
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=obtener_novedades",
-                data: "buscar=" + consulta,
-                dataType: "json",
+                type: 'POST',
+                url: 'index.php?action=obtener_novedades',
+                data: 'buscar=' + consulta,
+                dataType: 'json',
                 async: false,
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -45,7 +45,7 @@ $(document).ready(function() {
         }
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -57,19 +57,19 @@ $(document).ready(function() {
     function buscarNovedad(consulta){
 
         var saveData = [];
-        saveData["novedad"] = consulta;
+        saveData['novedad'] = consulta;
         var jObject = JSON.stringify(consulta);
 
         var dataResult;
 
         try {
             $.ajax({
-                type: "POST",
-                url: "index.php?action=buscar_novedades",
+                type: 'POST',
+                url: 'index.php?action=buscar_novedades',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
@@ -82,7 +82,7 @@ $(document).ready(function() {
         }
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     }
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
                         record.sistema]).draw(false);
                 }
             });
-            $("#divTablas").show();
+            $('#divTablas').show();
         }
     }
 
@@ -114,22 +114,22 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#modificarNovedad").click(function (e) {
+    $('#modificarNovedad').click(function (e) {
         try {
             var tablaNovedades = $('#tablaNovedades').DataTable();
 
             var elementoSeleccionado = tablaNovedades.rows('.selected').data();
 
-            $("#divDialogModificacion").modal("show");
+            $('#divDialogModificacion').modal('show');
 
             $.each(elementoSeleccionado, function(index, record) {
-                $("#novedad").val(record[0]);
-                $("#selectSistema").val(record[1]);
+                $('#novedad').val(record[0]);
+                $('#selectSistema').val(record[1]);
             });
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }
     });
 
@@ -137,15 +137,15 @@ $(document).ready(function() {
      * Se captura el evento cuando de da click en el boton modificar y se
      * realiza la operacion correspondiente.
      */    
-    $("#crearNovedad").click(function (e) {
+    $('#crearNovedad').click(function (e) {
         try {
-            $("#novedadNueva").val("");
-            $("#selectSistemaNueva").val("Sistema Eléctrico");
-            $("#divDialogCreacion").modal("show");
+            $('#novedadNueva').val('');
+            $('#selectSistemaNueva').val('Sistema Eléctrico');
+            $('#divDialogCreacion').modal('show');
         } 
         catch(ex) {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }         
     });
 
@@ -160,9 +160,9 @@ $(document).ready(function() {
 
             var elementoSeleccionado = tablaNovedades.rows('.selected').data();
             
-            if($.trim($("#novedad").val()) == ""){
-                alert("Error, la descripción de la novedad no puede estar vacía");
-                $("#novedad").focus();
+            if($.trim($('#novedad').val()) == ''){
+                alert('Error, la descripción de la novedad no puede estar vacía');
+                $('#novedad').focus();
             }else{
                 var saveData = {}, novedad;
                           
@@ -170,27 +170,27 @@ $(document).ready(function() {
                     novedad = record[0];
                 });
                 
-                saveData["novedad"] = novedad;
-                saveData["novedadNueva"] = $("#novedad").val();
-                saveData["sistema"] = $.trim($("#selectSistema").find(':selected').val());
+                saveData['novedad'] = novedad;
+                saveData['novedadNueva'] = $('#novedad').val();
+                saveData['sistema'] = $.trim($('#selectSistema').find(':selected').val());
 
                 var jObject = JSON.stringify(saveData);
 
                 //console.log(saveData);
 
                 $.ajax({
-                    type: "POST",
-                    url: "index.php?action=actualizar_novedad",
+                    type: 'POST',
+                    url: 'index.php?action=actualizar_novedad',
                     data: {jObject:  jObject},
-                    dataType: "json",
+                    dataType: 'json',
                     error: function(error){
-                        alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                        alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                         console.log(error.toString());
                         location.reload(true);
                     },
                     success: function(result){
                         if(result.value == true) {
-                            $("#divDialogModificacion").modal('toggle');
+                            $('#divDialogModificacion').modal('toggle');
                             alert(result.mensaje);
 
                             $.each(elementoSeleccionado, function(index, record){
@@ -212,7 +212,7 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }        
     }
 
@@ -224,26 +224,26 @@ $(document).ready(function() {
         try {           
             var saveData = {};
                           
-            saveData["novedad"] = $("#novedadNueva").val();
-            saveData["sistema"] = $.trim($("#selectSistemaNueva").find(':selected').val());
+            saveData['novedad'] = $('#novedadNueva').val();
+            saveData['sistema'] = $.trim($('#selectSistemaNueva').find(':selected').val());
 
             var jObject = JSON.stringify(saveData);
 
             console.log(saveData);
 
             $.ajax({
-                type: "POST",
-                url: "index.php?action=crear_novedad",
+                type: 'POST',
+                url: 'index.php?action=crear_novedad',
                 data: {jObject:  jObject},
-                dataType: "json",
+                dataType: 'json',
                 error: function(error){
-                    alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    alert('La sesión ha expirado, por favor ingrese nuevamente al sistema');
                     console.log(error.toString());
                     location.reload(true);
                 },
                 success: function(result){
                     if(result.value == true) {
-                        $("#divDialogCreacion").modal("toggle");
+                        $('#divDialogCreacion').modal('toggle');
                         alert(result.mensaje);
                         actualizarTablaNovedades();
                     }
@@ -256,15 +256,15 @@ $(document).ready(function() {
         catch(ex)
         {
             console.log(ex);
-            alert("Error");
+            alert('Error');
         }        
     }
 
     /**
      * evento que permite guardar las modificaciones de las novedades en la ventana modal
      */
-    $("#btGuardarModNovedad").click(function() {  
-        if(confirm("¿Esta seguro(a) que desea guardar" + " los cambios realizados a la novedad?","Confirmación"))
+    $('#btGuardarModNovedad').click(function() {  
+        if(confirm('¿Esta seguro(a) que desea guardar' + ' los cambios realizados a la novedad?','Confirmación'))
         {
             guardarModNovedad();
         }
@@ -273,8 +273,8 @@ $(document).ready(function() {
     /**
      * evento que permite guardar las modificaciones de las novedades en la ventana modal
      */
-    $("#btGuardarNovedad").click(function() {  
-        if(confirm("¿Esta seguro(a) que desea guardar" + " la novedad?","Confirmación"))
+    $('#btGuardarNovedad').click(function() {  
+        if(confirm('¿Esta seguro(a) que desea guardar' + ' la novedad?','Confirmación'))
         {
             guardarNovedad();
         }
