@@ -9,21 +9,23 @@
         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
         <div class='div_izquierda'><b>C&oacute;digo del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='text' name='id_edificio' id='id_edificio' value='' required/><br>
+        <input class='form-control formulario' type='text' name='id_edificio' id='id_edificio' value='' placeholder='Ej: 331' required/><br>
         <div class='div_izquierda'><b>Nombre del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='text' name='nombre_edificio' id='nombre_edificio' value='' required/><br>
+        <input class='form-control formulario' type='text' name='nombre_edificio' id='nombre_edificio' value='' placeholder='Ej: Ingenier&iacute;as' required/><br>
         <div class='div_izquierda'><b>N&uacute;mero de Pisos del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='number' name='pisos_edificio' id='pisos_edificio' value='' required/><br>
+        <input class='form-control formulario' type='number' name='pisos_edificio' id='pisos_edificio' value='' placeholder='Ej: 4' required/><br>
         <div class='div_izquierda'><b>¿El Edificio tiene terraza?<font color='red'>*</font></b></div>
         <label class='radio-inline'><input type='radio' name='terraza' value='true'>S&iacute;</label>
         <label class='radio-inline'><input type='radio' name='terraza' value='false'>No</label><br>
         <div class='div_izquierda'><b>¿El Edificio tiene sotano?<font color='red'>*</font></b></div>
         <label class='radio-inline'><input type='radio' name='sotano' value='true'>S&iacute;</label>
-        <label class='radio-inline'><input type='radio' name='sotano' value='false'>No</label><!--<br>
-        <div class='div_izquierda'><b>Planos Edificio</b></div>
-        <input class='form-control formulario' type='file' id='planos' multiple=true accept='.dwg,.dxf'><br>
-        <div class='div_izquierda'><b>Fotos Edificio</b></div>
-        <input class='form-control formulario' type='file' id='fotos' multiple=true accept='image/*'>-->
+        <label class='radio-inline'><input type='radio' name='sotano' value='false'>No</label><br>
+        <div class='div_izquierda'><b>Planos Edificio (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+        <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
+        <div class='div_izquierda'><b>Fotos Edificio (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
+        <br><div class='div_izquierda'><b>Indique la ubicación del edificio</b></div>
+        <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
         <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_edificio' id='guardar_edificio' value='Crear Edificio' title='Guardar información del Edificio'/>

@@ -1,7 +1,14 @@
 /**
 *funciones globales de la aplicacion 
 */
-$(document).ready(function () {});
+$(document).ready(function () {
+	setTimeout(function() {
+        $("#divDialogTimeOut").modal('show');
+    },600000);
+    $('#divDialogTimeOut').on('hidden.bs.modal', function () {
+    	location.reload();
+	});
+});
 
 /**
  * Función que muestra el texto como mensaje en el panel superior.

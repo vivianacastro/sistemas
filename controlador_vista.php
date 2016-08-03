@@ -208,7 +208,7 @@ class controlador_vista
             $html = $this->representar_datos_dinamica($html, $data);            
         }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, MENU_PRINCIPAL) == 0)) {
             $html = $this->conseguir_plantilla('template2', '');
-            $html = str_replace('{operaciones}', $this->conseguir_operaciones_add($modulo), $html);
+            $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
             $html = str_replace('{librerias_adicionales}', '', $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['form_menu_principal']);

@@ -22,7 +22,7 @@
     <link href='vistas/css/bootstrap.min.css' rel='stylesheet'/>
 
     <!-- Custom CSS -->
-    <link href='vistas/css/estilosApp' rel='stylesheet'/>
+    <link href='vistas/css/estilosApp?v=1.8' rel='stylesheet'/>
 
     <title>Sistema de Informaci&oacute;n del Mantenimiento Institucional</title>
 
@@ -53,7 +53,22 @@
                 <div class='navbar-brand' id='mensaje'>Sistema de Información del Mantenimiento Institucional</div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class='brand'><img src='vistas/images/idx-logouv.gif' alt='Matenimiento de la Universidad del Valle' title='Mantenimiento de la Universidad del Valle'/></div>
+            <div class='brand'>
+                <div class="form col-md-6">
+                    <img src='vistas/images/idx-logouv.gif' alt='Matenimiento de la Universidad del Valle' title='Mantenimiento de la Universidad del Valle'/>
+                </div>
+                <div class="form col-md-6">
+                    <div class="col-md-offset-6 form col-md-2">
+                    <a href="{CERRAR}"><span><img title="Información de Usuario" class="img_boton_barra" src="vistas/images/user.png"></img></span></a>
+                    </div>
+                    <div class="form col-md-2">
+                    <a href="{MENU_PRINCIPAL}"><span><img title="Ir a Home" class="img_boton_barra" src="vistas/images/home.png"></img></span></a>
+                    </div>
+                    <div class="form col-md-2">
+                    <a href="{CERRAR}"><span><img title="Cerrar Sesión" class="img_boton_barra" src="vistas/images/cerrar_sesion.png"></img></span></a>
+                    </div>
+                </div><br>
+            </div>
             <div class='address-bar'>Sección de Sostenibilidad y Mantenimiento</div><br>
             <div id='divMensaje' class='nav navbar-nav'>
                 {mensaje}
@@ -67,6 +82,16 @@
         </div>
         <!-- /.container -->
     </nav>
+
+    <div class='modal fade' role='dialog' id='divDialogTimeOut'> <!-- Para evitar que se cierre añadir: data-backdrop='static' data-keyboard='false'-->
+        <div class='modal-dialog' id='divTimeOut'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                   <h3><center>Timeout<br>Recargue la página por favor.</center></h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
     
     <!-- /.container -->
@@ -115,7 +140,10 @@
     <script src='controlador/plugins/bootstrap.min.js'></script>
 
     <!-- Librerias Adicionales -->
-    <script src='controlador/global_functions?v=1.0.js'></script>
+    <script src='controlador/global_functions.js'></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8xHemccOoUuS7rj641PFNikSJw9kkthY&libraries=drawing" defer></script>
+    
     {librerias_adicionales}
 
 </body>

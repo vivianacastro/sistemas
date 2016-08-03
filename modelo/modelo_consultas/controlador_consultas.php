@@ -73,6 +73,31 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar los campus
+     * almacenados en el sistema.
+     */
+    public function ubicacion_campus() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'nombre_campus' => $valor['nombre'],
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }        
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
      * Función que permite consultar los edificios de un campus
      * almacenados en el sistema.
      */

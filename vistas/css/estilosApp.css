@@ -209,7 +209,7 @@ caption{
 }
 
 .btn-agregar{
-    width: 10%;
+    width: 12%;
     text-align: center;
     padding: 0.5% 0.5% 0.5%;
 }
@@ -312,6 +312,10 @@ caption{
     margin-right: auto;
 }
 
+.img_boton_barra{
+    
+}
+
 .boton{
     font-weight: bold;
     color: #e60013;
@@ -322,6 +326,12 @@ caption{
     filter: alpha(opacity=70); /* For IE8 and earlier */
 }
 
+.img_boton_barra:hover{
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+
 .boton:hover{
     color: #e15661;
     font-size 100%;
@@ -329,6 +339,11 @@ caption{
 
 .form_button{
     text-align: center;
+}
+
+.mapa{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input[type=date]::-webkit-inner-spin-button {
@@ -389,6 +404,27 @@ footer {
 footer p {
     margin: 0;
     padding: 50px 0;
+}
+
+@media screen and (min-width:1200px) {
+    .mapa{
+        width:800px;
+        height:300px;
+    }
+}
+
+@media screen and (max-width:1200px) and (min-width: 992px) {
+    .mapa{
+        width:655px;
+        height:245px;
+    }
+}
+
+@media screen and (max-width:992px) and (min-width: 768px) {
+    .mapa{
+        width:500px;
+        height:187px;
+    }
 }
 
 @media screen and (min-width:768px) {
@@ -470,6 +506,10 @@ footer p {
 
     .img_boton{
         width: 35%;
+    }
+
+    .img_boton_barra{
+        width: 70%;
     }
 
     .img_boton_menu{
@@ -639,6 +679,10 @@ footer p {
     .img_boton{
         width: 25%;
     }
+
+    .img_boton_barra{
+        width: 50%;
+    }
 }
 
 @media screen and (max-width:767px) {
@@ -666,6 +710,11 @@ footer p {
 
     .img_boton{
         width: 20%;
+    }
+
+    .mapa{
+        width:500px;
+        height:187px;
     }
 
     #divMensaje{

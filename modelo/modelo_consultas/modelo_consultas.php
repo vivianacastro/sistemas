@@ -71,6 +71,30 @@ class modelo_consultas
     }
 
     /**
+     * funcion que permite buscar los campus que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function ubicacionCampus($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $sql = "SELECT nombre,lat,lng from campus WHERE sede = '".$nombre_sede."' and id = '".$nombre_campus."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación del Campus seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * funcion que permite buscar los edificios que se han creado en el sistema.
      * @return metadata con elresultado de la busqueda.
      */
