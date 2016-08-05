@@ -312,10 +312,6 @@ caption{
     margin-right: auto;
 }
 
-.img_boton_barra{
-    
-}
-
 .boton{
     font-weight: bold;
     color: #e60013;
@@ -424,6 +420,23 @@ footer p {
     .mapa{
         width:500px;
         height:187px;
+    }
+
+    .img_boton_barra{
+        width: 8% !important;
+    }
+
+    #divBarra{
+        display: table-cell;
+    }
+
+    #divBarra2{
+        display: table-cell;
+        text-align: right;
+    }
+
+    #divIcono{
+        display: inline;
     }
 }
 
@@ -582,6 +595,10 @@ footer p {
         letter-spacing: 0.3px;
         padding-left:25%;
     }
+
+    #menu{
+        display: inline-table;
+    }
     
     #navMenu li ul {
         position: absolute;
@@ -715,6 +732,19 @@ footer p {
     .mapa{
         width:500px;
         height:187px;
+    }
+
+    .img_boton_barra{
+        width: 5%;
+    }
+
+    #divBarra{
+        text-align: right;
+        display: inline-block;
+    }
+
+    #divIcono{
+        display: inline;
     }
 
     #divMensaje{

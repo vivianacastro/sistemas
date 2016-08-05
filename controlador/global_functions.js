@@ -8,6 +8,11 @@ $(document).ready(function () {
     $('#divDialogTimeOut').on('hidden.bs.modal', function () {
     	location.reload();
 	});
+
+	var URLactual = window.location;
+    if(URLactual['href'].indexOf('menu_principal') >= 0){
+        $('#menuMoviles').hide();
+    }
 });
 
 /**
