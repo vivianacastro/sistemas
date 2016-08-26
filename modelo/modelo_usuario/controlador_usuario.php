@@ -3,28 +3,91 @@
 class controlador_usuario {
 
     /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function crear_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Usuario',
+        );
+        $v = new controlador_vista();
+        $v->retornar_vista(USUARIO, USUARIO, CREAR_USUARIO, $data);
+    }
+
+    /**
+    * Función que despliega el panel que permite recuperar la contraseña de un usuario
+    **/
+    public function olvido_contrasenia() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Reestablecer Contraseña',
+        );
+        $v = new controlador_vista();
+        $v->retornar_vista(USUARIO, USUARIO, OLVIDO_CONTRASENIA, $data);
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function informacion_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Información de Usuario',
+        );
+        $v = new controlador_vista();
+        $v->retornar_vista(USUARIO, USUARIO, INFORMACION_USUARIO, $data);
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function modificar_informacion_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Modificar Información de Usuario',
+        );
+        $v = new controlador_vista();
+        $v->retornar_vista(USUARIO, USUARIO, MODIFICAR_INFORMACION_USUARIO, $data);
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function cambiar_contrasenia() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Cambiar Contraseña',
+        );
+        $v = new controlador_vista();
+        $v->retornar_vista(USUARIO, USUARIO, CAMBIAR_CONTRASENIA, $data);
+    }
+
+    /**
      * Función que permite iniciar una sesion por un usuario, ademas esta
      * función se encarga de desplegar el panel de logeo o el mostrar la pagina
      * de inicio de la aplicación web.
      */    
     public function iniciar_sesion() {
-        session_start();
-        
+        session_start();        
         //instaciar el objeto de la clase Modelo
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);  
-        
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $v = new Controlador_vista();
-        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
             if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
                 $_SESSION["autorizado"] = true;
                 session_regenerate_id();
                 $_SESSION["userid"] = session_id();
                 $_SESSION["login"] = $infoResult["login"];
                 $_SESSION["perfil"] = $infoResult["perfil"];
-                $_SESSION["nombre_usuario"] = $infoResult["nombre_usuario"];
+                $_SESSION["correo"] = $infoResult["correo"];
+                $_SESSION["telefono"] = $infoResult["telefono"];
+                $_SESSION["extension"] = $infoResult["extension"];
+                $_SESSION["nombre_usuario"] = ucwords($infoResult["nombre_usuario"]);
                 $_SESSION["modulo_planta"] = $infoResult["modulo_planta"];
                 $_SESSION["modulo_inventario"] = $infoResult["modulo_inventario"];
                 $_SESSION["modulo_aires"] = $infoResult["modulo_aires"];
@@ -33,24 +96,11 @@ class controlador_usuario {
                 $_SESSION["creacion_aires"] = $infoResult["creacion_aires"];
                 $_SESSION["id_db_user"] = $infoResult["id"];
                 $_SESSION["ultimoAcceso"] = time();
-                
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
-
                 $m->actualizarUltimoAcceso($_SESSION["login"]);
-
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
-
-                /*if($_SESSION["modulo_planta"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
-                }if($_SESSION["modulo_inventario"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST_DIA, $data);
-                }if($_SESSION["modulo_aires"]){
-                    $v->retornar_vista($_SESSION["perfil"],CONSULTAS, OPERATION_LIST, $data);
-                }else{
-                    $v->retornar_vista($_SESSION["perfil"],REGISTROS, OPERATION_SET, $data);
-                }*/
             }else{
                 $data = array(
                     'mensaje' => 'Intentelo de nuevo. Puede que haya '
@@ -64,7 +114,6 @@ class controlador_usuario {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
-
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
             }else {
                 $this->cerrar_sesion();
@@ -77,221 +126,170 @@ class controlador_usuario {
      * Función que permite cerrar una sesion de un usuario.
     */
     public function cerrar_sesion() {
-        session_start();
-        
+        session_start();        
         //eliminar informacion almacenada de la sesion
         session_unset();
         //finalizar sesion
-        session_destroy ();
-        
+        session_destroy ();        
         $data = array(
             'mensaje' => 'Bienvenido  '. date('d-m-y  h:i A'),
-        );
-        
+        );        
         $v = new Controlador_vista();
         $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
     }
 
-
-
-
-
-
-
-    
     /**
-     * Función que despliega el panel que permite crear, visualizar y modificar los 
-     * usuarios con acceso al sistema.
-     */     
-    public function administrar_usuario_autorizado() {
+     * Función que permite crear un usuario en el sistema
+    **/
+    public function guardar_usuario() {
         $GLOBALS['mensaje'] = "";
-        $data = array(
-            'mensaje' => 'Administrar usuarios del sistema',
-        );  
-        
-        $v = new Controlador_vista();
-        $v->retornar_vista($_SESSION["perfil"],USUARIO, OPERATION_ADM_SUPERV, $data);        
-    }
-    
-    /**
-     * Función que permite crear un usuario con acceso al sistema.
-     */     
-    public function crear_usuario_autorizado_para_adm_sistema() {
-        $GLOBALS['mensaje'] = "";
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            
-            if($m->validarDatos($info['nombre_usuario'], $info['login'], $info['password'], $info['perfil']) and $m->comprobarEmailUsuario($info["correo"]))
-            {
-                $m->insertarUsuarioAutorizado($info['nombre_usuario'], $info['login'], $info['password'], $info['perfil'], $info["correo"], $info["telefono"],$info["extension"]);
-                
-                $result = array(
-                    'value' => true,
-                );                
-            } else {
-                $result = array(
-                    'value' => false,
-                );                
+            $verificar = $m->verificarUsuario($info['login']);
+            if($verificar){
+                $m->guardarUsuario($info['nombre'],$info['login'],$info['correo'],$info['telefono'],$info['extension'],$info['contrasenia'],$info['mod_planta'],$info['mod_inventario'],
+                    $info['mod_aires'],$info['creacion_planta'],$info['creacion_inventario'],$info['creacion_aires'],$info['perfil']);
             }
         }
-        
         $result['mensaje'] = $GLOBALS['mensaje'];
-        
-        echo json_encode($result);   
-    }
-    
-    /**
-     * Función que permite cambiar los datos  de un 
-     * usuario con acceso al sistema, ademas esta función es la 
-     * encargada de desplegar el panel la realizar la operación de cambio de 
-     * contraseña o password.
-     */    
-    public function cambiar_datos() {
-        $GLOBALS['mensaje'] = "";
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        $v = new Controlador_vista();
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' & isset($_SESSION['login'])
-                & $_SESSION["autorizado"]) {
-            
-            $info = json_decode($_POST['jObject'], true);
-            $rslt = $m->modificarDatosUsuarioAutorizado($_SESSION["login"], $info['act_password'], $info['password'], $info['correo'], $info['telefono'], $info['extension']);
-                    
-            if($rslt) {
-                $result = array(
-                    'value' => true,
-                );
-            } else {
-                $result = array(
-                    'value' => false,
-                );                
-            }
-            
-            $result['mensaje'] = $GLOBALS['mensaje'];
-
-            echo json_encode($result);  
-        } else {
-            $data = array(
-                'mensaje' => 'Actualizar datos del usuario',
-            );            
-            $v->retornar_vista($_SESSION["perfil"],USUARIO, OPERATION_EDIT_DATA, $data);
-        }       
-    }
-    
-    /**
-     * Función que permite buscar un usuario con acceso al sistema.
-     */    
-    public function buscar_autorizados_manejar_sistema() {
-        $GLOBALS['mensaje'] = "";     
-
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = $m->dameUsuarioAutorizado($_POST['buscar']);
-        }
-        
-        $data['mensaje'] = $GLOBALS['mensaje'];
-        
-        echo json_encode($data);
-    }
-
-    /**
-     * Función que permite buscar un usuario con acceso al sistema.
-     */    
-    public function buscarUsuario() {
-        $GLOBALS['mensaje'] = "";     
-
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $data = $m->dameUsuarioAutorizadoNombre($_POST['buscar']);
-        }
-        
-        $data['mensaje'] = $GLOBALS['mensaje'];
-        
-        echo json_encode($data);
-    }     
-    
-    /**
-     * Función que permite eliminar uno o varios usuario con acceso 
-     * al sistema.
-     */    
-    public function eliminar_usuario_autorizado_adm_sistema() {
-        $GLOBALS['mensaje'] = "";
-        
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-            $data = array();
-            $info = json_decode($_POST['jObject'], true);
-
-            if($_SESSION['perfil'] == 'admin') {
-                for ($i = 0; $i < sizeof($info); $i++) {
-                    $respuesta = $m->eliminarUsuarioAutorizado($info[$i]);
-                }
-            }
-            
-            if($respuesta) {
-                $result = array(
-                    'value' => true,
-                );
-            } else {
-                $result = array(
-                    'value' => false,
-                );                
-            }
-        }  
-        
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        
-        echo json_encode($result);        
-    }
-    
-    /**
-     * Función que permite modificar el perfil o privilegio de un usuario 
-     * con acceso al sistema de sistema.
-     */    
-    public function modificar_perfil_usuario_autorizado_adm_sistema() {
-        $GLOBALS['mensaje'] = "";
-        
-        $m = new Modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-            if($_SESSION['perfil'] == 'admin') {
-                $info = json_decode($_POST['jObject'], true);
-                $rslt = $m->modificarPerfilUsuarioAutorizado($info['login'], $info['perfil']);
-            }
-                    
-            if($rslt) {
-                $result = array(
-                    'value' => true,
-                );
-            }else {
-                $result = array(
-                    'value' => false,
-                );                
-            }
-        }  
-        
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        
+        $result['verificar'] = $verificar;
         echo json_encode($result);
     }
 
-    
-    /*-------------------------------Operaciones del Index-----------------------------------------*/
+    /**
+     * Función que permite modificar la información de un usuario
+    **/
+    public function modificar_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = !$m->verificarUsuario($info['login']);
+            if($verificar){
+                $m->modificarUsuario($info['nombre'],$info['login'],$info['correo'],$info['telefono'],$info['extension']);
+                if($m){
+                    $_SESSION["nombre_usuario"] = ucwords($info["nombre"]);
+                    $_SESSION["correo"] = $info["correo"];
+                    $_SESSION["telefono"] = $info["telefono"];
+                    $_SESSION["extension"] = $info["extension"];                    
+                }
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite modificar la contraseña de un usuario
+    **/
+    public function modificar_contrasenia() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarContrasena($_SESSION['login'],$info['contrasenia_actual']);
+            if ($verificar) {
+                $verificar = $m->modificarContrasenia($_SESSION['login'],$info['contrasenia_nueva']);    
+            }else{
+                $GLOBALS['mensaje'] = "ERROR. Contraseña incorrecta";
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite reestablecer la contraseña de un usuario
+    **/
+    public function reestablecer_contrasenia() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = !$m->verificarCorreo($info['correo']);
+            if($verificar){
+                $m->reestablecerContrasenia($info['correo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite verificar si un login ya esta asignado
+    **/
+    public function verificar_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarUsuario($info['login']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite verificar si un correo ya esta registrado
+    **/
+    public function verificar_correo() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            if(strcmp(htmlspecialchars(trim($info['correo'])),$_SESSION["correo"]) != 0){
+                $verificar = $m->verificarCorreo($info['correo']);
+            }else{
+                $verificar = true;
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite verificar si un correo ya esta registrado
+    **/
+    public function obtener_informacion_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result['login'] = $_SESSION["login"];
+            $result['nombre_usuario'] = $_SESSION["nombre_usuario"];
+            $result['telefono'] = $_SESSION["telefono"];
+            $result['extension'] = $_SESSION["extension"];
+            $result['correo'] = $_SESSION["correo"];
+            /*$arrayAux = array(
+                'login' => $_SESSION["login"],
+                'nombre_usuario' => $_SESSION["nombre_usuario"],
+                'telefono' => $_SESSION["telefono"],
+                'extension' => $_SESSION["extension"],
+                'correo' => $_SESSION["correo"],
+                );
+            array_push($result, $arrayAux);*/
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
     
     
     /**
@@ -299,12 +297,10 @@ class controlador_usuario {
     */    
     public function check() {
         session_start();
-        if(isset($_SESSION['userid']) & $_SESSION["autorizado"]) {
-            
+        if(isset($_SESSION['userid']) & $_SESSION["autorizado"]) {            
             $fechaGuardada = $_SESSION["ultimoAcceso"]; 
             $ahora = time(); 
-            $tiempo_transcurrido = $ahora-$fechaGuardada;
- 
+            $tiempo_transcurrido = $ahora-$fechaGuardada; 
             if($tiempo_transcurrido >= T_SEGUNDOS_INACTIVIDAD_PERMITIDO) { 
                 session_unset();
                 session_destroy();

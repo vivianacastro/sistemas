@@ -1,7 +1,4 @@
 <?php
-//Librerías para el envío de mail
-include_once('class.phpmailer.php');
-include_once('class.smtp.php');
 /**
  * clase Modelo del modulo
  */
@@ -177,8 +174,8 @@ class modelo_creacion {
         $sede_espacio_padre = htmlspecialchars(trim($sede_espacio_padre));
         $campus_espacio_padre = htmlspecialchars(trim($campus_espacio_padre));
         $edificio_espacio_padre = htmlspecialchars(trim($edificio_espacio_padre));
-        $campos = "id,uso_espacio,id_edificio,id_campus,usuario_crea,piso_edificio,id_sede,lat,lng";
-        $valores = "'".$numero_espacio."','".$uso_espacio."','".$nombre_edificio."','".$nombre_campus."','".$_SESSION["login"]."','".$piso."','".$nombre_sede."','".$lat."','".$lng."'";
+        $campos = "id,uso_espacio,id_edificio,id_campus,usuario_crea,piso_edificio,id_sede";
+        $valores = "'".$numero_espacio."','".$uso_espacio."','".$nombre_edificio."','".$nombre_campus."','".$_SESSION["login"]."','".$piso."','".$nombre_sede."'";
         if (strcasecmp($material_pared,'') != 0) {
             $campos = $campos.",ancho_pared,alto_pared,id_material_pared";
             $valores = $valores.",'".$ancho_pared."','".$alto_pared."','".$material_pared."'";

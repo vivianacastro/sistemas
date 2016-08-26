@@ -23,7 +23,18 @@ $map = array(
     //Acciones usuario
     'iniciar_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'iniciar_sesion'),
     'cerrar_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'cerrar_sesion'),
-    'crear_usuario_autorizado_para_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario_autorizado_para_adm_sistema'),
+    'informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'informacion_usuario'),
+    'obtener_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'obtener_informacion_usuario'),
+    'crear_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario'),
+    'guardar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'guardar_usuario'),
+    'verificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_usuario'),
+    'verificar_correo' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_correo'),
+    'olvido_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'olvido_contrasenia'),
+    'reestablecer_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'reestablecer_contrasenia'),
+    'modificar_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_informacion_usuario'),
+    'cambiar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'cambiar_contrasenia'),
+    'modificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_usuario'),
+    'modificar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_contrasenia'),
 
     //Acciones Página Principal
     'menu_principal' => array('controlador' =>'controlador_usuario', 'action' =>'iniciar_sesion'),
@@ -63,51 +74,46 @@ $map = array(
     //Acciones Módulo Inventario
     
     //Acciones Módulo Aires Acondicionados
-
-    'administrar_autorizado_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'administrar_usuario_autorizado'),
-    'buscar_autorizados_manejar_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'buscar_autorizados_manejar_sistema'),
-    'eliminar_usuario_autorizado_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'eliminar_usuario_autorizado_adm_sistema'),
-    'modificar_perfil_usuario_autorizado_adm_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_perfil_usuario_autorizado_adm_sistema'),
-    'buscar_usuario_sistema' => array('controlador' =>'controlador_usuario', 'action' =>'buscarUsuario'),
-    'cambiar_datos' => array('controlador' =>'controlador_usuario', 'action' =>'cambiar_datos'),
 );
 
 // Parseo de la ruta
-if (isset($_GET['action']))
-{
-    if (isset($map[$_GET['action']]))
-    {
+if (isset($_GET['action'])){
+    if (isset($map[$_GET['action']])){
         $ruta = $_GET['action'];
-    }
-    else
-    {
+    }else{
         header('Status: 404 Not Found');
         echo '<html><body><h1>Error 404: No existe la ruta <i>' .
                 $_GET['action'] .
                 '</p></body></html>';
         exit;
     }
-}
-else
-{
+}else{
     $ruta = 'iniciar_sesion';
 }
 
 // Checkear el acceso del usuario
-if(!call_user_func(array(new controlador_usuario, 'check')))
-{
-    $ruta = 'iniciar_sesion';
+if(!call_user_func(array(new controlador_usuario, 'check'))){
+    if (strcmp($_GET['action'],'crear_usuario') == 0){
+        $ruta = 'crear_usuario';
+    }elseif(strcmp($_GET['action'],'verificar_usuario') == 0){
+        $ruta = 'verificar_usuario';
+    }elseif(strcmp($_GET['action'],'verificar_correo') == 0){
+        $ruta = 'verificar_correo';
+    }elseif(strcmp($_GET['action'],'guardar_usuario') == 0){
+        $ruta = 'guardar_usuario';
+    }elseif(strcmp($_GET['action'],'olvido_contrasenia') == 0){
+        $ruta = 'olvido_contrasenia';
+    }elseif(strcmp($_GET['action'],'reestablecer_contrasenia') == 0){
+        $ruta = 'reestablecer_contrasenia';
+    }else{
+        $ruta = 'iniciar_sesion';
+    }
 }
-
 $controlador = $map[$ruta];
-
 // Ejecución del controlador asociado a la ruta
-if (method_exists($controlador['controlador'],$controlador['action']))
-{   
+if (method_exists($controlador['controlador'],$controlador['action'])){   
     call_user_func(array(new $controlador['controlador'], $controlador['action']));
-}
-else
-{
+}else{
     header('Status: 404 Not Found');
     echo '<html><body><h1>Error 404: El controlador <i>' .
             $controlador['controlador'] .

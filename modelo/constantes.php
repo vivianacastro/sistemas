@@ -16,8 +16,12 @@ const PASS = 'ManteUnivalle';
 
 const INICIAR_SESION = 'iniciar_sesion';
 const CERRAR_SESION = 'cerrar_sesion';
+const CREAR_USUARIO = 'crear_usuario';
 const OLVIDO_CONTRASENIA = 'olvido_contrasenia';
 const MENU_PRINCIPAL = 'menu_principal';
+const INFORMACION_USUARIO = 'informacion_usuario';
+const MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
+const CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
 
 const MOD_PLANTA = 'mod_planta';
 const MOD_PLANTA = 'mod_inventario';
@@ -27,6 +31,9 @@ const OPERATION_MOD_PLANTA = 'modulo_planta';
 const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
 const OPERATION_MOD_AIRES = 'modulo_aires';
 const OPERATION_MOD_USUARIO = 'modificar_usuario';
+
+const OPERATION_MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
+const OPERATION_CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
 
 const OPERATION_CREAR_SEDE = 'crear_sede';
 const OPERATION_CREAR_CAMPUS = 'crear_campus';

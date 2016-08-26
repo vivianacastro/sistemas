@@ -20,39 +20,40 @@ class controlador_vista
         $diccionario = array(    
             'links_comunes'=>array(
                 'MENU_PRINCIPAL'=>'index.php?action='.MENU_PRINCIPAL,
+                'INFORMACION_USUARIO'=>'index.php?action='.INFORMACION_USUARIO,
                 'CERRAR'=>'index.php?action='.CERRAR_SESION,
-                ),       
-            'links_menu_principal'=>array(
+            ),'links_inicio'=>array(
+                'CREAR_USUARIO'=>'index.php?action='.CREAR_USUARIO,
+                'OLVIDO_CONTRASENIA'=>'index.php?action='.OLVIDO_CONTRASENIA,
+            ),'links_menu_principal'=>array(
                 'CERRAR'=>'index.php?action='.CERRAR_SESION,
-                ),
-            'links_planta'=>array(
+            ),'links_planta'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'CREAR_CAMPUS'=>'index.php?action='.OPERATION_CREAR_CAMPUS,
                 'CREAR_EDIFICIO'=>'index.php?action='.OPERATION_CREAR_EDIFICIO,
                 'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_ESPACIO,
                 'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_TIPO_MATERIAL,
                 'CREAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CREAR_TIPO_OBJETO,
-                ),
-            'links_inventario'=>array(
+            ),'links_inventario'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                ),
-            'links_aires'=>array(
+            ),'links_aires'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                ),
-            'form_index'=>array(
+            ),'links_usuario'=>array(
+                'MODIFICAR_INFORMACION_USUARIO'=>'index.php?action='.OPERATION_MODIFICAR_INFORMACION_USUARIO,
+                'CAMBIAR_CONTRASENIA'=>'index.php?action='.OPERATION_CAMBIAR_CONTRASENIA,
+            ),'form_index'=>array(
                 'FORM_INICIAR_SESION'=>'index.php?action='.INICIAR_SESION,
                 'FORM_NEW_USER'=>'index.php?action='.OPERATION_NEW_USER,
                 'FORM_MOD_PLANTA'=>'index.php?action='.OPERATION_MOD_PLANTA,
                 'FORM_MOD_INVENTARIO'=>'index.php?action='.OPERATION_MOD_INVENTARIO,
                 'FORM_MOD_AIRES'=>'index.php?action='.OPERATION_MOD_AIRES,
                 'FORM_MOD_USUARIO'=>'index.php?action='.OPERATION_MOD_USUARIO,
-                ),
-            'form_menu_principal'=>array(
+            ),'form_menu_principal'=>array(
                 'FORM_MOD_PLANTA'=>'index.php?action='.OPERATION_MOD_PLANTA,
                 'FORM_MOD_INVENTARIO'=>'index.php?action='.OPERATION_MOD_INVENTARIO,
                 'FORM_MOD_AIRES'=>'index.php?action='.OPERATION_MOD_AIRES,
                 'FORM_MOD_USUARIO'=>'index.php?action='.OPERATION_MOD_USUARIO,
-                ),
+            ),
         );        
     }
     
@@ -75,9 +76,7 @@ class controlador_vista
      * por parte del usuario y el módulo al que pertenece.
      * @return string
     **/
-    function conseguir_operaciones_add($modulo)
-    {
-
+    function conseguir_operaciones_add($modulo){
         if(strcmp($modulo,MOD_PLANTA) == 0){
             if(strcmp($_SESSION['creacion_planta'],'true') == 0){
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_planta.html';
@@ -97,11 +96,9 @@ class controlador_vista
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_aires.html';
             }
         }else{
-            $file = dirname(__FILE__).'/vistas/vistas_menu/'.$modulo.'.html';
-        }
-        
-        $template = file_get_contents($file);
-        
+            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_'.$modulo.'.html';
+        }        
+        $template = file_get_contents($file);        
         return $template;
     }
 
@@ -114,23 +111,19 @@ class controlador_vista
      * permite realizar la vista que se va a visualizar.
      * @return string.
     **/
-    function conseguir_plantilla($operacion='registros', $accion='')
-    {        
-        if(strcmp($operacion, 'template1') == 0 || strcmp($operacion, 'template2') == 0 )
-        {
+    function conseguir_plantilla($operacion='registros', $accion=''){        
+        if(strcmp($operacion, 'template1') == 0 || strcmp($operacion, 'template2') == 0 || strcmp($operacion, 'template3') == 0 ){
             $file = dirname(__FILE__).'/vistas/'.$operacion.'.html';
         }
         elseif(strcmp($accion,"menu_principal") == 0){
 
             //Menú principal para el usuario con acceso a todos los módulos de la aplicación
             if (strcmp($_SESSION["perfil"],"admin") == 0) {
-                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'_admin.html';
+                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_admin.html';
             }
             //Menú principal para el usuario con acceso a todos los módulos de la aplicación
             elseif (strcmp($_SESSION["modulo_planta"],"true") == 0 && strcmp($_SESSION["modulo_inventario"],"true") == 0 && strcmp($_SESSION["modulo_aires"],"true") == 0) {
-                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'_todos.html';
+                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_todos.html';
             }
             //Menú principal para el usuario con acceso a 2 módulos de la aplicación
             elseif(strcmp($_SESSION["modulo_planta"],"true") == 0 && strcmp($_SESSION["modulo_inventario"],"true") == 0){
@@ -145,22 +138,17 @@ class controlador_vista
             }
             //Menú principal para el usuario con acceso a 1 módulo de la aplicación
             elseif(strcmp($_SESSION["modulo_planta"],"true") == 0){
-                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'_1.html';
+                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_1.html';
             }elseif(strcmp($_SESSION["modulo_inventario"],"true") == 0){
-                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'_2.html';
+                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_2.html';
             }elseif(strcmp($_SESSION["modulo_aires"],"true") == 0){
-                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'_3.html';
+                $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_3.html';
             }
         }
-        else
-        {
-            $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'
-                    .$accion.'.html';
+        else{
+            $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'.html';
         }
-                
+
         $template = file_get_contents($file);
 
         return $template;
@@ -197,19 +185,27 @@ class controlador_vista
      * reemplazar dinámicamente. 
     **/
     function retornar_vista($modulo, $operacion, $accion, $data=array()) {
-        
-        global $diccionario;
-        
-        if(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, INICIAR_SESION) == 0 || strcmp($accion, OLVIDO_CONTRASENIA) == 0)){
+        global $diccionario;        
+        if(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, INICIAR_SESION) == 0)){
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = str_replace('{librerias_adicionales}', '', $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['form_index']);
-            $html = $this->representar_datos_dinamica($html, $data);            
+            $html = $this->representar_datos_dinamica($html, $diccionario['links_inicio']);
+            $html = $this->representar_datos_dinamica($html, $data);
+        }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, CREAR_USUARIO) == 0 || strcmp($accion, OLVIDO_CONTRASENIA) == 0)) {
+            $html = $this->conseguir_plantilla('template3', '');
+            $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
+            $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
+            $html = $this->representar_datos_dinamica($html, $diccionario['form_menu_principal']);
+            $html = $this->representar_datos_dinamica($html, $diccionario['links_comunes']);
+            $html = $this->representar_datos_dinamica($html, $diccionario['links_menu_principal']);
+            $html = $this->representar_datos_dinamica($html, $data);
         }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, MENU_PRINCIPAL) == 0)) {
             $html = $this->conseguir_plantilla('template2', '');
             $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
-            $html = str_replace('{librerias_adicionales}', '', $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['form_menu_principal']);
             $html = $this->representar_datos_dinamica($html, $diccionario['links_comunes']);
@@ -227,6 +223,8 @@ class controlador_vista
                 $html = $this->representar_datos_dinamica($html, $diccionario['links_inventario']);
             }elseif (strcmp($modulo, MOD_AIRES) == 0) {
                 $html = $this->representar_datos_dinamica($html, $diccionario['links_aires']);
+            }elseif (strcmp($modulo, USUARIO) == 0) {
+                $html = $this->representar_datos_dinamica($html, $diccionario['links_usuario']);
             }
             $html = $this->representar_datos_dinamica($html, $data);
         }

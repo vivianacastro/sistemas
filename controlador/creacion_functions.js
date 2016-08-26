@@ -260,16 +260,17 @@ $(document).ready(function() {
                     }*/
                     if(data.verificar){
                         $('#divDialogCreacion').modal('hide');
-                        /*$("#nombre_sede").val("seleccionar");
+                        $("#nombre_sede").val("");
                         $("#nombre_campus").empty();
-                        $("#id_edificio").val("");
-                        $("#nombre_edificio").val("");
-                        $("#pisos_edificio").val("");
-                        $('input[name=terraza]').attr('checked',false);
-                        $('input[name=sotano]').attr('checked',false);*/
-
-                        /*planos.value = "";
-                        fotos.value = "";*/
+                        $("#nombre_edificio").empty();
+                        $("#pisos").empty();
+                        $("#id_espacio").val("");
+                        $("#uso_espacio").val("");
+                        $('input[name=tiene_espacio_padre]').attr('checked',false);
+                        var planos = document.getElementById("planos[]");
+                        var fotos = document.getElementById("fotos[]");
+                        planos.value = "";
+                        fotos.value = "";
                     }
                 }
             });
@@ -1094,7 +1095,7 @@ $(document).ready(function() {
                             alert(mensaje);
                         }
                         if (resultado.verificar) {
-                            $("#nombre_sede").val("seleccionar");
+                            $("#nombre_sede").val("");
                             $("#nombre_campus").val("");
                             planos.value = "";
                             fotos.value = "";
@@ -1235,7 +1236,7 @@ $(document).ready(function() {
                             alert(mensaje);
                         }
                         if(resultado.verificar){
-                            $("#nombre_sede").val("seleccionar");
+                            $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
                             $("#id_edificio").val("");
                             $("#nombre_edificio").val("");
@@ -1282,6 +1283,7 @@ $(document).ready(function() {
                 var nombreEdificio = $("#nombre_edificio").val();
                 var piso = $("#pisos").val();
                 var numeroEspacio = $("#id_espacio").val();
+                numeroEspacio = numeroEspacio.split(".");
                 var usoEspacio = $("#uso_espacio").val();
                 var alturaPared = $("#altura_pared").val();
                 var anchoPared = $("#ancho_pared").val();
@@ -1294,6 +1296,7 @@ $(document).ready(function() {
                 var materialPiso = $("#material_piso").val();
                 var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
                 var numero_espacio_padre = $("#espacio_padre").val();
+                var numeroEspacios = [];
                 var tipoIluminacion = [];
                 var cantidadIluminacion = [];
                 var tipoSuministroEnergia = [];
@@ -1324,7 +1327,7 @@ $(document).ready(function() {
                 }
                 var espacioExistente = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio);
                 console.log(espacioExistente);
-                if (!espacioExistente.verificar || espacioPadre == 'true') {
+                if (!espacioExistente.verificar) {
                     alert("ERROR. El número de espacio ya esta registrado en el sistema");
                     $("#id_espacio").focus();
                 }else{
@@ -1392,6 +1395,8 @@ $(document).ready(function() {
                             tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
                             cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
                         }
+                    }for(var i=0;i<=numeroEspacio.length;i++){
+                        numeroEspacios[i] = numeroEspacio[i];
                     }
                     if (!validarCadena(nombreSede)) {
                         alert('ERROR. Seleccione la sede a la que pertenece el espacio');
@@ -1411,7 +1416,7 @@ $(document).ready(function() {
                     }else if(!validarCadena(usoEspacio)){
                         alert('ERROR. Seleccione el uso que tiene el espacio');
                         $('#uso_espacio').focus();
-                    }else if(!validarNumero(alturaPared)){
+                    }/*else if(!validarNumero(alturaPared)){
                         alert('ERROR. Ingrese la altura de las paredes del espacio');
                         $('#altura_pared').focus();
                     }else if(!validarNumero(anchoPared)){
@@ -1578,22 +1583,24 @@ $(document).ready(function() {
                             alert('ERROR. Ingrese el número de interruptores del tipo ('+aux+') que tiene el espacio');
                         }
                         $('#cantidad_interruptores'+aux+'').focus();
-                    }else if(!validarCadena(espacioPadre)){
+                    }*/else if(!validarCadena(espacioPadre)){
                         alert('ERROR. Especifique si el espacio está dentro de otro');
                         $('#tiene_espacio_padre').focus();
-                    }else if(espacioPadre != null && espacioPadre != 'false' && !validarNumero(numero_espacio_padre)){
-                        alert('ERROR. Especifique el espacio dentro del cual está el espacio a crear');
-                        $('#espacio_padre').focus();
-                    }else if(verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numero_espacio_padre).verificar){
-                        alert('ERROR. El espacio dentro del cual está el espacio a crear no existe');
-                        $('#espacio_padre').focus();
+                    }else if(espacioPadre == 'true'){
+                        if(espacioPadre != null && espacioPadre != 'false' && !validarNumero(numero_espacio_padre)){
+                            alert('ERROR. Especifique el número del espacio dentro del cual está el espacio a crear');
+                            $('#espacio_padre').focus();
+                        }else if(verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numero_espacio_padre).verificar){
+                            alert('ERROR. El espacio dentro del cual está el espacio a crear no existe');
+                            $('#espacio_padre').focus();
+                        }
                     }else{
                         var informacion = {};
                         informacion['nombre_sede'] = nombreSede;
                         informacion['nombre_campus'] = nombreCampus;
                         informacion['nombre_edificio'] = nombreEdificio;
                         informacion['piso'] = piso;
-                        informacion['numero_espacio'] = numeroEspacio;
+                        informacion['numero_espacio'] = numeroEspacios;
                         informacion['uso_espacio'] = usoEspacio;
                         informacion['altura_pared'] = alturaPared;
                         informacion['ancho_pared'] = anchoPared;
@@ -1625,15 +1632,9 @@ $(document).ready(function() {
                         informacion['tipo_interruptor'] = tipoInterruptor;
                         informacion['cantidad_interruptores'] = cantidadInterruptores;
                         informacion['numero_espacio_padre'] = numero_espacio_padre;
+                        console.log(informacion)
                         var arregloFotos = new FormData();
                         var arregloPlanos = new FormData();
-                        if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
-                        informacion['lat'] = coordenadas.lat().toFixed(8);
-                        informacion['lng'] = coordenadas.lng().toFixed(8);
-                        }else{
-                            informacion['lat'] = 0;
-                            informacion['lng'] = 0;
-                        }
                         if (piso == 'sotano') {
                             informacion['piso'] = '0';
                         }
@@ -1900,10 +1901,10 @@ $(document).ready(function() {
                             }
                         }else{
                             if (planos.files.length <= 5) {
-                                alert("ERROR. El número máximo de planos por edificio es 5");
+                                alert("ERROR. El número máximo de planos por espacio es 5");
                                 planos.focus();
                             }else{
-                                alert("ERROR. El número máximo de fotos por edificio es 20");
+                                alert("ERROR. El número máximo de fotos por espacio es 20");
                                 fotos.focus();
                             }
                         }
@@ -2059,7 +2060,7 @@ $(document).ready(function() {
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
         }
         dataEspacio = $.extend(dataEspacio,informacion);
-        guardarEspacio();
+        //guardarEspacio();
     });
 
     /**
@@ -2086,7 +2087,7 @@ $(document).ready(function() {
                     mostrarMensaje(resultado.mensaje);
                     console.log(resultado);
                     if(resultado.verificar){
-                        $("#tipo_material").val("seleccionar");
+                        $("#tipo_material").val("");
                         $("#nombre_tipo_material").val("");
                     }
                 }
@@ -2122,7 +2123,7 @@ $(document).ready(function() {
                     mostrarMensaje(resultado.mensaje);
                     console.log(resultado);
                     if(resultado.verificar){
-                        $("#tipo_objeto").val("seleccionar");
+                        $("#tipo_objeto").val("");
                         $("#nombre_tipo_objeto").val("");
                     }
                 }

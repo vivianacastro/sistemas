@@ -2,17 +2,25 @@
 *funciones globales de la aplicacion 
 */
 $(document).ready(function () {
+	var URLactual = window.location;
+    /*if(URLactual['href'].indexOf('menu_principal') >= 0 || URLactual['href'].indexOf('iniciar_sesion') >= 0){
+        $('#menuMoviles').hide();
+    }
+
+    if(URLactual['href'].indexOf('crear_usuario') >= 0 || URLactual['href'].indexOf('olvido_contrasenia') >= 0){
+    	$('#menuMoviles').hide();
+    	$('#divBarra2').hide();
+    	$('#divBarraMoviles').hide();
+    }*/
+
 	setTimeout(function() {
-        $("#divDialogTimeOut").modal('show');
+		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){
+			$("#divDialogTimeOut").modal('show');
+		}
     },600000);
     $('#divDialogTimeOut').on('hidden.bs.modal', function () {
     	location.reload();
 	});
-
-	var URLactual = window.location;
-    if(URLactual['href'].indexOf('menu_principal') >= 0){
-        $('#menuMoviles').hide();
-    }
 });
 
 /**
@@ -98,6 +106,20 @@ function validarArregloNumeros(arreglo) {
 		}
 	}
 	return posicion;
+}
+
+/**
+ * Función que valida si un correo es válido o no.
+ * @param {string} correo, cadena a validar.
+ * @returns {boolean} valido, booleano.
+ */
+function validarCorreo(correo) {
+	var valido = true;
+    expr = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (!expr.test(correo)){
+        valido = false;
+    }
+    return valido;
 }
 
 /**

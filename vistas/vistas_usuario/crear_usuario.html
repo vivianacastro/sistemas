@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Usuario</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n del Usuario</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Nombre<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='nombre_usuario' id='nombre_usuario' value='' placeholder='Ej: Pepito Pérez' required/><br>
+        <div class='div_izquierda'><b>Login<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario-minusculas' type='text' name='login_usuario' id='login_usuario' value='' placeholder='Ej: pepito.perez' required/>
+        <div class='div_error' id="error_login" style="display:none"><b>El login ya se encuentra registrado</b></div><br>
+        <div class='div_izquierda'><b>Correo<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario-minusculas' type='email' name='correo_usuario' id='correo_usuario' value='' placeholder='Ej: pepito.perez@correounivalle.edu.co' required/>
+        <div class='div_error' id="error_correo" style="display:none"><b>El correo ya se encuentra registrado</b></div><br>
+        <div class='div_izquierda'><b>Télefono:</b></div>
+        <input class='form-control formulario' type='number' name='telefono_usuario' id='telefono_usuario' value='' placeholder='Ej: 3212100' required/><br>
+        <div class='div_izquierda'><b>Extensión:</b></div>
+        <input class='form-control formulario' type='number' name='extension_usuario' id='extension_usuario' value='' placeholder='Ej: 1234' required/><br>
+        <div class='div_izquierda'><b>Contrase&ntilde;a<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='password' name='contrasenia' id='contrasenia' value='' required/><br>
+        <div class='div_izquierda'><b>Repita la Contrase&ntilde;a<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='password' name='repita_contrasenia' id='repita_contrasenia' value='' required/><br>
+    <div><br>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_usuario' id='guardar_usuario' value='Crear Usuario' title='Crear el Usuario'/>
+    </div>
+</div>

@@ -10,8 +10,6 @@ class controlador_creacion
     **/
     public function crear_sede() {
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Sede',
         );
@@ -30,8 +28,6 @@ class controlador_creacion
     **/
     public function crear_campus() {        
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Campus',
         );
@@ -50,8 +46,6 @@ class controlador_creacion
     **/
     public function crear_edificio() {
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Edificio',
         );
@@ -70,8 +64,6 @@ class controlador_creacion
     **/
     public function crear_espacio() {
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Espacio',
         );
@@ -90,8 +82,6 @@ class controlador_creacion
     **/
     public function crear_tipo_material() {
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Tipo Material',
         );
@@ -110,8 +100,6 @@ class controlador_creacion
     **/
     public function crear_tipo_objeto() {
         $GLOBALS['mensaje'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
             'mensaje' => 'Crear Tipo Objeto',
         );
@@ -131,7 +119,7 @@ class controlador_creacion
     public function guardar_sede(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -152,7 +140,7 @@ class controlador_creacion
     public function guardar_campus(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -173,7 +161,7 @@ class controlador_creacion
     public function guardar_edificio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -194,7 +182,7 @@ class controlador_creacion
     public function guardar_espacio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -206,7 +194,7 @@ class controlador_creacion
                     $info['tomacorriente'],$info['cantidad_tomacorrientes'],$info['tipo_puerta'],$info['cantidad_puertas'],$info['material_puerta'],$info['tipo_cerradura'],
                     $info['gato_puerta'],$info['material_marco'],$info['ancho_puerta'],$info['alto_puerta'],$info['tipo_ventana'],$info['cantidad_ventanas'],
                     $info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana'],$info['tipo_interruptor'],$info['cantidad_interruptores'],
-                    $info['numero_espacio_padre'],$info['lat'],$info['lng']);
+                    $info['numero_espacio_padre']);
                 /*for ($i=0;$i<count($info['tipo_iluminacion']);$i++) {
                     $m->guardarIluminacion($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_iluminacion'][$i],$info['cantidad_iluminacion'][$i]);
                 }
@@ -267,7 +255,7 @@ class controlador_creacion
     public function guardar_tipo_material(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -288,7 +276,7 @@ class controlador_creacion
     public function guardar_tipo_objeto(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -309,7 +297,7 @@ class controlador_creacion
     public function verificar_espacio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
@@ -327,7 +315,7 @@ class controlador_creacion
     public function guardar_planos_campus(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
@@ -354,7 +342,7 @@ class controlador_creacion
     public function guardar_fotos_campus(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
@@ -364,7 +352,7 @@ class controlador_creacion
                 $file = $info['archivo'.$i];
                 $data = $m->obtenerIdCampus($infoCampus['nombre_sede'],$infoCampus['nombre_campus']);
                 foreach ($data as $clave => $valor) {
-                 $idCampus = $valor['id'];
+                    $idCampus = $valor['id'];
                 }
                 $verificar = $m->guardarFotoCampus($infoCampus['nombre_sede'],$idCampus,$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
@@ -381,7 +369,7 @@ class controlador_creacion
     public function guardar_planos_edificio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
@@ -403,7 +391,7 @@ class controlador_creacion
     public function guardar_fotos_edificio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
@@ -425,7 +413,7 @@ class controlador_creacion
     public function guardar_planos_espacio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
@@ -447,7 +435,7 @@ class controlador_creacion
     public function guardar_fotos_espacio(){
         $GLOBALS['mensaje'] = "";
         $result = array();
-        $m = new Modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
