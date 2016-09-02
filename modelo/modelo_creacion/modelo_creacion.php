@@ -88,7 +88,7 @@ class modelo_creacion {
      * @param string $sotano, si el edificio tiene sotano.
      * @return array
      */
-    public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano){
+    public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano,$tipo_fachada,$alto_fachada,$ancho_fachada,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -96,7 +96,17 @@ class modelo_creacion {
         $numero_pisos = htmlspecialchars(trim($numero_pisos));
         $terraza = htmlspecialchars(trim($terraza));
         $sotano = htmlspecialchars(trim($sotano));
-        $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."');";
+        $tipo_fachada = htmlspecialchars(trim($tipo_fachada));
+        $alto_fachada = htmlspecialchars(trim($alto_fachada));
+        $ancho_fachada = htmlspecialchars(trim($ancho_fachada));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        if(strcasecmp($material_pared,'') != 0){
+            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,id_material_fachada,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$tipo_fachada."','".$ancho_fachada."','".$alto_fachada."');";
+        }else{
+            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$ancho_fachada."','".$alto_fachada."');";
+        }
+        
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Edificio 1)";
@@ -222,7 +232,7 @@ class modelo_creacion {
                 for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->guardarVentana($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
-                $GLOBALS['mensaje'] = "El espacio se guardó correctamente";
+                $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
                 return true;
             }
         }
@@ -450,39 +460,589 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar la información del suministro de energía de un espacio.
-     * @param string $id_espacio, id del espacio.
-     * @param string $id_campus, id del campus al que pertenece el espacio.
-     * @param string $id_edificio, id del edificio al que pertenece el espacio.
-     * @param string $tipo_ventana, tipo de ventana que tiene el espacio.
-     * @param string $cantidad, cantidad de ventanas que tiene el espacio.
-     * @param string $material_ventana, material de las ventanas del espacio.
-     * @param string $ancho_ventana, ancho de las ventanas del espacio.
-     * @param string $alto_ventana, alto de las ventanas del espacio.
+     * Función que permite guardar la información del punto sanitario de un espacio.
+     * @param string $id_espacio, id del espacio al que pertenece el punto sanitario.
+     * @param string $id_campus, id del campus al que pertenece el punto sanitario.
+     * @param string $id_edificio, id del edificio al que pertenece el punto sanitario.
+     * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el baño.
+     * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el espacio.
      * @return array
      */
-    public function guardarSalon($id_espacio,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
+    public function guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
-        $tipo_ventana = htmlspecialchars(trim($tipo_ventana));
-        $cantidad = htmlspecialchars(trim($cantidad));
-        $material_ventana = htmlspecialchars(trim($material_ventana));
-        $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
-        $alto_ventana = htmlspecialchars(trim($alto_ventana));
-        $sql = "INSERT INTO ventana_espacio (id_espacio,id_tipo_ventana,cantidad,id_material,ancho_ventana,alto_ventana,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_ventana."','".$cantidad."','".$material_ventana."','".$ancho_ventana."','".$alto_ventana."','".$id_edificio."','".$id_campus."');";
+        $tipo_punto_sanitario = htmlspecialchars(trim($tipo_punto_sanitario));
+        $cantidad_punto_sanitario = htmlspecialchars(trim($cantidad_punto_sanitario));
+        $sql = "INSERT INTO punto_sanitario (id_espacio,id_edificio,id_campus,id_tipo,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_punto_sanitario."','".$cantidad_punto_sanitario."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Espacio 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Punto Sanitario 1)";
             //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Espacio 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Punto Sanitario 2)";
                 //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
+                //$GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de los lavamanos de un baño.
+     * @param string $id_espacio, id del espacio al que pertenece el lavamanos.
+     * @param string $id_campus, id del campus al que pertenece el lavamanos.
+     * @param string $id_edificio, id del edificio al que pertenece el lavamanos.
+     * @param string $tipo_lavamanos, tipo de lavamanos que tiene el baño.
+     * @param string $cantidad_lavamanos, cantidad de lavamanos que tiene el baño.
+     * @return array
+     */
+    public function guardarLavamanosBano($id_espacio,$id_campus,$id_edificio,$tipo_lavamanos,$cantidad_lavamanos){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_lavamanos = htmlspecialchars(trim($tipo_lavamanos));
+        $cantidad_lavamanos = htmlspecialchars(trim($cantidad_lavamanos));
+        $sql = "INSERT INTO lavamanos_bano (id_espacio,id_edificio,id_campus,id_tipo_lavamanos,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_lavamanos."','".$cantidad_lavamanos."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Lavamanos-Baño 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Lavamanos-Baño 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El lavamanos del baño se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de los orinales de un baño.
+     * @param string $id_espacio, id del espacio al que pertenece el orinal.
+     * @param string $id_campus, id del campus al que pertenece el orinal.
+     * @param string $id_edificio, id del edificio al que pertenece el orinal.
+     * @param string $tipo_orinal, tipo de orinal que tiene el baño.
+     * @param string $cantidad_orinal, cantidad de orinales que tiene el baño.
+     * @return array
+     */
+    public function guardarOrinalBano($id_espacio,$id_campus,$id_edificio,$tipo_orinal,$cantidad_orinal){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_orinal = htmlspecialchars(trim($tipo_orinal));
+        $cantidad_orinal = htmlspecialchars(trim($cantidad_orinal));        
+
+        $sql = "INSERT INTO orinal_bano (id_espacio,id_edificio,id_campus,id_tipo_orinal,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_orinal."','".$cantidad_orinal."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Orinal-Baño 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Orinal-Baño 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El orinal del baño se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un salón
+     * @param string $id_espacio, id del salón.
+     * @param string $id_campus, id del campus al que pertenece el salón.
+     * @param string $id_edificio, id del edificio al que pertenece el salón.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el salón.
+     * @param string $capacidad, capacidad del salón.
+     * @param string $punto_proyector, si el salón tiene o no punto de proyector.
+     * @return array
+     */
+    public function guardarSalon($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El salón se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un auditorio
+     * @param string $id_espacio, id del auditorio.
+     * @param string $id_campus, id del campus al que pertenece el auditorio.
+     * @param string $id_edificio, id del edificio al que pertenece el auditorio.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el auditorio.
+     * @param string $capacidad, capacidad del auditorio.
+     * @param string $punto_proyector, si el auditorio tiene o no punto de proyector.
+     * @return array
+     */
+    public function guardarAuditorio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un laboratorio
+     * @param string $id_espacio, id del laboratorio.
+     * @param string $id_campus, id del campus al que pertenece el laboratorio.
+     * @param string $id_edificio, id del edificio al que pertenece el laboratorio.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el laboratorio.
+     * @param string $capacidad, capacidad del laboratorio.
+     * @param string $punto_proyector, si el laboratorio tiene o no punto de proyector.
+     * @param string $cantidad_punto_hidraulico, cantidad de puntos hidraulicos que tiene el laboratorio.
+     * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el laboratorio.
+     * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el laboratorio.
+     * @return array
+     */
+    public function guardarLaboratorio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
+                    $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una sala de computo
+     * @param string $id_espacio, id de la sala de computo.
+     * @param string $id_campus, id del campus al que pertenece la sala de computo.
+     * @param string $id_edificio, id del edificio al que pertenece la sala de computo.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de computo.
+     * @param string $capacidad, capacidad de la sala de computo.
+     * @param string $punto_proyector, si la sala de computo tiene o no punto de proyector.
+     * @return array
+     */
+    public function guardarSalaComputo($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una oficina
+     * @param string $id_espacio, id de la oficina.
+     * @param string $id_campus, id del campus al que pertenece la oficina.
+     * @param string $id_edificio, id del edificio al que pertenece la oficina.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la oficina.
+     * @param string $punto_proyector, si la oficina tiene o no punto de proyector.
+     * @return array
+     */
+    public function guardarOficina($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$punto_proyector){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,puntos_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$punto_proyector."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un baño
+     * @param string $id_espacio, id del baño.
+     * @param string $id_campus, id del campus al que pertenece el baño.
+     * @param string $id_edificio, id del edificio al que pertenece el baño.
+     * @param string $tipo_inodoro, tipo de inodoros que tiene el baño.
+     * @param string $cantidad_inodoro, cantidad de inodoros que tiene el baño.
+     * @param string $ducha, si el baño tiene ducha o no.
+     * @param string $tipo_orinal, tipo de orinales que tiene el baño.
+     * @param string $cantidad_orinal, cantidad de orinales que tiene el baño.
+     * @param string $tipo_lavamanos, tipo de lavamanos que tiene el baño.
+     * @param string $cantidad_lavamanos, cantidad de lavamanos que tiene el baño.
+     * @param string $lavatraperos, si el baño tiene o no lavatraperos.
+     * @param string $cantidad_sifon, cantidad de sifones que tiene el baño.
+     * @param string $tipo_divisiones, tipo de divisiones del baño.
+     * @param string $material_divisiones, material de las divisiones del baño.
+     * @return array
+     */
+    public function guardarBano($id_espacio,$id_campus,$id_edificio,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$cantidad_orinal,$tipo_lavamanos,$cantidad_lavamanos,$ducha,$lavatraperos,$cantidad_sifon,$tipo_divisiones,$material_divisiones){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_inodoro = htmlspecialchars(trim($tipo_inodoro));
+        $cantidad_inodoro = htmlspecialchars(trim($cantidad_inodoro));
+        $ducha = htmlspecialchars(trim($ducha));
+        $lavatraperos = htmlspecialchars(trim($lavatraperos));
+        $cantidad_sifon = htmlspecialchars(trim($cantidad_sifon));
+        $tipo_divisiones = htmlspecialchars(trim($tipo_divisiones));
+        $material_divisiones = htmlspecialchars(trim($material_divisiones));
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_tipo_inodoro,cantidad_inodoro,ducha,lavatraperos,cantidad_sifon,id_tipo_divisiones,id_material_divisiones) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_inodoro."','".$cantidad_inodoro."','".$ducha."','".$lavatraperos."','".$cantidad_sifon."','".$tipo_divisiones."','".$material_divisiones."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                for ($i=0;$i<count($tipo_lavamanos);$i++) {
+                    $this->guardarLavamanosBano($id_espacio,$id_campus,$id_edificio,$tipo_lavamanos[$i],$cantidad_lavamanos[$i]);
+                }
+                for ($i=0;$i<count($tipo_orinal);$i++) {
+                    $this->guardarOrinalBano($id_espacio,$id_campus,$id_edificio,$tipo_orinal[$i],$cantidad_orinal[$i]);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una bodega.
+     * @param string $id_espacio, id de la bodega.
+     * @param string $id_campus, id del campus al que pertenece la bodega.
+     * @param string $id_edificio, id del edificio al que pertenece la bodega.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la bodega.
+     * @return array
+     */
+    public function guardarBodega($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO bodega (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Bodega 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Bodega 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una sala de estudio.
+     * @param string $id_espacio, id de la sala de estudio.
+     * @param string $id_campus, id del campus al que pertenece la sala de estudio.
+     * @param string $id_edificio, id del edificio al que pertenece la sala de estudio.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de estudio.
+     * @return array
+     */
+    public function guardarSalaEstudio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO sala_estudio (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala de Estudio 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala de Estudio 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un cuarto de plantas.
+     * @param string $id_espacio, id del cuarto de plantas.
+     * @param string $id_campus, id del campus al que pertenece el cuarto de plantas.
+     * @param string $id_edificio, id del edificio al que pertenece el cuarto de plantas.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de plantas.
+     * @return array
+     */
+    public function guardarCuartoPlantas($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO cuarto_plantas (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Plantas 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Plantas 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un cuarto de aires acondicionados.
+     * @param string $id_espacio, id del cuarto de aires acondicionados.
+     * @param string $id_campus, id del campus al que pertenece el cuarto de aires acondicionados.
+     * @param string $id_edificio, id del edificio al que pertenece el cuarto de aires acondicionados.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de aires acondicionados.
+     * @return array
+     */
+    public function guardarCuartoAireAcondicionado($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO cuarto_aire_acondicionado (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Aires Acondicionados 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Aires Acondicionados 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un área deportiva cerrada.
+     * @param string $id_espacio, id del área deportiva cerrada.
+     * @param string $id_campus, id del campus al que pertenece el área deportiva cerrada.
+     * @param string $id_edificio, id del edificio al que pertenece el área deportiva cerrada.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el área deportiva cerrada.
+     * @return array
+     */
+    public function guardarAreaDeportivaCerrada($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO area_deportiva_cerrada (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Área Deportiva Cerrada 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Área Deportiva Cerrada 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un centro de datos.
+     * @param string $id_espacio, id del centro de datos.
+     * @param string $id_campus, id del campus al que pertenece el centro de datos.
+     * @param string $id_edificio, id del edificio al que pertenece el centro de datos.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el centro de datos.
+     * @return array
+     */
+    public function guardarCentroDatos($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $sql = "INSERT INTO centro_datos (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Centro de Datos 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Centro de Datos 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un cuarto de bombas.
+     * @param string $id_espacio, id del cuarto de bombas.
+     * @param string $id_campus, id del campus al que pertenece el cuarto de bombas.
+     * @param string $id_edificio, id del edificio al que pertenece el cuarto de bombas.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de bombas.
+     * @return array
+     */
+    public function guardarCuartoBombas($id_espacio,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $sql = "INSERT INTO cuarto_bombas (id_espacio,id_edificio,id_campus,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_hidraulico."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Bombas 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Bombas 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
+                    $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una cocineta.
+     * @param string $id_espacio, id de la cocineta.
+     * @param string $id_campus, id del campus al que pertenece la cocineta.
+     * @param string $id_edificio, id del edificio al que pertenece la cocineta.
+     * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la cocineta.
+     * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene la cocineta.
+     * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene la cocineta
+     * @return array
+     */
+    public function guardarCocineta($id_espacio,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $sql = "INSERT INTO cocineta (id_espacio,id_edificio,id_campus,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_hidraulico."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cocineta 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cocineta 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
+                    $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
+                }
                 return true;
             }
         }

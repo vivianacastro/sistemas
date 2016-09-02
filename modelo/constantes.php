@@ -37,6 +37,13 @@ const OPERATION_CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
 
 const OPERATION_CREAR_SEDE = 'crear_sede';
 const OPERATION_CREAR_CAMPUS = 'crear_campus';
+const OPERATION_CREAR_CANCHA = 'crear_cancha';
+const OPERATION_CREAR_CORREDOR = 'crear_corredor';
+const OPERATION_CREAR_PARQUEADERO = 'crear_parqueadero';
+const OPERATION_CREAR_PISCINA = 'crear_piscina';
+const OPERATION_CREAR_PLAZOLETA = 'crear_plazoleta';
+const OPERATION_CREAR_SENDERO = 'crear_sendero';
+const OPERATION_CREAR_VIAS = 'crear_vias';
 const OPERATION_CREAR_EDIFICIO = 'crear_edificio';
 const OPERATION_CREAR_ESPACIO = 'crear_espacio';
 const OPERATION_CREAR_TIPO_MATERIAL = 'crear_tipo_material';

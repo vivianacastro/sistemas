@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, orinalesCont = 0;
+    var espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
     var coordenadas = {};
     var dataEspacio = {};
     var map;
@@ -18,6 +18,13 @@ $(document).ready(function() {
             getCoordenadas();
         }else if(URLactual['href'].indexOf('crear_edificio') >= 0){
             actualizarSelectSede();
+            actualizarSelectMaterial("material_fachada",0);
+            initMap();
+            getCoordenadas()
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas()
         }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
@@ -85,7 +92,6 @@ $(document).ready(function() {
         google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
             coordenadas = (event.overlay.getPosition());
             map.panTo(coordenadas);
-            console.log("lat: "+coordenadas.lat().toFixed(8)+" lng: "+coordenadas.lng().toFixed(8));
             drawingManager.setOptions({
                 drawingControl: false
             });
@@ -117,8 +123,6 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -152,8 +156,6 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -186,8 +188,6 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -220,21 +220,19 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
                 success: function(data) {
                     dataEspacio = {};
-                    /*var resultadoPlanos = guardarPlanosEspacio(dataEspacio['planos']);
-                    var resultadoFotos = guardarFotosEspacio(dataEspacio['fotos']);*/
-                    mostrarMensaje(data.mensaje);
+                    var resultadoPlanos = guardarPlanosEspacio(dataEspacio['planos']);
+                    var resultadoFotos = guardarFotosEspacio(dataEspacio['fotos']);
+                    alert(data.mensaje);
                     console.log(data);
-                    /*console.log(resultadoPlanos);
-                    console.log(resultadoFotos);*/
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
                     var mensaje = "";
-                    /*if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                    if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             if (!resultadoPlanos.verificar[i]) {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -244,7 +242,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                    if (typeof resultadoFotos-+9[0] !== 'undefined' && resultadoFotos-+9[0] !== null) {
+                    if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
                                 mensaje += resultadoFotos.mensaje[i];
@@ -257,7 +255,7 @@ $(document).ready(function() {
                     if (mensaje.substring(0,0) != "") {
                         console.log(mensaje.length);
                         alert(mensaje);
-                    }*/
+                    }
                     if(data.verificar){
                         $('#divDialogCreacion').modal('hide');
                         $("#nombre_sede").val("");
@@ -271,6 +269,12 @@ $(document).ready(function() {
                         var fotos = document.getElementById("fotos[]");
                         planos.value = "";
                         fotos.value = "";
+                        for(var i=espaciosCont;i>0;i--){
+                            eliminarComponente("espacio"+espaciosCont);
+                        }
+                        espaciosCont = 0;
+                        $("#eliminar_espacio").attr('disabled','disabled');
+                        window.scrollTo(0,0);
                     }
                 }
             });
@@ -297,8 +301,6 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -331,8 +333,6 @@ $(document).ready(function() {
                 dataType: "json",
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -366,8 +366,6 @@ $(document).ready(function() {
                 processData: false,
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -400,8 +398,6 @@ $(document).ready(function() {
                 processData: false,
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -434,8 +430,6 @@ $(document).ready(function() {
                 processData: false,
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -468,8 +462,70 @@ $(document).ready(function() {
                 processData: false,
                 async: false,
                 error: function(xhr, status, error) {
-                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar los planos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
+    function guardarPlanosEspacio(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_planos_espacio",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar las fotos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
+    function guardarFotosEspacio(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_fotos_espacio",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err.Message);
                 },
@@ -976,7 +1032,7 @@ $(document).ready(function() {
     });
     
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_sede y se
+     * Se captura el evento cuando se da click en el boton guardar_sede y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_sede").click(function (e){
@@ -994,6 +1050,7 @@ $(document).ready(function() {
                     mostrarMensaje(resultado.mensaje);
                     if (resultado.verificar) {
                         $("#nombre_sede").val("");
+                        window.scrollTo(0,0);
                     }                    
                 }
             }
@@ -1005,7 +1062,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_campus y se
+     * Se captura el evento cuando se da click en el boton guardar_campus y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_campus").click(function (e){
@@ -1101,6 +1158,7 @@ $(document).ready(function() {
                             fotos.value = "";
                             initMap();
                             coordenadas.length = {};
+                            window.scrollTo(0,0);
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1121,7 +1179,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_edificio y se
+     * Se captura el evento cuando se da click en el boton guardar_edificio y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_edificio").click(function (e){
@@ -1135,6 +1193,9 @@ $(document).ready(function() {
                 var numeroPisos = $("#pisos_edificio").val();
                 var terraza = $('input[name="terraza"]:checked').val();
                 var sotano = $('input[name="sotano"]:checked').val();
+                var material_fachada = $("#material_fachada").val();
+                var alto_fachada = $("#alto_fachada").val();
+                var ancho_fachada = $("#ancho_fachada").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
                 if(nombreSede == 'seleccionar' || nombreSede.length == 0){
@@ -1169,6 +1230,9 @@ $(document).ready(function() {
                     informacion['numero_pisos'] = numeroPisos;
                     informacion['terraza'] = terraza;
                     informacion['sotano'] = sotano;
+                    informacion['material_fachada'] = material_fachada;
+                    informacion['alto_fachada'] = alto_fachada;
+                    informacion['ancho_fachada'] = ancho_fachada;
                     if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
@@ -1203,6 +1267,7 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('edificio',JSON.stringify(informacion));
                         arregloPlanos.append('edificio',JSON.stringify(informacion));
+                        console.log(informacion);
                         var resultado = guardarEdificio(informacion);
                         var resultadoPlanos = guardarPlanosEdificio(arregloPlanos);
                         var resultadoFotos = guardarFotosEdificio(arregloFotos);
@@ -1247,6 +1312,7 @@ $(document).ready(function() {
                             fotos.value = "";
                             initMap();
                             coordenadas.length = {};
+                            window.scrollTo(0,0);
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1267,7 +1333,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_edificio y se
+     * Se captura el evento cuando se da click en el boton guardar_edificio y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_espacio").click(function (e){
@@ -1282,8 +1348,7 @@ $(document).ready(function() {
                 var nombreCampus = $("#nombre_campus").val();
                 var nombreEdificio = $("#nombre_edificio").val();
                 var piso = $("#pisos").val();
-                var numeroEspacio = $("#id_espacio").val();
-                numeroEspacio = numeroEspacio.split(".");
+                var numeroEspacio = [];
                 var usoEspacio = $("#uso_espacio").val();
                 var alturaPared = $("#altura_pared").val();
                 var anchoPared = $("#ancho_pared").val();
@@ -1296,7 +1361,6 @@ $(document).ready(function() {
                 var materialPiso = $("#material_piso").val();
                 var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
                 var numero_espacio_padre = $("#espacio_padre").val();
-                var numeroEspacios = [];
                 var tipoIluminacion = [];
                 var cantidadIluminacion = [];
                 var tipoSuministroEnergia = [];
@@ -1325,11 +1389,45 @@ $(document).ready(function() {
                 if (piso == 'terraza') {
                     piso = '-1';
                 }
-                var espacioExistente = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio);
-                console.log(espacioExistente);
-                if (!espacioExistente.verificar) {
+                var espacioExistente = {};
+                espacioExistente['verificar'] = true;
+                espacioExistente['espacioRepetido'] = false;
+                for (var i=0;i<=espaciosCont;i++) {
+                    if(i==0){
+                        numeroEspacio[i] = $("#id_espacio").val();
+                    }else{
+                        var control = false;
+                        for (var a=0;a<i;a++) {
+                            var aux = $("#id_espacio"+i).val();
+                            if (aux == numeroEspacio[a]) {
+                                control = true;
+                            }
+                        }
+                        if (control) {
+                            espacioExistente['espacioRepetido'] = true;
+                            espacioExistente['input'] = i;
+                            break;
+                        }else{
+                            numeroEspacio[i] = $("#id_espacio"+i).val();
+                        }                        
+                    }
+                    var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio[i]);
+                    if (!comprobarEspacio.verificar){
+                        espacioExistente['verificar'] = false;
+                        if (i==0) {
+                            espacioExistente['input'] = "";
+                        }else{
+                            espacioExistente['input'] = i;
+                        }
+                        break;
+                    }
+                }
+                if(espacioExistente['espacioRepetido']){
+                    alert("ERROR. Hay dos o más espacios repetidos");
+                    $("#id_espacio"+espacioExistente['input']).focus();
+                }else if (!espacioExistente['verificar']) {
                     alert("ERROR. El número de espacio ya esta registrado en el sistema");
-                    $("#id_espacio").focus();
+                    $("#id_espacio"+espacioExistente['input']).focus();
                 }else{
                     for (var i=0;i<=iluminacionCont;i++) {
                         if (i==0) {
@@ -1395,8 +1493,6 @@ $(document).ready(function() {
                             tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
                             cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
                         }
-                    }for(var i=0;i<=numeroEspacio.length;i++){
-                        numeroEspacios[i] = numeroEspacio[i];
                     }
                     if (!validarCadena(nombreSede)) {
                         alert('ERROR. Seleccione la sede a la que pertenece el espacio');
@@ -1587,7 +1683,7 @@ $(document).ready(function() {
                         alert('ERROR. Especifique si el espacio está dentro de otro');
                         $('#tiene_espacio_padre').focus();
                     }else if(espacioPadre == 'true'){
-                        if(espacioPadre != null && espacioPadre != 'false' && !validarNumero(numero_espacio_padre)){
+                        if((espacioPadre != null) && (espacioPadre != 'false') && (!validarNumero(numero_espacio_padre))){
                             alert('ERROR. Especifique el número del espacio dentro del cual está el espacio a crear');
                             $('#espacio_padre').focus();
                         }else if(verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numero_espacio_padre).verificar){
@@ -1600,7 +1696,7 @@ $(document).ready(function() {
                         informacion['nombre_campus'] = nombreCampus;
                         informacion['nombre_edificio'] = nombreEdificio;
                         informacion['piso'] = piso;
-                        informacion['numero_espacio'] = numeroEspacios;
+                        informacion['numero_espacio'] = numeroEspacio;
                         informacion['uso_espacio'] = usoEspacio;
                         informacion['altura_pared'] = alturaPared;
                         informacion['ancho_pared'] = anchoPared;
@@ -1632,7 +1728,6 @@ $(document).ready(function() {
                         informacion['tipo_interruptor'] = tipoInterruptor;
                         informacion['cantidad_interruptores'] = cantidadInterruptores;
                         informacion['numero_espacio_padre'] = numero_espacio_padre;
-                        console.log(informacion)
                         var arregloFotos = new FormData();
                         var arregloPlanos = new FormData();
                         if (piso == 'sotano') {
@@ -1672,9 +1767,11 @@ $(document).ready(function() {
                             dataEspacio['planos'] = arregloPlanos;
                             dataEspacio = informacion;
                             $('#botones_punto_sanitario').hide();
+                            $('#botones_lavamanos').hide();
                             $('#botones_orinal').hide();
                             if (usoEspacio == '1') { //Salón
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1689,6 +1786,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '2'){ //Auditorio
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1703,6 +1801,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '3'){ //Laboratorio
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1728,6 +1827,7 @@ $(document).ready(function() {
                             }else if(usoEspacio == '4'){ //Sala de Cómputo
                                 console.log("1");
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1742,6 +1842,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '5'){ //Oficina
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1751,15 +1852,21 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '6'){ //Baño
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
+                                    +'<div id="lavamanos">'
                                     +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
+                                    +'</div>'
+                                    +'</div>';
+                                añadirComponente("informacionEspacio",componente);
+                                var componente = '<br><div id="informacion2">'
                                     +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" required></select><br>'
                                     +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
@@ -1779,8 +1886,9 @@ $(document).ready(function() {
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
+                                $('#botones_lavamanos').show();
                                 $('#botones_orinal').show();
-                                añadirComponente("informacionEspacio",componente);
+                                añadirComponente("informacionEspacio2",componente);
                                 actualizarSelectTipoObjeto("tipo_inodoro",0);
                                 actualizarSelectTipoObjeto("tipo_orinal",0);
                                 actualizarSelectTipoObjeto("tipo_lavamanos",0);
@@ -1790,6 +1898,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '7'){ //Cuarto Técnico
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1802,6 +1911,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '8'){ //Bodega/Almacen
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1813,6 +1923,7 @@ $(document).ready(function() {
                                 guardarEspacio();
                             }else if(usoEspacio == '10'){ //Cuarto de Plantas
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1822,6 +1933,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1831,6 +1943,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del área deportiva cerrada<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1842,6 +1955,7 @@ $(document).ready(function() {
                                 guardarEspacio();
                             }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1855,6 +1969,7 @@ $(document).ready(function() {
                                 guardarEspacio();
                             }else if(usoEspacio == '17'){ //Cuarto de Bombas
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
@@ -1874,6 +1989,7 @@ $(document).ready(function() {
                                 guardarEspacio();
                             }else if(usoEspacio == '19'){ //Cocineta
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
@@ -1891,6 +2007,7 @@ $(document).ready(function() {
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '20'){ //Sala de Estudio
                                 eliminarComponente("informacion");
+                                eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
                                     +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
@@ -1919,7 +2036,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_edificio y se
+     * Se captura el evento cuando se da click en el boton guardar_edificio y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_espacio_adicional").click(function (e){
@@ -1928,21 +2045,21 @@ $(document).ready(function() {
         if (usoEspacio == '1') { //Salón
             var cantidadPuntosRed = $("#cantidad_puntos_red").val();
             var capacidad = $("#capacidad").val();
-            var puntosRed = $("#punto_videobeam").val();
+            var puntosRed = $('input[name="punto_videobeam"]:checked').val();
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
             informacion["capacidad"] = capacidad;
             informacion["punto_videobeam"] = puntosRed;
         }else if(usoEspacio == '2'){ //Auditorio
             var cantidadPuntosRed = $("#cantidad_puntos_red").val();
             var capacidad = $("#capacidad").val();
-            var puntosRed = $("#punto_videobeam").val();
+            var puntosRed = $('input[name="punto_videobeam"]:checked').val();
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
             informacion["capacidad"] = capacidad;
             informacion["punto_videobeam"] = puntosRed;
         }else if(usoEspacio == '3'){ //Laboratorio
             var cantidadPuntosRed = $("#cantidad_puntos_red").val();
             var capacidad = $("#capacidad").val();
-            var puntosRed = $("#punto_videobeam").val();
+            var puntosRed = $('input[name="punto_videobeam"]:checked').val();
             var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
             var tipoPuntosSanitarios = [];
             var cantidadPuntosSanitarios = [];
@@ -1964,7 +2081,7 @@ $(document).ready(function() {
         }else if(usoEspacio == '4'){ //Sala de Cómputo
             var cantidadPuntosRed = $("#cantidad_puntos_red").val();
             var capacidad = $("#capacidad").val();
-            var puntosRed = $("#punto_videobeam").val();
+            var puntosRed = $('input[name="punto_videobeam"]:checked').val();
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
             informacion["capacidad"] = capacidad;
             informacion["punto_videobeam"] = puntosRed;
@@ -1978,9 +2095,20 @@ $(document).ready(function() {
             var cantidadLavamanos = $("#cantidad_lavamanos").val();
             var tipoDivisiones = $("#tipo_divisiones").val();
             var materialDivisiones = $("#material_divisiones").val();
-            var ducha = $("#ducha").val();
-            var lavatraperos = $("#lavatraperos").val();
+            var ducha = $('input[name="ducha"]:checked').val();
+            var lavatraperos = $('input[name="lavatraperos"]:checked').val();
             var cantidadSifones = $("#cantidad_sifones").val();
+            var tipoLavamanos = [];
+            var cantidadLavamanos = [];
+            for (var i=0;i<=lavamanosCont;i++) {
+                if (i==0) {
+                    tipoLavamanos[i] = $("#tipo_lavamanos").val();
+                    cantidadLavamanos[i] = $("#cantidad_lavamanos").val();
+                }else{
+                    tipoLavamanos[i] = $("#tipo_lavamanos"+i).val();
+                    cantidadLavamanos[i] = $("#cantidad_lavamanos"+i).val();
+                }
+            }
             var tipoOrinal = [];
             var cantidadOrinales = [];
             for (var i=0;i<=orinalesCont;i++) {
@@ -2005,7 +2133,7 @@ $(document).ready(function() {
             informacion["cantidad_sifones"] = cantidadSifones;
         }else if(usoEspacio == '7'){ //Cuarto Técnico
             var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var puntosRed = $("#punto_videobeam").val();
+            var puntosRed = $('input[name="punto_videobeam"]:checked').val();
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
             informacion["punto_videobeam"] = puntosRed;
         }else if(usoEspacio == '8'){ //Bodega/Almacen
@@ -2060,11 +2188,11 @@ $(document).ready(function() {
             informacion["cantidad_puntos_red"] = cantidadPuntosRed;
         }
         dataEspacio = $.extend(dataEspacio,informacion);
-        //guardarEspacio();
+        guardarEspacio();
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_tipo_material y se
+     * Se captura el evento cuando se da click en el boton guardar_tipo_material y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_tipo_material").click(function (e){
@@ -2089,6 +2217,7 @@ $(document).ready(function() {
                     if(resultado.verificar){
                         $("#tipo_material").val("");
                         $("#nombre_tipo_material").val("");
+                        window.scrollTo(0,0);
                     }
                 }
             }
@@ -2100,7 +2229,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_tipo_objeto y se
+     * Se captura el evento cuando se da click en el boton guardar_tipo_objeto y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_tipo_objeto").click(function (e){
@@ -2125,6 +2254,7 @@ $(document).ready(function() {
                     if(resultado.verificar){
                         $("#tipo_objeto").val("");
                         $("#nombre_tipo_objeto").val("");
+                        window.scrollTo(0,0);
                     }
                 }
             }
@@ -2136,7 +2266,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_informacion_adicional y se
+     * Se captura el evento cuando se da click en el boton añadir_informacion_adicional y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_informacion_adicional").click(function (e){
@@ -2146,7 +2276,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_informacion_adicional y se
+     * Se captura el evento cuando se da click en el boton eliminar_informacion_adicional y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_informacion_adicional").click(function (e){
@@ -2156,7 +2286,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_iluminacion y se
+     * Se captura el evento cuando se da click en el boton añadir_iluminacion y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_iluminacion").click(function (e){
@@ -2173,7 +2303,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_iluminacion y se
+     * Se captura el evento cuando se da click en el boton eliminar_iluminacion y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_iluminacion").click(function (e){
@@ -2185,7 +2315,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_tomacorriente y se
+     * Se captura el evento cuando se da click en el boton añadir_tomacorriente y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_tomacorriente").click(function (e){
@@ -2208,7 +2338,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_tomacorriente y se
+     * Se captura el evento cuando se da click en el boton eliminar_tomacorriente y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_tomacorriente").click(function (e){
@@ -2220,7 +2350,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_puerta y se
+     * Se captura el evento cuando se da click en el boton añadir_puerta y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_puerta").click(function (e){
@@ -2253,7 +2383,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_puerta y se
+     * Se captura el evento cuando se da click en el boton eliminar_puerta y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_puerta").click(function (e){
@@ -2265,7 +2395,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_ventana y se
+     * Se captura el evento cuando se da click en el boton añadir_ventana y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_ventana").click(function (e){
@@ -2289,7 +2419,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_ventana y se
+     * Se captura el evento cuando se da click en el boton eliminar_ventana y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_ventana").click(function (e){
@@ -2301,7 +2431,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_interruptor y se
+     * Se captura el evento cuando se da click en el boton añadir_interruptor y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_interruptor").click(function (e){
@@ -2318,7 +2448,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_interruptor y se
+     * Se captura el evento cuando se da click en el boton eliminar_interruptor y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_interruptor").click(function (e){
@@ -2330,7 +2460,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_punto_sanitario y se
+     * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_punto_sanitario").click(function (e){
@@ -2347,7 +2477,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_punto_sanitario y se
+     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_punto_sanitario").click(function (e){
@@ -2359,7 +2489,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton añadir_punto_sanitario y se
+     * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
      * realiza la operacion correspondiente.
      */
     $("#añadir_orinal").click(function (e){
@@ -2376,7 +2506,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton eliminar_punto_sanitario y se
+     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
      * realiza la operacion correspondiente.
      */
     $("#eliminar_orinal").click(function (e){
@@ -2385,5 +2515,73 @@ $(document).ready(function() {
         if(orinalesCont == 0){
             $("#eliminar_orinal").attr('disabled','disabled');
         }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton añadir_lavamanos y se
+     * realiza la operacion correspondiente.
+     */
+    $("#añadir_lavamanos").click(function (e){
+        lavamanosCont++;
+        var componente = '<div id="lavamanos'+lavamanosCont+'">'
+        +'<div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" min="0" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
+        +'</div>'
+        +'</div>';
+        añadirComponente("lavamanos",componente);
+        actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
+        $('#eliminar_lavamanos').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton eliminar_lavamanos y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_lavamanos").click(function (e){
+        eliminarComponente("lavamanos"+lavamanosCont);
+        lavamanosCont--;
+        if(lavamanosCont == 0){
+            $("#eliminar_lavamanos").attr('disabled','disabled');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+     * realiza la operacion correspondiente.
+     */
+    $("#agregar_espacio").click(function (e){
+        espaciosCont++;
+        var componente = '<div id="espacio'+espaciosCont+'">'
+        +'<br><div class="input-group">'
+        +'<input class="form-control formulario" type="number" min="1" name="id_espacio" id="id_espacio'+espaciosCont+'" value="" placeholder="Ej: 1001" required/>'
+        +'<span class="input-group-btn">'
+        +'</span>'
+        +'</div>'
+        +'</div>';
+        añadirComponente("espacio",componente);
+        $('#eliminar_espacio').removeAttr("disabled");
+    });
+
+    $("#eliminar_espacio").click(function (e){
+        eliminarComponente("espacio"+espaciosCont);
+        espaciosCont--;
+        if(espaciosCont == 0){
+            $("#eliminar_espacio").attr('disabled','disabled');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se cierra el modal divDialogCreacion y se
+     * realiza la operacion correspondiente.
+     */
+    $('#divDialogCreacion').on('hidden.bs.modal', function () {
+        puntosSanitariosCont = 0;
+        lavamanosCont = 0;
+        orinalesCont = 0;
+        $("#eliminar_lavamanos").attr('disabled','disabled');
+        $("#eliminar_punto_sanitario").attr('disabled','disabled');
+        $("#eliminar_orinal").attr('disabled','disabled');
     });
 });

@@ -45,6 +45,13 @@ $map = array(
     //Acciones Módulo Planta Física
     'crear_sede' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sede'),
     'crear_campus' => array('controlador' =>'controlador_creacion', 'action' =>'crear_campus'),
+    'crear_cancha' => array('controlador' =>'controlador_creacion', 'action' =>'crear_cancha'),
+    'crear_corredor' => array('controlador' =>'controlador_creacion', 'action' =>'crear_corredor'),
+    'crear_parqueadero' => array('controlador' =>'controlador_creacion', 'action' =>'crear_parqueadero'),
+    'crear_piscina' => array('controlador' =>'controlador_creacion', 'action' =>'crear_piscina'),
+    'crear_plazoleta' => array('controlador' =>'controlador_creacion', 'action' =>'crear_plazoleta'),
+    'crear_sendero' => array('controlador' =>'controlador_creacion', 'action' =>'crear_sendero'),
+    'crear_vias' => array('controlador' =>'controlador_creacion', 'action' =>'crear_vias'),
     'crear_edificio' => array('controlador' =>'controlador_creacion', 'action' =>'crear_edificio'),
     'crear_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'crear_espacio'),
     'crear_tipo_material' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_material'),

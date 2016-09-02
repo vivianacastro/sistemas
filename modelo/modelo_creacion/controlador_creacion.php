@@ -42,6 +42,134 @@ class controlador_creacion
 
     /**
     * Función que despliega el panel que permite crear
+    * una cancha en el sistema.
+    **/
+    public function crear_cancha() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Cancha',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CANCHA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un corredor en el sistema.
+    **/
+    public function crear_corredor() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Corredor',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CORREDOR, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * una cancha en el sistema.
+    **/
+    public function crear_parqueadero() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Parqueadero',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PARQUEADERO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * una piscina en el sistema.
+    **/
+    public function crear_piscina() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Piscina',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PISCINA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * una plazoleta en el sistema.
+    **/
+    public function crear_plazoleta() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Plazoleta',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PLAZOLETA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un sendero en el sistema.
+    **/
+    public function crear_sendero() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Sendero Peatonal',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SENDERO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * una vias en el sistema.
+    **/
+    public function crear_vias() {        
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Vías',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_VIAS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    
+
+    /**
+    * Función que despliega el panel que permite crear
     * un edificio en el sistema.
     **/
     public function crear_edificio() {
@@ -167,7 +295,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio']);
             if($verificar){
-                $m->guardarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['lat'],$info['lng']);
+                $m->guardarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -186,60 +314,47 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio']);
-            if($verificar){
-                $m->guardarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio'],$info['uso_espacio'],
-                    $info['altura_pared'],$info['ancho_pared'],$info['material_pared'],$info['largo_techo'],$info['ancho_techo'],$info['material_techo'],
-                    $info['largo_piso'],$info['ancho_piso'],$info['material_piso'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_suministro_energia'],
-                    $info['tomacorriente'],$info['cantidad_tomacorrientes'],$info['tipo_puerta'],$info['cantidad_puertas'],$info['material_puerta'],$info['tipo_cerradura'],
-                    $info['gato_puerta'],$info['material_marco'],$info['ancho_puerta'],$info['alto_puerta'],$info['tipo_ventana'],$info['cantidad_ventanas'],
-                    $info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana'],$info['tipo_interruptor'],$info['cantidad_interruptores'],
-                    $info['numero_espacio_padre']);
-                /*for ($i=0;$i<count($info['tipo_iluminacion']);$i++) {
-                    $m->guardarIluminacion($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_iluminacion'][$i],$info['cantidad_iluminacion'][$i]);
-                }
-                for ($i=0;$i<count($info['tipo_interruptor']);$i++) {
-                    $m->guardarInterruptores($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_interruptor'][$i],$info['cantidad_interruptores'][$i]);
-                }
-                for ($i=0;$i<count($info['tipo_puerta']);$i++) {
-                    $m->guardarPuertas($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_puerta'][$i],$info['material_puerta'][$i],$info['cantidad_puertas'][$i],$info['material_marco'][$i],$info['ancho_puerta'][$i],$info['alto_puerta'][$i],$info['gato_puerta'][$i]);
-                }
-                for ($i=0;$i<count($info['tipo_suministro_energia']);$i++) {
-                    $m->guardarSuministroEnergia($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_suministro_energia'][$i],$info['cantidad_tomacorrientes'][$i],$info['tomacorriente'][$i]);
-                }
-                for ($i=0;$i<count($info['tipo_ventana']);$i++) {
-                    $m->guardarVentana($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_ventana'][$i],$info['cantidad_ventanas'][$i],$info['material_ventana'][$i],$info['ancho_ventana'][$i],$info['alto_ventana'][$i]);
-                }*/
-                if (strcasecmp($info['uso_espacio'],'1') == 0) { //Salón
-                    $m->guardarSalon($info['numero_espacio'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
-                }else if (strcasecmp($uso_espacio,'2') == 0) { //Auditorio
-                    
-                }else if (strcasecmp($uso_espacio,'3') == 0) { //Laboratorio
-                    
-                }else if (strcasecmp($uso_espacio,'4') == 0) { //Sala de Cómputo
-                    
-                }else if (strcasecmp($uso_espacio,'5') == 0) { //Oficina
-
-                }else if (strcasecmp($uso_espacio,'6') == 0) { //Baño
-                    
-                }else if (strcasecmp($uso_espacio,'7') == 0) { //Cuarto Técnico
-                    
-                }else if (strcasecmp($uso_espacio,'8') == 0) { //Bodega/Almacen
-                    
-                }else if (strcasecmp($uso_espacio,'10') == 0) { //Cuarto de Plantas
-                    
-                }else if (strcasecmp($uso_espacio,'11') == 0) { //Cuarto de Aires Acondicionados
-                    
-                }else if (strcasecmp($uso_espacio,'12') == 0) { //Área Deportiva Cerrada
-                    
-                }else if (strcasecmp($uso_espacio,'14') == 0) { //Centro de Datos/Teléfono
-                    
-                }else if (strcasecmp($uso_espacio,'17') == 0) { //Cuarto de Bombas
-                    
-                }else if (strcasecmp($uso_espacio,'19') == 0) { //Cocineta
-                    
-                }else if (strcasecmp($uso_espacio,'20') == 0) { //Sala de Estudio
-                    
+            for ($i=0;$i<count($info['numero_espacio']);$i++) {
+                $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio'][$i]);
+                if($verificar){
+                    $m->guardarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio'][$i],$info['uso_espacio'],
+                        $info['altura_pared'],$info['ancho_pared'],$info['material_pared'],$info['largo_techo'],$info['ancho_techo'],$info['material_techo'],
+                        $info['largo_piso'],$info['ancho_piso'],$info['material_piso'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_suministro_energia'],
+                        $info['tomacorriente'],$info['cantidad_tomacorrientes'],$info['tipo_puerta'],$info['cantidad_puertas'],$info['material_puerta'],$info['tipo_cerradura'],
+                        $info['gato_puerta'],$info['material_marco'],$info['ancho_puerta'],$info['alto_puerta'],$info['tipo_ventana'],$info['cantidad_ventanas'],
+                        $info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana'],$info['tipo_interruptor'],$info['cantidad_interruptores'],
+                        $info['numero_espacio_padre']);
+                    if (strcasecmp($info['uso_espacio'],'1') == 0) { //Salón
+                        $m->guardarSalon($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                    }else if (strcasecmp($info['uso_espacio'],'2') == 0) { //Auditorio
+                        $m->guardarAuditorio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                    }else if (strcasecmp($info['uso_espacio'],'3') == 0) { //Laboratorio
+                        $m->guardarLaboratorio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                    }else if (strcasecmp($info['uso_espacio'],'4') == 0) { //Sala de Cómputo
+                        $m->guardarSalaComputo($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                    }else if (strcasecmp($info['uso_espacio'],'5') == 0) { //Oficina
+                        $m->guardarOficina($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'6') == 0) { //Baño
+                        $m->guardarBano($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_inodoro'],$info['cantidad_inodoro'],$info['tipo_orinal'],$info['cantidad_orinal'],$info['tipo_lavamanos'],$info['cantidad_lavamanos'],$info['ducha'],$info['lavatraperos'],$info['cantidad_sifones'],$info['tipo_divisiones'],$info['material_divisiones']);
+                    }else if (strcasecmp($info['uso_espacio'],'7') == 0) { //Cuarto Técnico
+                        $m->guardarCuartoTecnico($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['punto_videobeam']);
+                    }else if (strcasecmp($info['uso_espacio'],'8') == 0) { //Bodega/Almacen
+                        $m->guardarBodega($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'10') == 0) { //Cuarto de Plantas
+                        $m->guardarCuartoPlantas($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'11') == 0) { //Cuarto de Aires Acondicionados
+                        $m->guardarCuartoAireAcondicionado($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'12') == 0) { //Área Deportiva Cerrada
+                        $m->guardarAreaDeportivaCerrada($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'14') == 0) { //Centro de Datos/Teléfono
+                        $m->guardarCentroDatos($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }else if (strcasecmp($info['uso_espacio'],'17') == 0) { //Cuarto de Bombas
+                        $m->guardarCuartoBombas($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                    }else if (strcasecmp($info['uso_espacio'],'19') == 0) { //Cocineta
+                        $m->guardarCocineta($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                    }else if (strcasecmp($info['uso_espacio'],'20') == 0) { //Sala de Estudio
+                        $m->guardarSalaEstudio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                    }
                 }
             }
         }

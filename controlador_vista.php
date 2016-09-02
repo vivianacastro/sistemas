@@ -30,6 +30,13 @@ class controlador_vista
             ),'links_planta'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'CREAR_CAMPUS'=>'index.php?action='.OPERATION_CREAR_CAMPUS,
+                'CREAR_CANCHA'=>'index.php?action='.OPERATION_CREAR_CANCHA,
+                'CREAR_CORREDOR'=>'index.php?action='.OPERATION_CREAR_CORREDOR,
+                'CREAR_PARQUEADERO'=>'index.php?action='.OPERATION_CREAR_PARQUEADERO,
+                'CREAR_PISCINA'=>'index.php?action='.OPERATION_CREAR_PISCINA,
+                'CREAR_PLAZOLETA'=>'index.php?action='.OPERATION_CREAR_PLAZOLETA,
+                'CREAR_SENDERO'=>'index.php?action='.OPERATION_CREAR_SENDERO,
+                'CREAR_VIAS'=>'index.php?action='.OPERATION_CREAR_VIAS,
                 'CREAR_EDIFICIO'=>'index.php?action='.OPERATION_CREAR_EDIFICIO,
                 'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_ESPACIO,
                 'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_TIPO_MATERIAL,
@@ -81,19 +88,19 @@ class controlador_vista
             if(strcmp($_SESSION['creacion_planta'],'true') == 0){
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_planta.html';
             }else{
-                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_planta.html';
+                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_consulta_planta.html';
             }
         }elseif (strcmp($modulo,MOD_INVENTARIO) == 0) {
             if(strcmp($_SESSION['creacion_inventario'],'true') == 0){
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_inventario.html';
             }else{
-                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_inventario.html';
+                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_consulta_inventario.html';
             }
         }elseif (strcmp($modulo,MOD_AIRES) == 0) {
             if(strcmp($_SESSION['creacion_aires'],'true') == 0){
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_aires.html';
             }else{
-                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_aires.html';
+                $file = dirname(__FILE__).'/vistas/vistas_menu/menu_consulta_aires.html';
             }
         }else{
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_'.$modulo.'.html';
@@ -116,7 +123,6 @@ class controlador_vista
             $file = dirname(__FILE__).'/vistas/'.$operacion.'.html';
         }
         elseif(strcmp($accion,"menu_principal") == 0){
-
             //Menú principal para el usuario con acceso a todos los módulos de la aplicación
             if (strcmp($_SESSION["perfil"],"admin") == 0) {
                 $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_admin.html';
