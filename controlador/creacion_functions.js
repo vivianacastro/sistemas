@@ -20,15 +20,54 @@ $(document).ready(function() {
             actualizarSelectSede();
             actualizarSelectMaterial("material_fachada",0);
             initMap();
-            getCoordenadas()
+            getCoordenadas();
         }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
-            getCoordenadas()
-        }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
+          initMap();
+          actualizarSelectSede();
+          actualizarSelectUsosEspacios();
+          actualizarSelectMaterial("material_pared",0);
+          actualizarSelectMaterial("material_techo",0);
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_iluminacion",0);
+          actualizarSelectTipoObjeto("tipo_interruptor",0);
+          actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_pintura",0);
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
             actualizarSelectUsosEspacios();
             actualizarSelectMaterial("material_pared",0);
@@ -106,7 +145,7 @@ $(document).ready(function() {
             });
         });
     }
-    
+
     /**
      * Función que permite crear una sede
      * @param {string} consulta, información de la sede
@@ -141,7 +180,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un campus
-     * @param {string} informacion, información del campus 
+     * @param {string} informacion, información del campus
      * @returns {data}
      */
     function guardarCampus(informacion){
@@ -174,7 +213,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un edificio
-     * @param {string} informacion, información del edificio 
+     * @param {string} informacion, información del edificio
      * @returns {data}
      */
     function guardarEdificio(informacion){
@@ -206,7 +245,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un espacio
-     * @param {string} informacion, información del espacio 
+     * @param {string} informacion, información del espacio
      * @returns {data}
      */
     function guardarEspacio(){
@@ -287,7 +326,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un tipo de material
-     * @param {string} informacion, información del tipo de material 
+     * @param {string} informacion, información del tipo de material
      * @returns {data}
      */
     function guardarTipoMaterial(informacion){
@@ -558,12 +597,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -588,12 +627,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -618,12 +657,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -649,12 +688,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -679,12 +718,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -708,12 +747,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -739,12 +778,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -770,12 +809,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -807,12 +846,12 @@ $(document).ready(function() {
                     console.log(error.toString());
                     location.reload(true);
                 },
-                success: function(data){  
+                success: function(data){
                     dataResult = data;
                 }
             });
             return dataResult;
-        } 
+        }
         catch(ex) {
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
@@ -1030,7 +1069,7 @@ $(document).ready(function() {
             $('#div_espacio_padre').hide();
         }
     });
-    
+
     /**
      * Se captura el evento cuando se da click en el boton guardar_sede y se
      * realiza la operacion correspondiente.
@@ -1051,7 +1090,7 @@ $(document).ready(function() {
                     if (resultado.verificar) {
                         $("#nombre_sede").val("");
                         window.scrollTo(0,0);
-                    }                    
+                    }
                 }
             }
         }
@@ -1409,7 +1448,7 @@ $(document).ready(function() {
                             break;
                         }else{
                             numeroEspacio[i] = $("#id_espacio"+i).val();
-                        }                        
+                        }
                     }
                     var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio[i]);
                     if (!comprobarEspacio.verificar){
