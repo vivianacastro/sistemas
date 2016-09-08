@@ -37,7 +37,7 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_iluminacion",0);
           actualizarSelectTipoObjeto("tipo_interruptor",0);
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
-        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+        }/*else if(URLactual['href'].indexOf('crear_cancha') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
@@ -67,7 +67,7 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
+        }*/else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
             actualizarSelectUsosEspacios();
             actualizarSelectMaterial("material_pared",0);
