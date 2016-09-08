@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Plazoleta</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n de la Plazoleta</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_sede' id='nombre_sede' required></select><br>
+        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
+        <div class='div_izquierda'><b>C&oacute;digo de la Plazoleta<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='id_plazoleta' id='id_plazoleta' maxlength="10" value='' placeholder='Ej: 1' required/><br>
+        <div class='div_izquierda'><b>Nombre de la Plazoleta<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='nombre' id='nombre' maxlength="10" value='' placeholder='Ej: Plazoleta Ingenier&ioacute;as' required/><br>
+        <div class='form-group'>
+            <div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n de la Plazoleta</h5></b></div>
+            <div id='iluminacion'>
+                <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
+                <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' required></select><br>
+                <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
+                <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' required/><br>
+            </div>
+            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
+            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
+        </div><br>
+        <div class='div_izquierda'><b>Planos Plazoleta (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+        <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
+        <div class='div_izquierda'><b>Fotos Plazoleta (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
+        <br><div class='div_izquierda'><b>Indique la ubicación de la Plazoleta</b></div>
+        <div id="map" class="mapa"></div>
+    <div><br>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_plazoleta' id='guardar_plazoleta' value='Crear Plazoleta' title='Guardar información de la Plazoleta'/>
+    </div>
+</div>

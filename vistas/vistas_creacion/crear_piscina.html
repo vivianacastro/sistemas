@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Piscina</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n de la Piscina</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_sede' id='nombre_sede' required></select><br>
+        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
+        <div class='div_izquierda'><b>C&oacute;digo de la Piscina<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='id_plazoleta' id='id_plazoleta' maxlength="10" value='' placeholder='Ej: 1' required/><br>
+        <div class='div_izquierda'><b>Ancho de la Piscina:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+            <span class="input-group-addon">cm</span>
+        </div><br>
+        <div class='div_izquierda'><b>Alto de la Piscina:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='alto' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+            <span class="input-group-addon">cm</span>
+        </div><br>
+        <div class='div_izquierda'><b>Largo de la Piscina:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='largo' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+            <span class="input-group-addon">cm</span>
+        </div><br>
+        <div class='div_izquierda'><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>
+        <input class='form-control formulario' type="number" name='cantidad_puntos_hidraulicos' id='cantidad_puntos_hidraulicos' min="1" class="form-control" value='' placeholder='Ej: 10' required><br>
+        <div class='div_izquierda'><b>Planos Plazoleta (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+        <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
+        <div class='div_izquierda'><b>Fotos Plazoleta (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
+        <br><div class='div_izquierda'><b>Indique la ubicación de la Piscina</b></div>
+        <div id="map" class="mapa"></div>
+    <div><br>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_piscina' id='guardar_piscina' value='Crear Piscina' title='Guardar información de la Piscina'/>
+    </div>
+</div>

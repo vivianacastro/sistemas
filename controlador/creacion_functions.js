@@ -25,49 +25,47 @@ $(document).ready(function() {
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
-            initMap();
-            getCoordenadas();
+
         }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
-          initMap();
           actualizarSelectSede();
-          actualizarSelectUsosEspacios();
           actualizarSelectMaterial("material_pared",0);
           actualizarSelectMaterial("material_techo",0);
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_iluminacion",0);
           actualizarSelectTipoObjeto("tipo_interruptor",0);
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
-        }/*else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+          initMap();
+          getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+        }else if(URLactual['href'].indexOf('crear_piscina') >= 0){
+            actualizarSelectSede();
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_plazoleta') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+        }else if(URLactual['href'].indexOf('crear_sendero') >= 0){
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_cubierta",0);
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_iluminacion",0);
+            initMap();
+            getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_vias') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
-            actualizarSelectSede();
-            actualizarSelectMaterial("material_piso",0);
-            actualizarSelectTipoObjeto("tipo_pintura",0);
-            initMap();
-            getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
-            actualizarSelectSede();
-            actualizarSelectMaterial("material_piso",0);
-            actualizarSelectTipoObjeto("tipo_pintura",0);
-            initMap();
-            getCoordenadas();
-        }*/else if(URLactual['href'].indexOf('crear_espacio') >= 0){
+        }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
             actualizarSelectUsosEspacios();
             actualizarSelectMaterial("material_pared",0);
