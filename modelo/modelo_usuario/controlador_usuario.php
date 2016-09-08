@@ -70,9 +70,9 @@ class controlador_usuario {
      * Función que permite iniciar una sesion por un usuario, ademas esta
      * función se encarga de desplegar el panel de logeo o el mostrar la pagina
      * de inicio de la aplicación web.
-     */    
+     */
     public function iniciar_sesion() {
-        session_start();        
+        session_start();
         //instaciar el objeto de la clase Modelo
         $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -109,7 +109,7 @@ class controlador_usuario {
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
             }
         }else{
-            if($_SESSION["autorizado"] & isset($_SESSION['userid']) 
+            if($_SESSION["autorizado"] & isset($_SESSION['userid'])
                     & isset($_SESSION['perfil'])) {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
@@ -126,14 +126,14 @@ class controlador_usuario {
      * Función que permite cerrar una sesion de un usuario.
     */
     public function cerrar_sesion() {
-        session_start();        
+        session_start();
         //eliminar informacion almacenada de la sesion
         session_unset();
         //finalizar sesion
-        session_destroy ();        
+        session_destroy ();
         $data = array(
             'mensaje' => 'Bienvenido  '. date('d-m-y  h:i A'),
-        );        
+        );
         $v = new Controlador_vista();
         $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
     }
@@ -176,7 +176,7 @@ class controlador_usuario {
                     $_SESSION["nombre_usuario"] = ucwords($info["nombre"]);
                     $_SESSION["correo"] = $info["correo"];
                     $_SESSION["telefono"] = $info["telefono"];
-                    $_SESSION["extension"] = $info["extension"];                    
+                    $_SESSION["extension"] = $info["extension"];
                 }
             }
         }
@@ -197,7 +197,7 @@ class controlador_usuario {
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarContrasena($_SESSION['login'],$info['contrasenia_actual']);
             if ($verificar) {
-                $verificar = $m->modificarContrasenia($_SESSION['login'],$info['contrasenia_nueva']);    
+                $verificar = $m->modificarContrasenia($_SESSION['login'],$info['contrasenia_nueva']);
             }else{
                 $GLOBALS['mensaje'] = "ERROR. Contraseña incorrecta";
             }
@@ -290,30 +290,30 @@ class controlador_usuario {
         $result['verificar'] = $verificar;
         echo json_encode($result);
     }
-    
-    
+
+
     /**
      * Función que permite chekear si hay una sesion iniciada.
-    */    
+    */
     public function check() {
         session_start();
-        if(isset($_SESSION['userid']) & $_SESSION["autorizado"]) {            
-            $fechaGuardada = $_SESSION["ultimoAcceso"]; 
-            $ahora = time(); 
-            $tiempo_transcurrido = $ahora-$fechaGuardada; 
-            if($tiempo_transcurrido >= T_SEGUNDOS_INACTIVIDAD_PERMITIDO) { 
+        if(isset($_SESSION['userid'])) {            
+            $fechaGuardada = $_SESSION["ultimoAcceso"];
+            $ahora = time();
+            $tiempo_transcurrido = $ahora-$fechaGuardada;
+            if($tiempo_transcurrido >= T_SEGUNDOS_INACTIVIDAD_PERMITIDO) {
                 session_unset();
                 session_destroy();
                 return false;
-            }else { 
+            }else {
                 $_SESSION["ultimoAcceso"] = $ahora;
                 return true;
-            }             
-        }   
+            }
+        }
         return false;
     }
 
-    
+
 }
 
 ?>

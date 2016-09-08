@@ -1,6 +1,6 @@
 <?php
 /**
- * Constantes del sistema 
+ * Constantes del sistema
  */
 const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 6000000000000000;//600;
 
@@ -24,8 +24,8 @@ const MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
 const CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
 
 const MOD_PLANTA = 'mod_planta';
-const MOD_PLANTA = 'mod_inventario';
-const MOD_PLANTA = 'mod_aires';
+const MOD_INVENTARIO = 'mod_inventario';
+const MOD_AIRES = 'mod_aires';
 
 const OPERATION_MOD_PLANTA = 'modulo_planta';
 const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
