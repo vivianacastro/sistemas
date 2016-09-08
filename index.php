@@ -2,8 +2,8 @@
 //definicion de la ruta de la aplicacion
 define('__ROOT__', dirname(__FILE__));
 
-//dependencias de la aplicacion 
-require_once __ROOT__.'/modelo/config.php'; 
+//dependencias de la aplicacion
+require_once __ROOT__.'/modelo/config.php';
 require_once __ROOT__.'/modelo/constantes.php';
 require_once __ROOT__.'/controlador_vista.php';
 require_once __ROOT__.'/modelo/modelo_consultas/controlador_consultas.php';
@@ -47,6 +47,8 @@ $map = array(
     'crear_campus' => array('controlador' =>'controlador_creacion', 'action' =>'crear_campus'),
     'crear_cancha' => array('controlador' =>'controlador_creacion', 'action' =>'crear_cancha'),
     'crear_corredor' => array('controlador' =>'controlador_creacion', 'action' =>'crear_corredor'),
+    'crear_cubierta' => array('controlador' =>'controlador_creacion', 'action' =>'crear_cubierta'),
+    'crear_gradas' => array('controlador' =>'controlador_creacion', 'action' =>'crear_gradas'),
     'crear_parqueadero' => array('controlador' =>'controlador_creacion', 'action' =>'crear_parqueadero'),
     'crear_piscina' => array('controlador' =>'controlador_creacion', 'action' =>'crear_piscina'),
     'crear_plazoleta' => array('controlador' =>'controlador_creacion', 'action' =>'crear_plazoleta'),
@@ -79,7 +81,7 @@ $map = array(
     'ubicacion_campus' => array('controlador' =>'controlador_consultas', 'action' =>'ubicacion_campus'),
 
     //Acciones Módulo Inventario
-    
+
     //Acciones Módulo Aires Acondicionados
 );
 
@@ -118,7 +120,7 @@ if(!call_user_func(array(new controlador_usuario, 'check'))){
 }
 $controlador = $map[$ruta];
 // Ejecución del controlador asociado a la ruta
-if (method_exists($controlador['controlador'],$controlador['action'])){   
+if (method_exists($controlador['controlador'],$controlador['action'])){
     call_user_func(array(new $controlador['controlador'], $controlador['action']));
 }else{
     header('Status: 404 Not Found');

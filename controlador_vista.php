@@ -8,16 +8,16 @@ class controlador_vista
 {
     //array que guarda el diccionario de rutas del menu y formularios
     var $diccionario = array();
-    
+
     /**
      * Metodo constructora del Controlador_vista.
      * @global array $diccionario
     **/
     function __construct() {
-        
+
         global $diccionario;
-        
-        $diccionario = array(    
+
+        $diccionario = array(
             'links_comunes'=>array(
                 'MENU_PRINCIPAL'=>'index.php?action='.MENU_PRINCIPAL,
                 'INFORMACION_USUARIO'=>'index.php?action='.INFORMACION_USUARIO,
@@ -32,6 +32,8 @@ class controlador_vista
                 'CREAR_CAMPUS'=>'index.php?action='.OPERATION_CREAR_CAMPUS,
                 'CREAR_CANCHA'=>'index.php?action='.OPERATION_CREAR_CANCHA,
                 'CREAR_CORREDOR'=>'index.php?action='.OPERATION_CREAR_CORREDOR,
+                'CREAR_CUBIERTA'=>'index.php?action='.OPERATION_CREAR_CUBIERTA,
+                'CREAR_GRADAS'=>'index.php?action='.OPERATION_CREAR_GRADAS,
                 'CREAR_PARQUEADERO'=>'index.php?action='.OPERATION_CREAR_PARQUEADERO,
                 'CREAR_PISCINA'=>'index.php?action='.OPERATION_CREAR_PISCINA,
                 'CREAR_PLAZOLETA'=>'index.php?action='.OPERATION_CREAR_PLAZOLETA,
@@ -61,9 +63,9 @@ class controlador_vista
                 'FORM_MOD_AIRES'=>'index.php?action='.OPERATION_MOD_AIRES,
                 'FORM_MOD_USUARIO'=>'index.php?action='.OPERATION_MOD_USUARIO,
             ),
-        );        
+        );
     }
-    
+
     /**
     *funcion que permite cargar de forma dinamica las librerias de la aplicacion web
     *@param $operacion. Hace referencia la modulo que se carga una vez ejecutada una ruta
@@ -75,10 +77,10 @@ class controlador_vista
 
         return $link;
     }
-    
+
     /**
      * Función que permite conseguir y alamacenar como un string el menu de
-     * operaciones adicional dependiendo de la operación a realizar. 
+     * operaciones adicional dependiendo de la operación a realizar.
      * @param string $accion, Cadena que hace referencia a la operación a realizar por
      * por parte del usuario y el módulo al que pertenece.
      * @return string
@@ -104,8 +106,8 @@ class controlador_vista
             }
         }else{
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_'.$modulo.'.html';
-        }        
-        $template = file_get_contents($file);        
+        }
+        $template = file_get_contents($file);
         return $template;
     }
 
@@ -118,7 +120,7 @@ class controlador_vista
      * permite realizar la vista que se va a visualizar.
      * @return string.
     **/
-    function conseguir_plantilla($operacion='registros', $accion=''){        
+    function conseguir_plantilla($operacion='registros', $accion=''){
         if(strcmp($operacion, 'template1') == 0 || strcmp($operacion, 'template2') == 0 || strcmp($operacion, 'template3') == 0 ){
             $file = dirname(__FILE__).'/vistas/'.$operacion.'.html';
         }
@@ -161,7 +163,7 @@ class controlador_vista
     }
 
     /**
-     * Función que permite replazar dinamicamente informacion en cada página 
+     * Función que permite replazar dinamicamente informacion en cada página
      * html.
      * @param string $html, Cadena que que contiene el html de la página a
      * visualizar.
@@ -176,22 +178,22 @@ class controlador_vista
 
         return $html;
     }
-           
+
     /**
-     * Función que retorna y permite visualizar la página requerida por el 
+     * Función que retorna y permite visualizar la página requerida por el
      * usuario.
      * @global array $diccionario
      * @param string $modulo, cadena que hace referencia al módulo al que pertenece la
      * operación a realizar.
-     * @param string $operacion, cadena que hace referencia a la 
+     * @param string $operacion, cadena que hace referencia a la
      * operación a realizar.
      * @param string $accion, cadena que hace referencia a la operación que
      * permite realizar la vista que se va a visualizar.
      * @param array $data, arreglo que contiene la información que se va a
-     * reemplazar dinámicamente. 
+     * reemplazar dinámicamente.
     **/
     function retornar_vista($modulo, $operacion, $accion, $data=array()) {
-        global $diccionario;        
+        global $diccionario;
         if(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, INICIAR_SESION) == 0)){
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);

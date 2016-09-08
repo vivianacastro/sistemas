@@ -26,7 +26,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * un campus en el sistema.
     **/
-    public function crear_campus() {        
+    public function crear_campus() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Campus',
@@ -44,7 +44,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * una cancha en el sistema.
     **/
-    public function crear_cancha() {        
+    public function crear_cancha() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Cancha',
@@ -62,7 +62,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * un corredor en el sistema.
     **/
-    public function crear_corredor() {        
+    public function crear_corredor() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Corredor',
@@ -76,11 +76,47 @@ class controlador_creacion
         }
     }
 
+		/**
+    * Función que despliega el panel que permite crear
+    * una cubierta en el sistema.
+    **/
+    public function crear_cubierta() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Cubierta',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CUBIERTA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+		/**
+    * Función que despliega el panel que permite crear
+    * las gradas en el sistema.
+    **/
+    public function crear_gradas() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Gradas',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_GRADAS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
     /**
     * Función que despliega el panel que permite crear
     * una cancha en el sistema.
     **/
-    public function crear_parqueadero() {        
+    public function crear_parqueadero() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Parqueadero',
@@ -98,7 +134,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * una piscina en el sistema.
     **/
-    public function crear_piscina() {        
+    public function crear_piscina() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Piscina',
@@ -116,7 +152,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * una plazoleta en el sistema.
     **/
-    public function crear_plazoleta() {        
+    public function crear_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Plazoleta',
@@ -134,7 +170,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * un sendero en el sistema.
     **/
-    public function crear_sendero() {        
+    public function crear_sendero() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Sendero Peatonal',
@@ -152,7 +188,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * una vias en el sistema.
     **/
-    public function crear_vias() {        
+    public function crear_vias() {
         $GLOBALS['mensaje'] = "";
         $data = array(
             'mensaje' => 'Crear Vías',
@@ -166,7 +202,7 @@ class controlador_creacion
         }
     }
 
-    
+
 
     /**
     * Función que despliega el panel que permite crear
@@ -446,7 +482,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 
@@ -473,7 +509,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 
@@ -495,7 +531,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 
@@ -517,7 +553,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 
@@ -539,7 +575,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 
@@ -561,7 +597,7 @@ class controlador_creacion
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }
-        }        
+        }
         echo json_encode($result);
     }
 }

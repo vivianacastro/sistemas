@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Cubierta</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n de la Cubierta</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_sede' id='nombre_sede' required></select><br>
+        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
+        <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio' required></select><br>
+        <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
+        <div class='div_izquierda'><b>Tipo de cubierta:</b></div>
+        <select class='form-control formulario' name='tipo_cubierta' id='tipo_cubierta' required></select><br>
+        <div class='div_izquierda'><b>Material de la cubierta:</b></div>
+        <select class='form-control formulario' name='material_cubierta' id='material_cubierta' required></select><br>
+        <div class='div_izquierda'><b>Ancho de la Cubierta:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 2' required>
+            <span class="input-group-addon">m</span>
+        </div><br>
+        <div class='div_izquierda'><b>Largo de la Cubierta:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='largo' id='largo' min="1" class="form-control" value='' placeholder='Ej: 2' required>
+            <span class="input-group-addon">m</span>
+        </div><br>
+        <div class='div_izquierda'><b>Planos Cubierta (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+        <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
+        <div class='div_izquierda'><b>Fotos Cubierta (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
+    <div><br>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_cubierta' id='guardar_cubierta' value='Crear Cubierta' title='Guardar información de la Cubierta'/>
+    </div>
+</div>

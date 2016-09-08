@@ -4,6 +4,7 @@ $(document).ready(function() {
     var coordenadas = {};
     var dataEspacio = {};
     var map;
+    var URLactual = window.location;
 
     /**
      * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -11,7 +12,6 @@ $(document).ready(function() {
      * @returns {undefined}
      */
     (function (){
-        var URLactual = window.location;
         if(URLactual['href'].indexOf('crear_campus') >= 0){
             actualizarSelectSede();
             initMap();
@@ -36,6 +36,13 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
           initMap();
           getCoordenadas();
+        }else if(URLactual['href'].indexOf('crear_cubierta') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_cubierta",0);
+          actualizarSelectTipoObjeto("tipo_cubierta",0);
+        }else if(URLactual['href'].indexOf('crear_gradas') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_pasamanos",0);
         }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
@@ -995,8 +1002,10 @@ $(document).ready(function() {
                 lng: longitud,
                 lat: latitud
             }
-            map.panTo(coords);
-            google.maps.event.trigger(map, 'resize');
+            if (map != undefined) {
+              map.panTo(coords);
+              google.maps.event.trigger(map, 'resize');
+            }
         }
         var data = buscarEdificios(campus);
         $("#nombre_edificio").empty();
@@ -1024,35 +1033,80 @@ $(document).ready(function() {
         edificio["nombre_edificio"] = limpiarCadena($("#nombre_edificio").val());
         edificio["nombre_campus"] = limpiarCadena($("#nombre_campus").val());
         var data = buscarPisosEdificio(edificio);
-        $("#pisos").empty();
-        var row = $("<option value=''/>");
-        row.text("--Seleccionar--");
-        row.appendTo("#pisos");
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                numeroPisos = record.numero_pisos;
-                terraza = record.terraza;
-                sotano = record.sotano;
-            }
-        });
-        for (var i=0; i<numeroPisos;i++) {
-            if (i == 0 && sotano == 'true') {
-                aux = "Sotano";
-                row = $("<option value='sotano'/>");
-                row.text(aux);
-                row.appendTo("#pisos");
-            }
-            aux = i+1;
-            row = $("<option value='" + aux + "'/>");
-            row.text(aux);
+        if (URLactual['href'].indexOf('crear_gradas') >= 0) {
+          $("#piso_inicio").empty();
+          $("#piso_fin").empty();
+          var row = $("<option value=''/>");
+          var row2 = $("<option value=''/>");;
+          row.text("--Seleccionar--");
+          row2.text("--Seleccionar--");
+          row.appendTo("#piso_inicio");
+          row2.appendTo("#piso_fin");
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                  numeroPisos = record.numero_pisos;
+                  terraza = record.terraza;
+                  sotano = record.sotano;
+              }
+          });
+          for (var i=0; i<numeroPisos;i++) {
+              if (i == 0 && sotano == 'true') {
+                  aux = "Sotano";
+                  row = $("<option value='sotano'/>");
+                  row2 = $("<option value='sotano'/>");
+                  row.text(aux);
+                  row2.text(aux);
+                  row.appendTo("#piso_inicio");
+                  row2.appendTo("#piso_fin");
+              }
+              aux = i+1;
+              row = $("<option value='" + aux + "'/>");
+              row2 = $("<option value='" + aux + "'/>");
+              row.text(aux);
+              row2.text(aux);
+              row.appendTo("#piso_inicio");
+              row2.appendTo("#piso_fin");
+              if (i == (numeroPisos-1) && terraza == 'true') {
+                  aux = "Terraza";
+                  row = $("<option value='terraza'/>");
+                  row2 = $("<option value='terraza'/>");
+                  row.text(aux);
+                  row2.text(aux);
+                  row.appendTo("#piso_inicio");
+                  row2.appendTo("#piso_fin");
+              }
+          }
+        }else{
+            $("#pisos").empty();
+            var row = $("<option value=''/>");
+            row.text("--Seleccionar--");
             row.appendTo("#pisos");
-            if (i == (numeroPisos-1) && terraza == 'true') {
-                aux = "Terraza";
-                row = $("<option value='terraza'/>");
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    numeroPisos = record.numero_pisos;
+                    terraza = record.terraza;
+                    sotano = record.sotano;
+                }
+            });
+            for (var i=0; i<numeroPisos;i++) {
+                if (i == 0 && sotano == 'true') {
+                    aux = "Sotano";
+                    row = $("<option value='sotano'/>");
+                    row.text(aux);
+                    row.appendTo("#pisos");
+                }
+                aux = i+1;
+                row = $("<option value='" + aux + "'/>");
                 row.text(aux);
                 row.appendTo("#pisos");
+                if (i == (numeroPisos-1) && terraza == 'true') {
+                    aux = "Terraza";
+                    row = $("<option value='terraza'/>");
+                    row.text(aux);
+                    row.appendTo("#pisos");
+                }
             }
-        };
+        }
     });
 
     /**
