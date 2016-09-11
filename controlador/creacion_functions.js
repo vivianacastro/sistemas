@@ -43,6 +43,8 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('crear_gradas') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_pasamanos",0);
+          actualizarSelectMaterial("material_ventana",0);
+          actualizarSelectTipoObjeto("tipo_ventana",0);
         }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
@@ -115,7 +117,7 @@ $(document).ready(function() {
      */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 3.375119, lng: -76.5336927},//{lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
+            center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
@@ -228,6 +230,38 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=guardar_edificio",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //mostrarMensaje(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite crear las gradas
+     * @param {string} informacion, información de las gradas
+     * @returns {data}
+     */
+    function guardarGradas(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_gradas",
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -526,6 +560,70 @@ $(document).ready(function() {
      * @param {formData} informacion, formData con las imagenes.
      * @returns {data}
      */
+    function guardarPlanosGradas(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_planos_gradas",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar las fotos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
+    function guardarFotosGradas(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_fotos_gradas",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar los planos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
     function guardarPlanosEspacio(informacion){
         var dataResult;
         try {
@@ -624,7 +722,7 @@ $(document).ready(function() {
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_campus",
+                url: "index.php?action=consultar_todos_campus",
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -1034,14 +1132,10 @@ $(document).ready(function() {
         edificio["nombre_campus"] = limpiarCadena($("#nombre_campus").val());
         var data = buscarPisosEdificio(edificio);
         if (URLactual['href'].indexOf('crear_gradas') >= 0) {
-          $("#piso_inicio").empty();
-          $("#piso_fin").empty();
+          $("#pisos").empty();
           var row = $("<option value=''/>");
-          var row2 = $("<option value=''/>");;
           row.text("--Seleccionar--");
-          row2.text("--Seleccionar--");
-          row.appendTo("#piso_inicio");
-          row2.appendTo("#piso_fin");
+          row.appendTo("#pisos");
           $.each(data, function(index, record) {
               if($.isNumeric(index)) {
                   numeroPisos = record.numero_pisos;
@@ -1053,27 +1147,23 @@ $(document).ready(function() {
               if (i == 0 && sotano == 'true') {
                   aux = "Sotano";
                   row = $("<option value='sotano'/>");
-                  row2 = $("<option value='sotano'/>");
                   row.text(aux);
-                  row2.text(aux);
-                  row.appendTo("#piso_inicio");
-                  row2.appendTo("#piso_fin");
+                  row.appendTo("#pisos");
               }
-              aux = i+1;
-              row = $("<option value='" + aux + "'/>");
-              row2 = $("<option value='" + aux + "'/>");
-              row.text(aux);
-              row2.text(aux);
-              row.appendTo("#piso_inicio");
-              row2.appendTo("#piso_fin");
               if (i == (numeroPisos-1) && terraza == 'true') {
-                  aux = "Terraza";
-                  row = $("<option value='terraza'/>");
-                  row2 = $("<option value='terraza'/>");
+                  aux = i+1;
+                  row = $("<option value='" + aux + "'/>");
                   row.text(aux);
-                  row2.text(aux);
-                  row.appendTo("#piso_inicio");
-                  row2.appendTo("#piso_fin");
+                  row.appendTo("#pisos");
+                  aux = "Terraza";
+                  /*row = $("<option value='terraza'/>");
+                  //row.text(aux);
+                  row.appendTo("#pisos");*/
+              }else if(i < (numeroPisos-1)){
+                  aux = i+1;
+                  row = $("<option value='" + aux + "'/>");
+                  row.text(aux);
+                  row.appendTo("#pisos");
               }
           }
         }else{
@@ -1106,6 +1196,32 @@ $(document).ready(function() {
                     row.appendTo("#pisos");
                 }
             }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del radio button pasamanos
+     * y se actualiza el selector de pisos.
+     */
+    $("#form_pasamanos").change(function (e) {
+        var pasamanos = $('input[name="pasamanos"]:checked').val();
+        if (pasamanos == "true") {
+            $('#divPasamanos').show();
+        }else{
+            $('#divPasamanos').hide();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del radio button ventanas
+     * y se actualiza el selector de pisos.
+     */
+    $("#form_ventanas").change(function (e) {
+        var ventanas = $('input[name="ventanas"]:checked').val();
+        if (ventanas == "true") {
+            $('#divVentanas').show();
+        }else{
+            $('#divVentanas').hide();
         }
     });
 
@@ -1228,7 +1344,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (typeof resultadoFotos-+9[0] !== 'undefined' && resultadoFotos-+9[0] !== null) {
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1865,9 +1981,9 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>Capacidad del salón<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="capacidad" id="capacidad" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>¿El salón tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
@@ -1880,9 +1996,9 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>Capacidad del auditorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="capacidad" id="capacidad" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>¿El auditorio tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
@@ -1895,19 +2011,19 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>Capacidad del laboratorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="capacidad" id="capacidad" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>¿El laboratorio tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
                                     +'<div id="punto_sanitario">'
                                     +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
                                 $('#botones_punto_sanitario').show();
@@ -1921,9 +2037,9 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="capacidad" id="capacidad" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="capacidad" id="capacidad" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
@@ -1936,7 +2052,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Oficina');
@@ -1948,12 +2064,12 @@ $(document).ready(function() {
                                     +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
                                     +'<div id="lavamanos">'
                                     +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
@@ -1969,12 +2085,12 @@ $(document).ready(function() {
                                     +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false">No</label>'
                                     +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
                                     +'<div id="orinal">'
                                     +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
                                 $('#botones_lavamanos').show();
@@ -1992,7 +2108,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
                                     +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
@@ -2005,7 +2121,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Bodega/Almacén');
@@ -2017,7 +2133,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Cuarto');
@@ -2027,7 +2143,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Cuarto');
@@ -2037,7 +2153,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del área deportiva cerrada<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Área');
@@ -2049,7 +2165,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Centro de Datos');
@@ -2063,12 +2179,12 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
                                     +'<div id="punto_sanitario">'
                                     +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
                                 $('#botones_punto_sanitario').show();
@@ -2083,12 +2199,12 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
                                     +'<div id="punto_sanitario">'
                                     +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
                                     +'</div>'
                                     +'</div>';
                                 $('#botones_punto_sanitario').show();
@@ -2101,7 +2217,7 @@ $(document).ready(function() {
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
                                     +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
                                     +'</div>';
                                 añadirComponente("informacionEspacio",componente);
                                 $('#guardar_espacio_adicional').val('Crear Sala');
@@ -2283,6 +2399,172 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el boton guardar_gradas y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_gradas").click(function (e){
+      try{
+          var confirmacion = window.confirm("¿Guardar la información de las gradas?");
+          if (confirmacion) {
+              var nombreSede = $("#nombre_sede").val();
+              var nombreCampus = $("#nombre_campus").val();
+              var nombreEdificio = $("#nombre_edificio").val();
+              var pisoInicio = $("#pisos").val();
+              var pasamanos = $('input[name="pasamanos"]:checked').val();
+              var materialPasamanos = $("#material_pasamanos").val();
+              var ventanas = $('input[name="ventanas"]:checked').val();
+              var tipoVentana = {};
+              var cantidadVentanas = {};
+              var materialVentana = {};
+              var anchoVentana = {};
+              var altoVentana = {};
+              var planos = document.getElementById("planos[]");
+              var fotos = document.getElementById("fotos[]");
+              if(!validarCadena(nombreSede)){
+                  alert("ERROR. Seleccione la sede a la que pertenecen las gradas");
+                  $("#nombre_sede").focus();
+              }else if(!validarCadena(nombreCampus)){
+                  alert("ERROR. Ingrese el nombre del campus al que pertenecen las gradas");
+                  $("#nombre_campus").focus();
+              }else if(!validarCadena(nombreEdificio)){
+                  alert("ERROR. Seleccione el edificio al que pertenecen las gradas");
+                  $("#nombre_edificio").focus();
+              }else if(!validarCadena(pisoInicio)){
+                  alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
+                  $("#pisos").focus();
+              }else{
+                  for (var i=0;i<=ventanasCont;i++) {
+                      if (i==0) {
+                          tipoVentana[i] = $("#tipo_ventana").val();
+                          cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                          materialVentana[i] = $("#material_ventana").val();
+                          anchoVentana[i] = $("#ancho_ventana").val();
+                          altoVentana[i] = $("#alto_ventana").val();
+                      }else{
+                          tipoVentana[i] = $("#tipo_ventana"+i).val();
+                          cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                          materialVentana[i] = $("#material_ventana"+i).val();
+                          anchoVentana[i] = $("#ancho_ventana"+i).val();
+                          altoVentana[i] = $("#alto_ventana"+i).val();
+                      }
+                  }
+                  var informacion = {};
+                  var arregloFotos = new FormData();
+                  var arregloPlanos = new FormData();
+                  informacion['nombre_sede'] = nombreSede;
+                  informacion['nombre_campus'] = nombreCampus;
+                  informacion['nombre_edificio'] = nombreEdificio;
+                  informacion['piso_inicio'] = pisoInicio;
+                  informacion['pasamanos'] = pasamanos;
+                  informacion['material_pasamanos'] = materialPasamanos;
+                  informacion['ventana'] = ventanas;
+                  informacion['tipo_ventana'] = tipoVentana;
+                  informacion['cantidad_ventanas'] = cantidadVentanas;
+                  informacion['material_ventana'] = materialVentana;
+                  informacion['ancho_ventana'] = anchoVentana;
+                  informacion['alto_ventana'] = altoVentana;
+                  if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                      for (var i=0;i<fotos.files.length;i++) {
+                          var foto = fotos.files[i];
+                          if (foto.size > 2000000) {
+                              alert('La foto: "'+foto.name+"' es muy grande");
+                          }else{
+                              var nombreArchivo = foto.name;
+                              if(nombreArchivo.length > 50){
+                                  nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                              }
+                              arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                          }
+                      }
+                      for (var i=0;i<planos.files.length;i++) {
+                          var plano = planos.files[i];
+                          if (plano.size > 2000000) {
+                              alert('El archivo: "'+plano.name+"' es muy grande");
+                          }else{
+                              var nombreArchivo = plano.name;
+                              if(nombreArchivo.length > 50){
+                                  nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                              }
+                              arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                          }
+                      }
+                      arregloFotos.append('gradas',JSON.stringify(informacion));
+                      arregloPlanos.append('gradas',JSON.stringify(informacion));
+                      console.log(informacion);
+                      var resultado = guardarGradas(informacion);
+                      var resultadoPlanos = guardarPlanosGradas(arregloPlanos);
+                      var resultadoFotos = guardarFotosGradas(arregloFotos);
+                      mostrarMensaje(resultado.mensaje);
+                      console.log(resultado);
+                      console.log(resultadoPlanos);
+                      console.log(resultadoFotos);
+                      var mensaje = "";
+                      if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                          for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                              if (!resultadoPlanos.verificar[i]) {
+                                  mensaje += resultadoPlanos.mensaje[i];
+                              }
+                              if (i<resultadoPlanos.verificar.length-2) {
+                                  mensaje += "\n";
+                              }
+                          }
+                      }
+                      if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                          for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                              if (!resultadoFotos.verificar[i]) {
+                                  mensaje += resultadoFotos.mensaje[i];
+                              }
+                              if (i<resultadoFotos.verificar.length-1) {
+                                  mensaje += "\n";
+                              }
+                          }
+                      }
+                      if (mensaje.substring(0,0) != "") {
+                          console.log(mensaje.length);
+                          alert(mensaje);
+                      }
+                      if(resultado.verificar){
+                          $("#nombre_sede").val("");
+                          $("#nombre_campus").empty();
+                          $("#nombre_edificio").val("");
+                          $("#pisos").val("");
+                          $('input[name=pasamanos]').attr('checked',false);
+                          $('input[name=ventanas]').attr('checked',false);
+                          $("#tipo_ventana").val("");
+                          $("#cantidad_ventanas").val("");
+                          $("#material_ventana").val("");
+                          $("#ancho_ventana").val("");
+                          $("#alto_ventana").val("");
+                          $('#divVentanas').hide();
+                          for(var i=0;i<=ventanasCont;i++){
+                              eliminarComponente("ventana"+i);
+                              if(ventanasCont == 0){
+                                  $("#eliminar_ventana").attr('disabled','disabled');
+                              }
+                          }
+                          ventanasCont = 0;
+                          planos.value = "";
+                          fotos.value = "";
+                      }
+                  }else{
+                      if (planos.files.length <= 5) {
+                          alert("ERROR. El número máximo de planos por edificio es 5");
+                          planos.focus();
+                      }else{
+                          alert("ERROR. El número máximo de fotos por edificio es 20");
+                          fotos.focus();
+                      }
+                  }
+              }
+          }
+      }
+      catch(ex){
+          console.log(ex);
+          alert("Ocurrió un error, por favor inténtelo nuevamente");
+      }
+    });
+
+    /**
      * Se captura el evento cuando se da click en el boton guardar_tipo_material y se
      * realiza la operacion correspondiente.
      */
@@ -2386,7 +2668,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_iluminacion" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("iluminacion",componente);
         actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
@@ -2421,7 +2703,7 @@ $(document).ready(function() {
         +'<option value="no regulado">No Regulado</option>'
         +'</select><br>'
         +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("suministro_energia",componente);
         actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
@@ -2450,7 +2732,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
         +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2463,9 +2745,9 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
         +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
         +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("puerta",componente);
         actualizarSelectMaterial("material_puerta",puertasCont);
@@ -2495,13 +2777,13 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
         +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
         +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("ventana",componente);
         actualizarSelectMaterial("material_ventana",ventanasCont);
@@ -2531,7 +2813,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("interruptor",componente);
         actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
@@ -2560,7 +2842,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("punto_sanitario",componente);
         actualizarSelectTipoObjeto("tipo_punto_sanitario",puntosSanitariosCont);
@@ -2589,7 +2871,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("orinal",componente);
         actualizarSelectTipoObjeto("tipo_orinal",orinalesCont);
@@ -2618,7 +2900,7 @@ $(document).ready(function() {
         +'<div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
         +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="0" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
+        +'<input class="form-control formulario" type="number" min="1" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
         +'</div>'
         +'</div>';
         añadirComponente("lavamanos",componente);

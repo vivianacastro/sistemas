@@ -8,17 +8,17 @@ class modelo_consultas
 
     /**
      * Función contructur de la clase Model
-     * @param string $dbname nombre de la base de datos a la que se va a 
+     * @param string $dbname nombre de la base de datos a la que se va a
      * conectar el modelo.
-     * @param string $dbuser usuario con el que se va a conectar a la 
+     * @param string $dbuser usuario con el que se va a conectar a la
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
      */
     public function __construct($dbname,$dbuser,$dbpass,$dbhost){
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
-        try { 
-            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass); 
+        try {
+            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass);
             $this->conexion = $bd_conexion;
         } catch (PDOException $e) {
             var_dump( $e->getMessage());
@@ -30,7 +30,7 @@ class modelo_consultas
      * @return metadata con elresultado de la busqueda.
      */
     public function buscarSedes(){
-        $sql = "SELECT id,nombre from sede ORDER BY id;";
+        $sql = "SELECT id,nombre from sede ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Sedes 1)";
@@ -53,7 +53,7 @@ class modelo_consultas
      */
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $sql = "SELECT id,nombre from campus WHERE sede = '".$nombre_sede."' ORDER BY id;";
+        $sql = "SELECT id,nombre from campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 1)";

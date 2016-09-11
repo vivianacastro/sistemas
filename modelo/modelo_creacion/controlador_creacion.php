@@ -4,7 +4,7 @@
  */
 class controlador_creacion
 {
-	/**
+		/**
     * Función que despliega el panel que permite crear
     * una sede en el sistema.
     **/
@@ -202,8 +202,6 @@ class controlador_creacion
         }
     }
 
-
-
     /**
     * Función que despliega el panel que permite crear
     * un edificio en el sistema.
@@ -332,6 +330,27 @@ class controlador_creacion
             $verificar = $m->verificarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio']);
             if($verificar){
                 $m->guardarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar unas gradas en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+    */
+    public function guardar_gradas(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio']);
+            if($verificar){
+                $m->guardarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio'],$info['pasamanos'],$info['material_pasamanos'],$info['ventana'],$info['tipo_ventana'],$info['cantidad_ventanas'],$info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -550,6 +569,50 @@ class controlador_creacion
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
                 $verificar = $m->guardarFotoEdificio($infoEdificio['nombre_sede'],$infoEdificio['nombre_campus'],$infoEdificio['id_edificio'],$file);
+                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+                $result['verificar'][$i] = $verificar;
+            }
+        }
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar los planos que el usuario seleccione
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_planos_gradas(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = $_FILES;
+            $infoGradas = json_decode($_POST['gradas'], true);
+            for ($i=0; $i < count($info); $i++) {
+                $file = $info['archivo'.$i];
+                $verificar = $m->guardarPlanoGradas($infoGradas['nombre_sede'],$infoGradas['nombre_campus'],$infoGradas['nombre_edificio'],$infoGradas['piso_inicio'],$file);
+                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+                $result['verificar'][$i] = $verificar;
+            }
+        }
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite guardar las fotos que el usuario seleccione
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_fotos_gradas(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = $_FILES;
+            $infoGradas = json_decode($_POST['gradas'], true);
+            for ($i=0; $i < count($info); $i++) {
+                $file = $info['archivo'.$i];
+                $verificar = $m->guardarFotoGradas($infoGradas['nombre_sede'],$infoGradas['nombre_campus'],$infoGradas['nombre_edificio'],$infoGradas['piso_inicio'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['verificar'][$i] = $verificar;
             }

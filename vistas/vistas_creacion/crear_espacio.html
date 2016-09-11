@@ -24,9 +24,11 @@
         </div><br>
         <div class='div_izquierda'><b>Uso del(os) Espacio(s)<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='uso_espacio' id='uso_espacio' required></select><br>
-        <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_informacion_adicional' id='añadir_informacion_adicional' value='Añadir Información' title='Añadir Información Adicional del(os) espacio(s)'/>
-        <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_informacion_adicional' id='eliminar_informacion_adicional' value='Eliminar Información' title='Eliminar Información Adicional del(os) espacio(s)' disabled/>
-        <div id="informacion-adicional" style='display:none'><br>
+        <div id="divBotonesInformacionAdicional">
+          <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_informacion_adicional' id='añadir_informacion_adicional' value='Añadir Información' title='Añadir Información Adicional del(os) espacio(s)'/>
+          <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_informacion_adicional' id='eliminar_informacion_adicional' value='Eliminar Información' title='Eliminar Información Adicional del(os) espacio(s)' disabled/>
+        </div>
+        <div id="informacion-adicional" style='display:none'>
             <div class='form-group'>
                 <div><b><h5>Informaci&oacute;n de las Paredes del(os) Espacio(s)</h5></b></div>
                 <div class='div_izquierda'><b>Altura de las paredes:</b></div>
@@ -215,7 +217,7 @@
                 </div>
             <div class='form_button modal-footer'>
               <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_espacio_adicional' id='guardar_espacio_adicional' value='Crear Espacio' title='Guardar informaci&oacute;n del(os) Espacio(s)'/>
-            </div>      
+            </div>
         </div>
     </div>
 </div>

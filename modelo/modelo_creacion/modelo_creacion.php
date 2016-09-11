@@ -7,22 +7,22 @@ class modelo_creacion {
 
     /**
      * Función contructur de la clase Modelo
-     * @param string $dbname nombre de la base de datos a la que se va a 
+     * @param string $dbname nombre de la base de datos a la que se va a
      * conectar el modelo.
-     * @param string $dbuser usuario con el que se va a conectar a la 
+     * @param string $dbuser usuario con el que se va a conectar a la
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-     */    
+     */
     public function __construct($dbname,$dbuser,$dbpass,$dbhost) {
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
-        try{ 
-            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass); 
+        try{
+            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass);
             $this->conexion = $bd_conexion;
         }catch (PDOException $e){
             var_dump( $e->getMessage());
         }
-    }    
+    }
 
     /**
      * Función que permite guardar una sede.
@@ -106,7 +106,7 @@ class modelo_creacion {
         }else{
             $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$ancho_fachada."','".$alto_fachada."');";
         }
-        
+
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Edificio 1)";
@@ -120,6 +120,52 @@ class modelo_creacion {
             }else{
                 $GLOBALS['mensaje'] = "El edificio se guardó correctamente";
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar las gradas de un edificio.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id de campus.
+     * @param string $nombre_edificio, id del edificio.
+     * @param string $piso_inicio, piso de inicio de las gradas.
+     * @param string $pasamanos, si las gradas tienen pasamanos.
+     * @param string $material_pasamanos, id del material del pasamanos.
+     * @return array
+     */
+    public function guardarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$pasamanos,$material_pasamanos,$ventana,$tipoVentana,$cantidadVentanas,$materialVentana,$anchoVentana,$altoVentana){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso_inicio = htmlspecialchars(trim($piso_inicio));
+        $pasamanos = htmlspecialchars(trim($pasamanos));
+        $material_pasamanos = htmlspecialchars(trim($material_pasamanos));
+        $ventana = htmlspecialchars(trim($ventana));
+        $campos = "id_sede,id_campus,id_edificio,piso_inicio,pasamanos,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso_inicio."','".$pasamanos."','".$_SESSION['login']."'";
+        if (strcasecmp($material_pasamanos,'') != 0) {
+            $campos = $campos.",id_material_pasamanos";
+            $valores = $valores.",'".$material_pasamanos."'";
+        }
+        $sql = "INSERT INTO gradas (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Gradas 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Gradas 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                if (strcasecmp($ventana,'false') != 0) {
+                    for ($i=0;$i<count($tipoVentana);$i++) {
+                        $this->guardarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$tipoVentana[$i],$cantidadVentanas[$i],$materialVentana[$i],$anchoVentana[$i],$altoVentana[$i]);
+                    }
+                }
+                $GLOBALS['mensaje'] = "Las gradas del piso ".$piso_inicio." del edificio ".$nombre_edificio." se guardaron correctamente";
             }
         }
     }
@@ -218,19 +264,19 @@ class modelo_creacion {
                 return false;
             }else{
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->guardarIluminacion($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                    $this->guardarIluminacionEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->guardarInterruptores($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
+                    $this->guardarInterruptoresEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
-                    $this->guardarPuertas($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
+                    $this->guardarPuertasEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
                 }
                 for ($i=0;$i<count($tipo_suministro_energia);$i++) {
-                    $this->guardarSuministroEnergia($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_tomacorrientes[$i],$tomacorriente[$i]);
+                    $this->guardarSuministroEnergiaEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_tomacorrientes[$i],$tomacorriente[$i]);
                 }
                 for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->guardarVentana($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
+                    $this->guardarVentanaEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
                 $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
                 return true;
@@ -247,13 +293,19 @@ class modelo_creacion {
      * @param string $cantidad, cantidad de lámparas que tiene el espacio.
      * @return array
      */
-    public function guardarIluminacion($id_espacio,$id_campus,$id_edificio,$tipo_iluminacion,$cantidad){
+    public function guardarIluminacionEspacio($id_espacio,$id_campus,$id_edificio,$tipo_iluminacion,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $sql = "INSERT INTO iluminacion_espacio (id_espacio,id_tipo_iluminacion,cantidad,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_iluminacion."','".$cantidad."','".$id_edificio."','".$id_campus."');";
+        $campos = "id_espacio,id_edificio,id_campus,id_tipo_iluminacion";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_iluminacion."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        $sql = "INSERT INTO iluminacion_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 1)";
@@ -280,13 +332,19 @@ class modelo_creacion {
      * @param string $cantidad, cantidad de interruptores que tiene el espacio.
      * @return array
      */
-    public function guardarInterruptores($id_espacio,$id_campus,$id_edificio,$tipo_interruptor,$cantidad){
+    public function guardarInterruptoresEspacio($id_espacio,$id_campus,$id_edificio,$tipo_interruptor,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $sql = "INSERT INTO interruptor_espacio (id_espacio,id_tipo_interruptor,cantidad,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_interruptor."','".$cantidad."','".$id_edificio."','".$id_campus."');";
+        $campos = "id_espacio,id_edificio,id_campus,id_tipo_interruptor";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_interruptor."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        $sql = "INSERT INTO interruptores_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 1)";
@@ -318,7 +376,7 @@ class modelo_creacion {
      * @param string $gato, si la puerta tiene gato o no.
      * @return array
      */
-    public function guardarPuertas($id_espacio,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
+    public function guardarPuertasEspacio($id_espacio,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -329,7 +387,25 @@ class modelo_creacion {
         $ancho = htmlspecialchars(trim($ancho));
         $largo = htmlspecialchars(trim($largo));
         $gato = htmlspecialchars(trim($gato));
-        $sql = "INSERT INTO puerta_espacio (id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_puerta."','".$material_puerta."','".$cantidad."','".$material_marco."','".$ancho."','".$largo."','".$gato."','".$id_edificio."','".$id_campus."');";
+        $campos = "id_espacio,id_edificio,id_campus,id_tipo_puerta,id_material_puerta,id_material_marco";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_puerta."','".$material_puerta."','".$material_marco."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        if (strcasecmp($ancho,'') != 0) {
+          $campos = $campos.",ancho_puerta";
+          $valores = $valores.",'".$ancho."'";
+        }
+        if (strcasecmp($largo,'') != 0) {
+          $campos = $campos.",largo_puerta";
+          $valores = $valores.",'".$largo."'";
+        }
+        if (strcasecmp($gato,'') != 0) {
+          $campos = $campos.",gato";
+          $valores = $valores.",'".$gato."'";
+        }
+        $sql = "INSERT INTO puerta_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Espacio 1)";
@@ -394,15 +470,24 @@ class modelo_creacion {
      * @param string $tomacorriente, si el tomacorriente es regulado o no.
      * @return array
      */
-    public function guardarSuministroEnergia($id_espacio,$id_campus,$id_edificio,$tipo_suministro_energia,$cantidad,$tomacorriente){
+    public function guardarSuministroEnergiaEspacio($id_espacio,$id_campus,$id_edificio,$tipo_suministro_energia,$cantidad,$tomacorriente){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
         $cantidad = htmlspecialchars(trim($cantidad));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
-        $sql = "INSERT INTO suministro_energia_espacio 
-        (id_espacio,id_tipo_suministro_energia,cantidad,tomacorriente,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_suministro_energia."','".$cantidad."','".$tomacorriente."','".$id_edificio."','".$id_campus."');";
+        $campos = "id_espacio,id_edificio,id_campus,id_tipo_suministro_energia";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_suministro_energia."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        if (strcasecmp($tomacorriente,'') != 0) {
+          $campos = $campos.",tomacorriente";
+          $valores = $valores.",'".$tomacorriente."'";
+        }
+        $sql = "INSERT INTO suministro_energia_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 1)";
@@ -432,7 +517,7 @@ class modelo_creacion {
      * @param string $alto_ventana, alto de las ventanas del espacio.
      * @return array
      */
-    public function guardarVentana($id_espacio,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
+    public function guardarVentanaEspacio($id_espacio,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -441,7 +526,21 @@ class modelo_creacion {
         $material_ventana = htmlspecialchars(trim($material_ventana));
         $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
-        $sql = "INSERT INTO ventana_espacio (id_espacio,id_tipo_ventana,cantidad,id_material,ancho_ventana,alto_ventana,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_ventana."','".$cantidad."','".$material_ventana."','".$ancho_ventana."','".$alto_ventana."','".$id_edificio."','".$id_campus."');";
+        $campos = "id_espacio,id_edificio,id_campus,id_tipo_ventana,id_material";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_ventana."','".$material_ventana."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        if (strcasecmp($ancho_ventana,'') != 0) {
+          $campos = $campos.",ancho_ventana";
+          $valores = $valores.",'".$ancho_ventana."'";
+        }
+        if (strcasecmp($alto_ventana,'') != 0) {
+          $campos = $campos.",alto_ventana";
+          $valores = $valores.",'".$alto_ventana."'";
+        }
+        $sql = "INSERT INTO ventana_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Espacio 1)";
@@ -453,7 +552,65 @@ class modelo_creacion {
                 //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
+                $GLOBALS['mensaje'] = "La ventana del espacio se guardaró correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información del suministro de energía de un espacio.
+     * @param string $id_espacio, id del espacio.
+     * @param string $id_campus, id del campus al que pertenece el espacio.
+     * @param string $id_edificio, id del edificio al que pertenece el espacio.
+     * @param string $tipo_ventana, tipo de ventana que tiene el espacio.
+     * @param string $cantidad, cantidad de ventanas que tiene el espacio.
+     * @param string $material_ventana, material de las ventanas del espacio.
+     * @param string $ancho_ventana, ancho de las ventanas del espacio.
+     * @param string $alto_ventana, alto de las ventanas del espacio.
+     * @return array
+     */
+    public function guardarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $tipo_ventana = htmlspecialchars(trim($tipo_ventana));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $material_ventana = htmlspecialchars(trim($material_ventana));
+        $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
+        $alto_ventana = htmlspecialchars(trim($alto_ventana));
+        $campos = "id_sede,id_campus,id_edificio,piso_inicio,id_tipo_ventana";
+        $valores = "'".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$tipo_ventana."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        if (strcasecmp($material_ventana,'') != 0) {
+          $campos = $campos.",id_material";
+          $valores = $valores.",'".$material_ventana."'";
+        }
+        if (strcasecmp($ancho_ventana,'') != 0) {
+          $campos = $campos.",ancho_ventana";
+          $valores = $valores.",'".$ancho_ventana."'";
+        }
+        if (strcasecmp($alto_ventana,'') != 0) {
+          $campos = $campos.",alto_ventana";
+          $valores = $valores.",'".$alto_ventana."'";
+        }
+        $sql = "INSERT INTO ventana_gradas (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Gradas 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Gradas 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La ventana de las gradas se guardaron correctamente";
                 return true;
             }
         }
@@ -539,7 +696,7 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_orinal = htmlspecialchars(trim($tipo_orinal));
-        $cantidad_orinal = htmlspecialchars(trim($cantidad_orinal));        
+        $cantidad_orinal = htmlspecialchars(trim($cantidad_orinal));
 
         $sql = "INSERT INTO orinal_bano (id_espacio,id_edificio,id_campus,id_tipo_orinal,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_orinal."','".$cantidad_orinal."');";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1175,7 +1332,7 @@ class modelo_creacion {
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
-                        $GLOBALS['mensaje'] = $sql;
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Campus 2)";
                         unlink($ruta.$foto['name']);
                         //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
                         return false;
@@ -1272,6 +1429,105 @@ class modelo_creacion {
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Edificio 2)";
+                        unlink($ruta.$foto['name']);
+                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de unas gradas que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_edificio, variable con la información del edificio.
+     * @param string $id_edificio, variable con el piso del edificio.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoGradas($id_sede,$id_campus,$id_edificio,$piso,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                $id_sede = htmlspecialchars(trim($id_sede));
+                $id_campus = htmlspecialchars(trim($id_campus));
+                $id_edificio = htmlspecialchars(trim($id_edificio));
+                $piso = htmlspecialchars(trim($piso));
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO gradas_archivos (id_sede,id_campus,id_edificio,piso,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Gradas 1)";
+                    unlink($ruta.$plano['name']);
+                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Gradas 2)";
+                        unlink($ruta.$plano['name']);
+                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un edificio que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_edificio, variable con la información del edificio.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoGradas($id_sede,$id_campus,$id_edificio,$piso,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                $id_sede = htmlspecialchars(trim($id_sede));
+                $id_campus = htmlspecialchars(trim($id_campus));
+                $id_edificio = htmlspecialchars(trim($id_edificio));
+                $piso = htmlspecialchars(trim($piso));
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO gradas_archivos (id_sede,id_campus,id_edificio,piso,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Gradas 1)";
+                    unlink($ruta.$foto['name']);
+                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Gradas 2)";
                         unlink($ruta.$foto['name']);
                         //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
                         return false;
@@ -1476,6 +1732,40 @@ class modelo_creacion {
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El edificio ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, id de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, id del campus al que pertenece el edificio.
+     * @param string $nombre_edificio, id del edificio.
+     * @param string $piso, piso donde inician las gradas.
+     * @return array
+     */
+    public function verificarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT * FROM gradas WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_inicio = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Gradas 1)";
+            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Gradas 2)";
+                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "Las gradas del piso ".$piso." del edificio ".$nombre_edificio." ya se encuentran registradas en el sistema";
                 return false;
             }
             else{

@@ -9,22 +9,352 @@ class controlador_consultas
     * Función que despliega el panel que permite consultar
     * los espacios que se encuentran registrados en el sistema.
     **/
-    public function modulo_planta() {        
-        $GLOBALS['mensaje'] = "";        
+    public function modulo_planta() {
+        $GLOBALS['mensaje'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $data = array(
-            'mensaje' => 'Consultar espacio',
-        );        
+            'mensaje' => 'Módulo Planta Física',
+        );
         $v = new Controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_BUSQ_PLANTA, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_ESPACIO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
-    
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * los espacios que se encuentran registrados en el sistema.
+    **/
+    public function modulo_inventario() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $data = array(
+            'mensaje' => 'Módulo Inventario',
+        );
+        $v = new Controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * los espacios que se encuentran registrados en el sistema.
+    **/
+    public function modulo_aires() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $data = array(
+            'mensaje' => 'Módulo Aires Acondicionados',
+        );
+        $v = new Controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_AIRES, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * los espacios que se encuentran registrados en el sistema.
+    **/
+    public function modulo_usuarios() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $data = array(
+            'mensaje' => 'Módulo Usuarios',
+        );
+        $v = new Controlador_vista();
+        if (strcmp($_SESSION["perfil"],"admin") == 0) {
+            $v->retornar_vista(MOD_USUARIOS, CONSULTAS, OPERATION_CONSULTAR_USUARIOS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una sede en el sistema.
+    **/
+    public function consultar_sede() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Sede',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_SEDE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un campus en el sistema.
+    **/
+    public function consultar_campus() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Campus',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CAMPUS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una cancha en el sistema.
+    **/
+    public function consultar_cancha() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Cancha',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CANCHA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un corredor en el sistema.
+    **/
+    public function consultar_corredor() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Corredor',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CORREDOR, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+		/**
+    * Función que despliega el panel que permite consultar
+    * una cubierta en el sistema.
+    **/
+    public function consultar_cubierta() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Cubierta',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CUBIERTA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+		/**
+    * Función que despliega el panel que permite consultar
+    * las gradas en el sistema.
+    **/
+    public function consultar_gradas() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Gradas',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_GRADAS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una cancha en el sistema.
+    **/
+    public function consultar_parqueadero() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Parqueadero',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PARQUEADERO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una piscina en el sistema.
+    **/
+    public function consultar_piscina() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Piscina',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PISCINA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una plazoleta en el sistema.
+    **/
+    public function consultar_plazoleta() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Plazoleta',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PLAZOLETA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un sendero en el sistema.
+    **/
+    public function consultar_sendero() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Sendero Peatonal',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_SENDERO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * una vias en el sistema.
+    **/
+    public function consultar_vias() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Vías',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_VIAS, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un edificio en el sistema.
+    **/
+    public function consultar_edificio() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Edificio',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_EDIFICIO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un espacio en el sistema.
+    **/
+    public function consultar_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Espacio',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_ESPACIO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un tipo de material en el sistema.
+    **/
+    public function consultar_tipo_material() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Tipo Material',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_TIPO_MATERIAL, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
+    * un tipo de material en el sistema.
+    **/
+    public function consultar_tipo_objeto() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Tipo Objeto',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_TIPO_OBJETO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
     /**
      * Función que permite consultar las sedes
      * almacenadas en el sistema.
@@ -43,7 +373,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -52,7 +382,7 @@ class controlador_consultas
      * Función que permite consultar los campus
      * almacenados en el sistema.
      */
-    public function consultar_campus() {
+    public function consultar_todos_campus() {
         $GLOBALS['mensaje'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -67,7 +397,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -92,7 +422,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -116,7 +446,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -142,7 +472,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -165,7 +495,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -189,7 +519,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }
@@ -213,7 +543,7 @@ class controlador_consultas
                     );
                 array_push($dataNew, $arrayAux);
             }
-        }        
+        }
         $dataNew['mensaje'] = $GLOBALS['mensaje'];
         echo json_encode($dataNew);
     }

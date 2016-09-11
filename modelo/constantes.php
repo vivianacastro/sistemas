@@ -26,11 +26,12 @@ const CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
 const MOD_PLANTA = 'mod_planta';
 const MOD_INVENTARIO = 'mod_inventario';
 const MOD_AIRES = 'mod_aires';
+const MOD_USUARIOS = 'mod_usuarios';
 
 const OPERATION_MOD_PLANTA = 'modulo_planta';
 const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
 const OPERATION_MOD_AIRES = 'modulo_aires';
-const OPERATION_MOD_USUARIO = 'modificar_usuario';
+const OPERATION_MOD_USUARIO = 'modulo_usuarios';
 
 const OPERATION_MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
 const OPERATION_CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
@@ -50,6 +51,21 @@ const OPERATION_CREAR_EDIFICIO = 'crear_edificio';
 const OPERATION_CREAR_ESPACIO = 'crear_espacio';
 const OPERATION_CREAR_TIPO_MATERIAL = 'crear_tipo_material';
 const OPERATION_CREAR_TIPO_OBJETO = 'crear_tipo_objeto';
+const OPERATION_CONSULTAR_SEDE = 'consultar_sede';
+const OPERATION_CONSULTAR_CAMPUS = 'consultar_campus';
+const OPERATION_CONSULTAR_CANCHA = 'consultar_cancha';
+const OPERATION_CONSULTAR_CORREDOR = 'consultar_corredor';
+const OPERATION_CONSULTAR_CUBIERTA = 'consultar_cubierta';
+const OPERATION_CONSULTAR_GRADAS = 'consultar_gradas';
+const OPERATION_CONSULTAR_PARQUEADERO = 'consultar_parqueadero';
+const OPERATION_CONSULTAR_PISCINA = 'consultar_piscina';
+const OPERATION_CONSULTAR_PLAZOLETA = 'consultar_plazoleta';
+const OPERATION_CONSULTAR_SENDERO = 'consultar_sendero';
+const OPERATION_CONSULTAR_VIAS = 'consultar_vias';
+const OPERATION_CONSULTAR_EDIFICIO = 'consultar_edificio';
+const OPERATION_CONSULTAR_ESPACIO = 'consultar_espacio';
+const OPERATION_CONSULTAR_TIPO_MATERIAL = 'consultar_tipo_material';
+const OPERATION_CONSULTAR_TIPO_OBJETOS = 'consultar_tipo_objeto';
 const OPERATION_BUSQ_PLANTA = 'buscar_planta';
 
 

@@ -43,6 +43,21 @@ class controlador_vista
                 'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_ESPACIO,
                 'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_TIPO_MATERIAL,
                 'CREAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CREAR_TIPO_OBJETO,
+                'CONSULTAR_SEDE'=>'index.php?action='.OPERATION_CONSULTAR_SEDE,
+                'CONSULTAR_CAMPUS'=>'index.php?action='.OPERATION_CONSULTAR_CAMPUS,
+                'CONSULTAR_CANCHA'=>'index.php?action='.OPERATION_CONSULTAR_CANCHA,
+                'CONSULTAR_CORREDOR'=>'index.php?action='.OPERATION_CONSULTAR_CORREDOR,
+                'CONSULTAR_CUBIERTA'=>'index.php?action='.OPERATION_CONSULTAR_CUBIERTA,
+                'CONSULTAR_GRADAS'=>'index.php?action='.OPERATION_CONSULTAR_GRADAS,
+                'CONSULTAR_PARQUEADERO'=>'index.php?action='.OPERATION_CONSULTAR_PARQUEADERO,
+                'CONSULTAR_PISCINA'=>'index.php?action='.OPERATION_CONSULTAR_PISCINA,
+                'CONSULTAR_PLAZOLETA'=>'index.php?action='.OPERATION_CONSULTAR_PLAZOLETA,
+                'CONSULTAR_SENDERO'=>'index.php?action='.OPERATION_CONSULTAR_SENDERO,
+                'CONSULTAR_VIAS'=>'index.php?action='.OPERATION_CONSULTAR_VIAS,
+                'CONSULTAR_EDIFICIO'=>'index.php?action='.OPERATION_CONSULTAR_EDIFICIO,
+                'CONSULTAR_ESPACIO'=>'index.php?action='.OPERATION_CONSULTAR_ESPACIO,
+                'CONSULTAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_MATERIAL,
+                'CONSULTAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_OBJETOS,
             ),'links_inventario'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
             ),'links_aires'=>array(
@@ -104,6 +119,8 @@ class controlador_vista
             }else{
                 $file = dirname(__FILE__).'/vistas/vistas_menu/menu_consulta_aires.html';
             }
+        }elseif (strcmp($modulo,MOD_USUARIOS) == 0) {
+            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_usuarios.html';
         }else{
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_'.$modulo.'.html';
         }

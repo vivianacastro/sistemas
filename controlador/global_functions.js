@@ -1,5 +1,5 @@
 /**
-*funciones globales de la aplicacion 
+*funciones globales de la aplicacion
 */
 $(document).ready(function () {
 	var URLactual = window.location;

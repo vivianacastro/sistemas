@@ -228,7 +228,7 @@ caption{
 }
 
 .btn-agregar{
-    width: 12%;
+    width: 20%;
     text-align: center;
     padding: 0.5% 0.5% 0.5%;
 }
@@ -375,6 +375,10 @@ input[type=date]::-webkit-inner-spin-button {
     width: 100%;
 }
 
+#divBotonesInformacionAdicional{
+  padding-bottom: 2%;
+}
+
 #divMensaje{
     letter-spacing: 0.3px;
 }
@@ -448,6 +452,14 @@ footer p {
 
     .img_boton_barra{
         width: 8% !important;
+    }
+
+    .btn-agregar {
+      font-size: 80%;
+    }
+
+    #divMenu a{
+        font-size: 60% !important;
     }
 
     #divBarra{
@@ -623,7 +635,7 @@ footer p {
     #menu{
         display: inline-table;
     }
-    
+
     #navMenu li ul {
         position: absolute;
         width: 0;
@@ -662,8 +674,8 @@ footer p {
     }
 
     #navMenu li li:hover ul {
-        position: absolute; 
-        left: 100%; 
+        position: absolute;
+        left: 100%;
         top:0;
         display: block;
     }
@@ -684,7 +696,7 @@ footer p {
 
     #menu3{
         width: 33.33%;
-    }    
+    }
 
     #menu4{
         width: 25%;

@@ -11,14 +11,44 @@
         <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio' required></select><br>
         <div class='div_izquierda'><b>Piso Inicio<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='piso_inicio' id='piso_inicio' required></select><br>
-        <div class='div_izquierda'><b>Piso Fin<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='piso_fin' id='piso_fin' required></select><br>
-        <div class='div_izquierda'><b>Material del pasamanos:</b></div>
-        <select class='form-control formulario' name='material_pasamanos' id='material_pasamanos' required></select><br>
+        <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
         <div class='div_izquierda'><b>¿Las gradas tienen pasamanos?</b></div>
-        <label class='radio-inline'><input type='radio' name='pasamanos' value='true'>S&iacute;</label>
-        <label class='radio-inline'><input type='radio' name='pasamanos' value='false'>No</label><br>
+        <form id='form_pasamanos'>
+          <label class='radio-inline'><input type='radio' name='pasamanos' value='true'>S&iacute;</label>
+          <label class='radio-inline'><input type='radio' name='pasamanos' value='false'>No</label><br>
+        </form>
+        <div id="divPasamanos" style='display:none'>
+          <div class='div_izquierda'><b>Material del pasamanos:</b></div>
+          <select class='form-control formulario' name='material_pasamanos' id='material_pasamanos' required></select><br>
+        </div>
+        <div class='div_izquierda'><b>¿Las gradas tienen ventanas?</b></div>
+        <form id='form_ventanas'>
+          <label class='radio-inline'><input type='radio' name='ventanas' value='true'>S&iacute;</label>
+          <label class='radio-inline'><input type='radio' name='ventanas' value='false'>No</label><br>
+        </form>
+        <div id="divVentanas" class='form-group' style='display:none'>
+            <div><b><h5>Informaci&oacute;n de las Ventanas del(os) Espacio(s)</h5></b></div>
+            <div id='ventana'>
+                <div class='div_izquierda'><b>Tipo de ventana:</b></div>
+                <select class='form-control formulario' name='tipo_ventana' id='tipo_ventana' required></select><br>
+                <div class='div_izquierda'><b>Cantidad de ventanas del tipo:</b></div>
+                <input class='form-control formulario' type='number' min='1' name='cantidad_ventanas' id='cantidad_ventanas' value='' placeholder='Ej: 2' required/><br>
+                <div class='div_izquierda'><b>Material de la ventana:</b></div>
+                <select class='form-control formulario' name='material_ventana' id='material_ventana' required></select><br>
+                <div class='div_izquierda'><b>Ancho ventana:</b></div>
+                <div class="input-group">
+                    <input class='form-control formulario' type='number' min='1' name='ancho_ventana' id='ancho_ventana' value='' placeholder='Ej: 4' required/>
+                    <span class="input-group-addon">m</span>
+                </div><br>
+                <div class='div_izquierda'><b>Alto ventana:</b></div>
+                <div class="input-group">
+                    <input class='form-control formulario' type='number' min='1' name='alto_ventana' id='alto_ventana' value='' placeholder='Ej: 4' required/>
+                    <span class="input-group-addon">m</span>
+                </div><br>
+            </div>
+            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_ventana' id='añadir_ventana' value='Añadir Tipo' title='Añadir Tipo Ventana'/>
+            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_ventana' id='eliminar_ventana' value='Eliminar Tipo' title='Eliminar Tipo Ventana' disabled/>
+        </div><br>
         <div class='div_izquierda'><b>Planos Gradas (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
         <div class='div_izquierda'><b>Fotos Gradas (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
