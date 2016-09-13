@@ -400,6 +400,10 @@ input[type=date]::-webkit-inner-spin-button {
     width: 80%;
 }
 
+#divSelectConsulta{
+  padding-bottom: 1%;
+}
+
 #divBusqueda, #divCampus, #divEdificio, #divPiso{
     resize: none;
     width: 50%;
