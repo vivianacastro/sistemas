@@ -188,6 +188,10 @@ caption{
     margin-right: auto;
 }
 
+.form-group{
+  padding-bottom: 1%;
+}
+
 .panel-interno{
     margin-left: auto;
     margin-right: auto;
