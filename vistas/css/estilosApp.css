@@ -363,7 +363,6 @@ caption{
 .mapa{
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 1%;
 }
 
 .resaltarInput{
@@ -409,7 +408,7 @@ input[type=date]::-webkit-inner-spin-button {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
 }
 
 #divFecha{
