@@ -96,7 +96,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_SEDE, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_SEDE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -114,7 +114,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CAMPUS, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CAMPUS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -132,7 +132,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CANCHA, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CANCHA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -150,7 +150,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CORREDOR, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CORREDOR, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -168,7 +168,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_CUBIERTA, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CUBIERTA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -186,7 +186,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_GRADAS, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_GRADAS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -204,7 +204,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PARQUEADERO, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PARQUEADERO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -222,7 +222,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PISCINA, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PISCINA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -240,7 +240,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_PLAZOLETA, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PLAZOLETA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -258,7 +258,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_SENDERO, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_SENDERO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -276,7 +276,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_VIAS, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_VIAS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -294,7 +294,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_EDIFICIO, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_EDIFICIO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -312,7 +312,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_ESPACIO, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_ESPACIO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -330,7 +330,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_TIPO_MATERIAL, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TIPO_MATERIAL, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -348,7 +348,7 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CONSULTAR_TIPO_OBJETO, $data);
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TIPO_OBJETO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);

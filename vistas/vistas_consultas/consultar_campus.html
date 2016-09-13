@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<!--Consulta Por Número-->
-<div id="divFecha">
-    <p class="text-left">Número Solicitud:</p>
-    <div class="col-md-12">
-        <div class="row">
-            <input type="number" class="form-control" id="search" placeholder="N&uacute;mero de orden" title="Ingrese el n&uacute;mero de orden">
-        </div>
+<!--Consulta Rango Fechas-->
+<div id="divBusqueda">
+    <p class="text-left">Sede:</p>
+    <div id="divSelectConsulta">
+        <select class="form-control" name="sedeSearch" id="sedeSearch"></select>
+    </div><br>
+    <p class="text-left">Campus:</p>
+    <div id="divSelectConsulta">
+        <select class="form-control" name="campusSearch" id="campusSearch"></select>
     </div>
-</div><br><br><br>
-
+</div><br>
+<div id="map" class="mapa" style='display:'></div>
 <div class="container-fluid">
-    <input type="button" class="btn btn-primary btn-lg btn-4col" name="btImprimir" id="btImprimir" value="Generar" title="Generar PDF" disabled />
-    <input type="button" class="btn btn-primary btn-lg btn-4col" name="buscarOrdenes" id="buscarOrdenes" value="Buscar" title="Buscar novedad"/>
-    <input type="button" class="btn btn-primary btn-lg btn-4col" name="visualizarOrdenes" id="visualizarOrdenes" value="Ver orden" title="Ver orden seleccionada" disabled/>
-    <input type="button" class="btn btn-primary btn-lg btn-4col" name="modificarOrdenes" id="modificarOrdenes" value="Modificar" title="Modificar orden seleccionada" disabled/>
+    <input type="button" class="btn btn-primary btn-lg btn-4col" name="buscarCampus" id="buscarCampus" value="Buscar" title="Buscar campus"/>
+    <input type="button" class="btn btn-primary btn-lg btn-4col" name="visualizarCampus" id="visualizarCampus" value="Ver Información" title="Ver la información del campus seleccionado" disabled/>
 </div><br><br>
 
-<div class="modal fade" role="dialog" id="divDialogVisualizacion">
-    <div class="modal-dialog" id="divVisualizacion">
+<div class="modal fade" role="dialog" id="divDialogVisualizacion2">
+    <div class="modal-dialog" id="divVisualizacion2">
         <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -25,7 +25,7 @@
             </div>
             <div class="modal-body">
                 <div class="panel-heading"><b>Informaci&oacute;n de la Solicitud de Mantenimiento</b></div><br>
-                
+
                 <div class="div_izquierda">N&uacute;mero de solicitud: </div>
                 <input class="form-control formulario" type="text" name="extension" id="campNumeroSolicitud" value="" readonly />
 
@@ -71,83 +71,83 @@
 
                 <div class="div_izquierda">Espacio: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="espacio" id="espacio" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="espacio" id="espacio" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Cantidad novedad 1: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="cantidad1" id="cantidad1" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="cantidad1" id="cantidad1" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Novedad 1: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="novedad1" id="novedad1" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="novedad1" id="novedad1" value="" readonly />
                 </div>
-                
+
                 <div class="div_izquierda">Descripción novedad 1: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="descripcion_novedad" id="descripcion_novedad" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="descripcion_novedad" id="descripcion_novedad" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Cantidad novedad 2: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="cantidadN2" id="cantidadN2" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="cantidadN2" id="cantidadN2" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Novedad 2: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="novedad2" id="novedad2" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="novedad2" id="novedad2" value="" readonly />
                 </div>
-                
+
                 <div class="div_izquierda">Descripción novedad 2: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="descripcion_novedad2" id="descripcion_novedad2" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="descripcion_novedad2" id="descripcion_novedad2" value="" readonly />
                 </div>
-                
+
                 <div class="div_izquierda">Cantidad novedad 3: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="cantidadN3" id="cantidadN3" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="cantidadN3" id="cantidadN3" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Novedad 3: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="novedad3" id="novedad3" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="novedad3" id="novedad3" value="" readonly />
                 </div>
-                
+
                 <div class="div_izquierda">Descripción novedad 3: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="descripcion_novedad3" id="descripcion_novedad3" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="descripcion_novedad3" id="descripcion_novedad3" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Contacto: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="contacto" id="contacto" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="contacto" id="contacto" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Estado Orden: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="estado" id="estado" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="estado" id="estado" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Comentarios: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="descripcion" id="descripcion" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="descripcion" id="descripcion" value="" readonly />
                 </div>
 
                 <div class="div_izquierda">Fecha Solicitud: </div>
                 <div class="form_requerid">
-                    <input class="form-control formulario" type="text" name="fecha" id="fecha" value="" readonly /> 
+                    <input class="form-control formulario" type="text" name="fecha" id="fecha" value="" readonly />
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
-<div class="modal fade" role="dialog" id="divDialogModificacion">    
-    <div class="modal-dialog" id="divModificacion">
+<div class="modal fade" role="dialog" id="divDialogModificacion2">
+    <div class="modal-dialog" id="divModificacion2">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -177,7 +177,7 @@
                     <div id="divSelectOperario" style="display:none;">
                         <select name="selectOperario" class="form-control formulario" id="selectOperario">
                             <option value="Contratista">Contratista</option>
-                            <option value="Propio" selected="selected">Propio</option>                
+                            <option value="Propio" selected="selected">Propio</option>
                         </select>
                     </div><br>
                 </div>
@@ -188,7 +188,7 @@
                 </div>
 
                 <div class="divBotonMod">
-                    <input type="button" class="btn btn-primary btn-actualizar" name="btGuardarModOrdenes" id="btGuardarModOrdenes" value="Actualizar Órdenes" title="Actualizar órdenes seleccionadas"/>
+                    <input type="button" class="btn btn-primary btn-actualizar" name="btGuardarModOrdenes2" id="btGuardarModOrdenes2" value="Actualizar Órdenes" title="Actualizar órdenes seleccionadas"/>
                 </div><br>
             </div>
         </div>
@@ -197,8 +197,8 @@
 
 <div id="divTablas" style="display:none">
     <div class="table-responsive" id="divTabla">
-        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaOrdenes">
-            <caption><b>Solicitud<b></caption>
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaSolicitado2">
+            <caption><b>Solicitudes Solicitadas<b></caption>
             <thead>
                 <tr>
                     <th style="text-align:center">Número</th>
@@ -208,7 +208,7 @@
                     <th style="text-align:center">Campus</th>
                     <th style="text-align:center">Edificio</th>
                     <th style="text-align:center">Piso</th>
-                    <th style="text-align:center">Espacio</th>                    
+                    <th style="text-align:center">Espacio</th>
                     <th style="text-align:center">Novedad</th>
                     <th style="text-align:center">Cantidad</th>
                     <th style="text-align:center">Novedad</th>
@@ -216,11 +216,62 @@
                     <th style="text-align:center">Novedad</th>
                     <th style="text-align:center">Cantidad</th>
                     <th style="text-align:center">Contacto</th>
-                    <th style="text-align:center">Estado</th>
-                </tr> 
-            </thead> 
-            <tbody>  
-            </tbody> 
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div><br><br>
+    <div class="table-responsive" id="divTabla">
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaRevisado2">
+            <caption><b>Solicitudes Revisadas<b></caption>
+            <thead>
+                <tr>
+                    <th style="text-align:center">Número</th>
+                    <th style="text-align:center">Impreso</th>
+                    <th style="text-align:center">Fecha</th>
+                    <th style="text-align:center">Usuario</th>
+                    <th style="text-align:center">Campus</th>
+                    <th style="text-align:center">Edificio</th>
+                    <th style="text-align:center">Piso</th>
+                    <th style="text-align:center">Espacio</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Contacto</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div><br><br>
+    <div class="table-responsive" id="divTabla">
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaRealizado2">
+            <caption><b>Solicitudes Cerradas<b></caption>
+            <thead>
+                <tr>
+                    <th style="text-align:center">Número</th>
+                    <th style="text-align:center">Impreso</th>
+                    <th style="text-align:center">Fecha</th>
+                    <th style="text-align:center">Usuario</th>
+                    <th style="text-align:center">Campus</th>
+                    <th style="text-align:center">Edificio</th>
+                    <th style="text-align:center">Piso</th>
+                    <th style="text-align:center">Espacio</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Novedad</th>
+                    <th style="text-align:center">Cantidad</th>
+                    <th style="text-align:center">Contacto</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
 </div>

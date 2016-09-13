@@ -359,6 +359,7 @@ caption{
 .mapa{
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 1%;
 }
 
 .resaltarInput{
@@ -395,11 +396,12 @@ input[type=date]::-webkit-inner-spin-button {
     width: 80%;
 }
 
-#divBusqueda, #divCampus, #divEdificio, #divPiso, #divSistema, #divPeriodo{
+#divBusqueda, #divCampus, #divEdificio, #divPiso{
     resize: none;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 2%;
 }
 
 #divFecha{

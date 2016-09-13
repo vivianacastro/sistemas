@@ -29,6 +29,11 @@
         <select class='form-control formulario' name='material_piso' id='material_piso' required></select><br>
         <div class='div_izquierda'><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>
         <select class='form-control formulario' name='tipo_pintura' id='tipo_pintura' required></select><br>
+        <div class='div_izquierda'><b>Longitud de la demarcaci&oacute;n:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='longitud_demarcacion' id='longitud_demarcacion' min="1" class="form-control" value='' placeholder='Ej: 20' required>
+            <span class="input-group-addon">m</span>
+        </div><br>
         <div class='div_izquierda'><b>Planos Parqueadero (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
         <div class='div_izquierda'><b>Fotos Parqueadero (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>

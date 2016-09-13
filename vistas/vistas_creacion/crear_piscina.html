@@ -10,14 +10,14 @@
         <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
         <div class='div_izquierda'><b>C&oacute;digo de la Piscina<font color='red'>*</font>:</b></div>
         <input class='form-control formulario' type='text' name='id_plazoleta' id='id_plazoleta' maxlength="10" value='' placeholder='Ej: 1' required/><br>
+        <div class='div_izquierda'><b>Profundidad de la Piscina:</b></div>
+        <div class="input-group">
+            <input class='form-control formulario' type="number" name='alto' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+            <span class="input-group-addon">cm</span>
+        </div><br>
         <div class='div_izquierda'><b>Ancho de la Piscina:</b></div>
         <div class="input-group">
             <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
-            <span class="input-group-addon">cm</span>
-        </div><br>
-        <div class='div_izquierda'><b>Alto de la Piscina:</b></div>
-        <div class="input-group">
-            <input class='form-control formulario' type="number" name='alto' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' required>
             <span class="input-group-addon">cm</span>
         </div><br>
         <div class='div_izquierda'><b>Largo de la Piscina:</b></div>
@@ -27,9 +27,9 @@
         </div><br>
         <div class='div_izquierda'><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>
         <input class='form-control formulario' type="number" name='cantidad_puntos_hidraulicos' id='cantidad_puntos_hidraulicos' min="1" class="form-control" value='' placeholder='Ej: 10' required><br>
-        <div class='div_izquierda'><b>Planos Plazoleta (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+        <div class='div_izquierda'><b>Planos Piscina (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
-        <div class='div_izquierda'><b>Fotos Plazoleta (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <div class='div_izquierda'><b>Fotos Piscina (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
         <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
         <br><div class='div_izquierda'><b>Indique la ubicación de la Piscina</b></div>
         <div id="map" class="mapa"></div>
