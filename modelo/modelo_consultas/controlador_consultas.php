@@ -369,7 +369,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_sede' => $valor['nombre'],
+                    'nombre_sede' => ucwords($valor['nombre']),
                     );
                 array_push($dataNew, $arrayAux);
             }
@@ -393,7 +393,38 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_campus' => $valor['nombre'],
+                    'nombre_campus' => ucwords($valor['nombre']),
+                    'sede' => $valor['sede'],
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar la información de un campus
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_campus() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
                     );
                 array_push($dataNew, $arrayAux);
             }
@@ -406,6 +437,32 @@ class controlador_consultas
      * Función que permite consultar los campus
      * almacenados en el sistema.
      */
+    public function consultar_archivos_campus() {
+        $GLOBALS['mensaje'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dataNew = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                    );
+                array_push($dataNew, $arrayAux);
+            }
+        }
+        $dataNew['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($dataNew);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un
+     * campus.
+     */
     public function ubicacion_campus() {
         $GLOBALS['mensaje'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -416,7 +473,7 @@ class controlador_consultas
             $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'nombre_campus' => $valor['nombre'],
+                    'nombre_campus' => ucwords($valor['nombre']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                     );
@@ -442,7 +499,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_edificio' => $valor['nombre'],
+                    'nombre_edificio' => ucwords($valor['nombre']),
                     );
                 array_push($dataNew, $arrayAux);
             }
@@ -491,7 +548,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => $valor['uso'],
+                    'uso_espacio' => ucwords($valor['uso']),
                     );
                 array_push($dataNew, $arrayAux);
             }
@@ -515,7 +572,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_material' => $valor['material'],
+                    'nombre_material' => ucwords($valor['material']),
                     );
                 array_push($dataNew, $arrayAux);
             }
@@ -539,7 +596,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'tipo_objeto' => $valor['tipo'],
+                    'tipo_objeto' => ucwords($valor['tipo']),
                     );
                 array_push($dataNew, $arrayAux);
             }

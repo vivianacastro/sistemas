@@ -98,6 +98,8 @@ $map = array(
         'guardar_fotos_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_espacio'),
         //Acciones de consulta
         'consultar_sedes' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_sedes'),
+        'consultar_informacion_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_campus'),
+        'consultar_archivos_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_campus'),
         'consultar_todos_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_todos_campus'),
         'consultar_edificios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_edificios'),
         'consultar_pisos_edificio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_pisos_edificio'),

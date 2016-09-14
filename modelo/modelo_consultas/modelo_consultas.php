@@ -30,7 +30,7 @@ class modelo_consultas
      * @return metadata con elresultado de la busqueda.
      */
     public function buscarSedes(){
-        $sql = "SELECT id,nombre from sede ORDER BY nombre;";
+        $sql = "SELECT * from sede ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Sedes 1)";
@@ -53,7 +53,7 @@ class modelo_consultas
      */
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $sql = "SELECT id,nombre from campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
+        $sql = "SELECT * from campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 1)";
@@ -65,6 +65,54 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Campus de la sede seleccionada presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los campus que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarInformacionCampus($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $sql = "SELECT A.id as id_campus, A.nombre as nombre_campus, lat, lng, B.id as id_sede, B.nombre as nombre_sede from campus A JOIN sede B ON A.sede = B.id WHERE A.sede = '".$nombre_sede."' AND A.id = '".$nombre_campus."' ORDER BY A.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Campus 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Campus 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del campus seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los campus que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarArchivosCampus($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $sql = "SELECT * from campus_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 1)";
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 2)";
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Archivos del campus seleccionado";
             }
         }
         return $result;
@@ -100,7 +148,7 @@ class modelo_consultas
      */
     public function buscarEdificios($nombre_campus){
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT id,nombre from edificio WHERE id_campus = '".$nombre_campus."' ORDER BY id;";
+        $sql = "SELECT * from edificio WHERE id_campus = '".$nombre_campus."' ORDER BY id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";
