@@ -65,7 +65,7 @@ const OPERATION_CONSULTAR_VIAS = 'consultar_vias';
 const OPERATION_CONSULTAR_EDIFICIO = 'consultar_edificio';
 const OPERATION_CONSULTAR_ESPACIO = 'consultar_espacio';
 const OPERATION_CONSULTAR_TIPO_MATERIAL = 'consultar_tipo_material';
-const OPERATION_CONSULTAR_TIPO_OBJETOS = 'consultar_tipo_objeto';
+const OPERATION_CONSULTAR_TIPO_OBJETO = 'consultar_tipo_objeto';
 const OPERATION_BUSQ_PLANTA = 'buscar_planta';
 
 

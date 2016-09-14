@@ -2,16 +2,12 @@
 <!--Consulta Rango Fechas-->
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar Campus</h2></b><br></div>
-        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <div><b><h2>Buscar Sede</h2></b><br></div>
+        <div class='div_izquierda'><b>Nombre de la sede<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
-        <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación del campus</b></div>
-        <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarCampus" id="visualizarCampus" value="Ver Información" title="Ver la información del campus seleccionado"/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarSede" id="visualizarSede" value="Ver Información" title="Ver la información de la sede seleccionada"/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -19,26 +15,18 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Informaci&oacute;n del Campus</h4>
+              <h4 class='modal-title'>Informaci&oacute;n de la Sede</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionCampus'>
-                        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+                    <div id='informacionSede'>
+                        <div class='div_izquierda'><b>Nombre de la sede<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>Planos Edificio:</b></div>
-                        <div id='planos'></div><br>
-                        <div class='div_izquierda'><b>Fotos Edificio:</b></div>
-                        <div id='fotos'></div><br>
-                        <div class='div_izquierda'><b>Ubicación del campus</b></div>
-                        <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
                 </div>
             <div class='form_button modal-footer'>
-              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_campus' id='modificar_campus' value='Modificar Campus' title='Modificar informaci&oacute;n del Campus'/>
-              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_campus' id='guardar_modificaciones_campus' value='Guardar Cambios' title='Guardar informaci&oacute;n del Campus'/>
+              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_sede' id='modificar_sede' value='Modificar Sede' title='Modificar informaci&oacute;n de la Sede'/>
+              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_sede' id='guardar_modificaciones_sede' value='Guardar Cambios' title='Guardar informaci&oacute;n de la sede'/>
             </div>
         </div>
     </div>

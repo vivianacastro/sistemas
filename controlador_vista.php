@@ -57,7 +57,7 @@ class controlador_vista
                 'CONSULTAR_EDIFICIO'=>'index.php?action='.OPERATION_CONSULTAR_EDIFICIO,
                 'CONSULTAR_ESPACIO'=>'index.php?action='.OPERATION_CONSULTAR_ESPACIO,
                 'CONSULTAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_MATERIAL,
-                'CONSULTAR_TIPO_OBJETOS'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_OBJETOS,
+                'CONSULTAR_TIPO_OBJETO'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_OBJETO,
             ),'links_inventario'=>array(
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
             ),'links_aires'=>array(
