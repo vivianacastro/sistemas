@@ -487,7 +487,7 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
                   var componente = '<div class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/fotos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   añadirComponente("fotos",componente);
