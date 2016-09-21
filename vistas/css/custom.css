@@ -275,6 +275,12 @@
     margin-right: auto;
 }
 
+#myCarousel{
+	width: 25%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #navbar{
 	background-color: #D51B23;
 	color: white;

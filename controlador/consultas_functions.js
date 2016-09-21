@@ -486,11 +486,20 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  var componente = '<div class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
-                  añadirComponente("fotos",componente);
+                  console.log(index);
+                  if ((index-1) == 0) {
+                     var componente = '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div class="item active">'
+                       +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                       +'</div>';
+                 }else{
+                      var componente = '<li data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div class="item">'
+                        +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
               }else{
                   var componente = '<div class="div_izquierda">'
                   +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
