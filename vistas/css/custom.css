@@ -4,6 +4,10 @@
 	color: white !important;
 }
 
+.copyright{
+	padding: 2% 0% 0%;
+}
+
 .btn-agregar{
     width: 20%;
     text-align: center;
