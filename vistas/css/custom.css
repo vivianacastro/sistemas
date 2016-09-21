@@ -1,0 +1,205 @@
+/* your styles go here */
+
+.a i.fa, button i.fa{
+	color: white !important;
+}
+
+.btn-primary{
+    background-color: #e60013;
+    border-color: transparent;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    background-color: #e15661;
+    border-color: transparent;
+}
+
+.col-xs-5{
+	width: 40.66666667%;
+}
+
+.col-xs-7{
+	width: 56.33333333%;
+}
+
+.dropdown-toggle{
+	color: white !important;
+	text-decoration: none !important;
+}
+
+.dropdown-toggle:focus{
+	background-color: #e15661 !important;
+	border-color: transparent !important;
+}
+
+.dropdown-toggle:hover{
+	background-color: #e15661 !important;
+	border-color: transparent !important;
+}
+
+.image-footer{
+	width: 100%;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.img_boton{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img_boton:hover{
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+.img_boton_barra:hover{
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+.menu_usuario{
+	color: black !important;
+	width: 100% !important;
+}
+
+.modulo_actual{
+	color: white;
+	padding: 10% 0% 0%;
+}
+
+.navbar-toggle btn-template-main collapsed{
+	background-color: #D51B23;
+	border-color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+	background-color: #e15661;
+	border-color: transparent;
+}
+
+.navbar-collapse collapse{
+	background-color: #D51B23;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+	background-color: #e15661;
+	border-color: transparent;
+}
+
+.opcion_activa{
+	background-color: #e15661 !important;
+	border-color: transparent !important;
+}
+
+.page-scroll{
+	color: white !important;
+	text-decoration: none !important;
+}
+
+.page-scroll:focus{
+	background-color: #e15661 !important;
+	border-color: transparent !important;
+}
+
+.page-scroll:hover{
+	background-color: #e15661 !important;
+	border-color: transparent !important;
+}
+
+.social{
+	padding: 0% 0% 0%;
+}
+
+.texto_copyright{
+
+}
+
+#barra_usuario{
+	color: black !important;
+	float: right;
+	width: auto !important;
+}
+
+#barra_usuario:focus{
+	background-color: transparent !important;
+	font-weight: bold;
+	color: red;
+}
+
+#barra_usuario:hover{
+	background-color: transparent !important;
+	font-weight: bold;
+	color: red;
+}
+
+#copyright{
+	background-color: #D51B23;
+	color: white;
+	text-align: center;
+	padding: 2% 0 2%;
+}
+
+#divMensaje{
+    padding: 2% 0% 0%;
+    font-weight: 400;
+    display: table;
+    float: none;
+    margin: 0 auto;
+    table-layout: fixed;
+    font-size: 150%;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navbar{
+	background-color: #D51B23;
+	color: white;
+}
+
+#top{
+	background-color: white;
+	color: black;
+}
+
+#top .social a{
+	color: black;
+}
+
+#top .social a:hover{
+	color: red;
+}
+
+@media screen and (max-width:1200px) {
+	.img_boton{
+        width: 25%;
+    }
+}
+
+@media screen and (max-width:768px) {
+	.img_boton{
+        width: 20%;
+    }
+
+	.navbar .yamm-content h5{
+		border-bottom: double 2px white;
+		color: white;
+	}
+
+	.navbar .yamm-content ul li a{
+		color: white;
+	}
+}
+
+@media screen and (min-width:768px) {
+	.img_boton{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width:992px) and (min-width: 768px) {
+
+}
