@@ -16,7 +16,7 @@ const PASS = 'ManteUnivalle';
 
 const INICIAR_SESION = 'iniciar_sesion';
 const CERRAR_SESION = 'cerrar_sesion';
-const CREAR_USUARIO = 'planta_crear_usuario';
+const CREAR_USUARIO = 'crear_usuario';
 const OLVIDO_CONTRASENIA = 'olvido_contrasenia';
 const MENU_PRINCIPAL = 'menu_principal';
 const INFORMACION_USUARIO = 'informacion_usuario';

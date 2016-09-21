@@ -193,6 +193,7 @@ class controlador_vista
         }
 
         $template = file_get_contents($file);
+        //$template = $template." ".$file;
 
         return $template;
     }
