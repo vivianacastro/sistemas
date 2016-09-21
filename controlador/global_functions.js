@@ -63,7 +63,7 @@ $(document).ready(function () {
 	    	$('#option_crear_cubierta').addClass("opcion_activa_seleccion");
     	}else if ((URLactual['href'].indexOf('planta_crear_gradas') >= 0)) {
 	    	$('#option_crear_gradas').addClass("opcion_activa_seleccion");
-    	}else if ((URLactual['href'].indexOf('planta_consultar_espacio') >= 0)) {
+    	}else if ((URLactual['href'].indexOf('planta_consultar_espacio') >= 0) || (URLactual['href'].indexOf('modulo_planta') >= 0)) {
 	    	$('#option_consultar_espacio').addClass("opcion_activa_seleccion");
     	}else if ((URLactual['href'].indexOf('planta_consultar_cubierta') >= 0)) {
 	    	$('#option_consultar_cubierta').addClass("opcion_activa_seleccion");
