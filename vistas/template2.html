@@ -43,9 +43,9 @@ _________________________________________________________ -->
                             <a href="#" class="dropdown-toggle" id="barra_usuario" data-toggle="dropdown">{usuario}<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a href="{MODIFICAR_CONTRASENIA}">Cambiar Contrase&ntilde;a</a></li>
-                              <li><a href="{INFORMACION_USUARIO}">Informac&iacute;on de Usuario</a></li>
-                              <li><a href="{MODIFICAR_DATOS_USUARIO}">Modificar Datos</a></li>
+                              <li><a href="{CAMBIAR_CONTRASENIA}">Cambiar Contrase&ntilde;a</a></li>
+                              <li><a href="{INFORMACION_USUARIO}">Informaci&oacute;n de Usuario</a></li>
+                              <li><a href="{MODIFICAR_INFORMACION_USUARIO}">Modificar Datos</a></li>
                               <li><a href="{CERRAR}">Cerrar Sesi&oacute;n</a></li>
                             </ul>
                         </div>
@@ -84,7 +84,9 @@ _________________________________________________________ -->
         <section class="bar background-white no-mb padding-big text-center-sm">
             <div class="container">
                 <div class="row">
-                    {contenido}
+                    <div class='col-lg-12 text-center' id='contenido'>
+                        {contenido}
+                    </div>
                 </div>
             </div>
         </section>
