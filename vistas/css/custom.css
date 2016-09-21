@@ -190,6 +190,7 @@
 
 .opcion_activa_seleccion{
 	font-weight: bold;
+	color: black !important;
 }
 
 .page-scroll{
