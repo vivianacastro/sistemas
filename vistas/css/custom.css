@@ -19,7 +19,7 @@
 
 .btn-formulario:disabled{
     color: white;
-    background-color: #e60013;
+    background-color: #D51B23;
     border: none;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .btn-primary{
-    background-color: #e60013;
+    background-color: #D51B23;
     border-color: transparent;
 }
 
@@ -69,12 +69,12 @@
 
 .dropdown-toggle:focus{
 	background-color: #e15661 !important;
-	border-color: transparent !important;
+	border-color: #D51B23 !important;
 }
 
 .dropdown-toggle:hover{
 	background-color: #e15661 !important;
-	border-color: transparent !important;
+	border-color: #D51B23 !important;
 }
 
 .formulario{
@@ -133,7 +133,7 @@
 .input-lg{
     width: 100%;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
 }
 
 .izquierda{
@@ -161,7 +161,7 @@
 
 .modulo_actual{
 	color: white;
-	padding: 10% 0% 0%;
+	padding: 15% 0% 0%;
 }
 
 .navbar-toggle btn-template-main collapsed{
@@ -199,16 +199,16 @@
 
 .page-scroll:focus{
 	background-color: #e15661 !important;
-	border-color: transparent !important;
+	border-color: #D51B23 !important;
 }
 
 .page-scroll:hover{
 	background-color: #e15661 !important;
-	border-color: transparent !important;
+	border-color: #D51B23 !important;
 }
 
 .pull-right{
-    color: #e60013;
+    color: #D51B23;
 }
 
 .social{
@@ -260,7 +260,7 @@
 }
 
 #spanRegistrar{
-    color: #e60013;
+    color: #D51B23;
 }
 
 #top{
