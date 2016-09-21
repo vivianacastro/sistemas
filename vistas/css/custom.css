@@ -175,6 +175,10 @@
     width: 60%;
 }
 
+.modal-footer{
+		text-align: center;
+}
+
 .modulo_actual{
 	color: white;
 	padding: 15% 0% 0%;
