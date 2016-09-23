@@ -336,6 +336,10 @@ $(document).ready(function() {
               break;
           }
       }
+      var campus = $("campus_search").val();
+      if (campus != "") {
+          $('#visualizarCampus').removeAttr("disabled");
+      }
       /*var campus = {};
       campus["nombre_sede"] = limpiarCadena($("#nombre_sede").val());
       campus["nombre_campus"] = limpiarCadena($("#nombre_campus").val());
@@ -458,7 +462,6 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#visualizarCampus").click(function (e){
-      //getCoordenadas(mapaModificacion);
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
@@ -483,23 +486,27 @@ $(document).ready(function() {
               bounds.extend(loc);
           }
       });
+      $("#myCarousel").hide();
+      eliminarComponente("slide_carrusel");
+      eliminarComponente("item_carrusel");
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
                   console.log(index);
                   if ((index-1) == 0) {
-                     var componente = '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div class="item active">'
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active">'
                        +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
                        +'</div>';
                  }else{
-                      var componente = '<li data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
-                      var componente2 = '<div class="item">'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item">'
                         +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  $("#myCarousel").show();
               }else{
                   var componente = '<div class="div_izquierda">'
                   +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'

@@ -2925,6 +2925,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#agregar_espacio").click(function (e){
+        $("#divBotonesInformacionAdicional").hide();
         espaciosCont++;
         var componente = '<div id="espacio'+espaciosCont+'">'
         +'<br><div class="input-group">'
@@ -2941,6 +2942,7 @@ $(document).ready(function() {
         eliminarComponente("espacio"+espaciosCont);
         espaciosCont--;
         if(espaciosCont == 0){
+            $("#divBotonesInformacionAdicional").show();
             $("#eliminar_espacio").attr('disabled','disabled');
         }
     });
