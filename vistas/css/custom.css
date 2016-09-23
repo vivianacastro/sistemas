@@ -37,10 +37,10 @@
 
 .btn-lg{
     text-align: center;
-	border-radius: 10px 10px 10px 10px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	-webkit-border-radius: 10px 10px 10px 10px;
-	border: 0px solid #000000;
+		border-radius: 10px 10px 10px 10px;
+		-moz-border-radius: 10px 10px 10px 10px;
+		-webkit-border-radius: 10px 10px 10px 10px;
+		border: 0px solid #000000;
 }
 
 .btn-primary{
@@ -48,12 +48,7 @@
     border-color: transparent;
 }
 
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
-    background-color: #e15661;
-    border-color: transparent;
-}
-
-.btn-primary:disabled{
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:disabled{
     background-color: #e15661;
     border-color: transparent;
 }
@@ -84,12 +79,7 @@
 	text-decoration: none !important;
 }
 
-.dropdown-toggle:focus{
-	background-color: #e15661 !important;
-	border-color: #D51B23 !important;
-}
-
-.dropdown-toggle:hover{
+.dropdown-toggle:focus, .dropdown-toggle:hover, .dropdown-toggle:active{
 	background-color: #e15661 !important;
 	border-color: #D51B23 !important;
 }
@@ -194,18 +184,13 @@
 	border-color: white;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
 	background-color: #e15661;
 	border-color: transparent;
 }
 
 .navbar-collapse collapse{
 	background-color: #D51B23;
-}
-
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-	background-color: #e15661;
-	border-color: transparent;
 }
 
 .opcion_activa{
@@ -223,12 +208,7 @@
 	text-decoration: none !important;
 }
 
-.page-scroll:focus{
-	background-color: #e15661 !important;
-	border-color: #D51B23 !important;
-}
-
-.page-scroll:hover{
+.page-scroll:focus, .page-scroll:hover{
 	background-color: #e15661 !important;
 	border-color: #D51B23 !important;
 }
@@ -247,13 +227,7 @@
 	width: auto !important;
 }
 
-#barra_usuario:focus{
-	background-color: transparent !important;
-	font-weight: bold;
-	color: red;
-}
-
-#barra_usuario:hover{
+#barra_usuario:focus, #barra_usuario:hover{
 	background-color: transparent !important;
 	font-weight: bold;
 	color: red;
@@ -329,33 +303,33 @@
 }
 
 @media screen and (min-width:768px) {
-	.img_boton{
+		.img_boton{
         width: 35%;
     }
 }
 
 @media screen and (max-width:768px) {
-	.btn-formulario{
-        text-align: center;
-        font-size: 80%;
-        padding: 2% 2% 2%;
-    }
+		.btn-formulario{
+		    text-align: center;
+		    font-size: 80%;
+		    padding: 2% 2% 2%;
+		}
 
-	.img_boton{
-        width: 20%;
-    }
+		.img_boton{
+		    width: 20%;
+		}
 
-    .mapa{
-        width:500px;
-    }
+		.mapa{
+		    width:500px;
+		}
 
-    .mapa_modal{
-        width:500px;
-    }
+		.mapa_modal{
+		    width:500px;
+		}
 
 		.modal-dialog{
-        width: 100%;
-    }
+		    width: 100%;
+		}
 
 		.navbar .yamm-content h5{
 			border-bottom: double 2px white;
@@ -378,7 +352,7 @@
 }
 
 @media screen and (max-width:992px) and (min-width: 768px) {
-	.mapa{
+		.mapa{
         width:500px;
     }
 
