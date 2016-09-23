@@ -1,50 +1,49 @@
 <!DOCTYPE html>
     <form class="form col-md-12" action="{FORM_INICIAR_SESION}" method="POST">
-        <div class=" col-xs-7">
-          <div id="carrusel_inicio_sesion" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators" id="indicadores_carrusel">
-                <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="0" class="active"></li>
-                <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="1"></li>
-                <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="2"></li>
-            </ol>
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" id="fotos_carrusel" role="listbox">
-              <div id="item_carrusel" class="item active">
-                  <img src="archivos/images/campus/0-26/572264-Agua.jpg" alt="" width="80%" height="80%">
-                  <div class="carousel-caption">
-                      <p>Campus</p>
+        <div>
+            <div class=" col-xs-7">
+              <div id="carrusel_inicio_sesion" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators" id="indicadores_carrusel">
+                    <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="0" class="active"></li>
+                    <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="1"></li>
+                    <li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="2"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                  <div id="item_carrusel" class="item active">
+                      <img src="archivos/images/campus/0-26/572264-Agua.jpg" alt="" width="80%" height="80%">
                   </div>
-              </div>
-              <div id="item_carrusel" class="item">
-                  <img src="archivos/images/campus/0-26/572264-Energia.jpg" alt="" width="20%" height="20%">
-              </div>
-              <div id="item_carrusel" class="item">
-                  <img src="archivos/images/campus/0-26/copiade572264-Agua.jpg" alt="" width="20%" height="20%">
+                  <div id="item_carrusel" class="item">
+                      <img src="archivos/images/campus/0-26/572264-Energia.jpg" alt="" width="20%" height="20%">
+                  </div>
+                  <div id="item_carrusel" class="item">
+                      <img src="archivos/images/campus/0-26/copiade572264-Agua.jpg" alt="" width="20%" height="20%">
+                  </div>
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
               </div>
             </div>
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xs-5 text-center-sm div_input_inicio_sesion">
-            <div class="form-group">
-                <input type="text" name="login" class="form-control input-lg" placeholder="Ingrese su Usuario" required/>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" class="form-control input-lg" placeholder="Contraseña" required/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
-                <a class="derecha" id="spanRegistrar" href="{OLVIDO_CONTRASENIA}"><span class="pull-right">¿Olvidó su Contraseña?</span></a>
-                <a class="izquierda" id="spanRegistrar" href="{CREAR_USUARIO}"><span>¿No tienes una cuenta?</span></a>
+            <div class="col-xs-5 text-center-sm div_input_inicio_sesion">
+                <div class="form-group">
+                    <input type="text" name="login" class="form-control input-lg" placeholder="Ingrese su Usuario" required/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control input-lg" placeholder="Contraseña" required/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
+                    <a class="derecha" id="spanRegistrar" href="{OLVIDO_CONTRASENIA}"><span class="pull-left">¿Olvidó su Contraseña?</span></a>
+                    <a class="izquierda" id="spanRegistrar" href="{CREAR_USUARIO}"><span>¿No tienes una cuenta?</span></a>
+                </div>
             </div>
         </div>
     </form>
