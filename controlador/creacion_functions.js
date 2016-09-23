@@ -2926,6 +2926,7 @@ $(document).ready(function() {
      */
     $("#agregar_espacio").click(function (e){
         $("#divBotonesInformacionAdicional").hide();
+        $("#informacion-adicional").hide();
         espaciosCont++;
         var componente = '<div id="espacio'+espaciosCont+'">'
         +'<br><div class="input-group">'
