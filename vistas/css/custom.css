@@ -53,6 +53,11 @@
     border-color: transparent;
 }
 
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+}
+
 .col-xs-5{
 	width: 40.66666667%;
 }
@@ -63,6 +68,10 @@
 
 .copyright{
 	padding: 2% 0% 0%;
+}
+
+.div_input_inicio_sesion{
+		padding-top: 6%;
 }
 
 .div_izquierda{
@@ -100,18 +109,18 @@
 }
 
 .form-control{
-	border-radius: 10px 10px 10px 10px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	-webkit-border-radius: 10px 10px 10px 10px;
+		border-radius: 10px 10px 10px 10px;
+		-moz-border-radius: 10px 10px 10px 10px;
+		-webkit-border-radius: 10px 10px 10px 10px;
 }
 
 .form-group{
-  padding-bottom: 1%;
+  	padding-bottom: 1%;
 }
 
 .image-footer{
-	width: 100%;
-	margin-left: auto;
+		width: 100%;
+		margin-left: auto;
     margin-right: auto;
 }
 
@@ -144,7 +153,7 @@
 }
 
 .izquierda{
-	float: left;
+		float: left;
 }
 
 .mapa{
@@ -162,8 +171,8 @@
 }
 
 .menu_usuario{
-	color: black !important;
-	width: 100% !important;
+		color: black !important;
+		width: 100% !important;
 }
 
 .modal-dialog{
@@ -175,42 +184,42 @@
 }
 
 .modulo_actual{
-	color: white;
-	padding: 15% 0% 0%;
+		color: white;
+		padding: 15% 0% 0%;
 }
 
 .navbar-toggle btn-template-main collapsed{
-	background-color: #D51B23;
-	border-color: white;
+		background-color: #D51B23;
+		border-color: white;
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-	background-color: #e15661;
-	border-color: transparent;
+		background-color: #e15661;
+		border-color: transparent;
 }
 
 .navbar-collapse collapse{
-	background-color: #D51B23;
+		background-color: #D51B23;
 }
 
 .opcion_activa{
-	background-color: #e15661 !important;
-	border-color: transparent !important;
+		background-color: #e15661 !important;
+		border-color: transparent !important;
 }
 
 .opcion_activa_seleccion{
-	font-weight: bold;
-	color: black !important;
+		font-weight: bold;
+		color: black !important;
 }
 
 .page-scroll{
-	color: white !important;
-	text-decoration: none !important;
+		color: white !important;
+		text-decoration: none !important;
 }
 
 .page-scroll:focus, .page-scroll:hover{
-	background-color: #e15661 !important;
-	border-color: #D51B23 !important;
+		background-color: #e15661 !important;
+		border-color: #D51B23 !important;
 }
 
 .pull-right{
@@ -218,26 +227,32 @@
 }
 
 .social{
-	padding: 0% 0% 0%;
+		padding: 0% 0% 0%;
 }
 
 #barra_usuario{
-	color: black !important;
-	float: right;
-	width: auto !important;
+		color: black !important;
+		float: right;
+		width: auto !important;
 }
 
 #barra_usuario:focus, #barra_usuario:hover{
-	background-color: transparent !important;
-	font-weight: bold;
-	color: red;
+		background-color: transparent !important;
+		font-weight: bold;
+		color: red;
+}
+
+#carrusel_inicio_sesion{
+		width: 65%;
+		margin-left: auto;
+		margin-right: auto;
 }
 
 #copyright{
-	background-color: #D51B23;
-	color: white;
-	text-align: center;
-	padding: 2% 0 2%;
+		background-color: #D51B23;
+		color: white;
+		text-align: center;
+		padding: 2% 0 2%;
 }
 
 #divMensaje{
