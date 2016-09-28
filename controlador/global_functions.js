@@ -4,7 +4,7 @@
 $(document).ready(function () {
 		//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
 		var URLactual = window.location;
-    if(URLactual['href'].indexOf('menu_principal') >= 0){
+    if(URLactual['href'].indexOf('menu_principal') >= 0 || URLactual['href'].indexOf('iniciar_sesion') >= 0){
     	$('#home').addClass("opcion_activa");
     }else if(URLactual['href'].indexOf('modulo_planta') >= 0 || URLactual['href'].indexOf('planta') >= 0){
     	$('#planta').addClass("opcion_activa");
