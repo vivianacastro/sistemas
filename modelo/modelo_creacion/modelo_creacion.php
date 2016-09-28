@@ -451,11 +451,10 @@ class modelo_creacion {
      * Función que permite guardar una plazoleta.
      * @param string $nombre_sede, id de la sede.
      * @param string $nombre_campus, id del campus.
-     * @param string $id_piscina, código de la plazoleta.
-     * @param string $cantidad_punto_hidraulico, cantidad de puntos hidraulicos de la piscina.
-     * @param string $ancho, ancho de la piscina.
-     * @param string $largo, largo de la piscina.
-     * @param string $alto, alto de la piscina.
+     * @param string $id_plazoleta, código de la plazoleta.
+     * @param string $nombre, nombre de la plazoleta.
+     * @param array $tipo_iluminacion, tipo de iluminación de la plazoleta.
+     * @param array $cantidad_iluminacion, cantidad de lamparas de la plazoleta.
      * @param string $lat, latitud donde se encuentra el parqueadero.
      * @param string $lng, longitud donde se encuentra el parqueadero.
      * @return array
