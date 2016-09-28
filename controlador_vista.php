@@ -160,8 +160,9 @@ class controlador_vista
             $file = dirname(__FILE__).'/vistas/'.$operacion.'.html';
         }
         elseif(strcmp($accion,"menu_principal") == 0){
+            $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'.html';
             //Menú principal para el usuario con acceso a todos los módulos de la aplicación
-            if (strcmp($_SESSION["perfil"],"admin") == 0) {
+            /*if (strcmp($_SESSION["perfil"],"admin") == 0) {
                 $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_admin.html';
             }
             //Menú principal para el usuario con acceso a todos los módulos de la aplicación
@@ -186,7 +187,7 @@ class controlador_vista
                 $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_2.html';
             }elseif(strcmp($_SESSION["modulo_aires"],"true") == 0){
                 $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'_3.html';
-            }
+            }*/
         }
         else{
             $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'.html';
@@ -239,15 +240,6 @@ class controlador_vista
         }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, CREAR_USUARIO) == 0 || strcmp($accion, OLVIDO_CONTRASENIA) == 0)) {
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
-            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
-            $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
-            $html = $this->representar_datos_dinamica($html, $diccionario['links']);
-            $html = $this->representar_datos_dinamica($html, $data);
-        }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, MENU_PRINCIPAL) == 0)) {
-            $html = $this->conseguir_plantilla('template2', '');
-            $html = str_replace('{usuario}', $this->conseguir_usuario(), $html);
-            $html = str_replace('{operaciones}', $this->conseguir_operaciones_add($modulo), $html);
-            $html = str_replace('{modulo}', $this->conseguir_texto_modulo($modulo), $html);
             $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);

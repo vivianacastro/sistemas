@@ -338,6 +338,69 @@ class controlador_creacion
     }
 
 		/**
+     * Funcion que permite guardar una cancha en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_cancha(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarCancha($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            if($verificar){
+                $m->guardarCancha($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['uso_cancha'],$info['material_piso'],$info['tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar un corredor en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_corredor(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor']);
+            if($verificar){
+                $m->guardarCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['alto_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad_tomacorrientes'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptores'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar una cubierta en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_cubierta(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso']);
+            if($verificar){
+                $m->guardarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['tipo_cubierta'],$info['material_cubierta'],$info['ancho_cubierta'],$info['largo_cubierta'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
      * Funcion que permite guardar unas gradas en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
     */
@@ -351,6 +414,111 @@ class controlador_creacion
             $verificar = $m->verificarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio']);
             if($verificar){
                 $m->guardarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio'],$info['pasamanos'],$info['material_pasamanos'],$info['ventana'],$info['tipo_ventana'],$info['cantidad_ventanas'],$info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar un parqueadero en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_parqueadero(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['codigo']);
+            if($verificar){
+                $m->guardarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['codigo'],$info['capacidad'],$info['ancho'],$info['largo'],$info['material_piso'],$info['$tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar una piscina en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_piscina(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            if($verificar){
+                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar una plazoleta en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_plazoleta(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            if($verificar){
+                $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar un sendero en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_sendero(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarSendero($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            if($verificar){
+                $m->guardarSendero($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+		/**
+     * Funcion que permite guardar una vía en el sistema
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_via(){
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarVia($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            if($verificar){
+                $m->guardarVia($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];

@@ -25,7 +25,8 @@ $(document).ready(function() {
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
-
+            initMap();
+            getCoordenadas();
         }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_pared",0);
@@ -230,6 +231,38 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=guardar_edificio",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //mostrarMensaje(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite crear una cancha
+     * @param {string} informacion, información del edificio
+     * @returns {data}
+     */
+    function guardarCancha(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_cancha",
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -529,6 +562,70 @@ $(document).ready(function() {
      * @returns {data}
      */
     function guardarFotosEdificio(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_fotos_edificio",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar los planos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
+    function guardarPlanosCancha(informacion){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=guardar_planos_edificio",
+                data: informacion,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite guardar las fotos que se suban al sistema
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
+     */
+    function guardarFotosCancha(informacion){
         var dataResult;
         try {
             $.ajax({
@@ -1527,6 +1624,145 @@ $(document).ready(function() {
                             planos.focus();
                         }else{
                             alert("ERROR. El número máximo de fotos por edificio es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_cancha y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_cancha").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información de la cancha?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idCancha = $("#id_cancha").val();
+                var usoCancha = $("#uso_cancha").val();
+                var materialPiso = $("#material_piso").val();
+                var tipoPintura = $("#tipo_pintura").val();
+                var longitudDemarcacion = $("#longitud_demarcacion").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece la cancha");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece la cancha");
+                    $("#nombre_campus").focus();
+                }else if(idCancha.length == 0){
+                    alert("ERROR. Ingrese el código de la cancha");
+                    $("#id_cancha").focus();
+                }else if(usoCancha.length == 0){
+                    alert("ERROR. Ingrese uso de la cancha");
+                    $("#uso_cancha").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_cancha'] = idCancha;
+                    informacion['uso_cancha'] = usoCancha;
+                    informacion['material_piso'] = materialPiso;
+                    informacion['tipo_pintura'] = tipoPintura;
+                    informacion['longitud_demarcacion'] = longitudDemarcacion;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('cancha',JSON.stringify(informacion));
+                        arregloPlanos.append('cancha',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarCancha(informacion);
+                        var resultadoPlanos = guardarPlanosCancha(arregloPlanos);
+                        var resultadoFotos = guardarFotosCancha(arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_cancha").val("");
+                            $("#uso_cancha").val("");
+                            $("#material_piso").val("");
+                            $('#tipo_pintura').val("");
+                            $('#longitud_demarcacion').val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por cancha es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por cancha es 20");
                             fotos.focus();
                         }
                     }

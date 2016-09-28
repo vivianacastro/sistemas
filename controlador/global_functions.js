@@ -2,17 +2,8 @@
 *funciones globales de la aplicacion
 */
 $(document).ready(function () {
-	var URLactual = window.location;
-    /*if(URLactual['href'].indexOf('menu_principal') >= 0 || URLactual['href'].indexOf('iniciar_sesion') >= 0){
-        $('#menuMoviles').hide();
-    }
-
-    if(URLactual['href'].indexOf('crear_usuario') >= 0 || URLactual['href'].indexOf('olvido_contrasenia') >= 0){
-    	$('#menuMoviles').hide();
-    	$('#divBarra2').hide();
-    	$('#divBarraMoviles').hide();
-    }*/
-
+		//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
+		var URLactual = window.location;
     if(URLactual['href'].indexOf('menu_principal') >= 0){
     	$('#home').addClass("opcion_activa");
     }else if(URLactual['href'].indexOf('modulo_planta') >= 0 || URLactual['href'].indexOf('planta') >= 0){
@@ -85,13 +76,12 @@ $(document).ready(function () {
     }else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuarios') >= 0){
     	$('#usuarios').addClass("opcion_activa");
     }
-
 	setTimeout(function() {
 		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){
 			$("#divDialogTimeOut").modal('show');
 		}
     },600000);
-    $('#divDialogTimeOut').on('hidden.bs.modal', function () {
+  $('#divDialogTimeOut').on('hidden.bs.modal', function () {
     	location.reload();
 	});
 });
@@ -102,8 +92,9 @@ $(document).ready(function () {
  * @returns {undefined}
  */
 function mostrarMensaje(texto) {
-    $('#divMensaje').empty();
-    $('#divMensaje').text(texto);
+    //$('#divMensaje').empty();
+    //$('#divMensaje').text(texto);
+		alert(texto);
 }
 
 /**
@@ -165,20 +156,20 @@ function validarNumero(numero) {
  * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró el número que no cumple.
  */
 function validarArregloNumeros(arreglo) {
-	var posicion = null;
-	for (var i=0;i<arreglo.length;i++) {
-		if (arreglo[i] == '' || isNaN(arreglo[i])) {
-			posicion = i;
-			break;
-		}else if(arreglo[i] < 0){
-			posicion = i;
-			if(posicion == 0){
-				posicion = '';
-			}
-			break;
+		var posicion = null;
+		for (var i=0;i<arreglo.length;i++) {
+				if (arreglo[i] == '' || isNaN(arreglo[i])) {
+						posicion = i;
+						break;
+				}else if(arreglo[i] < 0){
+						posicion = i;
+						if(posicion == 0){
+								posicion = '';
+						}
+						break;
+				}
 		}
-	}
-	return posicion;
+		return posicion;
 }
 
 /**
@@ -187,7 +178,7 @@ function validarArregloNumeros(arreglo) {
  * @returns {boolean} valido, booleano.
  */
 function validarCorreo(correo) {
-	var valido = true;
+		var valido = true;
     expr = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!expr.test(correo)){
         valido = false;
@@ -201,10 +192,10 @@ function validarCorreo(correo) {
  * @returns {string} cadenaMinus, Cadena convertida.
  */
 function limpiarCadena(cadena) {
-	var cadenaMinus = cadena.toLowerCase();
-	cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
-	cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,'');
-	return cadenaMinus;
+		var cadenaMinus = cadena.toLowerCase();
+		cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
+		cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,'');
+		return cadenaMinus;
 }
 
 /**
@@ -213,7 +204,7 @@ function limpiarCadena(cadena) {
  * @param {string} componente, cadena con el componente a añadir.
  */
 function añadirComponente(divPadre,componente) {
-	$('#'+divPadre).append(componente);
+		$('#'+divPadre).append(componente);
 }
 
 /**
@@ -221,5 +212,5 @@ function añadirComponente(divPadre,componente) {
  * @param {string} componente, cadena con el componente a eliminar.
  */
 function eliminarComponente(idComponente) {
-	$('#'+idComponente).remove();
+		$('#'+idComponente).remove();
 }

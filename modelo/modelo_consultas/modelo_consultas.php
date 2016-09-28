@@ -34,10 +34,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Sedes 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Sedes 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -57,10 +59,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -81,10 +85,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Campus 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Campus 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -105,10 +111,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -129,10 +137,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -152,10 +162,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -176,10 +188,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Pisos Edificio 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Pisos Edificio 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -198,10 +212,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Usos Espacios 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Usos Espacios 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -221,10 +237,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Materiales 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Materiales 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
@@ -244,10 +262,12 @@ class modelo_consultas
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 1)";
+            $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 2)";
+                $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();

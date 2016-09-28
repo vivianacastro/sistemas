@@ -35,12 +35,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sede 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Sede 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La sede se guardó correctamente";
@@ -64,12 +64,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Campus 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Campus 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El campus se guardó correctamente";
@@ -80,12 +80,18 @@ class modelo_creacion {
 
     /**
      * Función que permite guardar un edificio.
+     * @param string $nombre_sede, id de la sede.
      * @param string $nombre_campus, id del campus.
      * @param string $id_edificio, id del edificio.
      * @param string $nombre_edificio, nombre del edificio.
      * @param string $numero_pisos, número de pisos del edificio.
      * @param string $terraza, si el edificio tiene terraza.
      * @param string $sotano, si el edificio tiene sotano.
+     * @param string $tipo_fachada, tipo de fachada del edificio.
+     * @param string $alto_fachada, alto de la fachada del edificio.
+     * @param string $ancho_fachada, ancho de la fachada del edificio.
+     * @param string $lat, latitud donde se encuentra el edificio.
+     * @param string $lng, longitud donde se encuentra el edificio.
      * @return array
      */
     public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano,$tipo_fachada,$alto_fachada,$ancho_fachada,$lat,$lng){
@@ -110,15 +116,189 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Edificio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Edificio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El edificio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una cancha.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_cancha, id de la cancha.
+     * @param string $uso_cancha, uso de la cancha.
+     * @param string $material_piso, material del piso de la cancha.
+     * @param string $tipo_pintura, tipo de pintura de la demarcación de la cancha.
+     * @param string $longitud_demarcacion, longitud de la demarcación de la cancha.
+     * @param string $lat, latitud donde se encuentra la cancha.
+     * @param string $lng, longitud donde se encuentra la cancha.
+     * @return array
+     */
+    public function guardarCancha($nombre_sede,$nombre_campus,$id_cancha,$uso_cancha,$material_piso,$tipo_pintura,$longitud_demarcacion,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_cancha = htmlspecialchars(trim($id_cancha));
+        $uso_cancha = htmlspecialchars(trim($uso_cancha));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $tipo_pintura = htmlspecialchars(trim($tipo_pintura));
+        $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,uso,longitud_demarcacion,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_cancha."','".$uso_cancha."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        if (strcasecmp($material_piso,'') != 0) {
+            $campos = $campos.",id_material_piso";
+            $valores = $valores.",'".$material_piso."'";
+        }if (strcasecmp($tipo_pintura,'') != 0) {
+            $campos = $campos.",id_tipo_pintura_demarcacion";
+            $valores = $valores.",'".$tipo_pintura."'";
+        }
+        $sql = "INSERT INTO cancha (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cancha 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cancha 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La cancha se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar un corredor.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_cancha, id del corredor.
+     * @param string $uso_cancha, uso del corredor.
+     * @param string $material_piso, material del piso del corredor.
+     * @param string $tipo_pintura, tipo de pintura de la demarcación del corredor.
+     * @param string $longitud_demarcacion, longitud de la demarcación del corredor.
+     * @param string $lat, latitud donde se encuentra la cancha.
+     * @param string $lng, longitud donde se encuentra la cancha.
+     * @return array
+     */
+    public function guardarCorredor($nombre_sede,$nombre_campus,$id_corredor,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$alto_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad_tomacorrientes,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptores,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_corredor = htmlspecialchars(trim($id_corredor));
+        $ancho_pared = htmlspecialchars(trim($ancho_pared));
+        $alto_pared = htmlspecialchars(trim($alto_pared));
+        $material_pared = htmlspecialchars(trim($material_pared));
+        $ancho_piso = htmlspecialchars(trim($ancho_piso));
+        $largo_piso = htmlspecialchars(trim($largo_piso));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $ancho_techo = htmlspecialchars(trim($ancho_techo));
+        $alto_techo = htmlspecialchars(trim($alto_techo));
+        $material_techo = htmlspecialchars(trim($material_techo));
+        $tomacorriente = htmlspecialchars(trim($tomacorriente));
+        $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
+        $cantidad_tomacorrientes = htmlspecialchars(trim($cantidad_tomacorrientes));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
+        $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
+        $cantidad_interruptores = htmlspecialchars(trim($cantidad_interruptores));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,ancho_pared,alto_pared,ancho_piso,largo_piso,ancho_techo,alto_techo,tomacorriente,cantidad_tomacorrientes,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_corredor."','".$ancho_pared."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$alto_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        if (strcasecmp($material_pared,'') != 0) {
+            $campos = $campos.",id_material_pared";
+            $valores = $valores.",'".$material_pared."'";
+        }if (strcasecmp($material_piso,'') != 0) {
+            $campos = $campos.",id_material_piso";
+            $valores = $valores.",'".$material_piso."'";
+        }if (strcasecmp($material_techo,'') != 0) {
+            $campos = $campos.",id_material_techo";
+            $valores = $valores.",'".$material_techo."'";
+        }if (strcasecmp($tipo_suministro_energia,'') != 0) {
+            $campos = $campos.",id_tipo_suministro_energia";
+            $valores = $valores.",'".$tipo_suministro_energia."'";
+        }
+        $sql = "INSERT INTO corredor (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->guardarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                }
+                for ($i=0;$i<count($tipo_interruptor);$i++) {
+                    $this->guardarInterruptoresCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
+                }
+                $GLOBALS['mensaje'] = "El corredor se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una cubierta de un edificio.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $nombre_edificio, id del edificio donde se encuentra la cubierta.
+     * @param string $piso, piso donde se encuentra la cubierta.
+     * @param string $tipo_cubierta, tipo de cubierta.
+     * @param string $material_cubierta, material de la cubierta.
+     * @param string $ancho_cubierta, ancho de la cubierta.
+     * @param string $largo_cubierta, largo de la cubierta.
+     * @param string $lat, latitud donde se encuentra la cubierta.
+     * @param string $lng, longitud donde se encuentra la cubierta.
+     * @return array
+     */
+    public function guardarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_cubierta,$material_cubierta,$ancho_cubierta,$largo_cubierta,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $tipo_cubierta = htmlspecialchars(trim($tipo_cubierta));
+        $material_cubierta = htmlspecialchars(trim($material_cubierta));
+        $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
+        $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
+        $campos = "id_sede,id_campus,id_edificio,piso,largo,ancho,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$alto_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$_SESSION['login']."'";
+        if (strcasecmp($tipo_cubierta,'') != 0) {
+            $campos = $campos.",id_tipo_cubierta";
+            $valores = $valores.",'".$tipo_cubierta."'";
+        }if (strcasecmp($material_cubierta,'') != 0) {
+            $campos = $campos.",id_material_cubierta";
+            $valores = $valores.",'".$material_cubierta."'";
+        }
+        $sql = "INSERT INTO cubiertas_piso (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Cubierta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Cubierta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La cubierta se guardó correctamente";
                 return true;
             }
         }
@@ -152,12 +332,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Gradas 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Gradas 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 if (strcasecmp($ventana,'false') != 0) {
@@ -166,6 +346,148 @@ class modelo_creacion {
                     }
                 }
                 $GLOBALS['mensaje'] = "Las gradas del piso ".$piso_inicio." del edificio ".$nombre_edificio." se guardaron correctamente";
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar un parqueadero.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $codigo, código del parqueadero.
+     * @param string $capacidad, capacidad del parqueadero.
+     * @param string $ancho, ancho del parqueadero.
+     * @param string $largo, largo del parqueadero.
+     * @param string $material_piso, material del piso del parqueadero.
+     * @param string $tipo_pintura, tipo de pintura de la demarcación del parqueadero.
+     * @param string $longitud_demarcacion, longitud de la demarcación del parqueadero.
+     * @param string $lat, latitud donde se encuentra el parqueadero.
+     * @param string $lng, longitud donde se encuentra el parqueadero.
+     * @return array
+     */
+    public function guardarParqueadero($nombre_sede,$nombre_campus,$codigo,$capacidad,$ancho,$largo,$material_piso,$tipo_pintura,$longitud_demarcacion,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $codigo = htmlspecialchars(trim($codigo));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $ancho = htmlspecialchars(trim($ancho));
+        $largo = htmlspecialchars(trim($largo));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $tipo_pintura = htmlspecialchars(trim($tipo_demarcacion));
+        $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,largo,ancho,capacidad,longitud_demarcacion,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$codigo."','".$capacidad."','".$ancho."','".$largo."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        if (strcasecmp($material_piso,'') != 0) {
+            $campos = $campos.",id_material_piso";
+            $valores = $valores.",'".$material_piso."'";
+        }if (strcasecmp($tipo_pintura,'') != 0) {
+            $campos = $campos.",id_tipo_pintura_demarcacion";
+            $valores = $valores.",'".$tipo_pintura."'";
+        }
+        $sql = "INSERT INTO parqueadero (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Parqueadero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Parqueadero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El parqueadero se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una piscina.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_piscina, código de la piscina.
+     * @param string $cantidad_punto_hidraulico, cantidad de puntos hidraulicos de la piscina.
+     * @param string $ancho, ancho de la piscina.
+     * @param string $largo, largo de la piscina.
+     * @param string $alto, alto de la piscina.
+     * @param string $lat, latitud donde se encuentra la piscina.
+     * @param string $lng, longitud donde se encuentra la piscina.
+     * @return array
+     */
+    public function guardarPiscina($nombre_sede,$nombre_campus,$id_piscina,$cantidad_punto_hidraulico,$ancho,$largo,$alto,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_piscina = htmlspecialchars(trim($id_piscina));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $ancho = htmlspecialchars(trim($ancho));
+        $largo = htmlspecialchars(trim($largo));
+        $alto = htmlspecialchars(trim($alto));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,cantidad_punto_hidraulico,largo,ancho,alto,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_piscina."','".$cantidad_punto_hidraulico."','".$ancho."','".$largo."','".$alto."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $sql = "INSERT INTO piscina (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La piscina se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una plazoleta.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_piscina, código de la plazoleta.
+     * @param string $cantidad_punto_hidraulico, cantidad de puntos hidraulicos de la piscina.
+     * @param string $ancho, ancho de la piscina.
+     * @param string $largo, largo de la piscina.
+     * @param string $alto, alto de la piscina.
+     * @param string $lat, latitud donde se encuentra el parqueadero.
+     * @param string $lng, longitud donde se encuentra el parqueadero.
+     * @return array
+     */
+    public function guardarPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$nombre,$tipo_iluminacion,$cantidad_iluminacion,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
+        $nombre = htmlspecialchars(trim($nombre));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,nombre,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_plazoleta."','".$nombre."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $sql = "INSERT INTO plazoleta (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->guardarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                }
+                $GLOBALS['mensaje'] = "La plazoleta se guardó correctamente";
+                return true;
             }
         }
     }
@@ -244,23 +566,16 @@ class modelo_creacion {
             $campos = $campos.",ancho_piso,largo_piso,id_material_piso";
             $valores = $valores.",'".$ancho_piso."','".$largo_piso."','".$material_piso."'";
         }
-
-        /*$sql = "INSERT INTO espacio (id,uso_espacio,ancho_pared,alto_pared,id_material_pared,
-            ancho_piso,largo_piso,id_material_piso,ancho_techo,largo_techo,id_material_techo,
-            espacio_padre,id_edificio,id_campus,edificio_padre,campus_padre,sede_padre,
-            usuario_crea,piso_edificio,id_sede) VALUES ('".$numero_espacio."','".$uso_espacio."','".$ancho_pared."','".$alto_pared."',
-            '".$material_pared."','".$ancho_piso."','".$largo_piso."','".$material_piso."','".$ancho_techo."','".$largo_techo."','".$material_techo."','".$numero_espacio_padre."',
-            '".$nombre_edificio."','".$nombre_campus."','".$edificio_espacio_padre."','".$campus_espacio_padre."','".$sede_espacio_padre."','".$_SESSION["login"]."','".$piso."','".$nombre_sede."');";*/
         $sql = "INSERT INTO espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
@@ -279,6 +594,84 @@ class modelo_creacion {
                     $this->guardarVentanaEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
                 $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de la iluminación de un corredor.
+     * @param string $id_espacio, id del corredor.
+     * @param string $id_campus, id del campus al que pertenece el corredor.
+     * @param string $id_corredor, id del corredor.
+     * @param string $tipo_iluminacion, tipo de iluminación que tiene el corredor.
+     * @param string $cantidad, cantidad de lámparas que tiene el corredor.
+     * @return array
+     */
+    public function guardarIluminacionCorredor($id_sede,$id_campus,$id_corredor,$tipo_iluminacion,$cantidad){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_corredor = htmlspecialchars(trim($id_corredor));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $campos = "id_sede,id_edificio,id,id_tipo_iluminacion";
+        $valores = "'".$id_sede."','".$id_edificio."','".$id_corredor."','".$tipo_iluminacion."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        $sql = "INSERT INTO iluminacion_corredor (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La iluminación del corredor se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de la iluminación de una plazoleta.
+     * @param string $id_espacio, id la plazoleta
+     * @param string $id_campus, id del campus al que pertenece la plazoleta.
+     * @param string $id_plazoleta, id del corredor.
+     * @param string $tipo_iluminacion, tipo de iluminación que tiene la plazoleta
+     * @param string $cantidad, cantidad de lámparas que tiene la plazoleta.
+     * @return array
+     */
+    public function guardarIluminacionPlazoleta($id_sede,$id_campus,$id_plazoleta,$tipo_iluminacion,$cantidad){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $campos = "id_sede,id_edificio,id,id_tipo_iluminacion";
+        $valores = "'".$id_sede."','".$id_edificio."','".$id_corredor."','".$tipo_iluminacion."'";
+        if (strcasecmp($cantidad,'') != 0) {
+          $campos = $campos.",cantidad";
+          $valores = $valores.",'".$cantidad."'";
+        }
+        $sql = "INSERT INTO iluminacion_plazoleta (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La iluminación de la plazoleta se guardó correctamente";
                 return true;
             }
         }
@@ -309,15 +702,50 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La iluminación del espacio se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de los interruptores de un espacio.
+     * @param string $id_espacio, id del espacio.
+     * @param string $id_campus, id del campus al que pertenece el espacio.
+     * @param string $id_edificio, id del edificio al que pertenece el espacio.
+     * @param string $tipo_interruptor, tipo de interruptor que tiene el espacio.
+     * @param string $cantidad, cantidad de interruptores que tiene el espacio.
+     * @return array
+     */
+    public function guardarInterruptoresCorredor($id_sede,$id_campus,$id_corredor,$tipo_interruptor,$cantidad){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_corredor = htmlspecialchars(trim($id_corredor));
+        $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $campos = "id,id_edificio,id_campus,id_tipo_interruptor,cantidad";
+        $valores = "'".$id_corredor."','".$id_edificio."','".$id_campus."','".$tipo_interruptor."','".$cantidad."'";
+        $sql = "INSERT INTO interruptores_corredor (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "Los interruptores del corredor se guardaron correctamente";
                 return true;
             }
         }
@@ -348,12 +776,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "Los interruptores del espacio se guardaron correctamente";
@@ -409,12 +837,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "Las puertas del espacio se guardaron correctamente";
@@ -446,12 +874,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Tipo Cerradura 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Tipo Cerradura 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo se cerradura de la puerta del espacio se guardó correctamente";
@@ -491,12 +919,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El suministro de energía del espacio se guardaron correctamente";
@@ -544,12 +972,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana del espacio se guardaró correctamente";
@@ -602,12 +1030,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Gradas 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Ventana-Gradas 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana de las gradas se guardaron correctamente";
@@ -635,12 +1063,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Punto Sanitario 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Punto Sanitario 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
@@ -668,12 +1096,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Lavamanos-Baño 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Lavamanos-Baño 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El lavamanos del baño se guardó correctamente";
@@ -702,12 +1130,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Orinal-Baño 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Orinal-Baño 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El orinal del baño se guardó correctamente";
@@ -733,16 +1161,16 @@ class modelo_creacion {
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El salón se guardó correctamente";
@@ -768,16 +1196,16 @@ class modelo_creacion {
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -807,16 +1235,16 @@ class modelo_creacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
-        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
+        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -845,16 +1273,16 @@ class modelo_creacion {
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,puntos_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -878,16 +1306,16 @@ class modelo_creacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,puntos_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$punto_proyector."');";
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,cantidad_punto_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['mensaje'] = $sql;//"Error: SQL (Guardar Oficina 2)";
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -929,12 +1357,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -962,16 +1390,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO bodega (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO bodega (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Bodega 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Bodega 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -993,16 +1421,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO sala_estudio (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO sala_estudio (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala de Estudio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala de Estudio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1024,16 +1452,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO cuarto_plantas (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO cuarto_plantas (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Plantas 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Plantas 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1055,16 +1483,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO cuarto_aire_acondicionado (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO cuarto_aire_acondicionado (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Aires Acondicionados 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Aires Acondicionados 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1086,16 +1514,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO area_deportiva_cerrada (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO area_deportiva_cerrada (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Área Deportiva Cerrada 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Área Deportiva Cerrada 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1117,16 +1545,16 @@ class modelo_creacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO centro_datos (id_espacio,id_edificio,id_campus,puntos_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO centro_datos (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Centro de Datos 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Centro de Datos 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1152,12 +1580,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Bombas 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Bombas 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1188,12 +1616,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cocineta 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Cocineta 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
@@ -1218,12 +1646,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Material 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Material 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de material se guardó correctamente";
@@ -1245,12 +1673,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Objeto 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Objeto 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de objeto se guardó correctamente";
@@ -1282,13 +1710,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Campus 1)";
                     unlink($ruta.$plano['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Campus 2)";
                         unlink($ruta.$plano['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1328,13 +1756,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Campus 1)";
                     unlink($ruta.$foto['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Campus 2)";
                         unlink($ruta.$foto['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1376,13 +1804,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Edificio 1)";
                     unlink($ruta.$plano['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Edificio 2)";
                         unlink($ruta.$plano['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1424,13 +1852,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Edificio 1)";
                     unlink($ruta.$foto['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Edificio 2)";
                         unlink($ruta.$foto['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1474,13 +1902,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Gradas 1)";
                     unlink($ruta.$plano['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Gradas 2)";
                         unlink($ruta.$plano['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1523,13 +1951,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Gradas 1)";
                     unlink($ruta.$foto['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Gradas 2)";
                         unlink($ruta.$foto['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1575,13 +2003,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Espacio 1)";
                     unlink($ruta.$plano['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Espacio 2)";
                         unlink($ruta.$plano['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1627,13 +2055,13 @@ class modelo_creacion {
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Espacio 1)";
                     unlink($ruta.$foto['name']);
-                    //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                    $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
                     if(!$l_stmt->execute()){
                         $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Espacio 2)";
                         unlink($ruta.$foto['name']);
-                        //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                        $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
@@ -1661,12 +2089,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Sede 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Sede 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "La sede ya se encuentra registrada en el sistema";
@@ -1679,7 +2107,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un campus ya esta registrada en el sistema.
+     * Función que permite consultar si un campus ya esta registrado en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
      * @param string $nombre_campus, nombre del campus.
      * @return array
@@ -1691,12 +2119,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Campus 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Campus 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El campus ya se encuentra registrado en el sistema";
@@ -1709,7 +2137,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * Función que permite consultar si un edificio ya esta registrado en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
      * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
      * @param string $id_edificio, id del edificio.
@@ -1723,15 +2151,113 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El edificio ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una cancha ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_cancha, id de la cancha.
+     * @return array
+     */
+    public function verificarCancha($nombre_sede,$nombre_campus,$id_cancha){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_cancha = htmlspecialchars(trim($id_cancha));
+        $sql = "SELECT * FROM edificio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_cancha."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Cancha 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Cancha 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "La cancha ya se encuentra registrada en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un corredor ya esta registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_corredor, id del corredor.
+     * @return array
+     */
+    public function verificarCorredor($nombre_sede,$nombre_campus,$id_corredor){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_corredor = htmlspecialchars(trim($id_corredor));
+        $sql = "SELECT * FROM corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_corredor."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "El corredor ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un corredor ya esta registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $nombre_edificio, id del edificio.
+     * @param string $piso, piso donde está la cubierta.
+     * @return array
+     */
+    public function verificarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT * FROM corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Cubierta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Cubierta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "La cubierta ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -1757,15 +2283,175 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Gradas 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Gradas 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "Las gradas del piso ".$piso." del edificio ".$nombre_edificio." ya se encuentran registradas en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $codigo, código del parqueadero.
+     * @return array
+     */
+    public function verificarParqueadero($nombre_sede,$nombre_campus,$codigo){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $codigo = htmlspecialchars(trim($codigo));
+        $sql = "SELECT * FROM parqueadero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$codigo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Parqueadero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Parqueadero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "El parqueadero ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_piscina, id de la piscina.
+     * @return array
+     */
+    public function verificarPiscina($nombre_sede,$nombre_campus,$id_piscina){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_piscina = htmlspecialchars(trim($id_piscina));
+        $sql = "SELECT * FROM piscina WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_piscina."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "La piscina ya se encuentra registrada en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_plazoleta, id de la plazoleta.
+     * @return array
+     */
+    public function verificarPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
+        $sql = "SELECT * FROM plazoleta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_plazoleta."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "La plazoleta ya se encuentra registrada en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_sendero, id del sendero.
+     * @return array
+     */
+    public function verificarSendero($nombre_sede,$nombre_campus,$id_sendero){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_sendero = htmlspecialchars(trim($id_sendero));
+        $sql = "SELECT * FROM sendero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_sendero."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "El sendero ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_edificio, id del edificio.
+     * @return array
+     */
+    public function verificarVia($nombre_sede,$nombre_campus,$id_via){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_via = htmlspecialchars(trim($id_via));
+        $sql = "SELECT * FROM via WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_via."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Vía 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Vía 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "La vía ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -1793,12 +2479,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Espacio 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Espacio 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El espacio ya se encuentra registrado en el sistema";
@@ -1823,12 +2509,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Material 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Material 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El tipo de material ya se encuentra registrado en el sistema";
@@ -1853,12 +2539,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Objeto 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Objeto 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "El tipo de objeto ya se encuentra registrado en el sistema";
@@ -1883,12 +2569,12 @@ class modelo_creacion {
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Obtener Id Campus 1)";
-            //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+            $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Obtener Id Campus 2)";
-                //$GLOBALS['mensaje'] = var_export($this->conexion->errorInfo(),true);
+                $GLOBALS['sql'] = $sql;
             }elseif($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
             }
