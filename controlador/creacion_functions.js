@@ -644,8 +644,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los objetos presentes en el sistema
-     * @param {string} informacion, arreglo que contiene el tipo de objeto a buscar
+     * Función que realiza una consulta de los espacios presentes en el sistema.
+     * @param {string} informacion, arreglo que contiene el espacio a buscar.
      * @returns {data} object json
     **/
     function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio){
