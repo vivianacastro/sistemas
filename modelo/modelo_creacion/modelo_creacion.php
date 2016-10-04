@@ -264,11 +264,9 @@ class modelo_creacion {
      * @param string $material_cubierta, material de la cubierta.
      * @param string $ancho_cubierta, ancho de la cubierta.
      * @param string $largo_cubierta, largo de la cubierta.
-     * @param string $lat, latitud donde se encuentra la cubierta.
-     * @param string $lng, longitud donde se encuentra la cubierta.
      * @return array
      */
-    public function guardarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_cubierta,$material_cubierta,$ancho_cubierta,$largo_cubierta,$lat,$lng){
+    public function guardarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_cubierta,$material_cubierta,$ancho_cubierta,$largo_cubierta){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
@@ -277,8 +275,8 @@ class modelo_creacion {
         $material_cubierta = htmlspecialchars(trim($material_cubierta));
         $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
         $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
-        $campos = "id_sede,id_campus,id_edificio,piso,largo,ancho,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$alto_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$_SESSION['login']."'";
+        $campos = "id_sede,id_campus,id_edificio,piso,largo,ancho,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso."','".$largo_cubierta."','".$ancho_cubierta."','".$_SESSION['login']."'";
         if (strcasecmp($tipo_cubierta,'') != 0) {
             $campos = $campos.",id_tipo_cubierta";
             $valores = $valores.",'".$tipo_cubierta."'";

@@ -1649,7 +1649,7 @@ $(document).ready(function() {
                     informacion['nombre_sede'] = nombreSede;
                     informacion['nombre_campus'] = nombreCampus;
                     informacion['nombre_edificio'] = nombreEdificio;
-                    informacion['pisos'] = piso;
+                    informacion['piso'] = piso;
                     informacion['tipo_cubierta'] = tipoCubierta;
                     informacion['material_cubierta'] = materialCubierta;
                     informacion['ancho'] = ancho;
@@ -1732,7 +1732,6 @@ $(document).ready(function() {
                             $("#largo").val("");
                             planos.value = "";
                             fotos.value = "";
-                            initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
                         }else{
