@@ -999,7 +999,7 @@ $(document).ready(function() {
                 var nombreCampus = $("#nombre_campus").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece el campus");
                     $("#nombre_sede").focus();
                 }else if(nombreCampus.length == 0){
@@ -1124,25 +1124,25 @@ $(document).ready(function() {
                 var ancho_fachada = $("#ancho_fachada").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece el edificio");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece el edifiicio");
                     $("#nombre_campus").focus();
-                }else if(idEdificio.length == 0){
+                }else if(!validarCadena(idEdificio)){
                     alert("ERROR. Ingrese el código del edificio");
                     $("#id_edificio").focus();
-                }else if(nombreEdificio.length == 0){
+                }else if(!validarCadena(nombreEdificio)){
                     alert("ERROR. Ingrese el nombre del edificio");
                     $("#nombre_edificio").focus();
-                }else if(numeroPisos.length == 0){
+                }else if(!validarCadena(numeroPisos)){
                     alert("ERROR. Ingrese el número de pisos del edificio");
                     $("#pisos_edificio").focus();
-                }else if(terraza == null || terraza.length == 0){
+                }else if(!validarCadena(terraza)){
                     alert("ERROR. Establesca si el edificio tiene terraza");
                     $("#terraza").focus();
-                }else if(sotano == null || sotano.length == 0){
+                }else if(!validarCadena(sotano)){
                     alert("ERROR. Establesca si el edificio tiene sotano");
                     $("#sotano").focus();
                 }else{
@@ -1268,23 +1268,23 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idCancha = $("#id_cancha").val();
-                var usoCancha = $("#uso_cancha").val();
+                var idCancha = limpiarCadena($("#id_cancha").val());
+                var usoCancha = limpiarCadena($("#uso_cancha").val());
                 var materialPiso = $("#material_piso").val();
                 var tipoPintura = $("#tipo_pintura").val();
                 var longitudDemarcacion = $("#longitud_demarcacion").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece la cancha");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece la cancha");
                     $("#nombre_campus").focus();
-                }else if(idCancha.length == 0){
+                }else if(!validarCadena(idCancha)){
                     alert("ERROR. Ingrese el código de la cancha");
                     $("#id_cancha").focus();
-                }else if(usoCancha.length == 0){
+                }else if(!validarCadena(usoCancha)){
                     alert("ERROR. Ingrese uso de la cancha");
                     $("#uso_cancha").focus();
                 }else{
@@ -1407,7 +1407,7 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idCorredor = $("#id_corredor").val();
+                var idCorredor = limpiarCadena($("#id_corredor").val());
                 var alturaPared = $("#altura_pared").val();
                 var anchoPared = $("#ancho_pared").val();
                 var largoTecho = $("#largo_techo").val();
@@ -1425,13 +1425,13 @@ $(document).ready(function() {
                 var cantidadInterruptores = [];
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece el corredor");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece el corredor");
                     $("#nombre_campus").focus();
-                }else if(idCorredor.length == 0){
+                }else if(!validarCadena(idCorredor)){
                     alert("ERROR. Ingrese el código del corredor");
                     $("#id_corredor").focus();
                 }else{
@@ -1625,16 +1625,16 @@ $(document).ready(function() {
                 var largo = $("#largo").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece la cubierta");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece la cubierta");
                     $("#nombre_campus").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreEdificio.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el edificio al que pertenece la cubierta");
                     $("#nombre_edificio").focus();
-                }else if(piso == 'seleccionar' || piso.length == 0){
+                }else if(!validarCadena(piso)){
                     alert("ERROR. Ingrese el piso donde se encuentra la cubierta");
                     $("#piso").focus();
                 }else{
@@ -1922,7 +1922,7 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idParqueadero = $("#id_parqueadero").val();
+                var idParqueadero = limpiarCadena($("#id_parqueadero").val());
                 var capacidad = $("#capacidad").val();
                 var ancho = $("#ancho").val();
                 var largo = $("#largo").val();
@@ -1931,13 +1931,13 @@ $(document).ready(function() {
                 var longitud_demarcacion = $("#longitud_demarcacion").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece el parqueadero");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece el parqueadero");
                     $("#nombre_campus").focus();
-                }else if(idParqueadero.length == 0){
+                }else if(!validarCadena(idParqueadero)){
                     alert("ERROR. Ingrese el código del parqueadero");
                     $("#id_parqueadero").focus();
                 }else{
@@ -2064,20 +2064,20 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idPiscina = $("#id_piscina").val();
+                var idPiscina = limpiarCadena($("#id_piscina").val());
                 var alto = $("#alto").val();
                 var ancho = $("#ancho").val();
                 var largo = $("#largo").val();
                 var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece la piscina");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece la piscina");
                     $("#nombre_campus").focus();
-                }else if(idParqueadero.length == 0){
+                }else if(!validarCadena(idPiscina)){
                     alert("ERROR. Ingrese el código de la piscina");
                     $("#id_piscina").focus();
                 }else{
@@ -2200,22 +2200,22 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idPlazoleta = $("#id_plazoleta").val();
-                var nombre = $("#nombre").val();
+                var idPlazoleta = limpiarCadena($("#id_plazoleta").val());
+                var nombre = limpiarCadena($("#nombre").val());
                 var tipoIluminacion = [];
                 var cantidadIluminacion = [];
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece la plazoleta");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece la plazoleta");
                     $("#nombre_campus").focus();
-                }else if(idPlazoleta.length == 0){
+                }else if(!validarCadena(idPlazoleta)){
                     alert("ERROR. Ingrese el código de la plazoleta");
                     $("#id_plazoleta").focus();
-                }else if(nombre.length == 0){
+                }else if(!validarCadena(nombre)){
                     alert("ERROR. Ingrese el nombre de la plazoleta");
                     $("#nombre").focus();
                 }else{
@@ -2349,7 +2349,7 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idSendero = $("#id_sendero").val();
+                var idSendero = limpiarCadena($("#id_sendero").val());
                 var longitud = $("#longitud").val();
                 var ancho = $("#ancho").val();
                 var materialPiso = $("#material_piso").val();
@@ -2360,13 +2360,13 @@ $(document).ready(function() {
                 var materialCubierta = $("#material_cubierta").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece el sendero peatonal");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece el sendero peatonal");
                     $("#nombre_campus").focus();
-                }else if(idSendero.length == 0){
+                }else if(!validarCadena(idSendero)){
                     alert("ERROR. Ingrese el código del sendero peatonal");
                     $("#id_sendero").focus();
                 }else{
@@ -2497,19 +2497,19 @@ $(document).ready(function() {
             if (confirmacion) {
                 var nombreSede = $("#nombre_sede").val();
                 var nombreCampus = $("#nombre_campus").val();
-                var idVia = $("#id_via").val();
+                var idVia = limpiarCadena($("#id_via").val());
                 var tipoPintura = $("#tipo_pintura").val();
                 var longitudDemarcacion = $("#longitud_demarcacion").val();
                 var materialPiso = $("#material_piso").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
-                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                if(!validarCadena(nombreSede)){
                     alert("ERROR. Seleccione la sede a la que pertenece la vía");
                     $("#nombre_sede").focus();
-                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                }else if(!validarCadena(nombreCampus)){
                     alert("ERROR. Ingrese el nombre del campus al que pertenece la vía");
                     $("#nombre_campus").focus();
-                }else if(idVia.length == 0){
+                }else if(!validarCadena(idVia)){
                     alert("ERROR. Ingrese el código de la vía");
                     $("#id_via").focus();
                 }else{
@@ -3489,10 +3489,10 @@ $(document).ready(function() {
             if (confirmacion) {
                 var tipoMaterial = $("#tipo_material").val();
                 var nombreTipoMaterial = $("#nombre_tipo_material").val();
-                if(tipoMaterial == 'seleccionar' || tipoMaterial.length == 0){
+                }else if(!validarCadena(tipoMaterial)){
                     alert("ERROR. Seleccione un tipo de material");
                     $("#tipo_material").focus();
-                }else if(tipoMaterial.length == 0){
+                }else if(!validarCadena(nombreTipoMaterial)){
                     alert("ERROR. Ingrese el nombre del tipo de material");
                     $("#nombre_tipo_material").focus();
                 }else{
@@ -3526,10 +3526,10 @@ $(document).ready(function() {
             if (confirmacion) {
                 var tipoObjeto = $("#tipo_objeto").val();
                 var nombreTipoObjeto = $("#nombre_tipo_objeto").val();
-                if(tipoObjeto == 'seleccionar' || tipoObjeto.length == 0){
+                }else if(!validarCadena(tipoObjeto)){
                     alert("ERROR. Seleccione un tipo de objeto");
                     $("#tipo_objeto").focus();
-                }else if(tipoObjeto.length == 0){
+                }else if(!validarCadena(nombreTipoObjeto)){
                     alert("ERROR. Ingrese el nombre del tipo de objeto");
                     $("#nombre_tipo_objeto").focus();
                 }else{
