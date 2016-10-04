@@ -312,6 +312,12 @@ class modelo_creacion {
      * @param string $piso_inicio, piso de inicio de las gradas.
      * @param string $pasamanos, si las gradas tienen pasamanos.
      * @param string $material_pasamanos, id del material del pasamanos.
+     * @param string $ventana, indica si las gradas tienen o no ventanas.
+     * @param string $tipoVentana, tipo de ventana de las gradas.
+     * @param string $cantidadVentanas, cantidad de ventanas del tipo de las gradas.
+     * @param string $materialVentana, material de las ventanas de las gradas.
+     * @param string $anchoVentana, ancho de las ventanas de las gradas.
+     * @param string $altoVentana, alto de las ventanas de las gradas.
      * @return array
      */
     public function guardarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$pasamanos,$material_pasamanos,$ventana,$tipoVentana,$cantidadVentanas,$materialVentana,$anchoVentana,$altoVentana){
@@ -455,8 +461,8 @@ class modelo_creacion {
      * @param string $nombre, nombre de la plazoleta.
      * @param array $tipo_iluminacion, tipo de iluminación de la plazoleta.
      * @param array $cantidad_iluminacion, cantidad de lamparas de la plazoleta.
-     * @param string $lat, latitud donde se encuentra el parqueadero.
-     * @param string $lng, longitud donde se encuentra el parqueadero.
+     * @param string $lat, latitud donde se encuentra la plazoleta.
+     * @param string $lng, longitud donde se encuentra la plazoleta.
      * @return array
      */
     public function guardarPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$nombre,$tipo_iluminacion,$cantidad_iluminacion,$lat,$lng){
@@ -486,6 +492,110 @@ class modelo_creacion {
                     $this->guardarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }
                 $GLOBALS['mensaje'] = "La plazoleta se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una plazoleta.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_plazoleta, código de la plazoleta.
+     * @param string $nombre, nombre de la plazoleta.
+     * @param array $tipo_iluminacion, tipo de iluminación de la plazoleta.
+     * @param array $cantidad_iluminacion, cantidad de lamparas de la plazoleta.
+     * @param string $lat, latitud donde se encuentra el parqueadero.
+     * @param string $lng, longitud donde se encuentra el parqueadero.
+     * @return array
+     */
+    public function guardarSendero($nombre_sede,$nombre_campus,$id_sendero,$longitud,$ancho,$material_piso,$tipo_iluminacion,$codigo_poste,$ancho_cubierta,$largo_cubierta,$material_cubierta,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_sendero = htmlspecialchars(trim($id_sendero));
+        $longitud = htmlspecialchars(trim($longitud));
+        $ancho = htmlspecialchars(trim($ancho));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $codigo_poste = htmlspecialchars(trim($codigo_poste));
+        $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
+        $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
+        $material_cubierta = htmlspecialchars(trim($material_cubierta));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,longitud,ancho,codigo_poste,ancho_cubierta,largo_cubierta,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_sendero."','".$longitud."','".$ancho."','".$codigo_poste."','".$ancho_cubierta."','".$largo_cubierta."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        if (strcasecmp($material_piso,'') != 0) {
+            $campos = $campos.",id_material_piso";
+            $valores = $valores.",'".$material_piso."'";
+        }if (strcasecmp($tipo_iluminacion,'') != 0) {
+            $campos = $campos.",id_tipo_iluminacion";
+            $valores = $valores.",'".$tipo_iluminacion."'";
+        }if (strcasecmp($material_cubierta,'') != 0) {
+            $campos = $campos.",id_material_cubierta";
+            $valores = $valores.",'".$material_cubierta."'";
+        }
+        $sql = "INSERT INTO plazoleta (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El sendero se guardó correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar una vía.
+     * @param string $nombre_sede, id de la sede.
+     * @param string $nombre_campus, id del campus.
+     * @param string $id_via, código de la vía.
+     * @param string $tipo_pintura, tipo de pintura de la vía.
+     * @param string $longitud_demarcacion, longitud de la demarcación de la vía.
+     * @param string $material_piso, material del piso de la vía.
+     * @param string $lat, latitud donde se encuentra la vía.
+     * @param string $lng, longitud donde se encuentra la vía.
+     * @return array
+     */
+    public function guardarVia($nombre_sede,$nombre_campus,$id_via,$tipo_pintura,$longitud_demarcacion,$material_piso,$lat,$lng){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_via = htmlspecialchars(trim($id_via));
+        $tipo_pintura = htmlspecialchars(trim($tipo_pintura));
+        $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "id_sede,id_campus,id,longitud_demarcacion,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_via."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        if (strcasecmp($tipo_pintura,'') != 0) {
+            $campos = $campos.",id_material_piso";
+            $valores = $valores.",'".$tipo_pintura."'";
+        }if (strcasecmp($material_piso,'') != 0) {
+            $campos = $campos.",id_tipo_iluminacion";
+            $valores = $valores.",'".$material_piso."'";
+        }
+        $sql = "INSERT INTO via (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Vía 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Vía 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La vía se guardó correctamente";
                 return true;
             }
         }
@@ -1695,11 +1805,11 @@ class modelo_creacion {
      */
     public function guardarPlanoCampus($id_sede,$id_campus,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = "/var/www/sistemas/archivos/planos/campus/".$id_sede."-".$id_campus."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1741,11 +1851,11 @@ class modelo_creacion {
      */
     public function guardarFotoCampus($id_sede,$id_campus,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = "/var/www/sistemas/archivos/images/campus/".$id_sede."-".$id_campus."/";
             if (!file_exists($foto["name"], $ruta)) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1788,12 +1898,12 @@ class modelo_creacion {
      */
     public function guardarPlanoEdificio($id_sede,$id_campus,$id_edificio,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = "/var/www/sistemas/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1836,12 +1946,12 @@ class modelo_creacion {
      */
     public function guardarFotoEdificio($id_sede,$id_campus,$id_edificio,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = "/var/www/sistemas/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1875,6 +1985,298 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar planos de una cancha que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_cancha, id de la cancha.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoCancha($id_sede,$id_campus,$id_cancha,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_cancha = htmlspecialchars(trim($id_cancha));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO cancha_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_cancha."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Cancha 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Cancha 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un edificio que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_cancha, id de la cancha.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoCancha($id_sede,$id_campus,$id_cancha,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_cancha = htmlspecialchars(trim($id_cancha));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO cancha_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_cancha."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Cancha 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Cancha 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de un corredor que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_corredor, id del corredor.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoCorredor($id_sede,$id_campus,$id_corredor,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_corredor = htmlspecialchars(trim($id_corredor));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO corredor_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_corredor."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Corredor 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Corredor 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un corredor que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_corredor, id del corredor.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoCorredor($id_sede,$id_campus,$id_corredor,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_corredor = htmlspecialchars(trim($id_corredor));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO corredor_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_corredor."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Corredor 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Corredor 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de una cubierta que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoCubierta($id_sede,$id_campus,$id_edificio,$piso,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO cubiertas_piso_archivos (id_sede,id_campus,id_edificio,piso,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Cubierta 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Cubierta 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+    * Función que permite guardar planos de una cubierta que el usuario selecionó.
+    * @param string $id_sede, variable con la información de la sede.
+    * @param string $id_campus, variable con la información del campus.
+    * @param string $id_edificio, id del edificio.
+    * @param string $piso, piso del edificio.
+    * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarFotoCubierta($id_sede,$id_campus,$id_edificio,$piso,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO cubiertas_piso_archivos (id_sede,id_campus,id_edificio,piso,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Cubierta 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Cubierta 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
      * Función que permite guardar planos de unas gradas que el usuario selecionó.
      * @param string $id_sede, variable con la información de la sede.
      * @param string $id_campus, variable con la información del campus.
@@ -1885,13 +2287,13 @@ class modelo_creacion {
      */
     public function guardarPlanoGradas($id_sede,$id_campus,$id_edificio,$piso,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = "/var/www/html/sistemas/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
-                $piso = htmlspecialchars(trim($piso));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1925,7 +2327,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar fotos de un edificio que el usuario selecionó.
+     * Función que permite guardar fotos de unas gradas que el usuario selecionó.
      * @param string $id_sede, variable con la información de la sede.
      * @param string $id_campus, variable con la información del campus.
      * @param string $id_edificio, variable con la información del edificio.
@@ -1934,13 +2336,13 @@ class modelo_creacion {
      */
     public function guardarFotoGradas($id_sede,$id_campus,$id_edificio,$piso,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = "/var/www/html/sistemas/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
-                $piso = htmlspecialchars(trim($piso));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -1974,6 +2376,486 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar planos de un parqueadero que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_parqueadero, id del parqueadero.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoParqueadero($id_sede,$id_campus,$id_parqueadero,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_parqueadero = htmlspecialchars(trim($id_parqueadero));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO parqueadero_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_parqueadero."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Parqueadero 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Parqueadero 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un parqueadero que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_parqueadero, id del parqueadero.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoParquedero($id_sede,$id_campus,$id_parqueadero,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_parqueadero = htmlspecialchars(trim($id_parqueadero));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO parqueadero_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_parqueadero."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Parqueadero 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Parqueadero 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de una piscina que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_piscina, id de la piscina.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoPiscina($id_sede,$id_campus,$id_piscina,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_piscina = htmlspecialchars(trim($id_piscina));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO piscina_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_piscina."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Piscina 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Piscina 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de una piscina que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_piscina, id de la piscina.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoPiscina($id_sede,$id_campus,$id_piscina,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_piscina = htmlspecialchars(trim($id_piscina));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO piscina_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_piscina."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Piscina 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Piscina 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de una plazoleta que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_plazoleta, id de la plazoleta.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoPlazoleta($id_sede,$id_campus,$id_plazoleta,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO plazoleta_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_plazoleta."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Plazoleta 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Plazoleta 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de una plazoleta que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_plazoleta, id de la plazoleta.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoPlazoleta($id_sede,$id_campus,$id_plazoleta,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO plazoleta_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_plazoleta."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Plazoleta 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Plazoleta 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de un sendero que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_sendero, id del sendero.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoSendero($id_sede,$id_campus,$id_sendero,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_sendero = htmlspecialchars(trim($id_sendero));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO sendero_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_sendero."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Sendero 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Sendero 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un sendero que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_sendero, id del sendero.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoSendero($id_sede,$id_campus,$id_sendero,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_sendero = htmlspecialchars(trim($id_sendero));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO sendero_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_sendero."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Sendero 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Sendero 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar planos de una vía que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_via, id de la vía.
+     * @param file $plano, variable con la información del plano a guardar.
+     * @return array
+     */
+    public function guardarPlanoVia($id_sede,$id_campus,$id_via,$plano){
+        if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_via = htmlspecialchars(trim($id_via));
+            $plano['name'] = str_replace(" ", "",$plano['name']);
+            $ruta = "/var/www/html/sistemas/archivos/planos/via/".$id_sede."-".$id_campus."-".$id_via."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
+                $sql = "INSERT INTO via_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_via."','".$plano['name']."','plano');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Vía 1)";
+                    unlink($ruta.$plano['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Vía 2)";
+                        unlink($ruta.$plano['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$plano['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de una via que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_via, id de la via.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoVia($id_sede,$id_campus,$id_via,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_via = htmlspecialchars(trim($id_via));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = "/var/www/html/sistemas/archivos/images/via/".$id_sede."-".$id_campus."-".$id_via."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO via_archivos (id_sede,id_campus,id,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_via."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Vía 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Vía 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
      * Función que permite guardar planos de un espacio que el usuario selecionó.
      * @param string $id_sede, variable con la información de la sede.
      * @param string $id_campus, variable con la información del campus.
@@ -1985,14 +2867,14 @@ class modelo_creacion {
      */
     public function guardarPlanoEspacio($id_sede,$id_campus,$id_edificio,$piso,$espacio,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
+            $espacio = htmlspecialchars(trim($espacio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = "/var/www/sistemas/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
             if (!file_exists($ruta.$foto['name'])) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
-                $piso = htmlspecialchars(trim($piso));
-                $espacio = htmlspecialchars(trim($espacio));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -2037,14 +2919,14 @@ class modelo_creacion {
      */
     public function guardarFotoEspacio($id_sede,$id_campus,$id_edificio,$piso,$espacio,$plano){
         if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_sede = htmlspecialchars(trim($id_sede));
+            $id_campus = htmlspecialchars(trim($id_campus));
+            $id_edificio = htmlspecialchars(trim($id_edificio));
+            $piso = htmlspecialchars(trim($piso));
+            $espacio = htmlspecialchars(trim($espacio));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = "/var/www/sistemas/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
             if (!file_exists($foto["name"], $ruta)) {
-                $id_sede = htmlspecialchars(trim($id_sede));
-                $id_campus = htmlspecialchars(trim($id_campus));
-                $id_edificio = htmlspecialchars(trim($id_edificio));
-                $piso = htmlspecialchars(trim($piso));
-                $espacio = htmlspecialchars(trim($espacio));
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }

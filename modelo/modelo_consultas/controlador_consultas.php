@@ -360,22 +360,24 @@ class controlador_consultas
      * almacenadas en el sistema.
      */
     public function consultar_sedes() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $data = $m->buscarSedes();
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_sede' => ucwords($valor['nombre']),
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -383,11 +385,12 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_todos_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarCampus($info["nombre_sede"]);
             while (list($clave, $valor) = each($data)){
@@ -398,11 +401,12 @@ class controlador_consultas
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -410,11 +414,12 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
@@ -426,11 +431,12 @@ class controlador_consultas
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -438,11 +444,12 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_archivos_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
@@ -452,11 +459,12 @@ class controlador_consultas
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -464,11 +472,12 @@ class controlador_consultas
      * campus.
      */
     public function ubicacion_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
@@ -477,11 +486,12 @@ class controlador_consultas
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -489,11 +499,12 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_edificios() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarEdificios($info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
@@ -501,11 +512,12 @@ class controlador_consultas
                     'id' => $valor['id'],
                     'nombre_edificio' => ucwords($valor['nombre']),
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -513,11 +525,12 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_pisos_edificio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarPisosEdificio($info["nombre_campus"],$info["nombre_edificio"]);
             while (list($clave, $valor) = each($data)){
@@ -527,11 +540,12 @@ class controlador_consultas
                     'terraza' => $valor['terraza'],
                     'sotano' => $valor['sotano'],
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -539,22 +553,24 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_usos_espacios() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $data = $m->buscarUsosEspacios();
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'uso_espacio' => ucwords($valor['uso']),
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -562,11 +578,12 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_materiales() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarMateriales($info["tipo_material"]);
             while (list($clave, $valor) = each($data)){
@@ -574,11 +591,12 @@ class controlador_consultas
                     'id' => $valor['id'],
                     'nombre_material' => ucwords($valor['material']),
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 
     /**
@@ -586,11 +604,12 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_tipo_objetos() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $dataNew = array();
+            $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarTipoObjetos($info["tipo_objeto"]);
             while (list($clave, $valor) = each($data)){
@@ -598,11 +617,12 @@ class controlador_consultas
                     'id' => $valor['id'],
                     'tipo_objeto' => ucwords($valor['tipo']),
                     );
-                array_push($dataNew, $arrayAux);
+                array_push($result, $arrayAux);
             }
         }
-        $dataNew['mensaje'] = $GLOBALS['mensaje'];
-        echo json_encode($dataNew);
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
     }
 }
 ?>

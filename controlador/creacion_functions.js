@@ -156,16 +156,17 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear una sede
-     * @param {string} consulta, información de la sede
+     * @param {string} consulta, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de un espacio).
+     * @param {array} informacion, información del tipo de objeto.
      * @returns {data}
      */
-    function guardarSede(informacion){
+    function guardarObjeto(tipo_objeto,informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=guardar_sede",
+                url: "index.php?action=guardar_"+tipo_objeto,
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -187,137 +188,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un campus
-     * @param {string} informacion, información del campus
-     * @returns {data}
-     */
-    function guardarCampus(informacion){
-        var dataResult;
-        var jObject = JSON.stringify(informacion);
-        console.log(informacion);
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_campus",
-                data: {jObject:jObject},
-                dataType: "json",
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    //mostrarMensaje(data.mensaje);
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite crear un edificio
-     * @param {string} informacion, información del edificio
-     * @returns {data}
-     */
-    function guardarEdificio(informacion){
-        var dataResult;
-        var jObject = JSON.stringify(informacion);
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_edificio",
-                data: {jObject:jObject},
-                dataType: "json",
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    //mostrarMensaje(data.mensaje);
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite crear una cancha
-     * @param {string} informacion, información del edificio
-     * @returns {data}
-     */
-    function guardarCancha(informacion){
-        var dataResult;
-        var jObject = JSON.stringify(informacion);
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_cancha",
-                data: {jObject:jObject},
-                dataType: "json",
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    //mostrarMensaje(data.mensaje);
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite crear las gradas
-     * @param {string} informacion, información de las gradas
-     * @returns {data}
-     */
-    function guardarGradas(informacion){
-        var dataResult;
-        var jObject = JSON.stringify(informacion);
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_gradas",
-                data: {jObject:jObject},
-                dataType: "json",
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    //mostrarMensaje(data.mensaje);
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite crear un espacio
-     * @param {string} informacion, información del espacio
+     * Función que permite crear un espacio.
+     * @param {array} informacion, información del espacio.
      * @returns {data}
      */
     function guardarEspacio(){
@@ -336,8 +208,8 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     dataEspacio = {};
-                    var resultadoPlanos = guardarPlanosEspacio(dataEspacio['planos']);
-                    var resultadoFotos = guardarFotosEspacio(dataEspacio['fotos']);
+                    var resultadoPlanos = guardarPlanos("espacio",dataEspacio['planos']);
+                    var resultadoFotos = guardarFotos("espacio",dataEspacio['fotos']);
                     alert(data.mensaje);
                     console.log(data);
                     console.log(resultadoPlanos);
@@ -397,8 +269,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un tipo de material
-     * @param {string} informacion, información del tipo de material
+     * Función que permite crear un tipo de material.
+     * @param {array} informacion, información del tipo de material.
      * @returns {data}
      */
     function guardarTipoMaterial(informacion){
@@ -430,7 +302,7 @@ $(document).ready(function() {
 
     /**
      * Función que permite crear un tipo de objeto
-     * @param {string} informacion, información del tipo de objeto
+     * @param {array} informacion, información del tipo de objeto
      * @returns {data}
      */
     function guardarTipoObjeto(informacion){
@@ -461,16 +333,17 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite guardar los planos que se suban al sistema
+     * Función que permite guardar los planos que se suban al sistema.
+     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
      * @param {formData} informacion, formData con las imagenes.
      * @returns {data}
      */
-    function guardarPlanosCampus(informacion){
+    function guardarPlanos(tipo_objeto,informacion){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=guardar_planos_campus",
+                url: "index.php?action=guardar_planos_"+tipo_objeto,
                 data: informacion,
                 dataType: "json",
                 contentType: false,
@@ -494,271 +367,16 @@ $(document).ready(function() {
 
     /**
      * Función que permite guardar las fotos que se suban al sistema
+     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
      * @param {formData} informacion, formData con las imagenes.
      * @returns {data}
      */
-    function guardarFotosCampus(informacion){
+    function guardarFotos(tipo_objeto,informacion){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=guardar_fotos_campus",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar los planos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarPlanosEdificio(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_planos_edificio",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar las fotos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarFotosEdificio(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_fotos_edificio",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar los planos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarPlanosCancha(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_planos_edificio",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar las fotos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarFotosCancha(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_fotos_edificio",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar los planos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarPlanosGradas(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_planos_gradas",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar las fotos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarFotosGradas(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_fotos_gradas",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar los planos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarPlanosEspacio(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_planos_espacio",
-                data: informacion,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                async: false,
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err.Message);
-                },
-                success: function(data) {
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que permite guardar las fotos que se suban al sistema
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
-    function guardarFotosEspacio(informacion){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=guardar_fotos_espacio",
+                url: "index.php?action=guardar_fotos_"+tipo_objeto,
                 data: informacion,
                 dataType: "json",
                 contentType: false,
@@ -811,6 +429,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los campus presentes en el sistema
+     * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
      * @returns {data} object json
     **/
     function buscarCampus(sede){
@@ -841,6 +460,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los campus presentes en el sistema
+     * @param {array} info, arreglo con la información del campus a buscar.
      * @returns {data} object json
     **/
     function ubicacionCampus(info){
@@ -871,7 +491,8 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los edificios del campus seleccionado
-     * presentes en el sistema
+     * presentes en el sistema.
+     * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
      * @returns {data} object json
     **/
     function buscarEdificios(campus){
@@ -902,6 +523,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta el número de pisos de un edificio
+     * @param {array} edificio, arreglo que contiene el edificio a buscar.
      * @returns {data} object json
     **/
     function buscarPisosEdificio(edificio){
@@ -961,7 +583,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los materiales presentes en el sistema
-     * @param {string} informacion, arreglo que contiene el tipo de material a buscar
+     * @param {array} informacion, arreglo que contiene el tipo de material a buscar
      * @returns {data} object json
     **/
     function buscarMateriales(informacion){
@@ -992,7 +614,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los objetos presentes en el sistema
-     * @param {string} informacion, arreglo que contiene el tipo de objeto a buscar
+     * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
      * @returns {data} object json
     **/
     function buscarTipoObjetos(informacion){
@@ -1350,7 +972,7 @@ $(document).ready(function() {
                 }else{
                     var informacion = {};
                     informacion['nombre_sede'] = limpiarCadena(nombreSede);
-                    var resultado = guardarSede(informacion);
+                    var resultado = guardarObjeto("sede",informacion);
                     mostrarMensaje(resultado.mensaje);
                     if (resultado.verificar) {
                         $("#nombre_sede").val("");
@@ -1423,9 +1045,9 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('campus',JSON.stringify(informacion));
                         arregloPlanos.append('campus',JSON.stringify(informacion));
-                        var resultado = guardarCampus(informacion);
-                        var resultadoPlanos = guardarPlanosCampus(arregloPlanos);
-                        var resultadoFotos = guardarFotosCampus(arregloFotos);
+                        var resultado = guardarObjeto("campus",informacion);
+                        var resultadoPlanos = guardarPlanos("campus",arregloPlanos);
+                        var resultadoFotos = guardarFotos("campus",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
                         console.log(resultado);
                         console.log(resultadoPlanos);
@@ -1572,9 +1194,9 @@ $(document).ready(function() {
                         arregloFotos.append('edificio',JSON.stringify(informacion));
                         arregloPlanos.append('edificio',JSON.stringify(informacion));
                         console.log(informacion);
-                        var resultado = guardarEdificio(informacion);
-                        var resultadoPlanos = guardarPlanosEdificio(arregloPlanos);
-                        var resultadoFotos = guardarFotosEdificio(arregloFotos);
+                        var resultado = guardarObjeto("edificio",informacion);
+                        var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
+                        var resultadoFotos = guardarFotos("edificio",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
                         console.log(resultado);
                         console.log(resultadoPlanos);
@@ -1711,9 +1333,9 @@ $(document).ready(function() {
                         arregloFotos.append('cancha',JSON.stringify(informacion));
                         arregloPlanos.append('cancha',JSON.stringify(informacion));
                         console.log(informacion);
-                        var resultado = guardarCancha(informacion);
-                        var resultadoPlanos = guardarPlanosCancha(arregloPlanos);
-                        var resultadoFotos = guardarFotosCancha(arregloFotos);
+                        var resultado = guardarObjeto("cancha",informacion);
+                        var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
+                        var resultadoFotos = guardarFotos("cancha",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
                         console.log(resultado);
                         console.log(resultadoPlanos);
@@ -1763,6 +1385,1229 @@ $(document).ready(function() {
                             planos.focus();
                         }else{
                             alert("ERROR. El número máximo de fotos por cancha es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_corredor y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_corredor").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información del corredor?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idCorredor = $("#id_corredor").val();
+                var alturaPared = $("#altura_pared").val();
+                var anchoPared = $("#ancho_pared").val();
+                var largoTecho = $("#largo_techo").val();
+                var anchoTecho = $("#ancho_techo").val();
+                var materialTecho = $("#material_techo").val();
+                var largoPiso = $("#largo_piso").val();
+                var anchoPiso = $("#ancho_piso").val();
+                var materialPiso = $("#material_piso").val();
+                var tipoIluminacion = [];
+                var cantidadIluminacion = [];
+                var tipoSuministroEnergia = [];
+                var tomacorriente = [];
+                var cantidadTomacorrientes = [];
+                var tipoInterruptor = [];
+                var cantidadInterruptores = [];
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece el corredor");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece el corredor");
+                    $("#nombre_campus").focus();
+                }else if(idCorredor.length == 0){
+                    alert("ERROR. Ingrese el código del corredor");
+                    $("#id_corredor").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_corredor'] = idCorredor;
+                    informacion['altura_pared'] = alturaPared;
+                    informacion['ancho_pared'] = anchoPared;
+                    informacion['largo_techo'] = largoTecho;
+                    informacion['ancho_techo'] = anchoTecho;
+                    informacion['material_techo'] = materialTecho;
+                    informacion['largo_piso'] = largoPiso;
+                    informacion['ancho_piso'] = anchoPiso;
+                    informacion['material_piso'] = materialPiso;
+                    for (var i=0;i<=iluminacionCont;i++) {
+                        if (i==0) {
+                            tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                            cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                        }else{
+                            tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                            cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                        }
+                    }
+                    for (var i=0;i<=tomacorrientesCont;i++) {
+                        if (i==0) {
+                            tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
+                            tomacorriente[i] = $("#tomacorriente").val();
+                            cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
+                        }else{
+                            tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
+                            tomacorriente[i] = $("#tomacorriente"+i).val();
+                            cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
+                        }
+                    }
+                    for (var i=0;i<=interruptoresCont;i++) {
+                        if (i==0) {
+                            tipoInterruptor[i] = $("#tipo_interruptor").val();
+                            cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                        }else{
+                            tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                            cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                        }
+                    }
+                    informacion['tipo_iluminacion'] = tipoIluminacion;
+                    informacion['cantidad_iluminacion'] = cantidadIluminacion;
+                    informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
+                    informacion['tomacorriente'] = tomacorriente;
+                    informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
+                    informacion['tipo_interruptor'] = tipoInterruptor;
+                    informacion['cantidad_interruptores'] = cantidadInterruptores;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('corredor',JSON.stringify(informacion));
+                        arregloPlanos.append('corredor',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("corredor",informacion);
+                        var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
+                        var resultadoFotos = guardarFotos("corredor",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_corredor").val("");
+                            $("#altura_pared").val("");
+                            $("#ancho_pared").val("");
+                            $("#largo_techo").val("");
+                            $("#ancho_techo").val("");
+                            $("#material_techo").val("");
+                            $("#largo_piso").val("");
+                            $("#ancho_piso").val("");
+                            $("#material_piso").val("");
+                            $("#tipo_iluminacion").val("");
+                            $("#cantidad_iluminacion").val("");
+                            $("#tipo_suministro_energia").val("");
+                            $("#tomacorriente").val("");
+                            $("#cantidad_tomacorrientes").val("");
+                            $("#tipo_interruptor").val("");
+                            $("#cantidad_interruptores").val("");
+                            while (iluminacionCont < 0) {
+                                eliminarComponente("iluminacion"+iluminacionCont);
+                                iluminacionCont--;
+                            }
+                            while (tomacorrientesCont < 0) {
+                                eliminarComponente("suministro_energia"+tomacorrientesCont);
+                                tomacorrientesCont--;
+                            }
+                            while (interruptoresCont < 0) {
+                                eliminarComponente("interruptor"+tomacorrientesCont);
+                                interruptoresCont--;
+                            }
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por corredor es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por corredor es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_cubierta y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_cubierta").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información de la cubierta?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var nombreEdificio = $("#nombre_edificio").val();
+                var piso = $("#pisos").val();
+                var tipoCubierta = $("#tipo_cubierta").val();
+                var materialCubierta = $("#material_cubierta").val();
+                var ancho = $("#ancho").val();
+                var largo = $("#largo").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece la cubierta");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece la cubierta");
+                    $("#nombre_campus").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreEdificio.length == 0){
+                    alert("ERROR. Ingrese el edificio al que pertenece la cubierta");
+                    $("#nombre_edificio").focus();
+                }else if(piso == 'seleccionar' || piso.length == 0){
+                    alert("ERROR. Ingrese el piso donde se encuentra la cubierta");
+                    $("#piso").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['nombre_edificio'] = nombreEdificio;
+                    informacion['pisos'] = piso;
+                    informacion['tipo_cubierta'] = tipoCubierta;
+                    informacion['material_cubierta'] = materialCubierta;
+                    informacion['ancho'] = ancho;
+                    informacion['largo'] = largo;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('cubierta',JSON.stringify(informacion));
+                        arregloPlanos.append('cubierta',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("cubierta",informacion);
+                        var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
+                        var resultadoFotos = guardarFotos("cubierta",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#nombre_edificio").empty();
+                            $("#pisos").empty();
+                            $("#tipo_cubierta").val("");
+                            $("#material_cubierta").val("");
+                            $("#ancho").val("");
+                            $("#largo").val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por cubierta es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por cubierta es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_gradas y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_gradas").click(function (e){
+      try{
+          var confirmacion = window.confirm("¿Guardar la información de las gradas?");
+          if (confirmacion) {
+              var nombreSede = $("#nombre_sede").val();
+              var nombreCampus = $("#nombre_campus").val();
+              var nombreEdificio = $("#nombre_edificio").val();
+              var pisoInicio = $("#pisos").val();
+              var pasamanos = $('input[name="pasamanos"]:checked').val();
+              var materialPasamanos = $("#material_pasamanos").val();
+              var ventanas = $('input[name="ventanas"]:checked').val();
+              var tipoVentana = {};
+              var cantidadVentanas = {};
+              var materialVentana = {};
+              var anchoVentana = {};
+              var altoVentana = {};
+              var planos = document.getElementById("planos[]");
+              var fotos = document.getElementById("fotos[]");
+              if(!validarCadena(nombreSede)){
+                  alert("ERROR. Seleccione la sede a la que pertenecen las gradas");
+                  $("#nombre_sede").focus();
+              }else if(!validarCadena(nombreCampus)){
+                  alert("ERROR. Ingrese el nombre del campus al que pertenecen las gradas");
+                  $("#nombre_campus").focus();
+              }else if(!validarCadena(nombreEdificio)){
+                  alert("ERROR. Seleccione el edificio al que pertenecen las gradas");
+                  $("#nombre_edificio").focus();
+              }else if(!validarCadena(pisoInicio)){
+                  alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
+                  $("#pisos").focus();
+              }else{
+                  var informacion = {};
+                  var arregloFotos = new FormData();
+                  var arregloPlanos = new FormData();
+                  informacion['nombre_sede'] = nombreSede;
+                  informacion['nombre_campus'] = nombreCampus;
+                  informacion['nombre_edificio'] = nombreEdificio;
+                  informacion['piso_inicio'] = pisoInicio;
+                  informacion['pasamanos'] = pasamanos;
+                  informacion['material_pasamanos'] = materialPasamanos;
+                  informacion['ventana'] = ventanas;
+                  for (var i=0;i<=ventanasCont;i++) {
+                      if (i==0) {
+                          tipoVentana[i] = $("#tipo_ventana").val();
+                          cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                          materialVentana[i] = $("#material_ventana").val();
+                          anchoVentana[i] = $("#ancho_ventana").val();
+                          altoVentana[i] = $("#alto_ventana").val();
+                      }else{
+                          tipoVentana[i] = $("#tipo_ventana"+i).val();
+                          cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                          materialVentana[i] = $("#material_ventana"+i).val();
+                          anchoVentana[i] = $("#ancho_ventana"+i).val();
+                          altoVentana[i] = $("#alto_ventana"+i).val();
+                      }
+                  }
+                  informacion['tipo_ventana'] = tipoVentana;
+                  informacion['cantidad_ventanas'] = cantidadVentanas;
+                  informacion['material_ventana'] = materialVentana;
+                  informacion['ancho_ventana'] = anchoVentana;
+                  informacion['alto_ventana'] = altoVentana;
+                  if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                      for (var i=0;i<fotos.files.length;i++) {
+                          var foto = fotos.files[i];
+                          if (foto.size > 2000000) {
+                              alert('La foto: "'+foto.name+"' es muy grande");
+                          }else{
+                              var nombreArchivo = foto.name;
+                              if(nombreArchivo.length > 50){
+                                  nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                              }
+                              arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                          }
+                      }
+                      for (var i=0;i<planos.files.length;i++) {
+                          var plano = planos.files[i];
+                          if (plano.size > 2000000) {
+                              alert('El archivo: "'+plano.name+"' es muy grande");
+                          }else{
+                              var nombreArchivo = plano.name;
+                              if(nombreArchivo.length > 50){
+                                  nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                              }
+                              arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                          }
+                      }
+                      arregloFotos.append('gradas',JSON.stringify(informacion));
+                      arregloPlanos.append('gradas',JSON.stringify(informacion));
+                      console.log(informacion);
+                      var resultado = guardarObjeto("gradas",informacion);
+                      var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
+                      var resultadoFotos = guardarFotos("gradas",arregloFotos);
+                      mostrarMensaje(resultado.mensaje);
+                      console.log(resultado);
+                      console.log(resultadoPlanos);
+                      console.log(resultadoFotos);
+                      var mensaje = "";
+                      if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                          for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                              if (!resultadoPlanos.verificar[i]) {
+                                  mensaje += resultadoPlanos.mensaje[i];
+                              }
+                              if (i<resultadoPlanos.verificar.length-2) {
+                                  mensaje += "\n";
+                              }
+                          }
+                      }
+                      if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                          for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                              if (!resultadoFotos.verificar[i]) {
+                                  mensaje += resultadoFotos.mensaje[i];
+                              }
+                              if (i<resultadoFotos.verificar.length-1) {
+                                  mensaje += "\n";
+                              }
+                          }
+                      }
+                      if (mensaje.substring(0,0) != "") {
+                          console.log(mensaje.length);
+                          alert(mensaje);
+                      }
+                      if(resultado.verificar){
+                          $("#nombre_sede").val("");
+                          $("#nombre_campus").empty();
+                          $("#nombre_edificio").empty();
+                          $("#pisos").empty();
+                          $('input[name=pasamanos]').attr('checked',false);
+                          $('input[name=ventanas]').attr('checked',false);
+                          $("#tipo_ventana").val("");
+                          $("#cantidad_ventanas").val("");
+                          $("#material_ventana").val("");
+                          $("#ancho_ventana").val("");
+                          $("#alto_ventana").val("");
+                          $('#divVentanas').hide();
+                          while (ventanasCont < 0) {
+                              eliminarComponente("ventana"+ventanasCont);
+                              ventanasCont--;
+                          }
+                          planos.value = "";
+                          fotos.value = "";
+                      }
+                  }else{
+                      if (planos.files.length <= 5) {
+                          alert("ERROR. El número máximo de planos por gradas es 5");
+                          planos.focus();
+                      }else{
+                          alert("ERROR. El número máximo de fotos por gradas es 20");
+                          fotos.focus();
+                      }
+                  }
+              }
+          }
+      }
+      catch(ex){
+          console.log(ex);
+          alert("Ocurrió un error, por favor inténtelo nuevamente");
+      }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_parqueadero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_parqueadero").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información del parqueadero?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idParqueadero = $("#id_parqueadero").val();
+                var capacidad = $("#capacidad").val();
+                var ancho = $("#ancho").val();
+                var largo = $("#largo").val();
+                var material_piso = $("#material_piso").val();
+                var tipo_pintura = $("#tipo_pintura").val();
+                var longitud_demarcacion = $("#longitud_demarcacion").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece el parqueadero");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece el parqueadero");
+                    $("#nombre_campus").focus();
+                }else if(idParqueadero.length == 0){
+                    alert("ERROR. Ingrese el código del parqueadero");
+                    $("#id_parqueadero").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_parqueadero'] = idParqueadero;
+                    informacion['capacidad'] = capacidad;
+                    informacion['ancho'] = ancho;
+                    informacion['largo'] = largo;
+                    informacion['material_piso'] = material_piso;
+                    informacion['tipo_pintura'] = tipo_pintura;
+                    informacion['longitud_demarcacion'] = longitud_demarcacion;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('parqueadero',JSON.stringify(informacion));
+                        arregloPlanos.append('parqueadero',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("parqueadero",informacion);
+                        var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
+                        var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_parqueadero").val("");
+                            $("#capacidad").val("");
+                            $("#ancho").val("");
+                            $("#largo").val("");
+                            $("#material_piso").val("");
+                            $("#tipo_pintura").val("");
+                            $("#longitud_demarcacion").val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por parqueadero es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por parqueadero es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_piscina y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_piscina").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información de la piscina?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idPiscina = $("#id_piscina").val();
+                var alto = $("#alto").val();
+                var ancho = $("#ancho").val();
+                var largo = $("#largo").val();
+                var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece la piscina");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece la piscina");
+                    $("#nombre_campus").focus();
+                }else if(idParqueadero.length == 0){
+                    alert("ERROR. Ingrese el código de la piscina");
+                    $("#id_piscina").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_piscina'] = idPiscina;
+                    informacion['alto'] = alto;
+                    informacion['ancho'] = ancho;
+                    informacion['largo'] = largo;
+                    informacion['cantidad_puntos_hidraulicos'] = cantidadPuntosHidraulicos;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('piscina',JSON.stringify(informacion));
+                        arregloPlanos.append('piscina',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("piscina",informacion);
+                        var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
+                        var resultadoFotos = guardarFotos("piscina",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_piscina").val("");
+                            $("#alto").val("");
+                            $("#ancho").val("");
+                            $("#largo").val("");
+                            $("#cantidad_puntos_hidraulicos").val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por piscina es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por piscina es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_plazoleta y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_plazoleta").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información de la plazoleta?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idPlazoleta = $("#id_plazoleta").val();
+                var nombre = $("#nombre").val();
+                var tipoIluminacion = [];
+                var cantidadIluminacion = [];
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece la plazoleta");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece la plazoleta");
+                    $("#nombre_campus").focus();
+                }else if(idPlazoleta.length == 0){
+                    alert("ERROR. Ingrese el código de la plazoleta");
+                    $("#id_plazoleta").focus();
+                }else if(nombre.length == 0){
+                    alert("ERROR. Ingrese el nombre de la plazoleta");
+                    $("#nombre").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_plazoleta'] = idPlazoleta;
+                    informacion['nombre'] = nombre;
+                    for (var i=0;i<=iluminacionCont;i++) {
+                        if (i==0) {
+                            tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                            cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                        }else{
+                            tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                            cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                        }
+                    }
+                    informacion['tipo_iluminacion'] = tipoIluminacion;
+                    informacion['cantidad_iluminacion'] = cantidadIluminacion;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('plazoleta',JSON.stringify(informacion));
+                        arregloPlanos.append('plazoleta',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("plazoleta",informacion);
+                        var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
+                        var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_plazoleta").val("");
+                            $("#nombre").val("");
+                            $("#tipo_iluminacion").val();
+                            $("#cantidad_iluminacion").val();
+                            while (iluminacionCont < 0) {
+                                eliminarComponente("iluminacion"+iluminacionCont);
+                                iluminacionCont--;
+                            }
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por piscina es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por piscina es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_sendero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_sendero").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información del sendero peatonal?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idSendero = $("#id_sendero").val();
+                var longitud = $("#longitud").val();
+                var ancho = $("#ancho").val();
+                var materialPiso = $("#material_piso").val();
+                var tipoIluminacion = $("#tipo_iluminacion").val();
+                var codigoPoste = $("#codigo_poste").val();
+                var anchoCubierta = $("#ancho_cubierta").val();
+                var largoCubierta = $("#largo_cubierta").val();
+                var materialCubierta = $("#material_cubierta").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece el sendero peatonal");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece el sendero peatonal");
+                    $("#nombre_campus").focus();
+                }else if(idSendero.length == 0){
+                    alert("ERROR. Ingrese el código del sendero peatonal");
+                    $("#id_sendero").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_sendero'] = idSendero;
+                    informacion['longitud'] = longitud;
+                    informacion['ancho'] = ancho;
+                    informacion['material_piso'] = materialPiso;
+                    informacion['tipo_iluminacion'] = tipoIluminacion;
+                    informacion['codigo_poste'] = codigoPoste;
+                    informacion['ancho_cubierta'] = anchoCubierta;
+                    informacion['largo_cubierta'] = largoCubierta;
+                    informacion['material_cubierta'] = materialCubierta;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('sendero',JSON.stringify(informacion));
+                        arregloPlanos.append('sendero',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("sendero",informacion);
+                        var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
+                        var resultadoFotos = guardarFotos("sendero",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_sendero").val("");
+                            $("#longitud").val("");
+                            $("#ancho").val("");
+                            $("#material_piso").val("");
+                            $("#tipo_iluminacion").val("");
+                            $("#codigo_poste").val("");
+                            $("#ancho_cubierta").val("");
+                            $("#largo_cubierta").val("");
+                            $("#material_cubierta").val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por sendero peatonal es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por sendero peatonal es 20");
+                            fotos.focus();
+                        }
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_via y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_via").click(function (e){
+        try{
+            var confirmacion = window.confirm("¿Guardar la información de la vía?");
+            if (confirmacion) {
+                var nombreSede = $("#nombre_sede").val();
+                var nombreCampus = $("#nombre_campus").val();
+                var idVia = $("#id_via").val();
+                var tipoPintura = $("#tipo_pintura").val();
+                var longitudDemarcacion = $("#longitud_demarcacion").val();
+                var materialPiso = $("#material_piso").val();
+                var planos = document.getElementById("planos[]");
+                var fotos = document.getElementById("fotos[]");
+                if(nombreSede == 'seleccionar' || nombreSede.length == 0){
+                    alert("ERROR. Seleccione la sede a la que pertenece la vía");
+                    $("#nombre_sede").focus();
+                }else if(nombreCampus == 'seleccionar' || nombreCampus.length == 0){
+                    alert("ERROR. Ingrese el nombre del campus al que pertenece la vía");
+                    $("#nombre_campus").focus();
+                }else if(idVia.length == 0){
+                    alert("ERROR. Ingrese el código de la vía");
+                    $("#id_via").focus();
+                }else{
+                    var informacion = {};
+                    var arregloFotos = new FormData();
+                    var arregloPlanos = new FormData();
+                    informacion['nombre_sede'] = nombreSede;
+                    informacion['nombre_campus'] = nombreCampus;
+                    informacion['id_via'] = idVia;
+                    informacion['tipo_pintura'] = tipoPintura;
+                    informacion['longitud_demarcacion'] = longitudDemarcacion;
+                    informacion['material_piso'] = materialPiso;
+                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                        informacion['lat'] = coordenadas.lat().toFixed(8);
+                        informacion['lng'] = coordenadas.lng().toFixed(8);
+                    }else{
+                        informacion['lat'] = 0;
+                        informacion['lng'] = 0;
+                    }
+                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                        for (var i=0;i<fotos.files.length;i++) {
+                            var foto = fotos.files[i];
+                            if (foto.size > 2000000) {
+                                alert('La foto: "'+foto.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = foto.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                }
+                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                            }
+                        }
+                        for (var i=0;i<planos.files.length;i++) {
+                            var plano = planos.files[i];
+                            if (plano.size > 2000000) {
+                                alert('El archivo: "'+plano.name+"' es muy grande");
+                            }else{
+                                var nombreArchivo = plano.name;
+                                if(nombreArchivo.length > 50){
+                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                                }
+                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                            }
+                        }
+                        arregloFotos.append('via',JSON.stringify(informacion));
+                        arregloPlanos.append('via',JSON.stringify(informacion));
+                        console.log(informacion);
+                        var resultado = guardarObjeto("via",informacion);
+                        var resultadoPlanos = guardarPlanos("via",arregloPlanos);
+                        var resultadoFotos = guardarFotos("via",arregloFotos);
+                        mostrarMensaje(resultado.mensaje);
+                        console.log(resultado);
+                        console.log(resultadoPlanos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
+                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                                if (!resultadoPlanos.verificar[i]) {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }
+                                if (i<resultadoPlanos.verificar.length-2) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }
+                                if (i<resultadoFotos.verificar.length-1) {
+                                    mensaje += "\n";
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,0) != "") {
+                            console.log(mensaje.length);
+                            alert(mensaje);
+                        }
+                        if(resultado.verificar){
+                            $("#nombre_sede").val("");
+                            $("#nombre_campus").empty();
+                            $("#id_via").val("");
+                            $("#tipo_pintura").val("");
+                            $("#longitud_demarcacion").val("");
+                            $("#material_piso").val("");
+                            planos.value = "";
+                            fotos.value = "";
+                            initMap();
+                            coordenadas.length = {};
+                            window.scrollTo(0,0);
+                        }
+                    }else{
+                        if (planos.files.length <= 5) {
+                            alert("ERROR. El número máximo de planos por vía es 5");
+                            planos.focus();
+                        }else{
+                            alert("ERROR. El número máximo de fotos por vía es 20");
                             fotos.focus();
                         }
                     }
@@ -2632,172 +3477,6 @@ $(document).ready(function() {
         }
         dataEspacio = $.extend(dataEspacio,informacion);
         guardarEspacio();
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_gradas y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_gradas").click(function (e){
-      try{
-          var confirmacion = window.confirm("¿Guardar la información de las gradas?");
-          if (confirmacion) {
-              var nombreSede = $("#nombre_sede").val();
-              var nombreCampus = $("#nombre_campus").val();
-              var nombreEdificio = $("#nombre_edificio").val();
-              var pisoInicio = $("#pisos").val();
-              var pasamanos = $('input[name="pasamanos"]:checked').val();
-              var materialPasamanos = $("#material_pasamanos").val();
-              var ventanas = $('input[name="ventanas"]:checked').val();
-              var tipoVentana = {};
-              var cantidadVentanas = {};
-              var materialVentana = {};
-              var anchoVentana = {};
-              var altoVentana = {};
-              var planos = document.getElementById("planos[]");
-              var fotos = document.getElementById("fotos[]");
-              if(!validarCadena(nombreSede)){
-                  alert("ERROR. Seleccione la sede a la que pertenecen las gradas");
-                  $("#nombre_sede").focus();
-              }else if(!validarCadena(nombreCampus)){
-                  alert("ERROR. Ingrese el nombre del campus al que pertenecen las gradas");
-                  $("#nombre_campus").focus();
-              }else if(!validarCadena(nombreEdificio)){
-                  alert("ERROR. Seleccione el edificio al que pertenecen las gradas");
-                  $("#nombre_edificio").focus();
-              }else if(!validarCadena(pisoInicio)){
-                  alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
-                  $("#pisos").focus();
-              }else{
-                  for (var i=0;i<=ventanasCont;i++) {
-                      if (i==0) {
-                          tipoVentana[i] = $("#tipo_ventana").val();
-                          cantidadVentanas[i] = $("#cantidad_ventanas").val();
-                          materialVentana[i] = $("#material_ventana").val();
-                          anchoVentana[i] = $("#ancho_ventana").val();
-                          altoVentana[i] = $("#alto_ventana").val();
-                      }else{
-                          tipoVentana[i] = $("#tipo_ventana"+i).val();
-                          cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
-                          materialVentana[i] = $("#material_ventana"+i).val();
-                          anchoVentana[i] = $("#ancho_ventana"+i).val();
-                          altoVentana[i] = $("#alto_ventana"+i).val();
-                      }
-                  }
-                  var informacion = {};
-                  var arregloFotos = new FormData();
-                  var arregloPlanos = new FormData();
-                  informacion['nombre_sede'] = nombreSede;
-                  informacion['nombre_campus'] = nombreCampus;
-                  informacion['nombre_edificio'] = nombreEdificio;
-                  informacion['piso_inicio'] = pisoInicio;
-                  informacion['pasamanos'] = pasamanos;
-                  informacion['material_pasamanos'] = materialPasamanos;
-                  informacion['ventana'] = ventanas;
-                  informacion['tipo_ventana'] = tipoVentana;
-                  informacion['cantidad_ventanas'] = cantidadVentanas;
-                  informacion['material_ventana'] = materialVentana;
-                  informacion['ancho_ventana'] = anchoVentana;
-                  informacion['alto_ventana'] = altoVentana;
-                  if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                      for (var i=0;i<fotos.files.length;i++) {
-                          var foto = fotos.files[i];
-                          if (foto.size > 2000000) {
-                              alert('La foto: "'+foto.name+"' es muy grande");
-                          }else{
-                              var nombreArchivo = foto.name;
-                              if(nombreArchivo.length > 50){
-                                  nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
-                              }
-                              arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                          }
-                      }
-                      for (var i=0;i<planos.files.length;i++) {
-                          var plano = planos.files[i];
-                          if (plano.size > 2000000) {
-                              alert('El archivo: "'+plano.name+"' es muy grande");
-                          }else{
-                              var nombreArchivo = plano.name;
-                              if(nombreArchivo.length > 50){
-                                  nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                              }
-                              arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                          }
-                      }
-                      arregloFotos.append('gradas',JSON.stringify(informacion));
-                      arregloPlanos.append('gradas',JSON.stringify(informacion));
-                      console.log(informacion);
-                      var resultado = guardarGradas(informacion);
-                      var resultadoPlanos = guardarPlanosGradas(arregloPlanos);
-                      var resultadoFotos = guardarFotosGradas(arregloFotos);
-                      mostrarMensaje(resultado.mensaje);
-                      console.log(resultado);
-                      console.log(resultadoPlanos);
-                      console.log(resultadoFotos);
-                      var mensaje = "";
-                      if (typeof resultadoPlanos[0] !== 'undefined' && resultadoPlanos[0] !== null) {
-                          for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                              if (!resultadoPlanos.verificar[i]) {
-                                  mensaje += resultadoPlanos.mensaje[i];
-                              }
-                              if (i<resultadoPlanos.verificar.length-2) {
-                                  mensaje += "\n";
-                              }
-                          }
-                      }
-                      if (typeof resultadoFotos[0] !== 'undefined' && resultadoFotos[0] !== null) {
-                          for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                              if (!resultadoFotos.verificar[i]) {
-                                  mensaje += resultadoFotos.mensaje[i];
-                              }
-                              if (i<resultadoFotos.verificar.length-1) {
-                                  mensaje += "\n";
-                              }
-                          }
-                      }
-                      if (mensaje.substring(0,0) != "") {
-                          console.log(mensaje.length);
-                          alert(mensaje);
-                      }
-                      if(resultado.verificar){
-                          $("#nombre_sede").val("");
-                          $("#nombre_campus").empty();
-                          $("#nombre_edificio").val("");
-                          $("#pisos").val("");
-                          $('input[name=pasamanos]').attr('checked',false);
-                          $('input[name=ventanas]').attr('checked',false);
-                          $("#tipo_ventana").val("");
-                          $("#cantidad_ventanas").val("");
-                          $("#material_ventana").val("");
-                          $("#ancho_ventana").val("");
-                          $("#alto_ventana").val("");
-                          $('#divVentanas').hide();
-                          for(var i=0;i<=ventanasCont;i++){
-                              eliminarComponente("ventana"+i);
-                              if(ventanasCont == 0){
-                                  $("#eliminar_ventana").attr('disabled','disabled');
-                              }
-                          }
-                          ventanasCont = 0;
-                          planos.value = "";
-                          fotos.value = "";
-                      }
-                  }else{
-                      if (planos.files.length <= 5) {
-                          alert("ERROR. El número máximo de planos por edificio es 5");
-                          planos.focus();
-                      }else{
-                          alert("ERROR. El número máximo de fotos por edificio es 20");
-                          fotos.focus();
-                      }
-                  }
-              }
-          }
-      }
-      catch(ex){
-          console.log(ex);
-          alert("Ocurrió un error, por favor inténtelo nuevamente");
-      }
     });
 
     /**
