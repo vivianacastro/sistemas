@@ -3126,7 +3126,7 @@ class modelo_creacion {
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT * FROM cubierta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."';";
+        $sql = "SELECT * FROM cubiertas_pisos_piso WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Cubierta 1)";
@@ -3350,13 +3350,12 @@ class modelo_creacion {
      * @param string $numero_espacio, número del espacio.
      * @return array
      */
-    public function verificarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$numero_espacio){
+    public function verificarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$numero_espacio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
-        $piso = htmlspecialchars(trim($piso));
         $numero_espacio = htmlspecialchars(trim($numero_espacio));
-        $sql = "SELECT * FROM espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_edificio = '".$piso."' AND id = '".$numero_espacio."';";
+        $sql = "SELECT * FROM espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$numero_espacio."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Espacio 1)";

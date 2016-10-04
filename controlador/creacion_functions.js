@@ -648,12 +648,11 @@ $(document).ready(function() {
      * @param {string} informacion, arreglo que contiene el espacio a buscar.
      * @returns {data} object json
     **/
-    function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio){
+    function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio){
         var espacio = {};
         espacio["nombre_sede"] = nombreSede;
         espacio["nombre_campus"] = nombreCampus;
         espacio["nombre_edificio"] = nombreEdificio;
-        espacio["piso"] = piso;
         espacio["numero_espacio"] = numeroEspacio;
         var dataResult;
         var jObject = JSON.stringify(espacio);
@@ -1239,6 +1238,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_edificio").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1378,6 +1379,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_cancha").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1588,6 +1591,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_corredor").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1730,6 +1735,9 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#nombre_edificio").focus();
+                            $("#pisos").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -1893,6 +1901,9 @@ $(document).ready(function() {
                           }
                           planos.value = "";
                           fotos.value = "";
+                      }else{
+                          $("#nombre_edificio").focus();
+                          $("#pisos").focus();
                       }
                   }else{
                       if (planos.files.length <= 5) {
@@ -2035,6 +2046,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_parqueadero").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -2171,6 +2184,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_piscina").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -2320,6 +2335,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_plazoleta").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -2468,6 +2485,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_sendero").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -2601,6 +2620,8 @@ $(document).ready(function() {
                             initMap();
                             coordenadas.length = {};
                             window.scrollTo(0,0);
+                        }else{
+                            $("#id_via").focus();
                         }
                     }else{
                         if (planos.files.length <= 5) {
@@ -2699,7 +2720,7 @@ $(document).ready(function() {
                             numeroEspacio[i] = $("#id_espacio"+i).val();
                         }
                     }
-                    var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numeroEspacio[i]);
+                    var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio[i]);
                     if (!comprobarEspacio.verificar){
                         espacioExistente['verificar'] = false;
                         if (i==0) {
@@ -2974,7 +2995,7 @@ $(document).ready(function() {
                         if((espacioPadre != null) && (espacioPadre != 'false') && (!validarNumero(numero_espacio_padre))){
                             alert('ERROR. Especifique el número del espacio dentro del cual está el espacio a crear');
                             $('#espacio_padre').focus();
-                        }else if(verificarEspacio(nombreSede,nombreCampus,nombreEdificio,piso,numero_espacio_padre).verificar){
+                        }else if(verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numero_espacio_padre).verificar){
                             alert('ERROR. El espacio dentro del cual está el espacio a crear no existe');
                             $('#espacio_padre').focus();
                         }
@@ -3506,6 +3527,8 @@ $(document).ready(function() {
                         $("#tipo_material").val("");
                         $("#nombre_tipo_material").val("");
                         window.scrollTo(0,0);
+                    }else{
+                        $("#nombre_tipo_material").focus();
                     }
                 }
             }
@@ -3543,6 +3566,8 @@ $(document).ready(function() {
                         $("#tipo_objeto").val("");
                         $("#nombre_tipo_objeto").val("");
                         window.scrollTo(0,0);
+                    }else{
+                        $("#nombre_tipo_objeto").focus();
                     }
                 }
             }

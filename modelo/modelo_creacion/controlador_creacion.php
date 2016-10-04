@@ -578,7 +578,7 @@ class controlador_creacion
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             for ($i=0;$i<count($info['numero_espacio']);$i++) {
-                $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio'][$i]);
+                $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['numero_espacio'][$i]);
                 if($verificar){
                     $m->guardarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio'][$i],$info['uso_espacio'],
                         $info['altura_pared'],$info['ancho_pared'],$info['material_pared'],$info['largo_techo'],$info['ancho_techo'],$info['material_techo'],
