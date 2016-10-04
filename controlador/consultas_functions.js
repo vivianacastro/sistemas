@@ -2,9 +2,97 @@ $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion;
   var marcadores = [];
+  var URLactual = window.location;
 
-  initMap();
-  actualizarSelectSede();
+  /**
+   * Función que se ejecuta al momento que se accede a la página que lo tiene
+   * incluido.
+   * @returns {undefined}
+   */
+  (function (){
+      if(URLactual['href'].indexOf('consultar_campus') >= 0){
+          actualizarSelectSede();
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_edificio') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_fachada",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_cancha') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_pintura",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
+        actualizarSelectSede();
+        actualizarSelectMaterial("material_pared",0);
+        actualizarSelectMaterial("material_techo",0);
+        actualizarSelectMaterial("material_piso",0);
+        actualizarSelectTipoObjeto("tipo_iluminacion",0);
+        actualizarSelectTipoObjeto("tipo_interruptor",0);
+        actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+        initMap();
+        getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_cubierta') >= 0){
+        actualizarSelectSede();
+        actualizarSelectMaterial("material_cubierta",0);
+        actualizarSelectTipoObjeto("tipo_cubierta",0);
+      }else if(URLactual['href'].indexOf('consultar_gradas') >= 0){
+        actualizarSelectSede();
+        actualizarSelectMaterial("material_pasamanos",0);
+        actualizarSelectMaterial("material_ventana",0);
+        actualizarSelectTipoObjeto("tipo_ventana",0);
+      }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_pintura",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
+          actualizarSelectSede();
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_pintura",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_cubierta",0);
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_iluminacion",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_vias') >= 0){
+          actualizarSelectSede();
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_pintura",0);
+          initMap();
+          getCoordenadas();
+      }else if(URLactual['href'].indexOf('consultar_espacio') >= 0){
+          actualizarSelectSede();
+          actualizarSelectUsosEspacios();
+          actualizarSelectMaterial("material_pared",0);
+          actualizarSelectMaterial("material_techo",0);
+          actualizarSelectMaterial("material_piso",0);
+          actualizarSelectMaterial("material_puerta",0);
+          actualizarSelectMaterial("material_marco_puerta",0);
+          actualizarSelectMaterial("material_ventana",0);
+          actualizarSelectTipoObjeto("tipo_cerradura",0);
+          actualizarSelectTipoObjeto("tipo_iluminacion",0);
+          actualizarSelectTipoObjeto("tipo_interruptor",0);
+          actualizarSelectTipoObjeto("tipo_puerta",0);
+          actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+          actualizarSelectTipoObjeto("tipo_ventana",0);
+      }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+          initMap();
+          rellenarMapa();
+      }
+  })();
 
   /**
    * Función que carga el mapa y lo configura.

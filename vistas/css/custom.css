@@ -314,9 +314,9 @@
 }
 
 @media screen and (min-width:1200px) {
-	.mapa{
-        width:800px;
-    }
+		.mapa{
+	  		width:800px;
+	  }
 
     .mapa_modal{
         width:540px;
