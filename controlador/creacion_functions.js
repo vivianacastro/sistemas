@@ -3489,7 +3489,7 @@ $(document).ready(function() {
             if (confirmacion) {
                 var tipoMaterial = $("#tipo_material").val();
                 var nombreTipoMaterial = $("#nombre_tipo_material").val();
-                }else if(!validarCadena(tipoMaterial)){
+                if(!validarCadena(tipoMaterial)){
                     alert("ERROR. Seleccione un tipo de material");
                     $("#tipo_material").focus();
                 }else if(!validarCadena(nombreTipoMaterial)){
@@ -3526,7 +3526,7 @@ $(document).ready(function() {
             if (confirmacion) {
                 var tipoObjeto = $("#tipo_objeto").val();
                 var nombreTipoObjeto = $("#nombre_tipo_objeto").val();
-                }else if(!validarCadena(tipoObjeto)){
+                if(!validarCadena(tipoObjeto)){
                     alert("ERROR. Seleccione un tipo de objeto");
                     $("#tipo_objeto").focus();
                 }else if(!validarCadena(nombreTipoObjeto)){
