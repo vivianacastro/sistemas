@@ -1010,7 +1010,7 @@ $(document).ready(function() {
                     var arregloFotos = new FormData();
                     var arregloPlanos = new FormData();
                     informacion['nombre_sede'] = nombreSede;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -1159,7 +1159,7 @@ $(document).ready(function() {
                     informacion['material_fachada'] = material_fachada;
                     informacion['alto_fachada'] = alto_fachada;
                     informacion['ancho_fachada'] = ancho_fachada;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -1298,7 +1298,7 @@ $(document).ready(function() {
                     informacion['material_piso'] = materialPiso;
                     informacion['tipo_pintura'] = tipoPintura;
                     informacion['longitud_demarcacion'] = longitudDemarcacion;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -1485,7 +1485,7 @@ $(document).ready(function() {
                     informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
                     informacion['tipo_interruptor'] = tipoInterruptor;
                     informacion['cantidad_interruptores'] = cantidadInterruptores;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -1649,7 +1649,7 @@ $(document).ready(function() {
                     informacion['material_cubierta'] = materialCubierta;
                     informacion['ancho'] = ancho;
                     informacion['largo'] = largo;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -1953,7 +1953,7 @@ $(document).ready(function() {
                     informacion['material_piso'] = material_piso;
                     informacion['tipo_pintura'] = tipo_pintura;
                     informacion['longitud_demarcacion'] = longitud_demarcacion;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -2091,7 +2091,7 @@ $(document).ready(function() {
                     informacion['ancho'] = ancho;
                     informacion['largo'] = largo;
                     informacion['cantidad_puntos_hidraulicos'] = cantidadPuntosHidraulicos;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -2237,7 +2237,7 @@ $(document).ready(function() {
                     }
                     informacion['tipo_iluminacion'] = tipoIluminacion;
                     informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -2384,7 +2384,7 @@ $(document).ready(function() {
                     informacion['ancho_cubierta'] = anchoCubierta;
                     informacion['largo_cubierta'] = largoCubierta;
                     informacion['material_cubierta'] = materialCubierta;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
@@ -2522,7 +2522,7 @@ $(document).ready(function() {
                     informacion['tipo_pintura'] = tipoPintura;
                     informacion['longitud_demarcacion'] = longitudDemarcacion;
                     informacion['material_piso'] = materialPiso;
-                    if (typeof coordenadas != 'undefined' || coordenadas.length > 0) {
+                    if (typeof coordenadas.length != 'undefined') {
                         informacion['lat'] = coordenadas.lat().toFixed(8);
                         informacion['lng'] = coordenadas.lng().toFixed(8);
                     }else{
