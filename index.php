@@ -80,6 +80,7 @@ $map = array(
         'planta_consultar_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_espacio'),
         'planta_consultar_tipo_material' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_material'),
         'planta_consultar_tipo_objeto' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_objeto'),
+        'planta_consultar_mapa' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mapa'),
         //Acciones de creación
         'guardar_sede' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_sede'),
         'guardar_campus' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_campus'),
@@ -117,7 +118,7 @@ $map = array(
         'guardar_planos_sendero' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_planos_sendero'),
         'guardar_fotos_sendero' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_sendero'),
         'guardar_planos_vias' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_planos_vias'),
-        'guardar_fotos_vias' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_vias'),        
+        'guardar_fotos_vias' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_vias'),
         'guardar_planos_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_planos_espacio'),
         'guardar_fotos_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_espacio'),
         //Acciones de consulta

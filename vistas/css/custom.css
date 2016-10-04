@@ -171,6 +171,12 @@
     height: 300px;
 }
 
+.mapa_completo{
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
 .mapa_modal{
     margin-left: auto;
     margin-right: auto;

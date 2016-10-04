@@ -356,6 +356,24 @@ class controlador_consultas
     }
 
     /**
+    * Función que despliega el panel que permite consultar
+    * el mapa con todos los campus, edificios, etc. creados en el sistema.
+    **/
+    public function consultar_mapa() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Mapa',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
      * Función que permite consultar las sedes
      * almacenadas en el sistema.
      */

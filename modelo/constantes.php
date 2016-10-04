@@ -51,6 +51,7 @@ const OPERATION_CREAR_EDIFICIO = 'planta_crear_edificio';
 const OPERATION_CREAR_ESPACIO = 'planta_crear_espacio';
 const OPERATION_CREAR_TIPO_MATERIAL = 'planta_crear_tipo_material';
 const OPERATION_CREAR_TIPO_OBJETO = 'planta_crear_tipo_objeto';
+const OPERATION_CONSULTAR_MAPA = 'planta_consultar_mapa';
 const OPERATION_CONSULTAR_SEDE = 'planta_consultar_sede';
 const OPERATION_CONSULTAR_CAMPUS = 'planta_consultar_campus';
 const OPERATION_CONSULTAR_CANCHA = 'planta_consultar_cancha';

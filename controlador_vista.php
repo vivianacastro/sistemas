@@ -55,6 +55,7 @@ class controlador_vista
                 'CONSULTAR_ESPACIO'=>'index.php?action='.OPERATION_CONSULTAR_ESPACIO,
                 'CONSULTAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_MATERIAL,
                 'CONSULTAR_TIPO_OBJETO'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_OBJETO,
+                'MAPA'=>'index.php?action='.OPERATION_CONSULTAR_MAPA,
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'MODIFICAR_INFORMACION_USUARIO'=>'index.php?action='.OPERATION_MODIFICAR_INFORMACION_USUARIO,
