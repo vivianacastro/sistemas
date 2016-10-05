@@ -58,7 +58,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0) {
             $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.nombre as nombre_sede from campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
         }else{
-            $sql = "SELECT * from campus a JOIN sede b ON a.sede = b.id WHERE a.sede = '".$nombre_sede."' ORDER BY a.nombre;";
+            $sql = "SELECT * from campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -74,6 +74,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Campus de la sede seleccionada presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

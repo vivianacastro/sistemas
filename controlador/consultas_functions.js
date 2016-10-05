@@ -3,7 +3,7 @@ $(document).ready(function() {
   var mapaConsulta, mapaModificacion, campusSeleccionado;
   var marcadores = [];
   var URLactual = window.location;
-  var infowindow;
+  var infoWindowActiva;
 
   /**
    * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -385,7 +385,7 @@ $(document).ready(function() {
       var data = buscarCampus(sede);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
-              if (record.lat == '0' || record.lng == '0') {
+              if (record.lat != '0' || record.lng != '0') {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
@@ -395,7 +395,7 @@ $(document).ready(function() {
                   var contentString = '<div id="content">'+
                       '<div id="siteNotice">'+
                       '</div>'+
-                      '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h4>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h3>'+
                       '<div id="bodyContent">'+
                         '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
                         '<div class="form_button">'+
@@ -403,11 +403,18 @@ $(document).ready(function() {
                         '</div>'+
                       '</div>'+
                       '</div>';
-                  var infowindow = new google.maps.InfoWindow({
-                    content: contentString
+                  var infoWindow = new google.maps.InfoWindow({
+                      content: contentString
                   });
                   marker.addListener('click', function() {
-                    infowindow.open(map, marker);
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
                   });
                   marcadores.push(marker);
                   marker.setMap(mapaConsulta);
@@ -416,7 +423,7 @@ $(document).ready(function() {
               }
           }
       });
-      if (data.mensaje != "") {
+      if (data.mensaje != null) {
           mapaConsulta.fitBounds(bounds);
           mapaConsulta.panToBounds(bounds);
           for (var i = 0; i < marcadores.length; i++) {
@@ -424,12 +431,12 @@ $(document).ready(function() {
               function () {
                   /*var select = this.id;
                   var limites = new google.maps.LatLngBounds();
-                  campusSeleccionado = select;
                   var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
                   limites.extend(loc);
                   mapaConsulta.fitBounds(limites);
                   mapaConsulta.panToBounds(limites);*/
-                  mapaConsulta.setZoom(15);
+                  campusSeleccionado = this.id;
+                  mapaConsulta.setZoom(16);
                   mapaConsulta.setCenter(this.getPosition());
               });
           }
@@ -472,7 +479,7 @@ $(document).ready(function() {
               bounds.extend(loc);
           }
       });
-      if (data.mensaje != "") {
+      if (data.mensaje != null) {
           mapaConsulta.fitBounds(bounds);
           mapaConsulta.panToBounds(bounds);
           for (var i = 0; i < marcadores.length; i++) {
@@ -703,59 +710,71 @@ $(document).ready(function() {
     var data = buscarEdificios(info);
     console.log(data);
     var bounds  = new google.maps.LatLngBounds();
-    $.each(data, function(index, record) {
-        if($.isNumeric(index)) {
-            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                title: record.nombre_campus,
-                id: record.id
-            });
-            var contentString = '<div id="content">'+
-                '<div id="siteNotice">'+
-                '</div>'+
-                '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h4>'+
-                '<div id="bodyContent">'+
-                  '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
-                  '<div class="form_button">'+
-                  '<div class="col-xs-6">'+
-                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                  '</div>'+
-                  '<div class="col-xs-6">'+
-                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver espacios del edificio"/>'+
-                  '</div>'+
-                  '</div>'+
-                '</div>'+
-                '</div>';
-            infowindow = new google.maps.InfoWindow({
-              content: contentString
-            });
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-            marcadores.push(marker);
-            marker.setMap(mapaConsulta);
-            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-            bounds.extend(loc);
-        }
-    });
-    if (data.mensaje != "") {
+    if (data.mensaje == null) {
+        alert("El campus seleccionado no tiene edificios creados en el sistema o con su ubicación establecida");
+        rellenarMapa();
+    }else{
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    title: record.nombre_campus,
+                    id: record.id
+                });
+                var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h3>'+
+                    '<div id="bodyContent">'+
+                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
+                      '<div class="form_button">'+
+                      '<div class="col-xs-6">'+
+                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                      '</div>'+
+                      '<div class="col-xs-6">'+
+                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver espacios del edificio"/>'+
+                      '</div>'+
+                      '</div>'+
+                    '</div>'+
+                    '</div>';
+                infoWindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                marker.addListener('click', function() {
+                    if (infoWindowActiva != null) {
+                        infoWindowActiva.close();
+                    }
+                    infoWindow.open(map, marker);
+                    infoWindowActiva = infoWindow;
+                });
+                google.maps.event.addListener(mapaConsulta, 'click', function(){
+                    infoWindow.close();
+                });
+                marcadores.push(marker);
+                marker.setMap(mapaConsulta);
+                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                bounds.extend(loc);
+            }
+        });
+    }
+    if (data.mensaje != null) {
         mapaConsulta.fitBounds(bounds);
         mapaConsulta.panToBounds(bounds);
         for (var i = 0; i < marcadores.length; i++) {
             google.maps.event.addListener(marcadores[i], 'click',
             function () {
-                var select = this.id;
+                /*var select = this.id;
                 var limites = new google.maps.LatLngBounds();
                 campusSeleccionado = select;
                 var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
                 limites.extend(loc);
                 mapaConsulta.fitBounds(limites);
-                mapaConsulta.panToBounds(limites);
+                mapaConsulta.panToBounds(limites);*/
+                mapaConsulta.setZoom(19);
+                mapaConsulta.setCenter(this.getPosition());
             });
         }
-    }else{
-        getCoordenadas(mapaConsulta);
     }
   });
 

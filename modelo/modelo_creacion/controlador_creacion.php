@@ -349,7 +349,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio']);
             if($verificar){
-                $m->guardarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+                $m->guardarEdificio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['material_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -487,7 +487,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
             if($verificar){
-                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['material_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -510,7 +510,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
             if($verificar){
-                $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['tipo_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+                $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['material_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];

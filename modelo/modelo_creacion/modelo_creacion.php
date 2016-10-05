@@ -87,14 +87,14 @@ class modelo_creacion {
      * @param string $numero_pisos, número de pisos del edificio.
      * @param string $terraza, si el edificio tiene terraza.
      * @param string $sotano, si el edificio tiene sotano.
-     * @param string $tipo_fachada, tipo de fachada del edificio.
+     * @param string $material_fachada, material de la fachada del edificio.
      * @param string $alto_fachada, alto de la fachada del edificio.
      * @param string $ancho_fachada, ancho de la fachada del edificio.
      * @param string $lat, latitud donde se encuentra el edificio.
      * @param string $lng, longitud donde se encuentra el edificio.
      * @return array
      */
-    public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano,$tipo_fachada,$alto_fachada,$ancho_fachada,$lat,$lng){
+    public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano,$material_fachada,$alto_fachada,$ancho_fachada,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -102,13 +102,13 @@ class modelo_creacion {
         $numero_pisos = htmlspecialchars(trim($numero_pisos));
         $terraza = htmlspecialchars(trim($terraza));
         $sotano = htmlspecialchars(trim($sotano));
-        $tipo_fachada = htmlspecialchars(trim($tipo_fachada));
+        $material_fachada = htmlspecialchars(trim($material_fachada));
         $alto_fachada = htmlspecialchars(trim($alto_fachada));
         $ancho_fachada = htmlspecialchars(trim($ancho_fachada));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
-        if(strcasecmp($material_pared,'') != 0){
-            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,id_material_fachada,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$tipo_fachada."','".$ancho_fachada."','".$alto_fachada."');";
+        if (strcasecmp($material_fachada,'') != 0){
+            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,id_material_fachada,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$material_fachada."','".$ancho_fachada."','".$alto_fachada."');";
         }else{
             $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$ancho_fachada."','".$alto_fachada."');";
         }
