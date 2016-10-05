@@ -1,4 +1,9 @@
 /* your styles go here */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 .a i.fa, button i.fa{
 	color: white !important;
@@ -175,6 +180,7 @@
     margin-left: auto;
     margin-right: auto;
     width: auto;
+		height: 500px !important;
 }
 
 .mapa_modal{
@@ -283,6 +289,10 @@
 
 #divTimeOut{
     width: 60%;
+}
+
+#map {
+  height: 100%;
 }
 
 #myCarousel{

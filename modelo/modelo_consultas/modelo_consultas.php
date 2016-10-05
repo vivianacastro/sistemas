@@ -55,7 +55,12 @@ class modelo_consultas
      */
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $sql = "SELECT * from campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
+        if (strcmp($nombre_sede,"") == 0) {
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.nombre as nombre_sede from campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
+        }else{
+            $sql = "SELECT * from campus a JOIN sede b ON a.sede = b.id WHERE a.sede = '".$nombre_sede."' ORDER BY a.nombre;";
+        }
+
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 1)";
@@ -158,7 +163,9 @@ class modelo_consultas
      */
     public function buscarEdificios($nombre_campus){
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * from edificio WHERE id_campus = '".$nombre_campus."' ORDER BY id;";
+        $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
+                from edificio a JOIN campus b ON a.id_campus = b.id JOIN sede c ON a.id_sede = c.id LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
+                WHERE a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";

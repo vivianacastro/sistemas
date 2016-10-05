@@ -415,6 +415,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_campus' => ucwords($valor['nombre']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
                     'sede' => $valor['sede'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -529,6 +530,18 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_edificio' => ucwords($valor['nombre']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'pisos' => ucwords($valor['numero_pisos']),
+                    'sotano' => ucwords($valor['sotano']),
+                    'terraza' => ucwords($valor['terraza']),
+                    'material_fachada' => ucwords($valor['material_fachada']),
+                    'ancho_fachada' => ucwords($valor['ancho_fachada']),
+                    'alto_fachada' => ucwords($valor['alto_fachada']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => ucwords($valor['lng']),
                     );
                 array_push($result, $arrayAux);
             }

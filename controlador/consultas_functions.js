@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-  var mapaConsulta, mapaModificacion;
+  var mapaConsulta, mapaModificacion, campusSeleccionado;
   var marcadores = [];
   var URLactual = window.location;
+  var infowindow;
 
   /**
    * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -89,7 +90,7 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
           actualizarSelectTipoObjeto("tipo_ventana",0);
       }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
-          initMap();
+          initMapConsulta();
           rellenarMapa();
       }
   })();
@@ -106,6 +107,19 @@ $(document).ready(function() {
       }
       mapaConsulta = new google.maps.Map(document.getElementById('map'), options);
       mapaModificacion = new google.maps.Map(document.getElementById('map_modificacion'), options);
+  }
+
+  /**
+   * Función que carga el mapa y lo configura.
+   * @returns {undefined}
+   */
+  function initMapConsulta() {
+      var options = {
+          center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
+          zoom: 16,
+          //mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      mapaConsulta = new google.maps.Map(document.getElementById('map'), options);
   }
 
   /**
@@ -278,7 +292,7 @@ $(document).ready(function() {
 
   /**
    * Función que realiza una consulta de los edificios del campus seleccionado
-   * presentes en el sistema
+   * presentes en el sistema.
    * @returns {data} object json
   **/
   function buscarEdificios(campus){
@@ -355,6 +369,69 @@ $(document).ready(function() {
               row.appendTo("#sede_search");
           }
       });
+  }
+
+  /**
+   * Función que llena el mapa con todos los campus.
+   * @returns {undefined}
+  **/
+  function rellenarMapa(){
+      for (var i = 0; i < marcadores.length; i++) {
+          marcadores[i].setMap(null);
+      }
+      var bounds  = new google.maps.LatLngBounds();
+      var sede = {};
+      sede["nombre_sede"] = "";
+      var data = buscarCampus(sede);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  title: record.nombre_campus,
+                  id: record.id
+              });
+              var contentString = '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h4>'+
+                  '<div id="bodyContent">'+
+                    '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
+                    '<div class="form_button">'+
+                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Edificios Campus" title="Ver edificios del campus"/>'+
+                    '</div>'+
+                  '</div>'+
+                  '</div>';
+              infowindow = new google.maps.InfoWindow({
+                content: contentString
+              });
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
+              marcadores.push(marker);
+              marker.setMap(mapaConsulta);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      if (data.mensaje != "") {
+          mapaConsulta.fitBounds(bounds);
+          mapaConsulta.panToBounds(bounds);
+          for (var i = 0; i < marcadores.length; i++) {
+              google.maps.event.addListener(marcadores[i], 'click',
+              function () {
+                  var select = this.id;
+                  var limites = new google.maps.LatLngBounds();
+                  campusSeleccionado = select;
+                  var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
+                  limites.extend(loc);
+                  mapaConsulta.fitBounds(limites);
+                  mapaConsulta.panToBounds(limites);
+              });
+          }
+      }else{
+        getCoordenadas(mapaConsulta);
+      }
   }
 
   /**
@@ -607,6 +684,68 @@ $(document).ready(function() {
       mapaModificacion.fitBounds(bounds);
       mapaModificacion.panToBounds(bounds);
       $("#divDialogConsulta").modal('show');
+  });
+
+  //$("#ver_edificios").click(function (e){
+  $("#map").on("click", ".ver_edificios", function(){
+    for (var i = 0; i < marcadores.length; i++) {
+        marcadores[i].setMap(null);
+    }
+    var info = {};
+    info["nombre_campus"] = campusSeleccionado;
+    var data = buscarEdificios(info);
+    console.log(data);
+    var bounds  = new google.maps.LatLngBounds();
+    $.each(data, function(index, record) {
+        if($.isNumeric(index)) {
+            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title: record.nombre_campus,
+                id: record.id
+            });
+            var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h4>'+
+                '<div id="bodyContent">'+
+                  '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id_edificio+'-'+record.nombre+'</p>'+
+                  '<div class="form_button">'+
+                  '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                  '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver espacios del edificio"/>'+
+                  '</div>'+
+                '</div>'+
+                '</div>';
+            infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+            marcadores.push(marker);
+            marker.setMap(mapaConsulta);
+            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+            bounds.extend(loc);
+        }
+    });
+    if (data.mensaje != "") {
+        mapaConsulta.fitBounds(bounds);
+        mapaConsulta.panToBounds(bounds);
+        for (var i = 0; i < marcadores.length; i++) {
+            google.maps.event.addListener(marcadores[i], 'click',
+            function () {
+                var select = this.id;
+                var limites = new google.maps.LatLngBounds();
+                campusSeleccionado = select;
+                var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
+                limites.extend(loc);
+                mapaConsulta.fitBounds(limites);
+                mapaConsulta.panToBounds(limites);
+            });
+        }
+    }else{
+      getCoordenadas(mapaConsulta);
+    }
   });
 
   /**
