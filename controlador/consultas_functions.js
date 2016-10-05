@@ -686,7 +686,10 @@ $(document).ready(function() {
       $("#divDialogConsulta").modal('show');
   });
 
-  //$("#ver_edificios").click(function (e){
+  /**
+   * Se captura el evento cuando se da click en el boton ver_edificios y se
+   * realiza la operacion correspondiente.
+   */
   $("#map").on("click", ".ver_edificios", function(){
     for (var i = 0; i < marcadores.length; i++) {
         marcadores[i].setMap(null);
@@ -709,10 +712,14 @@ $(document).ready(function() {
                 '</div>'+
                 '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h4>'+
                 '<div id="bodyContent">'+
-                  '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id_edificio+'-'+record.nombre+'</p>'+
+                  '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
                   '<div class="form_button">'+
-                  '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                  '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver espacios del edificio"/>'+
+                  '<div class="col-xs-6">'+
+                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                  '</div>'+
+                  '<div class="col-xs-6">'+
+                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver espacios del edificio"/>'+
+                  '</div>'+
                   '</div>'+
                 '</div>'+
                 '</div>';
@@ -746,6 +753,14 @@ $(document).ready(function() {
     }else{
       getCoordenadas(mapaConsulta);
     }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_edificios y se
+   * realiza la operacion correspondiente.
+   */
+  $("#map").on("click", ".ver_campus", function(){
+      rellenarMapa();
   });
 
   /**
