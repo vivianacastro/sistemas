@@ -385,33 +385,35 @@ $(document).ready(function() {
       var data = buscarCampus(sede);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  title: record.nombre_campus,
-                  id: record.id
-              });
-              var contentString = '<div id="content">'+
-                  '<div id="siteNotice">'+
-                  '</div>'+
-                  '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h4>'+
-                  '<div id="bodyContent">'+
-                    '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
-                    '<div class="form_button">'+
-                    '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Edificios Campus" title="Ver edificios del campus"/>'+
-                    '</div>'+
-                  '</div>'+
-                  '</div>';
-              var infowindow = new google.maps.InfoWindow({
-                content: contentString
-              });
-              marker.addListener('click', function() {
-                infowindow.open(map, marker);
-              });
-              marcadores.push(marker);
-              marker.setMap(mapaConsulta);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
+              if (record.lat == '0' || record.lng == '0') {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: record.nombre_campus,
+                      id: record.id
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h4 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h4>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
+                        '<div class="form_button">'+
+                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Edificios Campus" title="Ver edificios del campus"/>'+
+                        '</div>'+
+                      '</div>'+
+                      '</div>';
+                  var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
           }
       });
       if (data.mensaje != "") {
@@ -420,13 +422,15 @@ $(document).ready(function() {
           for (var i = 0; i < marcadores.length; i++) {
               google.maps.event.addListener(marcadores[i], 'click',
               function () {
-                  var select = this.id;
+                  /*var select = this.id;
                   var limites = new google.maps.LatLngBounds();
                   campusSeleccionado = select;
                   var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
                   limites.extend(loc);
                   mapaConsulta.fitBounds(limites);
-                  mapaConsulta.panToBounds(limites);
+                  mapaConsulta.panToBounds(limites);*/
+                  mapaConsulta.setZoom(15);
+                  mapaConsulta.setCenter(this.getPosition());
               });
           }
       }else{

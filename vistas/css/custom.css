@@ -254,6 +254,7 @@ html, body {
 		color: black !important;
 		float: right;
 		width: auto !important;
+    padding: 1% 0% 0%;
 }
 
 #barra_usuario:focus, #barra_usuario:hover{
