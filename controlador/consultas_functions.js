@@ -402,7 +402,7 @@ $(document).ready(function() {
                     '</div>'+
                   '</div>'+
                   '</div>';
-              infowindow = new google.maps.InfoWindow({
+              var infowindow = new google.maps.InfoWindow({
                 content: contentString
               });
               marker.addListener('click', function() {
@@ -751,7 +751,7 @@ $(document).ready(function() {
             });
         }
     }else{
-      getCoordenadas(mapaConsulta);
+        getCoordenadas(mapaConsulta);
     }
   });
 
