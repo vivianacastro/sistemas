@@ -1010,7 +1010,9 @@ $(document).ready(function() {
                     var arregloFotos = new FormData();
                     var arregloPlanos = new FormData();
                     informacion['nombre_sede'] = nombreSede;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1018,7 +1020,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     informacion['nombre_campus'] = limpiarCadena(nombreCampus);
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
@@ -1101,8 +1103,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -1161,7 +1167,9 @@ $(document).ready(function() {
                     informacion['material_fachada'] = material_fachada;
                     informacion['alto_fachada'] = alto_fachada;
                     informacion['ancho_fachada'] = ancho_fachada;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1169,7 +1177,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -1262,8 +1270,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -1307,7 +1319,9 @@ $(document).ready(function() {
                     informacion['material_piso'] = materialPiso;
                     informacion['tipo_pintura'] = tipoPintura;
                     informacion['longitud_demarcacion'] = longitudDemarcacion;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1315,7 +1329,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -1405,8 +1419,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -1498,7 +1516,9 @@ $(document).ready(function() {
                     informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
                     informacion['tipo_interruptor'] = tipoInterruptor;
                     informacion['cantidad_interruptores'] = cantidadInterruptores;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1506,7 +1526,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -1619,8 +1639,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -1666,7 +1690,9 @@ $(document).ready(function() {
                     informacion['material_cubierta'] = materialCubierta;
                     informacion['ancho'] = ancho;
                     informacion['largo'] = largo;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1674,7 +1700,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -1765,8 +1791,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -1977,7 +2007,9 @@ $(document).ready(function() {
                     informacion['material_piso'] = material_piso;
                     informacion['tipo_pintura'] = tipo_pintura;
                     informacion['longitud_demarcacion'] = longitud_demarcacion;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -1985,7 +2017,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -2077,8 +2109,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -2119,7 +2155,9 @@ $(document).ready(function() {
                     informacion['ancho'] = ancho;
                     informacion['largo'] = largo;
                     informacion['cantidad_puntos_hidraulicos'] = cantidadPuntosHidraulicos;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -2127,7 +2165,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -2217,8 +2255,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -2269,7 +2311,9 @@ $(document).ready(function() {
                     }
                     informacion['tipo_iluminacion'] = tipoIluminacion;
                     informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -2277,7 +2321,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -2370,8 +2414,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -2420,7 +2468,9 @@ $(document).ready(function() {
                     informacion['ancho_cubierta'] = anchoCubierta;
                     informacion['largo_cubierta'] = largoCubierta;
                     informacion['material_cubierta'] = materialCubierta;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -2428,7 +2478,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -2522,8 +2572,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
@@ -2562,7 +2616,9 @@ $(document).ready(function() {
                     informacion['tipo_pintura'] = tipoPintura;
                     informacion['longitud_demarcacion'] = longitudDemarcacion;
                     informacion['material_piso'] = materialPiso;
-                    try {
+                    informacion['lat'] = coordenadas.lat().toFixed(8);
+                    informacion['lng'] = coordenadas.lng().toFixed(8);
+                    /*try {
                       informacion['lat'] = coordenadas.lat().toFixed(8);
                       informacion['lng'] = coordenadas.lng().toFixed(8);
                     } catch (e) {
@@ -2570,7 +2626,7 @@ $(document).ready(function() {
                             informacion['lat'] = 0;
                             informacion['lng'] = 0;
                         }
-                    }
+                    }*/
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {
                         for (var i=0;i<fotos.files.length;i++) {
                             var foto = fotos.files[i];
@@ -2659,8 +2715,12 @@ $(document).ready(function() {
             }
         }
         catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
+            if (e instanceof TypeError) {
+                alert("ERROR. Seleccione la ubicación en el mapa del edificio");
+            }else{
+                console.log(ex);
+                alert("Ocurrió un error, por favor inténtelo nuevamente");
+            }
         }
     });
 
