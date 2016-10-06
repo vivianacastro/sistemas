@@ -1238,6 +1238,9 @@ $(document).ready(function() {
                             $("#pisos_edificio").val("");
                             $('input[name=terraza]').attr('checked',false);
                             $('input[name=sotano]').attr('checked',false);
+                            $("#material_fachada").val("");
+                            $("#alto_fachada").val("");
+                            $("#ancho_fachada").val("");
                             planos.value = "";
                             fotos.value = "";
                             initMap();
