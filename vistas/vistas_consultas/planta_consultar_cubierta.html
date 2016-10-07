@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--Consulta Cubierta-->
+<div>
+    <div class='form-group'>
+        <div><b><h2>Buscar Cubierta</h2></b><br></div>
+        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
+        <div class='div_izquierda'><b>Campus al que pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
+        <div class='div_izquierda'><b>C&oacute;digo del Edificio al que pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='edificio_search' id='edificio_search' required></select><br>
+        <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
+        <div class='div_izquierda'><b>Indique la ubicación del Edificio donde está la Cubierta</b></div>
+        <div id="map" class="mapa"></div>
+    <div><br>
+    <div class='form_button'>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarCubierta" id="visualizarCubierta" value="Ver Información" title="Ver la información de la cubierta seleccionada"/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Informaci&oacute;n de la Cubierta</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionCubierta'>
+                        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio' disabled required></select><br>
+                        <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='pisos' id='pisos' disabled required></select><br>
+                        <div class='div_izquierda'><b>Tipo de Cubierta:</b></div>
+                        <select class='form-control formulario' name='tipo_cubierta' id='tipo_cubierta' required></select><br>
+                        <div class='div_izquierda'><b>Material de la Cubierta:</b></div>
+                        <select class='form-control formulario' name='material_cubierta' id='material_cubierta' required></select><br>
+                        <div class='div_izquierda'><b>Ancho de la Cubierta:</b></div>
+                        <div class="input-group">
+                            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 2' required>
+                            <span class="input-group-addon">m</span>
+                        </div><br>
+                        <div class='div_izquierda'><b>Largo de la Cubierta:</b></div>
+                        <div class="input-group">
+                            <input class='form-control formulario' type="number" name='largo' id='largo' min="1" class="form-control" value='' placeholder='Ej: 2' required>
+                            <span class="input-group-addon">m</span>
+                        </div><br>
+                        <div class='div_izquierda'><b>Planos Cubierta:</b></div>
+                        <div id='planos'></div><br>
+                        <div class='div_izquierda'><b>Fotos Cubierta:</b></div>
+                        <div id='fotos'></div><br>
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators" id="indicadores_carrusel">
+                          </ol>
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                          </div>
+                          <!-- Left and right controls -->
+                          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div><br>
+                    </div>
+                </div>
+            <div class='form_button modal-footer'>
+              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_cubierta' id='modificar_cubierta' value='Modificar Cubierta' title='Modificar informaci&oacute;n de la Cubierta'/>
+              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_cubierta' id='guardar_modificaciones_cubierta' value='Guardar Cambios' title='Guardar informaci&oacute;n de la Cubierta'/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<!--Consulta Rango Fechas-->
+<!--Consulta Sendero-->
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar Campus</h2></b><br></div>
-        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <div><b><h2>Buscar Sendero</h2></b><br></div>
+        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación del campus</b></div>
+        <div class='div_izquierda'><b>C&oacute;digo del Sendero<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='codigo_search' id='codigo_search' required></select><br>
+        <div class='div_izquierda'><b>Indique la ubicación del Sendero</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarCampus" id="visualizarCampus" value="Ver Información" title="Ver la información del campus seleccionado"/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarSendero" id="visualizarSendero" value="Ver Información" title="Ver la información del sendero seleccionado"/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -19,18 +21,59 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Informaci&oacute;n del Campus</h4>
+              <h4 class='modal-title'>Informaci&oacute;n del Sendero</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionCampus'>
-                        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+                    <div id='informacionSendero'>
+                        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>Planos Edificio:</b></div>
+                        <div class='div_izquierda'><b>C&oacute;digo del Sendero<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='id_sendero' id='id_sendero' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Longitud del Sendero:</b></div>
+                        <div class="input-group">
+                            <input class='form-control formulario' type="number" name='longitud' id='longitud' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                            <span class="input-group-addon">m</span>
+                        </div><br>
+                        <div class='div_izquierda'><b>Ancho del Sendero:</b></div>
+                        <div class="input-group">
+                            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 10' required>
+                            <span class="input-group-addon">m</span>
+                        </div><br>
+                        <div class='div_izquierda'><b>Material del piso:</b></div>
+                        <select class='form-control formulario' name='material_piso' id='material_piso' required></select><br>
+                        <div class='form-group'>
+                            <div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Sendero</h5></b></div>
+                            <div id='iluminacion'>
+                                <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
+                                <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' required></select><br>
+                                <div class='div_izquierda'><b>C&oacute;digo del poste:</b></div>
+                                <input class='form-control formulario' type='number' min='1' name='codigo_poste' id='codigo_poste' value='' placeholder='Ej: 10320' required/><br>
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <div><b><h5>Informaci&oacute;n de la Cubierta del Sendero</h5></b></div>
+                            <div id='cubierta'>
+                                <div class='div_izquierda'><b>Ancho de la cubierta:</b></div>
+                                <div class="input-group">
+                                    <input class='form-control formulario' type="number" name='ancho_cubierta' id='ancho_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                                    <span class="input-group-addon">m</span>
+                                </div><br>
+                                <div class='div_izquierda'><b>Largo de la cubierta:</b></div>
+                                <div class="input-group">
+                                    <input class='form-control formulario' type="number" name='largo_cubierta' id='largo_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                                    <span class="input-group-addon">m</span>
+                                </div><br>
+                                <div class='div_izquierda'><b>Materia de la cubierta:</b></div>
+                                <select class='form-control formulario' name='material_cubierta' id='material_cubierta' required></select>
+                            </div>
+                        </div>
+                        <div class='div_izquierda'><b>Planos Sendero:</b></div>
                         <div id='planos'></div><br>
-                        <div class='div_izquierda'><b>Fotos Edificio:</b></div>
+                        <div class='div_izquierda'><b>Fotos Sendero:</b></div>
+                        <div id='fotos'></div><br>
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                           <!-- Indicators -->
                           <ol class="carousel-indicators" id="indicadores_carrusel">
@@ -48,13 +91,13 @@
                             <span class="sr-only">Next</span>
                           </a>
                         </div><br>
-                        <div class='div_izquierda'><b>Ubicación del campus</b></div>
+                        <div class='div_izquierda'><b>Ubicación del Sendero</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
                 </div>
             <div class='form_button modal-footer'>
-              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_campus' id='modificar_campus' value='Modificar Campus' title='Modificar informaci&oacute;n del Campus'/>
-              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_campus' id='guardar_modificaciones_campus' value='Guardar Cambios' title='Guardar informaci&oacute;n del Campus'/>
+              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_sendero' id='modificar_sendero' value='Modificar Sendero' title='Modificar informaci&oacute;n del Sendero'/>
+              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_sendero' id='guardar_modificaciones_sendero' value='Guardar Cambios' title='Guardar informaci&oacute;n del Sendero'/>
             </div>
         </div>
     </div>

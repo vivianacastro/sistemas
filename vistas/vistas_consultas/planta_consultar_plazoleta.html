@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<!--Consulta Rango Fechas-->
+<!--Consulta Plazoleta-->
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar Campus</h2></b><br></div>
-        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+        <div><b><h2>Buscar Plazoleta</h2></b><br></div>
+        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación del campus</b></div>
+        <div class='div_izquierda'><b>C&oacute;digo de la Plazoleta<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='codigo_search' id='codigo_search' required></select><br>
+        <div class='div_izquierda'><b>Indique la ubicación de la Plazoleta</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarCampus" id="visualizarCampus" value="Ver Información" title="Ver la información del campus seleccionado"/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarPlazoleta" id="visualizarPlazoleta" value="Ver Información" title="Ver la información de la plazoleta seleccionado"/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -19,18 +21,34 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Informaci&oacute;n del Campus</h4>
+              <h4 class='modal-title'>Informaci&oacute;n de la Plazoleta</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionCampus'>
-                        <div class='div_izquierda'><b>Sede a la que Pertenece<font color='red'>*</font>:</b></div>
+                    <div id='informacionPlazoleta'>
+                        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>Planos Edificio:</b></div>
+                        <div class='div_izquierda'><b>C&oacute;digo de la Plazoleta<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='id_plazoleta' id='id_plazoleta' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Nombre de la Plazoleta<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre' id='nombre' maxlength="10" value='' placeholder='Ej: Plazoleta Ingenier&ioacute;as' required/><br>
+                        <div class='form-group'>
+                            <div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n de la Plazoleta</h5></b></div>
+                            <div id='iluminacion'>
+                                <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
+                                <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' required></select><br>
+                                <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
+                                <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' required/><br>
+                            </div>
+                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
+                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
+                        </div>
+                        <div class='div_izquierda'><b>Planos Plazoleta:</b></div>
                         <div id='planos'></div><br>
-                        <div class='div_izquierda'><b>Fotos Edificio:</b></div>
+                        <div class='div_izquierda'><b>Fotos Plazoleta:</b></div>
+                        <div id='fotos'></div><br>
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                           <!-- Indicators -->
                           <ol class="carousel-indicators" id="indicadores_carrusel">
@@ -48,13 +66,13 @@
                             <span class="sr-only">Next</span>
                           </a>
                         </div><br>
-                        <div class='div_izquierda'><b>Ubicación del campus</b></div>
+                        <div class='div_izquierda'><b>Ubicación de la Plazoleta</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
                 </div>
             <div class='form_button modal-footer'>
-              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_campus' id='modificar_campus' value='Modificar Campus' title='Modificar informaci&oacute;n del Campus'/>
-              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_campus' id='guardar_modificaciones_campus' value='Guardar Cambios' title='Guardar informaci&oacute;n del Campus'/>
+              <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_plazoleta' id='modificar_plazoleta' value='Modificar Plazoleta' title='Modificar informaci&oacute;n de la Plazoleta'/>
+              <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_plazoleta' id='guardar_modificaciones_plazoleta' value='Guardar Cambios' title='Guardar informaci&oacute;n de la Plazoleta'/>
             </div>
         </div>
     </div>
