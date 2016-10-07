@@ -69,7 +69,7 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_iluminacion",0);
             initMap();
             getCoordenadas();
-        }else if(URLactual['href'].indexOf('crear_vias') >= 0){
+        }else if(URLactual['href'].indexOf('crear_via') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);

@@ -35,7 +35,7 @@ class controlador_vista
                 'CREAR_PISCINA'=>'index.php?action='.OPERATION_CREAR_PISCINA,
                 'CREAR_PLAZOLETA'=>'index.php?action='.OPERATION_CREAR_PLAZOLETA,
                 'CREAR_SENDERO'=>'index.php?action='.OPERATION_CREAR_SENDERO,
-                'CREAR_VIAS'=>'index.php?action='.OPERATION_CREAR_VIAS,
+                'CREAR_VIA'=>'index.php?action='.OPERATION_CREAR_VIA,
                 'CREAR_EDIFICIO'=>'index.php?action='.OPERATION_CREAR_EDIFICIO,
                 'CREAR_ESPACIO'=>'index.php?action='.OPERATION_CREAR_ESPACIO,
                 'CREAR_TIPO_MATERIAL'=>'index.php?action='.OPERATION_CREAR_TIPO_MATERIAL,

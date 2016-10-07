@@ -196,17 +196,17 @@ class controlador_creacion
 
     /**
     * Función que despliega el panel que permite crear
-    * una vias en el sistema.
+    * una via en el sistema.
     **/
-    public function crear_vias() {
+    public function crear_via() {
         $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
-            'mensaje' => 'Crear Vías',
+            'mensaje' => 'Crear Vía',
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_VIAS, $data);
+            $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_VIA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
