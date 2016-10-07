@@ -14,18 +14,18 @@ $(document).ready(function() {
       if(URLactual['href'].indexOf('consultar_campus') >= 0){
           actualizarSelectSede();
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_edificio') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_fachada",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_cancha') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_pared",0);
@@ -35,7 +35,7 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_interruptor",0);
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_cubierta') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_cubierta",0);
@@ -50,30 +50,30 @@ $(document).ready(function() {
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
           actualizarSelectSede();
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_cubierta",0);
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_iluminacion",0);
           initMap();
-          getCoordenadas();
-      }else if(URLactual['href'].indexOf('consultar_vias') >= 0){
+          getCoordenadas(mapaConsulta);
+      }else if(URLactual['href'].indexOf('consultar_via') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_espacio') >= 0){
           actualizarSelectSede();
           actualizarSelectUsosEspacios();
@@ -352,6 +352,68 @@ $(document).ready(function() {
   }
 
   /**
+   * Función que realiza una consulta de los materiales presentes en el sistema
+   * @param {array} informacion, arreglo que contiene el tipo de material a buscar
+   * @returns {data} object json
+  **/
+  function buscarMateriales(informacion){
+      var dataResult;
+      var jObject = JSON.stringify(informacion);
+      try {
+          $.ajax({
+              type: "POST",
+              url: "index.php?action=consultar_materiales",
+              data: {jObject:jObject},
+              dataType: "json",
+              async: false,
+              error: function (request, status, error) {
+                  console.log(error.toString());
+                  location.reload(true);
+              },
+              success: function(data){
+                  dataResult = data;
+              }
+          });
+          return dataResult;
+      }
+      catch(ex) {
+          console.log(ex);
+          alert("Ocurrió un error, por favor inténtelo nuevamente");
+      }
+  }
+
+  /**
+   * Función que realiza una consulta de los objetos presentes en el sistema
+   * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
+   * @returns {data} object json
+  **/
+  function buscarTipoObjetos(informacion){
+      var dataResult;
+      var jObject = JSON.stringify(informacion);
+      try {
+          $.ajax({
+              type: "POST",
+              url: "index.php?action=consultar_tipo_objetos",
+              data: {jObject:jObject},
+              dataType: "json",
+              async: false,
+              error: function (request, status, error) {
+                  console.log(error.toString());
+                  location.reload(true);
+              },
+              success: function(data){
+                  dataResult = data;
+              }
+          });
+          return dataResult;
+      }
+      catch(ex) {
+          console.log(ex);
+          alert("Ocurrió un error, por favor inténtelo nuevamente");
+      }
+  }
+
+  /**
    * Función que llena y actualiza el selector de campus.
    * @returns {undefined}
   **/
@@ -367,6 +429,58 @@ $(document).ready(function() {
               row = $("<option value='" + record.id + "'/>");
               row.text(aux);
               row.appendTo("#sede_search");
+          }
+      });
+  }
+
+  /**
+   * Función que llena y actualiza el selector de material que se ingresa.
+   * @param {string} material, nombre del selector a actualizar y tipo de material.
+   * @returns {undefined}
+  **/
+  function actualizarSelectMaterial(material,id){
+      if (id == 0) {
+          id = "";
+      }
+      var informacion = {};
+      informacion['tipo_material'] = material;
+      var data = buscarMateriales(informacion);
+      $("#"+material+id).empty();
+      var row = $("<option value=''/>");
+      row.text("--Seleccionar--");
+      row.appendTo("#"+material+id);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              aux = record.nombre_material;
+              row = $("<option value='" + record.id + "'/>");
+              row.text(aux);
+              row.appendTo("#"+material+id);
+          }
+      });
+  }
+
+  /**
+   * Función que llena y actualiza el selector de tipo de objeto.
+   * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
+   * @returns {undefined}
+  **/
+  function actualizarSelectTipoObjeto(tipo_objeto,id){
+      if (id == 0) {
+          id = "";
+      }
+      var informacion = {};
+      informacion['tipo_objeto'] = tipo_objeto;
+      var data = buscarTipoObjetos(informacion);
+      $("#"+tipo_objeto+id).empty();
+      var row = $("<option value=''/>");
+      row.text("--Seleccionar--");
+      row.appendTo("#"+tipo_objeto+id);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              aux = record.tipo_objeto;
+              row = $("<option value='" + record.id + "'/>");
+              row.text(aux);
+              row.appendTo("#"+tipo_objeto+id);
           }
       });
   }
@@ -528,7 +642,7 @@ $(document).ready(function() {
           }
       });
       if ((latitud == 0 || isNaN(latitud)) && (longitud == 0 || isNaN(longitud))) {
-          getCoordenadas();
+          getCoordenadas(mapaConsulta);
       }else{
           var coords =  {
               lng: longitud,
