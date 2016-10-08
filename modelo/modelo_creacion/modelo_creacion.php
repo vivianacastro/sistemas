@@ -1,6 +1,6 @@
 <?php
 /**
- * clase Modelo del modulo
+ * Clase modelo_creacion
  */
 class modelo_creacion {
     protected $conexion;

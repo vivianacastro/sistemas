@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase controlador
+ * Clase controlador_creacion
  */
 class controlador_creacion
 {

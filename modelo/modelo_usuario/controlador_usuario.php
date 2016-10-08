@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Clase controlador_usuario
+ */
 class controlador_usuario {
 
     /**
@@ -297,7 +299,7 @@ class controlador_usuario {
     */
     public function check() {
         session_start();
-        if(isset($_SESSION['userid'])) {            
+        if(isset($_SESSION['userid'])) {
             $fechaGuardada = $_SESSION["ultimoAcceso"];
             $ahora = time();
             $tiempo_transcurrido = $ahora-$fechaGuardada;

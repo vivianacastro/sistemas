@@ -28,24 +28,24 @@ $(document).ready(function() {
             initMap();
             getCoordenadas();
         }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_pared",0);
-          actualizarSelectMaterial("material_techo",0);
-          actualizarSelectMaterial("material_piso",0);
-          actualizarSelectTipoObjeto("tipo_iluminacion",0);
-          actualizarSelectTipoObjeto("tipo_interruptor",0);
-          actualizarSelectTipoObjeto("tipo_suministro_energia",0);
-          initMap();
-          getCoordenadas();
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_pared",0);
+            actualizarSelectMaterial("material_techo",0);
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_iluminacion",0);
+            actualizarSelectTipoObjeto("tipo_interruptor",0);
+            actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+            initMap();
+            getCoordenadas();
         }else if(URLactual['href'].indexOf('crear_cubierta') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_cubierta",0);
-          actualizarSelectTipoObjeto("tipo_cubierta",0);
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_cubierta",0);
+            actualizarSelectTipoObjeto("tipo_cubierta",0);
         }else if(URLactual['href'].indexOf('crear_gradas') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_pasamanos",0);
-          actualizarSelectMaterial("material_ventana",0);
-          actualizarSelectTipoObjeto("tipo_ventana",0);
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_pasamanos",0);
+            actualizarSelectMaterial("material_ventana",0);
+            actualizarSelectTipoObjeto("tipo_ventana",0);
         }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);

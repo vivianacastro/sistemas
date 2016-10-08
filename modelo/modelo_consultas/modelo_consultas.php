@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase modelo de consultas
+ * Clase modelo_consultas
  */
 class modelo_consultas
 {
@@ -81,7 +81,103 @@ class modelo_consultas
     }
 
     /**
-     * funcion que permite buscar los campus que se han creado en el sistema.
+     * funcion que permite buscar las canchas que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarCanchas($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
+            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus from cancha a JOIN sede b ON a.id_sede = b.id JOIN campus c ON a.id_campus = c.id ORDER BY a.nombre;";
+        }else{
+            $sql = "SELECT * from cancha WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+        }
+
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Canchas 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Canchas 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Canchas del campus seleccionado presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los corredores que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarCorredores($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
+            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus from corredor a JOIN sede b ON a.id_sede = b.id JOIN campus c ON a.id_campus = c.id ORDER BY a.nombre;";
+        }else{
+            $sql = "SELECT * from corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+        }
+
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Corredores 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Corredores 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Corredores del campus seleccionado presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar los corredores que se han creado en el sistema.
+     * @return metadata con elresultado de la busqueda.
+     */
+    public function buscarCubiertas($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
+            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus from corredor a JOIN sede b ON a.id_sede = b.id JOIN campus c ON a.id_campus = c.id ORDER BY a.nombre;";
+        }else{
+            $sql = "SELECT * from corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+        }
+
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Corredores 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Corredores 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Corredores del campus seleccionado presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * funcion que permite buscar la información de un campus en el sistema.
      * @return metadata con elresultado de la busqueda.
      */
     public function buscarInformacionCampus($nombre_sede,$nombre_campus){

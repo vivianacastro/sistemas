@@ -130,7 +130,7 @@ $map = array(
         'consultar_pisos_edificio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_pisos_edificio'),
         'consultar_usos_espacios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_usos_espacios'),
         'consultar_materiales' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_materiales'),
-        'consultar_tipo_objeto' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_objeto'),
+        'consultar_tipo_objetos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_objetos'),
         'verificar_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_espacio'),
         'ubicacion_campus' => array('controlador' =>'controlador_consultas', 'action' =>'ubicacion_campus'),
         //Acciones de modificación

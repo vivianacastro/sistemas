@@ -1,4 +1,7 @@
 <?php
+/**
+ * Clase modelo_usuario
+ */
 include_once('class.phpmailer.php');
 include_once('class.smtp.php');
 class modelo_usuario {
@@ -6,19 +9,19 @@ class modelo_usuario {
 
     /**
      * Función contructura de la clase Modelo_usuario.
-     * @param string $dbname nombre de la base de datos a la que se va a 
+     * @param string $dbname nombre de la base de datos a la que se va a
      * conectar el modelo.
-     * @param string $dbuser usuario con el que se va a conectar a la 
+     * @param string $dbuser usuario con el que se va a conectar a la
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-     */     
-    public function __construct($dbname,$dbuser,$dbpass,$dbhost) {        
-        $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;        
+     */
+    public function __construct($dbname,$dbuser,$dbpass,$dbhost) {
+        $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
         try {
-            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass); 
+            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass);
             $this->conexion = $bd_conexion;
-            
+
         }catch (PDOException $e) {
             var_dump( $e->getMessage());
         }
@@ -37,7 +40,7 @@ class modelo_usuario {
             $GLOBALS['mensaje'] = MJ_PREPARAR_CONSULTA_FALLIDA;
             return false;
         }else {
-            if(!$l_stmt->execute()) { 
+            if(!$l_stmt->execute()) {
                 $GLOBALS['mensaje'] = MJ_CONSULTA_FALLIDA;
                 return false;
             }if($l_stmt->rowCount() > 0){
@@ -45,14 +48,14 @@ class modelo_usuario {
             }
         }
         return $result[0];
-    }    
-    
+    }
+
     /**
      * funcion que encripta la constraseña del usuario usando el metodo md5
      * @param  [type] $password [description]
      * @return [type]           [description]
      */
-    public function encriptarPassword($password) {       
+    public function encriptarPassword($password) {
         //return crypt($password, Config::$salt);
         return md5($password);
     }
@@ -65,39 +68,39 @@ class modelo_usuario {
      * @return boolean
      */
     public function verificarContrasena($linput, $cinput) {
-        $passwdBd = $this->retornarContrasena($linput);        
+        $passwdBd = $this->retornarContrasena($linput);
         if (md5($cinput) == $passwdBd) {
             return true;
-        } 
+        }
         else {
             return false;
         }
     }
 
     /**
-     * Función que permite comprobar si un determinado usuario tiene acceso o 
+     * Función que permite comprobar si un determinado usuario tiene acceso o
      * no al sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
      * @param string $password, Cadena que hace referencia al login del usuario.
     */
     public function comprobarAcceso($login, $password) {
         $login = htmlspecialchars($login);
-        $login = strtolower($login);        
+        $login = strtolower($login);
         if(!$this->verificarContrasena($login, $password)){
             $GLOBALS['mensaje'] = MJ_ERROR_CONTRASENA_INCORRECTA;
             return;
-        }        
-        $password = $this->retornarContrasena($login);        
+        }
+        $password = $this->retornarContrasena($login);
         $sql = "SELECT * FROM usuarios WHERE login = '".$login."' AND password = '".$password."' AND estado = 'ACTIVO';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = MJ_PREPARAR_CONSULTA_FALLIDA;            
+            $GLOBALS['mensaje'] = MJ_PREPARAR_CONSULTA_FALLIDA;
         }else{
-            if(!$l_stmt->execute()){ 
+            if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = MJ_CONSULTA_FALLIDA;
-            }if($l_stmt->rowCount() > 0){ 
-                $result = $l_stmt->fetchAll(); 
-            }             
+            }if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+            }
         }
         $GLOBALS['mensaje'] = MJ_CONSULTA_EXITOSA;
         return $result[0];
@@ -127,7 +130,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite crear un usuario 
+     * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
     */
@@ -145,7 +148,7 @@ class modelo_usuario {
         $creacion_inventario = htmlspecialchars(trim($creacion_inventario));
         $creacion_aires = htmlspecialchars(trim($creacion_aires));
         $perfil = htmlspecialchars(trim($perfil));
-        $sql = "INSERT INTO usuarios (nombre_usuario,login,correo,telefono,extension,password,modulo_planta,modulo_inventario,modulo_aires,creacion_planta,creacion_inventario,creacion_aires,perfil) VALUES 
+        $sql = "INSERT INTO usuarios (nombre_usuario,login,correo,telefono,extension,password,modulo_planta,modulo_inventario,modulo_aires,creacion_planta,creacion_inventario,creacion_aires,perfil) VALUES
         ('".$nombre."','".$login."','".$correo."','".$telefono."','".$extension."','".$contrasenia."','".$mod_planta."','".$mod_inventario."','".$mod_aires."','".$creacion_planta."','".$creacion_inventario."','".$creacion_aires."','".$perfil."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -165,7 +168,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite crear un usuario 
+     * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
     */
@@ -194,7 +197,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite crear un usuario 
+     * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
      * @param string $contrasenia, Cadena que hace referencia a la nueva contraseña.
@@ -221,7 +224,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite crear un usuario 
+     * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
     */
@@ -238,7 +241,7 @@ class modelo_usuario {
             $rstr .= $source[$num-1];
         }
         $c = md5($rstr);
-        $mail = new PHPMailer();             
+        $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = "ssl";
@@ -282,7 +285,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite comprobar si un login ya se 
+     * Función que permite comprobar si un login ya se
      * encuentra registrado en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
     */
@@ -309,7 +312,7 @@ class modelo_usuario {
     }
 
     /**
-     * Función que permite comprobar si un correo ya se 
+     * Función que permite comprobar si un correo ya se
      * encuentra registrado en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
     */
