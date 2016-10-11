@@ -686,19 +686,19 @@ class modelo_creacion {
                 return false;
             }else{
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->guardarIluminacionEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                    $this->guardarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->guardarInterruptoresEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
+                    $this->guardarInterruptoresEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
-                    $this->guardarPuertasEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
+                    $this->guardarPuertasEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
                 }
                 for ($i=0;$i<count($tipo_suministro_energia);$i++) {
-                    $this->guardarSuministroEnergiaEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_tomacorrientes[$i],$tomacorriente[$i]);
+                    $this->guardarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_tomacorrientes[$i],$tomacorriente[$i]);
                 }
                 for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->guardarVentanaEspacio($numero_espacio,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
+                    $this->guardarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
                 $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
                 return true;
@@ -721,8 +721,8 @@ class modelo_creacion {
         $id_corredor = htmlspecialchars(trim($id_corredor));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_sede,id_edificio,id,id_tipo_iluminacion";
-        $valores = "'".$id_sede."','".$id_edificio."','".$id_corredor."','".$tipo_iluminacion."'";
+        $campos = "id_sede,id_campus,id,id_tipo_iluminacion";
+        $valores = "'".$id_sede."','".$id_campus."','".$id_corredor."','".$tipo_iluminacion."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -760,8 +760,8 @@ class modelo_creacion {
         $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_sede,id_edificio,id,id_tipo_iluminacion";
-        $valores = "'".$id_sede."','".$id_edificio."','".$id_corredor."','".$tipo_iluminacion."'";
+        $campos = "id_sede,id_campus,id,id_tipo_iluminacion";
+        $valores = "'".$id_sede."','".$id_campus."','".$id_corredor."','".$tipo_iluminacion."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -787,20 +787,22 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de la iluminación de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_iluminacion, tipo de iluminación que tiene el espacio.
      * @param string $cantidad, cantidad de lámparas que tiene el espacio.
      * @return array
      */
-    public function guardarIluminacionEspacio($id_espacio,$id_campus,$id_edificio,$tipo_iluminacion,$cantidad){
+    public function guardarIluminacionEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_espacio,id_edificio,id_campus,id_tipo_iluminacion";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_iluminacion."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_iluminacion";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_iluminacion."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -825,11 +827,11 @@ class modelo_creacion {
 
     /**
      * Función que permite guardar la información de los interruptores de un espacio.
-     * @param string $id_espacio, id del espacio.
-     * @param string $id_campus, id del campus al que pertenece el espacio.
-     * @param string $id_edificio, id del edificio al que pertenece el espacio.
-     * @param string $tipo_interruptor, tipo de interruptor que tiene el espacio.
-     * @param string $cantidad, cantidad de interruptores que tiene el espacio.
+     * @param string $id_espacio, id del corredor.
+     * @param string $id_sede, id de la sede a la que pertenece el corredor.
+     * @param string $id_campus, id del campus al que pertenece el corredor.
+     * @param string $tipo_interruptor, tipo de interruptor que tiene el corredor.
+     * @param string $cantidad, cantidad de interruptores que tiene el corredor.
      * @return array
      */
     public function guardarInterruptoresCorredor($id_sede,$id_campus,$id_corredor,$tipo_interruptor,$cantidad){
@@ -861,20 +863,22 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de los interruptores de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_interruptor, tipo de interruptor que tiene el espacio.
      * @param string $cantidad, cantidad de interruptores que tiene el espacio.
      * @return array
      */
-    public function guardarInterruptoresEspacio($id_espacio,$id_campus,$id_edificio,$tipo_interruptor,$cantidad){
+    public function guardarInterruptoresEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_interruptor,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_espacio,id_edificio,id_campus,id_tipo_interruptor";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_interruptor."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_interruptor";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_interruptor."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -900,6 +904,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de las puertas de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_puerta, tipo de puerta que tiene el espacio.
@@ -911,8 +916,9 @@ class modelo_creacion {
      * @param string $gato, si la puerta tiene gato o no.
      * @return array
      */
-    public function guardarPuertasEspacio($id_espacio,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
+    public function guardarPuertasEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
@@ -922,8 +928,8 @@ class modelo_creacion {
         $ancho = htmlspecialchars(trim($ancho));
         $largo = htmlspecialchars(trim($largo));
         $gato = htmlspecialchars(trim($gato));
-        $campos = "id_espacio,id_edificio,id_campus,id_tipo_puerta,id_material_puerta,id_material_marco";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_puerta."','".$material_puerta."','".$material_marco."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_puerta,id_material_puerta,id_material_marco";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_puerta."','".$material_puerta."','".$material_marco."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -961,6 +967,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de las cerraduras de una puerta de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_puerta, tipo de puerta que tiene el espacio.
@@ -969,15 +976,16 @@ class modelo_creacion {
      * @param string $tipo_cerradura, tipo de cerradura de las puertas.
      * @return array
      */
-    public function guardarPuertaTipoCerradura($id_espacio,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura){
+    public function guardarPuertaTipoCerradura($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
         $material_puerta = htmlspecialchars(trim($material_puerta));
         $material_marco = htmlspecialchars(trim($material_marco));
         $tipo_cerradura = htmlspecialchars(trim($tipo_cerradura));
-        $sql = "INSERT INTO puerta_tipo_cerradura (id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura,id_edificio,id_campus) VALUES ('".$id_espacio."','".$tipo_puerta."','".$material_puerta."','".$material_marco."','".$id_tipo_cerradura."','".$id_edificio."','".$id_campus."');";
+        $sql = "INSERT INTO puerta_tipo_cerradura (id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura,id_edificio,id_campus,id_sede) VALUES ('".$id_espacio."','".$tipo_puerta."','".$material_puerta."','".$material_marco."','".$id_tipo_cerradura."','".$id_edificio."','".$id_campus."','".$id_sede."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Tipo Cerradura 1)";
@@ -996,8 +1004,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar la información de las puertas de un espacio.
+     * Función que permite guardar la información del suministro de energía de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_suministro_energia, tipo de suministro de energía que tiene el espacio.
@@ -1005,15 +1014,16 @@ class modelo_creacion {
      * @param string $tomacorriente, si el tomacorriente es regulado o no.
      * @return array
      */
-    public function guardarSuministroEnergiaEspacio($id_espacio,$id_campus,$id_edificio,$tipo_suministro_energia,$cantidad,$tomacorriente){
+    public function guardarSuministroEnergiaEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_suministro_energia,$cantidad,$tomacorriente){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
         $cantidad = htmlspecialchars(trim($cantidad));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
-        $campos = "id_espacio,id_edificio,id_campus,id_tipo_suministro_energia";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_suministro_energia."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_suministro_energia";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_suministro_energia."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -1041,8 +1051,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar la información del suministro de energía de un espacio.
+     * Función que permite guardar la información de las ventanas de un espacio.
      * @param string $id_espacio, id del espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
      * @param string $id_campus, id del campus al que pertenece el espacio.
      * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_ventana, tipo de ventana que tiene el espacio.
@@ -1052,8 +1063,9 @@ class modelo_creacion {
      * @param string $alto_ventana, alto de las ventanas del espacio.
      * @return array
      */
-    public function guardarVentanaEspacio($id_espacio,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
+    public function guardarVentanaEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_ventana = htmlspecialchars(trim($tipo_ventana));
@@ -1061,8 +1073,8 @@ class modelo_creacion {
         $material_ventana = htmlspecialchars(trim($material_ventana));
         $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
-        $campos = "id_espacio,id_edificio,id_campus,id_tipo_ventana,id_material";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_ventana."','".$material_ventana."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_ventana,id_material";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_ventana."','".$material_ventana."'";
         if (strcasecmp($cantidad,'') != 0) {
           $campos = $campos.",cantidad";
           $valores = $valores.",'".$cantidad."'";
@@ -1094,15 +1106,16 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar la información del suministro de energía de un espacio.
-     * @param string $id_espacio, id del espacio.
+     * Función que permite guardar la información de las ventanas de unas gradas.
+     * @param string $id_sede, id de la sede a la que pertenecen las gradas.
      * @param string $id_campus, id del campus al que pertenece el espacio.
-     * @param string $id_edificio, id del edificio al que pertenece el espacio.
-     * @param string $tipo_ventana, tipo de ventana que tiene el espacio.
-     * @param string $cantidad, cantidad de ventanas que tiene el espacio.
-     * @param string $material_ventana, material de las ventanas del espacio.
-     * @param string $ancho_ventana, ancho de las ventanas del espacio.
-     * @param string $alto_ventana, alto de las ventanas del espacio.
+     * @param string $id_edificio, id del edificio al que pertenecen las gradas.
+     * @param string $piso, piso donde están las gradas
+     * @param string $tipo_ventana, tipo de ventana que tienen las gradas.
+     * @param string $cantidad, cantidad de ventanas que tienen las gradas.
+     * @param string $material_ventana, material de las ventanas de las gradas.
+     * @param string $ancho_ventana, ancho de las ventanas de las gradas.
+     * @param string $alto_ventana, alto de las ventanas de las gradas.
      * @return array
      */
     public function guardarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
@@ -1153,20 +1166,22 @@ class modelo_creacion {
 
     /**
      * Función que permite guardar la información del punto sanitario de un espacio.
-     * @param string $id_espacio, id del espacio al que pertenece el punto sanitario.
-     * @param string $id_campus, id del campus al que pertenece el punto sanitario.
-     * @param string $id_edificio, id del edificio al que pertenece el punto sanitario.
+     * @param string $id_espacio, id del espacio al que pertenece el espacio.
+     * @param string $id_sede, id de la sede a la que pertenece el espacio.
+     * @param string $id_campus, id del campus al que pertenece el espacio.
+     * @param string $id_edificio, id del edificio al que pertenece el espacio.
      * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el baño.
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el espacio.
      * @return array
      */
-    public function guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+    public function guardarPuntoSanitario($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_punto_sanitario = htmlspecialchars(trim($tipo_punto_sanitario));
         $cantidad_punto_sanitario = htmlspecialchars(trim($cantidad_punto_sanitario));
-        $sql = "INSERT INTO punto_sanitario (id_espacio,id_edificio,id_campus,id_tipo,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_punto_sanitario."','".$cantidad_punto_sanitario."');";
+        $sql = "INSERT INTO punto_sanitario (id_espacio,id_edificio,id_campus,id_sede,id_tipo,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_punto_sanitario."','".$cantidad_punto_sanitario."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Punto Sanitario 1)";
@@ -1187,19 +1202,21 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de los lavamanos de un baño.
      * @param string $id_espacio, id del espacio al que pertenece el lavamanos.
+     * @param string $id_sede, id de la sede a la que pertenece el lavamanos.
      * @param string $id_campus, id del campus al que pertenece el lavamanos.
      * @param string $id_edificio, id del edificio al que pertenece el lavamanos.
      * @param string $tipo_lavamanos, tipo de lavamanos que tiene el baño.
      * @param string $cantidad_lavamanos, cantidad de lavamanos que tiene el baño.
      * @return array
      */
-    public function guardarLavamanosBano($id_espacio,$id_campus,$id_edificio,$tipo_lavamanos,$cantidad_lavamanos){
+    public function guardarLavamanosBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_lavamanos,$cantidad_lavamanos){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_lavamanos = htmlspecialchars(trim($tipo_lavamanos));
         $cantidad_lavamanos = htmlspecialchars(trim($cantidad_lavamanos));
-        $sql = "INSERT INTO lavamanos_bano (id_espacio,id_edificio,id_campus,id_tipo_lavamanos,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_lavamanos."','".$cantidad_lavamanos."');";
+        $sql = "INSERT INTO lavamanos_bano (id_espacio,id_edificio,id_campus,id_sede,id_tipo_lavamanos,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_lavamanos."','".$cantidad_lavamanos."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Lavamanos-Baño 1)";
@@ -1220,20 +1237,22 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de los orinales de un baño.
      * @param string $id_espacio, id del espacio al que pertenece el orinal.
+     * @param string $id_sede, id de la sede a la que pertenece el orinal.
      * @param string $id_campus, id del campus al que pertenece el orinal.
      * @param string $id_edificio, id del edificio al que pertenece el orinal.
      * @param string $tipo_orinal, tipo de orinal que tiene el baño.
      * @param string $cantidad_orinal, cantidad de orinales que tiene el baño.
      * @return array
      */
-    public function guardarOrinalBano($id_espacio,$id_campus,$id_edificio,$tipo_orinal,$cantidad_orinal){
+    public function guardarOrinalBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_orinal,$cantidad_orinal){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_orinal = htmlspecialchars(trim($tipo_orinal));
         $cantidad_orinal = htmlspecialchars(trim($cantidad_orinal));
 
-        $sql = "INSERT INTO orinal_bano (id_espacio,id_edificio,id_campus,id_tipo_orinal,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_orinal."','".$cantidad_orinal."');";
+        $sql = "INSERT INTO orinal_bano (id_espacio,id_edificio,id_campus,id_sede,id_tipo_orinal,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_orinal."','".$cantidad_orinal."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Orinal-Baño 1)";
@@ -1254,6 +1273,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un salón
      * @param string $id_espacio, id del salón.
+     * @param string $id_sede, id de la sede a la que pertenece el salón.
      * @param string $id_campus, id del campus al que pertenece el salón.
      * @param string $id_edificio, id del edificio al que pertenece el salón.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el salón.
@@ -1261,14 +1281,15 @@ class modelo_creacion {
      * @param string $punto_proyector, si el salón tiene o no punto de proyector.
      * @return array
      */
-    public function guardarSalon($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarSalon($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 1)";
@@ -1289,6 +1310,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un auditorio
      * @param string $id_espacio, id del auditorio.
+     * @param string $id_sede, id de la sede a la que pertenece el auditorio.
      * @param string $id_campus, id del campus al que pertenece el auditorio.
      * @param string $id_edificio, id del edificio al que pertenece el auditorio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el auditorio.
@@ -1296,14 +1318,15 @@ class modelo_creacion {
      * @param string $punto_proyector, si el auditorio tiene o no punto de proyector.
      * @return array
      */
-    public function guardarAuditorio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarAuditorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 1)";
@@ -1324,6 +1347,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un laboratorio
      * @param string $id_espacio, id del laboratorio.
+     * @param string $id_sede, id de la sede a la que pertenece el laboratorio.
      * @param string $id_campus, id del campus al que pertenece el laboratorio.
      * @param string $id_edificio, id del edificio al que pertenece el laboratorio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el laboratorio.
@@ -1334,15 +1358,16 @@ class modelo_creacion {
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el laboratorio.
      * @return array
      */
-    public function guardarLaboratorio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+    public function guardarLaboratorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
-        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
+        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 1)";
@@ -1366,6 +1391,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una sala de computo
      * @param string $id_espacio, id de la sala de computo.
+     * @param string $id_sede, id de la sede a la que pertenece la sala de computo.
      * @param string $id_campus, id del campus al que pertenece la sala de computo.
      * @param string $id_edificio, id del edificio al que pertenece la sala de computo.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de computo.
@@ -1373,14 +1399,15 @@ class modelo_creacion {
      * @param string $punto_proyector, si la sala de computo tiene o no punto de proyector.
      * @return array
      */
-    public function guardarSalaComputo($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarSalaComputo($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 1)";
@@ -1401,19 +1428,21 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una oficina
      * @param string $id_espacio, id de la oficina.
+     * @param string $id_sede, id de la sede a la que pertenece la oficina.
      * @param string $id_campus, id del campus al que pertenece la oficina.
      * @param string $id_edificio, id del edificio al que pertenece la oficina.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la oficina.
      * @param string $punto_proyector, si la oficina tiene o no punto de proyector.
      * @return array
      */
-    public function guardarOficina($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red,$punto_proyector){
+    public function guardarOficina($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$punto_proyector){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,cantidad_punto_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."','".$punto_proyector."');";
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$punto_proyector."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 1)";
@@ -1434,6 +1463,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un baño
      * @param string $id_espacio, id del baño.
+     * @param string $id_sede, id de la sede a la que pertenece el baño.
      * @param string $id_campus, id del campus al que pertenece el baño.
      * @param string $id_edificio, id del edificio al que pertenece el baño.
      * @param string $tipo_inodoro, tipo de inodoros que tiene el baño.
@@ -1449,8 +1479,9 @@ class modelo_creacion {
      * @param string $material_divisiones, material de las divisiones del baño.
      * @return array
      */
-    public function guardarBano($id_espacio,$id_campus,$id_edificio,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$cantidad_orinal,$tipo_lavamanos,$cantidad_lavamanos,$ducha,$lavatraperos,$cantidad_sifon,$tipo_divisiones,$material_divisiones){
+    public function guardarBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$cantidad_orinal,$tipo_lavamanos,$cantidad_lavamanos,$ducha,$lavatraperos,$cantidad_sifon,$tipo_divisiones,$material_divisiones){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_inodoro = htmlspecialchars(trim($tipo_inodoro));
@@ -1460,7 +1491,7 @@ class modelo_creacion {
         $cantidad_sifon = htmlspecialchars(trim($cantidad_sifon));
         $tipo_divisiones = htmlspecialchars(trim($tipo_divisiones));
         $material_divisiones = htmlspecialchars(trim($material_divisiones));
-        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_tipo_inodoro,cantidad_inodoro,ducha,lavatraperos,cantidad_sifon,id_tipo_divisiones,id_material_divisiones) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$tipo_inodoro."','".$cantidad_inodoro."','".$ducha."','".$lavatraperos."','".$cantidad_sifon."','".$tipo_divisiones."','".$material_divisiones."');";
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_sede,id_tipo_inodoro,cantidad_inodoro,ducha,lavatraperos,cantidad_sifon,id_tipo_divisiones,id_material_divisiones) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_inodoro."','".$cantidad_inodoro."','".$ducha."','".$lavatraperos."','".$cantidad_sifon."','".$tipo_divisiones."','".$material_divisiones."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 1)";
@@ -1487,17 +1518,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una bodega.
      * @param string $id_espacio, id de la bodega.
+     * @param string $id_sede, id de la sede a la que pertenece la bodega.
      * @param string $id_campus, id del campus al que pertenece la bodega.
      * @param string $id_edificio, id del edificio al que pertenece la bodega.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la bodega.
      * @return array
      */
-    public function guardarBodega($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarBodega($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO bodega (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO bodega (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Bodega 1)";
@@ -1518,17 +1551,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una sala de estudio.
      * @param string $id_espacio, id de la sala de estudio.
+     * @param string $id_sede, id de la sede a la que pertenece la sala de estudio.
      * @param string $id_campus, id del campus al que pertenece la sala de estudio.
      * @param string $id_edificio, id del edificio al que pertenece la sala de estudio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de estudio.
      * @return array
      */
-    public function guardarSalaEstudio($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarSalaEstudio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO sala_estudio (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO sala_estudio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala de Estudio 1)";
@@ -1549,17 +1584,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un cuarto de plantas.
      * @param string $id_espacio, id del cuarto de plantas.
+     * @param string $id_sede, id de la sede a la que pertenece el cuarto de plantas.
      * @param string $id_campus, id del campus al que pertenece el cuarto de plantas.
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de plantas.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de plantas.
      * @return array
      */
-    public function guardarCuartoPlantas($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarCuartoPlantas($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO cuarto_plantas (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO cuarto_plantas (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Plantas 1)";
@@ -1580,17 +1617,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un cuarto de aires acondicionados.
      * @param string $id_espacio, id del cuarto de aires acondicionados.
+     * @param string $id_sede, id de la sede a la que pertenece el cuarto de aires acondicionados.
      * @param string $id_campus, id del campus al que pertenece el cuarto de aires acondicionados.
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de aires acondicionados.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de aires acondicionados.
      * @return array
      */
-    public function guardarCuartoAireAcondicionado($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarCuartoAireAcondicionado($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO cuarto_aire_acondicionado (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO cuarto_aire_acondicionado (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Aires Acondicionados 1)";
@@ -1611,17 +1650,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un área deportiva cerrada.
      * @param string $id_espacio, id del área deportiva cerrada.
+     * @param string $id_sede, id de la sede a la que pertenece el área deportiva cerrada.
      * @param string $id_campus, id del campus al que pertenece el área deportiva cerrada.
      * @param string $id_edificio, id del edificio al que pertenece el área deportiva cerrada.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el área deportiva cerrada.
      * @return array
      */
-    public function guardarAreaDeportivaCerrada($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarAreaDeportivaCerrada($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO area_deportiva_cerrada (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO area_deportiva_cerrada (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Área Deportiva Cerrada 1)";
@@ -1642,17 +1683,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un centro de datos.
      * @param string $id_espacio, id del centro de datos.
+     * @param string $id_sede, id de la sede a la que pertenece el centro de datos.
      * @param string $id_campus, id del campus al que pertenece el centro de datos.
      * @param string $id_edificio, id del edificio al que pertenece el centro de datos.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el centro de datos.
      * @return array
      */
-    public function guardarCentroDatos($id_espacio,$id_campus,$id_edificio,$cantidad_punto_red){
+    public function guardarCentroDatos($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $sql = "INSERT INTO centro_datos (id_espacio,id_edificio,id_campus,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_red."');";
+        $sql = "INSERT INTO centro_datos (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Centro de Datos 1)";
@@ -1673,17 +1716,19 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de un cuarto de bombas.
      * @param string $id_espacio, id del cuarto de bombas.
+     * @param string $id_sede, id de la sede a la que pertenece el cuarto de bombas.
      * @param string $id_campus, id del campus al que pertenece el cuarto de bombas.
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de bombas.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de bombas.
      * @return array
      */
-    public function guardarCuartoBombas($id_espacio,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+    public function guardarCuartoBombas($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
-        $sql = "INSERT INTO cuarto_bombas (id_espacio,id_edificio,id_campus,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_hidraulico."');";
+        $sql = "INSERT INTO cuarto_bombas (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_hidraulico."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cuarto de Bombas 1)";
@@ -1707,6 +1752,7 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una cocineta.
      * @param string $id_espacio, id de la cocineta.
+     * @param string $id_sede, id de la sede a la que pertenece la cocineta.
      * @param string $id_campus, id del campus al que pertenece la cocineta.
      * @param string $id_edificio, id del edificio al que pertenece la cocineta.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la cocineta.
@@ -1714,12 +1760,13 @@ class modelo_creacion {
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene la cocineta
      * @return array
      */
-    public function guardarCocineta($id_espacio,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+    public function guardarCocineta($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
+        $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
-        $sql = "INSERT INTO cocineta (id_espacio,id_edificio,id_campus,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$cantidad_punto_hidraulico."');";
+        $sql = "INSERT INTO cocineta (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_hidraulico."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Cocineta 1)";
@@ -2958,7 +3005,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si una sede ya esta registrada en el sistema.
+     * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
      */
@@ -2986,7 +3033,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un campus ya esta registrado en el sistema.
+     * Función que permite consultar si un campus ya está registrado en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
      * @param string $nombre_campus, nombre del campus.
      * @return array
@@ -3016,7 +3063,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrado en el sistema.
+     * Función que permite consultar si un edificio ya está registrado en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
      * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
      * @param string $id_edificio, id del edificio.
@@ -3048,9 +3095,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si una cancha ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si una cancha ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la cancha.
+     * @param string $nombre_campus, nombre del campus al que pertenece la cancha.
      * @param string $id_cancha, id de la cancha.
      * @return array
      */
@@ -3080,9 +3127,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un corredor ya esta registrado en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si un corredor ya está registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el corredor.
+     * @param string $nombre_campus, nombre del campus al que pertenece el corredor.
      * @param string $id_corredor, id del corredor.
      * @return array
      */
@@ -3112,9 +3159,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un corredor ya esta registrado en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si una cubierta ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la cubierta.
+     * @param string $nombre_campus, nombre del campus al que pertenece la cubierta.
      * @param string $nombre_edificio, id del edificio.
      * @param string $piso, piso donde está la cubierta.
      * @return array
@@ -3146,9 +3193,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, id de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, id del campus al que pertenece el edificio.
+     * Función que permite consultar si unas gradas ya están registradas en el sistema.
+     * @param string $nombre_sede, id de la sede a la que pertenecen las gradas.
+     * @param string $nombre_campus, id del campus al que pertenecen las gradas.
      * @param string $nombre_edificio, id del edificio.
      * @param string $piso, piso donde inician las gradas.
      * @return array
@@ -3180,9 +3227,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si un parqueadero ya está registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el parqueadero.
+     * @param string $nombre_campus, nombre del campus al que pertenece el parqueadero.
      * @param string $codigo, código del parqueadero.
      * @return array
      */
@@ -3212,9 +3259,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si una piscina ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la piscina.
+     * @param string $nombre_campus, nombre del campus al que pertenece la piscina.
      * @param string $id_piscina, id de la piscina.
      * @return array
      */
@@ -3244,9 +3291,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si una plazoleta ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la plazoleta.
+     * @param string $nombre_campus, nombre del campus al que pertenece la plazoleta.
      * @param string $id_plazoleta, id de la plazoleta.
      * @return array
      */
@@ -3276,9 +3323,9 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * Función que permite consultar si un sendero ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el sendero.
+     * @param string $nombre_campus, nombre del campus al que pertenece el sendero.
      * @param string $id_sendero, id del sendero.
      * @return array
      */
@@ -3308,10 +3355,10 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
-     * @param string $id_edificio, id del edificio.
+     * Función que permite consultar si una vía ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la vía.
+     * @param string $nombre_campus, nombre del campus al que pertenece la vía.
+     * @param string $id_edificio, id de la vía.
      * @return array
      */
     public function verificarVia($nombre_sede,$nombre_campus,$id_via){
@@ -3340,7 +3387,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * Función que permite consultar si un edificio ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el espacio.
      * @param string $nombre_campus, nombre del campus al que pertenece el espacio.
      * @param string $nombre_edificio, nombre del edificio al que pertenece el espacio.
@@ -3375,7 +3422,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * Función que permite consultar si un edificio ya está registrada en el sistema.
      * @param string $tipo_material, tipo de material.
      * @param string $nombre_tipo_material, nombre del tipo de material.
      * @return array
@@ -3405,7 +3452,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya esta registrada en el sistema.
+     * Función que permite consultar si un edificio ya está registrada en el sistema.
      * @param string $tipo_material, tipo de objeto.
      * @param string $nombre_tipo_material, nombre del tipo de objeto.
      * @return array
@@ -3435,7 +3482,7 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite consultar el id de un campus ya esta registrada en el sistema.
+     * Función que permite consultar el id de un campus ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
      * @param string $nombre_campus, nombre del campus.
      * @return array

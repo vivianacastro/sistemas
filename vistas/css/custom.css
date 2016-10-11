@@ -13,11 +13,13 @@ html, body {
     width: auto;
     text-align: center;
     padding: 0.5% 0.5% 0.5%;
+    font-size: smaller;
 }
 
 .btn-agregar-modal{
     width: auto;
     text-align: center;
+    font-size: smaller;
     padding: 0.5% 0.5% 0.5%;
 }
 
@@ -30,9 +32,8 @@ html, body {
 .btn-formulario{
     width: auto;
     text-align: center;
-    /*padding: 0.5% 0.5% 0.5%;*/
     padding: 0% 2% 0%;
-    font-size: small;
+    font-size: large;
 }
 
 .btn-formulario:disabled{
@@ -43,6 +44,7 @@ html, body {
 
 .btn-lg{
     text-align: center;
+    /*font-size: small;*/
 		border-radius: 10px 10px 10px 10px;
 		-moz-border-radius: 10px 10px 10px 10px;
 		-webkit-border-radius: 10px 10px 10px 10px;
@@ -281,6 +283,10 @@ html, body {
 		padding: 2% 0 2%;
 }
 
+#divBotonesInformacionAdicional{
+    padding: 2% 0% 2%;
+}
+
 #divMensaje{
     padding: 2% 0% 0%;
     font-weight: 400;
@@ -362,7 +368,6 @@ html, body {
 @media screen and (max-width:768px) {
 		.btn-formulario{
 		    text-align: center;
-		    font-size: 80%;
 		    padding: 2% 2% 2%;
 		}
 

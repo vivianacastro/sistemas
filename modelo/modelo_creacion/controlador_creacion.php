@@ -588,35 +588,35 @@ class controlador_creacion
                         $info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana'],$info['tipo_interruptor'],$info['cantidad_interruptores'],
                         $info['numero_espacio_padre']);
                     if (strcasecmp($info['uso_espacio'],'1') == 0) { //Salón
-                        $m->guardarSalon($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                        $m->guardarSalon($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'2') == 0) { //Auditorio
-                        $m->guardarAuditorio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                        $m->guardarAuditorio($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'3') == 0) { //Laboratorio
-                        $m->guardarLaboratorio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                        $m->guardarLaboratorio($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
                     }else if (strcasecmp($info['uso_espacio'],'4') == 0) { //Sala de Cómputo
-                        $m->guardarSalaComputo($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
+                        $m->guardarSalaComputo($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'5') == 0) { //Oficina
-                        $m->guardarOficina($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarOficina($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'6') == 0) { //Baño
-                        $m->guardarBano($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_inodoro'],$info['cantidad_inodoro'],$info['tipo_orinal'],$info['cantidad_orinal'],$info['tipo_lavamanos'],$info['cantidad_lavamanos'],$info['ducha'],$info['lavatraperos'],$info['cantidad_sifones'],$info['tipo_divisiones'],$info['material_divisiones']);
+                        $m->guardarBano($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_inodoro'],$info['cantidad_inodoro'],$info['tipo_orinal'],$info['cantidad_orinal'],$info['tipo_lavamanos'],$info['cantidad_lavamanos'],$info['ducha'],$info['lavatraperos'],$info['cantidad_sifones'],$info['tipo_divisiones'],$info['material_divisiones']);
                     }else if (strcasecmp($info['uso_espacio'],'7') == 0) { //Cuarto Técnico
-                        $m->guardarCuartoTecnico($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['punto_videobeam']);
+                        $m->guardarCuartoTecnico($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'8') == 0) { //Bodega/Almacen
-                        $m->guardarBodega($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarBodega($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'10') == 0) { //Cuarto de Plantas
-                        $m->guardarCuartoPlantas($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarCuartoPlantas($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'11') == 0) { //Cuarto de Aires Acondicionados
-                        $m->guardarCuartoAireAcondicionado($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarCuartoAireAcondicionado($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'12') == 0) { //Área Deportiva Cerrada
-                        $m->guardarAreaDeportivaCerrada($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarAreaDeportivaCerrada($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'14') == 0) { //Centro de Datos/Teléfono
-                        $m->guardarCentroDatos($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarCentroDatos($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }else if (strcasecmp($info['uso_espacio'],'17') == 0) { //Cuarto de Bombas
-                        $m->guardarCuartoBombas($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                        $m->guardarCuartoBombas($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
                     }else if (strcasecmp($info['uso_espacio'],'19') == 0) { //Cocineta
-                        $m->guardarCocineta($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
+                        $m->guardarCocineta($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_hidraulicos'],$info['tipo_punto_sanitario'],$info['cantidad_puntos_sanitarios']);
                     }else if (strcasecmp($info['uso_espacio'],'20') == 0) { //Sala de Estudio
-                        $m->guardarSalaEstudio($info['numero_espacio'][$i],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarSalaEstudio($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
                     }
                 }
             }
