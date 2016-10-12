@@ -336,13 +336,7 @@ html, body {
 }
 
 @media screen and (min-width:1200px) {
-		.mapa{
-	  		width:800px;
-	  }
 
-    .mapa_modal{
-        width:540px;
-    }
 }
 
 @media screen and (max-width:1200px) {
@@ -375,14 +369,6 @@ html, body {
 		    width: 20%;
 		}
 
-		.mapa{
-		    width:500px;
-		}
-
-		.mapa_modal{
-		    width:500px;
-		}
-
 		.modal-dialog{
 		    width: 100%;
 		}
@@ -406,21 +392,9 @@ html, body {
 }
 
 @media screen and (max-width:1200px) and (min-width: 992px) {
-    .mapa{
-        width:655px;
-    }
 
-    .mapa_modal{
-        width:635px;
-    }
 }
 
 @media screen and (max-width:992px) and (min-width: 768px) {
-		.mapa{
-        width:500px;
-    }
 
-    .mapa_modal{
-        width:532px;
-    }
 }
