@@ -193,7 +193,7 @@ class modelo_creacion {
      * @param string $lng, longitud donde se encuentra la cancha.
      * @return array
      */
-    public function guardarCorredor($nombre_sede,$nombre_campus,$id_corredor,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$alto_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad_tomacorrientes,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptores,$lat,$lng){
+    public function guardarCorredor($nombre_sede,$nombre_campus,$id_corredor,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad_tomacorrientes,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptores,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_corredor = htmlspecialchars(trim($id_corredor));
@@ -204,19 +204,15 @@ class modelo_creacion {
         $largo_piso = htmlspecialchars(trim($largo_piso));
         $material_piso = htmlspecialchars(trim($material_piso));
         $ancho_techo = htmlspecialchars(trim($ancho_techo));
-        $alto_techo = htmlspecialchars(trim($alto_techo));
+        $largo_techo = htmlspecialchars(trim($largo_techo));
         $material_techo = htmlspecialchars(trim($material_techo));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
         $cantidad_tomacorrientes = htmlspecialchars(trim($cantidad_tomacorrientes));
-        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
-        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
-        $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
-        $cantidad_interruptores = htmlspecialchars(trim($cantidad_interruptores));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
-        $campos = "id_sede,id_campus,id,ancho_pared,alto_pared,ancho_piso,largo_piso,ancho_techo,alto_techo,tomacorriente,cantidad_tomacorrientes,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_corredor."','".$ancho_pared."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$alto_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $campos = "id_sede,id_campus,id,ancho_pared,alto_pared,ancho_piso,largo_piso,ancho_techo,largo_techo,tomacorriente,cantidad,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_corredor."','".$ancho_pared."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$largo_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$lat."','".$lng."','".$_SESSION['login']."'";
         if (strcasecmp($material_pared,'') != 0) {
             $campos = $campos.",id_material_pared";
             $valores = $valores.",'".$material_pared."'";
@@ -377,7 +373,7 @@ class modelo_creacion {
         $ancho = htmlspecialchars(trim($ancho));
         $largo = htmlspecialchars(trim($largo));
         $material_piso = htmlspecialchars(trim($material_piso));
-        $tipo_pintura = htmlspecialchars(trim($tipo_demarcacion));
+        $tipo_pintura = htmlspecialchars(trim($tipo_pintura));
         $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
@@ -403,6 +399,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El parqueadero se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -468,8 +465,6 @@ class modelo_creacion {
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
         $nombre = htmlspecialchars(trim($nombre));
-        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
-        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,nombre,lat,lng,usuario_crea";
@@ -507,7 +502,7 @@ class modelo_creacion {
      * @param string $lng, longitud donde se encuentra el parqueadero.
      * @return array
      */
-    public function guardarSendero($nombre_sede,$nombre_campus,$id_sendero,$longitud,$ancho,$material_piso,$tipo_iluminacion,$codigo_poste,$ancho_cubierta,$largo_cubierta,$material_cubierta,$lat,$lng){
+    public function guardarSendero($nombre_sede,$nombre_campus,$id_sendero,$longitud,$ancho,$material_piso,$tipo_iluminacion,$cantidad_iluminacion,$codigo_poste,$ancho_cubierta,$largo_cubierta,$material_cubierta,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_sendero = htmlspecialchars(trim($id_sendero));
@@ -515,14 +510,15 @@ class modelo_creacion {
         $ancho = htmlspecialchars(trim($ancho));
         $material_piso = htmlspecialchars(trim($material_piso));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
         $codigo_poste = htmlspecialchars(trim($codigo_poste));
         $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
         $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
         $material_cubierta = htmlspecialchars(trim($material_cubierta));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
-        $campos = "id_sede,id_campus,id,longitud,ancho,codigo_poste,ancho_cubierta,largo_cubierta,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_sendero."','".$longitud."','".$ancho."','".$codigo_poste."','".$ancho_cubierta."','".$largo_cubierta."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $campos = "id_sede,id_campus,id,longitud,ancho,cantidad,codigo_poste,ancho_cubierta,largo_cubierta,lat,lng,usuario_crea";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_sendero."','".$longitud."','".$ancho."','".$cantidad_iluminacion."','".$codigo_poste."','".$ancho_cubierta."','".$largo_cubierta."','".$lat."','".$lng."','".$_SESSION['login']."'";
         if (strcasecmp($material_piso,'') != 0) {
             $campos = $campos.",id_material_piso";
             $valores = $valores.",'".$material_piso."'";
@@ -533,7 +529,7 @@ class modelo_creacion {
             $campos = $campos.",id_material_cubierta";
             $valores = $valores.",'".$material_cubierta."'";
         }
-        $sql = "INSERT INTO plazoleta (".$campos.") VALUES (".$valores.");";
+        $sql = "INSERT INTO sendero (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sendero 1)";
@@ -545,7 +541,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El sendero se guardó correctamente";
+                $GLOBALS['mensaje'] = "El sendero peatonal se guardó correctamente";
                 return true;
             }
         }
@@ -575,10 +571,10 @@ class modelo_creacion {
         $campos = "id_sede,id_campus,id,longitud_demarcacion,lat,lng,usuario_crea";
         $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_via."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
         if (strcasecmp($tipo_pintura,'') != 0) {
-            $campos = $campos.",id_material_piso";
+            $campos = $campos.",id_tipo_pintura_demarcacion";
             $valores = $valores.",'".$tipo_pintura."'";
         }if (strcasecmp($material_piso,'') != 0) {
-            $campos = $campos.",id_tipo_iluminacion";
+            $campos = $campos.",id_tipo_material";
             $valores = $valores.",'".$material_piso."'";
         }
         $sql = "INSERT INTO via (".$campos.") VALUES (".$valores.");";
@@ -639,7 +635,7 @@ class modelo_creacion {
      * @param string $numero_espacio_padre, número del espacio al que pertenece el nuevo espacio.
      * @return array
      */
-    public function guardarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$numero_espacio,$uso_espacio,$alto_pared,$ancho_pared,$material_pared,$largo_techo,$ancho_techo,$material_techo,$largo_piso,$ancho_piso,$material_piso,$tipo_iluminacion,$cantidad_iluminacion,$tipo_suministro_energia,$tomacorriente,$cantidad_tomacorrientes,$tipo_puerta,$cantidad_puertas,$material_puerta,$tipo_cerradura,$gato_puerta,$material_marco,$ancho_puerta,$alto_puerta,$tipo_ventana,$cantidad_ventanas,$material_ventana,$ancho_ventana,$alto_ventana,$tipo_interruptor,$cantidad_interruptores,$numero_espacio_padre,$sede_espacio_padre,$campus_espacio_padre,$edificio_espacio_padre){
+    public function guardarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$numero_espacio,$uso_espacio,$alto_pared,$ancho_pared,$material_pared,$largo_techo,$ancho_techo,$material_techo,$largo_piso,$ancho_piso,$material_piso,$tipo_iluminacion,$cantidad_iluminacion,$tipo_suministro_energia,$tomacorriente,$cantidad_tomacorrientes,$tipo_puerta,$cantidad_puertas,$material_puerta,$tipo_cerradura,$gato_puerta,$material_marco,$ancho_puerta,$alto_puerta,$tipo_ventana,$cantidad_ventanas,$material_ventana,$ancho_ventana,$alto_ventana,$tipo_interruptor,$cantidad_interruptores,$numero_espacio_padre){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
@@ -656,9 +652,6 @@ class modelo_creacion {
         $ancho_piso = htmlspecialchars(trim($ancho_piso));
         $material_piso = htmlspecialchars(trim($material_piso));
         $numero_espacio_padre = htmlspecialchars(trim($numero_espacio_padre));
-        $sede_espacio_padre = htmlspecialchars(trim($sede_espacio_padre));
-        $campus_espacio_padre = htmlspecialchars(trim($campus_espacio_padre));
-        $edificio_espacio_padre = htmlspecialchars(trim($edificio_espacio_padre));
         $campos = "id,uso_espacio,id_edificio,id_campus,usuario_crea,piso_edificio,id_sede";
         $valores = "'".$numero_espacio."','".$uso_espacio."','".$nombre_edificio."','".$nombre_campus."','".$_SESSION["login"]."','".$piso."','".$nombre_sede."'";
         if (strcasecmp($material_pared,'') != 0) {
@@ -672,6 +665,10 @@ class modelo_creacion {
         if (strcasecmp($material_piso,'') != 0) {
             $campos = $campos.",ancho_piso,largo_piso,id_material_piso";
             $valores = $valores.",'".$ancho_piso."','".$largo_piso."','".$material_piso."'";
+        }
+        if (strcasecmp($numero_espacio_padre,'') != 0) {
+            $campos = $campos.",sede_padre,campus_padre,edificio_padre,espacio_padre";
+            $valores = $valores.",'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$numero_espacio_padre."'";
         }
         $sql = "INSERT INTO espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
@@ -721,26 +718,26 @@ class modelo_creacion {
         $id_corredor = htmlspecialchars(trim($id_corredor));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_sede,id_campus,id,id_tipo_iluminacion";
-        $valores = "'".$id_sede."','".$id_campus."','".$id_corredor."','".$tipo_iluminacion."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
-        }
-        $sql = "INSERT INTO iluminacion_corredor (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 2)";
+        $campos = "id_sede,id_campus,id,cantidad";
+        $valores = "'".$id_sede."','".$id_campus."','".$id_corredor."','".$cantidad."'";
+        if (strcasecmp($tipo_iluminacion,'') != 0) {
+            $campos = $campos.",id_tipo_iluminacion";
+            $valores = $valores.",'".$tipo_iluminacion."'";
+            $sql = "INSERT INTO iluminacion_corredor (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La iluminación del corredor se guardó correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "La iluminación del corredor se guardó correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -760,26 +757,26 @@ class modelo_creacion {
         $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_sede,id_campus,id,id_tipo_iluminacion";
-        $valores = "'".$id_sede."','".$id_campus."','".$id_corredor."','".$tipo_iluminacion."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
-        }
-        $sql = "INSERT INTO iluminacion_plazoleta (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 2)";
+        $campos = "id_sede,id_campus,id,cantidad";
+        $valores = "'".$id_sede."','".$id_campus."','".$id_plazoleta."','".$cantidad."'";
+        if (strcasecmp($tipo_iluminacion,'') != 0) {
+            $campos = $campos.",id_tipo_iluminacion";
+            $valores = $valores.",'".$tipo_iluminacion."'";
+            $sql = "INSERT INTO iluminacion_plazoleta (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La iluminación de la plazoleta se guardó correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Plazoleta 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "La iluminación de la plazoleta se guardó correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -801,26 +798,26 @@ class modelo_creacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_iluminacion";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_iluminacion."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
-        }
-        $sql = "INSERT INTO iluminacion_espacio (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 2)";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."'";
+        if (strcasecmp($tipo_iluminacion,'') != 0) {
+              $campos = $campos.",id_tipo_iluminacion";
+              $valores = $valores.",'".$tipo_iluminacion."'";
+            $sql = "INSERT INTO iluminacion_espacio (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La iluminación del espacio se guardó correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Iluminación-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "La iluminación del espacio se guardó correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -840,22 +837,26 @@ class modelo_creacion {
         $id_corredor = htmlspecialchars(trim($id_corredor));
         $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id,id_edificio,id_campus,id_tipo_interruptor,cantidad";
-        $valores = "'".$id_corredor."','".$id_edificio."','".$id_campus."','".$tipo_interruptor."','".$cantidad."'";
-        $sql = "INSERT INTO interruptores_corredor (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 2)";
+        $campos = "id,id_sede,id_campus,cantidad";
+        $valores = "'".$id_corredor."','".$id_sede."','".$id_campus."','".$cantidad."'";
+        if (strcasecmp($tipo_interruptor,'') != 0) {
+            $campos = $campos.",id_tipo_interruptor";
+            $valores = $valores.",'".$tipo_interruptor."'";
+            $sql = "INSERT INTO interruptor_corredor (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "Los interruptores del corredor se guardaron correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "Los interruptores del corredor se guardaron correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -877,26 +878,26 @@ class modelo_creacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_interruptor";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_interruptor."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
-        }
-        $sql = "INSERT INTO interruptores_espacio (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 2)";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."'";
+        if (strcasecmp($tipo_interruptor,'') != 0) {
+            $campos = $campos.",id_tipo_interruptor";
+            $valores = $valores.",'".$tipo_interruptor."'";
+            $sql = "INSERT INTO interruptor_espacio (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "Los interruptores del espacio se guardaron correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Interruptor-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "Los interruptores del espacio se guardaron correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -928,23 +929,19 @@ class modelo_creacion {
         $ancho = htmlspecialchars(trim($ancho));
         $largo = htmlspecialchars(trim($largo));
         $gato = htmlspecialchars(trim($gato));
-        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_puerta,id_material_puerta,id_material_marco";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_puerta."','".$material_puerta."','".$material_marco."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad,ancho_puerta,largo_puerta,gato";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."','".$ancho."','".$largo."','".$gato."'";
+        if (strcasecmp($tipo_puerta,'') != 0) {
+          $campos = $campos.",id_tipo_puerta";
+          $valores = $valores.",'".$tipo_puerta."'";
         }
-        if (strcasecmp($ancho,'') != 0) {
-          $campos = $campos.",ancho_puerta";
-          $valores = $valores.",'".$ancho."'";
+        if (strcasecmp($material_puerta,'') != 0) {
+          $campos = $campos.",id_material_puerta";
+          $valores = $valores.",'".$material_puerta."'";
         }
-        if (strcasecmp($largo,'') != 0) {
-          $campos = $campos.",largo_puerta";
-          $valores = $valores.",'".$largo."'";
-        }
-        if (strcasecmp($gato,'') != 0) {
-          $campos = $campos.",gato";
-          $valores = $valores.",'".$gato."'";
+        if (strcasecmp($material_marco,'') != 0) {
+          $campos = $campos.",id_material_marco";
+          $valores = $valores.",'".$material_marco."'";
         }
         $sql = "INSERT INTO puerta_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1022,30 +1019,26 @@ class modelo_creacion {
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
         $cantidad = htmlspecialchars(trim($cantidad));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
-        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_suministro_energia";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_suministro_energia."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
-        }
-        if (strcasecmp($tomacorriente,'') != 0) {
-          $campos = $campos.",tomacorriente";
-          $valores = $valores.",'".$tomacorriente."'";
-        }
-        $sql = "INSERT INTO suministro_energia_espacio (".$campos.") VALUES (".$valores.");";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 2)";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad,tomacorriente";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."','".$tomacorriente."'";
+        if (strcasecmp($tipo_suministro_energia,'') != 0) {
+            $campos = $campos.",cantidad";
+            $valores = $valores.",'".$tipo_suministro_energia."'";
+            $sql = "INSERT INTO suministro_energia_espacio (".$campos.") VALUES (".$valores.");";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El suministro de energía del espacio se guardaron correctamente";
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Suministro-Energia-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['mensaje'] = "El suministro de energía del espacio se guardaron correctamente";
+                    return true;
+                }
             }
         }
     }
@@ -1073,19 +1066,15 @@ class modelo_creacion {
         $material_ventana = htmlspecialchars(trim($material_ventana));
         $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
-        $campos = "id_espacio,id_edificio,id_campus,id_sede,id_tipo_ventana,id_material";
-        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_ventana."','".$material_ventana."'";
-        if (strcasecmp($cantidad,'') != 0) {
-          $campos = $campos.",cantidad";
-          $valores = $valores.",'".$cantidad."'";
+        $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad,ancho_ventana,alto_ventana";
+        $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."','".$ancho_ventana."','".$alto_ventana."'";
+        if (strcasecmp($tipo_ventana,'') != 0) {
+          $campos = $campos.",id_tipo_ventana";
+          $valores = $valores.",'".$tipo_ventana."'";
         }
-        if (strcasecmp($ancho_ventana,'') != 0) {
-          $campos = $campos.",ancho_ventana";
-          $valores = $valores.",'".$ancho_ventana."'";
-        }
-        if (strcasecmp($alto_ventana,'') != 0) {
-          $campos = $campos.",alto_ventana";
-          $valores = $valores.",'".$alto_ventana."'";
+        if (strcasecmp($material_ventana,'') != 0) {
+          $campos = $campos.",id_material";
+          $valores = $valores.",'".$material_ventana."'";
         }
         $sql = "INSERT INTO ventana_espacio (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1278,18 +1267,18 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el salón.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el salón.
      * @param string $capacidad, capacidad del salón.
-     * @param string $punto_proyector, si el salón tiene o no punto de proyector.
+     * @param string $punto_videobeam, si el salón tiene o no punto de proyector.
      * @return array
      */
-    public function guardarSalon($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarSalon($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
-        $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $punto_videobeam = htmlspecialchars(trim($punto_videobeam));
+        $sql = "INSERT INTO salon (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_videobeam."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Salón 1)";
@@ -1315,18 +1304,18 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el auditorio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el auditorio.
      * @param string $capacidad, capacidad del auditorio.
-     * @param string $punto_proyector, si el auditorio tiene o no punto de proyector.
+     * @param string $punto_videobeam, si el auditorio tiene o no punto de proyector.
      * @return array
      */
-    public function guardarAuditorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarAuditorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
-        $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $punto_videobeam = htmlspecialchars(trim($punto_videobeam));
+        $sql = "INSERT INTO auditorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_videobeam."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Auditorio 1)";
@@ -1352,22 +1341,22 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el laboratorio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el laboratorio.
      * @param string $capacidad, capacidad del laboratorio.
-     * @param string $punto_proyector, si el laboratorio tiene o no punto de proyector.
+     * @param string $punto_videobeam, si el laboratorio tiene o no punto de proyector.
      * @param string $cantidad_punto_hidraulico, cantidad de puntos hidraulicos que tiene el laboratorio.
      * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el laboratorio.
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el laboratorio.
      * @return array
      */
-    public function guardarLaboratorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
+    public function guardarLaboratorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
-        $punto_proyector = htmlspecialchars(trim($punto_proyector));
+        $punto_videobeam = htmlspecialchars(trim($punto_videobeam));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
-        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."','".$cantidad_punto_hidraulico."');";
+        $sql = "INSERT INTO laboratorio (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam,cantidad_punto_hidraulico) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_videobeam."','".$cantidad_punto_hidraulico."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Laboratorio 1)";
@@ -1396,18 +1385,18 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece la sala de computo.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de computo.
      * @param string $capacidad, capacidad de la sala de computo.
-     * @param string $punto_proyector, si la sala de computo tiene o no punto de proyector.
+     * @param string $punto_videobeam, si la sala de computo tiene o no punto de proyector.
      * @return array
      */
-    public function guardarSalaComputo($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_proyector){
+    public function guardarSalaComputo($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $capacidad = htmlspecialchars(trim($capacidad));
-        $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_proyector."');";
+        $punto_videobeam = htmlspecialchars(trim($punto_videobeam));
+        $sql = "INSERT INTO sala_computo (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,capacidad,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$capacidad."','".$punto_videobeam."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sala Computo 1)";
@@ -1432,17 +1421,17 @@ class modelo_creacion {
      * @param string $id_campus, id del campus al que pertenece la oficina.
      * @param string $id_edificio, id del edificio al que pertenece la oficina.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la oficina.
-     * @param string $punto_proyector, si la oficina tiene o no punto de proyector.
+     * @param string $punto_videobeam, si la oficina tiene o no punto de proyector.
      * @return array
      */
-    public function guardarOficina($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$punto_proyector){
+    public function guardarOficina($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
-        $punto_proyector = htmlspecialchars(trim($punto_proyector));
-        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$punto_proyector."');";
+        $punto_videobeam = htmlspecialchars(trim($punto_videobeam));
+        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_sede,cantidad_punto_red,punto_video_beam) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad_punto_red."','".$punto_videobeam."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 1)";
@@ -1450,7 +1439,7 @@ class modelo_creacion {
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = $sql;//"Error: SQL (Guardar Oficina 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Oficina 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{

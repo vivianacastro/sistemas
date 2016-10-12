@@ -473,7 +473,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarEdificios($info["nombre_campus"]);
+            $data = $m->buscarEdificios($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
@@ -544,7 +544,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarPisosEdificio($info["nombre_campus"],$info["nombre_edificio"]);
+            $data = $m->buscarPisosEdificio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],

@@ -395,7 +395,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor']);
             if($verificar){
-                $m->guardarCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['alto_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad_tomacorrientes'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptores'],$info['lat'],$info['lng']);
+                $m->guardarCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad_tomacorrientes'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptores'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -464,7 +464,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['codigo']);
             if($verificar){
-                $m->guardarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['codigo'],$info['capacidad'],$info['ancho'],$info['largo'],$info['material_piso'],$info['$tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
+                $m->guardarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['id_parqueadero'],$info['capacidad'],$info['ancho'],$info['largo'],$info['material_piso'],$info['tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -487,7 +487,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
             if($verificar){
-                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['material_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina'],$info['alto'],$info['ancho'],$info['largo'],$info['cantidad_puntos_hidraulicos'],$info['material_fachada'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -510,7 +510,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
             if($verificar){
-                $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$info['nombre_edificio'],$info['numero_pisos'],$info['terraza'],$info['sotano'],$info['material_fachada'],$info['alto_fachada'],$info['ancho_fachada'],$info['lat'],$info['lng']);
+                $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_plazoleta'],$info['nombre'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -533,7 +533,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarSendero($info['nombre_sede'],$info['nombre_campus'],$info['id_sendero']);
             if($verificar){
-                $m->guardarSendero($info['nombre_sede'],$info['nombre_campus'],$info['id_sendero'],$info['longitud'],$info['ancho'],$info['material_piso'],$info['tipo_iluminacion'],$info['codigo_poste'],$info['ancho_cubierta'],$info['largo_cubierta'],$info['material_cubierta'],$info['lat'],$info['lng']);
+                $m->guardarSendero($info['nombre_sede'],$info['nombre_campus'],$info['id_sendero'],$info['longitud'],$info['ancho'],$info['material_piso'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['codigo_poste'],$info['ancho_cubierta'],$info['largo_cubierta'],$info['material_cubierta'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -596,7 +596,7 @@ class controlador_creacion
                     }else if (strcasecmp($info['uso_espacio'],'4') == 0) { //Sala de Cómputo
                         $m->guardarSalaComputo($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['capacidad'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'5') == 0) { //Oficina
-                        $m->guardarOficina($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red']);
+                        $m->guardarOficina($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['cantidad_puntos_red'],$info['punto_videobeam']);
                     }else if (strcasecmp($info['uso_espacio'],'6') == 0) { //Baño
                         $m->guardarBano($info['numero_espacio'][$i],$info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['tipo_inodoro'],$info['cantidad_inodoro'],$info['tipo_orinal'],$info['cantidad_orinal'],$info['tipo_lavamanos'],$info['cantidad_lavamanos'],$info['ducha'],$info['lavatraperos'],$info['cantidad_sifones'],$info['tipo_divisiones'],$info['material_divisiones']);
                     }else if (strcasecmp($info['uso_espacio'],'7') == 0) { //Cuarto Técnico
@@ -685,7 +685,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['numero_espacio']);
+            $verificar = $m->verificarEspacio($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['numero_espacio']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
