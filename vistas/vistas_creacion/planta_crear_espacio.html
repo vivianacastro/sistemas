@@ -169,14 +169,16 @@
                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_interruptor' id='eliminar_interruptor' value='Eliminar Tipo Interruptor' title='Eliminar Tipo Interruptor' disabled/>
             </div>
         </div>
-        <div class='div_izquierda'><b>¿El Espacio est&aacute; dentro de otro?<font color='red'>*</font></b></div>
-        <form id='form_espacio_padre'>
-            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='true'>S&iacute;</label>
-            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='false'>No</label>
-        </form><br>
-        <div id='div_espacio_padre' style='display:none'>
-            <div class='div_izquierda'><b>¿Cu&aacute;l es el n&uacute;mero del(os) Espacio(s) que está(n) dentro del que se va a crear?</b></div>
-            <input class='form-control formulario' type='text' maxlength="10" name='espacio_padre' id='espacio_padre' value='' placeholder='Ej: 1001' required/>
+        <div id="divTieneEspacioPadre" style='display:none'>
+          <div class='div_izquierda'><b>¿El Espacio est&aacute; dentro de otro?<font color='red'>*</font></b></div>
+          <form id='form_espacio_padre'>
+              <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='true'>S&iacute;</label>
+              <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='false'>No</label>
+          </form><br>
+          <div id='div_espacio_padre' style='display:none'>
+              <div class='div_izquierda'><b>¿Cu&aacute;l es el n&uacute;mero del(os) Espacio(s) que está(n) dentro del que se va a crear?</b></div>
+              <select class='form-control formulario' name='espacio_padre' id='espacio_padre' required></select><br>
+          </div>
         </div><br>
         <div class='div_izquierda'><b>Planos Edificio (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>

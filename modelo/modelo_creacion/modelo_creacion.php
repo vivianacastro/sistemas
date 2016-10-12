@@ -3023,7 +3023,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La sede ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La sede ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3053,7 +3053,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El campus ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El campus ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3085,7 +3085,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El edificio ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El edificio ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3117,7 +3117,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La cancha ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La cancha ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3149,7 +3149,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El corredor ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El corredor ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3183,7 +3183,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La cubierta ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La cubierta ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3217,7 +3217,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "Las gradas del piso ".$piso." del edificio ".$nombre_edificio." ya se encuentran registradas en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. Las gradas del piso ".$piso." del edificio ".$nombre_edificio." ya se encuentran registradas en el sistema";
                 return false;
             }
             else{
@@ -3249,7 +3249,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El parqueadero ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El parqueadero ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3281,7 +3281,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La piscina ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La piscina ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3313,7 +3313,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La plazoleta ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La plazoleta ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3345,7 +3345,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El sendero ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El sendero ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3377,7 +3377,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "La vía ya se encuentra registrada en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. La vía ya se encuentra registrada en el sistema";
                 return false;
             }
             else{
@@ -3412,7 +3412,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El espacio ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El espacio ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3442,7 +3442,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El tipo de material ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El tipo de material ya se encuentra registrado en el sistema";
                 return false;
             }
             else{
@@ -3472,7 +3472,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "El tipo de objeto ya se encuentra registrado en el sistema";
+                $GLOBALS['mensaje'] = "ERROR. El tipo de objeto ya se encuentra registrado en el sistema";
                 return false;
             }
             else{

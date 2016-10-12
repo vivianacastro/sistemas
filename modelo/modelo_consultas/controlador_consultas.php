@@ -500,6 +500,39 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar los edificios de un campus
+     * almacenados en el sistema.
+     */
+    public function consultar_espacios() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarEspacios($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'uso_espacio' => ucwords($valor['uso_espacio']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_edificio' => ucwords($valor['id_edificio']),
+                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
+                    'piso' => ucwords($valor['piso_edificio']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => ucwords($valor['lng']),
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar el número de pisos de un edificio
      * almacenado en el sistema.
      */

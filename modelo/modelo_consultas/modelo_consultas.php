@@ -1110,6 +1110,39 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar los espacios de un piso de un edificio que se han creado en el sistema.
+     * @return metadata con el resultado de la busqueda.
+     */
+    public function buscarEspacios($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT a.id,a.uso_espacio,b.nombre as nombre_sede,c.nombre as nombre_campus,d.id as id_edificio,d.nombre as nombre_edificio,a.piso_edificio,d.lat,d.lng
+                FROM espacio a JOIN sede b ON a.id_sede = b.id
+                              JOIN campus c ON a.id_campus = c.id
+                              JOIN edificio d ON a.id_edificio = d.id
+                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso_edificio = '".$piso."' ORDER BY a.id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Espacios del edificio presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar el número de pisos de un edificio que se han creado en el sistema.
      * @return metadata con el resultado de la busqueda.
      */

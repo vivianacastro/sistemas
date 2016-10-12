@@ -276,23 +276,23 @@ $(document).ready(function() {
                         $("#tipo_interruptor").val("");
                         $("#cantidad_interruptores").val("");
                         $("#informacion-adicional").hide();
-                        while (iluminacionCont < 0) {
+                        while (iluminacionCont > 0) {
                             eliminarComponente("iluminacion"+iluminacionCont);
                             iluminacionCont--;
                         }
-                        while (tomacorrientesCont < 0) {
+                        while (tomacorrientesCont > 0) {
                             eliminarComponente("suministro_energia"+tomacorrientesCont);
                             tomacorrientesCont--;
                         }
-                        while (puertasCont < 0) {
+                        while (puertasCont > 0) {
                             eliminarComponente("puerta"+tomacorrientesCont);
                             puertasCont--;
                         }
-                        while (ventanasCont < 0) {
+                        while (ventanasCont > 0) {
                             eliminarComponente("ventana"+tomacorrientesCont);
                             ventanasCont--;
                         }
-                        while (interruptoresCont < 0) {
+                        while (interruptoresCont > 0) {
                             eliminarComponente("interruptor"+tomacorrientesCont);
                             interruptoresCont--;
                         }
@@ -310,6 +310,38 @@ $(document).ready(function() {
                     }
                 }
             });
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que permite consultar los espacios existentes en un piso de un edificio.
+     * @param {array} informacion, información del tipo de material.
+     * @returns {data}
+     */
+    function buscarEspacios(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_espacios",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //mostrarMensaje(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
         }
         catch(ex) {
             console.log(ex);
@@ -971,6 +1003,43 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del radio button pasamanos
      * y se actualiza el selector de pisos.
      */
+    $("#pisos").change(function (e) {
+        var nombreSede = $("#nombre_sede").val();
+        var nombreCampus = $("#nombre_campus").val();
+        var nombreEdificio = $("#nombre_edificio").val();
+        var piso = $("#pisos").val();
+        if (validarCadena(nombreSede) && validarCadena(nombreCampus) && validarCadena(nombreEdificio) && validarCadena(piso)) {
+            var info = {};
+            info["nombre_sede"] = nombreSede;
+            info["nombre_campus"] = nombreCampus;
+            info["nombre_edificio"] = nombreEdificio;
+            info["piso"] = piso;
+            var data = buscarEspacios(info);
+            console.log(data);
+            if (data.mensaje != null) {
+                $("#espacio_padre").empty();
+                var row = $("<option value=''/>");
+                row.text("--Seleccionar--");
+                row.appendTo("#espacio_padre");
+                $.each(data, function(index, record) {
+                    if($.isNumeric(index)) {
+                        aux = record.id;
+                        row = $("<option value='" + record.id + "'/>");
+                        row.text(aux);
+                        row.appendTo("#espacio_padre");
+                    }
+                });
+                $("#divTieneEspacioPadre").show();
+            }else{
+                $("#divTieneEspacioPadre").hide();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del radio button pasamanos
+     * y se actualiza el selector de pisos.
+     */
     $("#form_pasamanos").change(function (e) {
         var pasamanos = $('input[name="pasamanos"]:checked').val();
         if (pasamanos == "true") {
@@ -1132,7 +1201,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }
                     }else{
@@ -1286,7 +1355,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_edificio").focus();
@@ -1427,7 +1496,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_cancha").focus();
@@ -1624,22 +1693,22 @@ $(document).ready(function() {
                             $("#cantidad_tomacorrientes").val("");
                             $("#tipo_interruptor").val("");
                             $("#cantidad_interruptores").val("");
-                            while (iluminacionCont < 0) {
+                            while (iluminacionCont > 0) {
                                 eliminarComponente("iluminacion"+iluminacionCont);
                                 iluminacionCont--;
                             }
-                            while (tomacorrientesCont < 0) {
+                            while (tomacorrientesCont > 0) {
                                 eliminarComponente("suministro_energia"+tomacorrientesCont);
                                 tomacorrientesCont--;
                             }
-                            while (interruptoresCont < 0) {
+                            while (interruptoresCont > 0) {
                                 eliminarComponente("interruptor"+tomacorrientesCont);
                                 interruptoresCont--;
                             }
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_corredor").focus();
@@ -1693,6 +1762,11 @@ $(document).ready(function() {
                     alert("ERROR. Ingrese el piso donde se encuentra la cubierta");
                     $("#piso").focus();
                 }else{
+                    if (piso == 'sotano') {
+                        piso = '0';
+                    }else if (piso == 'terraza') {
+                        piso = '-1';
+                    }
                     var informacion = {};
                     var arregloFotos = new FormData();
                     var arregloPlanos = new FormData();
@@ -1782,8 +1856,6 @@ $(document).ready(function() {
                             $("#largo").val("");
                             planos.value = "";
                             fotos.value = "";
-                            initMap();
-                            coordenadas.length = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#nombre_edificio").focus();
@@ -1842,6 +1914,11 @@ $(document).ready(function() {
                   alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
                   $("#pisos").focus();
               }else{
+                  if (pisoInicio == 'sotano') {
+                      pisoInicio = '0';
+                  }else if (pisoInicio == 'terraza') {
+                      pisoInicio = '-1';
+                  }
                   var informacion = {};
                   var arregloFotos = new FormData();
                   var arregloPlanos = new FormData();
@@ -1939,18 +2016,20 @@ $(document).ready(function() {
                           $("#pisos").empty();
                           $('input[name=pasamanos]').attr('checked',false);
                           $('input[name=ventanas]').attr('checked',false);
+                          $("#divPasamanos").hide();
+                          $("#divVentanas").hide();
                           $("#tipo_ventana").val("");
                           $("#cantidad_ventanas").val("");
                           $("#material_ventana").val("");
                           $("#ancho_ventana").val("");
                           $("#alto_ventana").val("");
-                          $('#divVentanas').hide();
-                          while (ventanasCont < 0) {
+                          while (ventanasCont > 0) {
                               eliminarComponente("ventana"+ventanasCont);
                               ventanasCont--;
                           }
                           planos.value = "";
                           fotos.value = "";
+                          window.scrollTo(0,0);
                       }else{
                           $("#nombre_edificio").focus();
                           $("#pisos").focus();
@@ -2094,7 +2173,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_parqueadero").focus();
@@ -2232,7 +2311,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_piscina").focus();
@@ -2376,14 +2455,14 @@ $(document).ready(function() {
                             $("#nombre").val("");
                             $("#tipo_iluminacion").val();
                             $("#cantidad_iluminacion").val();
-                            while (iluminacionCont < 0) {
+                            while (iluminacionCont > 0) {
                                 eliminarComponente("iluminacion"+iluminacionCont);
                                 iluminacionCont--;
                             }
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_plazoleta").focus();
@@ -2533,7 +2612,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_sendero").focus();
@@ -2668,7 +2747,7 @@ $(document).ready(function() {
                             planos.value = "";
                             fotos.value = "";
                             initMap();
-                            coordenadas.length = {};
+                            coordenadas = {};
                             window.scrollTo(0,0);
                         }else{
                             $("#id_via").focus();

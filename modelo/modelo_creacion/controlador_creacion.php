@@ -416,9 +416,9 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso']);
+            $verificar = $m->verificarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['pisos']);
             if($verificar){
-                $m->guardarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$info['tipo_cubierta'],$info['material_cubierta'],$info['ancho_cubierta'],$info['largo_cubierta'],$info['lat'],$info['lng']);
+                $m->guardarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['pisos'],$info['tipo_cubierta'],$info['material_cubierta'],$info['ancho'],$info['largo'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
