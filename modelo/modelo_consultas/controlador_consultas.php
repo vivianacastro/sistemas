@@ -334,6 +334,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_campus' => ucwords($valor['nombre']),
+                    'id_sede' => ucwords($valor['id_sede']),
                     'nombre_sede' => ucwords($valor['nombre_sede']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],

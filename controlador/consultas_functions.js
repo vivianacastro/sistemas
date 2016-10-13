@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var mapaConsulta, mapaModificacion, campusSeleccionado;
+  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado;
   var marcadores = [];
   var URLactual = window.location;
   var infoWindowActiva;
@@ -504,7 +504,8 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       title: record.nombre_campus,
-                      id: record.id
+                      id: record.id,
+                      id_sede: record.id_sede
                   });
                   var contentString = '<div id="content">'+
                       '<div id="siteNotice">'+
@@ -549,6 +550,7 @@ $(document).ready(function() {
                   limites.extend(loc);
                   mapaConsulta.fitBounds(limites);
                   mapaConsulta.panToBounds(limites);*/
+                  sedeSeleccionada = this.id_sede;
                   campusSeleccionado = this.id;
                   mapaConsulta.setZoom(16);
                   mapaConsulta.setCenter(this.getPosition());
@@ -820,12 +822,12 @@ $(document).ready(function() {
         marcadores[i].setMap(null);
     }
     var info = {};
+    info["nombre_sede"] = sedeSeleccionada;
     info["nombre_campus"] = campusSeleccionado;
     var data = buscarEdificios(info);
-    console.log(data);
     var bounds  = new google.maps.LatLngBounds();
     if (data.mensaje == null) {
-        alert("El campus seleccionado no tiene edificios creados en el sistema o con su ubicación establecida");
+        alert("El campus seleccionado no tiene edificios creados en el sistema");
         rellenarMapa();
     }else{
         $.each(data, function(index, record) {
@@ -833,7 +835,7 @@ $(document).ready(function() {
                 var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
-                    title: record.nombre_campus,
+                    title: record.id + "-" + record.nombre_edificio,
                     id: record.id
                 });
                 var contentString = '<div id="content">'+

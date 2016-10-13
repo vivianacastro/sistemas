@@ -323,16 +323,20 @@ html, body {
 }
 
 #top{
-	background-color: white;
-	color: black;
+	 background-color: white;
+	  color: black;
 }
 
 #top .social a{
-	color: black;
+	 color: black;
 }
 
 #top .social a:hover{
-	color: red;
+	 color: red;
+}
+
+#ver_campus, #ver_edificios, #ver_espacios{
+    font-size: small;
 }
 
 @media screen and (min-width:1200px) {

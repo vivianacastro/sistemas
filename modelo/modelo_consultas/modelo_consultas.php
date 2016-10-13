@@ -57,7 +57,7 @@ class modelo_consultas
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         if (strcmp($nombre_sede,"") == 0) {
-            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede, b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
         }else{
             $sql = "SELECT * FROM campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
         }
@@ -1264,7 +1264,9 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
-                FROM edificio a JOIN campus b ON a.id_campus = b.id JOIN sede c ON a.id_sede = c.id LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
+                FROM edificio a JOIN campus b ON a.id_campus = b.id
+                                JOIN sede c ON a.id_sede = c.id
+                                LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
