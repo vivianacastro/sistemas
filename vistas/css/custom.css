@@ -353,13 +353,13 @@ html, body {
 		}
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:767px) {
 		.img_boton{
         width: 35%;
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
 		.btn-formulario{
 		    text-align: center;
 		    padding: 2% 2% 2%;
@@ -386,6 +386,10 @@ html, body {
 				width: 100%;
 		}
 
+    #logoUnivalle{
+        display: none;
+    }
+
 		#carrusel_inicio_sesion{
 				display: none;
 		}
@@ -395,6 +399,6 @@ html, body {
 
 }
 
-@media screen and (max-width:992px) and (min-width: 768px) {
+@media screen and (max-width:992px) and (min-width: 767px) {
 
 }
