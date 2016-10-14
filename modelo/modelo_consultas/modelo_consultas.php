@@ -57,7 +57,7 @@ class modelo_consultas
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         if (strcmp($nombre_sede,"") == 0) {
-            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede, b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
         }else{
             $sql = "SELECT * FROM campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
         }
@@ -91,7 +91,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM cancha a JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -127,7 +127,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM corredor a JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -167,7 +167,7 @@ class modelo_consultas
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0 AND strcmp($nombre_edificio,"") == 0 AND strcmp($piso,"") == 0) {
-            $sql = "SELECT a.piso,b.nombre as nombre_sede,c.nombre as nombre_campus,a.id_edificio as id_edificio,d.nombre as nombre_edificio
+            $sql = "SELECT a.piso,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,a.id_edificio as id_edificio,d.nombre as nombre_edificio
                     FROM cubiertas_piso a JOIN sede b ON a.id_sede = b.id
                                           JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
                                           JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id ORDER BY a.piso;";
@@ -208,7 +208,7 @@ class modelo_consultas
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.piso_inicio,b.nombre as nombre_sede,c.nombre as nombre_campus,d.nombre as nombre_edificio,d.id as id_edificio
+            $sql = "SELECT a.piso_inicio,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,d.nombre as nombre_edificio,d.id as id_edificio
                     FROM gradas a JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
                                   JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id ORDER BY a.piso_inicio;";
@@ -245,7 +245,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM parqueadero a  JOIN sede b ON a.id_sede = b.id
                                         JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -281,7 +281,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM piscina a  JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -317,7 +317,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM plazoleta a  JOIN sede b ON a.id_sede = b.id
                                       JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -353,7 +353,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM sendero a  JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -389,7 +389,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.nombre as nombre_sede,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM via a  JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
         }else{
@@ -1263,11 +1263,19 @@ class modelo_consultas
     public function buscarEdificios($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
-                FROM edificio a JOIN campus b ON a.id_campus = b.id
-                                JOIN sede c ON a.id_sede = c.id
-                                LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
-                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
+        if (strcmp($nombre_sede,"") == 0) {
+            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
+                    FROM edificio a JOIN campus b ON a.id_campus = b.id
+                                    JOIN sede c ON a.id_sede = c.id
+                                    LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
+                    WHERE a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
+        }else{
+            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
+                    FROM edificio a JOIN campus b ON a.id_campus = b.id
+                                    JOIN sede c ON a.id_sede = c.id
+                                    LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";
@@ -1299,7 +1307,7 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT a.id,a.uso_espacio,b.nombre as nombre_sede,c.nombre as nombre_campus,d.id as id_edificio,d.nombre as nombre_edificio,a.piso_edificio,d.lat,d.lng
+        $sql = "SELECT a.id,a.uso_espacio,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,d.id as id_edificio,d.nombre as nombre_edificio,a.piso_edificio,d.lat,d.lng
                 FROM espacio a JOIN sede b ON a.id_sede = b.id
                               JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
                               JOIN edificio d ON a.id_edificio = d.id

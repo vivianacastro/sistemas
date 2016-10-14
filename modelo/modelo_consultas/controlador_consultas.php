@@ -362,7 +362,264 @@ class controlador_consultas
             $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
                     'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_corredores() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCorredores($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_cubiertas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCubiertas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_gradas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_parqueaderos() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_piscinas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_plazoletas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_senderos() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                    );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las canchas
+     * almacenadas en el sistema.
+     */
+    public function consultar_vias() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
                     'uso' => ucwords($valor['uso']),
@@ -394,7 +651,9 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
+                    'id_sede' => ucwords($valor['id_sede']),
                     'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -517,7 +776,9 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'uso_espacio' => ucwords($valor['uso_espacio']),
+                    'id_sede' => ucwords($valor['id_sede']),
                     'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id_edificio' => ucwords($valor['id_edificio']),
                     'nombre_edificio' => ucwords($valor['nombre_edificio']),
