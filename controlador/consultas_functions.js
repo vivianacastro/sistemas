@@ -788,19 +788,19 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-4">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-4">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
-                      '</div>'+
-                      '<div class="col-xs-4">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-6">'+
+                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
+                        '<div class="col-xs-6">'+
+                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -836,16 +836,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Cancha:</b> '+record.id+'<b>Uso:</b> '+record.uso+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_cancha" name="ver_cancha" id="ver_cancha" value="Ver Informaci&oacute;n Cancha" title="Ver la informaci&oacute;n de la cancha"/>'+
-                      '</div>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_cancha" name="ver_cancha" id="ver_cancha" value="Ver Informaci&oacute;n Cancha" title="Ver la informaci&oacute;n de la cancha"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -881,16 +881,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Corredor:</b> '+record.id+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_corredor" name="ver_corredor" id="ver_corredor" value="Ver Informaci&oacute;n Corredor" title="Ver la informaci&oacute;n del corredor"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_corredor" name="ver_corredor" id="ver_corredor" value="Ver Informaci&oacute;n Corredor" title="Ver la informaci&oacute;n del corredor"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -926,16 +926,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>parqueadero:</b> '+record.id+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_parqueadero" name="ver_parqueadero" id="ver_parqueadero" value="Ver Informaci&oacute;n Parqueadero" title="Ver la informaci&oacute;n del parqueadero"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_parqueadero" name="ver_parqueadero" id="ver_parqueadero" value="Ver Informaci&oacute;n Parqueadero" title="Ver la informaci&oacute;n del parqueadero"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -971,16 +971,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Piscina:</b> '+record.id+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_piscina" name="ver_piscina" id="ver_piscina" value="Ver Informaci&oacute;n Piscina" title="Ver la informaci&oacute;nd de la piscina"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_piscina" name="ver_piscina" id="ver_piscina" value="Ver Informaci&oacute;n Piscina" title="Ver la informaci&oacute;nd de la piscina"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -1016,16 +1016,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Plazoleta:</b> '+record.id+'-'+record.nombre+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_plazoleta" name="ver_plazoleta" id="ver_plazoleta" value="Ver Informaci&oacute;n Plazoleta" title="Ver la informaci&oacute;n de la plazoleta"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_plazoleta" name="ver_plazoleta" id="ver_plazoleta" value="Ver Informaci&oacute;n Plazoleta" title="Ver la informaci&oacute;n de la plazoleta"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -1061,16 +1061,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Sendero:</b> '+record.id+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero"/>'+
+                      '<div class="col-xs-12">'+
+                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero"/>'+
+                      '</div><br>'+
+                      '<div class="col-xs-12">'+
+                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
                       '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
@@ -1106,16 +1106,16 @@ $(document).ready(function() {
                     '<div id="bodyContent">'+
                       '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>V&iacute;a:</b> '+record.id+'</p>'+
                       '<div class="form_button">'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '<div class="col-xs-6">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_via" name="ver_via" id="ver_via" value="Ver Informaci&oacute;n V&iacute;a" title="Ver la informaci&oacute;n de la v&iacute;a"/>'+
-                      '</div>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_via" name="ver_via" id="ver_via" value="Ver Informaci&oacute;n V&iacute;a" title="Ver la informaci&oacute;n de la v&iacute;a"/>'+
+                        '</div><br>'+
+                        '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                        '</div>'+
                       '</div>'+
                     '</div>'+
                     '</div>';
-                infoWindow = new google.maps.InfoWindow({
+                var infoWindow = new google.maps.InfoWindow({
                   content: contentString
                 });
                 marker.addListener('click', function() {
