@@ -127,7 +127,7 @@ $map = array(
         'consultar_canchas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_canchas'),
         'consultar_corredores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_corredores'),
         'consultar_cubiertas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_cubiertas'),
-        'consultar_gradas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_gradas'),
+        'consultar_todas_gradas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_todas_gradas'),
         'consultar_parqueaderos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_parqueaderos'),
         'consultar_piscinas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_piscinas'),
         'consultar_plazoletas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_plazoletas'),

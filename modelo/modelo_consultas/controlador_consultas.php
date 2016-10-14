@@ -293,8 +293,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las sedes
-     * almacenadas en el sistema.
+     * Función que permite consultar las sedes almacenadas en el sistema.
      */
     public function consultar_sedes() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -308,7 +307,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_sede' => ucwords($valor['nombre']),
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -318,8 +317,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar los campus
-     * almacenados en el sistema.
+     * Función que permite consultar los campus almacenados en el sistema.
      */
     public function consultar_todos_campus() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -338,7 +336,7 @@ class controlador_consultas
                     'nombre_sede' => ucwords($valor['nombre_sede']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -348,8 +346,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las canchas almacenadas en el sistema.
      */
     public function consultar_canchas() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -370,7 +367,7 @@ class controlador_consultas
                     'uso' => ucwords($valor['uso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -380,8 +377,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar los corredores almacenados en el sistema.
      */
     public function consultar_corredores() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -401,7 +397,7 @@ class controlador_consultas
                     'id' => ucwords($valor['id']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -411,8 +407,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las cubiertas almacenadas en el sistema.
      */
     public function consultar_cubiertas() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -429,11 +424,12 @@ class controlador_consultas
                     'nombre_sede' => ucwords($valor['nombre_sede']),
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
+                    'id_edificio' => ucwords($valor['id_edificio']),
+                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
+                    'piso' => ucwords($valor['piso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -443,10 +439,9 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las gradas almacenadas en el sistema.
      */
-    public function consultar_gradas() {
+    public function consultar_todas_gradas() {
         $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -461,11 +456,12 @@ class controlador_consultas
                     'nombre_sede' => ucwords($valor['nombre_sede']),
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
+                    'id_edificio' => ucwords($valor['id_edificio']),
+                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
+                    'piso_inicio' => ucwords($valor['piso_inicio']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -475,8 +471,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar los parqueaderos almacenados en el sistema.
      */
     public function consultar_parqueaderos() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -486,7 +481,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarParqueaderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => ucwords($valor['id_sede']),
@@ -494,10 +489,9 @@ class controlador_consultas
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -507,8 +501,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las piscinas almacenadas en el sistema.
      */
     public function consultar_piscinas() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -518,7 +511,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarPiscinas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => ucwords($valor['id_sede']),
@@ -526,10 +519,9 @@ class controlador_consultas
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -539,8 +531,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las plazoletas almacenadas en el sistema.
      */
     public function consultar_plazoletas() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -550,7 +541,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarPlazoletas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => ucwords($valor['id_sede']),
@@ -558,10 +549,10 @@ class controlador_consultas
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
+                    'nombre' => ucwords($valor['nombre']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -571,8 +562,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar los senderos almacenados en el sistema.
      */
     public function consultar_senderos() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -582,7 +572,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarSenderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => ucwords($valor['id_sede']),
@@ -590,10 +580,9 @@ class controlador_consultas
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -603,8 +592,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar las canchas
-     * almacenadas en el sistema.
+     * Función que permite consultar las vías almacenadas en el sistema.
      */
     public function consultar_vias() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -614,7 +602,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarVias($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => ucwords($valor['id_sede']),
@@ -622,97 +610,9 @@ class controlador_consultas
                     'id_campus' => ucwords($valor['id_campus']),
                     'nombre_campus' => ucwords($valor['nombre_campus']),
                     'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
-                    );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar la información de un campus
-     * almacenado en el sistema.
-     */
-    public function consultar_informacion_campus() {
-        $GLOBALSGLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'id_sede' => $valor['id_sede'],
-                    'id_campus' => $valor['id_campus'],
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'lat' => $valor['lat'],
-                    'lng' => $valor['lng'],
-                    );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar los campus
-     * almacenados en el sistema.
-     */
-    public function consultar_archivos_campus() {
-        $GLOBALSGLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"]);
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'id_sede' => $valor['id_sede'],
-                    'id_campus' => $valor['id_campus'],
-                    'nombre' => $valor['nombre'],
-                    'tipo' => $valor['tipo'],
-                    );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar la ubicación de un
-     * campus.
-     */
-    public function ubicacion_campus() {
-        $GLOBALSGLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $info = json_decode($_POST['jObject'], true);
-            $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'nombre_campus' => ucwords($valor['nombre']),
-                    'lat' => $valor['lat'],
-                    'lng' => $valor['lng'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -745,12 +645,9 @@ class controlador_consultas
                     'pisos' => ucwords($valor['numero_pisos']),
                     'sotano' => ucwords($valor['sotano']),
                     'terraza' => ucwords($valor['terraza']),
-                    'material_fachada' => ucwords($valor['material_fachada']),
-                    'ancho_fachada' => ucwords($valor['ancho_fachada']),
-                    'alto_fachada' => ucwords($valor['alto_fachada']),
                     'lat' => ucwords($valor['lat']),
                     'lng' => ucwords($valor['lng']),
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -760,7 +657,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar los edificios de un campus
+     * Función que permite consultar los espacios de un edificio
      * almacenados en el sistema.
      */
     public function consultar_espacios() {
@@ -783,9 +680,18 @@ class controlador_consultas
                     'id_edificio' => ucwords($valor['id_edificio']),
                     'nombre_edificio' => ucwords($valor['nombre_edificio']),
                     'piso' => ucwords($valor['piso_edificio']),
+                    'ancho_pared' => ucwords($valor['ancho_pared']),
+                    'alto_pared' => ucwords($valor['alto_pared']),
+                    'material_pared' => ucwords($valor['material_pared']),
+                    'ancho_piso' => ucwords($valor['ancho_piso']),
+                    'largo_piso' => ucwords($valor['largo_piso']),
+                    'material_piso' => ucwords($valor['material_piso']),
+                    'ancho_techo' => ucwords($valor['ancho_techo']),
+                    'largo_techo' => ucwords($valor['largo_techo']),
+                    'material_techo' => ucwords($valor['material_techo']),
                     'lat' => ucwords($valor['lat']),
                     'lng' => ucwords($valor['lng']),
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -813,7 +719,7 @@ class controlador_consultas
                     'numero_pisos' => $valor['numero_pisos'],
                     'terraza' => $valor['terraza'],
                     'sotano' => $valor['sotano'],
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -838,7 +744,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'uso_espacio' => ucwords($valor['uso']),
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -864,7 +770,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre_material' => ucwords($valor['material']),
-                    );
+                );
                 array_push($result, $arrayAux);
             }
         }
@@ -890,7 +796,728 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'tipo_objeto' => ucwords($valor['tipo']),
-                    );
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un campus.
+     */
+    public function ubicacion_campus() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_campus' => ucwords($valor['id']),
+                    'nombre_campus' => ucwords($valor['nombre']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de una cancha.
+     */
+    public function ubicacion_cancha() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'uso' => ucwords($valor['uso']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un corredor.
+     */
+    public function ubicacion_corredor() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un parqueadero.
+     */
+    public function ubicacion_parqueadero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionParqueadero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de una piscina.
+     */
+    public function ubicacion_piscina() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionPiscina($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de una plazoleta.
+     */
+    public function ubicacion_plazoleta() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'nombre' => ucwords($valor['nombre']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un sendero.
+     */
+    public function ubicacion_sendero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionSendero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de una vía.
+     */
+    public function ubicacion_via() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionVia($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la ubicación de un edificio.
+     */
+    public function ubicacion_edificio() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->ubicacionEdificio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un campus
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_sede() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionSede($info["nombre_sede"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un campus
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_campus() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un campus
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_cancha() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => $valor['nombre_campus'],
+                    'uso' => $valor['uso'],
+                    'material_piso' => ucwords($valor['material_piso']),
+                    'tipo_pintura' => ucwords($valor['tipo_pintura']),
+                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un corredor
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_corredor() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCorredor($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => ucwords($valor['id']),
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => $valor['nombre_campus'],
+                    'ancho_pared' => $valor['ancho_pared'],
+                    'alto_pared' => ucwords($valor['alto_pared']),
+                    'material_pared' => ucwords($valor['material_pared']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de una cubierta
+     * almacenadas en el sistema.
+     */
+    public function consultar_informacion_cubierta() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCubierta($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'piso' => ucwords($valor['piso']),
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => $valor['nombre_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
+                    'largo' => ucwords($valor['largo']),
+                    'ancho' => ucwords($valor['ancho']),
+                    'material_cubierta' => ucwords($valor['material_cubierta']),
+                    'tipo_cubierta' => $valor['tipo_cubierta'],
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+    * Función que permite consultar la información de unas gradas
+    * almacenadas en el sistema.
+     */
+    public function consultar_informacion_gradas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_edificio' => $valor['id_edificio'],
+                    'nombre_edificio' => $valor['nombre_edificio'],
+                    'piso_inicio' => ucwords($valor['piso_inicio']),
+                    'pasamanos' => ucwords($valor['pasamanos']),
+                    'material_pasamanos' => ucwords($valor['material_pasamanos']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un parqueadero
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_parqueadero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionParqueadero($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => $valor['id'],
+                    'largo' => $valor['largo'],
+                    'ancho' => ucwords($valor['ancho']),
+                    'capacidad' => ucwords($valor['capacidad']),
+                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
+                    'material_piso' => ucwords($valor['material_piso']),
+                    'tipo_pintura_demarcacion' => $valor['tipo_pintura_demarcacion'],
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de una piscina
+     * almacenada en el sistema.
+     */
+    public function consultar_informacion_piscina() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionPiscina($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => $valor['id'],
+                    'cantidad_punto_hidraulico' => $valor['cantidad_punto_hidraulico'],
+                    'largo' => ucwords($valor['largo']),
+                    'ancho' => ucwords($valor['ancho']),
+                    'alto' => ucwords($valor['alto']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de una plazoleta
+     * almacenada en el sistema.
+     */
+    public function consultar_informacion_plazoleta() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionPlazoleta($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => $valor['id'],
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un sendero
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_sendero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionSendero($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => $valor['id'],
+                    'longitud' => $valor['longitud'],
+                    'ancho' => ucwords($valor['ancho']),
+                    'material_piso' => ucwords($valor['material_piso']),
+                    'tipo_iluminacion' => ucwords($valor['tipo_iluminacion']),
+                    'cantidad' => ucwords($valor['cantidad']),
+                    'codigo_poste' => $valor['codigo_poste'],
+                    'material_cubierta' => $valor['material_cubierta'],
+                    'ancho_cubierta' => ucwords($valor['ancho_cubierta']),
+                    'largo_cubierta' => ucwords($valor['largo_cubierta']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => ucwords($valor['lng']),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de una vía
+     * almacenada en el sistema.
+     */
+    public function consultar_informacion_via() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionVia($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => $valor['idt'],
+                    'material_piso' => $valor['material_pisog'],
+                    'tipo_pintura' => ucwords($valor['tipo_pintura']),
+                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
+                    'lat' => $valor['lat'],
+                    'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un edificio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_edificio() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionEdificio($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id' => ucwords($valor['id']),
+                    'nombre' => ucwords($valor['nombre']),
+                    'numero_pisos' => ucwords($valor['numero_pisos']),
+                    'sotano' => ucwords($valor['sotano']),
+                    'terraza' => ucwords($valor['terraza']),
+                    'material_fachada' => ucwords($valor['material_fachada']),
+                    'ancho_fachada' => ucwords($valor['ancho_fachada']),
+                    'alto_fachada' => ucwords($valor['alto_fachada']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => ucwords($valor['lng']),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_espacio() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'uso_espacio' => ucwords($valor['uso_espacio']),
+                    'id_sede' => ucwords($valor['id_sede']),
+                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_campus' => ucwords($valor['id_campus']),
+                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_edificio' => ucwords($valor['id_edificio']),
+                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
+                    'piso' => ucwords($valor['piso_edificio']),
+                    'ancho_pared' => ucwords($valor['ancho_pared']),
+                    'alto_pared' => ucwords($valor['alto_pared']),
+                    'material_pared' => ucwords($valor['material_pared']),
+                    'ancho_piso' => ucwords($valor['ancho_piso']),
+                    'largo_piso' => ucwords($valor['largo_piso']),
+                    'material_piso' => ucwords($valor['material_piso']),
+                    'ancho_techo' => ucwords($valor['ancho_techo']),
+                    'largo_techo' => ucwords($valor['largo_techo']),
+                    'material_techo' => ucwords($valor['material_techo']),
+                    'lat' => ucwords($valor['lat']),
+                    'lng' => ucwords($valor['lng']),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los campus
+     * almacenados en el sistema.
+     */
+    public function consultar_archivos_campus() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
                 array_push($result, $arrayAux);
             }
         }

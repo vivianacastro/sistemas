@@ -93,7 +93,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM cancha a JOIN sede b ON a.id_sede = b.id
-                                  JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                  JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM cancha WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -129,7 +129,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM corredor a JOIN sede b ON a.id_sede = b.id
-                                    JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                    JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -169,7 +169,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0 AND strcmp($nombre_edificio,"") == 0 AND strcmp($piso,"") == 0) {
             $sql = "SELECT a.piso,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,a.id_edificio as id_edificio,d.nombre as nombre_edificio
                     FROM cubiertas_piso a JOIN sede b ON a.id_sede = b.id
-                                          JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                          JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                           JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id ORDER BY a.piso;";
         }else{
             $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."' ORDER BY piso;";
@@ -210,7 +210,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.piso_inicio,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,d.nombre as nombre_edificio,d.id as id_edificio
                     FROM gradas a JOIN sede b ON a.id_sede = b.id
-                                  JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                  JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                   JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id ORDER BY a.piso_inicio;";
         }else{
             $sql = "SELECT * FROM corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_inicio = '".$piso."' ORDER BY piso_inicio;";
@@ -247,7 +247,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM parqueadero a  JOIN sede b ON a.id_sede = b.id
-                                        JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                        JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM parqueadero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -283,7 +283,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM piscina a  JOIN sede b ON a.id_sede = b.id
-                                    JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                    JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM piscina WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -317,9 +317,9 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
-            $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM plazoleta a  JOIN sede b ON a.id_sede = b.id
-                                      JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                      JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM plazoleta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -355,7 +355,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM sendero a  JOIN sede b ON a.id_sede = b.id
-                                    JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                    JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM sendero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -391,7 +391,7 @@ class modelo_consultas
         if (strcmp($nombre_sede,"") == 0 AND strcmp($nombre_campus,"") == 0) {
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM via a  JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede ORDER BY a.id;";
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
             $sql = "SELECT * FROM via WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
@@ -409,6 +409,81 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Vías del campus seleccionado presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar los edificios que se han creado en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el edificio.
+     * @param string $nombre_campus, id del campus donde está el edificio.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarEdificios($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        if (strcmp($nombre_sede,"") == 0) {
+            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng
+                    FROM edificio a JOIN campus b ON a.id_campus = b.id
+                                    JOIN sede c ON a.id_sede = c.id
+                    WHERE a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
+        }else{
+            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng
+                    FROM edificio a JOIN campus b ON a.id_campus = b.id
+                                    JOIN sede c ON a.id_sede = c.id
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Edificios del campus presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar los espacios de un piso de un edificio que se han creado en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenecen los espacios.
+     * @param string $nombre_campus, id del campus donde están los espacios..
+     * @param string $nombre_edificio, id del edificio donde están los espacios a buscar.
+     * @param string $piso, piso del edificio donde están los espacios.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarEspacios($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT a.id,a.uso_espacio,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,d.id as id_edificio,d.nombre as nombre_edificio,a.piso_edificio,d.lat,d.lng
+                FROM espacio a  JOIN sede b ON a.id_sede = b.id
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
+                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso_edificio = '".$piso."' ORDER BY a.id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Espacios del edificio presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
             }
         }
@@ -484,9 +559,9 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT a.id, b.nombre as nombre_sede, c.nombre as nombre_campus, a.uso, d.material as material_piso, e.tipo as tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
+        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.uso, d.material as material_piso, e.tipo as tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
                 FROM cancha a JOIN sede b ON a.id_sede = b.id
-                              JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                              JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                               LEFT JOIN material_piso d ON a.id_material_piso = d.id
                               LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
@@ -519,11 +594,11 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT a.id, b.nombre as nombre_sede, c.nombre as nombre_campus, a.ancho_pared, a.alto_pared, d.material as material_pared, a.lat, a.lng
+        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.ancho_pared, a.alto_pared, d.material as material_pared, a.lat, a.lng
                         a.ancho_piso, a.largo_piso, e.material as material_piso,
                         a.ancho_techo, a.largo_techo, f.material as material_techo, a.tomacorriente, g.tipo as tipo_suministro_energia, a.cantidad, a.lat, a.lng
                 FROM corredor a JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                 LEFT JOIN material_pared d ON a.id_material_pared = d.id
                                 LEFT JOIN material_piso e ON a.id_material_piso = e.id
                                 LEFT JOIN material_techo f ON a.id_material_techo = f.id
@@ -560,9 +635,9 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT a.piso, b.nombre as nombre_sede, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.largo, a.ancho, e.material as material_cubierta, f.tipo as tipo_cubierta, d.lat, d.lng
+        $sql = "SELECT a.piso, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.largo, a.ancho, e.material as material_cubierta, f.tipo as tipo_cubierta, d.lat, d.lng
                 FROM cubiertas_piso a JOIN sede b ON a.id_sede = b.id
-                                      JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                      JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                       JOIN edificio d ON a.id_edificio = d.id
                                       LEFT JOIN material_cubierta e ON a.id_material_cubierta = e.id
                                       LEFT JOIN tipo_cubierta f ON a.id_tipo_cubierta = f.id
@@ -598,9 +673,9 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, e.material as material_pasamanos, d.lat, d.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.piso_inicio, a.pasamanos, e.material as material_pasamanos, d.lat, d.lng
                 FROM gradas a JOIN sede b ON a.id_sede = b.id
-                              JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                              JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                               JOIN edificio d ON a.id_edificio = d.id
                               LEFT JOIN material_pasamanos e ON a.id_material_pasamanos = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso_inicio = '".$piso."' ORDER BY a.piso_inicio;";
@@ -635,7 +710,7 @@ class modelo_consultas
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.largo, a.ancho, a.capacidad, a.longitud_demarcacion, d.material as material_piso, e.tipo as tipo_pintura_demarcacion, a.lat, a.lng
                 FROM parqueadero a  JOIN sede b ON a.id_sede = b.id
-                                    JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                    JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                     LEFT JOIN material_piso d ON a.id_material_piso = d.id
                                     LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
@@ -670,7 +745,7 @@ class modelo_consultas
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.cantidad_punto_hidraulico, a.largo, a.ancho, a.alto, a.lat, a.lng
                 FROM piscina a  JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -703,7 +778,7 @@ class modelo_consultas
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.lat, a.lng
                 FROM plazoleta a  JOIN sede b ON a.id_sede = b.id
-                                  JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                  JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -736,7 +811,7 @@ class modelo_consultas
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.longitud, a.ancho, d.material as material_piso, e.tipo as tipo_iluminacion, a.cantidad, a.codigo_poste, f.material as material_cubierta, a.ancho_cubierta, a.largo_cubierta, a.lat, a.lng
                 FROM sendero a  JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                 LEFT JOIN material_piso d ON a.id_material_piso = d.id
                                 LEFT JOIN tipo_iluminacion e ON a.id_tipo_iluminacion = e.id
                                 LEFT JOIN material_cubierta f ON a.id_material_cubierta = f.id
@@ -772,7 +847,7 @@ class modelo_consultas
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, d.material as material_piso, e.tipo as tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
                 FROM via a  JOIN sede b ON a.id_sede = b.id
-                            JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                            JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                             LEFT JOIN material_piso d ON a.id_tipo_material = d.id
                             LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
@@ -805,9 +880,9 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.numero_pisos, a.sotano, a.terraza, d.material as material_fachada, a.ancho_fachada, a.alto_fachada, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.nombre, a.numero_pisos, a.sotano, a.terraza, d.material as material_fachada, a.ancho_fachada, a.alto_fachada, a.lat, a.lng
                 FROM edificio a JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                 LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -823,46 +898,6 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del edificio seleccionado";
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Función que permite buscar la información de un espacio en el sistema.
-     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
-     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
-     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
-     * @param string $id, id del espacio a buscar.
-     * @return metadata con el resultado de la búsqueda.
-     */
-    public function buscarInformacionEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
-        $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
-        $id = htmlspecialchars(trim($id));
-        $sql = "SELECT DISTINCT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, e.uso, a.ancho_pared, a.alto_pared, f.material as material_pared, a.ancho_piso, a.largo_piso, g.material as material_piso, a.ancho_techo, a.largo_techo, h.material as material_techo, a.espacio_padre, d.lat, d.lng
-                FROM espacio a  JOIN sede b ON a.id_sede = b.id
-                                JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
-                                JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
-                                JOIN uso_espacio e ON a.uso_espacio = e.id
-                                LEFT JOIN material_pared f ON a.id_material_pared = f.id
-                                LEFT JOIN material_piso g ON a.id_material_piso = g.id
-                                LEFT JOIN material_techo h ON a.id_material_techo = h.id
-                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.id = '".$id."' ORDER BY a.id;";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Espacio 1)";
-            $GLOBALS['sql'] = $sql;
-        }
-        else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Espacio 2)";
-                $GLOBALS['sql'] = $sql;
-            }
-            if($l_stmt->rowCount() > 0){
-                $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Información del espacio seleccionado";
             }
         }
         return $result;
@@ -1227,7 +1262,7 @@ class modelo_consultas
     }
 
     /**
-     * Función que permite buscar a ubicación de los campus que se han creado en el sistema.
+     * Función que permite buscar la ubicación de un campus en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
      * @return metadata con el resultado de la búsqueda.
@@ -1235,7 +1270,7 @@ class modelo_consultas
     public function ubicacionCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT nombre,lat,lng FROM campus WHERE sede = '".$nombre_sede."' and id = '".$nombre_campus."' ORDER BY id;";
+        $sql = "SELECT id,nombre,lat,lng FROM campus WHERE sede = '".$nombre_sede."' AND id = '".$nombre_campus."' ORDER BY id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 1)";
@@ -1248,84 +1283,247 @@ class modelo_consultas
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Ubicación del Campus seleccionado";
+                $GLOBALS['mensaje'] = "Ubicación del campus seleccionado";
             }
         }
         return $result;
     }
 
     /**
-     * Función que permite buscar los edificios que se han creado en el sistema.
-     * @param string $nombre_sede, id de la sede al que pertenece el edificio.
-     * @param string $nombre_campus, id del campus donde está el edificio.
-     * @return metadata con el resultado de la búsqueda.
+     * Función que permite buscar la ubicación de una cancha en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece la cancha.
+     * @param string $nombre_campus, id de la cancha al que pertenece la cancha.
+     * @param string $id, id de la cancha.
+      * @return metadata con el resultado de la búsqueda.
      */
-    public function buscarEdificios($nombre_sede,$nombre_campus){
+    public function ubicacionCancha($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        if (strcmp($nombre_sede,"") == 0) {
-            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
-                    FROM edificio a JOIN campus b ON a.id_campus = b.id
-                                    JOIN sede c ON a.id_sede = c.id
-                                    LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
-                    WHERE a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
-        }else{
-            $sql = "SELECT a.id,a.nombre,a.id_campus,b.nombre as nombre_campus,a.id_sede,c.nombre as nombre_sede,a.numero_pisos,a.sotano,a.terraza,a.lat,a.lng,d.material as material_fachada,a.ancho_fachada,a.alto_fachada
-                    FROM edificio a JOIN campus b ON a.id_campus = b.id
-                                    JOIN sede c ON a.id_sede = c.id
-                                    LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
-                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY a.id;";
-        }
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,uso,lat,lng FROM cancha WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Cancha 1)";
             $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Cancha 2)";
                 $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Edificios del campus presentes en el sistema";
+                $GLOBALS['mensaje'] = "Ubicación de la cancha seleccionada";
             }
         }
         return $result;
     }
 
     /**
-     * Función que permite buscar los espacios de un piso de un edificio que se han creado en el sistema.
-     * @param string $nombre_sede, id de la sede al que pertenecen los espacios.
-     * @param string $nombre_campus, id del campus donde están los espacios..
-     * @param string $nombre_edificio, id del edificio donde están los espacios a buscar.
-     * @param string $piso, piso del edificio donde están los espacios.
+     * Función que permite buscar la ubicación de un corredor en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece al corredor.
+     * @param string $nombre_campus, id del campus al que pertenece al corredor.
+     * @param string $id, id del corredor.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionCorredor($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,lat,lng FROM corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación del corredor seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de un parqueadero en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el parqueadero.
+     * @param string $nombre_campus, id del campus al que pertenece el parqueadero.
+     * @param string $id, id del parqueadero.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionParqueadero($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,lat,lng FROM parqueadero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación parqueadero 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación parqueadero 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación del parqueadero seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de una piscina en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece la piscina.
+     * @param string $nombre_campus, id del campus al que pertenece la piscina.
+     * @param string $id, id de la piscina.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionPiscina($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,lat,lng FROM piscina WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación de la piscina seleccionada";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de una plazoleta en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece la plazoleta.
+     * @param string $nombre_campus, id del campus al que pertenece la plazoleta.
+     * @param string $id, id de la plazoleta.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionPlazoleta($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,nombre,lat,lng FROM plazoleta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación de la plazoleta seleccionada";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de una sendero en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el sendero.
+     * @param string $nombre_campus, id del campus al que pertenece el sendero.
+     * @param string $id, id del sendero.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionSendero($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,lat,lng FROM sendero WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación del sendero seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de una vía en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece la vía.
+     * @param string $nombre_campus, id del campus al que pertenece la vía.
+     * @param string $id, id de la cancha.
+      * @return metadata con el resultado de la búsqueda.
+     */
+    public function ubicacionVia($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT id,lat,lng FROM via WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Vía 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Vía 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Ubicación de la vía seleccionada";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la ubicación de un edificio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el edificio.
+     * @param string $nombre_campus, id del campus al que pertenece el edificio..
+     * @param string $nombre_edificio, id del edificio.
      * @return metadata con el resultado de la búsqueda.
      */
-    public function buscarEspacios($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+    public function ubicacionEdificio($nombre_sede,$nombre_campus,$nombre_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
-        $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT a.id,a.uso_espacio,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus,d.id as id_edificio,d.nombre as nombre_edificio,a.piso_edificio,d.lat,d.lng
-                FROM espacio a JOIN sede b ON a.id_sede = b.id
-                              JOIN campus c ON a.id_campus = c.id and a.id_sede = c.sede
-                              JOIN edificio d ON a.id_edificio = d.id
-                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso_edificio = '".$piso."' ORDER BY a.id;";
+        $sql = "SELECT id,nombre,numero_pisos,sotano,terraza,lat,lng FROM edificio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$nombre_edificio."' ORDER BY id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Edificio 1)";
             $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Edificio 2)";
                 $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Espacios del edificio presentes en el sistema";
-                $GLOBALS['sql'] = $sql;
+                $GLOBALS['mensaje'] = "Ubicación del edificio seleccionado";
             }
         }
         return $result;
@@ -1433,6 +1631,46 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT DISTINCT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, e.uso, a.ancho_pared, a.alto_pared, f.material as material_pared, a.ancho_piso, a.largo_piso, g.material as material_piso, a.ancho_techo, a.largo_techo, h.material as material_techo, a.espacio_padre, d.lat, d.lng
+                FROM espacio a  JOIN sede b ON a.id_sede = b.id
+                                JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
+                                JOIN uso_espacio e ON a.uso_espacio = e.id
+                                LEFT JOIN material_pared f ON a.id_material_pared = f.id
+                                LEFT JOIN material_piso g ON a.id_material_piso = g.id
+                                LEFT JOIN material_techo h ON a.id_material_techo = h.id
+                WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.id = '".$id."' ORDER BY a.id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del espacio seleccionado";
             }
         }
         return $result;

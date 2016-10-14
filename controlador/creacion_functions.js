@@ -156,8 +156,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear una sede
-     * @param {string} consulta, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de un espacio).
+     * Función que permite crear un tipo de objeto.
+     * @param {string} tipo_objeto, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de los espacios).
      * @param {array} informacion, información del tipo de objeto.
      * @returns {data}
      */
