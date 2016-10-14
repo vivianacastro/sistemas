@@ -306,7 +306,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_sede' => ucwords($valor['nombre']),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -331,9 +331,9 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_campus' => ucwords($valor['nombre']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -359,12 +359,12 @@ class controlador_consultas
             $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'uso' => utf8_encode(ucwords($valor['uso'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -390,11 +390,11 @@ class controlador_consultas
             $data = $m->buscarCorredores($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -420,13 +420,13 @@ class controlador_consultas
             $data = $m->buscarCubiertas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id_edificio' => ucwords($valor['id_edificio']),
-                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
-                    'piso' => ucwords($valor['piso']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
+                    'piso' => utf8_encode(ucwords($valor['piso'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -452,13 +452,13 @@ class controlador_consultas
             $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id_edificio' => ucwords($valor['id_edificio']),
-                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
-                    'piso_inicio' => ucwords($valor['piso_inicio']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
+                    'piso_inicio' => utf8_encode(ucwords($valor['piso_inicio'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -484,11 +484,11 @@ class controlador_consultas
             $data = $m->buscarParqueaderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -514,11 +514,11 @@ class controlador_consultas
             $data = $m->buscarPiscinas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -544,12 +544,12 @@ class controlador_consultas
             $data = $m->buscarPlazoletas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
-                    'nombre' => ucwords($valor['nombre']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -575,11 +575,11 @@ class controlador_consultas
             $data = $m->buscarSenderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -605,11 +605,11 @@ class controlador_consultas
             $data = $m->buscarVias($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -637,16 +637,16 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_edificio' => ucwords($valor['nombre']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'pisos' => ucwords($valor['numero_pisos']),
-                    'sotano' => ucwords($valor['sotano']),
-                    'terraza' => ucwords($valor['terraza']),
-                    'lat' => ucwords($valor['lat']),
-                    'lng' => ucwords($valor['lng']),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'pisos' => utf8_encode(ucwords($valor['numero_pisos'])),
+                    'sotano' => utf8_encode(ucwords($valor['sotano'])),
+                    'terraza' => utf8_encode(ucwords($valor['terraza'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'lng' => utf8_encode(ucwords($valor['lng'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -672,25 +672,25 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => ucwords($valor['uso_espacio']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id_edificio' => ucwords($valor['id_edificio']),
-                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
-                    'piso' => ucwords($valor['piso_edificio']),
-                    'ancho_pared' => ucwords($valor['ancho_pared']),
-                    'alto_pared' => ucwords($valor['alto_pared']),
-                    'material_pared' => ucwords($valor['material_pared']),
-                    'ancho_piso' => ucwords($valor['ancho_piso']),
-                    'largo_piso' => ucwords($valor['largo_piso']),
-                    'material_piso' => ucwords($valor['material_piso']),
-                    'ancho_techo' => ucwords($valor['ancho_techo']),
-                    'largo_techo' => ucwords($valor['largo_techo']),
-                    'material_techo' => ucwords($valor['material_techo']),
-                    'lat' => ucwords($valor['lat']),
-                    'lng' => ucwords($valor['lng']),
+                    'uso_espacio' => utf8_encode(ucwords($valor['uso_espacio'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
+                    'piso' => utf8_encode(ucwords($valor['piso_edificio'])),
+                    'ancho_pared' => utf8_encode(ucwords($valor['ancho_pared'])),
+                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
+                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
+                    'ancho_piso' => utf8_encode(ucwords($valor['ancho_piso'])),
+                    'largo_piso' => utf8_encode(ucwords($valor['largo_piso'])),
+                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
+                    'ancho_techo' => utf8_encode(ucwords($valor['ancho_techo'])),
+                    'largo_techo' => utf8_encode(ucwords($valor['largo_techo'])),
+                    'material_techo' => utf8_encode(ucwords($valor['material_techo'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'lng' => utf8_encode(ucwords($valor['lng'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -743,7 +743,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => ucwords($valor['uso']),
+                    'uso_espacio' => utf8_encode(ucwords($valor['uso'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -769,7 +769,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_material' => ucwords($valor['material']),
+                    'nombre_material' => utf8_encode(ucwords($valor['material'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -795,7 +795,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'tipo_objeto' => ucwords($valor['tipo']),
+                    'tipo_objeto' => utf8_encode(ucwords($valor['tipo'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -819,8 +819,8 @@ class controlador_consultas
             $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_campus' => ucwords($valor['id']),
-                    'nombre_campus' => ucwords($valor['nombre']),
+                    'id_campus' => utf8_encode(ucwords($valor['id'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -846,8 +846,8 @@ class controlador_consultas
             $data = $m->ubicacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
-                    'uso' => ucwords($valor['uso']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'uso' => utf8_encode(ucwords($valor['uso'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -873,7 +873,7 @@ class controlador_consultas
             $data = $m->ubicacionCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -899,7 +899,7 @@ class controlador_consultas
             $data = $m->ubicacionParqueadero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -925,7 +925,7 @@ class controlador_consultas
             $data = $m->ubicacionPiscina($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -951,8 +951,8 @@ class controlador_consultas
             $data = $m->ubicacionPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
-                    'nombre' => ucwords($valor['nombre']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -978,7 +978,7 @@ class controlador_consultas
             $data = $m->ubicacionSendero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1004,7 +1004,7 @@ class controlador_consultas
             $data = $m->ubicacionVia($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1030,7 +1030,7 @@ class controlador_consultas
             $data = $m->ubicacionEdificio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1057,8 +1057,8 @@ class controlador_consultas
             $data = $m->buscarInformacionSede($info["nombre_sede"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1083,10 +1083,10 @@ class controlador_consultas
             $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1113,16 +1113,16 @@ class controlador_consultas
             $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
                     'nombre_campus' => $valor['nombre_campus'],
                     'uso' => $valor['uso'],
-                    'material_piso' => ucwords($valor['material_piso']),
-                    'tipo_pintura' => ucwords($valor['tipo_pintura']),
-                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
-                    'lat' => ucwords($valor['lat']),
+                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
+                    'tipo_pintura' => utf8_encode(ucwords($valor['tipo_pintura'])),
+                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1148,15 +1148,15 @@ class controlador_consultas
             $data = $m->buscarInformacionCorredor($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => ucwords($valor['id']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
                     'nombre_campus' => $valor['nombre_campus'],
                     'ancho_pared' => $valor['ancho_pared'],
-                    'alto_pared' => ucwords($valor['alto_pared']),
-                    'material_pared' => ucwords($valor['material_pared']),
-                    'lat' => ucwords($valor['lat']),
+                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
+                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1182,16 +1182,16 @@ class controlador_consultas
             $data = $m->buscarInformacionCubierta($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'piso' => ucwords($valor['piso']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
+                    'piso' => utf8_encode(ucwords($valor['piso'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
                     'nombre_campus' => $valor['nombre_campus'],
                     'id_edificio' => $valor['id_edificio'],
-                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
-                    'largo' => ucwords($valor['largo']),
-                    'ancho' => ucwords($valor['ancho']),
-                    'material_cubierta' => ucwords($valor['material_cubierta']),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
+                    'largo' => utf8_encode(ucwords($valor['largo'])),
+                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
+                    'material_cubierta' => utf8_encode(ucwords($valor['material_cubierta'])),
                     'tipo_cubierta' => $valor['tipo_cubierta'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1219,15 +1219,15 @@ class controlador_consultas
             $data = $m->buscarInformacionGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id_edificio' => $valor['id_edificio'],
                     'nombre_edificio' => $valor['nombre_edificio'],
-                    'piso_inicio' => ucwords($valor['piso_inicio']),
-                    'pasamanos' => ucwords($valor['pasamanos']),
-                    'material_pasamanos' => ucwords($valor['material_pasamanos']),
+                    'piso_inicio' => utf8_encode(ucwords($valor['piso_inicio'])),
+                    'pasamanos' => utf8_encode(ucwords($valor['pasamanos'])),
+                    'material_pasamanos' => utf8_encode(ucwords($valor['material_pasamanos'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1254,16 +1254,16 @@ class controlador_consultas
             $data = $m->buscarInformacionParqueadero($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id' => $valor['id'],
                     'largo' => $valor['largo'],
-                    'ancho' => ucwords($valor['ancho']),
-                    'capacidad' => ucwords($valor['capacidad']),
-                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
-                    'material_piso' => ucwords($valor['material_piso']),
+                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
+                    'capacidad' => utf8_encode(ucwords($valor['capacidad'])),
+                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
+                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
                     'tipo_pintura_demarcacion' => $valor['tipo_pintura_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1291,16 +1291,16 @@ class controlador_consultas
             $data = $m->buscarInformacionPiscina($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id' => $valor['id'],
                     'cantidad_punto_hidraulico' => $valor['cantidad_punto_hidraulico'],
-                    'largo' => ucwords($valor['largo']),
-                    'ancho' => ucwords($valor['ancho']),
-                    'alto' => ucwords($valor['alto']),
-                    'lat' => ucwords($valor['lat']),
+                    'largo' => utf8_encode(ucwords($valor['largo'])),
+                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
+                    'alto' => utf8_encode(ucwords($valor['alto'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1326,10 +1326,10 @@ class controlador_consultas
             $data = $m->buscarInformacionPlazoleta($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1357,22 +1357,22 @@ class controlador_consultas
             $data = $m->buscarInformacionSendero($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id' => $valor['id'],
                     'longitud' => $valor['longitud'],
-                    'ancho' => ucwords($valor['ancho']),
-                    'material_piso' => ucwords($valor['material_piso']),
-                    'tipo_iluminacion' => ucwords($valor['tipo_iluminacion']),
-                    'cantidad' => ucwords($valor['cantidad']),
+                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
+                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
+                    'tipo_iluminacion' => utf8_encode(ucwords($valor['tipo_iluminacion'])),
+                    'cantidad' => utf8_encode(ucwords($valor['cantidad'])),
                     'codigo_poste' => $valor['codigo_poste'],
                     'material_cubierta' => $valor['material_cubierta'],
-                    'ancho_cubierta' => ucwords($valor['ancho_cubierta']),
-                    'largo_cubierta' => ucwords($valor['largo_cubierta']),
-                    'lat' => ucwords($valor['lat']),
-                    'lng' => ucwords($valor['lng']),
+                    'ancho_cubierta' => utf8_encode(ucwords($valor['ancho_cubierta'])),
+                    'largo_cubierta' => utf8_encode(ucwords($valor['largo_cubierta'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'lng' => utf8_encode(ucwords($valor['lng'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1397,14 +1397,14 @@ class controlador_consultas
             $data = $m->buscarInformacionVia($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
                     'id' => $valor['idt'],
                     'material_piso' => $valor['material_pisog'],
-                    'tipo_pintura' => ucwords($valor['tipo_pintura']),
-                    'longitud_demarcacion' => ucwords($valor['longitud_demarcacion']),
+                    'tipo_pintura' => utf8_encode(ucwords($valor['tipo_pintura'])),
+                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1432,19 +1432,19 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id' => ucwords($valor['id']),
-                    'nombre' => ucwords($valor['nombre']),
-                    'numero_pisos' => ucwords($valor['numero_pisos']),
-                    'sotano' => ucwords($valor['sotano']),
-                    'terraza' => ucwords($valor['terraza']),
-                    'material_fachada' => ucwords($valor['material_fachada']),
-                    'ancho_fachada' => ucwords($valor['ancho_fachada']),
-                    'alto_fachada' => ucwords($valor['alto_fachada']),
-                    'lat' => ucwords($valor['lat']),
-                    'lng' => ucwords($valor['lng']),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
+                    'numero_pisos' => utf8_encode(ucwords($valor['numero_pisos'])),
+                    'sotano' => utf8_encode(ucwords($valor['sotano'])),
+                    'terraza' => utf8_encode(ucwords($valor['terraza'])),
+                    'material_fachada' => utf8_encode(ucwords($valor['material_fachada'])),
+                    'ancho_fachada' => utf8_encode(ucwords($valor['ancho_fachada'])),
+                    'alto_fachada' => utf8_encode(ucwords($valor['alto_fachada'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'lng' => utf8_encode(ucwords($valor['lng'])),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1470,25 +1470,25 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => ucwords($valor['uso_espacio']),
-                    'id_sede' => ucwords($valor['id_sede']),
-                    'nombre_sede' => ucwords($valor['nombre_sede']),
-                    'id_campus' => ucwords($valor['id_campus']),
-                    'nombre_campus' => ucwords($valor['nombre_campus']),
-                    'id_edificio' => ucwords($valor['id_edificio']),
-                    'nombre_edificio' => ucwords($valor['nombre_edificio']),
-                    'piso' => ucwords($valor['piso_edificio']),
-                    'ancho_pared' => ucwords($valor['ancho_pared']),
-                    'alto_pared' => ucwords($valor['alto_pared']),
-                    'material_pared' => ucwords($valor['material_pared']),
-                    'ancho_piso' => ucwords($valor['ancho_piso']),
-                    'largo_piso' => ucwords($valor['largo_piso']),
-                    'material_piso' => ucwords($valor['material_piso']),
-                    'ancho_techo' => ucwords($valor['ancho_techo']),
-                    'largo_techo' => ucwords($valor['largo_techo']),
-                    'material_techo' => ucwords($valor['material_techo']),
-                    'lat' => ucwords($valor['lat']),
-                    'lng' => ucwords($valor['lng']),
+                    'uso_espacio' => utf8_encode(ucwords($valor['uso_espacio'])),
+                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
+                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
+                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
+                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
+                    'piso' => utf8_encode(ucwords($valor['piso_edificio'])),
+                    'ancho_pared' => utf8_encode(ucwords($valor['ancho_pared'])),
+                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
+                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
+                    'ancho_piso' => utf8_encode(ucwords($valor['ancho_piso'])),
+                    'largo_piso' => utf8_encode(ucwords($valor['largo_piso'])),
+                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
+                    'ancho_techo' => utf8_encode(ucwords($valor['ancho_techo'])),
+                    'largo_techo' => utf8_encode(ucwords($valor['largo_techo'])),
+                    'material_techo' => utf8_encode(ucwords($valor['material_techo'])),
+                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'lng' => utf8_encode(ucwords($valor['lng'])),
                 );
                 array_push($result, $arrayAux);
             }
