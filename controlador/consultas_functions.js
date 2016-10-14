@@ -758,7 +758,14 @@ $(document).ready(function() {
     var plazoletas = buscarObjetos("plazoletas",info);
     var senderos = buscarObjetos("senderos",info);
     var vias = buscarObjetos("vias",info);
-    console.log(info);
+    console.log(edificios);
+    console.log(canchas);
+    console.log(corredores);
+    console.log(parqueaderos);
+    console.log(piscinas);
+    console.log(plazoletas);
+    console.log(senderos);
+    console.log(vias);
     var bounds  = new google.maps.LatLngBounds();
     if (edificios.mensaje == null && canchas.mensaje == null && corredores.mensaje == null && parqueaderos.mensaje == null && piscinas.mensaje == null && plazoletas.mensaje == null && senderos.mensaje == null && vias.mensaje == null) {
         alert("El campus seleccionado no tiene edificios creados en el sistema");
