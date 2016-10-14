@@ -335,7 +335,7 @@ html, body {
 	 color: red;
 }
 
-#ver_campus, #ver_cancha, #ver_corredor, #ver_parqueadero, #ver_piscina, #ver_plazoleta, #ver_sendero, #ver_via, #ver_espacios{
+#ver_campus, #ver_cancha, #ver_corredor, #ver_parqueadero, #ver_piscina, #ver_plazoleta, #ver_sendero, #ver_via, #ver_edificio, #ver_edificios, #ver_espacios{
     font-size: small;
 }
 

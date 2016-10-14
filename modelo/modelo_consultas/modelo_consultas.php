@@ -95,7 +95,10 @@ class modelo_consultas
                     FROM cancha a JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id;";
         }else{
-            $sql = "SELECT * FROM cancha WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+            $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
+                    FROM cancha a JOIN sede b ON a.id_sede = b.id
+                                  JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede ORDER BY a.id
+                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
