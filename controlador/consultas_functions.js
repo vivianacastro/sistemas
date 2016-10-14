@@ -468,12 +468,6 @@ $(document).ready(function() {
           for (var i = 0; i < marcadores.length; i++) {
               google.maps.event.addListener(marcadores[i], 'click',
               function () {
-                  /*var select = this.id;
-                  var limites = new google.maps.LatLngBounds();
-                  var loc = new google.maps.LatLng(this.position.lat(), this.position.lng());
-                  limites.extend(loc);
-                  mapaConsulta.fitBounds(limites);
-                  mapaConsulta.panToBounds(limites);*/
                   sedeSeleccionada = this.id_sede;
                   campusSeleccionado = this.id;
                   mapaConsulta.setZoom(16);
@@ -764,7 +758,7 @@ $(document).ready(function() {
     var plazoletas = buscarObjetos("plazoletas",info);
     var senderos = buscarObjetos("senderos",info);
     var vias = buscarObjetos("vias",info);
-    console.log(canchas);
+    console.log(info);
     var bounds  = new google.maps.LatLngBounds();
     if (edificios.mensaje == null && canchas.mensaje == null && corredores.mensaje == null && parqueaderos.mensaje == null && piscinas.mensaje == null && plazoletas.mensaje == null && senderos.mensaje == null && vias.mensaje == null) {
         alert("El campus seleccionado no tiene edificios creados en el sistema");
@@ -776,7 +770,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Edificio: " + record.id + "-" + record.nombre_edificio,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -822,7 +818,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Cancha: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -865,7 +863,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Corredor: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -908,7 +908,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Parqueadero: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -951,7 +953,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Piscina: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -994,7 +998,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Plazoleta: " + record.id + "-" + record.nombre,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -1037,7 +1043,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "Sendero: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
@@ -1080,7 +1088,9 @@ $(document).ready(function() {
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: "V&iacute;a: " + record.id,
-                    id: record.id
+                    id: record.id,
+                    id_campus: record.id_campus,
+                    id_sede: record.id_sede
                 });
                 var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
