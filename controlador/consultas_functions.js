@@ -582,7 +582,7 @@ $(document).ready(function() {
 
   /**
    * Se captura el evento cuando se modifica el valor del selector sede_search
-   * y se actualiza el selector de campus.
+   * y se actualiza el selector de sedes.
    */
   $("#sede_search").change(function (e) {
       if (URLactual['href'].indexOf('consultar_sede') >= 0) {
@@ -656,7 +656,7 @@ $(document).ready(function() {
 
   /**
    * Se captura el evento cuando se modifica el valor del selector campus_search
-   * y se actualiza el selector de edificios.
+   * y se actualiza el selector de campus.
    */
   $("#campus_search").change(function (e) {
       if (URLactual['href'].indexOf('consultar_campus') >= 0) {
@@ -1017,7 +1017,7 @@ $(document).ready(function() {
 
   /**
    * Se captura el evento cuando se modifica el valor del selector codigo_search
-   * y se actualiza el selector de pisos.
+   * y se actualiza el selector de códigos.
    */
   $("#codigo_search").change(function (e) {
       if (validarCadena($("#codigo_search").val())) {
@@ -1057,7 +1057,7 @@ $(document).ready(function() {
 
   /**
    * Se captura el evento cuando se modifica el valor del selector edificio_search
-   * y se actualiza el selector de pisos.
+   * y se actualiza el selector de edificios.
    */
   $("#edificio_search").change(function (e) {
       if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_edificio') >= 0) {
@@ -1218,14 +1218,90 @@ $(document).ready(function() {
   });
 
   /**
-   * Se captura el evento cuando se modifica el valor del selector pisos_search
-   * y se actualiza el selector de pisos.
+   * Se captura el evento cuando se modifica el valor del selector espacio_search
+   * y se actualiza el selector de espacios.
    */
   $("#espacio_search").change(function (e) {
       if (validarCadena($("#espacio_search").val())) {
           $('#visualizarEspacio').removeAttr("disabled");
       }else{
           $('#visualizarEspacio').attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector pisos_search
+   * y se actualiza el selector de tipo de objeto.
+   */
+  $("#tipo_material_search").change(function (e) {
+      if (validarCadena($("#tipo_material_search").val())) {
+          var tipoObjeto = {};
+          tipoObjeto["tipo_material"] = $("#tipo_material_search").val();
+          var data = buscarObjetos("materiales",tipoObjeto);
+          $("#nombre_tipo_material_search").empty();
+          var row = $("<option value=''/>");
+          row.text("--Seleccionar--");
+          row.appendTo("#nombre_tipo_material_search");
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                  aux = record.nombre_material;
+                  row = $("<option value='" + record.id + "'/>");
+                  row.text(aux);
+                  row.appendTo("#nombre_tipo_material_search");
+              }
+          });
+      }else{
+          $("#nombre_tipo_material_search").empty();
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector nombre_tipo_material_search
+   * y se actualiza el selector de tipo de objeto.
+   */
+  $("#nombre_tipo_material_search").change(function (e) {
+      if (validarCadena($("#nombre_tipo_material_search").val())) {
+          $('#visualizarTipoMaterial').removeAttr("disabled");
+      }else{
+          $('#visualizarTipoMaterial').attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector pisos_search
+   * y se actualiza el selector de tipo de objeto.
+   */
+  $("#tipo_objeto_search").change(function (e) {
+      if (validarCadena($("#tipo_objeto_search").val())) {
+          var tipoObjeto = {};
+          tipoObjeto["tipo_objeto"] = $("#tipo_objeto_search").val();
+          var data = buscarObjetos("tipo_objetos",tipoObjeto);
+          $("#nombre_tipo_objeto_search").empty();
+          var row = $("<option value=''/>");
+          row.text("--Seleccionar--");
+          row.appendTo("#nombre_tipo_objeto_search");
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                  aux = record.tipo_objeto;
+                  row = $("<option value='" + record.id + "'/>");
+                  row.text(aux);
+                  row.appendTo("#nombre_tipo_objeto_search");
+              }
+          });
+      }else{
+          $("#nombre_tipo_objeto_search").empty();
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector nombre_tipo_objeto_search
+   * y se actualiza el selector de tipo de objeto.
+   */
+  $("#nombre_tipo_objeto_search").change(function (e) {
+      if (validarCadena($("#nombre_tipo_objeto_search").val())) {
+          $('#visualizarTipoObjeto').removeAttr("disabled");
+      }else{
+          $('#visualizarTipoObjeto').attr('disabled','disabled');
       }
   });
 
