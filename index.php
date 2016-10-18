@@ -160,6 +160,7 @@ $map = array(
         'ubicacion_sendero' => array('controlador' =>'controlador_consultas', 'action' =>'ubicacion_sendero'),
         'ubicacion_via' => array('controlador' =>'controlador_consultas', 'action' =>'ubicacion_via'),
         'ubicacion_edificio' => array('controlador' =>'controlador_consultas', 'action' =>'ubicacion_edificio'),
+        'consultar_informacion_sede' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_sede'),
         'consultar_informacion_campus' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_campus'),
         'consultar_informacion_cancha' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_cancha'),
         'consultar_informacion_corredor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_corredor'),

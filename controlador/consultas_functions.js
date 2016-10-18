@@ -199,7 +199,7 @@ $(document).ready(function() {
       try {
           $.ajax({
               type: "POST",
-              url: "index.php?action=consultar_informacion"+tipo_objeto,
+              url: "index.php?action=consultar_informacion_"+tipo_objeto,
               data: {jObject:jObject},
               dataType: "json",
               async: false,
@@ -1306,6 +1306,68 @@ $(document).ready(function() {
   });
 
   /**
+   * Se captura el evento cuando se da click en el boton visualizarSede y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarSede").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = "";
+      var data = consultarInformacionObjeto("sede",info);
+      var archivos = consultarArchivosObjeto("campus",info);
+      /*var archivos = consultarArchivosObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("corredor",info);
+      var archivos = consultarArchivosObjeto("cubierta",info);
+      var archivos = consultarArchivosObjeto("gradas",info);
+      var archivos = consultarArchivosObjeto("parqueadero",info);
+      var archivos = consultarArchivosObjeto("piscina",info);
+      var archivos = consultarArchivosObjeto("plazoleta",info);
+      var archivos = consultarArchivosObjeto("sendero",info);
+      var archivos = consultarArchivosObjeto("via",info);
+      var archivos = consultarArchivosObjeto("edificio",info);
+      var archivos = consultarArchivosObjeto("espacio",info);*/
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+          }
+      });
+      $("#myCarousel").hide();
+      eliminarComponente("slide_carrusel");
+      eliminarComponente("item_carrusel");
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  console.log(index);
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active">'
+                       +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item">'
+                        +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      $("#divDialogConsulta").modal('show');
+  });
+
+
+  /**
    * Se captura el evento cuando se da click en el boton visualizarCampus y se
    * realiza la operacion correspondiente.
    */
@@ -1367,6 +1429,85 @@ $(document).ready(function() {
       mapaModificacion.fitBounds(bounds);
       mapaModificacion.panToBounds(bounds);
       $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_sede y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_sede").click(function (e){
+      $("#nombre_sede").prop('disabled', false);
+      $("#modificar_sede").hide();
+      $("#guardar_modificaciones_sede").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_campus").click(function (e){
+      $("#nombre_campus").prop('disabled', false);
+      $("#modificar_campus").hide();
+      $("#guardar_modificaciones_campus").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_cancha").click(function (e){
+      $("#uso_cancha").prop('disabled', false);
+      $("#material_piso").prop('disabled', false);
+      $("#tipo_pintura").prop('disabled', false);
+      $("#longitud_demarcacion").prop('disabled', false);
+      $("#modificar_cancha").hide();
+      $("#guardar_modificaciones_cancha").show();
+  });
+
+  /**
+   * Se captura el evento cuando se cierra el modal divDialogConsulta.
+   */
+  $('#divDialogConsulta').on('hidden.bs.modal', function () {
+      $("#nombre_sede").prop('disabled', true);
+      $("#nombre_campus").prop('disabled', true);
+      $("#nombre_cancha").prop('disabled', true);
+      $("#nombre_corredor").prop('disabled', true);
+      $("#nombre_cubierta").prop('disabled', true);
+      $("#nombre_gradas").prop('disabled', true);
+      $("#nombre_parqueadero").prop('disabled', true);
+      $("#nombre_piscina").prop('disabled', true);
+      $("#nombre_plazoleta").prop('disabled', true);
+      $("#nombre_sendero").prop('disabled', true);
+      $("#nombre_via").prop('disabled', true);
+      $("#nombre_edificio").prop('disabled', true);
+      $("#pisos").prop('disabled', true);
+      $("#id_espacio").prop('disabled', true);
+      $("#modificar_sede").show();
+      $("#modificar_campus").show();
+      $("#modificar_cancha").show();
+      $("#modificar_corredor").show();
+      $("#modificar_cubierta").show();
+      $("#modificar_gradas").show();
+      $("#modificar_parqueadero").show();
+      $("#modificar_piscina").show();
+      $("#modificar_plazoleta").show();
+      $("#modificar_sendero").show();
+      $("#modificar_via").show();
+      $("#modificar_edificio").show();
+      $("#modificar_espacio").show();
+      $("#guardar_modificaciones_sede").hide();
+      $("#guardar_modificaciones_campus").hide();
+      $("#guardar_modificaciones_cancha").hide();
+      $("#guardar_modificaciones_corredor").hide();
+      $("#guardar_modificaciones_cubierta").hide();
+      $("#guardar_modificaciones_gradas").hide();
+      $("#guardar_modificaciones_parqueadero").hide();
+      $("#guardar_modificaciones_piscina").hide();
+      $("#guardar_modificaciones_plazoleta").hide();
+      $("#guardar_modificaciones_sendero").hide();
+      $("#guardar_modificaciones_via").hide();
+      $("#guardar_modificaciones_edificio").hide();
+      $("#guardar_modificaciones_espacio").hide();
   });
 
   /**

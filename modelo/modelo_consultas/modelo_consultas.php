@@ -526,9 +526,7 @@ class modelo_consultas
      */
     public function buscarInformacionSede($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $sql = "SELECT id, nombre
-                FROM sede
-                WHERE nombre = '".$nombre_sede."' ORDER BY nombre;";
+        $sql = "SELECT id, nombre FROM sede WHERE id = '".$nombre_sede."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Sede 1)";

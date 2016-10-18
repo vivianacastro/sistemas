@@ -1057,8 +1057,8 @@ class controlador_consultas
             $data = $m->buscarInformacionSede($info["nombre_sede"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => $valor['id_sede'],
-                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id'],
+                    'nombre_sede' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
