@@ -41,7 +41,7 @@
                         <div class='div_izquierda'><b>N&uacute;mero(s) del(os) Espacio(s)<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' maxlength="10" name='id_espacio' id='id_espacio' value='' placeholder='Ej: 1001' disabled required/>
                         <div class='div_izquierda'><b>Uso del(os) Espacio(s)<font color='red'>*</font>:</b></div>
-                        <select class='form-control formulario' name='uso_espacio' id='uso_espacio' required></select><br>
+                        <select class='form-control formulario' name='uso_espacio' id='uso_espacio' disabled required></select><br>
                         <div id="divBotonesInformacionAdicional">
                           <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_informacion_adicional' id='añadir_informacion_adicional' value='Añadir Información' title='Añadir Información Adicional del(os) espacio(s)'/>
                           <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_informacion_adicional' id='eliminar_informacion_adicional' value='Eliminar Información' title='Eliminar Información Adicional del(os) espacio(s)' disabled/>
@@ -51,54 +51,54 @@
                                 <div><b><h5>Informaci&oacute;n de las Paredes del(os) Espacio(s)</h5></b></div>
                                 <div class='div_izquierda'><b>Altura de las paredes:</b></div>
                                 <div class="input-group">
-                                   <input class='form-control formulario' type='number' min='1' name='altura_pared' id='altura_pared' value='' placeholder='Ej: 4' required/>
+                                   <input class='form-control formulario' type='number' min='1' name='altura_pared' id='altura_pared' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Ancho de las paredes:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type='number' min='1' name='ancho_pared' id='ancho_pared' value='' placeholder='Ej: 4' required/>
+                                    <input class='form-control formulario' type='number' min='1' name='ancho_pared' id='ancho_pared' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Material de las paredes:</b></div>
-                                <select class='form-control formulario' name='material_pared' id='material_pared' required></select><br>
+                                <select class='form-control formulario' name='material_pared' id='material_pared' disabled required></select><br>
                             </div>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n del Techo del(os) Espacio(s)</h5></b></div>
                                 <div class='div_izquierda'><b>Largo del techo:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type='number' min='1' name='largo_techo' id='largo_techo' value='' placeholder='Ej: 4' required/>
+                                    <input class='form-control formulario' type='number' min='1' name='largo_techo' id='largo_techo' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Ancho del techo:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type='number' min='1' name='ancho_techo' id='ancho_techo' value='' placeholder='Ej: 4' required/>
+                                    <input class='form-control formulario' type='number' min='1' name='ancho_techo' id='ancho_techo' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Material del techo:</b></div>
-                                <select class='form-control formulario' name='material_techo' id='material_techo' required></select><br>
+                                <select class='form-control formulario' name='material_techo' id='material_techo' disabled required></select><br>
                             </div>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n del Piso del(os) Espacio(s)</h5></b></div>
                                 <div class='div_izquierda'><b>Largo del piso:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type='number' min='1' name='largo_piso' id='largo_piso' value='' placeholder='Ej: 4' required/>
+                                    <input class='form-control formulario' type='number' min='1' name='largo_piso' id='largo_piso' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Ancho del piso:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type='number' min='1' name='ancho_piso' id='ancho_piso' value='' placeholder='Ej: 4' required/>
+                                    <input class='form-control formulario' type='number' min='1' name='ancho_piso' id='ancho_piso' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Material del piso:</b></div>
-                                <select class='form-control formulario' name='material_piso' id='material_piso' required></select><br>
+                                <select class='form-control formulario' name='material_piso' id='material_piso' disabled required></select><br>
                             </div>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del(os) Espacio(s)</h5></b></div>
                                 <div id='iluminacion'>
                                     <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
-                                    <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' required></select><br>
+                                    <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
@@ -107,15 +107,15 @@
                                 <div><b><h5>Informaci&oacute;n del Suministro de Energ&iacute;a del(os) Espacio(s)</h5></b></div>
                                 <div id='suministro_energia'>
                                     <div class='div_izquierda'><b>Tipo de suministro de energ&iacute;a:</b></div>
-                                    <select class='form-control formulario' name='tipo_suministro_energia' id='tipo_suministro_energia' required></select><br>
+                                    <select class='form-control formulario' name='tipo_suministro_energia' id='tipo_suministro_energia' disabled required></select><br>
                                     <div class='div_izquierda'><b>Tomacorriente:</b></div>
-                                    <select class='form-control formulario' name='tomacorriente' id='tomacorriente' required>
+                                    <select class='form-control formulario' name='tomacorriente' id='tomacorriente' disabled required>
                                         <option value='' selected='selected'>--Seleccionar--</option>
                                         <option value='regulado'>Regulado</option>
                                         <option value='no regulado'>No Regulado</option>
                                     </select><br>
                                     <div class='div_izquierda'><b>Cantidad de tomacorrientes del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_tomacorriente' id='añadir_tomacorriente' value='Añadir Tipo' title='Añadir Tipo Suministro de Energ&iacute;a'/>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_tomacorriente' id='eliminar_tomacorriente' value='Eliminar Tipo' title='Eliminar Tipo Suministro de Energ&iacute;a' disabled/>
@@ -124,28 +124,28 @@
                                 <div><b><h5>Informaci&oacute;n de las Puertas del(os) Espacio(s)</h5></b></div>
                                 <div id='puerta'>
                                     <div class='div_izquierda'><b>Tipo de puerta:</b></div>
-                                    <select class='form-control formulario' name='tipo_puerta' id='tipo_puerta' required></select><br>
+                                    <select class='form-control formulario' name='tipo_puerta' id='tipo_puerta' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de puertas del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_puertas' id='cantidad_puertas' value='' placeholder='Ej: 2' required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_puertas' id='cantidad_puertas' value='' placeholder='Ej: 2' disabled required/><br>
                                     <div class='div_izquierda'><b>Material de la puerta:</b></div>
-                                    <select class='form-control formulario' name='material_puerta' id='material_puerta' required></select><br>
+                                    <select class='form-control formulario' name='material_puerta' id='material_puerta' disabled required></select><br>
                                     <div class='div_izquierda'><b>Tipo de cerradura:</b></div>
-                                    <select class='form-control formulario' name='tipo_cerradura' id='tipo_cerradura' required></select><br>
+                                    <select class='form-control formulario' name='tipo_cerradura' id='tipo_cerradura' disabled required></select><br>
                                     <!--<input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_tipo_cerradura' id='añadir_tipo_cerradura' value='Añadir Tipo' title='Añadir Tipo Cerradura'/>
                                     <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_tipo_cerradura' id='eliminar_tipo_cerradura' value='Eliminar Tipo' title='Eliminar Tipo Cerradura' disabled/>-->
                                     <div class='div_izquierda'><b>¿La Puerta tiene gato?:</b></div>
                                     <label class='radio-inline'><input type='radio' name='gato_puerta' value='true'>S&iacute;</label>
                                     <label class='radio-inline'><input type='radio' name='gato_puerta' value='false'>No</label><br>
                                     <div class='div_izquierda'><b>Material del marco:</b></div>
-                                    <select class='form-control formulario' name='material_marco_puerta' id='material_marco_puerta' required></select><br>
+                                    <select class='form-control formulario' name='material_marco_puerta' id='material_marco_puerta' disabled required></select><br>
                                     <div class='div_izquierda'><b>Ancho puerta:</b></div>
                                     <div class="input-group">
-                                        <input class='form-control formulario' type='number' min='1' name='ancho_puerta' id='ancho_puerta' value='' placeholder='Ej: 4' required/>
+                                        <input class='form-control formulario' type='number' min='1' name='ancho_puerta' id='ancho_puerta' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                     <div class='div_izquierda'><b>Alto puerta:</b></div>
                                     <div class="input-group">
-                                        <input class='form-control formulario' type='number' min='1' name='alto_puerta' id='alto_puerta' value='' placeholder='Ej: 4' required/>
+                                        <input class='form-control formulario' type='number' min='1' name='alto_puerta' id='alto_puerta' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                 </div>
@@ -156,19 +156,19 @@
                                 <div><b><h5>Informaci&oacute;n de las Ventanas del(os) Espacio(s)</h5></b></div>
                                 <div id='ventana'>
                                     <div class='div_izquierda'><b>Tipo de ventana:</b></div>
-                                    <select class='form-control formulario' name='tipo_ventana' id='tipo_ventana' required></select><br>
+                                    <select class='form-control formulario' name='tipo_ventana' id='tipo_ventana' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de ventanas del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_ventanas' id='cantidad_ventanas' value='' placeholder='Ej: 2' required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_ventanas' id='cantidad_ventanas' value='' placeholder='Ej: 2' disabled required/><br>
                                     <div class='div_izquierda'><b>Material de la ventana:</b></div>
-                                    <select class='form-control formulario' name='material_ventana' id='material_ventana' required></select><br>
+                                    <select class='form-control formulario' name='material_ventana' id='material_ventana' disabled required></select><br>
                                     <div class='div_izquierda'><b>Ancho ventana:</b></div>
                                     <div class="input-group">
-                                        <input class='form-control formulario' type='number' min='1' name='ancho_ventana' id='ancho_ventana' value='' placeholder='Ej: 4' required/>
+                                        <input class='form-control formulario' type='number' min='1' name='ancho_ventana' id='ancho_ventana' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                     <div class='div_izquierda'><b>Alto ventana:</b></div>
                                     <div class="input-group">
-                                        <input class='form-control formulario' type='number' min='1' name='alto_ventana' id='alto_ventana' value='' placeholder='Ej: 4' required/>
+                                        <input class='form-control formulario' type='number' min='1' name='alto_ventana' id='alto_ventana' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                 </div>
@@ -179,9 +179,9 @@
                                 <div><b><h5>Informaci&oacute;n de los Interruptores del(os) Espacio(s)</h5></b></div>
                                 <div id='interruptor'>
                                     <div class='div_izquierda'><b>Tipo de interruptor:</b></div>
-                                    <select class='form-control formulario' name='tipo_interruptor' id='tipo_interruptor' required></select><br>
+                                    <select class='form-control formulario' name='tipo_interruptor' id='tipo_interruptor' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de interruptores:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_interruptores' id='cantidad_interruptores' value='' placeholder='Ej: 2' required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_interruptores' id='cantidad_interruptores' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_interruptor' id='añadir_interruptor' value='Añadir Tipo' title='Añadir Tipo Interruptor'/>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_interruptor' id='eliminar_interruptor' value='Eliminar Tipo' title='Eliminar Tipo Interruptor' disabled/>
@@ -194,7 +194,7 @@
                         </form><br>
                         <div id='div_espacio_padre' style='display:none'>
                             <div class='div_izquierda'><b>¿Cu&aacute;l es el n&uacute;mero del(os) Espacio(s) que está(n) dentro del que se va a crear?</b></div>
-                            <input class='form-control formulario' type='text' maxlength="10" name='espacio_padre' id='espacio_padre' value='' placeholder='Ej: 1001' required/>
+                            <input class='form-control formulario' type='text' maxlength="10" name='espacio_padre' id='espacio_padre' value='' placeholder='Ej: 1001' disabled required/>
                         </div><br>
                         <div id="informacion_especifica" style='display:none'>
                             <div id='informacionEspacio'></div>
