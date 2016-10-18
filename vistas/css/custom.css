@@ -95,10 +95,6 @@ html, body {
     padding-left: 15%;
 }
 
-.derecha{
-		float: right;
-}
-
 .dropdown-toggle{
 		color: white !important;
 		text-decoration: none !important;
@@ -166,10 +162,6 @@ html, body {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-}
-
-.izquierda{
-		float: left;
 }
 
 .mapa{
@@ -255,6 +247,10 @@ html, body {
 
 .social{
 		padding: 0% 0% 0%;
+}
+
+.texto-inicio-sesion{
+    font-size: medium;
 }
 
 #barra_usuario{
@@ -357,7 +353,7 @@ html, body {
 		}
 }
 
-@media screen and (min-width:767px) {
+@media screen and (min-width:768px) {
 		.img_boton{
         width: 35%;
     }
@@ -386,6 +382,10 @@ html, body {
 			color: white;
 		}
 
+    .texto-inicio-sesion{
+        font-size: x-small;
+    }
+
 		#divTimeOut{
 				width: 100%;
 		}
@@ -400,9 +400,13 @@ html, body {
 }
 
 @media screen and (max-width:1200px) and (min-width: 992px) {
-
+    .texto-inicio-sesion{
+        font-size: small;
+    }
 }
 
-@media screen and (max-width:992px) and (min-width: 767px) {
-
+@media screen and (max-width:991px) and (min-width: 768px) {
+    .texto-inicio-sesion{
+        font-size: smaller;
+    }
 }

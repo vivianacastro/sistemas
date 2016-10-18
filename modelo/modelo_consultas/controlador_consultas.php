@@ -114,7 +114,7 @@ class controlador_consultas
 
     /**
     * Función que despliega el panel que permite consultar
-    * una cancha en el sistema.
+    * un parqueadero en el sistema.
     **/
     public function consultar_parqueadero() {
         $GLOBALS['mensaje'] = "";
@@ -306,7 +306,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre'])),
+                    'nombre_sede' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -331,9 +331,9 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'nombre_campus' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -359,12 +359,12 @@ class controlador_consultas
             $data = $m->buscarCanchas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'uso' => utf8_encode(ucwords($valor['uso'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'uso' => mb_convert_case($valor['uso'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -390,11 +390,11 @@ class controlador_consultas
             $data = $m->buscarCorredores($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -420,13 +420,13 @@ class controlador_consultas
             $data = $m->buscarCubiertas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
-                    'piso' => utf8_encode(ucwords($valor['piso'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => $valor['piso'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -452,13 +452,13 @@ class controlador_consultas
             $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
-                    'piso_inicio' => utf8_encode(ucwords($valor['piso_inicio'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'piso_inicio' => $valor['piso_inicio'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -484,11 +484,11 @@ class controlador_consultas
             $data = $m->buscarParqueaderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -514,11 +514,11 @@ class controlador_consultas
             $data = $m->buscarPiscinas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -544,12 +544,12 @@ class controlador_consultas
             $data = $m->buscarPlazoletas($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -575,11 +575,11 @@ class controlador_consultas
             $data = $m->buscarSenderos($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -605,11 +605,11 @@ class controlador_consultas
             $data = $m->buscarVias($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -637,16 +637,16 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'pisos' => utf8_encode(ucwords($valor['numero_pisos'])),
-                    'sotano' => utf8_encode(ucwords($valor['sotano'])),
-                    'terraza' => utf8_encode(ucwords($valor['terraza'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
-                    'lng' => utf8_encode(ucwords($valor['lng'])),
+                    'nombre_edificio' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'pisos' => mb_convert_case($valor['numero_pisos'],MB_CASE_TITLE,"UTF-8"),
+                    'sotano' => mb_convert_case($valor['sotano'],MB_CASE_TITLE,"UTF-8"),
+                    'terraza' => mb_convert_case($valor['terraza'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
+                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -672,25 +672,25 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => utf8_encode(ucwords($valor['uso_espacio'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
-                    'piso' => utf8_encode(ucwords($valor['piso_edificio'])),
-                    'ancho_pared' => utf8_encode(ucwords($valor['ancho_pared'])),
-                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
-                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
-                    'ancho_piso' => utf8_encode(ucwords($valor['ancho_piso'])),
-                    'largo_piso' => utf8_encode(ucwords($valor['largo_piso'])),
-                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
-                    'ancho_techo' => utf8_encode(ucwords($valor['ancho_techo'])),
-                    'largo_techo' => utf8_encode(ucwords($valor['largo_techo'])),
-                    'material_techo' => utf8_encode(ucwords($valor['material_techo'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
-                    'lng' => utf8_encode(ucwords($valor['lng'])),
+                    'uso_espacio' => mb_convert_case($valor['uso_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => mb_convert_case($valor['piso_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_pared' => mb_convert_case($valor['ancho_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'alto_pared' => mb_convert_case($valor['alto_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_piso' => mb_convert_case($valor['ancho_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_piso' => mb_convert_case($valor['largo_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_techo' => mb_convert_case($valor['ancho_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_techo' => mb_convert_case($valor['largo_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'material_techo' => mb_convert_case($valor['material_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
+                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -743,7 +743,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => utf8_encode(ucwords($valor['uso'])),
+                    'uso_espacio' => mb_convert_case($valor['uso'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -769,7 +769,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'nombre_material' => utf8_encode(ucwords($valor['material'])),
+                    'nombre_material' => mb_convert_case($valor['material'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -795,7 +795,7 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'tipo_objeto' => utf8_encode(ucwords($valor['tipo'])),
+                    'tipo_objeto' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -819,8 +819,8 @@ class controlador_consultas
             $data = $m->ubicacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_campus' => utf8_encode(ucwords($valor['id'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre'])),
+                    'id_campus' => $valor['id'],
+                    'nombre_campus' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -846,8 +846,8 @@ class controlador_consultas
             $data = $m->ubicacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'uso' => utf8_encode(ucwords($valor['uso'])),
+                    'id' => $valor['id'],
+                    'uso' => mb_convert_case($valor['uso'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -873,7 +873,7 @@ class controlador_consultas
             $data = $m->ubicacionCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -899,7 +899,7 @@ class controlador_consultas
             $data = $m->ubicacionParqueadero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -925,7 +925,7 @@ class controlador_consultas
             $data = $m->ubicacionPiscina($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -951,8 +951,8 @@ class controlador_consultas
             $data = $m->ubicacionPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -978,7 +978,7 @@ class controlador_consultas
             $data = $m->ubicacionSendero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1004,7 +1004,7 @@ class controlador_consultas
             $data = $m->ubicacionVia($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1030,7 +1030,7 @@ class controlador_consultas
             $data = $m->ubicacionEdificio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
+                    'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1057,8 +1057,8 @@ class controlador_consultas
             $data = $m->buscarInformacionSede($info["nombre_sede"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1083,10 +1083,10 @@ class controlador_consultas
             $data = $m->buscarInformacionCampus($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1099,7 +1099,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar la información de un campus
+     * Función que permite consultar la información de una cancha
      * almacenado en el sistema.
      */
     public function consultar_informacion_cancha() {
@@ -1113,16 +1113,16 @@ class controlador_consultas
             $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => $valor['nombre_campus'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'uso' => $valor['uso'],
-                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
-                    'tipo_pintura' => utf8_encode(ucwords($valor['tipo_pintura'])),
-                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_pintura' => mb_convert_case($valor['tipo_pintura'],MB_CASE_TITLE,"UTF-8"),
+                    'longitud_demarcacion' => $valor['longitud_demarcacion'],
+                    'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1148,15 +1148,15 @@ class controlador_consultas
             $data = $m->buscarInformacionCorredor($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => $valor['nombre_campus'],
+                    'id' => $valor['id'],
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'ancho_pared' => $valor['ancho_pared'],
-                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
-                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'alto_pared' => mb_convert_case($valor['alto_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1182,17 +1182,17 @@ class controlador_consultas
             $data = $m->buscarInformacionCubierta($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'piso' => utf8_encode(ucwords($valor['piso'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => $valor['nombre_campus'],
+                    'piso' => $valor['piso'],
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => $valor['id_edificio'],
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
-                    'largo' => utf8_encode(ucwords($valor['largo'])),
-                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
-                    'material_cubierta' => utf8_encode(ucwords($valor['material_cubierta'])),
-                    'tipo_cubierta' => $valor['tipo_cubierta'],
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'largo' => $valor['largo'],
+                    'ancho' => $valor['ancho'],
+                    'material_cubierta' => mb_convert_case($valor['material_cubierta'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_cubierta' => mb_convert_case($valor['tipo_cubierta'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1219,15 +1219,15 @@ class controlador_consultas
             $data = $m->buscarInformacionGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => $valor['id_edificio'],
                     'nombre_edificio' => $valor['nombre_edificio'],
-                    'piso_inicio' => utf8_encode(ucwords($valor['piso_inicio'])),
-                    'pasamanos' => utf8_encode(ucwords($valor['pasamanos'])),
-                    'material_pasamanos' => utf8_encode(ucwords($valor['material_pasamanos'])),
+                    'piso_inicio' => $valor['piso_inicio'],
+                    'pasamanos' => mb_convert_case($valor['pasamanos'],MB_CASE_TITLE,"UTF-8"),
+                    'material_pasamanos' => mb_convert_case($valor['material_pasamanos'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1254,16 +1254,16 @@ class controlador_consultas
             $data = $m->buscarInformacionParqueadero($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => $valor['id'],
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'largo' => $valor['largo'],
-                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
-                    'capacidad' => utf8_encode(ucwords($valor['capacidad'])),
-                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
-                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
+                    'ancho' => $valor['ancho'],
+                    'capacidad' => $valor['capacidad'],
+                    'longitud_demarcacion' => $valor['longitud_demarcacion'],
+                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
                     'tipo_pintura_demarcacion' => $valor['tipo_pintura_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1291,16 +1291,16 @@ class controlador_consultas
             $data = $m->buscarInformacionPiscina($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => $valor['id'],
                     'cantidad_punto_hidraulico' => $valor['cantidad_punto_hidraulico'],
-                    'largo' => utf8_encode(ucwords($valor['largo'])),
-                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
-                    'alto' => utf8_encode(ucwords($valor['alto'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
+                    'largo' => $valor['largo'],
+                    'ancho' => $valor['ancho'],
+                    'alto' => $valor['alto'],
+                    'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
@@ -1326,10 +1326,10 @@ class controlador_consultas
             $data = $m->buscarInformacionPlazoleta($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => $valor['id'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1357,22 +1357,22 @@ class controlador_consultas
             $data = $m->buscarInformacionSendero($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => $valor['id'],
                     'longitud' => $valor['longitud'],
-                    'ancho' => utf8_encode(ucwords($valor['ancho'])),
-                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
-                    'tipo_iluminacion' => utf8_encode(ucwords($valor['tipo_iluminacion'])),
-                    'cantidad' => utf8_encode(ucwords($valor['cantidad'])),
+                    'ancho' => $valor['ancho'],
+                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_iluminacion' => mb_convert_case($valor['tipo_iluminacion'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad' => mb_convert_case($valor['cantidad'],MB_CASE_TITLE,"UTF-8"),
                     'codigo_poste' => $valor['codigo_poste'],
                     'material_cubierta' => $valor['material_cubierta'],
-                    'ancho_cubierta' => utf8_encode(ucwords($valor['ancho_cubierta'])),
-                    'largo_cubierta' => utf8_encode(ucwords($valor['largo_cubierta'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
-                    'lng' => utf8_encode(ucwords($valor['lng'])),
+                    'ancho_cubierta' => mb_convert_case($valor['ancho_cubierta'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_cubierta' => mb_convert_case($valor['largo_cubierta'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
+                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1397,14 +1397,14 @@ class controlador_consultas
             $data = $m->buscarInformacionVia($info["nombre_sede"],$info["nombre_campus"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => $valor['idt'],
                     'material_piso' => $valor['material_pisog'],
-                    'tipo_pintura' => utf8_encode(ucwords($valor['tipo_pintura'])),
-                    'longitud_demarcacion' => utf8_encode(ucwords($valor['longitud_demarcacion'])),
+                    'tipo_pintura' => mb_convert_case($valor['tipo_pintura'],MB_CASE_TITLE,"UTF-8"),
+                    'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1432,19 +1432,19 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id' => utf8_encode(ucwords($valor['id'])),
-                    'nombre' => utf8_encode(ucwords($valor['nombre'])),
-                    'numero_pisos' => utf8_encode(ucwords($valor['numero_pisos'])),
-                    'sotano' => utf8_encode(ucwords($valor['sotano'])),
-                    'terraza' => utf8_encode(ucwords($valor['terraza'])),
-                    'material_fachada' => utf8_encode(ucwords($valor['material_fachada'])),
-                    'ancho_fachada' => utf8_encode(ucwords($valor['ancho_fachada'])),
-                    'alto_fachada' => utf8_encode(ucwords($valor['alto_fachada'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
-                    'lng' => utf8_encode(ucwords($valor['lng'])),
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'numero_pisos' => mb_convert_case($valor['numero_pisos'],MB_CASE_TITLE,"UTF-8"),
+                    'sotano' => mb_convert_case($valor['sotano'],MB_CASE_TITLE,"UTF-8"),
+                    'terraza' => mb_convert_case($valor['terraza'],MB_CASE_TITLE,"UTF-8"),
+                    'material_fachada' => mb_convert_case($valor['material_fachada'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_fachada' => mb_convert_case($valor['ancho_fachada'],MB_CASE_TITLE,"UTF-8"),
+                    'alto_fachada' => mb_convert_case($valor['alto_fachada'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
+                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1470,25 +1470,25 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
-                    'uso_espacio' => utf8_encode(ucwords($valor['uso_espacio'])),
-                    'id_sede' => utf8_encode(ucwords($valor['id_sede'])),
-                    'nombre_sede' => utf8_encode(ucwords($valor['nombre_sede'])),
-                    'id_campus' => utf8_encode(ucwords($valor['id_campus'])),
-                    'nombre_campus' => utf8_encode(ucwords($valor['nombre_campus'])),
-                    'id_edificio' => utf8_encode(ucwords($valor['id_edificio'])),
-                    'nombre_edificio' => utf8_encode(ucwords($valor['nombre_edificio'])),
-                    'piso' => utf8_encode(ucwords($valor['piso_edificio'])),
-                    'ancho_pared' => utf8_encode(ucwords($valor['ancho_pared'])),
-                    'alto_pared' => utf8_encode(ucwords($valor['alto_pared'])),
-                    'material_pared' => utf8_encode(ucwords($valor['material_pared'])),
-                    'ancho_piso' => utf8_encode(ucwords($valor['ancho_piso'])),
-                    'largo_piso' => utf8_encode(ucwords($valor['largo_piso'])),
-                    'material_piso' => utf8_encode(ucwords($valor['material_piso'])),
-                    'ancho_techo' => utf8_encode(ucwords($valor['ancho_techo'])),
-                    'largo_techo' => utf8_encode(ucwords($valor['largo_techo'])),
-                    'material_techo' => utf8_encode(ucwords($valor['material_techo'])),
-                    'lat' => utf8_encode(ucwords($valor['lat'])),
-                    'lng' => utf8_encode(ucwords($valor['lng'])),
+                    'uso_espacio' => mb_convert_case($valor['uso_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => mb_convert_case($valor['piso_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_pared' => mb_convert_case($valor['ancho_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'alto_pared' => mb_convert_case($valor['alto_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_piso' => mb_convert_case($valor['ancho_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_piso' => mb_convert_case($valor['largo_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_techo' => mb_convert_case($valor['ancho_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_techo' => mb_convert_case($valor['largo_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'material_techo' => mb_convert_case($valor['material_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'lat' => $valor['lat'],
+                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
