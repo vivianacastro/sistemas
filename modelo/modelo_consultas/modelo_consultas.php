@@ -57,9 +57,9 @@ class modelo_consultas
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         if (strcmp($nombre_sede,"") == 0) {
-            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id ORDER BY a.nombre;";
         }else{
-            $sql = "SELECT * FROM campus WHERE sede = '".$nombre_sede."' ORDER BY nombre;";
+            $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede FROM campus a JOIN sede b ON a.sede = b.id WHERE sede = '".$nombre_sede."' ORDER BY a.nombre;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);

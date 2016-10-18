@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado;
+  var campusSelect = null;
   var marcadores = [];
   var URLactual = window.location;
   var infoWindowActiva;
@@ -16,18 +17,18 @@ $(document).ready(function() {
       }else if(URLactual['href'].indexOf('consultar_campus') >= 0){
           actualizarSelectSede();
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_edificio') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_fachada",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_cancha') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_pared",0);
@@ -37,49 +38,49 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_interruptor",0);
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_cubierta') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_cubierta",0);
           actualizarSelectTipoObjeto("tipo_cubierta",0);
           initMapConsulta();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_gradas') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_pasamanos",0);
           actualizarSelectMaterial("material_ventana",0);
           actualizarSelectTipoObjeto("tipo_ventana",0);
           initMapConsulta();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
           actualizarSelectSede();
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_cubierta",0);
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_iluminacion",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_via') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_espacio') >= 0){
           actualizarSelectSede();
           actualizarSelectUsosEspacios();
@@ -96,7 +97,7 @@ $(document).ready(function() {
           actualizarSelectTipoObjeto("tipo_suministro_energia",0);
           actualizarSelectTipoObjeto("tipo_ventana",0);
           initMapConsulta();
-          getCoordenadas(mapaConsulta);
+          rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
           initMapConsulta();
           rellenarMapaConsulta();
@@ -125,7 +126,6 @@ $(document).ready(function() {
       var options = {
           center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
           zoom: 16,
-          //mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       mapaConsulta = new google.maps.Map(document.getElementById('map'), options);
   }
@@ -480,54 +480,28 @@ $(document).ready(function() {
       var data = buscarObjetos("campus",sede);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
-              if (record.lat != '0' || record.lng != '0') {
-                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                  var marker = new google.maps.Marker({
-                      position: myLatlng,
-                      title: record.nombre_campus,
-                      id: record.id,
-                      id_sede: record.id_sede
-                  });
-                  var contentString = '<div id="content">'+
-                      '<div id="siteNotice">'+
-                      '</div>'+
-                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Campus</h3>'+
-                      '<div id="bodyContent">'+
-                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
-                        '<div class="form_button">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Edificios Campus" title="Ver edificios del campus"/>'+
-                        '</div>'+
-                      '</div>'+
-                      '</div>';
-                  var infoWindow = new google.maps.InfoWindow({
-                      content: contentString
-                  });
-                  marker.addListener('click', function() {
-                      if (infoWindowActiva != null) {
-                          infoWindowActiva.close();
-                      }
-                      infoWindow.open(map, marker);
-                      infoWindowActiva = infoWindow;
-                  });
-                  google.maps.event.addListener(mapaConsulta, 'click', function(){
-                      infoWindow.close();
-                  });
-                  marcadores.push(marker);
-                  marker.setMap(mapaConsulta);
-                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                  bounds.extend(loc);
-              }
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede
+              });
+              marcadores.push(marker);
+              marker.setMap(mapa);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
           }
       });
-      if (data.mensaje != null) {
+      if (data.mensaje != "") {
           mapa.fitBounds(bounds);
           mapa.panToBounds(bounds);
           for (var i = 0; i < marcadores.length; i++) {
               google.maps.event.addListener(marcadores[i], 'click',
               function () {
-                  sedeSeleccionada = this.id_sede;
-                  campusSeleccionado = this.id;
-                  mapa.setZoom(16);
+                  $("#sede_search").val(this.id_sede).change();
+                  $("#campus_search").val(this.id).change();
+                  mapa.setZoom(15);
                   mapa.setCenter(this.getPosition());
               });
           }
@@ -602,7 +576,7 @@ $(document).ready(function() {
               });
           }
       }else{
-        getCoordenadas(mapaConsulta);
+          getCoordenadas(mapaConsulta);
       }
   }
 
@@ -625,10 +599,15 @@ $(document).ready(function() {
           var sede = {};
           var bounds  = new google.maps.LatLngBounds();
           $("#campus_search").empty();
-          $('#visualizarCampus').attr('disabled','disabled');
-          $('#visualizarEdificio').attr('disabled','disabled');
-          sede["nombre_sede"] = $("#sede_search").val();
-          var data = buscarObjetos("campus",sede);
+          if (URLactual['href'].indexOf('consultar_campus') >= 0) {
+              $('#visualizarCampus').attr('disabled','disabled');
+          }
+          if (validarCadena($("#sede_search").val())) {
+              sede["nombre_sede"] = $("#sede_search").val();
+              var data = buscarObjetos("campus",sede);
+          }else{
+              rellenarMapa(mapaConsulta);
+          }
           var row = $("<option value=''/>");
           row.text("--Seleccionar--");
           row.appendTo("#campus_search");
@@ -642,7 +621,8 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       title: record.nombre_campus,
-                      id: record.id
+                      id: record.id,
+                      id_sede: record.id_sede
                   });
                   marcadores.push(marker);
                   marker.setMap(mapaConsulta);
@@ -656,13 +636,14 @@ $(document).ready(function() {
               for (var i = 0; i < marcadores.length; i++) {
                   google.maps.event.addListener(marcadores[i], 'click',
                   function () {
+                      $("#sede_search").val(this.id_sede);
                       $("#campus_search").val(this.id).change();
                       mapaConsulta.setZoom(15);
                       mapaConsulta.setCenter(this.getPosition());
                   });
               }
           }else{
-            getCoordenadas(mapaConsulta);
+              getCoordenadas(mapaConsulta);
           }
           if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
               $("#edificio_search").empty();
@@ -695,52 +676,381 @@ $(document).ready(function() {
           for (var i = 0; i < marcadores.length; i++) {
             marcadores[i].setMap(null);
           }
-          $("#edificio_search").empty();
-          $('#visualizarEdificio').attr('disabled','disabled');
           var campus = {};
           var bounds  = new google.maps.LatLngBounds();
-          campus["nombre_sede"] = $("#sede_search").val();
-          campus["nombre_campus"] = $("#campus_search").val();
-          var data = buscarObjetos("edificios",campus);
-          var row = $("<option value=''/>");
-          row.text("--Seleccionar--");
-          row.appendTo("#edificio_search");
-          $.each(data, function(index, record) {
-              if($.isNumeric(index)) {
-                  aux = record.id + "-" + record.nombre_edificio;
-                  row = $("<option value='" + record.id + "'/>");
-                  row.text(aux);
+          if (validarCadena($("#campus_search").val())) {
+              campus["nombre_sede"] = $("#sede_search").val();
+              campus["nombre_campus"] = $("#campus_search").val();
+              if (URLactual['href'].indexOf('consultar_cancha') >= 0) {
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("canchas",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id + " - " + record.uso;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id + " - " + record.uso,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("corredores",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("parqueaderos",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("piscinas",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("plazoletas",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id + " - " + record.nombre;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id + " - " + record.nombre,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("senderos",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else if(URLactual['href'].indexOf('consultar_via') >= 0){
+                  $("#codigo_search").empty();
+                  var data = buscarObjetos("vias",campus);
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#codigo_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#codigo_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
+                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#codigo_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+              }else{
+                  var data = buscarObjetos("edificios",campus);
+                  $("#edificio_search").empty();
+                  if(URLactual['href'].indexOf('consultar_edificio') >= 0){
+                      $('#visualizarEdificio').attr('disabled','disabled');
+                  }
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
                   row.appendTo("#edificio_search");
-                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                  var marker = new google.maps.Marker({
-                      position: myLatlng,
-                      title: record.id+"-"+record.nombre_edificio,
-                      id: record.id,
-                      id_campus: record.id_campus,
-                      id_sede: record.id_sede
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          aux = record.id + "-" + record.nombre_edificio;
+                          row = $("<option value='" + record.id + "'/>");
+                          row.text(aux);
+                          row.appendTo("#edificio_search");
+                          var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                          var marker = new google.maps.Marker({
+                              position: myLatlng,
+                              title: record.id + "-" + record.nombre_edificio,
+                              id: record.id,
+                              id_sede: record.id_sede,
+                              id_campus: record.id_campus
+                          });
+                          marcadores.push(marker);
+                          marker.setMap(mapaConsulta);
+                          var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                          bounds.extend(loc);
+                      }
                   });
-                  marcadores.push(marker);
-                  marker.setMap(mapaConsulta);
-                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                  bounds.extend(loc);
-              }
-          });
-          if (data.mensaje != "") {
-              mapaConsulta.fitBounds(bounds);
-              mapaConsulta.panToBounds(bounds);
-              for (var i = 0; i < marcadores.length; i++) {
-                  google.maps.event.addListener(marcadores[i], 'click',
-                  function () {
-                      $("#edificio_search").val(this.id).change();
-                      mapaConsulta.setZoom(19);
-                      mapaConsulta.setCenter(this.getPosition());
-                  });
+                  if (data.mensaje != "") {
+                      mapaConsulta.fitBounds(bounds);
+                      mapaConsulta.panToBounds(bounds);
+                      for (var i = 0; i < marcadores.length; i++) {
+                          google.maps.event.addListener(marcadores[i], 'click',
+                          function () {
+                              $("#edificio_search").val(this.id).change();
+                              mapaConsulta.setZoom(19);
+                              mapaConsulta.setCenter(this.getPosition());
+                          });
+                      }
+                  }else{
+                      getCoordenadas(mapaConsulta);
+                  }
+                  if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+                      $("#pisos_search").empty();
+                  }
               }
           }else{
-              getCoordenadas(mapaConsulta);
+              var sede = $("#sede_search").val();
+              $("#sede_search").val(sede).change();
           }
-          if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
-              $("#pisos_search").empty();
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector codigo_search
+   * y se actualiza el selector de pisos.
+   */
+  $("#codigo_search").change(function (e) {
+      if (validarCadena($("#codigo_search").val())) {
+          if(URLactual['href'].indexOf('consultar_cancha') >= 0){
+              $('#visualizarCancha').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
+              $('#visualizarCorredor').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
+              $('#visualizarParqueadero').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
+              $('#visualizarPiscina').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
+              $('#visualizarPlazoleta').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
+              $('#visualizarSendero').removeAttr("disabled");
+          }else if(URLactual['href'].indexOf('consultar_via') >= 0){
+              $('#visualizarVia').removeAttr("disabled");
+          }
+      }else{
+          if(URLactual['href'].indexOf('consultar_cancha') >= 0){
+              $('#visualizarCancha').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
+              $('#visualizarCorredor').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
+              $('#visualizarParqueadero').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
+              $('#visualizarPiscina').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
+              $('#visualizarPlazoleta').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
+              $('#visualizarSendero').attr('disabled','disabled');
+          }else if(URLactual['href'].indexOf('consultar_via') >= 0){
+              $('#visualizarVia').attr('disabled','disabled');
           }
       }
   });
@@ -750,94 +1060,118 @@ $(document).ready(function() {
    * y se actualiza el selector de pisos.
    */
   $("#edificio_search").change(function (e) {
-      if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+      if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_edificio') >= 0) {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#edificio_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
                   break;
               }
           }
-          var edificio = $("#edificio_search").val();
-          if (edificio != "") {
-              $('#visualizarEdificio').removeAttr("disabled");
+          if (validarCadena($("#edificio_search").val())) {
+              if (URLactual['href'].indexOf('consultar_cubierta') >= 0) {
+                  $('#visualizarCubierta').removeAttr("disabled");
+              }else if (URLactual['href'].indexOf('consultar_gradas') >= 0) {
+                  $('#visualizarGradas').removeAttr("disabled");
+              }else if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+                  $('#visualizarEdificio').removeAttr("disabled");
+              }
           }else{
-              $('#visualizarEdificio').attr('disabled','disabled');
+              if (URLactual['href'].indexOf('consultar_cubierta') >= 0) {
+                  $('#visualizarCubierta').attr('disabled','disabled');
+              }else if (URLactual['href'].indexOf('consultar_gradas') >= 0) {
+                  $('#visualizarGradas').removeAttr("disabled");
+              }else if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+                  $('#visualizarEdificio').removeAttr("disabled");
+              }
           }
       }else{
           var edificio = {};
           var numeroPisos, terraza, sotano;
-          edificio["nombre_sede"] = $("#sede_search").val();
-          edificio["nombre_campus"] = $("#campus_search").val();
-          edificio["nombre_edificio"] = $("#edificio_search").val();
-          var data = buscarObjetos("pisos_edificio",edificio);
-          if (URLactual['href'].indexOf('crear_gradas') >= 0) {
-            $("#pisos_search").empty();
-            var row = $("<option value=''/>");
-            row.text("--Seleccionar--");
-            row.appendTo("#pisos_search");
-            $.each(data, function(index, record) {
-                if($.isNumeric(index)) {
-                    numeroPisos = record.numero_pisos;
-                    terraza = record.terraza;
-                    sotano = record.sotano;
-                }
-            });
-            for (var i=0; i<numeroPisos;i++) {
-                if (i == 0 && sotano == 'true') {
-                    aux = "Sotano";
-                    row = $("<option value='sotano'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos_search");
-                }
-                if (i == (numeroPisos-1) && terraza == 'true') {
-                    aux = i+1;
-                    row = $("<option value='" + aux + "'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos_search");
-                    aux = "Terraza";
-                }else if(i < (numeroPisos-1)){
-                    aux = i+1;
-                    row = $("<option value='" + aux + "'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos_search");
-                }
-            }
-          }else{
-              $("#pisos_search").empty();
-              var row = $("<option value=''/>");
-              row.text("--Seleccionar--");
-              row.appendTo("#pisos_search");
-              $.each(data, function(index, record) {
-                  if($.isNumeric(index)) {
-                      numeroPisos = record.numero_pisos;
-                      terraza = record.terraza;
-                      sotano = record.sotano;
-                  }
-              });
-              for (var i=0; i<numeroPisos;i++) {
-                  if (i == 0 && sotano == 'true') {
-                      aux = "Sotano";
-                      row = $("<option value='sotano'/>");
-                      row.text(aux);
-                      row.appendTo("#pisos_search");
-                  }
-                  aux = i+1;
-                  row = $("<option value='" + aux + "'/>");
-                  row.text(aux);
+          if (validarCadena($("#edificio_search").val())) {
+              edificio["nombre_sede"] = $("#sede_search").val();
+              edificio["nombre_campus"] = $("#campus_search").val();
+              edificio["nombre_edificio"] = $("#edificio_search").val();
+              if(URLactual['href'].indexOf('consultar_cubierta') >= 0){
+                  var data = buscarObjetos("cubiertas",edificio);
+              }else if(URLactual['href'].indexOf('consultar_gradas') >= 0){
+                  var data = buscarObjetos("gradas",edificio);
+              }else{
+                  var data = buscarObjetos("pisos_edificio",edificio);
+              }
+              if (URLactual['href'].indexOf('crear_gradas') >= 0) {
+                  $("#pisos_search").empty();
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
                   row.appendTo("#pisos_search");
-                  if (i == (numeroPisos-1) && terraza == 'true') {
-                      aux = "Terraza";
-                      row = $("<option value='terraza'/>");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          numeroPisos = record.numero_pisos;
+                          terraza = record.terraza;
+                          sotano = record.sotano;
+                      }
+                  });
+                  for (var i=0; i<numeroPisos;i++) {
+                      if (i == 0 && sotano == 'true') {
+                          aux = "Sotano";
+                          row = $("<option value='sotano'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
+                      if (i == (numeroPisos-1) && terraza == 'true') {
+                          aux = i+1;
+                          row = $("<option value='" + aux + "'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                          aux = "Terraza";
+                      }else if(i < (numeroPisos-1)){
+                          aux = i+1;
+                          row = $("<option value='" + aux + "'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
+                  }
+              }else{
+                  $("#pisos_search").empty();
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#pisos_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          numeroPisos = record.numero_pisos;
+                          terraza = record.terraza;
+                          sotano = record.sotano;
+                      }
+                  });
+                  for (var i=0; i<numeroPisos;i++) {
+                      if (i == 0 && sotano == 'true') {
+                          aux = "Sotano";
+                          row = $("<option value='sotano'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
+                      aux = i+1;
+                      row = $("<option value='" + aux + "'/>");
                       row.text(aux);
                       row.appendTo("#pisos_search");
+                      if (i == (numeroPisos-1) && terraza == 'true') {
+                          aux = "Terraza";
+                          row = $("<option value='terraza'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
                   }
               }
+          }else{
+              var campus = $("#campus_search").val();
+              $("#campus_search").val(campus).change();
+              $("#pisos_search").empty();
+              $("#espacio_search").empty();
           }
       }
   });
 
   /**
-   * Se captura el evento cuando se modifica el valor del selector edificio_search
+   * Se captura el evento cuando se modifica el valor del selector pisos_search
    * y se actualiza el selector de pisos.
    */
   $("#pisos_search").change(function (e) {
@@ -848,82 +1182,50 @@ $(document).ready(function() {
                   break;
               }
           }
-          var edificio = $("#edificio_search").val();
-          if (edificio != "") {
-              $('#visualizarEdificio').removeAttr("disabled");
+          if (validarCadena($("#edificio_search").val())) {
+              $('#visualizarCubierta').removeAttr("disabled");
+              $('#visualizarGradas').removeAttr("disabled");
           }else{
-              $('#visualizarEdificio').attr('disabled','disabled');
+              $('#visualizarCubierta').attr('disabled','disabled');
+              $('#visualizarGradas').removeAttr("disabled");
           }
       }else{
           var edificio = {};
-          var numeroPisos, terraza, sotano;
           edificio["nombre_sede"] = $("#sede_search").val();
           edificio["nombre_campus"] = $("#campus_search").val();
           edificio["nombre_edificio"] = $("#edificio_search").val();
-          var data = buscarObjetos("pisos_edificio",edificio);
-          if (URLactual['href'].indexOf('crear_gradas') >= 0) {
-            $("#pisos").empty();
-            var row = $("<option value=''/>");
-            row.text("--Seleccionar--");
-            row.appendTo("#pisos");
-            $.each(data, function(index, record) {
-                if($.isNumeric(index)) {
-                    numeroPisos = record.numero_pisos;
-                    terraza = record.terraza;
-                    sotano = record.sotano;
-                }
-            });
-            for (var i=0; i<numeroPisos;i++) {
-                if (i == 0 && sotano == 'true') {
-                    aux = "Sotano";
-                    row = $("<option value='sotano'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos");
-                }
-                if (i == (numeroPisos-1) && terraza == 'true') {
-                    aux = i+1;
-                    row = $("<option value='" + aux + "'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos");
-                    aux = "Terraza";
-                }else if(i < (numeroPisos-1)){
-                    aux = i+1;
-                    row = $("<option value='" + aux + "'/>");
-                    row.text(aux);
-                    row.appendTo("#pisos");
-                }
-            }
+          if($("#pisos_search").val() == '-1'){
+              edificio["piso"] = "terraza";
+          }else if($("#pisos_search").val() == '0'){
+              edificio["piso"] = "sotano";
           }else{
-              $("#pisos").empty();
-              var row = $("<option value=''/>");
-              row.text("--Seleccionar--");
-              row.appendTo("#pisos");
-              $.each(data, function(index, record) {
-                  if($.isNumeric(index)) {
-                      numeroPisos = record.numero_pisos;
-                      terraza = record.terraza;
-                      sotano = record.sotano;
-                  }
-              });
-              for (var i=0; i<numeroPisos;i++) {
-                  if (i == 0 && sotano == 'true') {
-                      aux = "Sotano";
-                      row = $("<option value='sotano'/>");
-                      row.text(aux);
-                      row.appendTo("#pisos");
-                  }
-                  aux = i+1;
-                  row = $("<option value='" + aux + "'/>");
-                  row.text(aux);
-                  row.appendTo("#pisos");
-                  if (i == (numeroPisos-1) && terraza == 'true') {
-                      aux = "Terraza";
-                      row = $("<option value='terraza'/>");
-                      row.text(aux);
-                      row.appendTo("#pisos");
-                  }
-              }
+              edificio["piso"] = $("#pisos_search").val();
           }
+          var data = buscarObjetos("espacios",edificio);
+          $("#espacio_search").empty();
+          var row = $("<option value=''/>");
+          row.text("--Seleccionar--");
+          row.appendTo("#espacio_search");
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                  aux = record.id;
+                  row = $("<option value='" + record.id + "'/>");
+                  row.text(aux);
+                  row.appendTo("#espacio_search");
+              }
+          });
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del selector pisos_search
+   * y se actualiza el selector de pisos.
+   */
+  $("#espacio_search").change(function (e) {
+      if (validarCadena($("#espacio_search").val())) {
+          $('#visualizarEspacio').removeAttr("disabled");
+      }else{
+          $('#visualizarEspacio').attr('disabled','disabled');
       }
   });
 
@@ -1004,408 +1306,408 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#map").on("click", ".ver_edificios", function(){
-    for (var i = 0; i < marcadores.length; i++) {
-        marcadores[i].setMap(null);
-    }
-    var info = {};
-    info["nombre_sede"] = sedeSeleccionada;
-    info["nombre_campus"] = campusSeleccionado;
-    var edificios = buscarObjetos("edificios",info);
-    var canchas = buscarObjetos("canchas",info);
-    var corredores = buscarObjetos("corredores",info);
-    var parqueaderos = buscarObjetos("parqueaderos",info);
-    var piscinas = buscarObjetos("piscinas",info);
-    var plazoletas = buscarObjetos("plazoletas",info);
-    var senderos = buscarObjetos("senderos",info);
-    var vias = buscarObjetos("vias",info);
-    console.log(edificios);
-    console.log(canchas);
-    console.log(corredores);
-    console.log(parqueaderos);
-    console.log(piscinas);
-    console.log(plazoletas);
-    console.log(senderos);
-    console.log(vias);
-    var bounds  = new google.maps.LatLngBounds();
-    if (edificios.mensaje == null && canchas.mensaje == null && corredores.mensaje == null && parqueaderos.mensaje == null && piscinas.mensaje == null && plazoletas.mensaje == null && senderos.mensaje == null && vias.mensaje == null) {
-        alert("El campus seleccionado no tiene edificios creados en el sistema");
-        rellenarMapaConsulta();
-    }else{
-        $.each(edificios, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Edificio: " + record.id + "-" + record.nombre_edificio,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
-                      '<div class="form_button">'+
-                        '<div class="col-xs-12">'+
-                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
-                        '</div><br>'+
-                        '<div class="col-xs-6">'+
-                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                        '</div>'+
-                        '<div class="col-xs-6">'+
-                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
+      for (var i = 0; i < marcadores.length; i++) {
+          marcadores[i].setMap(null);
+      }
+      var info = {};
+      info["nombre_sede"] = sedeSeleccionada;
+      info["nombre_campus"] = campusSeleccionado;
+      var edificios = buscarObjetos("edificios",info);
+      var canchas = buscarObjetos("canchas",info);
+      var corredores = buscarObjetos("corredores",info);
+      var parqueaderos = buscarObjetos("parqueaderos",info);
+      var piscinas = buscarObjetos("piscinas",info);
+      var plazoletas = buscarObjetos("plazoletas",info);
+      var senderos = buscarObjetos("senderos",info);
+      var vias = buscarObjetos("vias",info);
+      console.log(edificios);
+      console.log(canchas);
+      console.log(corredores);
+      console.log(parqueaderos);
+      console.log(piscinas);
+      console.log(plazoletas);
+      console.log(senderos);
+      console.log(vias);
+      var bounds  = new google.maps.LatLngBounds();
+      if (edificios.mensaje == null && canchas.mensaje == null && corredores.mensaje == null && parqueaderos.mensaje == null && piscinas.mensaje == null && plazoletas.mensaje == null && senderos.mensaje == null && vias.mensaje == null) {
+          alert("El campus seleccionado no tiene edificios creados en el sistema");
+          rellenarMapaConsulta();
+      }else{
+          $.each(edificios, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Edificio: " + record.id + "-" + record.nombre_edificio,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
+                        '<div class="form_button">'+
+                          '<div class="col-xs-12">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-6">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
+                          '<div class="col-xs-6">'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
+                          '</div>'+
                         '</div>'+
                       '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(canchas, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Cancha: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Cancha</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Cancha:</b> '+record.id+'<b><br>Uso:</b> '+record.uso+'</p>'+
-                      '<div class="form_button">'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(canchas, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Cancha: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Cancha</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Cancha:</b> '+record.id+'<b><br>Uso:</b> '+record.uso+'</p>'+
+                        '<div class="form_button">'+
+                            '<div class="col-xs-12">'+
+                                '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_cancha" name="ver_cancha" id="ver_cancha" value="Ver Informaci&oacute;n Cancha" title="Ver la informaci&oacute;n de la cancha"/>'+
+                            '</div><br>'+
+                            '<div class="col-xs-12">'+
+                                '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                            '</div>'+
+                        '</div>'+
+                      '</div>'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(corredores, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Corredor: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Corredor</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Corredor:</b> '+record.id+'</p>'+
+                        '<div class="form_button">'+
                           '<div class="col-xs-12">'+
-                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_cancha" name="ver_cancha" id="ver_cancha" value="Ver Informaci&oacute;n Cancha" title="Ver la informaci&oacute;n de la cancha"/>'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_corredor" name="ver_corredor" id="ver_corredor" value="Ver Informaci&oacute;n Corredor" title="Ver la informaci&oacute;n del corredor"/>'+
                           '</div><br>'+
                           '<div class="col-xs-12">'+
                               '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
                           '</div>'+
+                        '</div>'+
                       '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(corredores, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Corredor: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Corredor</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Corredor:</b> '+record.id+'</p>'+
-                      '<div class="form_button">'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(parqueaderos, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Parqueadero: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Parqueadero</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>parqueadero:</b> '+record.id+'</p>'+
+                        '<div class="form_button">'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_parqueadero" name="ver_parqueadero" id="ver_parqueadero" value="Ver Informaci&oacute;n Parqueadero" title="Ver la informaci&oacute;n del parqueadero"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(piscinas, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Piscina: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Piscina</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Piscina:</b> '+record.id+'</p>'+
+                        '<div class="form_button">'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_piscina" name="ver_piscina" id="ver_piscina" value="Ver Informaci&oacute;n Piscina" title="Ver la informaci&oacute;nd de la piscina"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(plazoletas, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Plazoleta: " + record.id + "-" + record.nombre,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Plazoleta</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Plazoleta:</b> '+record.id+'-'+record.nombre+'</p>'+
+                        '<div class="form_button">'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_plazoleta" name="ver_plazoleta" id="ver_plazoleta" value="Ver Informaci&oacute;n Plazoleta" title="Ver la informaci&oacute;n de la plazoleta"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(senderos, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "Sendero: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Sendero</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Sendero:</b> '+record.id+'</p>'+
+                        '<div class="form_button">'+
                         '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_corredor" name="ver_corredor" id="ver_corredor" value="Ver Informaci&oacute;n Corredor" title="Ver la informaci&oacute;n del corredor"/>'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero"/>'+
                         '</div><br>'+
                         '<div class="col-xs-12">'+
                             '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
                         '</div>'+
-                      '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(parqueaderos, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Parqueadero: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Parqueadero</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>parqueadero:</b> '+record.id+'</p>'+
-                      '<div class="form_button">'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_parqueadero" name="ver_parqueadero" id="ver_parqueadero" value="Ver Informaci&oacute;n Parqueadero" title="Ver la informaci&oacute;n del parqueadero"/>'+
-                        '</div><br>'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
                         '</div>'+
                       '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(piscinas, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Piscina: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Piscina</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Piscina:</b> '+record.id+'</p>'+
-                      '<div class="form_button">'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_piscina" name="ver_piscina" id="ver_piscina" value="Ver Informaci&oacute;n Piscina" title="Ver la informaci&oacute;nd de la piscina"/>'+
-                        '</div><br>'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+          $.each(vias, function(index, record) {
+              if($.isNumeric(index)) {
+                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                  var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      title: "V&iacute;a: " + record.id,
+                      id: record.id,
+                      id_campus: record.id_campus,
+                      id_sede: record.id_sede
+                  });
+                  var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n V&iacute;a</h3>'+
+                      '<div id="bodyContent">'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>V&iacute;a:</b> '+record.id+'</p>'+
+                        '<div class="form_button">'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_via" name="ver_via" id="ver_via" value="Ver Informaci&oacute;n V&iacute;a" title="Ver la informaci&oacute;n de la v&iacute;a"/>'+
+                          '</div><br>'+
+                          '<div class="col-xs-12">'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                          '</div>'+
                         '</div>'+
                       '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(plazoletas, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Plazoleta: " + record.id + "-" + record.nombre,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Plazoleta</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Plazoleta:</b> '+record.id+'-'+record.nombre+'</p>'+
-                      '<div class="form_button">'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_plazoleta" name="ver_plazoleta" id="ver_plazoleta" value="Ver Informaci&oacute;n Plazoleta" title="Ver la informaci&oacute;n de la plazoleta"/>'+
-                        '</div><br>'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                        '</div>'+
-                      '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(senderos, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "Sendero: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Sendero</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Sendero:</b> '+record.id+'</p>'+
-                      '<div class="form_button">'+
-                      '<div class="col-xs-12">'+
-                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero"/>'+
-                      '</div><br>'+
-                      '<div class="col-xs-12">'+
-                          '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                      '</div>'+
-                      '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-        $.each(vias, function(index, record) {
-            if($.isNumeric(index)) {
-                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: "V&iacute;a: " + record.id,
-                    id: record.id,
-                    id_campus: record.id_campus,
-                    id_sede: record.id_sede
-                });
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n V&iacute;a</h3>'+
-                    '<div id="bodyContent">'+
-                      '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>V&iacute;a:</b> '+record.id+'</p>'+
-                      '<div class="form_button">'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_via" name="ver_via" id="ver_via" value="Ver Informaci&oacute;n V&iacute;a" title="Ver la informaci&oacute;n de la v&iacute;a"/>'+
-                        '</div><br>'+
-                        '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
-                        '</div>'+
-                      '</div>'+
-                    '</div>'+
-                    '</div>';
-                var infoWindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                marker.addListener('click', function() {
-                    if (infoWindowActiva != null) {
-                        infoWindowActiva.close();
-                    }
-                    infoWindow.open(map, marker);
-                    infoWindowActiva = infoWindow;
-                });
-                google.maps.event.addListener(mapaConsulta, 'click', function(){
-                    infoWindow.close();
-                });
-                marcadores.push(marker);
-                marker.setMap(mapaConsulta);
-                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                bounds.extend(loc);
-            }
-        });
-    }
-    if (edificios.mensaje != null && canchas.mensaje != null && corredores.mensaje != null && parqueaderos.mensaje != null && piscinas.mensaje != null && plazoletas.mensaje != null && senderos.mensaje != null && vias.mensaje != null) {
-        mapaConsulta.fitBounds(bounds);
-        mapaConsulta.panToBounds(bounds);
-        for (var i = 0; i < marcadores.length; i++) {
-            google.maps.event.addListener(marcadores[i], 'click',
-            function () {
-                mapaConsulta.setZoom(19);
-                mapaConsulta.setCenter(this.getPosition());
-            });
-        }
-    }
+                      '</div>';
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  marker.addListener('click', function() {
+                      if (infoWindowActiva != null) {
+                          infoWindowActiva.close();
+                      }
+                      infoWindow.open(map, marker);
+                      infoWindowActiva = infoWindow;
+                  });
+                  google.maps.event.addListener(mapaConsulta, 'click', function(){
+                      infoWindow.close();
+                  });
+                  marcadores.push(marker);
+                  marker.setMap(mapaConsulta);
+                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                  bounds.extend(loc);
+              }
+          });
+      }
+      if (edificios.mensaje != null && canchas.mensaje != null && corredores.mensaje != null && parqueaderos.mensaje != null && piscinas.mensaje != null && plazoletas.mensaje != null && senderos.mensaje != null && vias.mensaje != null) {
+          mapaConsulta.fitBounds(bounds);
+          mapaConsulta.panToBounds(bounds);
+          for (var i = 0; i < marcadores.length; i++) {
+              google.maps.event.addListener(marcadores[i], 'click',
+              function () {
+                  mapaConsulta.setZoom(19);
+                  mapaConsulta.setCenter(this.getPosition());
+              });
+          }
+      }
   });
 
   /**
