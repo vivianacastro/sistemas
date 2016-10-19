@@ -9,11 +9,11 @@
         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
         <div class='div_izquierda'><b>C&oacute;digo del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='text' name='id_edificio' id='id_edificio' value='' placeholder='Ej: 331' required/><br>
+        <input class='form-control formulario' type='text' name='id_edificio' id='id_edificio' value='' maxlength="10" placeholder='Ej: 331' required/><br>
         <div class='div_izquierda'><b>Nombre del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='text' name='nombre_edificio' id='nombre_edificio' value='' placeholder='Ej: Ingenier&iacute;as' required/><br>
+        <input class='form-control formulario' type='text' name='nombre_edificio' id='nombre_edificio' value='' maxlength="50" placeholder='Ej: Ingenier&iacute;as' required/><br>
         <div class='div_izquierda'><b>N&uacute;mero de Pisos del Edificio<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='number' min="1" name='pisos_edificio' id='pisos_edificio' value='' placeholder='Ej: 4' required/><br>
+        <input class='form-control formulario' type='number' min="1" name='pisos_edificio' id='pisos_edificio' value='' maxlength="5" placeholder='Ej: 4' required/><br>
         <div class='div_izquierda'><b>¿El Edificio tiene terraza?<font color='red'>*</font></b></div>
         <label class='radio-inline'><input type='radio' name='terraza' value='true'>S&iacute;</label>
         <label class='radio-inline'><input type='radio' name='terraza' value='false'>No</label><br>
@@ -23,12 +23,12 @@
         <div><b><h5>Informaci&oacute;n de la Fachada del Edificio</h5></b></div>
         <div class='div_izquierda'><b>Ancho de la fachada:</b></div>
         <div class="input-group">
-           <input class='form-control formulario' type='number' min="1" name='ancho_fachada' id='ancho_fachada' value='' placeholder='Ej: 4' required/>
+           <input class='form-control formulario' type='number' min="1" name='ancho_fachada' maxlength="10" id='ancho_fachada' value='' placeholder='Ej: 4' required/>
             <span class="input-group-addon">m</span>
         </div><br>
         <div class='div_izquierda'><b>Alto de la fachada:</b></div>
         <div class="input-group">
-           <input class='form-control formulario' type='number' min="1" name='alto_fachada' id='alto_fachada' value='' placeholder='Ej: 4' required/>
+           <input class='form-control formulario' type='number' min="1" name='alto_fachada' maxlength="10" id='alto_fachada' value='' placeholder='Ej: 4' required/>
             <span class="input-group-addon">m</span>
         </div><br>
         <div class='div_izquierda'><b>Material de fachada (m):</b></div>
