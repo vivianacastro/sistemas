@@ -70,8 +70,17 @@ html, body {
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-    width: 70%;
     margin: auto;
+}
+
+.carouselImg img {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+}
+
+.div_carousel{
+    height: 300px;
 }
 
 .col-xs-5{
@@ -87,7 +96,7 @@ html, body {
 }
 
 .div_input_inicio_sesion{
-		padding-top: 6%;
+		padding-top: 4%;
 }
 
 .div_izquierda{
@@ -267,7 +276,8 @@ html, body {
 }
 
 #carrusel_inicio_sesion{
-		width: 70%;
+		/*width: 70%;
+    height: 300px;*/
 		margin-left: auto;
 		margin-right: auto;
 }
@@ -300,18 +310,18 @@ html, body {
 }
 
 #map {
-  height: 300px;
+    height: 300px;
 }
 
 #myCarousel{
-	width: 25%;
-	margin-left: auto;
-	margin-right: auto;
+  	width: 70%;
+  	margin-left: auto;
+  	margin-right: auto;
 }
 
 #navbar{
-	background-color: #D51B23;
-	color: white;
+	   background-color: #D51B23;
+	  color: white;
 }
 
 #spanRegistrar{
@@ -319,26 +329,23 @@ html, body {
 }
 
 #top{
-	 background-color: white;
-	  color: black;
+	   background-color: white;
+	    color: black;
 }
 
 #top .social a{
-	 color: black;
+	   color: black;
 }
 
 #top .social a:hover{
-	 color: red;
+	   color: red;
 }
 
 #ver_campus, #ver_cancha, #ver_corredor, #ver_parqueadero, #ver_piscina, #ver_plazoleta, #ver_sendero, #ver_via, #ver_edificio, #ver_edificios, #ver_espacios{
     font-size: small;
 }
 
-@media screen and (min-width:1200px) {
-
-}
-
+/* Smaller than standard 960 (devices and browsers) */
 @media screen and (max-width:1200px) {
 		.img_boton{
     		width: 25%;
@@ -353,60 +360,62 @@ html, body {
 		}
 }
 
+@media screen and (min-width: 992px) and (max-width:1200px){
+    .texto-inicio-sesion{
+        font-size: small;
+    }
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media screen and (min-width: 768px) and (max-width:991px) {
+    .texto-inicio-sesion{
+        font-size: smaller;
+    }
+}
+
 @media screen and (min-width:768px) {
 		.img_boton{
         width: 35%;
     }
 }
 
-@media screen and (max-width:767px) {
-		.btn-formulario{
-		    text-align: center;
-		    padding: 2% 2% 2%;
-		}
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+    .btn-formulario{
+        text-align: center;
+        padding: 2% 2% 2%;
+    }
 
-		.img_boton{
-		    width: 20%;
-		}
+    .img_boton{
+        width: 20%;
+    }
 
-		.modal-dialog{
-		    width: 100%;
-		}
+    .modal-dialog{
+        width: 100%;
+    }
 
-		.navbar .yamm-content h5{
-			border-bottom: double 2px white;
-			color: white;
-		}
+    .navbar .yamm-content h5{
+      border-bottom: double 2px white;
+      color: white;
+    }
 
-		.navbar .yamm-content ul li a{
-			color: white;
-		}
+    .navbar .yamm-content ul li a{
+      color: white;
+    }
 
     .texto-inicio-sesion{
         font-size: x-small;
     }
 
-		#divTimeOut{
-				width: 100%;
-		}
+    #divTimeOut{
+        width: 100%;
+    }
 
     #logoUnivalle{
         display: none;
     }
 
-		#carrusel_inicio_sesion{
-				display: none;
-		}
-}
-
-@media screen and (max-width:1200px) and (min-width: 992px) {
-    .texto-inicio-sesion{
-        font-size: small;
-    }
-}
-
-@media screen and (max-width:991px) and (min-width: 768px) {
-    .texto-inicio-sesion{
-        font-size: smaller;
+    #carrusel_inicio_sesion{
+        display: none;
     }
 }

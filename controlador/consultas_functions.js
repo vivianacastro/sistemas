@@ -1342,13 +1342,13 @@ $(document).ready(function() {
                   console.log(index);
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active">'
-                       +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item">'
-                        +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -1405,13 +1405,13 @@ $(document).ready(function() {
                   console.log(index);
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active">'
-                       +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item">'
-                        +'<img src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'">'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
