@@ -462,7 +462,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['codigo']);
+            $verificar = $m->verificarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['id_parqueadero']);
             if($verificar){
                 $m->guardarParqueadero($info['nombre_sede'],$info['nombre_campus'],$info['id_parqueadero'],$info['capacidad'],$info['ancho'],$info['largo'],$info['material_piso'],$info['tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
             }
@@ -485,7 +485,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina']);
             if($verificar){
                 $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina'],$info['alto'],$info['ancho'],$info['largo'],$info['cantidad_puntos_hidraulicos'],$info['material_fachada'],$info['lat'],$info['lng']);
             }
@@ -508,7 +508,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha']);
+            $verificar = $m->verificarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_plazoleta']);
             if($verificar){
                 $m->guardarPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_plazoleta'],$info['nombre'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
             }
