@@ -2,9 +2,10 @@ $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0;
   var campusSelect = null;
-  var marcadores = [];
+  var marcadores = [], marcadoresModificacion = [];
   var URLactual = window.location;
   var infoWindowActiva;
+  var coordsMapaModificacion;
 
   /**
    * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -539,7 +540,7 @@ $(document).ready(function() {
                       '<div id="bodyContent">'+
                         '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'</p>'+
                         '<div class="form_button">'+
-                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Edificios Campus" title="Ver edificios del campus"/>'+
+                        '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificios" name="ver_edificios" id="ver_edificios" value="Ver Elementos Campus" title="Ver elementos del campus"/>'+
                         '</div>'+
                       '</div>'+
                       '</div>';
@@ -1384,17 +1385,19 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var bounds  = new google.maps.LatLngBounds();
-      var lat;
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       var data = consultarInformacionObjeto("campus",info);
       var archivos = consultarArchivosObjeto("campus",info);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              lat = myLatlng;
+              coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
                   //draggable: true,
@@ -1402,6 +1405,7 @@ $(document).ready(function() {
                   id: record.id_campus,
                   id_sede: record.id_sede
               });
+              marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
               var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
               bounds.extend(loc);
@@ -1442,9 +1446,24 @@ $(document).ready(function() {
           }
       });
       $("#divDialogConsulta").modal('show');
-      getCoordenadas(mapaModificacion);
-      mapaModificacion.panToBounds(bounds);
-      mapaModificacion.fitBounds(bounds);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se abre el modal divDialogConsulta.
+   */
+  $("#divDialogConsulta").on("shown.bs.modal", function () {
+      if (URLactual['href'].indexOf('consultar_corredor') == -1 && URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1) {
+          google.maps.event.trigger(mapaModificacion, "resize");
+          mapaModificacion.setZoom(15);
+          mapaModificacion.setCenter(coordsMapaModificacion);
+      }
   });
 
   /**
@@ -1938,7 +1957,7 @@ $(document).ready(function() {
               }
           });
       }
-      if (edificios.mensaje != null && canchas.mensaje != null && corredores.mensaje != null && parqueaderos.mensaje != null && piscinas.mensaje != null && plazoletas.mensaje != null && senderos.mensaje != null && vias.mensaje != null) {
+      if (edificios.mensaje != null || canchas.mensaje != null || corredores.mensaje != null || parqueaderos.mensaje != null || piscinas.mensaje != null || plazoletas.mensaje != null || senderos.mensaje != null || vias.mensaje != null) {
           mapaConsulta.fitBounds(bounds);
           mapaConsulta.panToBounds(bounds);
           for (var i = 0; i < marcadores.length; i++) {
@@ -1952,7 +1971,7 @@ $(document).ready(function() {
   });
 
   /**
-   * Se captura el evento cuando se da click en el boton visualizarCampus y se
+   * Se captura el evento cuando se da click en el boton modificar_campus y se
    * realiza la operacion correspondiente.
    */
   $("#modificar_campus").click(function (e){
