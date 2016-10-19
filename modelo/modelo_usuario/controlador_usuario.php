@@ -18,6 +18,24 @@ class controlador_usuario {
     }
 
     /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function crear_usuario_logueado() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Crear Usuario',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["perfil"],"admin") == 0) {
+            $v->retornar_vista(USUARIO, USUARIO, CREAR_USUARIO_LOGUEADO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
     * Función que despliega el panel que permite recuperar la contraseña de un usuario
     **/
     public function olvido_contrasenia() {
@@ -27,6 +45,24 @@ class controlador_usuario {
         );
         $v = new controlador_vista();
         $v->retornar_vista(USUARIO, USUARIO, OLVIDO_CONTRASENIA, $data);
+    }
+
+    /**
+    * Función que despliega el panel que permite crear
+    * un usuario en el sistema.
+    **/
+    public function listar_usuarios_logueado() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Listar Usuarios',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["perfil"],"admin") == 0) {
+            $v->retornar_vista(USUARIO, USUARIO, LISTAR_USUARIOS_LOGUEADO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
     }
 
     /**

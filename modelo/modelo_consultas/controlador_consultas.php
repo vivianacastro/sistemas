@@ -488,7 +488,7 @@ class controlador_consultas
                     'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
-                    'id' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );

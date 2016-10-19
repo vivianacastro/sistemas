@@ -696,6 +696,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_cancha.png',
                               title: record.id + " - " + record.uso,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -736,6 +737,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_corredor.png',
                               title: record.id,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -776,6 +778,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_parqueadero.png',
                               title: record.id,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -816,6 +819,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_piscina.png',
                               title: record.id,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -856,6 +860,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_plazoleta.png',
                               title: record.id + " - " + record.nombre,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -896,6 +901,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_sendero.png',
                               title: record.id,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -936,6 +942,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_via.png',
                               title: record.id,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -979,6 +986,7 @@ $(document).ready(function() {
                           var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                           var marker = new google.maps.Marker({
                               position: myLatlng,
+                              icon: 'vistas/images/icono_edificio.png',
                               title: record.id + "-" + record.nombre_edificio,
                               id: record.id,
                               id_sede: record.id_sede,
@@ -1563,6 +1571,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_edificio.png',
                       title: "Edificio: " + record.id + "-" + record.nombre_edificio,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1611,6 +1620,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_cancha.png',
                       title: "Cancha: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1656,6 +1666,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_corredor.png',
                       title: "Corredor: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1701,6 +1712,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_parqueadero.png',
                       title: "Parqueadero: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1746,6 +1758,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_piscina.png',
                       title: "Piscina: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1791,6 +1804,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_plazoleta.png',
                       title: "Plazoleta: " + record.id + "-" + record.nombre,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1836,6 +1850,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_sendero.png',
                       title: "Sendero: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -1881,6 +1896,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_via.png',
                       title: "Vía: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,

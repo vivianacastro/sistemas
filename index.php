@@ -26,7 +26,9 @@ $map = array(
         'cerrar_sesion' => array('controlador' =>'controlador_usuario', 'action' =>'cerrar_sesion'),
         'informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'informacion_usuario'),
         'crear_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario'),
+        'crear_usuario_logueado' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario_logueado'),
         'olvido_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'olvido_contrasenia'),
+        'listar_usuarios_logueado' => array('controlador' =>'controlador_usuario', 'action' =>'listar_usuarios_logueado'),
         'modificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_usuario'),
         'modificar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_contrasenia'),
         //Acciones de creación
