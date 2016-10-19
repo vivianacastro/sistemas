@@ -1873,7 +1873,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
-                      title: "V&iacute;a: " + record.id,
+                      title: "Vía: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
                       id_sede: record.id_sede
