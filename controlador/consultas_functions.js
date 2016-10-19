@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado;
+  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0;
   var campusSelect = null;
   var marcadores = [];
   var URLactual = window.location;
@@ -111,7 +111,7 @@ $(document).ready(function() {
   function initMap() {
       var options = {
           center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
-          zoom: 16,
+          zoom: 15,
           //mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       mapaConsulta = new google.maps.Map(document.getElementById('map'), options);
@@ -1343,12 +1343,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -1376,6 +1376,7 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var bounds  = new google.maps.LatLngBounds();
+      var lat;
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       var data = consultarInformacionObjeto("campus",info);
@@ -1385,11 +1386,13 @@ $(document).ready(function() {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              lat = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
                   //draggable: true,
                   title: record.nombre_campus,
-                  id: record.id_campus
+                  id: record.id_campus,
+                  id_sede: record.id_sede
               });
               marker.setMap(mapaModificacion);
               var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
@@ -1397,28 +1400,32 @@ $(document).ready(function() {
           }
       });
       $("#myCarousel").hide();
-      eliminarComponente("slide_carrusel");
-      eliminarComponente("item_carrusel");
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  console.log(index);
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="peopleCarouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div class="div_izquierda">'
+                  var componente = '<div id="plano" class="div_izquierda">'
                   +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
@@ -1426,9 +1433,10 @@ $(document).ready(function() {
               }
           }
       });
-      mapaModificacion.fitBounds(bounds);
-      mapaModificacion.panToBounds(bounds);
       $("#divDialogConsulta").modal('show');
+      getCoordenadas(mapaModificacion);
+      mapaModificacion.panToBounds(bounds);
+      mapaModificacion.fitBounds(bounds);
   });
 
   /**
