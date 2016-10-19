@@ -909,6 +909,8 @@ $(document).ready(function() {
             }
             if (map != undefined) {
               map.panTo(coords);
+              map.setZoom(15);
+              map.setCenter(coords);
               google.maps.event.trigger(map, 'resize');
             }
         }
