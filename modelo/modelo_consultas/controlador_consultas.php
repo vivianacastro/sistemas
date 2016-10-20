@@ -1170,6 +1170,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
+            $GLOBALS['sql'] = $info["nombre_sede"].$info["nombre_campus"].$info["id"];
             $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
@@ -1559,8 +1560,8 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar los campus
-     * almacenados en el sistema.
+     * Función que permite consultar los archivos de un campus
+     * almacenado en el sistema.
      */
     public function consultar_archivos_campus() {
         $GLOBALSGLOBALS['mensaje'] = "";
@@ -1575,6 +1576,328 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de una cancha
+     * almacenada en el sistema.
+     */
+    public function consultar_archivos_cancha() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de un corredor
+     * almacenado en el sistema.
+     */
+    public function consultar_archivos_corredor() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de una cubierta
+     * almacenada en el sistema.
+     */
+    public function consultar_archivos_cubierta() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCubierta($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'piso' => $valor['piso'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de unas gradas
+     * almacenadas en el sistema.
+     */
+    public function consultar_archivos_gradas() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'piso_inicio' => $valor['piso_inicio'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de un parqueadero
+     * almacenado en el sistema.
+     */
+    public function consultar_archivos_parqueadero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosParqueadero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de una piscina
+     * almacenada en el sistema.
+     */
+    public function consultar_archivos_piscina() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosPiscina($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de una plazoleta
+     * almacenada en el sistema.
+     */
+    public function consultar_archivos_plazoleta() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de un sendero
+     * almacenado en el sistema.
+     */
+    public function consultar_archivos_sendero() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosSendero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de una vía
+     * almacenada en el sistema.
+     */
+    public function consultar_archivos_via() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosVia($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de un edificio
+     * almacenado en el sistema.
+     */
+    public function consultar_archivos_edificio() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosEdificio($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los archivos de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_archivos_espacio() {
+        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'id' => $valor['id'],
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );

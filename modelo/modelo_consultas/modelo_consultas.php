@@ -44,6 +44,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Sedes presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -477,6 +478,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Edificios del campus presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -540,6 +542,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la sede seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -570,6 +573,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -605,6 +609,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -644,6 +649,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -682,6 +688,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cubierta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -754,6 +761,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -787,6 +795,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -820,6 +829,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -856,6 +866,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -891,6 +902,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -925,6 +937,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -953,6 +966,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -982,6 +996,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1011,6 +1026,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1041,6 +1057,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cubierta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1101,6 +1118,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1131,6 +1149,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1161,6 +1180,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1191,6 +1211,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1221,6 +1242,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1251,6 +1273,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1283,6 +1306,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del espacio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1311,6 +1335,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1341,6 +1366,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1371,6 +1397,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1401,6 +1428,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1431,6 +1459,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1461,6 +1490,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1491,6 +1521,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1521,6 +1552,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1551,6 +1583,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1582,6 +1615,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Número de pisos del edificio";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1606,6 +1640,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Usos de Espacios presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1632,6 +1667,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Materiales presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1658,6 +1694,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1698,6 +1735,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del espacio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

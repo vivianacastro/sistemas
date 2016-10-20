@@ -1470,9 +1470,11 @@ $(document).ready(function() {
       var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
-      info['id'] = id;
+      info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("cancha",info);
       var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
@@ -1514,12 +1516,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+cancha+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+cancha+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -1528,7 +1530,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+cancha+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   añadirComponente("planos",componente);
