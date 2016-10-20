@@ -1110,7 +1110,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
@@ -1145,7 +1145,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionCorredor($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
@@ -1251,7 +1251,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionParqueadero($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionParqueadero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -1288,7 +1288,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionPiscina($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionPiscina($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -1323,7 +1323,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionPlazoleta($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -1354,7 +1354,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionSendero($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionSendero($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -1394,7 +1394,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionVia($info["nombre_sede"],$info["nombre_campus"]);
+            $data = $m->buscarInformacionVia($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
