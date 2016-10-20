@@ -833,6 +833,8 @@ $(document).ready(function() {
                           marker.setMap(mapaConsulta);
                           var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
                           bounds.extend(loc);
+                          console.log(record.lat);
+                          console.log(record.lng);
                       }
                   });
                   if (data.mensaje != "") {
