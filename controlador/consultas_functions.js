@@ -484,6 +484,7 @@ $(document).ready(function() {
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               var marker = new google.maps.Marker({
                   position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
                   title: record.nombre_campus,
                   id: record.id,
                   id_sede: record.id_sede
@@ -529,6 +530,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_campus.png',
                       title: record.nombre_campus,
                       id: record.id,
                       id_sede: record.id_sede
@@ -621,6 +623,7 @@ $(document).ready(function() {
                   var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                   var marker = new google.maps.Marker({
                       position: myLatlng,
+                      icon: 'vistas/images/icono_campus.png',
                       title: record.nombre_campus,
                       id: record.id,
                       id_sede: record.id_sede
@@ -1400,6 +1403,7 @@ $(document).ready(function() {
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
                   title: record.nombre_campus,
                   id: record.id_campus,
                   id_sede: record.id_sede
@@ -1485,6 +1489,7 @@ $(document).ready(function() {
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
                   title: record.nombre_campus,
                   id: record.id,
                   id_sede: record.id_sede,
