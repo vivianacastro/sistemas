@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<!--Consulta Piscina-->
+<!--Consulta Parqueadero-->
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar Piscina</h2></b><br></div>
+        <div><b><h2>Buscar Parqueadero</h2></b><br></div>
         <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>C&oacute;digo de la Piscina<font color='red'>*</font>:</b></div>
+        <div class='div_izquierda'><b>C&oacute;digo del Parqueadero<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='codigo_search' id='codigo_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación de la Piscina</b></div>
+        <div class='div_izquierda'><b>Indique la ubicación del Parqueadero</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarPiscina" id="visualizarPiscina" value="Ver Información" title="Ver la información de la piscina seleccionada" disabled/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarParqueadero" id="visualizarParqueadero" value="Ver Información" title="Ver la información del parqueadero seleccionado" disabled/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -21,37 +21,44 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Informaci&oacute;n de la Piscina</h4>
+              <h4 class='modal-title'>Informaci&oacute;n del Parqueadero</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionPiscina'>
+                    <div id='informacionParqueadero'>
                         <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>C&oacute;digo del Piscina<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' name='id_piscina' id='id_piscina' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>Profundidad de la Piscina:</b></div>
+                        <div class='div_izquierda'><b>C&oacute;digo del Parqueadero<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='id_parqueadero' id='id_parqueadero' maxlength="50" value='' placeholder='Ej: Parqueadero 1' disabled required/><br>
+                        <div class='div_izquierda'><b>Capacidad del Parqueadero:</b></div>
                         <div class="input-group">
-                            <input class='form-control formulario' type="number" name='alto' id='alto' min="1" class="form-control" value='' placeholder='Ej: 2' disabled required>
-                            <span class="input-group-addon">cm</span>
+                            <input class='form-control formulario' type="number" name='capacidad' id='capacidad' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
+                            <span class="input-group-addon">autos</span>
                         </div><br>
-                        <div class='div_izquierda'><b>Ancho de la Piscina:</b></div>
+                        <div class='div_izquierda'><b>Ancho del Parqueadero:</b></div>
                         <div class="input-group">
                             <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
-                            <span class="input-group-addon">cm</span>
+                            <span class="input-group-addon">m</span>
                         </div><br>
-                        <div class='div_izquierda'><b>Largo de la Piscina:</b></div>
+                        <div class='div_izquierda'><b>Largo del Parqueadero:</b></div>
                         <div class="input-group">
-                            <input class='form-control formulario' type="number" name='largo' id='largo' min="1" class="form-control" value='' placeholder='Ej: 80' disabled required>
-                            <span class="input-group-addon">cm</span>
+                            <input class='form-control formulario' type="number" name='largo' id='largo' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
+                            <span class="input-group-addon">m</span>
                         </div><br>
-                        <div class='div_izquierda'><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>
-                        <input class='form-control formulario' type="number" name='cantidad_puntos_hidraulicos' id='cantidad_puntos_hidraulicos' min="1" class="form-control" value='' placeholder='Ej: 10' disabled required><br>
-                        <div class='div_izquierda'><b>Planos Piscina:</b></div>
+                        <div class='div_izquierda'><b>Material del piso:</b></div>
+                        <select class='form-control formulario' name='material_piso' id='material_piso' disabled required></select><br>
+                        <div class='div_izquierda'><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>
+                        <select class='form-control formulario' name='tipo_pintura' id='tipo_pintura' disabled required></select><br>
+                        <div class='div_izquierda'><b>Longitud de la demarcaci&oacute;n:</b></div>
+                        <div class="input-group">
+                            <input class='form-control formulario' type="number" name='longitud_demarcacion' id='longitud_demarcacion' min="1" class="form-control" value='' placeholder='Ej: 20' disabled required>
+                            <span class="input-group-addon">m</span>
+                        </div>
+                        <div class='div_izquierda'><b>Planos Parqueadero:</b></div>
                         <div id='planos'></div><br>
-                        <div class='div_izquierda'><b>Fotos Piscina:</b></div>
+                        <div class='div_izquierda'><b>Fotos Parqueadero:</b></div>
                         <div id='fotos'></div><br>
                         <div class="div_carousel">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -72,9 +79,13 @@
                               </a>
                             </div>
                         </div><br>
-                        <div class='div_izquierda'><b>Ubicación de la Piscina</b></div>
+                        <div class='div_izquierda'><b>Ubicación del Parqueadero</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
+                </div>
+                <div class='form_button modal-footer'>
+                  <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_parqueadero' id='modificar_parqueadero' value='Modificar Parqueadero' title='Modificar informaci&oacute;n del Parqueadero'/>
+                  <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_parqueadero' id='guardar_modificaciones_parqueadero' value='Guardar Cambios' title='Guardar informaci&oacute;n del Parqueadero'/>
                 </div>
             </div>
         </div>

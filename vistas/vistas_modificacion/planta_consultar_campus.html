@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<!--Consulta V&iacute;a-->
+<!--Consulta Rango Fechas-->
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar V&iacute;a</h2></b><br></div>
+        <div><b><h2>Buscar Campus</h2></b><br></div>
         <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>C&oacute;digo del V&iacute;a<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='codigo_search' id='codigo_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación de la V&iacute;a</b></div>
+        <div class='div_izquierda'><b>Indique la ubicación del Campus</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarVia" id="visualizarVia" value="Ver Información" title="Ver la información de la via seleccionada" disabled/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarCampus" id="visualizarCampus" value="Ver Información" title="Ver la información del campus seleccionado" disabled/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -21,29 +19,18 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Informaci&oacute;n del V&iacute;a</h4>
+              <h4 class='modal-title'>Informaci&oacute;n del Campus</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionVia'>
+                    <div id='informacionCampus'>
                         <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>C&oacute;digo de la V&iacute;a<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' name='id_via' id='id_via' maxlength="10" value='' placeholder='Ej: 1' required/><br>
-                        <div class='div_izquierda'><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>
-                        <select class='form-control formulario' name='tipo_pintura' id='tipo_pintura' required></select><br>
-                        <div class='div_izquierda'><b>Longitud de la demarcaci&oacute;n:</b></div>
-                        <div class="input-group">
-                            <input class='form-control formulario' type="number" name='longitud_demarcacion' id='longitud_demarcacion' min="1" class="form-control" value='' placeholder='Ej: 20' required>
-                            <span class="input-group-addon">m</span>
-                        </div><br>
-                        <div class='div_izquierda'><b>Material del piso:</b></div>
-                        <select class='form-control formulario' name='material_piso' id='material_piso' required></select><br>
-                        <div class='div_izquierda'><b>Planos V&iacute;a:</b></div>
+                        <div class='div_izquierda'><b>Planos Campus:</b></div>
                         <div id='planos'></div><br>
-                        <div class='div_izquierda'><b>Fotos V&iacute;a:</b></div>
+                        <div class='div_izquierda'><b>Fotos Campus:</b></div>
                         <div id='fotos'></div><br>
                         <div class="div_carousel">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -64,9 +51,13 @@
                               </a>
                             </div>
                         </div><br>
-                        <div class='div_izquierda'><b>Ubicación del V&iacute;a</b></div>
+                        <div class='div_izquierda'><b>Ubicación del Campus</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
+                </div>
+                <div class='form_button modal-footer'>
+                  <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_campus' id='modificar_campus' value='Modificar Campus' title='Modificar informaci&oacute;n del Campus'/>
+                  <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_campus' id='guardar_modificaciones_campus' value='Guardar Cambios' title='Guardar informaci&oacute;n del Campus'/>
                 </div>
             </div>
         </div>

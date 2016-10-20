@@ -78,11 +78,8 @@ class controlador_vista
     *funcion que permite cargar de forma dinamica las librerias de la aplicacion web
     *@param $operacion. Hace referencia la modulo que se carga una vez ejecutada una ruta
     **/
-    function crear_enlace_libreria($operacion)
-    {
-        $link = "<script type='text/javascript' src='controlador/".$operacion."_functions.js'>"
-                . "</script>";
-
+    function crear_enlace_libreria($operacion){
+        $link = "<script type='text/javascript' src='controlador/".$operacion."_functions.js'></script>";
         return $link;
     }
 
@@ -241,7 +238,6 @@ class controlador_vista
         }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, CREAR_USUARIO) == 0 || strcmp($accion, OLVIDO_CONTRASENIA) == 0)) {
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
-            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);
             $html = $this->representar_datos_dinamica($html, $data);
@@ -250,7 +246,11 @@ class controlador_vista
             $html = str_replace('{usuario}', $this->conseguir_usuario(), $html);
             $html = str_replace('{operaciones}', $this->conseguir_operaciones_add($modulo), $html);
             $html = str_replace('{modulo}', $this->conseguir_texto_modulo($modulo), $html);
-            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
+            if(strcmp($operacion, 'modificacion') == 0) {
+                $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria('consultas').$this->crear_enlace_libreria($operacion), $html);
+            }else{
+                $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
+            }
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);
             $html = $this->representar_datos_dinamica($html, $data);
