@@ -4,6 +4,7 @@ $(document).ready(function() {
     var coordenadas = {};
     var dataEspacio = {};
     var map;
+    var icono = "";
     var URLactual = window.location;
 
     /**
@@ -16,46 +17,52 @@ $(document).ready(function() {
             actualizarSelectSede();
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_campus.png';
         }else if(URLactual['href'].indexOf('crear_edificio') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_fachada",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_edificio.png';
         }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_cancha.png';
         }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_pared",0);
-          actualizarSelectMaterial("material_techo",0);
-          actualizarSelectMaterial("material_piso",0);
-          actualizarSelectTipoObjeto("tipo_iluminacion",0);
-          actualizarSelectTipoObjeto("tipo_interruptor",0);
-          actualizarSelectTipoObjeto("tipo_suministro_energia",0);
-          initMap();
-          getCoordenadas();
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_pared",0);
+            actualizarSelectMaterial("material_techo",0);
+            actualizarSelectMaterial("material_piso",0);
+            actualizarSelectTipoObjeto("tipo_iluminacion",0);
+            actualizarSelectTipoObjeto("tipo_interruptor",0);
+            actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+            initMap();
+            getCoordenadas();
+            icono = 'vistas/images/icono_corredor.png';
         }else if(URLactual['href'].indexOf('crear_cubierta') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_cubierta",0);
-          actualizarSelectTipoObjeto("tipo_cubierta",0);
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_cubierta",0);
+            actualizarSelectTipoObjeto("tipo_cubierta",0);
         }else if(URLactual['href'].indexOf('crear_gradas') >= 0){
-          actualizarSelectSede();
-          actualizarSelectMaterial("material_pasamanos",0);
-          actualizarSelectMaterial("material_ventana",0);
-          actualizarSelectTipoObjeto("tipo_ventana",0);
+            actualizarSelectSede();
+            actualizarSelectMaterial("material_pasamanos",0);
+            actualizarSelectMaterial("material_ventana",0);
+            actualizarSelectTipoObjeto("tipo_ventana",0);
         }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_parqueadero.png';
         }else if(URLactual['href'].indexOf('crear_piscina') >= 0){
             actualizarSelectSede();
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_piscina.png';
         }else if(URLactual['href'].indexOf('crear_plazoleta') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
@@ -63,6 +70,7 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_plazoleta.png';
         }else if(URLactual['href'].indexOf('crear_sendero') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_cubierta",0);
@@ -70,12 +78,14 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_iluminacion",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_sendero.png';
         }else if(URLactual['href'].indexOf('crear_via') >= 0){
             actualizarSelectSede();
             actualizarSelectMaterial("material_piso",0);
             actualizarSelectTipoObjeto("tipo_pintura",0);
             initMap();
             getCoordenadas();
+            icono = 'vistas/images/icono_via.png';
         }else if(URLactual['href'].indexOf('crear_espacio') >= 0){
             actualizarSelectSede();
             actualizarSelectUsosEspacios();
@@ -123,6 +133,25 @@ $(document).ready(function() {
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        if(URLactual['href'].indexOf('crear_campus') >= 0){
+            icono = 'vistas/images/icono_campus.png';
+        }else if(URLactual['href'].indexOf('crear_edificio') >= 0){
+            icono = 'vistas/images/icono_edificio.png';
+        }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
+            icono = 'vistas/images/icono_cancha.png';
+        }else if(URLactual['href'].indexOf('crear_corredor') >= 0){
+            icono = 'vistas/images/icono_corredor.png';
+        }else if(URLactual['href'].indexOf('crear_parqueadero') >= 0){
+            icono = 'vistas/images/icono_parqueadero.png';
+        }else if(URLactual['href'].indexOf('crear_piscina') >= 0){
+            icono = 'vistas/images/icono_piscina.png';
+        }else if(URLactual['href'].indexOf('crear_plazoleta') >= 0){
+            icono = 'vistas/images/icono_plazoleta.png';
+        }else if(URLactual['href'].indexOf('crear_sendero') >= 0){
+            icono = 'vistas/images/icono_sendero.png';
+        }else if(URLactual['href'].indexOf('crear_via') >= 0){
+            icono = 'vistas/images/icono_via.png';
+        }
         var drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.MARKER,
             drawingControl: true,
@@ -133,7 +162,8 @@ $(document).ready(function() {
                 ]
             },
             markerOptions: {
-                draggable: true
+                draggable: true,
+                icon: icono
             }
         });
         drawingManager.setMap(map);
