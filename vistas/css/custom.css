@@ -5,6 +5,10 @@ html, body {
     padding: 0;
 }
 
+.image-upload > input{
+    
+}
+
 .a i.fa, button i.fa{
 	 color: white !important;
 }
@@ -44,7 +48,6 @@ html, body {
 
 .btn-lg{
     text-align: center;
-    /*font-size: small;*/
 		border-radius: 10px 10px 10px 10px;
 		-moz-border-radius: 10px 10px 10px 10px;
 		-webkit-border-radius: 10px 10px 10px 10px;
@@ -61,8 +64,31 @@ html, body {
     border-color: transparent;
 }
 
+.carousel-control.left{
+    background: rgba(225,86,97,1) !important;
+    background: -moz-linear-gradient(left, rgba(225,86,97,1) 0%, rgba(255,255,255,1) 100%) !important;
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(225,86,97,1)), color-stop(100%, rgba(255,255,255,1))) !important;
+    background: -webkit-linear-gradient(left, rgba(225,86,97,1) 0%, rgba(255,255,255,1) 100%) !important;
+    background: -o-linear-gradient(left, rgba(225,86,97,1) 0%, rgba(255,255,255,1) 100%) !important;
+    background: -ms-linear-gradient(left, rgba(225,86,97,1) 0%, rgba(255,255,255,1) 100%) !important;
+    background: linear-gradient(to right, rgba(225,86,97,1) 0%, rgba(255,255,255,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e15661', endColorstr='#ffffff', GradientType=1 ) !important;
+}
+
+.carousel-control.right{
+    background: rgba(255,255,255,1) !important;
+    background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(225,86,97,1) 100%) !important;
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(225,86,97,1))) !important;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(225,86,97,1) 100%) !important;
+    background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(225,86,97,1) 100%) !important;
+    background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(225,86,97,1) 100%) !important;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(225,86,97,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e15661', GradientType=1 ) !important;
+}
+
 .carousel-indicators .active{
-		background-color: black;
+		background-color: #D51B23;
+    border-color: transparent;
 }
 
 .carousel-indicators li{
@@ -173,6 +199,21 @@ html, body {
     margin-right: auto;
 }
 
+.item {
+    height: 300px;
+}
+
+.item img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .mapa{
     margin-left: auto;
     margin-right: auto;
@@ -262,6 +303,12 @@ html, body {
     font-size: medium;
 }
 
+#agregar_foto{
+    height: 300px;
+    width: 100%;
+    border-color: transparent;
+}
+
 #barra_usuario{
 		color: black !important;
 		float: right;
@@ -276,8 +323,6 @@ html, body {
 }
 
 #carrusel_inicio_sesion{
-		/*width: 70%;
-    height: 300px;*/
 		margin-left: auto;
 		margin-right: auto;
 }
@@ -308,7 +353,6 @@ html, body {
 #divTimeOut{
     width: 60%;
 }
-
 
 #myCarousel{
   	width: 70%;
