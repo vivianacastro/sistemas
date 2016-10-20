@@ -487,7 +487,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina']);
             if($verificar){
-                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina'],$info['alto'],$info['ancho'],$info['largo'],$info['cantidad_puntos_hidraulicos'],$info['material_fachada'],$info['lat'],$info['lng']);
+                $m->guardarPiscina($info['nombre_sede'],$info['nombre_campus'],$info['id_piscina'],$info['alto'],$info['ancho'],$info['largo'],$info['cantidad_puntos_hidraulicos'],$info['lat'],$info['lng']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
