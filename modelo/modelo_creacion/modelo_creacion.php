@@ -44,6 +44,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La sede se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -73,6 +74,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El campus se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -125,6 +127,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El edificio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -175,6 +178,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La cancha se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -245,6 +249,7 @@ class modelo_creacion {
                     $this->guardarInterruptoresCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
                 }
                 $GLOBALS['mensaje'] = "El corredor se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -293,6 +298,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La cubierta se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -400,6 +406,7 @@ class modelo_creacion {
             }else{
                 $GLOBALS['mensaje'] = "El parqueadero se guardó correctamente";
                 $GLOBALS['sql'] = $sql;
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -443,6 +450,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La piscina se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -485,6 +493,7 @@ class modelo_creacion {
                     $this->guardarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }
                 $GLOBALS['mensaje'] = "La plazoleta se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -542,6 +551,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El sendero peatonal se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -590,6 +600,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La vía se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -698,6 +709,7 @@ class modelo_creacion {
                     $this->guardarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
                 $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -736,7 +748,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "La iluminación del corredor se guardó correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -775,7 +788,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "La iluminación de la plazoleta se guardó correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -816,7 +830,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "La iluminación del espacio se guardó correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -855,7 +870,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "Los interruptores del corredor se guardaron correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -896,7 +912,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "Los interruptores del espacio se guardaron correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -956,6 +973,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "Las puertas del espacio se guardaron correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -995,6 +1013,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo se cerradura de la puerta del espacio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1037,7 +1056,8 @@ class modelo_creacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "El suministro de energía del espacio se guardaron correctamente";
-                    return true;
+                    $GLOBALS['sql'] = $sql;
+                return true;
                 }
             }
         }
@@ -1089,6 +1109,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana del espacio se guardaró correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1148,6 +1169,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana de las gradas se guardaron correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1183,6 +1205,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1218,6 +1241,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El lavamanos del baño se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1254,6 +1278,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El orinal del baño se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1291,6 +1316,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El salón se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1328,6 +1354,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1372,6 +1399,7 @@ class modelo_creacion {
                 for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
                     $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
                 }
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1409,6 +1437,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1444,6 +1473,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1499,6 +1529,7 @@ class modelo_creacion {
                 for ($i=0;$i<count($tipo_orinal);$i++) {
                     $this->guardarOrinalBano($id_espacio,$id_campus,$id_edificio,$tipo_orinal[$i],$cantidad_orinal[$i]);
                 }
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1532,6 +1563,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1565,6 +1597,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1598,6 +1631,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1631,6 +1665,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1664,6 +1699,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1697,6 +1733,7 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1733,6 +1770,7 @@ class modelo_creacion {
                 for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
                     $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
                 }
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1771,6 +1809,7 @@ class modelo_creacion {
                 for ($i=0;$i<count($tipo_punto_sanitario);$i++) {
                     $this->guardarPuntoSanitario($id_espacio,$id_campus,$id_edificio,$tipo_punto_sanitario[$i],$cantidad_punto_sanitario[$i]);
                 }
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1798,6 +1837,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de material se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1825,6 +1865,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de objeto se guardó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1863,7 +1904,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -1909,7 +1951,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -1957,7 +2000,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2005,7 +2049,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2053,7 +2098,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2101,7 +2147,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2149,7 +2196,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2197,7 +2245,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2247,7 +2296,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2297,7 +2347,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2347,7 +2398,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2396,7 +2448,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2444,7 +2497,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2492,7 +2546,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2540,7 +2595,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2588,7 +2644,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2636,7 +2693,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2684,7 +2742,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2732,7 +2791,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2780,7 +2840,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2828,7 +2889,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2876,7 +2938,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2928,7 +2991,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -2980,7 +3044,8 @@ class modelo_creacion {
                         return false;
                     }else{
                         $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                        return true;
+                        $GLOBALS['sql'] = $sql;
+                return true;
                     }
                 }
             }else{
@@ -3016,6 +3081,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3046,6 +3112,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3078,6 +3145,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3110,6 +3178,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3142,6 +3211,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3176,6 +3246,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3210,6 +3281,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3242,6 +3314,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3274,6 +3347,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3306,6 +3380,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3338,6 +3413,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3370,6 +3446,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3405,6 +3482,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3435,6 +3513,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3465,6 +3544,7 @@ class modelo_creacion {
                 return false;
             }
             else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
