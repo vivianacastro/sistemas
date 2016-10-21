@@ -1401,6 +1401,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#divDialogConsulta").modal('show');
@@ -1496,7 +1497,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
-      numeroFotos++
+      numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -1608,7 +1609,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
-
+      numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
