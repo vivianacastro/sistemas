@@ -1385,12 +1385,20 @@ $(document).ready(function() {
       if (numeroFotos == 0) {
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+              +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }else{
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }
       añadirComponente("indicadores_carrusel",componente);
@@ -1472,14 +1480,23 @@ $(document).ready(function() {
       if (numeroFotos == 0) {
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }else{
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }
+      numeroFotos++
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -1575,12 +1592,20 @@ $(document).ready(function() {
       if (numeroFotos == 0) {
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }else{
           componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
-            +'<button type="button" id="agregar_foto" name="agregar_foto" class="btn btn-default"><img src="vistas/images/icono_foto.png"/></button>'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
             +'</div>';
       }
 

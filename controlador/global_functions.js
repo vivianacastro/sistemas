@@ -86,6 +86,18 @@ $(document).ready(function () {
 		});
 });
 
+$("#myCarousel").on("change", ".upload", function(){
+		var fotos = document.getElementById("fileInputOculto");
+		var texto = "";
+		if (fotos.files.length > 1) {
+				texto = fotos.files.length + " archivos";
+		}else{
+				texto = fotos.files[0].name;
+		}
+		$("#fileInputVisible").val(texto);
+});
+
+
 /**
  * Función que muestra el texto como mensaje en el panel superior.
  * @param {string} texto, Cadena que representa el mensaje a mostrar.
