@@ -1404,12 +1404,12 @@ $(document).ready(function() {
             +'</div>';
       }
       if (numeroPlanos == 0) {
-          var componente = '<div id="plano" class="div_izquierda">'
+          var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
               +'<br></div>';
           numeroPlanos++;
-          añadirComponente("planos",componente);
+          añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -1511,12 +1511,12 @@ $(document).ready(function() {
             +'</div>';
       }
       if (numeroPlanos == 0) {
-          var componente = '<div id="plano" class="div_izquierda">'
+          var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
               +'<br></div>';
           numeroPlanos++;
-          añadirComponente("planos",componente);
+          añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -1634,12 +1634,12 @@ $(document).ready(function() {
             +'</div>';
       }
       if (numeroPlanos == 0) {
-          var componente = '<div id="plano" class="div_izquierda">'
+          var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
               +'<br></div>';
           numeroPlanos++;
-          añadirComponente("planos",componente);
+          añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
