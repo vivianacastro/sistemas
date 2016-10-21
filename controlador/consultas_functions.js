@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0;
+  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0, numeroPlanos = 0;
   var campusSelect = null;
   var marcadores = [], marcadoresModificacion = [];
   var URLactual = window.location;
@@ -1354,6 +1354,7 @@ $(document).ready(function() {
       }
       numeroFotos = 0;
       eliminarComponente("plano");
+      numeroPlanos = 0;
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
@@ -1377,6 +1378,7 @@ $(document).ready(function() {
                   +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
+                  numeroPlanos++;
                   añadirComponente("planos",componente);
               }
           }
@@ -1387,7 +1389,7 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
               +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
@@ -1396,14 +1398,23 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
       }
+      if (numeroPlanos == 0) {
+          var componente = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componente);
+      }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
       $("#divDialogConsulta").modal('show');
   });
 
@@ -1450,6 +1461,7 @@ $(document).ready(function() {
       }
       numeroFotos = 0;
       eliminarComponente("plano");
+      numeroPlanos = 0;
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
@@ -1473,6 +1485,7 @@ $(document).ready(function() {
                   +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
+                  numeroPlanos++;
                   añadirComponente("planos",componente);
               }
           }
@@ -1483,7 +1496,7 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
@@ -1492,14 +1505,23 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
       }
+      if (numeroPlanos == 0) {
+          var componente = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componente);
+      }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
@@ -1562,6 +1584,7 @@ $(document).ready(function() {
       }
       numeroFotos = 0;
       eliminarComponente("plano");
+      numeroPlanos = 0;
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
@@ -1585,6 +1608,7 @@ $(document).ready(function() {
                   +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
+                  numeroPlanos++;
                   añadirComponente("planos",componente);
               }
           }
@@ -1595,7 +1619,7 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
@@ -1604,14 +1628,23 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Seleccione una o más fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
                   +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
               +'</div>'
             +'</div>';
       }
+      if (numeroPlanos == 0) {
+          var componente = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componente);
+      }
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {

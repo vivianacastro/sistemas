@@ -5,12 +5,13 @@ html, body {
     padding: 0;
 }
 
-.image-upload > input{
-
-}
-
 .a i.fa, button i.fa{
 	 color: white !important;
+}
+
+.agregar_archivos{
+    float: left;
+    width: 82% !important;
 }
 
 .boton_agregar_foto{
