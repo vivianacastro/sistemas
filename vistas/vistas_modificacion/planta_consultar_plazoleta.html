@@ -42,8 +42,10 @@
                                 <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
                                 <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/><br>
                             </div>
-                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
-                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
+                            <div id="botones_anadir" style="display:none">
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
+                            </div>
                         </div>
                         <div class='div_izquierda'><b>Planos Plazoleta:</b></div>
                         <div id='planos'></div><br>

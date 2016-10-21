@@ -86,15 +86,18 @@ $(document).ready(function () {
 		});
 });
 
+/**
+ * Evento de cambio del selector de archivo del modal de consulta/modificación.
+ */
 $("#myCarousel").on("change", ".upload", function(){
-		var fotos = document.getElementById("fileInputOculto");
-		var texto = "";
-		if (fotos.files.length > 1) {
-				texto = fotos.files.length + " archivos";
-		}else{
-				texto = fotos.files[0].name;
-		}
-		$("#fileInputVisible").val(texto);
+			var fotos = document.getElementById("fileInputOculto");
+			var texto = "";
+			if (fotos.files.length > 1) {
+					texto = fotos.files.length + " archivos";
+			}else{
+					texto = fotos.files[0].name;
+			}
+			$("#fileInputVisible").val(texto);
 });
 
 

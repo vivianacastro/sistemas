@@ -1656,6 +1656,1494 @@ $(document).ready(function() {
   });
 
   /**
+   * Se captura el evento cuando se da click en el boton visualizarCorredor y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarCorredor").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("corredor",info);
+      //var dataIluminacion = consultarInformacionObjeto("corredor_iluminacion",info);
+      //var dataInterruptor = consultarInformacionObjeto("corredor_interruptor",info);
+      var archivos = consultarArchivosObjeto("corredor",info);
+      console.log(data);
+      //console.log(dataIluminacion);
+      //console.log(dataInterruptor);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_corredor").val(record.id);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_corredor.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarCubierta y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarCubierta").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cubierta",info);
+      var archivos = consultarArchivosObjeto("cubierta",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarGradas y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarGradas").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarParqueadero y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarParqueadero").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarPiscina y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizaPiscina").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarPlazoleta y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarPlazoleta").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarSendero y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarSendero").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarVia y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarVia").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarEdificio y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarEdificio").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarEspacio y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarEspacio").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarTipoMaterial y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarTipoMaterial").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton visualizarTipoObjeto y se
+   * realiza la operacion correspondiente.
+   */
+  $("#visualizarTipoObjeto").click(function (e){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      var bounds  = new google.maps.LatLngBounds();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_campus.png',
+                  title: record.nombre_campus,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+              bounds.extend(loc);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      numeroFotos = 0;
+      eliminarComponente("plano");
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      if (numeroPlanos == 0) {
+          var componentePlano = '<div id="plano" class="div_izquierda">'
+              +'<span>Agregar un plano</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          numeroPlanos++;
+          añadirComponente("planos",componentePlano);
+      }
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(15);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
+  });
+
+  /**
    * Se captura el evento cuando se abre el modal divDialogConsulta.
    */
   $("#divDialogConsulta").on("shown.bs.modal", function () {

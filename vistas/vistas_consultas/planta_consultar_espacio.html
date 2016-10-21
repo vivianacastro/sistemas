@@ -42,11 +42,7 @@
                         <input class='form-control formulario' type='text' maxlength="10" name='id_espacio' id='id_espacio' value='' placeholder='Ej: 1001' disabled required/>
                         <div class='div_izquierda'><b>Uso del(os) Espacio(s)<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='uso_espacio' id='uso_espacio' disabled required></select><br>
-                        <div id="divBotonesInformacionAdicional">
-                          <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_informacion_adicional' id='añadir_informacion_adicional' value='Añadir Información' title='Añadir Información Adicional del(os) espacio(s)'/>
-                          <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_informacion_adicional' id='eliminar_informacion_adicional' value='Eliminar Información' title='Eliminar Información Adicional del(os) espacio(s)' disabled/>
-                        </div>
-                        <div id="informacion-adicional" style='display:none'>
+                        <div id="informacion-adicional">
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n de las Paredes del(os) Espacio(s)</h5></b></div>
                                 <div class='div_izquierda'><b>Altura de las paredes:</b></div>
@@ -100,8 +96,6 @@
                                     <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
                                     <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_iluminacion' id='añadir_iluminacion' value='Añadir Tipo' title='Añadir Tipo de Iluminaci&oacute;n'/>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_iluminacion' id='eliminar_iluminacion' value='Eliminar Tipo' title='Eliminar Tipo de Iluminaci&oacute;n' disabled/>
                             </div><br>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n del Suministro de Energ&iacute;a del(os) Espacio(s)</h5></b></div>
@@ -117,8 +111,6 @@
                                     <div class='div_izquierda'><b>Cantidad de tomacorrientes del tipo:</b></div>
                                     <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_tomacorriente' id='añadir_tomacorriente' value='Añadir Tipo' title='Añadir Tipo Suministro de Energ&iacute;a'/>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_tomacorriente' id='eliminar_tomacorriente' value='Eliminar Tipo' title='Eliminar Tipo Suministro de Energ&iacute;a' disabled/>
                             </div><br>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n de las Puertas del(os) Espacio(s)</h5></b></div>
@@ -131,8 +123,6 @@
                                     <select class='form-control formulario' name='material_puerta' id='material_puerta' disabled required></select><br>
                                     <div class='div_izquierda'><b>Tipo de cerradura:</b></div>
                                     <select class='form-control formulario' name='tipo_cerradura' id='tipo_cerradura' disabled required></select><br>
-                                    <!--<input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_tipo_cerradura' id='añadir_tipo_cerradura' value='Añadir Tipo' title='Añadir Tipo Cerradura'/>
-                                    <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_tipo_cerradura' id='eliminar_tipo_cerradura' value='Eliminar Tipo' title='Eliminar Tipo Cerradura' disabled/>-->
                                     <div class='div_izquierda'><b>¿La Puerta tiene gato?:</b></div>
                                     <label class='radio-inline'><input type='radio' name='gato_puerta' value='true'>S&iacute;</label>
                                     <label class='radio-inline'><input type='radio' name='gato_puerta' value='false'>No</label><br>
@@ -149,8 +139,6 @@
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                 </div>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_puerta' id='añadir_puerta' value='Añadir Tipo' title='Añadir Tipo Puerta'/>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_puerta' id='eliminar_puerta' value='Eliminar Tipo' title='Eliminar Tipo Puerta' disabled/>
                             </div><br>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n de las Ventanas del(os) Espacio(s)</h5></b></div>
@@ -172,8 +160,6 @@
                                         <span class="input-group-addon">m</span>
                                     </div><br>
                                 </div>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_ventana' id='añadir_ventana' value='Añadir Tipo' title='Añadir Tipo Ventana'/>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_ventana' id='eliminar_ventana' value='Eliminar Tipo' title='Eliminar Tipo Ventana' disabled/>
                             </div><br>
                             <div class='form-group'>
                                 <div><b><h5>Informaci&oacute;n de los Interruptores del(os) Espacio(s)</h5></b></div>
@@ -183,8 +169,6 @@
                                     <div class='div_izquierda'><b>Cantidad de interruptores:</b></div>
                                     <input class='form-control formulario' type='number' min='1' name='cantidad_interruptores' id='cantidad_interruptores' value='' placeholder='Ej: 2' disabled required/><br>
                                 </div>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_interruptor' id='añadir_interruptor' value='Añadir Tipo' title='Añadir Tipo Interruptor'/>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_interruptor' id='eliminar_interruptor' value='Eliminar Tipo' title='Eliminar Tipo Interruptor' disabled/>
                             </div>
                         </div>
                         <div class='div_izquierda'><b>¿El Espacio est&aacute; dentro de otro?<font color='red'>*</font></b></div>
@@ -198,28 +182,12 @@
                         </div><br>
                         <div id="informacion_especifica" style='display:none'>
                             <div id='informacionEspacio'></div>
-                            <div id='botones_lavamanos' style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_lavamanos' id='añadir_lavamanos' value='Añadir Tipo' title='Añadir Tipo Lavamanos'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_lavamanos' id='eliminar_lavamanos' value='Eliminar Tipo' title='Eliminar Tipo Lavamanos' disabled/>
-                            </div>
                             <div id='informacionEspacio2'></div>
-                            <div id='botones_punto_sanitario' style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_punto_sanitario' id='añadir_punto_sanitario' value='Añadir Tipo' title='Añadir Tipo Punto Sanitario'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_punto_sanitario' id='eliminar_punto_sanitario' value='Eliminar Tipo' title='Eliminar Tipo Punto Sanitario' disabled/>
-                            </div>
-                            <div id='botones_orinal'  style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_orinal' id='añadir_orinal' value='Añadir Tipo' title='Añadir Tipo Orinal'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_orinal' id='eliminar_orinal' value='Eliminar Tipo' title='Eliminar Tipo Orinal' disabled/>
-                            </div>
                         </div>
                         <div class='div_izquierda'><b>Planos Edificio (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
                         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
                         <div class='div_izquierda'><b>Fotos Edificio (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
                         <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
-                        <div style='display:none'>
-                            <br><div class='div_izquierda'><b>Indique la ubicación del(os) Espacio(s)</b></div>
-                            <div id="map" class="mapa"></div>
-                        </div>
                         <div class='div_izquierda'><b>Planos Espacio:</b></div>
                         <div id='planos'></div><br>
                         <div class='div_izquierda'><b>Fotos Espacio:</b></div>
