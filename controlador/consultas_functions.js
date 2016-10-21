@@ -1407,7 +1407,7 @@ $(document).ready(function() {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br></div>';
+              +'<br><br></div>';
           numeroPlanos++;
           añadirComponente("planos",componentePlano);
       }
@@ -1514,7 +1514,7 @@ $(document).ready(function() {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br></div>';
+              +'<br><br></div>';
           numeroPlanos++;
           añadirComponente("planos",componentePlano);
       }
@@ -1637,7 +1637,7 @@ $(document).ready(function() {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br></div>';
+              +'<br><br></div>';
           numeroPlanos++;
           añadirComponente("planos",componentePlano);
       }
