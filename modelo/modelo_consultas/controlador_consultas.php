@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 /**
  * Clase controlador_consultas
  */
@@ -702,11 +704,11 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
-                    'pisos' => mb_convert_case($valor['numero_pisos'],MB_CASE_TITLE,"UTF-8"),
-                    'sotano' => mb_convert_case($valor['sotano'],MB_CASE_TITLE,"UTF-8"),
-                    'terraza' => mb_convert_case($valor['terraza'],MB_CASE_TITLE,"UTF-8"),
+                    'pisos' => $valor['numero_pisos'],
+                    'sotano' => $valor['sotano'],
+                    'terraza' => $valor['terraza'],
                     'lat' => $valor['lat'],
-                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
+                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -739,18 +741,18 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'piso' => mb_convert_case($valor['piso_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_pared' => mb_convert_case($valor['ancho_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'alto_pared' => mb_convert_case($valor['alto_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_piso' => mb_convert_case($valor['ancho_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'largo_piso' => mb_convert_case($valor['largo_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_techo' => mb_convert_case($valor['ancho_techo'],MB_CASE_TITLE,"UTF-8"),
-                    'largo_techo' => mb_convert_case($valor['largo_techo'],MB_CASE_TITLE,"UTF-8"),
-                    'material_techo' => mb_convert_case($valor['material_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => $valor['piso_edificio'],
+                    'ancho_pared' => $valor['ancho_pared'],
+                    'alto_pared' => $valor['alto_pared'],
+                    'material_pared' => $valor['id_material_pared'],
+                    'ancho_piso' => $valor['ancho_piso'],
+                    'largo_piso' => $valor['largo_piso'],
+                    'material_piso' => $valor['id_material_piso'],
+                    'ancho_techo' => $valor['ancho_techo'],
+                    'largo_techo' => $valor['largo_techo'],
+                    'material_techo' => $valor['id_material_techo'],
                     'lat' => $valor['lat'],
-                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
+                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1180,8 +1182,8 @@ class controlador_consultas
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'uso' => $valor['uso'],
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_pintura' => mb_convert_case($valor['tipo_pintura'],MB_CASE_TITLE,"UTF-8"),
+                    'material_piso' => $valor['id_material_piso'],
+                    'tipo_pintura' => $valor['id_tipo_pintura'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1216,15 +1218,15 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'ancho_pared' => $valor['ancho_pared'],
                     'alto_pared' => $valor['alto_pared'],
-                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
+                    'material_pared' => $valor['id_material_pared'],
                     'ancho_piso' => $valor['ancho_piso'],
-                    'alto_piso' => $valor['alto_piso'],
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_techo' => $valor['anchotecho'],
-                    'alto_techo' => $valor['altotecho'],
-                    'material_techo' => mb_convert_case($valor['materialtecho'],MB_CASE_TITLE,"UTF-8"),
-                    'tomacorriente' => mb_convert_case($valor['tomacorriente'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_suministro_energia' => mb_convert_case($valor['tipo_suministro_energia'],MB_CASE_TITLE,"UTF-8"),
+                    'largo_piso' => $valor['largo_piso'],
+                    'material_piso' => $valor['id_material_piso'],
+                    'ancho_techo' => $valor['ancho_techo'],
+                    'largo_techo' => $valor['largo_piso'],
+                    'material_techo' => $valor['id_material_techo'],
+                    'tomacorriente' => $valor['tomacorriente'],
+                    'tipo_suministro_energia' => $valor['id_tipo_suministro_energia'],
                     'cantidad' => $valor['cantidad'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1261,8 +1263,8 @@ class controlador_consultas
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'largo' => $valor['largo'],
                     'ancho' => $valor['ancho'],
-                    'material_cubierta' => mb_convert_case($valor['material_cubierta'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_cubierta' => mb_convert_case($valor['tipo_cubierta'],MB_CASE_TITLE,"UTF-8"),
+                    'material_cubierta' => $valor['id_material_cubierta'],
+                    'tipo_cubierta' => $valor['id_tipo_cubierta'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1294,10 +1296,10 @@ class controlador_consultas
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => $valor['id_edificio'],
-                    'nombre_edificio' => $valor['nombre_edificio'],
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'piso_inicio' => $valor['piso_inicio'],
-                    'pasamanos' => mb_convert_case($valor['pasamanos'],MB_CASE_TITLE,"UTF-8"),
-                    'material_pasamanos' => mb_convert_case($valor['material_pasamanos'],MB_CASE_TITLE,"UTF-8"),
+                    'pasamanos' => $valor['pasamanos'],
+                    'material_pasamanos' => $valor['id_material_pasamanos'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1333,8 +1335,8 @@ class controlador_consultas
                     'ancho' => $valor['ancho'],
                     'capacidad' => $valor['capacidad'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_pintura_demarcacion' => $valor['tipo_pintura_demarcacion'],
+                    'material_piso' => $valor['id_material_piso'],
+                    'tipo_pintura_demarcacion' => $valor['id_tipo_pintura_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1434,15 +1436,15 @@ class controlador_consultas
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'longitud' => $valor['longitud'],
                     'ancho' => $valor['ancho'],
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_iluminacion' => mb_convert_case($valor['tipo_iluminacion'],MB_CASE_TITLE,"UTF-8"),
-                    'cantidad' => mb_convert_case($valor['cantidad'],MB_CASE_TITLE,"UTF-8"),
-                    'codigo_poste' => $valor['codigo_poste'],
+                    'material_piso' => $valor['id_material_piso'],
+                    'tipo_iluminacion' => $valor['id_tipo_iluminacion'],
+                    'cantidad' => $valor['cantidad'],
+                    'codigo_poste' => mb_convert_case($valor['codigo_poste'],MB_CASE_UPPER ,"UTF-8"),
                     'material_cubierta' => $valor['material_cubierta'],
-                    'ancho_cubierta' => mb_convert_case($valor['ancho_cubierta'],MB_CASE_TITLE,"UTF-8"),
-                    'largo_cubierta' => mb_convert_case($valor['largo_cubierta'],MB_CASE_TITLE,"UTF-8"),
+                    'ancho_cubierta' => $valor['ancho_cubierta'],
+                    'largo_cubierta' => $valor['largo_cubierta'],
                     'lat' => $valor['lat'],
-                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
+                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1471,9 +1473,9 @@ class controlador_consultas
                     'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
-                    'id' => $valor['idt'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'material_piso' => $valor['material_pisog'],
-                    'tipo_pintura' => mb_convert_case($valor['tipo_pintura'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_pintura' => $valor['id_tipo_pintura'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1507,14 +1509,14 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
-                    'numero_pisos' => mb_convert_case($valor['numero_pisos'],MB_CASE_TITLE,"UTF-8"),
-                    'sotano' => mb_convert_case($valor['sotano'],MB_CASE_TITLE,"UTF-8"),
-                    'terraza' => mb_convert_case($valor['terraza'],MB_CASE_TITLE,"UTF-8"),
-                    'material_fachada' => mb_convert_case($valor['material_fachada'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_fachada' => mb_convert_case($valor['ancho_fachada'],MB_CASE_TITLE,"UTF-8"),
-                    'alto_fachada' => mb_convert_case($valor['alto_fachada'],MB_CASE_TITLE,"UTF-8"),
+                    'numero_pisos' => $valor['numero_pisos'],
+                    'sotano' => $valor['sotano'],
+                    'terraza' => $valor['terraza'],
+                    'material_fachada' => $valor['id_material_fachada'],
+                    'ancho_fachada' => $valor['ancho_fachada'],
+                    'alto_fachada' => $valor['alto_fachada'],
                     'lat' => $valor['lat'],
-                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
+                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1547,18 +1549,18 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'piso' => mb_convert_case($valor['piso_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_pared' => mb_convert_case($valor['ancho_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'alto_pared' => mb_convert_case($valor['alto_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'material_pared' => mb_convert_case($valor['material_pared'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_piso' => mb_convert_case($valor['ancho_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'largo_piso' => mb_convert_case($valor['largo_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'material_piso' => mb_convert_case($valor['material_piso'],MB_CASE_TITLE,"UTF-8"),
-                    'ancho_techo' => mb_convert_case($valor['ancho_techo'],MB_CASE_TITLE,"UTF-8"),
-                    'largo_techo' => mb_convert_case($valor['largo_techo'],MB_CASE_TITLE,"UTF-8"),
-                    'material_techo' => mb_convert_case($valor['material_techo'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => $valor['piso_edificio'],
+                    'ancho_pared' => $valor['ancho_pared'],
+                    'alto_pared' => $valor['alto_pared'],
+                    'material_pared' => $valor['id_material_pared'],
+                    'ancho_piso' => $valor['ancho_piso'],
+                    'largo_piso' => $valor['largo_piso'],
+                    'material_piso' => $valor['id_material_piso'],
+                    'ancho_techo' => $valor['ancho_techo'],
+                    'largo_techo' => $valor['largo_techo'],
+                    'material_techo' => $valor['id_material_techo'],
                     'lat' => $valor['lat'],
-                    'lng' => mb_convert_case($valor['lng'],MB_CASE_TITLE,"UTF-8"),
+                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1613,7 +1615,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1642,7 +1644,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1731,7 +1733,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1760,7 +1762,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1784,12 +1786,12 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            $data = $m->buscarArchivosPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1818,7 +1820,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1847,7 +1849,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1876,7 +1878,7 @@ class controlador_consultas
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id' => $valor['id'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
@@ -1900,13 +1902,14 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArchivosEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            $data = $m->buscarArchivosEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_campus"],$info["piso"],$info["codigo_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => $valor['id_edificio'],
-                    'id' => $valor['id'],
+                    'piso' => $valor['piso_edificio'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
                 );
