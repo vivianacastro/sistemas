@@ -1805,7 +1805,12 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
+<<<<<<< HEAD
       var id = $("#codigo_search").val();
+=======
+      var id = $("#edificio_search").val();
+      var id = $("#pisos_search").val();
+>>>>>>> parent of 5c439e1... Actualización
       var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
@@ -1821,11 +1826,20 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
+<<<<<<< HEAD
               $("#id_cancha").val(record.id);
               $("#uso_cancha").val(record.uso);
               $("#material_piso").val(record.material_piso);
               $("#tipo_pintura").val(record.tipo_pintura);
               $("#longitud_demarcacion").val(record.longitud_demarcacion);
+=======
+              $("#nombre_edificio").val(record.id);
+              $("#pisos").val(record.uso);
+              $("#tipo_cubierta").val(record.material_piso);
+              $("#material_cubierta").val(record.tipo_pintura);
+              $("#ancho").val(record.longitud_demarcacion);
+              $("#largo").val(record.longitud_demarcacion);
+>>>>>>> parent of 5c439e1... Actualización
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
