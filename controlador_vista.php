@@ -61,7 +61,7 @@ class controlador_vista
                 'MODIFICAR_INFORMACION_USUARIO'=>'index.php?action='.OPERATION_MODIFICAR_INFORMACION_USUARIO,
                 'CAMBIAR_CONTRASENIA'=>'index.php?action='.OPERATION_CAMBIAR_CONTRASENIA,
                 'FORM_INICIAR_SESION'=>'index.php?action='.INICIAR_SESION,
-                'FORM_NEW_USER'=>'index.php?action='.OPERATION_NEW_USER,
+                //'FORM_NEW_USER'=>'index.php?action='.OPERATION_NEW_USER,
                 'FORM_MOD_PLANTA'=>'index.php?action='.OPERATION_MOD_PLANTA,
                 'FORM_MOD_INVENTARIO'=>'index.php?action='.OPERATION_MOD_INVENTARIO,
                 'FORM_MOD_AIRES'=>'index.php?action='.OPERATION_MOD_AIRES,
