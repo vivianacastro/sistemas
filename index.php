@@ -214,22 +214,20 @@ if (isset($_GET['action'])){
 
 // Checkear el acceso del usuario
 if(!call_user_func(array(new controlador_usuario, 'check'))){
-    if (isset($_GET['action'])){
-        if (strcmp($_GET['action'],'crear_usuario') == 0){
-            $ruta = 'crear_usuario';
-        }elseif(strcmp($_GET['action'],'verificar_usuario') == 0){
-            $ruta = 'verificar_usuario';
-        }elseif(strcmp($_GET['action'],'verificar_correo') == 0){
-            $ruta = 'verificar_correo';
-        }elseif(strcmp($_GET['action'],'guardar_usuario') == 0){
-            $ruta = 'guardar_usuario';
-        }elseif(strcmp($_GET['action'],'olvido_contrasenia') == 0){
-            $ruta = 'olvido_contrasenia';
-        }elseif(strcmp($_GET['action'],'reestablecer_contrasenia') == 0){
-            $ruta = 'reestablecer_contrasenia';
-        }else{
-            $ruta = 'iniciar_sesion';
-        }
+    if (strcmp($_GET['action'],'crear_usuario') == 0){
+        $ruta = 'crear_usuario';
+    }elseif(strcmp($_GET['action'],'verificar_usuario') == 0){
+        $ruta = 'verificar_usuario';
+    }elseif(strcmp($_GET['action'],'verificar_correo') == 0){
+        $ruta = 'verificar_correo';
+    }elseif(strcmp($_GET['action'],'guardar_usuario') == 0){
+        $ruta = 'guardar_usuario';
+    }elseif(strcmp($_GET['action'],'olvido_contrasenia') == 0){
+        $ruta = 'olvido_contrasenia';
+    }elseif(strcmp($_GET['action'],'reestablecer_contrasenia') == 0){
+        $ruta = 'reestablecer_contrasenia';
+    }else{
+        $ruta = 'iniciar_sesion';
     }
 }
 $controlador = $map[$ruta];

@@ -163,9 +163,6 @@ $(document).ready(function() {
           tipo_objeto = "todos_campus";
       }
       var jObject = JSON.stringify(informacion);
-      console.log("consultar_"+tipo_objeto);
-      console.log(informacion);
-      console.log(jObject);
       var dataResult;
       try {
           $.ajax({
@@ -1077,7 +1074,7 @@ $(document).ready(function() {
    * y se actualiza el selector de edificios.
    */
   $("#edificio_search").change(function (e) {
-      if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+      if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_edificio') >= 0) {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#edificio_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
@@ -1105,18 +1102,16 @@ $(document).ready(function() {
           var edificio = {};
           var numeroPisos, terraza, sotano;
           if (validarCadena($("#edificio_search").val())) {
-              var data;
               edificio["nombre_sede"] = $("#sede_search").val();
               edificio["nombre_campus"] = $("#campus_search").val();
               edificio["nombre_edificio"] = $("#edificio_search").val();
               if(URLactual['href'].indexOf('consultar_cubierta') >= 0){
-                  data = buscarObjetos("cubiertas",edificio);
+                  var data = buscarObjetos("cubiertas",edificio);
               }else if(URLactual['href'].indexOf('consultar_gradas') >= 0){
-                  data = buscarObjetos("gradas",edificio);
+                  var data = buscarObjetos("gradas",edificio);
               }else{
-                  data = buscarObjetos("pisos_edificio",edificio);
+                  var data = buscarObjetos("pisos_edificio",edificio);
               }
-              console.log(data);
               if (URLactual['href'].indexOf('crear_gradas') >= 0) {
                   $("#pisos_search").empty();
                   var row = $("<option value=''/>");
@@ -1810,8 +1805,8 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var edificio = $("#edificio_search").val();
-      var piso = $("#pisos_search").val();
+      var id = $("#edificio_search").val();
+      var id = $("#pisos_search").val();
       var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
@@ -1828,18 +1823,12 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#nombre_edificio").val(record.id_edificio);
-              var piso = record.piso;
-              if (piso == 0) {
-                  piso = 'sotano';
-              }else if (piso == 1) {
-                  piso = 'terraza';
-              }
-              $("#pisos").val(piso);
-              $("#tipo_cubierta").val(record.tipo_cubierta);
-              $("#material_cubierta").val(record.material_cubierta);
-              $("#ancho").val(record.ancho);
-              $("#largo").val(record.largo);
+              $("#nombre_edificio").val(record.id);
+              $("#pisos").val(record.uso);
+              $("#tipo_cubierta").val(record.material_piso);
+              $("#material_cubierta").val(record.tipo_pintura);
+              $("#ancho").val(record.longitud_demarcacion);
+              $("#largo").val(record.longitud_demarcacion);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
@@ -1870,12 +1859,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -1884,7 +1873,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;

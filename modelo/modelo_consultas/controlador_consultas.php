@@ -358,7 +358,7 @@ class controlador_consultas
      * Función que permite consultar las sedes almacenadas en el sistema.
      */
     public function consultar_sedes() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -382,7 +382,7 @@ class controlador_consultas
      * Función que permite consultar los campus almacenados en el sistema.
      */
     public function consultar_todos_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -411,7 +411,7 @@ class controlador_consultas
      * Función que permite consultar las canchas almacenadas en el sistema.
      */
     public function consultar_canchas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -442,7 +442,7 @@ class controlador_consultas
      * Función que permite consultar los corredores almacenados en el sistema.
      */
     public function consultar_corredores() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -472,14 +472,14 @@ class controlador_consultas
      * Función que permite consultar las cubiertas almacenadas en el sistema.
      */
     public function consultar_cubiertas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarCubiertas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
+            $data = $m->buscarCubiertas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -504,14 +504,14 @@ class controlador_consultas
      * Función que permite consultar las gradas almacenadas en el sistema.
      */
     public function consultar_todas_gradas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
+            $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -536,7 +536,7 @@ class controlador_consultas
      * Función que permite consultar los parqueaderos almacenados en el sistema.
      */
     public function consultar_parqueaderos() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -566,7 +566,7 @@ class controlador_consultas
      * Función que permite consultar las piscinas almacenadas en el sistema.
      */
     public function consultar_piscinas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -596,7 +596,7 @@ class controlador_consultas
      * Función que permite consultar las plazoletas almacenadas en el sistema.
      */
     public function consultar_plazoletas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -627,7 +627,7 @@ class controlador_consultas
      * Función que permite consultar los senderos almacenados en el sistema.
      */
     public function consultar_senderos() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -657,7 +657,7 @@ class controlador_consultas
      * Función que permite consultar las vías almacenadas en el sistema.
      */
     public function consultar_vias() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -688,7 +688,7 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_edificios() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -723,7 +723,7 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_espacios() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -767,7 +767,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_pisos_edificio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -795,7 +795,7 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_usos_espacios() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -820,7 +820,7 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_materiales() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -846,7 +846,7 @@ class controlador_consultas
      * almacenados en el sistema.
      */
     public function consultar_tipo_objetos() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -871,7 +871,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de un campus.
      */
     public function ubicacion_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -898,7 +898,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de una cancha.
      */
     public function ubicacion_cancha() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -925,7 +925,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de un corredor.
      */
     public function ubicacion_corredor() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -951,7 +951,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de un parqueadero.
      */
     public function ubicacion_parqueadero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -977,7 +977,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de una piscina.
      */
     public function ubicacion_piscina() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1003,7 +1003,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de una plazoleta.
      */
     public function ubicacion_plazoleta() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1030,7 +1030,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de un sendero.
      */
     public function ubicacion_sendero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1056,7 +1056,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de una vía.
      */
     public function ubicacion_via() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1082,7 +1082,7 @@ class controlador_consultas
      * Función que permite consultar la ubicación de un edificio.
      */
     public function ubicacion_edificio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1109,7 +1109,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_sede() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1135,7 +1135,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1165,7 +1165,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_cancha() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1201,7 +1201,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_corredor() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1244,7 +1244,7 @@ class controlador_consultas
      * almacenadas en el sistema.
      */
     public function consultar_informacion_cubierta() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1281,7 +1281,7 @@ class controlador_consultas
     * almacenadas en el sistema.
      */
     public function consultar_informacion_gradas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1316,7 +1316,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_parqueadero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1353,7 +1353,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_informacion_piscina() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1388,7 +1388,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_informacion_plazoleta() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1419,7 +1419,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_sendero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1459,7 +1459,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_informacion_via() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1493,7 +1493,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_edificio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1531,7 +1531,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_informacion_espacio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1575,7 +1575,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_campus() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1603,7 +1603,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_archivos_cancha() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1632,7 +1632,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_corredor() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1661,7 +1661,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_archivos_cubierta() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1691,7 +1691,7 @@ class controlador_consultas
      * almacenadas en el sistema.
      */
     public function consultar_archivos_gradas() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1721,7 +1721,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_parqueadero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1750,7 +1750,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_archivos_piscina() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1779,7 +1779,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_archivos_plazoleta() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1808,7 +1808,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_sendero() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1837,7 +1837,7 @@ class controlador_consultas
      * almacenada en el sistema.
      */
     public function consultar_archivos_via() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1866,7 +1866,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_edificio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
@@ -1895,7 +1895,7 @@ class controlador_consultas
      * almacenado en el sistema.
      */
     public function consultar_archivos_espacio() {
-        $GLOBALS['mensaje'] = "";
+        $GLOBALSGLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);

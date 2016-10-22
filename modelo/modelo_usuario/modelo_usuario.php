@@ -39,11 +39,11 @@ class modelo_usuario {
         $sql = "SELECT password FROM usuarios WHERE login = '".$l."';";
         $l_stmt = $this->conexion->prepare($sql);
         if (!$l_stmt) {
-            $GLOBALS['mensaje'] = "Error: SQL (Retornar Contraseña 1)";
+            $GLOBALS['mensaje'] = MJ_PREPARAR_CONSULTA_FALLIDA;
             return false;
         }else {
             if(!$l_stmt->execute()) {
-                $GLOBALS['mensaje'] = "Error: SQL (Retornar Contraseña 2)";
+                $GLOBALS['mensaje'] = MJ_CONSULTA_FALLIDA;
                 return false;
             }if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetch(PDO::FETCH_NUM);
@@ -89,22 +89,22 @@ class modelo_usuario {
         $login = htmlspecialchars($login);
         $login = strtolower($login);
         if(!$this->verificarContrasena($login, $password)){
-            $GLOBALS['mensaje'] = "Contraseña incorrecta";
+            $GLOBALS['mensaje'] = MJ_ERROR_CONTRASENA_INCORRECTA;
             return;
         }
         $password = $this->retornarContrasena($login);
         $sql = "SELECT * FROM usuarios WHERE login = '".$login."' AND password = '".$password."' AND estado = 'ACTIVO';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Comprobar Acceso 1)";
+            $GLOBALS['mensaje'] = MJ_PREPARAR_CONSULTA_FALLIDA;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Comprobar Acceso 2)";
+                $GLOBALS['mensaje'] = MJ_CONSULTA_FALLIDA;
             }if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
             }
         }
-        $GLOBALS['mensaje'] = "Acceso autorizado";
+        $GLOBALS['mensaje'] = MJ_CONSULTA_EXITOSA;
         return $result[0];
     }
 

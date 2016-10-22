@@ -112,16 +112,13 @@ class controlador_usuario {
      * de inicio de la aplicación web.
      */
     public function iniciar_sesion() {
-        //session_start();  //Comentado
+        session_start();
         //instaciar el objeto de la clase Modelo
         $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $v = new Controlador_vista();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
-                if (session_status() == PHP_SESSION_NONE) { //Añadido
-                    session_start();
-                }
                 $_SESSION["autorizado"] = true;
                 session_regenerate_id();
                 $_SESSION["userid"] = session_id();
@@ -152,7 +149,8 @@ class controlador_usuario {
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
             }
         }else{
-            if(isset($_SESSION['userid']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil'])) {
+            if($_SESSION["autorizado"] & isset($_SESSION['userid'])
+                    & isset($_SESSION['perfil'])) {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
@@ -168,7 +166,7 @@ class controlador_usuario {
      * Función que permite cerrar una sesion de un usuario.
     */
     public function cerrar_sesion() {
-        //session_start(); //Comentado
+        session_start();
         //eliminar informacion almacenada de la sesion
         session_unset();
         //finalizar sesion
