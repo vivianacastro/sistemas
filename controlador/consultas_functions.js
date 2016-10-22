@@ -667,6 +667,7 @@ $(document).ready(function() {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#campus_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
+                  mapaConsulta.setZoom(15);
                   break;
               }
           }
@@ -1048,6 +1049,14 @@ $(document).ready(function() {
           }else if(URLactual['href'].indexOf('consultar_via') >= 0){
               $('#visualizarVia').removeAttr("disabled");
           }
+          for (var i = 0; i < marcadores.length; i++) {
+              var codigo = $("#codigo_search").val();
+              if(codigo == marcadores[i].id){
+                  mapaConsulta.setCenter(marcadores[i].getPosition());
+                  mapaConsulta.setZoom(19);
+                  break;
+              }
+          }
       }else{
           if(URLactual['href'].indexOf('consultar_cancha') >= 0){
               $('#visualizarCancha').attr('disabled','disabled');
@@ -1078,6 +1087,7 @@ $(document).ready(function() {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#edificio_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
+                  mapaConsulta.setZoom(19);
                   break;
               }
           }
@@ -1113,40 +1123,7 @@ $(document).ready(function() {
               }else{
                   data = buscarObjetos("pisos_edificio",edificio);
               }
-              console.log(data);
-              if (URLactual['href'].indexOf('crear_gradas') >= 0) {
-                  $("#pisos_search").empty();
-                  var row = $("<option value=''/>");
-                  row.text("--Seleccionar--");
-                  row.appendTo("#pisos_search");
-                  $.each(data, function(index, record) {
-                      if($.isNumeric(index)) {
-                          numeroPisos = record.numero_pisos;
-                          terraza = record.terraza;
-                          sotano = record.sotano;
-                      }
-                  });
-                  for (var i=0; i<numeroPisos;i++) {
-                      if (i == 0 && sotano == 'true') {
-                          aux = "Sótano";
-                          row = $("<option value='sotano'/>");
-                          row.text(aux);
-                          row.appendTo("#pisos_search");
-                      }
-                      if (i == (numeroPisos-1) && terraza == 'true') {
-                          aux = i+1;
-                          row = $("<option value='" + aux + "'/>");
-                          row.text(aux);
-                          row.appendTo("#pisos_search");
-                          aux = "Terraza";
-                      }else if(i < (numeroPisos-1)){
-                          aux = i+1;
-                          row = $("<option value='" + aux + "'/>");
-                          row.text(aux);
-                          row.appendTo("#pisos_search");
-                      }
-                  }
-              }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
+              if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
                   $("#pisos_search").empty();
                   var row = $("<option value=''/>");
                   row.text("--Seleccionar--");
@@ -1221,6 +1198,14 @@ $(document).ready(function() {
                       }
                   }
               }
+              for (var i = 0; i < marcadores.length; i++) {
+                  var codigo = $("#edificio_search").val();
+                  if(codigo == marcadores[i].id){
+                      mapaConsulta.setCenter(marcadores[i].getPosition());
+                      mapaConsulta.setZoom(19);
+                      break;
+                  }
+              }
           }else{
               var campus = $("#campus_search").val();
               $("#campus_search").val(campus).change();
@@ -1235,7 +1220,7 @@ $(document).ready(function() {
    * y se actualiza el selector de pisos.
    */
   $("#pisos_search").change(function (e) {
-      if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+      if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_edificio') >= 0) {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#edificio_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
@@ -1853,8 +1838,6 @@ $(document).ready(function() {
       info['piso'] = limpiarCadena(piso);
       var data = consultarInformacionObjeto("cubierta",info);
       var archivos = consultarArchivosObjeto("cubierta",info);
-      console.log(data);
-      console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
@@ -1862,7 +1845,7 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#nombre_edificio").val(record.id_edificio);
+              $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
               var piso = record.piso;
               if (piso == 0) {
                   piso = 'sotano';
