@@ -163,9 +163,6 @@ $(document).ready(function() {
           tipo_objeto = "todos_campus";
       }
       var jObject = JSON.stringify(informacion);
-      console.log("consultar_"+tipo_objeto);
-      console.log(informacion);
-      console.log(jObject);
       var dataResult;
       try {
           $.ajax({
@@ -1131,7 +1128,7 @@ $(document).ready(function() {
                   });
                   for (var i=0; i<numeroPisos;i++) {
                       if (i == 0 && sotano == 'true') {
-                          aux = "Sotano";
+                          aux = "Sótano";
                           row = $("<option value='sotano'/>");
                           row.text(aux);
                           row.appendTo("#pisos_search");
@@ -1145,6 +1142,50 @@ $(document).ready(function() {
                       }else if(i < (numeroPisos-1)){
                           aux = i+1;
                           row = $("<option value='" + aux + "'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
+                  }
+              }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
+                  $("#pisos_search").empty();
+                  var row = $("<option value=''/>");
+                  row.text("--Seleccionar--");
+                  row.appendTo("#pisos_search");
+                  $.each(data, function(index, record) {
+                      if($.isNumeric(index)) {
+                          var aux;
+                          piso = record.piso;
+                          if (piso == 0) {
+                              aux = "Sótano";
+                              row = $("<option value='sotano'/>");
+                              row.text(aux);
+                              row.appendTo("#pisos_search");
+                          }else if (piso == -1) {
+                              aux = "Terraza";
+                              row = $("<option value='terraza'/>");
+                              row.text(aux);
+                              row.appendTo("#pisos_search");
+                          }else{
+                              row = $("<option value='" + piso + "'/>");
+                              row.text(piso);
+                              row.appendTo("#pisos_search");
+                          }
+                      }
+                  });
+                  for (var i=0; i<numeroPisos;i++) {
+                      if (i == 0 && sotano == 'true') {
+                          aux = "Sótano";
+                          row = $("<option value='sotano'/>");
+                          row.text(aux);
+                          row.appendTo("#pisos_search");
+                      }
+                      aux = i+1;
+                      row = $("<option value='" + aux + "'/>");
+                      row.text(aux);
+                      row.appendTo("#pisos_search");
+                      if (i == (numeroPisos-1) && terraza == 'true') {
+                          aux = "Terraza";
+                          row = $("<option value='terraza'/>");
                           row.text(aux);
                           row.appendTo("#pisos_search");
                       }
@@ -1163,7 +1204,7 @@ $(document).ready(function() {
                   });
                   for (var i=0; i<numeroPisos;i++) {
                       if (i == 0 && sotano == 'true') {
-                          aux = "Sotano";
+                          aux = "Sótano";
                           row = $("<option value='sotano'/>");
                           row.text(aux);
                           row.appendTo("#pisos_search");

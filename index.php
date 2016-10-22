@@ -1,4 +1,6 @@
 <?php
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 //definicion de la ruta de la aplicacion
 define('__ROOT__', dirname(__FILE__));
 

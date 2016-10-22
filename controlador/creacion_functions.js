@@ -988,7 +988,7 @@ $(document).ready(function() {
           });
           for (var i=0; i<numeroPisos;i++) {
               if (i == 0 && sotano == 'true') {
-                  aux = "Sotano";
+                  aux = "Sótano";
                   row = $("<option value='sotano'/>");
                   row.text(aux);
                   row.appendTo("#pisos");
@@ -1023,7 +1023,7 @@ $(document).ready(function() {
             });
             for (var i=0; i<numeroPisos;i++) {
                 if (i == 0 && sotano == 'true') {
-                    aux = "Sotano";
+                    aux = "Sótano";
                     row = $("<option value='sotano'/>");
                     row.text(aux);
                     row.appendTo("#pisos");

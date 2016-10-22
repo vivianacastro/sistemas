@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 /**
  * Clase modelo_consultas
  */
@@ -100,7 +100,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.uso,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM cancha a JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -139,7 +139,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM corredor a JOIN sede b ON a.id_sede = b.id
                             JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -183,7 +183,7 @@ class modelo_consultas
                     FROM cubiertas_piso a JOIN sede b ON a.id_sede = b.id
                                           JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                           JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' ORDER BY piso;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' ORDER BY piso;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -227,7 +227,7 @@ class modelo_consultas
                     FROM gradas a JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                   JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' ORDER BY piso_inicio;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' ORDER BY piso_inicio;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -266,7 +266,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM parqueadero a  JOIN sede b ON a.id_sede = b.id
                                         JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -305,7 +305,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM piscina a  JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -344,7 +344,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.nombre,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM plazoleta a  JOIN sede b ON a.id_sede = b.id
                                       JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -383,7 +383,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM sendero a  JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -422,7 +422,7 @@ class modelo_consultas
             $sql = "SELECT a.id,a.lat,a.lng,b.id as id_sede,b.nombre as nombre_sede,c.id as id_campus,c.nombre as nombre_campus
                     FROM via a  JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
-                    WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY id;";
+                    WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' ORDER BY id;";
         }
 
         $l_stmt = $this->conexion->prepare($sql);

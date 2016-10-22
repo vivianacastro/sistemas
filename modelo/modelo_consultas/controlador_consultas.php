@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 /**
  * Clase controlador_consultas
  */
@@ -489,8 +489,6 @@ class controlador_consultas
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'piso' => $valor['piso'],
-                    'lat' => $valor['lat'],
-                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -520,9 +518,7 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'piso_inicio' => $valor['piso_inicio'],
-                    'lat' => $valor['lat'],
-                    'lng' => $valor['lng'],
+                    'piso' => $valor['piso_inicio'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -751,8 +747,6 @@ class controlador_consultas
                     'ancho_techo' => $valor['ancho_techo'],
                     'largo_techo' => $valor['largo_techo'],
                     'material_techo' => $valor['id_material_techo'],
-                    'lat' => $valor['lat'],
-                    'lng' => $valor['lng'],
                 );
                 array_push($result, $arrayAux);
             }

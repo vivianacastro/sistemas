@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 /**
  * Clase que guarda la información para conectarse a la base de datos.
  */
