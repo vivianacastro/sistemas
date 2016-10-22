@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 /**
  * Clase modelo_consultas
  */
@@ -46,6 +44,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Sedes presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -479,6 +478,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Edificios del campus presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -542,6 +542,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la sede seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -572,6 +573,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -588,9 +590,11 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.uso, a.id_material_piso, a.id_tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
+        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.uso, d.material as material_piso, e.tipo as tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
                 FROM cancha a JOIN sede b ON a.id_sede = b.id
                               JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                              LEFT JOIN material_piso d ON a.id_material_piso = d.id
+                              LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -605,6 +609,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -621,10 +626,15 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.ancho_pared, a.alto_pared, a.id_material_pared, a.ancho_piso, a.largo_piso,
-                a.id_material_piso, a.ancho_techo, a.largo_techo, a.id_material_techo, a.tomacorriente, a.id_tipo_suministro_energia, a.cantidad, a.lat, a.lng
+        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.ancho_pared, a.alto_pared, d.material as material_pared, a.lat, a.lng
+                        a.ancho_piso, a.largo_piso, e.material as material_piso,
+                        a.ancho_techo, a.largo_techo, f.material as material_techo, a.tomacorriente, g.tipo as tipo_suministro_energia, a.cantidad, a.lat, a.lng
                 FROM corredor a JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                LEFT JOIN material_pared d ON a.id_material_pared = d.id
+                                LEFT JOIN material_piso e ON a.id_material_piso = e.id
+                                LEFT JOIN material_techo f ON a.id_material_techo = f.id
+                                LEFT JOIN tipo_suministro_energia g ON a.id_tipo_suministro_energia = g.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -639,6 +649,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -657,10 +668,12 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT a.piso, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.largo, a.ancho, a.id_material_cubierta, a.id_tipo_cubierta, d.lat, d.lng
+        $sql = "SELECT a.piso, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.largo, a.ancho, e.material as material_cubierta, f.tipo as tipo_cubierta, d.lat, d.lng
                 FROM cubiertas_piso a JOIN sede b ON a.id_sede = b.id
                                       JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                       JOIN edificio d ON a.id_edificio = d.id
+                                      LEFT JOIN material_cubierta e ON a.id_material_cubierta = e.id
+                                      LEFT JOIN tipo_cubierta f ON a.id_tipo_cubierta = f.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso = '".$piso."' ORDER BY a.piso;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -675,6 +688,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cubierta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -693,10 +707,11 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.piso_inicio, a.pasamanos, a.id_material_pasamanos, d.lat, d.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.piso_inicio, a.pasamanos, e.material as material_pasamanos, d.lat, d.lng
                 FROM gradas a JOIN sede b ON a.id_sede = b.id
                               JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                               JOIN edificio d ON a.id_edificio = d.id
+                              LEFT JOIN material_pasamanos e ON a.id_material_pasamanos = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.piso_inicio = '".$piso."' ORDER BY a.piso_inicio;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -727,9 +742,11 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.largo, a.ancho, a.capacidad, a.longitud_demarcacion, a.id_material_piso, a.id_tipo_pintura_demarcacion, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.largo, a.ancho, a.capacidad, a.longitud_demarcacion, d.material as material_piso, e.tipo as tipo_pintura_demarcacion, a.lat, a.lng
                 FROM parqueadero a  JOIN sede b ON a.id_sede = b.id
                                     JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                    LEFT JOIN material_piso d ON a.id_material_piso = d.id
+                                    LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -744,6 +761,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -777,6 +795,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -810,6 +829,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -826,9 +846,12 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.longitud, a.ancho, a.id_material_piso, a.id_tipo_iluminacion, a.cantidad, a.codigo_poste, a.id_material_cubierta, a.ancho_cubierta, a.largo_cubierta, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.longitud, a.ancho, d.material as material_piso, e.tipo as tipo_iluminacion, a.cantidad, a.codigo_poste, f.material as material_cubierta, a.ancho_cubierta, a.largo_cubierta, a.lat, a.lng
                 FROM sendero a  JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                LEFT JOIN material_piso d ON a.id_material_piso = d.id
+                                LEFT JOIN tipo_iluminacion e ON a.id_tipo_iluminacion = e.id
+                                LEFT JOIN material_cubierta f ON a.id_material_cubierta = f.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -843,6 +866,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -859,9 +883,11 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.id_material_piso, a.id_tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, d.material as material_piso, e.tipo as tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
                 FROM via a  JOIN sede b ON a.id_sede = b.id
                             JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                            LEFT JOIN material_piso d ON a.id_tipo_material = d.id
+                            LEFT JOIN tipo_pintura e ON a.id_tipo_pintura_demarcacion = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -876,6 +902,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -892,9 +919,10 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.nombre, a.numero_pisos, a.sotano, a.terraza, a.id_material_fachada, a.ancho_fachada, a.alto_fachada, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.nombre, a.numero_pisos, a.sotano, a.terraza, d.material as material_fachada, a.ancho_fachada, a.alto_fachada, a.lat, a.lng
                 FROM edificio a JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
+                                LEFT JOIN material_fachada d ON a.id_material_fachada = d.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -909,6 +937,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -923,7 +952,7 @@ class modelo_consultas
     public function buscarArchivosCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * FROM campus_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY nombre;";
+        $sql = "SELECT * FROM campus_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 1)";
@@ -937,6 +966,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -952,7 +982,7 @@ class modelo_consultas
     public function buscarArchivosCancha($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * FROM cancha_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM cancha_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Cancha 1)";
@@ -966,6 +996,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -981,7 +1012,7 @@ class modelo_consultas
     public function buscarArchivosCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * FROM corredor_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM corredor_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Corredor 1)";
@@ -995,6 +1026,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1011,7 +1043,7 @@ class modelo_consultas
     public function buscarArchivosCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * FROM cubiertas_piso_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."' ORDER BY nombre;";
+        $sql = "SELECT * FROM cubiertas_piso_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Cubierta 1)";
@@ -1025,6 +1057,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cubierta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1041,7 +1074,7 @@ class modelo_consultas
     public function buscarArchivosGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $sql = "SELECT * FROM gradas_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_inicio = '".$piso."' ORDER BY nombre;";
+        $sql = "SELECT * FROM gradas_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_inicio = '".$piso."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Gradas 1)";
@@ -1071,7 +1104,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM parqueadero_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM parqueadero_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Parqueadero 1)";
@@ -1085,6 +1118,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1101,7 +1135,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM piscina_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM piscina_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Piscina 1)";
@@ -1115,6 +1149,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1131,7 +1166,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM plazoleta_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM plazoleta_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Plazoleta 1)";
@@ -1145,6 +1180,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1161,7 +1197,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM sendero_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM sendero_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Sendero 1)";
@@ -1175,6 +1211,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1191,7 +1228,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM via_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM via_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Vía 1)";
@@ -1205,6 +1242,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1221,7 +1259,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
-        $sql = "SELECT * FROM edificio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_edificio."' ORDER BY nombre;";
+        $sql = "SELECT * FROM edificio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_edificio."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Edificio 1)";
@@ -1235,6 +1273,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1253,7 +1292,7 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM edificio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM edificio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Espacio 1)";
@@ -1267,6 +1306,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del espacio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1295,6 +1335,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del campus seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1325,6 +1366,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la cancha seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1355,6 +1397,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del corredor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1385,6 +1428,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del parqueadero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1415,6 +1459,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la piscina seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1445,6 +1490,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la plazoleta seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1475,6 +1521,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del sendero seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1505,6 +1552,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la vía seleccionada";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1535,6 +1583,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del edificio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1566,6 +1615,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Número de pisos del edificio";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1590,6 +1640,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Usos de Espacios presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1616,6 +1667,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Materiales presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1642,6 +1694,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1660,11 +1713,14 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT DISTINCT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, e.uso, a.ancho_pared, a.alto_pared, a.id_material_pared, a.ancho_piso, a.largo_piso, a.id_material_piso, a.ancho_techo, a.largo_techo, a.id_material_techo, a.espacio_padre, d.lat, d.lng
+        $sql = "SELECT DISTINCT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, e.uso, a.ancho_pared, a.alto_pared, f.material as material_pared, a.ancho_piso, a.largo_piso, g.material as material_piso, a.ancho_techo, a.largo_techo, h.material as material_techo, a.espacio_padre, d.lat, d.lng
                 FROM espacio a  JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                 JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
                                 JOIN uso_espacio e ON a.uso_espacio = e.id
+                                LEFT JOIN material_pared f ON a.id_material_pared = f.id
+                                LEFT JOIN material_piso g ON a.id_material_piso = g.id
+                                LEFT JOIN material_techo h ON a.id_material_techo = h.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1679,6 +1735,7 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del espacio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

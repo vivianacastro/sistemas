@@ -1694,15 +1694,15 @@ $(document).ready(function() {
               $("#altura_pared").val(record.ancho_pared);
               $("#ancho_pared").val(record.alto_pared);
               $("#material_pared").val(record.material_pared);
-              $("#ancho_piso").val(record.ancho_piso);
-              $("#largo_piso").val(record.largo_piso);
-              $("#material_piso").val(record.material_piso);
-              $("#ancho_techo").val(record.ancho_techo);
-              $("#largo_techo").val(record.largo_techo);
-              $("#material_techo").val(record.material_techo);
-              $("#tomacorriente").val(record.tomacorriente);
-              $("#tipo_suministro_energia").val(record.tipo_suministro_energia);
-              $("#cantidad_tomacorrientes").val(record.cantidad);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#altura_pared").val(record.ancho_pared);
+              $("#ancho_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
@@ -1733,12 +1733,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -1747,7 +1747,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -1805,13 +1805,11 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var id = $("#edificio_search").val();
-      var id = $("#pisos_search").val();
+      var id = $("#codigo_search").val();
       var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
-      info['nombre_edificio'] = limpiarCadena(edificio);
-      info['piso'] = limpiarCadena(piso);
+      info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("cubierta",info);
       var archivos = consultarArchivosObjeto("cubierta",info);
       console.log(data);
@@ -1823,12 +1821,11 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#nombre_edificio").val(record.id);
-              $("#pisos").val(record.uso);
-              $("#tipo_cubierta").val(record.material_piso);
-              $("#material_cubierta").val(record.tipo_pintura);
-              $("#ancho").val(record.longitud_demarcacion);
-              $("#largo").val(record.longitud_demarcacion);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
