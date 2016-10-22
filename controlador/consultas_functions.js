@@ -1408,6 +1408,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+<<<<<<< HEAD
       if (numeroPlanos == 0) {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
@@ -1417,6 +1418,8 @@ $(document).ready(function() {
           añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
+=======
+>>>>>>> parent of e02e3ab... Actualización
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
@@ -1515,6 +1518,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+<<<<<<< HEAD
       if (numeroPlanos == 0) {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
@@ -1524,6 +1528,9 @@ $(document).ready(function() {
           añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
+=======
+      numeroFotos++
+>>>>>>> parent of e02e3ab... Actualización
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
@@ -1905,6 +1912,7 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+<<<<<<< HEAD
       if (numeroPlanos == 0) {
           var componentePlano = '<div id="plano" class="div_izquierda">'
               +'<span>Agregar un plano</span><br>'
@@ -3144,6 +3152,9 @@ $(document).ready(function() {
           añadirComponente("planos",componentePlano);
       }
       numeroFotos++;
+=======
+
+>>>>>>> parent of e02e3ab... Actualización
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
