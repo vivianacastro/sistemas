@@ -596,64 +596,79 @@ $(document).ready(function() {
               $('#visualizarSede').attr('disabled','disabled');
           }
       }else{
-          for (var i = 0; i < marcadores.length; i++) {
-              marcadores[i].setMap(null);
-          }
-          var sede = {};
-          var bounds  = new google.maps.LatLngBounds();
-          $("#campus_search").empty();
-          if (URLactual['href'].indexOf('consultar_campus') >= 0) {
-              $('#visualizarCampus').attr('disabled','disabled');
-          }
           if (validarCadena($("#sede_search").val())) {
-              sede["nombre_sede"] = $("#sede_search").val();
-              var data = buscarObjetos("campus",sede);
-          }else{
-              rellenarMapa(mapaConsulta);
-          }
-          var row = $("<option value=''/>");
-          row.text("--Seleccionar--");
-          row.appendTo("#campus_search");
-          $.each(data, function(index, record) {
-              if($.isNumeric(index)) {
-                  aux = record.nombre_campus;
-                  row = $("<option value='" + record.id + "'/>");
-                  row.text(aux);
-                  row.appendTo("#campus_search");
-                  var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                  var marker = new google.maps.Marker({
-                      position: myLatlng,
-                      icon: 'vistas/images/icono_campus.png',
-                      title: record.nombre_campus,
-                      id: record.id,
-                      id_sede: record.id_sede
-                  });
-                  marcadores.push(marker);
-                  marker.setMap(mapaConsulta);
-                  var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                  bounds.extend(loc);
-              }
-          });
-          if (data.mensaje != "") {
-              mapaConsulta.fitBounds(bounds);
-              mapaConsulta.panToBounds(bounds);
               for (var i = 0; i < marcadores.length; i++) {
-                  google.maps.event.addListener(marcadores[i], 'click',
-                  function () {
-                      $("#sede_search").val(this.id_sede);
-                      $("#campus_search").val(this.id).change();
-                      mapaConsulta.setZoom(15);
-                      mapaConsulta.setCenter(this.getPosition());
-                  });
+                  marcadores[i].setMap(null);
+              }
+              var sede = {};
+              var bounds  = new google.maps.LatLngBounds();
+              $("#campus_search").empty();
+              if (URLactual['href'].indexOf('consultar_campus') >= 0) {
+                  $('#visualizarCampus').attr('disabled','disabled');
+              }
+              if (validarCadena($("#sede_search").val())) {
+                  sede["nombre_sede"] = $("#sede_search").val();
+                  var data = buscarObjetos("campus",sede);
+              }else{
+                  rellenarMapa(mapaConsulta);
+              }
+              var row = $("<option value=''/>");
+              row.text("--Seleccionar--");
+              row.appendTo("#campus_search");
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      aux = record.nombre_campus;
+                      row = $("<option value='" + record.id + "'/>");
+                      row.text(aux);
+                      row.appendTo("#campus_search");
+                      var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                      var marker = new google.maps.Marker({
+                          position: myLatlng,
+                          icon: 'vistas/images/icono_campus.png',
+                          title: record.nombre_campus,
+                          id: record.id,
+                          id_sede: record.id_sede
+                      });
+                      marcadores.push(marker);
+                      marker.setMap(mapaConsulta);
+                      var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                      bounds.extend(loc);
+                  }
+              });
+              if (data.mensaje != "") {
+                  mapaConsulta.fitBounds(bounds);
+                  mapaConsulta.panToBounds(bounds);
+                  for (var i = 0; i < marcadores.length; i++) {
+                      google.maps.event.addListener(marcadores[i], 'click',
+                      function () {
+                          $("#sede_search").val(this.id_sede);
+                          $("#campus_search").val(this.id).change();
+                          mapaConsulta.setZoom(15);
+                          mapaConsulta.setCenter(this.getPosition());
+                      });
+                  }
+              }else{
+                  getCoordenadas(mapaConsulta);
+              }
+              if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+                  $("#edificio_search").empty();
+              }else if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+                  $("#edificio_search").empty();
+                  $("#pisos_search").empty();
               }
           }else{
-              getCoordenadas(mapaConsulta);
-          }
-          if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+              $("#campus_search").empty();
+              $("#campus_search").val("");
+              $("#codigo_search").empty();
+              $("#codigo_search").val("");
               $("#edificio_search").empty();
-          }else if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
-              $("#edificio_search").empty();
+              $("#edificio_search").val("");
               $("#pisos_search").empty();
+              $("#pisos_search").val("");
+              $("#espacio_search").empty();
+              $("#espacio_search").val("");
+              var sede = $("#sede_search").val();
+              rellenarMapa(mapaConsulta);
           }
       }
   });
@@ -1022,6 +1037,23 @@ $(document).ready(function() {
                   }
               }
           }else{
+              if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+                  $("#edificio_search").empty();
+                  $("#pisos_search").empty();
+                  $("#espacio_search").empty();
+                  $("#edificio_search").val("");
+              }else{
+                  $("#codigo_search").empty();
+                  $("#codigo_search").val("");
+              }
+              $("#codigo_search").empty();
+              $("#codigo_search").val("");
+              $("#edificio_search").empty();
+              $("#edificio_search").val("");
+              $("#pisos_search").empty();
+              $("#pisos_search").val("");
+              $("#espacio_search").empty();
+              $("#espacio_search").val("");
               var sede = $("#sede_search").val();
               $("#sede_search").val(sede).change();
           }
@@ -1092,21 +1124,14 @@ $(document).ready(function() {
               }
           }
           if (validarCadena($("#edificio_search").val())) {
-              if (URLactual['href'].indexOf('consultar_cubierta') >= 0) {
-                  $('#visualizarCubierta').removeAttr("disabled");
-              }else if (URLactual['href'].indexOf('consultar_gradas') >= 0) {
-                  $('#visualizarGradas').removeAttr("disabled");
-              }else if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
-                  $('#visualizarEdificio').removeAttr("disabled");
-              }
+              $('#visualizarCubierta').removeAttr("disabled");
+              $('#visualizarGradas').removeAttr("disabled");
+              $('#visualizarEdificio').removeAttr("disabled");
           }else{
-              if (URLactual['href'].indexOf('consultar_cubierta') >= 0) {
-                  $('#visualizarCubierta').attr('disabled','disabled');
-              }else if (URLactual['href'].indexOf('consultar_gradas') >= 0) {
-                  $('#visualizarGradas').removeAttr("disabled");
-              }else if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
-                  $('#visualizarEdificio').removeAttr("disabled");
-              }
+              $('#visualizarCubierta').attr('disabled','disabled');
+              $('#visualizarGradas').attr('disabled','disabled');
+              $('#visualizarEdificio').attr('disabled','disabled');
+
           }
       }else{
           var edificio = {};
@@ -1132,12 +1157,12 @@ $(document).ready(function() {
                       if($.isNumeric(index)) {
                           var aux;
                           piso = record.piso;
-                          if (piso == 0) {
+                          if (piso == '0') {
                               aux = "Sótano";
                               row = $("<option value='sotano'/>");
                               row.text(aux);
                               row.appendTo("#pisos_search");
-                          }else if (piso == -1) {
+                          }else if (piso == '-1') {
                               aux = "Terraza";
                               row = $("<option value='terraza'/>");
                               row.text(aux);
@@ -1207,10 +1232,12 @@ $(document).ready(function() {
                   }
               }
           }else{
+              $("#pisos_search").empty();
+              $("#pisos_search").val("");
+              $("#espacio_search").empty();
+              $("#espacio_search").val("");
               var campus = $("#campus_search").val();
               $("#campus_search").val(campus).change();
-              $("#pisos_search").empty();
-              $("#espacio_search").empty();
           }
       }
   });
@@ -1220,7 +1247,7 @@ $(document).ready(function() {
    * y se actualiza el selector de pisos.
    */
   $("#pisos_search").change(function (e) {
-      if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_edificio') >= 0) {
+      if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
           for (var i = 0; i < marcadores.length; i++) {
               if (marcadores[i].id == $("#edificio_search").val()) {
                   mapaConsulta.setCenter(marcadores[i].getPosition());
@@ -1230,35 +1257,40 @@ $(document).ready(function() {
           if (validarCadena($("#edificio_search").val())) {
               $('#visualizarCubierta').removeAttr("disabled");
               $('#visualizarGradas').removeAttr("disabled");
+              $('#visualizarEspacio').removeAttr("disabled");
           }else{
               $('#visualizarCubierta').attr('disabled','disabled');
-              $('#visualizarGradas').removeAttr("disabled");
+              $('#visualizarGradas').attr('disabled','disabled');
+              $('#visualizarEspacio').removeAttr("disabled");
           }
       }else{
-          var edificio = {};
-          edificio["nombre_sede"] = $("#sede_search").val();
-          edificio["nombre_campus"] = $("#campus_search").val();
-          edificio["nombre_edificio"] = $("#edificio_search").val();
-          if($("#pisos_search").val() == '-1'){
-              edificio["piso"] = "terraza";
-          }else if($("#pisos_search").val() == '0'){
-              edificio["piso"] = "sotano";
-          }else{
+          if (validarCadena($("#edificio_search").val())) {
+              var edificio = {};
+              edificio["nombre_sede"] = $("#sede_search").val();
+              edificio["nombre_campus"] = $("#campus_search").val();
+              edificio["nombre_edificio"] = $("#edificio_search").val();
               edificio["piso"] = $("#pisos_search").val();
+              var data = buscarObjetos("espacios",edificio);
+              $("#espacio_search").empty();
+              var row = $("<option value=''/>");
+              row.text("--Seleccionar--");
+              row.appendTo("#espacio_search");
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      aux = record.id;
+                      row = $("<option value='" + record.id + "'/>");
+                      row.text(aux);
+                      row.appendTo("#espacio_search");
+                  }
+              });
+          }else{
+              $("#pisos_search").empty();
+              $("#pisos_search").val("");
+              $("#espacio_search").empty();
+              $("#espacio_search").val("");
+              var edificio = $("#edificio_search").val();
+              $("#edificio_search").val(edificio).change();
           }
-          var data = buscarObjetos("espacios",edificio);
-          $("#espacio_search").empty();
-          var row = $("<option value=''/>");
-          row.text("--Seleccionar--");
-          row.appendTo("#espacio_search");
-          $.each(data, function(index, record) {
-              if($.isNumeric(index)) {
-                  aux = record.id;
-                  row = $("<option value='" + record.id + "'/>");
-                  row.text(aux);
-                  row.appendTo("#espacio_search");
-              }
-          });
       }
   });
 
@@ -1290,7 +1322,7 @@ $(document).ready(function() {
           $.each(data, function(index, record) {
               if($.isNumeric(index)) {
                   aux = record.nombre_material;
-                  row = $("<option value='" + record.id + "'/>");
+                  row = $("<option value='" + limpiarCadena(record.nombre_material) + "'/>");
                   row.text(aux);
                   row.appendTo("#nombre_tipo_material_search");
               }
@@ -1328,7 +1360,7 @@ $(document).ready(function() {
           $.each(data, function(index, record) {
               if($.isNumeric(index)) {
                   aux = record.tipo_objeto;
-                  row = $("<option value='" + record.id + "'/>");
+                  row = $("<option value='" + limpiarCadena(record.tipo_objeto) + "'/>");
                   row.text(aux);
                   row.appendTo("#nombre_tipo_objeto_search");
               }
@@ -1449,7 +1481,6 @@ $(document).ready(function() {
       $("#divDialogConsulta").modal('show');
   });
 
-
   /**
    * Se captura el evento cuando se da click en el boton visualizarCampus y se
    * realiza la operacion correspondiente.
@@ -1458,7 +1489,6 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       var data = consultarInformacionObjeto("campus",info);
@@ -1481,8 +1511,6 @@ $(document).ready(function() {
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -1572,7 +1600,6 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
@@ -1596,16 +1623,14 @@ $(document).ready(function() {
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_cancha.png',
+                  title: record.id+" - "+record.uso,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -1679,7 +1704,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -1695,13 +1720,12 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("corredor",info);
-      //var dataIluminacion = consultarInformacionObjeto("corredor_iluminacion",info);
-      //var dataInterruptor = consultarInformacionObjeto("corredor_interruptor",info);
+      //var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
+      //var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
       var archivos = consultarArchivosObjeto("corredor",info);
       console.log(data);
       //console.log(dataIluminacion);
@@ -1732,15 +1756,13 @@ $(document).ready(function() {
               var marker = new google.maps.Marker({
                   position: myLatlng,
                   icon: 'vistas/images/icono_corredor.png',
-                  title: record.nombre_campus,
+                  title: record.id,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -1814,7 +1836,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -1831,25 +1853,27 @@ $(document).ready(function() {
       var campus = $("#campus_search").val();
       var edificio = $("#edificio_search").val();
       var piso = $("#pisos_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['nombre_edificio'] = limpiarCadena(edificio);
-      info['piso'] = limpiarCadena(piso);
+      var piso = piso;
+      if (piso == 'sotano') {
+          piso = '0';
+      }else if(piso == 'terraza'){
+          piso = '-1';
+      }
+      info['piso'] = piso;
       var data = consultarInformacionObjeto("cubierta",info);
       var archivos = consultarArchivosObjeto("cubierta",info);
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          marcadoresModificacion[i].setMap(null);
-      }
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
               $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
               var piso = record.piso;
-              if (piso == 0) {
+              if (piso == '0') {
                   piso = 'sotano';
-              }else if (piso == 1) {
+              }else if (piso == '-1') {
                   piso = 'terraza';
               }
               $("#pisos").val(piso);
@@ -1857,20 +1881,6 @@ $(document).ready(function() {
               $("#material_cubierta").val(record.material_cubierta);
               $("#ancho").val(record.ancho);
               $("#largo").val(record.largo);
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              coordsMapaModificacion = myLatlng;
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
-                  id: record.id,
-                  id_sede: record.id_sede,
-                  id_campus: record.id_campus
-              });
-              marcadoresModificacion.push(marker);
-              marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -1941,13 +1951,6 @@ $(document).ready(function() {
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          google.maps.event.addListener(marcadoresModificacion[i], 'click',
-          function () {
-              mapaModificacion.setZoom(15);
-              mapaModificacion.setCenter(this.getPosition());
-          });
-      }
       $("#divDialogConsulta").modal('show');
   });
 
@@ -1959,41 +1962,35 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
+      var edificio = $("#edificio_search").val();
+      var piso = $("#pisos_search").val();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
-      info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
-      console.log(data);
-      console.log(archivos);
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          marcadoresModificacion[i].setMap(null);
+      info['nombre_edificio'] = limpiarCadena(edificio);
+      var piso = piso;
+      if (piso == 'sotano') {
+          piso = '0';
+      }else if(piso == 'terraza'){
+          piso = '-1';
       }
+      info['piso_inicio'] = piso;
+      var data = consultarInformacionObjeto("gradas",info);
+      //var dataVentana = consultarInformacionObjeto("ventana_gradas",info);
+      var archivos = consultarArchivosObjeto("gradas",info);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              coordsMapaModificacion = myLatlng;
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
-                  id: record.id,
-                  id_sede: record.id_sede,
-                  id_campus: record.id_campus
-              });
-              marcadoresModificacion.push(marker);
-              marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
+              $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
+              var piso = record.piso_inicio;
+              if (piso == '0') {
+                  piso = 'sotano';
+              }else if (piso == '-1') {
+                  piso = 'terraza';
+              }
+              $("#pisos").val(piso);
+              $("input[name=pasamanos][value=" + record.pasamanos + "]").prop('checked', true);
+              $("#material_pasamanos").val(record.material_pasamanos);
           }
       });
       $("#myCarousel").hide();
@@ -2010,12 +2007,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2024,7 +2021,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2064,13 +2061,6 @@ $(document).ready(function() {
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          google.maps.event.addListener(marcadoresModificacion[i], 'click',
-          function () {
-              mapaModificacion.setZoom(15);
-              mapaModificacion.setCenter(this.getPosition());
-          });
-      }
       $("#divDialogConsulta").modal('show');
   });
 
@@ -2083,12 +2073,11 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("parqueadero",info);
+      var archivos = consultarArchivosObjeto("parqueadero",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2098,25 +2087,25 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
+              $("#id_parqueadero").val(record.id);
+              $("#capacidad").val(record.capacidad);
+              $("#ancho").val(record.ancho);
+              $("#largo").val(record.largo);
               $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#tipo_pintura").val(record.tipo_pintura_demarcacion);
               $("#longitud_demarcacion").val(record.longitud_demarcacion);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_parqueadero.png',
+                  title: record.id,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2133,12 +2122,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2147,7 +2136,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2190,7 +2179,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2201,17 +2190,16 @@ $(document).ready(function() {
    * Se captura el evento cuando se da click en el boton visualizarPiscina y se
    * realiza la operacion correspondiente.
    */
-  $("#visualizaPiscina").click(function (e){
+  $("#visualizarPiscina").click(function (e){
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("piscina",info);
+      var archivos = consultarArchivosObjeto("piscina",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2221,25 +2209,23 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#id_piscina").val(record.id);
+              $("#alto").val(record.alto);
+              $("#ancho").val(record.ancho);
+              $("#largo").val(record.largo);
+              $("#cantidad_puntos_hidraulicos").val(record.cantidad_punto_hidraulico);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_piscina.png',
+                  title: record.id,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2256,12 +2242,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2270,7 +2256,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2313,7 +2299,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2329,12 +2315,12 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("plazoleta",info);
+      //var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
+      var archivos = consultarArchivosObjeto("plazoleta",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2344,25 +2330,20 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#id_plazoleta").val(record.id);
+              $("#nombre").val(record.nombre);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_plazoleta.png',
+                  title: record.id+" - "+record.nombre,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2379,12 +2360,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2393,7 +2374,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2436,7 +2417,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2452,12 +2433,11 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("sendero",info);
+      var archivos = consultarArchivosObjeto("sendero",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2467,25 +2447,28 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
+              $("#id_sendero").val(record.id);
+              $("#longitud").val(record.longitud);
+              $("#ancho").val(record.ancho);
               $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#tipo_iluminacion").val(record.tipo_iluminacion);
+              $("#cantidad_iluminacion").val(record.cantidad);
+              $("#codigo_poste").val(record.codigo_poste);
+              $("#ancho_cubierta").val(record.ancho_cubierta);
+              $("#largo_cubierta").val(record.largo_cubierta);
+              $("#material_cubierta").val(record.material_cubierta);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_sendero.png',
+                  title: record.id,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2502,12 +2485,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2516,7 +2499,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2559,7 +2542,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2575,12 +2558,11 @@ $(document).ready(function() {
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
       var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("via",info);
+      var archivos = consultarArchivosObjeto("via",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2590,25 +2572,22 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
+              $("#id_via").val(record.id);
               $("#tipo_pintura").val(record.tipo_pintura);
               $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#material_piso").val(record.material_piso);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_via.png',
+                  title: record.id,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2625,12 +2604,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2639,7 +2618,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2682,7 +2661,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(18);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2697,13 +2676,12 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
+      var id = $("#edificio_search").val();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("edificio",info);
+      var archivos = consultarArchivosObjeto("edificio",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2713,25 +2691,26 @@ $(document).ready(function() {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#id_edificio").val(record.id);
+              $("#nombre_edificio").val(record.nombre);
+              $("#pisos_edificio").val(record.numero_pisos);
+              $("input[name=terraza][value=" + record.terraza + "]").prop('checked', true);
+              $("input[name=sotano][value=" + record.sotano + "]").prop('checked', true);
+              $("#ancho_fachada").val(record.ancho_fachada);
+              $("#alto_fachada").val(record.alto_fachada);
+              $("#material_fachada").val(record.material_fachada);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
+                  icon: 'vistas/images/icono_edificio.png',
+                  title: record.id+" - "+record.nombre,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
           }
       });
       $("#myCarousel").hide();
@@ -2748,12 +2727,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -2762,7 +2741,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -2805,7 +2784,7 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           google.maps.event.addListener(marcadoresModificacion[i], 'click',
           function () {
-              mapaModificacion.setZoom(15);
+              mapaModificacion.setZoom(19);
               mapaModificacion.setCenter(this.getPosition());
           });
       }
@@ -2820,43 +2799,74 @@ $(document).ready(function() {
       var info =  {};
       var sede = $("#sede_search").val();
       var campus = $("#campus_search").val();
-      var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
+      var edificio = $("#edificio_search").val();
+      var id = $("#espacio_search").val();
+      var usoEspacio;
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
+      info['nombre_edificio'] = edificio;
       info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var data = consultarInformacionObjeto("espacio",info);
+      //var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",info);
+      //var dataInterruptor = consultarInformacionObjeto("interrutor_espacio",info);
+      //var dataPuerta = consultarInformacionObjeto("puerta_espacio",info);
+      //var dataTipoCerradura = consultarInformacionObjeto("puerta_tipo_cerradura",info);
+      //var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
+      //var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
+      var archivos = consultarArchivosObjeto("espacio",info);
       console.log(data);
       console.log(archivos);
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          marcadoresModificacion[i].setMap(null);
-      }
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
+              $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
+              $("#pisos").val(record.piso);
+              $("#id_espacio").val(record.id);
+              usoEspacio = record.uso_espacio;
+              $("#uso_espacio").val(usoEspacio);
+              $("#ancho_pared").val(record.ancho_pared);
+              $("#alto_pared").val(record.alto_pared);
+              $("#material_pared").val(record.material_pared);
+              $("#ancho_piso").val(record.ancho_piso);
+              $("#largo_piso").val(record.largo_piso);
               $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              coordsMapaModificacion = myLatlng;
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
-                  id: record.id,
-                  id_sede: record.id_sede,
-                  id_campus: record.id_campus
-              });
-              marcadoresModificacion.push(marker);
-              marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
+              $("#ancho_techo").val(record.ancho_techo);
+              $("#largo_techo").val(record.largo_techo);
+              $("#material_techo").val(record.material_techo);
           }
       });
+      /*if (usoEspacio == '1') { //Salón
+          data = consultarInformacionObjeto("salon",info);
+      }else if(usoEspacio == '2'){ //Auditorio
+          data = consultarInformacionObjeto("auditorio",info);
+      }else if(usoEspacio == '3'){ //Laboratorio
+          data = consultarInformacionObjeto("laboratorio",info);
+      }else if(usoEspacio == '4'){ //Sala de Cómputo
+          data = consultarInformacionObjeto("sala_computo",info);
+      }else if(usoEspacio == '5'){ //Oficina
+          data = consultarInformacionObjeto("oficina",info);
+      }else if(usoEspacio == '6'){ //Baño
+          data = consultarInformacionObjeto("bano",info);
+      }else if(usoEspacio == '7'){ //Cuarto Técnico
+          data = consultarInformacionObjeto("cuarto_tecnico",info);
+      }else if(usoEspacio == '8'){ //Bodega/Almacen
+          data = consultarInformacionObjeto("bodega",info);
+      }else if(usoEspacio == '10'){ //Cuarto de Plantas
+          data = consultarInformacionObjeto("cuarto_plantas",info);
+      }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+          data = consultarInformacionObjeto("cuarto_aires_acondicionados",info);
+      }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+          data = consultarInformacionObjeto("area_deportiva_cerrada",info);
+      }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+          data = consultarInformacionObjeto("centro_datos",info);
+      }else if(usoEspacio == '17'){ //Cuarto de Bombas
+          data = consultarInformacionObjeto("cuarto_bombas",info);
+      }else if(usoEspacio == '19'){ //Cocineta
+          data = consultarInformacionObjeto("cocineta",info);
+      }else if(usoEspacio == '20'){ //Sala de Estudio
+          data = consultarInformacionObjeto("sala_estudio",info);
+      }*/
       $("#myCarousel").hide();
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
@@ -2925,13 +2935,6 @@ $(document).ready(function() {
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
       $("#myCarousel").show();
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          google.maps.event.addListener(marcadoresModificacion[i], 'click',
-          function () {
-              mapaModificacion.setZoom(15);
-              mapaModificacion.setCenter(this.getPosition());
-          });
-      }
       $("#divDialogConsulta").modal('show');
   });
 
@@ -2941,120 +2944,20 @@ $(document).ready(function() {
    */
   $("#visualizarTipoMaterial").click(function (e){
       var info =  {};
-      var sede = $("#sede_search").val();
-      var campus = $("#campus_search").val();
-      var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
-      info['nombre_sede'] = sede;
-      info['nombre_campus'] = campus;
-      info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
+      var tipoMaterial = $("#tipo_material_search").val();
+      var nombreTipoMaterial = $("#nombre_tipo_material_search").val();
+      /*info['tipo_material'] = tipoMaterial;
+      info['nombre_tipo_materil'] = nombreTipoMaterial;
+      var data = consultarInformacionObjeto("tipo_material",info);
       console.log(data);
-      console.log(archivos);
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          marcadoresModificacion[i].setMap(null);
-      }
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
-              $("#nombre_sede").val(record.nombre_sede);
-              $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              coordsMapaModificacion = myLatlng;
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
-                  id: record.id,
-                  id_sede: record.id_sede,
-                  id_campus: record.id_campus
-              });
-              marcadoresModificacion.push(marker);
-              marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
+              $("#tipo_material").val(record.tipo_material);
+              $("#nombre_tipo_material").val(record.nombre);
           }
-      });
-      $("#myCarousel").hide();
-      for (var i = 0; i < numeroFotos; i++) {
-          eliminarComponente("slide_carrusel");
-          eliminarComponente("item_carrusel");
-      }
-      numeroFotos = 0;
-      eliminarComponente("plano");
-      numeroPlanos = 0;
-      $.each(archivos, function(index, record) {
-          if($.isNumeric(index)) {
-              if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
-                       +'</div>';
-                 }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
-                        +'</div>';
-                 }
-                  añadirComponente("indicadores_carrusel",componente);
-                  añadirComponente("fotos_carrusel",componente2);
-                  numeroFotos++;
-                  $("#myCarousel").show();
-              }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
-                  numeroPlanos++;
-                  añadirComponente("planos",componente);
-              }
-          }
-      });
-      var componente, componente2;
-      if (numeroFotos == 0) {
-          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
-          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-            +'<div class="fileUpload btn boton_agregar_foto">'
-                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
-              +'</div>'
-            +'</div>';
-      }else{
-          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
-          componente2 = '<div id="item_carrusel" class="item carouselImg">'
-            +'<div class="fileUpload btn boton_agregar_foto">'
-                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
-              +'</div>'
-            +'</div>';
-      }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
-      numeroFotos++;
-      añadirComponente("indicadores_carrusel",componente);
-      añadirComponente("fotos_carrusel",componente2);
-      $("#myCarousel").show();
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          google.maps.event.addListener(marcadoresModificacion[i], 'click',
-          function () {
-              mapaModificacion.setZoom(15);
-              mapaModificacion.setCenter(this.getPosition());
-          });
-      }
+      });*/
+      $("#tipo_material").val(tipoMaterial);
+      $("#nombre_tipo_material").val(nombreTipoMaterial);
       $("#divDialogConsulta").modal('show');
   });
 
@@ -3062,172 +2965,43 @@ $(document).ready(function() {
    * Se captura el evento cuando se da click en el boton visualizarTipoObjeto y se
    * realiza la operacion correspondiente.
    */
-  $("#visualizarTipoObjeto").click(function (e){
-      var info =  {};
-      var sede = $("#sede_search").val();
-      var campus = $("#campus_search").val();
-      var id = $("#codigo_search").val();
-      var bounds  = new google.maps.LatLngBounds();
-      info['nombre_sede'] = sede;
-      info['nombre_campus'] = campus;
-      info['id'] = limpiarCadena(id);
-      var data = consultarInformacionObjeto("cancha",info);
-      var archivos = consultarArchivosObjeto("cancha",info);
-      console.log(data);
-      console.log(archivos);
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          marcadoresModificacion[i].setMap(null);
-      }
-      $.each(data, function(index, record) {
-          if($.isNumeric(index)) {
-              $("#nombre_sede").val(record.nombre_sede);
-              $("#nombre_campus").val(record.nombre_campus);
-              $("#id_cancha").val(record.id);
-              $("#uso_cancha").val(record.uso);
-              $("#material_piso").val(record.material_piso);
-              $("#tipo_pintura").val(record.tipo_pintura);
-              $("#longitud_demarcacion").val(record.longitud_demarcacion);
-              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-              coordsMapaModificacion = myLatlng;
-              var marker = new google.maps.Marker({
-                  position: myLatlng,
-                  icon: 'vistas/images/icono_campus.png',
-                  title: record.nombre_campus,
-                  id: record.id,
-                  id_sede: record.id_sede,
-                  id_campus: record.id_campus
-              });
-              marcadoresModificacion.push(marker);
-              marker.setMap(mapaModificacion);
-              var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-              bounds.extend(loc);
-          }
-      });
-      $("#myCarousel").hide();
-      for (var i = 0; i < numeroFotos; i++) {
-          eliminarComponente("slide_carrusel");
-          eliminarComponente("item_carrusel");
-      }
-      numeroFotos = 0;
-      eliminarComponente("plano");
-      numeroPlanos = 0;
-      $.each(archivos, function(index, record) {
-          if($.isNumeric(index)) {
-              if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
-                       +'</div>';
-                 }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
-                        +'</div>';
-                 }
-                  añadirComponente("indicadores_carrusel",componente);
-                  añadirComponente("fotos_carrusel",componente2);
-                  numeroFotos++;
-                  $("#myCarousel").show();
-              }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
-                  numeroPlanos++;
-                  añadirComponente("planos",componente);
-              }
-          }
-      });
-      var componente, componente2;
-      if (numeroFotos == 0) {
-          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
-          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-            +'<div class="fileUpload btn boton_agregar_foto">'
-                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
-              +'</div>'
-            +'</div>';
-      }else{
-          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
-          componente2 = '<div id="item_carrusel" class="item carouselImg">'
-            +'<div class="fileUpload btn boton_agregar_foto">'
-                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
-              +'</div>'
-            +'</div>';
-      }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
-      numeroFotos++;
-      añadirComponente("indicadores_carrusel",componente);
-      añadirComponente("fotos_carrusel",componente2);
-      $("#myCarousel").show();
-      for (var i = 0; i < marcadoresModificacion.length; i++) {
-          google.maps.event.addListener(marcadoresModificacion[i], 'click',
-          function () {
-              mapaModificacion.setZoom(15);
-              mapaModificacion.setCenter(this.getPosition());
-          });
-      }
-      $("#divDialogConsulta").modal('show');
-  });
+   $("#visualizarTipoObjeto").click(function (e){
+       var info =  {};
+       var tipoObjeto = $("#tipo_objeto_search").val();
+       var nombreTipoObjeto = $("#nombre_tipo_objeto_search").val();
+       /*info['tipo_objeto'] = tipoObjeto;
+       info['nombre_tipo_objeto'] = nombreTipoObjeto;
+       var data = consultarInformacionObjeto("tipo_objeto",info);
+       console.log(data);
+       $.each(data, function(index, record) {
+           if($.isNumeric(index)) {
+              $("#tipo_objeto").val(record.tipo_objeto);
+               $("#nombre_tipo_objeto").val(record.nombre);
+           }
+       });*/
+       $("#tipo_objeto_search").val(tipoObjeto);
+       $("#nombre_tipo_objeto_search").val(nombreTipoObjeto);
+       $("#divDialogConsulta").modal('show');
+   });
 
   /**
    * Se captura el evento cuando se abre el modal divDialogConsulta.
    */
   $("#divDialogConsulta").on("shown.bs.modal", function () {
-      if (URLactual['href'].indexOf('consultar_corredor') == -1 && URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1) {
+      if (URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_gradas') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1) {
+          if (URLactual['href'].indexOf('consultar_campus') >= 0) {
+              mapaModificacion.setZoom(15);
+          }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1){
+              mapaModificacion.setZoom(18);
+          }
           google.maps.event.trigger(mapaModificacion, "resize");
-          mapaModificacion.setZoom(15);
           mapaModificacion.setCenter(coordsMapaModificacion);
       }
   });
 
   /**
-   * Se captura el evento cuando se da click en el boton modificar_sede y se
-   * realiza la operacion correspondiente.
-   */
-  $("#modificar_sede").click(function (e){
-      $("#nombre_sede").prop('disabled', false);
-      $("#modificar_sede").hide();
-      $("#guardar_modificaciones_sede").show();
-  });
-
-  /**
-   * Se captura el evento cuando se da click en el boton modificar_campus y se
-   * realiza la operacion correspondiente.
-   */
-  $("#modificar_campus").click(function (e){
-      $("#nombre_campus").prop('disabled', false);
-      $("#modificar_campus").hide();
-      $("#guardar_modificaciones_campus").show();
-  });
-
-  /**
-   * Se captura el evento cuando se da click en el boton modificar_campus y se
-   * realiza la operacion correspondiente.
-   */
-  $("#modificar_cancha").click(function (e){
-      $("#uso_cancha").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_pintura").prop('disabled', false);
-      $("#longitud_demarcacion").prop('disabled', false);
-      $("#modificar_cancha").hide();
-      $("#guardar_modificaciones_cancha").show();
-  });
-
-  /**
-   * Se captura el evento cuando se cierra el modal divDialogConsulta.
-   */
+  * Se captura el evento cuando se cierra el modal divDialogConsulta.
+  */
   $('#divDialogConsulta').on('hidden.bs.modal', function () {
       $("#nombre_sede").prop('disabled', true);
       $("#nombre_campus").prop('disabled', true);
@@ -3269,6 +3043,39 @@ $(document).ready(function() {
       $("#guardar_modificaciones_via").hide();
       $("#guardar_modificaciones_edificio").hide();
       $("#guardar_modificaciones_espacio").hide();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_sede y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_sede").click(function (e){
+      $("#nombre_sede").prop('disabled', false);
+      $("#modificar_sede").hide();
+      $("#guardar_modificaciones_sede").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_campus").click(function (e){
+      $("#nombre_campus").prop('disabled', false);
+      $("#modificar_campus").hide();
+      $("#guardar_modificaciones_campus").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton modificar_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#modificar_cancha").click(function (e){
+      $("#uso_cancha").prop('disabled', false);
+      $("#material_piso").prop('disabled', false);
+      $("#tipo_pintura").prop('disabled', false);
+      $("#longitud_demarcacion").prop('disabled', false);
+      $("#modificar_cancha").hide();
+      $("#guardar_modificaciones_cancha").show();
   });
 
   /**

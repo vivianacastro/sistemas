@@ -791,7 +791,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.nombre, a.lat, a.lng
                 FROM plazoleta a  JOIN sede b ON a.id_sede = b.id
                                   JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
@@ -857,7 +857,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.id_material_piso, a.id_tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.id, a.id_tipo_material, a.id_tipo_pintura_demarcacion, a.longitud_demarcacion, a.lat, a.lng
                 FROM via a  JOIN sede b ON a.id_sede = b.id
                             JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";
@@ -1251,7 +1251,7 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM edificio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM espacio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Espacio 1)";
@@ -1658,11 +1658,10 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT DISTINCT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, e.uso, a.ancho_pared, a.alto_pared, a.id_material_pared, a.ancho_piso, a.largo_piso, a.id_material_piso, a.ancho_techo, a.largo_techo, a.id_material_techo, a.espacio_padre, d.lat, d.lng
+        $sql = "SELECT b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, d.id as id_edificio, d.nombre as nombre_edificio, a.id, a.piso_edificio, a.uso_espacio, a.ancho_pared, a.alto_pared, a.id_material_pared, a.ancho_piso, a.largo_piso, a.id_material_piso, a.ancho_techo, a.largo_techo, a.id_material_techo, a.espacio_padre, d.lat, d.lng
                 FROM espacio a  JOIN sede b ON a.id_sede = b.id
                                 JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                                 JOIN edificio d ON a.id_sede = d.id_sede AND a.id_campus = d.id_campus AND a.id_edificio = d.id
-                                JOIN uso_espacio e ON a.uso_espacio = e.id
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id_edificio = '".$nombre_edificio."' AND a.id = '".$id."' ORDER BY a.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

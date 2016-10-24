@@ -7,13 +7,13 @@
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus al que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>C&oacute;digo del Edificio al que pertenece<font color='red'>*</font>:</b></div>
+        <div class='div_izquierda'><b>C&oacute;digo del edificio al que pertenece<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='edificio_search' id='edificio_search' required></select><br>
         <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='pisos_search' id='pisos_search' required></select><br>
         <div class='div_izquierda'><b>C&oacute;digo del Espacio<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='espacio_search' id='espacio_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación del Edificio al que pertenece</b></div>
+        <div class='div_izquierda'><b>Indique la ubicación del edificio al que pertenece</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
@@ -35,11 +35,11 @@
                         <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
-                        <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio'disabled  required></select><br>
+                        <input class='form-control formulario' type='text' name='nombre_edificio' id='nombre_edificio' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
-                        <select class='form-control formulario' name='pisos' id='pisos' disabled required></select><br>
+                        <input class='form-control formulario' type='number' name='pisos' id='pisos' value='' disabled required/><br>
                         <div class='div_izquierda'><b>N&uacute;mero(s) del(os) Espacio(s)<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' maxlength="10" name='id_espacio' id='id_espacio' value='' placeholder='Ej: 1001' disabled required/>
+                        <input class='form-control formulario' type='text' maxlength="10" name='id_espacio' id='id_espacio' value='' placeholder='Ej: 1001' disabled required/><br>
                         <div class='div_izquierda'><b>Uso del(os) Espacio(s)<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='uso_espacio' id='uso_espacio' disabled required></select><br>
                         <div id="informacion-adicional">
@@ -94,7 +94,7 @@
                                     <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
                                     <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/>
                                 </div>
                             </div><br>
                             <div class='form-group'>
@@ -109,7 +109,7 @@
                                         <option value='no regulado'>No Regulado</option>
                                     </select><br>
                                     <div class='div_izquierda'><b>Cantidad de tomacorrientes del tipo:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/>
                                 </div>
                             </div><br>
                             <div class='form-group'>
@@ -124,8 +124,8 @@
                                     <div class='div_izquierda'><b>Tipo de cerradura:</b></div>
                                     <select class='form-control formulario' name='tipo_cerradura' id='tipo_cerradura' disabled required></select><br>
                                     <div class='div_izquierda'><b>¿La Puerta tiene gato?:</b></div>
-                                    <label class='radio-inline'><input type='radio' name='gato_puerta' value='true'>S&iacute;</label>
-                                    <label class='radio-inline'><input type='radio' name='gato_puerta' value='false'>No</label><br>
+                                    <label class='radio-inline'><input type='radio' name='gato_puerta' value='true' disabled>S&iacute;</label>
+                                    <label class='radio-inline'><input type='radio' name='gato_puerta' value='false' disabled>No</label><br>
                                     <div class='div_izquierda'><b>Material del marco:</b></div>
                                     <select class='form-control formulario' name='material_marco_puerta' id='material_marco_puerta' disabled required></select><br>
                                     <div class='div_izquierda'><b>Ancho puerta:</b></div>
@@ -137,7 +137,7 @@
                                     <div class="input-group">
                                         <input class='form-control formulario' type='number' min='1' name='alto_puerta' id='alto_puerta' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
-                                    </div><br>
+                                    </div>
                                 </div>
                             </div><br>
                             <div class='form-group'>
@@ -158,7 +158,7 @@
                                     <div class="input-group">
                                         <input class='form-control formulario' type='number' min='1' name='alto_ventana' id='alto_ventana' value='' placeholder='Ej: 4' disabled required/>
                                         <span class="input-group-addon">m</span>
-                                    </div><br>
+                                    </div>
                                 </div>
                             </div><br>
                             <div class='form-group'>
@@ -167,14 +167,14 @@
                                     <div class='div_izquierda'><b>Tipo de interruptor:</b></div>
                                     <select class='form-control formulario' name='tipo_interruptor' id='tipo_interruptor' disabled required></select><br>
                                     <div class='div_izquierda'><b>Cantidad de interruptores:</b></div>
-                                    <input class='form-control formulario' type='number' min='1' name='cantidad_interruptores' id='cantidad_interruptores' value='' placeholder='Ej: 2' disabled required/><br>
+                                    <input class='form-control formulario' type='number' min='1' name='cantidad_interruptores' id='cantidad_interruptores' value='' placeholder='Ej: 2' disabled required/>
                                 </div>
                             </div>
                         </div>
                         <div class='div_izquierda'><b>¿El Espacio est&aacute; dentro de otro?<font color='red'>*</font></b></div>
                         <form id='form_espacio_padre'>
-                            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='true'>S&iacute;</label>
-                            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='false'>No</label>
+                            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='true' disabled>S&iacute;</label>
+                            <label class='radio-inline'><input type='radio' name='tiene_espacio_padre' value='false' disabled>No</label>
                         </form><br>
                         <div id='div_espacio_padre' style='display:none'>
                             <div class='div_izquierda'><b>¿Cu&aacute;l es el n&uacute;mero del(os) Espacio(s) que está(n) dentro del que se va a crear?</b></div>
@@ -182,35 +182,34 @@
                         </div><br>
                         <div id="informacion_especifica" style='display:none'>
                             <div id='informacionEspacio'></div>
-                            <div id='informacionEspacio2'></div>
                         </div>
-                        <div class='div_izquierda'><b>Planos Edificio (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
+                        <div class='div_izquierda'><b>Planos Espacio (Tama&ntilde;o m&aacute;ximo: 2Mb - Número m&aacute;ximo de archivos: 10)</b></div>
                         <input class='form-control formulario' type='file' id='planos[]' name='planos[]' multiple accept='.dwg,.dxf'><br>
-                        <div class='div_izquierda'><b>Fotos Edificio (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+                        <div class='div_izquierda'><b>Fotos Espacio (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
                         <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
                         <div class='div_izquierda'><b>Planos Espacio:</b></div>
                         <div id='planos'></div><br>
                         <div class='div_izquierda'><b>Fotos Espacio:</b></div>
                         <div id='fotos'>
-                            <div class="div_carousel">
-                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                  <!-- Indicators -->
-                                  <ol class="carousel-indicators" id="indicadores_carrusel">
-                                  </ol>
-                                  <!-- Wrapper for slides -->
-                                  <div class="carousel-inner" id="fotos_carrusel" role="listbox">
-                                  </div>
-                                  <!-- Left and right controls -->
-                                  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                  </a>
-                                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                  </a>
+                          <div class="div_carousel">
+                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators" id="indicadores_carrusel">
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
                                 </div>
-                            </div>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                          </div>
                         </div><br>
                     </div>
                 </div>

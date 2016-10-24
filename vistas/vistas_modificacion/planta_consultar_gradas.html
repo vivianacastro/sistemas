@@ -7,11 +7,11 @@
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
-        <div class='div_izquierda'><b>C&oacute;digo del Edificio al que pertenecen<font color='red'>*</font>:</b></div>
+        <div class='div_izquierda'><b>C&oacute;digo del edificio al que pertenecen<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='edificio_search' id='edificio_search' required></select><br>
         <div class='div_izquierda'><b>Piso donde inician las gradas<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='pisos_search' id='pisos_search' required></select><br>
-        <div class='div_izquierda'><b>Indique la ubicación del Edificio donde están las Gradas</b></div>
+        <div class='div_izquierda'><b>Indique la ubicación del edificio donde están las Gradas</b></div>
         <div id="map" class="mapa"></div>
     <div><br>
     <div class='form_button'>
@@ -38,19 +38,14 @@
                         <input class='form-control formulario' type='text' name='pisos' id='pisos' value='' disabled required/><br>
                         <div class='div_izquierda'><b>¿Las gradas tienen pasamanos?</b></div>
                         <form id='form_pasamanos'>
-                          <label class='radio-inline'><input type='radio' name='pasamanos' value='true'>S&iacute;</label>
-                          <label class='radio-inline'><input type='radio' name='pasamanos' value='false'>No</label><br>
+                          <label class='radio-inline'><input type='radio' name='pasamanos' value='true' disabled>S&iacute;</label>
+                          <label class='radio-inline'><input type='radio' name='pasamanos' value='false' disabled>No</label><br>
                         </form>
                         <div id="divPasamanos" style='display:none'>
                           <div class='div_izquierda'><b>Material del pasamanos:</b></div>
                           <select class='form-control formulario' name='material_pasamanos' id='material_pasamanos' disabled required></select><br>
                         </div>
-                        <div class='div_izquierda'><b>¿Las gradas tienen ventanas?</b></div>
-                        <form id='form_ventanas'>
-                          <label class='radio-inline'><input type='radio' name='ventanas' value='true'>S&iacute;</label>
-                          <label class='radio-inline'><input type='radio' name='ventanas' value='false'>No</label><br>
-                        </form>
-                        <div id="divVentanas" class='form-group' style='display:none'>
+                        <div id="divVentanas" class='form-group'>
                             <div><b><h5>Informaci&oacute;n de las Ventanas del(os) Espacio(s)</h5></b></div>
                             <div id='ventana'>
                                 <div class='div_izquierda'><b>Tipo de ventana:</b></div>
@@ -68,10 +63,10 @@
                                 <div class="input-group">
                                     <input class='form-control formulario' type='number' min='1' name='alto_ventana' id='alto_ventana' value='' placeholder='Ej: 4' disabled required/>
                                     <span class="input-group-addon">m</span>
-                                </div><br>
+                                </div>
                             </div>
                             <div id="botones_anadir" style="display:none">
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_ventana' id='añadir_ventana' value='Añadir Tipo' title='Añadir Tipo Ventana'/>
+                                <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_ventana' id='añadir_ventana' value='Añadir Tipo' title='Añadir Tipo Ventana'/>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_ventana' id='eliminar_ventana' value='Eliminar Tipo' title='Eliminar Tipo Ventana' disabled/>
                             </div>
                         </div>
@@ -98,9 +93,7 @@
                                 </a>
                               </div>
                           </div>
-                        </div><br>
-                        <div class='div_izquierda'><b>Ubicación del Gradas</b></div>
-                        <div id="map_modificacion" class="mapa_modal"></div>
+                        </div>
                     </div>
                 </div>
                 <div class='form_button modal-footer'>

@@ -34,23 +34,25 @@
                         <input class='form-control formulario' type='text' name='id_sendero' id='id_sendero' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Longitud del Sendero:</b></div>
                         <div class="input-group">
-                            <input class='form-control formulario' type="number" name='longitud' id='longitud' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                            <input class='form-control formulario' type="number" name='longitud' id='longitud' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
                             <span class="input-group-addon">m</span>
                         </div><br>
                         <div class='div_izquierda'><b>Ancho del Sendero:</b></div>
                         <div class="input-group">
-                            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 10' required>
+                            <input class='form-control formulario' type="number" name='ancho' id='ancho' min="1" class="form-control" value='' placeholder='Ej: 10' disabled required>
                             <span class="input-group-addon">m</span>
                         </div><br>
                         <div class='div_izquierda'><b>Material del piso:</b></div>
-                        <select class='form-control formulario' name='material_piso' id='material_piso' required></select><br>
+                        <select class='form-control formulario' name='material_piso' id='material_piso' disabled required></select><br>
                         <div class='form-group'>
                             <div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Sendero</h5></b></div>
                             <div id='iluminacion'>
                                 <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
-                                <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' required></select><br>
+                                <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' disabled required></select><br>
+                                <div class='div_izquierda'><b>Cantidad:</b></div>
+                                <input class='form-control formulario' type="number" name='cantidad_iluminacion' id='cantidad_iluminacion' min='1' maxlength="10" class="form-control" value='' placeholder='Ej: 10' disabled required><br>
                                 <div class='div_izquierda'><b>C&oacute;digo del poste:</b></div>
-                                <input class='form-control formulario' type='number' min='1' name='codigo_poste' id='codigo_poste' value='' placeholder='Ej: 10320' required/><br>
+                                <input class='form-control formulario' type='number' min='1' name='codigo_poste' id='codigo_poste' value='' placeholder='Ej: 10320' disabled required/><br>
                             </div>
                         </div>
                         <div class='form-group'>
@@ -58,16 +60,16 @@
                             <div id='cubierta'>
                                 <div class='div_izquierda'><b>Ancho de la cubierta:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type="number" name='ancho_cubierta' id='ancho_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                                    <input class='form-control formulario' type="number" name='ancho_cubierta' id='ancho_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Largo de la cubierta:</b></div>
                                 <div class="input-group">
-                                    <input class='form-control formulario' type="number" name='largo_cubierta' id='largo_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' required>
+                                    <input class='form-control formulario' type="number" name='largo_cubierta' id='largo_cubierta' min="1" class="form-control" value='' placeholder='Ej: 30' disabled required>
                                     <span class="input-group-addon">m</span>
                                 </div><br>
                                 <div class='div_izquierda'><b>Materia de la cubierta:</b></div>
-                                <select class='form-control formulario' name='material_cubierta' id='material_cubierta' required></select>
+                                <select class='form-control formulario' name='material_cubierta' id='material_cubierta' disabled required></select>
                             </div>
                         </div>
                         <div class='div_izquierda'><b>Planos Sendero:</b></div>

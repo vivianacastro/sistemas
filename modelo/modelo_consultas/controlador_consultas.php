@@ -509,7 +509,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
+            $data = $m->buscarGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],
@@ -1330,7 +1330,7 @@ class controlador_consultas
                     'capacidad' => $valor['capacidad'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'material_piso' => $valor['id_material_piso'],
-                    'tipo_pintura_demarcacion' => $valor['tipo_pintura_demarcacion'],
+                    'tipo_pintura_demarcacion' => $valor['id_tipo_pintura_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1397,6 +1397,7 @@ class controlador_consultas
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
                 );
@@ -1434,7 +1435,7 @@ class controlador_consultas
                     'tipo_iluminacion' => $valor['id_tipo_iluminacion'],
                     'cantidad' =>$valor['cantidad'],
                     'codigo_poste' => $valor['codigo_poste'],
-                    'material_cubierta' => $valor['material_cubierta'],
+                    'material_cubierta' => $valor['id_material_cubierta'],
                     'ancho_cubierta' =>$valor['ancho_cubierta'],
                     'largo_cubierta' =>$valor['largo_cubierta'],
                     'lat' => $valor['lat'],
@@ -1467,9 +1468,9 @@ class controlador_consultas
                     'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                     'id_campus' => $valor['id_campus'],
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
-                    'id' => $valor['idt'],
-                    'material_piso' => $valor['material_pisog'],
-                    'tipo_pintura' => $valor['id_tipo_pintura'],
+                    'id' => $valor['id'],
+                    'material_piso' => $valor['id_tipo_material'],
+                    'tipo_pintura' => $valor['id_tipo_pintura_demarcacion'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
@@ -1536,7 +1537,6 @@ class controlador_consultas
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
-                    'uso_espacio' => mb_convert_case($valor['uso_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
                     'id_campus' => $valor['id_campus'],
@@ -1544,6 +1544,7 @@ class controlador_consultas
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'piso' =>$valor['piso_edificio'],
+                    'uso_espacio' =>$valor['uso_espacio'],
                     'ancho_pared' =>$valor['ancho_pared'],
                     'alto_pared' =>$valor['alto_pared'],
                     'material_pared' => $valor['id_material_pared'],
@@ -1555,6 +1556,60 @@ class controlador_consultas
                     'material_techo' => $valor['id_material_techo'],
                     'lat' => $valor['lat'],
                     'lng' =>$valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un tipo de material
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_tipo_material() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionTipoMaterial($info["tipo_material"],$info["id_tipo_material"],$info["nombre"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'tipo_material' => mb_convert_case($info["tipo_material"],MB_CASE_TITLE,"UTF-8"),
+                    'id_tipo_material' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['material'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un tipo de objeto
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_tipo_objeto() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionTipoObjeto($info["tipo_objeto"],$info["id_tipo_objeto"],$info["nombre"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'tipo_objeto' => mb_convert_case($info["tipo_objeto"],MB_CASE_TITLE,"UTF-8"),
+                    'id_tipo_objeto' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -1780,7 +1835,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArchivosCampus($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            $data = $m->buscarArchivosPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_sede' => $valor['id_sede'],

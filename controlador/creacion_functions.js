@@ -988,7 +988,7 @@ $(document).ready(function() {
           });
           for (var i=0; i<numeroPisos;i++) {
               if (i == 0 && sotano == 'true') {
-                  aux = "Sotano";
+                  aux = "Sótano";
                   row = $("<option value='sotano'/>");
                   row.text(aux);
                   row.appendTo("#pisos");
@@ -1023,7 +1023,7 @@ $(document).ready(function() {
             });
             for (var i=0; i<numeroPisos;i++) {
                 if (i == 0 && sotano == 'true') {
-                    aux = "Sotano";
+                    aux = "Sótano";
                     row = $("<option value='sotano'/>");
                     row.text(aux);
                     row.appendTo("#pisos");
@@ -1092,19 +1092,6 @@ $(document).ready(function() {
             $('#divPasamanos').show();
         }else{
             $('#divPasamanos').hide();
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se modifica el valor del radio button ventanas
-     * y se actualiza el selector de pisos.
-     */
-    $("#form_ventanas").change(function (e) {
-        var ventanas = $('input[name="ventanas"]:checked').val();
-        if (ventanas == "true") {
-            $('#divVentanas').show();
-        }else{
-            $('#divVentanas').hide();
         }
     });
 
@@ -2045,9 +2032,7 @@ $(document).ready(function() {
                           $("#nombre_edificio").empty();
                           $("#pisos").empty();
                           $('input[name=pasamanos]').attr('checked',false);
-                          $('input[name=ventanas]').attr('checked',false);
                           $("#divPasamanos").hide();
-                          $("#divVentanas").hide();
                           $("#tipo_ventana").val("");
                           $("#cantidad_ventanas").val("");
                           $("#material_ventana").val("");
