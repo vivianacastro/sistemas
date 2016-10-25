@@ -183,12 +183,12 @@ $map = array(
         'consultar_informacion_interruptor_corredor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_interruptor_corredor'),
         'consultar_informacion_ventana_gradas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_ventana_gradas'),
         'consultar_informacion_iluminacion_plazoleta' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_iluminacion_plazoleta'),
-        /*'consultar_informacion_iluminacion_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_iluminacion_espacio'),
+        'consultar_informacion_iluminacion_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_iluminacion_espacio'),
         'consultar_informacion_interruptor_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_interruptor_espacio'),
         'consultar_informacion_puerta_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_puerta_espacio'),
         'consultar_informacion_puerta_tipo_cerradura' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_puerta_tipo_cerradura'),
         'consultar_informacion_suministro_energia_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_suministro_energia_espacio'),
-        'consultar_informacion_ventana_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_ventana_espacio'),*/
+        'consultar_informacion_ventana_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_ventana_espacio'),
         'verificar_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_espacio'),
         //Acciones de modificación
 

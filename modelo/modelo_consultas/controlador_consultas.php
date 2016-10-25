@@ -1685,6 +1685,200 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar la información de la iluminación de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_iluminacion_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionIluminacionEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_iluminacion' =>$valor['id_tipo_iluminacion'],
+                    'cantidad' =>$valor['cantidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de los interruptores de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_interruptor_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionInterrutorEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_interruptor' =>$valor['id_tipo_interruptor'],
+                    'cantidad' =>$valor['cantidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de las puertas de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_puerta_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionPuertaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_puerta' =>$valor['id_tipo_puerta'],
+                    'material_puerta' =>$valor['id_material_puerta'],
+                    'cantidad' =>$valor['cantidad'],
+                    'material_marco' =>$valor['id_material_marco'],
+                    'ancho' =>$valor['ancho'],
+                    'largo' =>$valor['largo'],
+                    'gato' =>$valor['gato'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de las puertas de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_puerta_tipo_cerradura() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionPuertaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["tipo_puerta"],$info["material_puerta"],$info["material_marco"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_puerta' =>$valor['id_tipo_puerta'],
+                    'material_puerta' =>$valor['id_material_puerta'],
+                    'cantidad' =>$valor['cantidad'],
+                    'material_marco' =>$valor['id_material_marco'],
+                    'ancho' =>$valor['ancho'],
+                    'largo' =>$valor['largo'],
+                    'gato' =>$valor['gato'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de la iluminación de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_suministro_energia_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionSuministroEnergiaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_suministro_energia' =>$valor['id_tipo_suministro_energia'],
+                    'cantidad' =>$valor['cantidad'],
+                    'tomacorriente' =>$valor['tomacorriente'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de la iluminación de un espacio
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_ventana_espacio() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionVentanaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_ventana' =>$valor['id_tipo_ventana'],
+                    'ancho' =>$valor['ancho_ventana'],
+                    'alto' =>$valor['alto_ventana'],
+                    'cantidad' =>$valor['cantidad'],
+                    'material_ventana' =>$valor['id_material_ventana'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar los archivos de un campus
      * almacenado en el sistema.
      */

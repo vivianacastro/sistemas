@@ -775,7 +775,7 @@ class modelo_consultas
     }
 
     /**
-     * Función que permite buscar la información de las ventanas de unas unas gradas en el sistema.
+     * Función que permite buscar la información de las ventanas de unas gradas en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenecen las gradas a buscar.
      * @param string $nombre_campus, id del campus donde están las gradas a buscar.
      * @param string $nombre_edificio, id del edificio al que pertenecen las gradas a buscar.
@@ -1762,6 +1762,201 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de la iluminación de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionIluminacionEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM iluminacion_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_iluminacion,id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la iluminación del espacio seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de los interruptores de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionInterrutorEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM interruptor_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_interruptor,id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de los interruptores del espacio seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de las puertas de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionPuertaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM puerta_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_puerta,id_material_puerta,id_material_marco,id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de las puertas del espacio seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información del tipo de cerradura de una puerta de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionPuertaTipoCerradura($nombre_sede,$nombre_campus,$nombre_edificio,$id,$tipo_puerta,$material_puerta,$material_marco){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
+        $material_puerta = htmlspecialchars(trim($material_puerta));
+        $material_marco = htmlspecialchars(trim($material_marco));
+        $sql = "SELECT * FROM puerta_tipo_cerradura WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."'  AND id_tipo_puerta = '".$tipo_puerta."'  AND id_material_puerta = '".$material_puerta."'  AND id_material_marco = '".$material_marco."' ORDER BY id_tipo_cerradura;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Tipo Cerradura 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Tipo Cerradura 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la cerradura de las puertas del espacio seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información del suministro de energía de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionSuministroEnergiaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM suministro_energia_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_suministro_energia,id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Suministro Energía-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Suministro Energía-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del suministro de energía del espacio seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de las ventanas de un espacio en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
+     * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
+     * @param string $id, id del espacio a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionVentanaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM ventana_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_ventana,id_material_ventana,id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de las ventanas del espacio seleccionado";
             }
         }
         return $result;

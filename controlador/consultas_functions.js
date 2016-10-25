@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-  var espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
+  var espaciosCont = 0, iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
   var campusSelect = null;
   var marcadores = [], marcadoresModificacion = [];
   var URLactual = window.location;
@@ -2899,12 +2899,11 @@ $(document).ready(function() {
       info['nombre_edificio'] = edificio;
       info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("espacio",info);
-      //var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",info);
-      //var dataInterruptor = consultarInformacionObjeto("interrutor_espacio",info);
-      //var dataPuerta = consultarInformacionObjeto("puerta_espacio",info);
-      //var dataTipoCerradura = consultarInformacionObjeto("puerta_tipo_cerradura",info);
-      //var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
-      //var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
+      var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",info);
+      var dataInterruptor = consultarInformacionObjeto("interrutor_espacio",info);
+      var dataPuerta = consultarInformacionObjeto("puerta_espacio",info);
+      var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
+      var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
       var archivos = consultarArchivosObjeto("espacio",info);
       console.log(data);
       console.log(archivos);
@@ -2926,6 +2925,181 @@ $(document).ready(function() {
               $("#ancho_techo").val(record.ancho_techo);
               $("#largo_techo").val(record.largo_techo);
               $("#material_techo").val(record.material_techo);
+          }
+      });
+      $.each(dataIluminacion, function(index, record) {
+          if($.isNumeric(index)) {
+              if (iluminacionCont == 0) {
+                  $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion").val(record.cantidad);
+              }else{
+                  var componente = '<div id="iluminacion'+iluminacionCont+'">'
+                  +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
+                  +'</div>';
+                  añadirComponente("iluminacion",componente);
+                  actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
+                  $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+              }
+              iluminacionCont++;
+          }
+      });
+      $.each(dataInterruptor, function(index, record) {
+          if($.isNumeric(index)) {
+              if (interruptoresCont == 0) {
+                  $("#tipo_interruptor").val(record.tipo_interruptor);
+                  $("#cantidad_interruptores").val(record.cantidad);
+              }else{
+                  var componente = '<div id="interruptor'+interruptoresCont+'">'
+                  +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
+                  +'</div>';
+                  añadirComponente("interruptor",componente);
+                  actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
+                  $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
+                  $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
+              }
+              interruptoresCont++;
+          }
+      });
+      $.each(dataPuerta, function(index, record) {
+          if($.isNumeric(index)) {
+              if (puertasCont == 0) {
+                  $("#tipo_puerta").val(record.tipo_puerta);
+                  $("#cantidad_puertas").val(record.cantidad);
+                  $("#material_puerta").val(record.material_puerta);
+                  $("#gato_puerta").val(record.gato);
+                  $("#material_marco").val(record.material_marco);
+                  $("#ancho_puerta").val(record.ancho);
+                  $("#alto_puerta").val(record.alto);
+              }else{
+                  var componente = '<div id="puerta'+puertasCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
+                  +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
+                  //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
+                  //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
+                  +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
+                  +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
+                  +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
+                  +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("puerta",componente);
+                  actualizarSelectMaterial("material_puerta",puertasCont);
+                  actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
+                  $("#tipo_puerta"+puertasCont).val(record.tipo_puerta);
+                  $("#cantidad_puertas"+puertasCont).val(record.cantidad);
+                  $("#material_puerta"+puertasCont).val(record.material_puerta);
+                  $("#gato_puerta"+puertasCont).val(record.gato);
+                  $("#material_marco"+puertasCont).val(record.material_marco);
+                  $("#ancho_puerta"+puertasCont).val(record.ancho);
+                  $("#alto_puerta"+puertasCont).val(record.alto);
+              }
+              var tipoPuerta = record.tipo_puerta;
+              var materialPuerta = record.material_puerta;
+              var materialMarco = record.material_marco;
+              var infoPuerta = {};
+              infoPuerta['nombre_sede'] = sede;
+              infoPuerta['nombre_campus'] = campus;
+              infoPuerta['nombre_edificio'] = edificio;
+              infoPuerta['id'] = limpiarCadena(id);
+              infoPuerta['tipo_puerta'] = tipoPuerta;
+              infoPuerta['material_puerta'] = materialPuerta;
+              infoPuerta['material_marco'] = materialMarco;
+              var dataTipoCerradura = consultarInformacionObjeto("puerta_tipo_cerradura",infoPuerta);
+              $.each(dataSuministro, function(index, record) {
+                  if($.isNumeric(index)) {
+                      if (cerraduraCont == 0) {
+                          $("#tipo_cerradura"+cerraduraCont).val(record.tipo_cerradura);
+                      }else{
+                          var componente = '<div id="cerradura'+cerraduraCont+'">'
+                          +'<div class="div_izquierda"><b>Tipo de cerradura ('+(cerraduraCont+1)+') de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                          +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+cerraduraCont'" required></select><br>'
+                          +'</div>';
+                          añadirComponente("cerradura",componente);
+                          actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
+                          $("#tipo_cerradura"+cerraduraCont).val(record.tipo_cerradura);
+                      }
+                      cerraduraCont++;
+                  }
+              });
+              puertasCont++;
+          }
+      });
+      $.each(dataSuministro, function(index, record) {
+          if($.isNumeric(index)) {
+              if (tomacorrientesCont == 0) {
+                  $("#tipo_suministro_energia").val(record.tipo_suministro_energia);
+                  $("#tomacorriente").val(record.tomacorriente);
+                  $("#cantidad_tomacorrientes").val(record.cantidad);
+              }else{
+                  var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
+                  +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
+                  +'<option value="regulado">Regulado</option>'
+                  +'<option value="no regulado">No Regulado</option>'
+                  +'</select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("suministro_energia",componente);
+                  actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
+                  $("#tipo_suministro_energia"+tomacorrientesCont).val(record.tipo_suministro_energia);
+                  $("#tomacorriente"+tomacorrientesCont).val(record.tomacorriente);
+                  $("#cantidad_tomacorrientes"+tomacorrientesCont).val(record.cantidad);
+              }
+              tomacorrientesCont++;
+          }
+      });
+      $.each(dataVentana, function(index, record) {
+          if($.isNumeric(index)) {
+              if (ventanasCont == 0) {
+                  $("#tipo_ventana").val(record.tipo_ventana);
+                  $("#cantidad_ventanas").val(record.cantidad);
+                  $("#material_ventana").val(record.material);
+                  $("#ancho_ventana").val(record.ancho);
+                  $("#alto_ventana").val(record.alto);
+              }else{
+                  var componente = '<div id="ventana'+ventanasCont+'">'
+                  +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                  +'</div>';
+                  añadirComponente("ventana",componente);
+                  actualizarSelectMaterial("material_ventana",ventanasCont);
+                  actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
+                  $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
+                  $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
+                  $("#material_ventana"+ventanasCont).val(record.material);
+                  $("#ancho_ventana"+ventanasCont).val(record.ancho);
+                  $("#alto_ventana"+ventanasCont).val(record.alto);
+              }
+              ventanasCont++;
           }
       });
       /*if (usoEspacio == '1') { //Salón
@@ -2995,79 +3169,6 @@ $(document).ready(function() {
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
-          }
-      });
-      $.each(dataIluminacion, function(index, record) {
-          if($.isNumeric(index)) {
-              if (iluminacionCont == 0) {
-                  $("#tipo_iluminacion").val(record.tipo_iluminacion);
-                  $("#cantidad_iluminacion").val(record.cantidad);
-              }else{
-                  var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                  +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                  +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
-                  +'</div>';
-                  añadirComponente("iluminacion",componente);
-                  actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
-                  $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
-                  $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
-              }
-              iluminacionCont++;
-          }
-      });
-      $.each(dataInterruptor, function(index, record) {
-          if($.isNumeric(index)) {
-              if (interruptoresCont == 0) {
-                  $("#tipo_interruptor").val(record.tipo_interruptor);
-                  $("#cantidad_interruptores").val(record.cantidad);
-              }else{
-                  var componente = '<div id="interruptor'+interruptoresCont+'">'
-                  +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
-                  +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
-                  +'</div>';
-                  añadirComponente("interruptor",componente);
-                  actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
-                  $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
-                  $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
-              }
-              interruptoresCont++;
-          }
-      });
-      $.each(dataVentana, function(index, record) {
-          if($.isNumeric(index)) {
-              if (ventanasCont == 0) {
-                  $("#tipo_ventana").val(record.tipo_ventana);
-                  $("#cantidad_ventanas").val(record.cantidad);
-                  $("#material_ventana").val(record.material);
-                  $("#ancho_ventana").val(record.ancho);
-                  $("#alto_ventana").val(record.alto);
-              }else{
-                  var componente = '<div id="ventana'+ventanasCont+'">'
-                  +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
-                  +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
-                  +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
-                  +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
-                  +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
-                  +'</div>';
-                  añadirComponente("ventana",componente);
-                  actualizarSelectMaterial("material_ventana",ventanasCont);
-                  actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
-                  $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
-                  $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
-                  $("#material_ventana"+ventanasCont).val(record.material);
-                  $("#ancho_ventana"+ventanasCont).val(record.ancho);
-                  $("#alto_ventana"+ventanasCont).val(record.alto);
-              }
-              ventanasCont++;
           }
       });
       var componente, componente2;
