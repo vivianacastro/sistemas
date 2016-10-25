@@ -586,7 +586,7 @@ class modelo_consultas
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.uso, a.id_material_piso, a.id_tipo_pintura, a.longitud_demarcacion, a.lat, a.lng
+        $sql = "SELECT a.id, b.id as id_sede, b.nombre as nombre_sede, c.id as id_campus, c.nombre as nombre_campus, a.uso, a.id_material_piso, a.id_tipo_pintura_demarcacion, a.longitud_demarcacion, a.lat, a.lng
                 FROM cancha a JOIN sede b ON a.id_sede = b.id
                               JOIN campus c ON a.id_campus = c.id AND a.id_sede = c.sede
                 WHERE a.id_sede = '".$nombre_sede."' AND a.id_campus = '".$nombre_campus."' AND a.id = '".$id."' ORDER BY a.id;";

@@ -1166,7 +1166,6 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $GLOBALS['sql'] = $info["nombre_sede"].$info["nombre_campus"].$info["id"];
             $data = $m->buscarInformacionCancha($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
@@ -1177,7 +1176,7 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'uso' => $valor['uso'],
                     'material_piso' => $valor['id_material_piso'],
-                    'tipo_pintura' => $valor['id_tipo_pintura'],
+                    'tipo_pintura' => $valor['id_tipo_pintura_demarcacion'],
                     'longitud_demarcacion' => $valor['longitud_demarcacion'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
