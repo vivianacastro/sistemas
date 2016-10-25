@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, numeroFotos = 0, numeroPlanos = 0;
+  var espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
   var campusSelect = null;
   var marcadores = [], marcadoresModificacion = [];
   var URLactual = window.location;
@@ -66,14 +67,15 @@ $(document).ready(function() {
       }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_piso",0);
+          actualizarSelectTipoObjeto("tipo_iluminacion",0);
           actualizarSelectTipoObjeto("tipo_pintura",0);
           initMap();
           rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
           actualizarSelectSede();
           actualizarSelectMaterial("material_cubierta",0);
-          actualizarSelectMaterial("material_piso",0);
           actualizarSelectTipoObjeto("tipo_iluminacion",0);
+          actualizarSelectMaterial("material_piso",0);
           initMap();
           rellenarMapa(mapaConsulta);
       }else if(URLactual['href'].indexOf('consultar_via') >= 0){
@@ -1405,6 +1407,8 @@ $(document).ready(function() {
       var archivos = consultarArchivosObjeto("via",info);
       var archivos = consultarArchivosObjeto("edificio",info);
       var archivos = consultarArchivosObjeto("espacio",info);*/
+      console.log(data);
+      console.log(archivos);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
@@ -1452,8 +1456,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
               +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -1461,19 +1465,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -1493,6 +1495,8 @@ $(document).ready(function() {
       info['nombre_campus'] = campus;
       var data = consultarInformacionObjeto("campus",info);
       var archivos = consultarArchivosObjeto("campus",info);
+      console.log(data);
+      console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
@@ -1555,8 +1559,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -1564,19 +1568,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -1675,8 +1677,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -1684,19 +1686,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -1724,12 +1724,12 @@ $(document).ready(function() {
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("corredor",info);
-      //var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
-      //var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
+      var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
+      var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
       var archivos = consultarArchivosObjeto("corredor",info);
       console.log(data);
-      //console.log(dataIluminacion);
-      //console.log(dataInterruptor);
+      console.log(dataIluminacion);
+      console.log(dataInterruptor);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
@@ -1763,6 +1763,46 @@ $(document).ready(function() {
               });
               marcadoresModificacion.push(marker);
               marker.setMap(mapaModificacion);
+          }
+      });
+      $.each(dataIluminacion, function(index, record) {
+          if($.isNumeric(index)) {
+              if (iluminacionCont == 0) {
+                  $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion").val(record.cantidad);
+              }else{
+                  var componente = '<div id="iluminacion'+iluminacionCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("iluminacion",componente);
+                  actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
+                  $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+              }
+              iluminacionCont++;
+          }
+      });
+      $.each(dataInterruptor, function(index, record) {
+          if($.isNumeric(index)) {
+              if (interruptoresCont == 0) {
+                  $("#tipo_interruptor").val(record.tipo_interruptor);
+                  $("#cantidad_interruptores").val(record.cantidad);
+              }else{
+                  var componente = '<div id="interruptor'+interruptoresCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("interruptor",componente);
+                  actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
+                  $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
+                  $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
+              }
+              interruptoresCont++;
           }
       });
       $("#myCarousel").hide();
@@ -1807,8 +1847,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -1816,19 +1856,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -1865,6 +1903,8 @@ $(document).ready(function() {
       info['piso'] = piso;
       var data = consultarInformacionObjeto("cubierta",info);
       var archivos = consultarArchivosObjeto("cubierta",info);
+      console.log(data);
+      console.log(archivos);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
@@ -1925,8 +1965,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -1934,19 +1974,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -1975,8 +2013,11 @@ $(document).ready(function() {
       }
       info['piso_inicio'] = piso;
       var data = consultarInformacionObjeto("gradas",info);
-      //var dataVentana = consultarInformacionObjeto("ventana_gradas",info);
+      var dataVentana = consultarInformacionObjeto("ventana_gradas",info);
       var archivos = consultarArchivosObjeto("gradas",info);
+      console.log(data);
+      console.log(dataVentana);
+      console.log(archivos);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
@@ -1991,6 +2032,39 @@ $(document).ready(function() {
               $("#pisos").val(piso);
               $("input[name=pasamanos][value=" + record.pasamanos + "]").prop('checked', true);
               $("#material_pasamanos").val(record.material_pasamanos);
+          }
+      });
+      $.each(dataVentana, function(index, record) {
+          if($.isNumeric(index)) {
+              if (ventanasCont == 0) {
+                  $("#tipo_ventana").val(record.tipo_ventana);
+                  $("#cantidad_ventanas").val(record.cantidad);
+                  $("#material_ventana").val(record.material);
+                  $("#ancho_ventana").val(record.ancho);
+                  $("#alto_ventana").val(record.alto);
+              }else{
+                  var componente = '<div id="ventana'+ventanasCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
+                  +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
+                  +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("ventana",componente);
+                  actualizarSelectMaterial("material_ventana",ventanasCont);
+                  actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
+                  $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
+                  $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
+                  $("#material_ventana"+ventanasCont).val(record.material);
+                  $("#ancho_ventana"+ventanasCont).val(record.ancho);
+                  $("#alto_ventana"+ventanasCont).val(record.alto);
+              }
+              ventanasCont++;
           }
       });
       $("#myCarousel").hide();
@@ -2035,8 +2109,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2044,19 +2118,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2150,8 +2222,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2159,19 +2231,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2270,8 +2340,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2279,19 +2349,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2319,9 +2387,10 @@ $(document).ready(function() {
       info['nombre_campus'] = campus;
       info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("plazoleta",info);
-      //var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
+      var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
       var archivos = consultarArchivosObjeto("plazoleta",info);
       console.log(data);
+      console.log(dataIluminacion);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
@@ -2346,6 +2415,27 @@ $(document).ready(function() {
               marker.setMap(mapaModificacion);
           }
       });
+      $.each(dataIluminacion, function(index, record) {
+          if($.isNumeric(index)) {
+              if (iluminacionCont == 0) {
+                  $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion").val(record.cantidad);
+              }else{
+                  var componente = '<div id="iluminacion'+iluminacionCont+'">'
+                  +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
+                  +'</div>';
+                  añadirComponente("iluminacion",componente);
+                  actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
+                  $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                  $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+              }
+              iluminacionCont++;
+          }
+      });
+      console.log(iluminacionCont);
       $("#myCarousel").hide();
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
@@ -2388,8 +2478,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2397,19 +2487,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2513,8 +2601,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2522,19 +2610,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2632,8 +2718,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2641,19 +2727,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2755,8 +2839,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2764,19 +2848,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2909,8 +2991,8 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item active carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }else{
@@ -2918,19 +3000,17 @@ $(document).ready(function() {
           componente2 = '<div id="item_carrusel" class="item carouselImg">'
             +'<div class="fileUpload btn boton_agregar_foto">'
                   +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
-                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" multiple/>'
-                  +'<input id="fileInputOculto" type="file" class="upload" multiple/>'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
               +'</div>'
             +'</div>';
       }
-      if (numeroPlanos == 0) {
-          var componentePlano = '<div id="plano" class="div_izquierda">'
-              +'<span>Agregar un plano</span><br>'
-              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
-          numeroPlanos++;
-          añadirComponente("planos",componentePlano);
-      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
       añadirComponente("fotos_carrusel",componente2);
@@ -2979,8 +3059,8 @@ $(document).ready(function() {
                $("#nombre_tipo_objeto").val(record.nombre);
            }
        });*/
-       $("#tipo_objeto_search").val(tipoObjeto);
-       $("#nombre_tipo_objeto_search").val(nombreTipoObjeto);
+       $("#tipo_objeto").val(tipoObjeto);
+       $("#nombre_tipo_objeto").val(nombreTipoObjeto);
        $("#divDialogConsulta").modal('show');
    });
 
@@ -2991,11 +3071,13 @@ $(document).ready(function() {
       if (URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_gradas') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1) {
           if (URLactual['href'].indexOf('consultar_campus') >= 0) {
               mapaModificacion.setZoom(15);
-          }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1){
+              google.maps.event.trigger(mapaModificacion, "resize");
+              mapaModificacion.setCenter(coordsMapaModificacion);
+          }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1))){
               mapaModificacion.setZoom(18);
+              google.maps.event.trigger(mapaModificacion, "resize");
+              mapaModificacion.setCenter(coordsMapaModificacion);
           }
-          google.maps.event.trigger(mapaModificacion, "resize");
-          mapaModificacion.setCenter(coordsMapaModificacion);
       }
   });
 
@@ -3043,6 +3125,57 @@ $(document).ready(function() {
       $("#guardar_modificaciones_via").hide();
       $("#guardar_modificaciones_edificio").hide();
       $("#guardar_modificaciones_espacio").hide();
+      while (iluminacionCont > 0) {
+          eliminarComponente("iluminacion"+iluminacionCont);
+          iluminacionCont--;
+      }
+      while (tomacorrientesCont > 0) {
+          eliminarComponente("suministro_energia"+tomacorrientesCont);
+          tomacorrientesCont--;
+      }
+      while (puertasCont > 0) {
+          eliminarComponente("puerta"+tomacorrientesCont);
+          puertasCont--;
+      }
+      while (ventanasCont > 0) {
+          eliminarComponente("ventana"+tomacorrientesCont);
+          ventanasCont--;
+      }
+      while (interruptoresCont > 0) {
+          eliminarComponente("interruptor"+tomacorrientesCont);
+          interruptoresCont--;
+      }
+  });
+
+  /**
+   * Evento de cambio del selector de archivo del modal de consulta/modificación.
+   */
+  $("#planos").on("change", ".agregar_archivos", function(){
+      var planos = document.getElementById("planos[]");
+			var fotos = document.getElementById("fileInputOculto");
+      var aux = numeroPlanos + planos.files.length;
+      var aux2 = numeroFotos + fotos.files.length;
+			if (aux > numeroPlanos) {
+					$("#guardar_archivos").show();
+			}else if(aux2 == numeroFotos){
+					$("#guardar_archivos").hide();
+			}
+  });
+
+  /**
+   * Evento de cambio del selector de archivo del modal de consulta/modificación.
+   */
+  $("#myCarousel").on("change", ".upload", function(){
+      var fotos = document.getElementById("fileInputOculto");
+      var planos = document.getElementById("planos[]");
+      console.log(planos.files.length);
+      var aux = numeroFotos + fotos.files.length;
+      var aux2 = numeroPlanos + planos.files.length;
+			if (aux > numeroFotos) {
+					$("#guardar_archivos").show();
+			}else if(aux2 == numeroPlanos){
+					$("#guardar_archivos").hide();
+			}
   });
 
   /**
@@ -3510,5 +3643,319 @@ $(document).ready(function() {
   $("#modificar_campus").click(function (e){
       $("#modificar_campus").hide();
       $("#guardar_modificaciones_campus").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_informacion_adicional y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_informacion_adicional").click(function (e){
+      $("#informacion-adicional").show();
+      $("#añadir_informacion_adicional").attr('disabled','disabled');
+      $('#eliminar_informacion_adicional').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_informacion_adicional y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_informacion_adicional").click(function (e){
+      $("#informacion-adicional").hide();
+      $("#eliminar_informacion_adicional").attr('disabled','disabled');
+      $('#añadir_informacion_adicional').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_iluminacion y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_iluminacion").click(function (e){
+      iluminacionCont++;
+      var componente = '<div id="iluminacion'+iluminacionCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("iluminacion",componente);
+      actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
+      $('#eliminar_iluminacion').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_iluminacion y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_iluminacion").click(function (e){
+      eliminarComponente("iluminacion"+iluminacionCont);
+      iluminacionCont--;
+      if(iluminacionCont == 0){
+          $("#eliminar_iluminacion").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_tomacorriente y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_tomacorriente").click(function (e){
+      tomacorrientesCont++;
+      var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
+      +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
+      +'<option value="regulado">Regulado</option>'
+      +'<option value="no regulado">No Regulado</option>'
+      +'</select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("suministro_energia",componente);
+      actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
+      $('#eliminar_tomacorriente').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_tomacorriente y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_tomacorriente").click(function (e){
+      eliminarComponente("suministro_energia"+tomacorrientesCont);
+      tomacorrientesCont--;
+      if(tomacorrientesCont == 0){
+          $("#eliminar_tomacorriente").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_puerta y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_puerta").click(function (e){
+      puertasCont++;
+      var componente = '<div id="puerta'+puertasCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
+      +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
+      //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
+      //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
+      +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
+      +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
+      +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
+      +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
+      +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("puerta",componente);
+      actualizarSelectMaterial("material_puerta",puertasCont);
+      actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
+      $('#eliminar_puerta').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_puerta y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_puerta").click(function (e){
+      eliminarComponente("puerta"+puertasCont);
+      puertasCont--;
+      if(puertasCont == 0){
+          $("#eliminar_puerta").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_ventana y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_ventana").click(function (e){
+      ventanasCont++;
+      var componente = '<div id="ventana'+ventanasCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
+      +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
+      +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("ventana",componente);
+      actualizarSelectMaterial("material_ventana",ventanasCont);
+      actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
+      $('#eliminar_ventana').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_ventana y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_ventana").click(function (e){
+      eliminarComponente("ventana"+ventanasCont);
+      ventanasCont--;
+      if(ventanasCont == 0){
+          $("#eliminar_ventana").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_interruptor y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_interruptor").click(function (e){
+      interruptoresCont++;
+      var componente = '<div id="interruptor'+interruptoresCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("interruptor",componente);
+      actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
+      $('#eliminar_interruptor').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_interruptor y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_interruptor").click(function (e){
+      eliminarComponente("interruptor"+interruptoresCont);
+      interruptoresCont--;
+      if(interruptoresCont == 0){
+          $("#eliminar_interruptor").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_punto_sanitario").click(function (e){
+      puntosSanitariosCont++;
+      var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("punto_sanitario",componente);
+      actualizarSelectTipoObjeto("tipo_punto_sanitario",puntosSanitariosCont);
+      $('#eliminar_punto_sanitario').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_punto_sanitario").click(function (e){
+      eliminarComponente("punto_sanitario"+puntosSanitariosCont);
+      puntosSanitariosCont--;
+      if(puntosSanitariosCont == 0){
+          $("#eliminar_punto_sanitario").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_orinal").click(function (e){
+      orinalesCont++;
+      var componente = '<div id="orinal'+orinalesCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" required/><br>'
+      +'</div>';
+      añadirComponente("orinal",componente);
+      actualizarSelectTipoObjeto("tipo_orinal",orinalesCont);
+      $('#eliminar_orinal').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_orinal").click(function (e){
+      eliminarComponente("orinal"+orinalesCont);
+      orinalesCont--;
+      if(orinalesCont == 0){
+          $("#eliminar_orinal").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton añadir_lavamanos y se
+   * realiza la operacion correspondiente.
+   */
+  $("#añadir_lavamanos").click(function (e){
+      lavamanosCont++;
+      var componente = '<div id="lavamanos'+lavamanosCont+'">'
+      +'<div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
+      +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
+      +'</div>'
+      +'</div>';
+      añadirComponente("lavamanos",componente);
+      actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
+      $('#eliminar_lavamanos').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_lavamanos y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_lavamanos").click(function (e){
+      eliminarComponente("lavamanos"+lavamanosCont);
+      lavamanosCont--;
+      if(lavamanosCont == 0){
+          $("#eliminar_lavamanos").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton agregar_espacio y se
+   * realiza la operacion correspondiente.
+   */
+  $("#agregar_espacio").click(function (e){
+      $("#divBotonesInformacionAdicional").hide();
+      $("#informacion-adicional").hide();
+      espaciosCont++;
+      var componente = '<div id="espacio'+espaciosCont+'">'
+      +'<br><div class="input-group">'
+      +'<input class="form-control formulario" type="number" min="1" name="id_espacio" id="id_espacio'+espaciosCont+'" value="" placeholder="Ej: 1001" required/>'
+      +'<span class="input-group-btn">'
+      +'</span>'
+      +'</div>'
+      +'</div>';
+      añadirComponente("espacio",componente);
+      $('#eliminar_espacio').removeAttr("disabled");
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton eliminar_espacio y se
+   * realiza la operacion correspondiente.
+   */
+  $("#eliminar_espacio").click(function (e){
+      eliminarComponente("espacio"+espaciosCont);
+      espaciosCont--;
+      if(espaciosCont == 0){
+          $("#divBotonesInformacionAdicional").show();
+          $("#eliminar_espacio").attr('disabled','disabled');
+      }
   });
 });

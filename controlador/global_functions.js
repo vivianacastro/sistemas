@@ -94,7 +94,7 @@ $("#myCarousel").on("change", ".upload", function(){
 			var texto = "";
 			if (fotos.files.length > 1) {
 					texto = fotos.files.length + " archivos";
-			}else{
+			}else if (fotos.files.length == 1){
 					texto = fotos.files[0].name;
 			}
 			$("#fileInputVisible").val(texto);

@@ -83,7 +83,7 @@
                                 <div class='div_izquierda'><b>Tipo de l&aacute;mpara:</b></div>
                                 <select class='form-control formulario' name='tipo_iluminacion' id='tipo_iluminacion' disabled required></select><br>
                                 <div class='div_izquierda'><b>Cantidad de l&aacute;mparas del tipo:</b></div>
-                                <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/><br>
+                                <input class='form-control formulario' type='number' min='1' name='cantidad_iluminacion' id='cantidad_iluminacion' value='' placeholder='Ej: 2' disabled required/>
                             </div>
                         </div><br>
                         <div class='form-group'>
@@ -98,7 +98,7 @@
                                     <option value='no regulado'>No Regulado</option>
                                 </select><br>
                                 <div class='div_izquierda'><b>Cantidad de tomacorrientes del tipo:</b></div>
-                                <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/><br>
+                                <input class='form-control formulario' type='number' min='1' name='cantidad_tomacorrientes' id='cantidad_tomacorrientes' value='' placeholder='Ej: 2' disabled required/>
                             </div>
                         </div><br>
                         <div class='form-group'>
@@ -137,6 +137,9 @@
                         <div class='div_izquierda'><b>Ubicación del Corredor</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>
                     </div>
+                </div>
+                <div class='form_button modal-footer'>
+                  <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_archivos' id='guardar_archivos' value='Guardar Archivos Seleccionados' title='Guardar los archivos seleccionados'/>
                 </div>
             </div>
         </div>

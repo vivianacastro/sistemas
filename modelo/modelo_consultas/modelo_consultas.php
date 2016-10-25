@@ -643,6 +643,66 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar la información de la iluminación de un corredor en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el corredor a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el corredor a buscar.
+     * @param string $id, id del corredor a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionIluminacionCorredor($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM iluminacion_corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la iluminación del corredor seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de los interruptores de un corredor en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece el corredor a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece el corredor a buscar.
+     * @param string $id, id del corredor a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionInterruptorCorredor($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM interruptor_corredor WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de los interruptores del corredor seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de una cubierta en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece la cubierta a buscar.
      * @param string $nombre_campus, id del campus donde está la cubierta a buscar.
@@ -709,6 +769,38 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de las gradas seleccionadas";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de las ventanas de unas unas gradas en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenecen las gradas a buscar.
+     * @param string $nombre_campus, id del campus donde están las gradas a buscar.
+     * @param string $nombre_edificio, id del edificio al que pertenecen las gradas a buscar.
+     * @param string $piso, piso donde inician las gradas.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT * FROM ventana_gradas WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso_inicio = '".$piso."' ORDER BY piso_inicio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Gradas 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Gradas 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de las ventanas de las gradas seleccionadas";
             }
         }
         return $result;
@@ -808,6 +900,36 @@ class modelo_consultas
             if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la plazoleta seleccionada";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de la iluminación de una plazoleta en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenece la plazoleta a buscar.
+     * @param string $nombre_campus, id del campus al que pertenece la plazoleta a buscar.
+     * @param string $id, id de la plazoleta a buscar.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarInformacionIluminacionPlazoleta($nombre_sede,$nombre_campus,$id){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM iluminacion_plazoleta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id."' ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() > 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la iluminación de la plazoleta seleccionada";
             }
         }
         return $result;

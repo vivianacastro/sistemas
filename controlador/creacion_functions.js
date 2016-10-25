@@ -3997,7 +3997,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+     * Se captura el evento cuando se da click en el boton agregar_espacio y se
      * realiza la operacion correspondiente.
      */
     $("#agregar_espacio").click(function (e){
@@ -4015,6 +4015,10 @@ $(document).ready(function() {
         $('#eliminar_espacio').removeAttr("disabled");
     });
 
+    /**
+     * Se captura el evento cuando se da click en el boton eliminar_espacio y se
+     * realiza la operacion correspondiente.
+     */
     $("#eliminar_espacio").click(function (e){
         eliminarComponente("espacio"+espaciosCont);
         espaciosCont--;

@@ -1214,16 +1214,74 @@ class controlador_consultas
                     'alto_pared' => $valor['alto_pared'],
                     'material_pared' => $valor['id_material_pared'],
                     'ancho_piso' => $valor['ancho_piso'],
-                    'alto_piso' => $valor['alto_piso'],
+                    'largo_piso' => $valor['largo_piso'],
                     'material_piso' => $valor['id_material_piso'],
-                    'ancho_techo' => $valor['anchotecho'],
-                    'alto_techo' => $valor['altotecho'],
+                    'ancho_techo' => $valor['ancho_techo'],
+                    'largo_techo' => $valor['largo_techo'],
                     'material_techo' => $valor['id_material_techo'],
-                    'tomacorriente' => mb_convert_case($valor['tomacorriente'],MB_CASE_TITLE,"UTF-8"),
+                    'tomacorriente' => $valor['tomacorriente'],
                     'tipo_suministro_energia' => $valor['id_tipo_suministro_energia'],
                     'cantidad' => $valor['cantidad'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de la iluminación de un corredor
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_iluminacion_corredor() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionIluminacionCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'tipo_iluminacion' => $valor['id_tipo_iluminacion'],
+                    'cantidad' => $valor['cantidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de los interruptores de un corredor
+     * almacenado en el sistema.
+     */
+    public function consultar_informacion_interruptor_corredor() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionInterruptorCorredor($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'tipo_interruptor' => $valor['id_tipo_interruptor'],
+                    'cantidad' => $valor['cantidad'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1296,6 +1354,39 @@ class controlador_consultas
                     'material_pasamanos' => $valor['id_material_pasamanos'],
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+    * Función que permite consultar la información de las ventanas de unas gradas
+    * almacenadas en el sistema.
+     */
+    public function consultar_informacion_ventana_gradas() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionVentanaGradas($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso_inicio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'piso_inicio' => $valor['piso_inicio'],
+                    'tipo_ventana' => $valor['id_tipo_ventana'],
+                    'cantidad' => $valor['cantidad'],
+                    'material' => $valor['id_material'],
+                    'alto' => $valor['alto_ventana'],
+                    'ancho' => $valor['ancho_ventana'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1400,6 +1491,35 @@ class controlador_consultas
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'lat' => $valor['lat'],
                     'lng' => $valor['lng'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de la iluminación de una plazoleta
+     * almacenada en el sistema.
+     */
+    public function consultar_informacion_iluminacion_plazoleta() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionIluminacionPlazoleta($info["nombre_sede"],$info["nombre_campus"],$info["id"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo_iluminacion' => $valor['id_tipo_iluminacion'],
+                    'cantidad' => $valor['cantidad'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1556,60 +1676,6 @@ class controlador_consultas
                     'material_techo' => $valor['id_material_techo'],
                     'lat' => $valor['lat'],
                     'lng' =>$valor['lng'],
-                );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar la información de un tipo de material
-     * almacenado en el sistema.
-     */
-    public function consultar_informacion_tipo_material() {
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionTipoMaterial($info["tipo_material"],$info["id_tipo_material"],$info["nombre"]);
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'tipo_material' => mb_convert_case($info["tipo_material"],MB_CASE_TITLE,"UTF-8"),
-                    'id_tipo_material' => $valor['id'],
-                    'nombre' => mb_convert_case($valor['material'],MB_CASE_TITLE,"UTF-8"),
-                );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar la información de un tipo de objeto
-     * almacenado en el sistema.
-     */
-    public function consultar_informacion_tipo_objeto() {
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionTipoObjeto($info["tipo_objeto"],$info["id_tipo_objeto"],$info["nombre"]);
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'tipo_objeto' => mb_convert_case($info["tipo_objeto"],MB_CASE_TITLE,"UTF-8"),
-                    'id_tipo_objeto' => $valor['id'],
-                    'nombre' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
