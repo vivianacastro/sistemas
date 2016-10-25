@@ -1,6 +1,6 @@
 <?php
 /*error_reporting(E_ALL);
-ini_set('display_errors', '1');*/
+ini_set('display_errors', '1');*
 /**
  * Clase controlador_creacion
  */
@@ -713,7 +713,7 @@ class controlador_creacion
                 $file = $info['archivo'.$i];
                 $data = $m->obtenerIdCampus($infoCampus['nombre_sede'],$infoCampus['nombre_campus']);
                 foreach ($data as $clave => $valor) {
-                 $idCampus = $valor['id'];
+                 	$idCampus = $valor['id'];
                 }
                 $verificar = $m->guardarPlanoCampus($infoCampus['nombre_sede'],$idCampus,$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];

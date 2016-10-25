@@ -1885,7 +1885,7 @@ class modelo_creacion {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/sistemas/archivos/planos/campus/".$id_sede."-".$id_campus."/";
+            $ruta = __ROOT__."/archivos/planos/campus/".$id_sede."-".$id_campus."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -1932,7 +1932,7 @@ class modelo_creacion {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/sistemas/archivos/images/campus/".$id_sede."-".$id_campus."/";
+            $ruta = __ROOT__."/archivos/images/campus/".$id_sede."-".$id_campus."/";
             if (!file_exists($foto["name"], $ruta)) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -1981,7 +1981,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/sistemas/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
+            $ruta = __ROOT__."/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2030,7 +2030,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/sistemas/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
+            $ruta = __ROOT__."/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id_edificio."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2079,7 +2079,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_cancha = htmlspecialchars(trim($id_cancha));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
+            $ruta = __ROOT__."/archivos/planos/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2128,7 +2128,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_cancha = htmlspecialchars(trim($id_cancha));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
+            $ruta = __ROOT__."/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2177,7 +2177,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_corredor = htmlspecialchars(trim($id_corredor));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
+            $ruta = __ROOT__."/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2226,7 +2226,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_corredor = htmlspecialchars(trim($id_corredor));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
+            $ruta = __ROOT__."/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id_corredor."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2277,7 +2277,7 @@ class modelo_creacion {
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $piso = htmlspecialchars(trim($piso));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            $ruta = __ROOT__."/archivos/planos/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2328,7 +2328,7 @@ class modelo_creacion {
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $piso = htmlspecialchars(trim($piso));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            $ruta = __ROOT__."/archivos/images/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2379,7 +2379,7 @@ class modelo_creacion {
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $piso = htmlspecialchars(trim($piso));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            $ruta = __ROOT__."/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2429,7 +2429,7 @@ class modelo_creacion {
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $piso = htmlspecialchars(trim($piso));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
+            $ruta = __ROOT__."/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2478,7 +2478,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_parqueadero = htmlspecialchars(trim($id_parqueadero));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
+            $ruta = __ROOT__."/archivos/planos/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2527,7 +2527,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_parqueadero = htmlspecialchars(trim($id_parqueadero));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
+            $ruta = __ROOT__."/archivos/images/parqueadero/".$id_sede."-".$id_campus."-".$id_parqueadero."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2576,7 +2576,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_piscina = htmlspecialchars(trim($id_piscina));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
+            $ruta = __ROOT__."/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2625,7 +2625,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_piscina = htmlspecialchars(trim($id_piscina));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
+            $ruta = __ROOT__."/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id_piscina."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2674,7 +2674,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
+            $ruta = __ROOT__."/archivos/planos/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2723,7 +2723,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_plazoleta = htmlspecialchars(trim($id_plazoleta));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
+            $ruta = __ROOT__."/archivos/images/plazoleta/".$id_sede."-".$id_campus."-".$id_plazoleta."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2772,7 +2772,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_sendero = htmlspecialchars(trim($id_sendero));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
+            $ruta = __ROOT__."/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2821,7 +2821,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_sendero = htmlspecialchars(trim($id_sendero));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
+            $ruta = __ROOT__."/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id_sendero."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2870,7 +2870,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_via = htmlspecialchars(trim($id_via));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/html/sistemas/archivos/planos/via/".$id_sede."-".$id_campus."-".$id_via."/";
+            $ruta = __ROOT__."/archivos/planos/via/".$id_sede."-".$id_campus."-".$id_via."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2919,7 +2919,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_via = htmlspecialchars(trim($id_via));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/html/sistemas/archivos/images/via/".$id_sede."-".$id_campus."-".$id_via."/";
+            $ruta = __ROOT__."/archivos/images/via/".$id_sede."-".$id_campus."-".$id_via."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -2972,7 +2972,7 @@ class modelo_creacion {
             $piso = htmlspecialchars(trim($piso));
             $espacio = htmlspecialchars(trim($espacio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = "/var/www/sistemas/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
+            $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
@@ -3025,7 +3025,7 @@ class modelo_creacion {
             $piso = htmlspecialchars(trim($piso));
             $espacio = htmlspecialchars(trim($espacio));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = "/var/www/sistemas/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
+            $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
             if (!file_exists($foto["name"], $ruta)) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
