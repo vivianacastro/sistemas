@@ -364,6 +364,7 @@ html, body {
 		float: right;
 		width: auto !important;
     padding: 1% 0% 0%;
+    cursor: pointer;
 }
 
 #barra_usuario:focus, #barra_usuario:hover{
