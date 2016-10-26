@@ -273,12 +273,15 @@ $(document).ready(function() {
                 }else if(!validarCorreo(correo)){
                 	alert("ERROR: Ingrese un correo válido");
                 	$("#correo_usuario").focus();
-                }else if(contrasenia.length == 0){
-                	alert('ERROR. Ingrese una contraseña para el usuario');
+                }else if(!contrasenia.match("/[A-z\&.\-]*$/") && !contrasenia.match("/\d/")){
+                	alert('ERROR. La contraseña mínimo debe tener 8 caracteres');
+                	$("#contrasenia").focus();
+                }else if(contrasenia.length < 8){
+                	alert('ERROR. La contraseña debe contener letras y números');
                 	$("#contrasenia").focus();
                 }else if(contrasenia != contrasenia2){
                 	alert('ERROR. Las contraseñas no coinciden');
-                	$("#contrasenia").focus();
+                	//$("#contrasenia").focus();
                 	$("#repita_contrasenia").focus();
                 }else{
                 	var informacion = {};
@@ -311,7 +314,7 @@ $(document).ready(function() {
 			        	$("#login_usuario").addClass("resaltarInput");
 			        	$("#guardar_usuario").attr('disabled','disabled');
                 	}
-                	
+
                 }
             }
         }
@@ -348,7 +351,7 @@ $(document).ready(function() {
                 		alert("El correo no está registrado");
                 		$("#correo").focus();
                 	}
-                	
+
                 }
             }
         }
@@ -400,7 +403,7 @@ $(document).ready(function() {
                 		alert("El correo no está registrado");
                 		$("#correo").focus();
                 	}
-                	
+
                 }
             }
         }
@@ -447,7 +450,7 @@ $(document).ready(function() {
                 		alert(respuesta.mensaje);
                 		$("#contrasenia_actual").focus();
                 	}
-                	
+
                 }
             }
         }
@@ -471,7 +474,7 @@ $(document).ready(function() {
         }else{
         	$("#error_login").hide();
         	$("#login_usuario").removeClass("resaltarInput");
-        	$('#guardar_usuario').removeAttr("disabled");        	
+        	$('#guardar_usuario').removeAttr("disabled");
         }
     });
 

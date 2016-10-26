@@ -3845,14 +3845,14 @@ $(document).ready(function() {
                                   '</ol>'+
                                   '<!-- Wrapper for slides -->'+
                                   '<div class="carousel-inner" id="fotos_carrusel" role="listbox">'+
-                                          '<div id="item_carrusel" class="item active carouselImg">'+
-                                              'img class="peopleCarouselImg" src="archivos/images/campus/0-26/572264-Agua.jpg" alt=""/>'+
-                                              '/div>'+
-                                              'div id="item_carrusel" class="item carouselImg">'+
-                                              'img class="carouselImg" src="archivos/images/campus/0-26/572264-Energia.jpg" alt=""/>'+
-                                              '/div>'+
-                                              'div id="item_carrusel" class="item carouselImg">'+
-                                              'img class="carouselImg" src="archivos/images/campus/0-26/copiade572264-Agua.jpg" alt=""/>'+
+                                        '<div id="item_carrusel" class="item active carouselImg">'+
+                                            '<img class="peopleCarouselImg" src="archivos/images/campus/0-26/572264-Agua.jpg" alt=""/>'+
+                                            '</div>'+
+                                            '<div id="item_carrusel" class="item carouselImg">'+
+                                            '<img class="carouselImg" src="archivos/images/campus/0-26/572264-Energia.jpg" alt=""/>'+
+                                            '</div>'+
+                                            '<div id="item_carrusel" class="item carouselImg">'+
+                                            '<img class="carouselImg" src="archivos/images/campus/0-26/copiade572264-Agua.jpg" alt=""/>'+
                                       '</div>'+
                                   '</div>'+
                                   '<!-- Left and right controls -->'+
@@ -3866,16 +3866,16 @@ $(document).ready(function() {
                                   '</a>'+
                                 '</div>'+
                             '</div>'+
-                        '</div>'+
+                        '</div><br>'+
                         '<div class="form_button">'+
                           '<div class="col-xs-12">'+
                             '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
                           '</div><br>'+
                           '<div class="col-xs-6">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
                           '</div>'+
                           '<div class="col-xs-6">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
+                              '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_espacios" name="ver_espacios" id="ver_espacios" value="Ver Espacios" title="Ver los espacios del edificio"/>'+
                           '</div>'+
                         '</div>'+
                       '</div>'+

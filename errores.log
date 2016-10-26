@@ -2418,3 +2418,9 @@
 [26-Oct-2016 07:44:03 America/Bogota] PHP Notice:  Undefined index: ancho_techo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 747
 [26-Oct-2016 07:44:03 America/Bogota] PHP Notice:  Undefined index: largo_techo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 748
 [26-Oct-2016 07:44:03 America/Bogota] PHP Notice:  Undefined index: id_material_techo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 749
+[26-Oct-2016 14:14:52 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 241
+[26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 243
+[26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 245
+[26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 247
+[26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 249
+[26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 251
