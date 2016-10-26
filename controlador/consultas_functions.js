@@ -1457,7 +1457,6 @@ $(document).ready(function() {
   $("#visualizarSede").click(function (e){
       var info =  {};
       var sede = $("#sede_search").val();
-      var bounds  = new google.maps.LatLngBounds();
       info['nombre_sede'] = sede;
       info['nombre_campus'] = "";
       var data = consultarInformacionObjeto("sede",info);
@@ -3311,18 +3310,96 @@ $(document).ready(function() {
   $('#divDialogConsulta').on('hidden.bs.modal', function () {
       $("#nombre_sede").attr('disabled','disabled');
       $("#nombre_campus").attr('disabled','disabled');
-      $("#nombre_cancha").attr('disabled','disabled');
-      $("#nombre_corredor").attr('disabled','disabled');
-      $("#nombre_cubierta").attr('disabled','disabled');
-      $("#nombre_gradas").attr('disabled','disabled');
-      $("#nombre_parqueadero").attr('disabled','disabled');
-      $("#nombre_piscina").attr('disabled','disabled');
-      $("#nombre_plazoleta").attr('disabled','disabled');
-      $("#nombre_sendero").attr('disabled','disabled');
-      $("#nombre_via").attr('disabled','disabled');
+      $("#id_cancha").attr('disabled','disabled');
+      $("#uso_cancha").attr('disabled','disabled');
+      $("#material_piso").attr('disabled','disabled');
+      $("#tipo_pintura").attr('disabled','disabled');
+      $("#longitud_demarcacion").attr('disabled','disabled');
+      $("#id_corredor").attr('disabled','disabled');
+      $("#altura_pared").attr('disabled','disabled');
+      $("#ancho_pared").attr('disabled','disabled');
+      $("#material_pared").attr('disabled','disabled');
+      $("#tipo_cubierta").attr('disabled','disabled');
+      $("#material_cubierta").attr('disabled','disabled');
+      $("#ancho").attr('disabled','disabled');
+      $("#largo").attr('disabled','disabled');
+      $("#pasamanos").attr('disabled','disabled');
+      $("#material_pasamanos").attr('disabled','disabled');
+      $("#tipo_ventana").attr('disabled','disabled');
+      $("#cantidad_ventanas").attr('disabled','disabled');
+      $("#material_ventana").attr('disabled','disabled');
+      $("#ancho_ventana").attr('disabled','disabled');
+      $("#alto_ventana").attr('disabled','disabled');
+      $("#id_parqueadero").attr('disabled','disabled');
+      $("#capacidad").attr('disabled','disabled');
+      $("#ancho").attr('disabled','disabled');
+      $("#largo").attr('disabled','disabled');
+      $("#material_piso").attr('disabled','disabled');
+      $("#tipo_pintura").attr('disabled','disabled');
+      $("#longitud_demarcacion").attr('disabled','disabled');
+      $("#id_piscina").attr('disabled','disabled');
+      $("#alto").attr('disabled','disabled');
+      $("#ancho").attr('disabled','disabled');
+      $("#largo").attr('disabled','disabled');
+      $("#cantidad_puntos_hidraulicos").attr('disabled','disabled');
+      $("#id_plazoleta").attr('disabled','disabled');
+      $("#nombre").attr('disabled','disabled');
+      $("#tipo_iluminacion").attr('disabled','disabled');
+      $("#cantidad_iluminacion").attr('disabled','disabled');
+      $("#id_sendero").attr('disabled','disabled');
+      $("#longitud").attr('disabled','disabled');
+      $("#ancho").attr('disabled','disabled');
+      $("#material_piso").attr('disabled','disabled');
+      $("#tipo_iluminacion").attr('disabled','disabled');
+      $("#cantidad_iluminacion").attr('disabled','disabled');
+      $("#codigo_poste").attr('disabled','disabled');
+      $("#ancho_cubierta").attr('disabled','disabled');
+      $("#largo_cubierta").attr('disabled','disabled');
+      $("#material_cubierta").attr('disabled','disabled');
+      $("#id_via").attr('disabled','disabled');
+      $("#tipo_pintura").attr('disabled','disabled');
+      $("#longitud_demarcacion").attr('disabled','disabled');
+      $("#material_piso").attr('disabled','disabled');
       $("#nombre_edificio").attr('disabled','disabled');
-      $("#pisos").attr('disabled','disabled');
+      $("#pisos_edificio").attr('disabled','disabled');
+      $("#terraza").attr('disabled','disabled');
+      $("#sotano").attr('disabled','disabled');
+      $("#ancho_fachada").attr('disabled','disabled');
+      $("#alto_fachada").attr('disabled','disabled');
+      $("#material_fachada").attr('disabled','disabled');
       $("#id_espacio").attr('disabled','disabled');
+      $("#pisos").attr('disabled','disabled');
+      $("#uso_espacio").attr('disabled','disabled');
+      $("#altura_pared").attr('disabled','disabled');
+      $("#ancho_pared").attr('disabled','disabled');
+      $("#material_pared").attr('disabled','disabled');
+      $("#largo_techo").attr('disabled','disabled');
+      $("#ancho_techo").attr('disabled','disabled');
+      $("#material_techo").attr('disabled','disabled');
+      $("#largo_piso").attr('disabled','disabled');
+      $("#ancho_piso").attr('disabled','disabled');
+      $("#material_piso").attr('disabled','disabled');
+      $("#tipo_iluminacion").attr('disabled','disabled');
+      $("#cantidad_iluminacion").attr('disabled','disabled');
+      $("#tipo_suministro_energia").attr('disabled','disabled');
+      $("#tomacorriente").attr('disabled','disabled');
+      $("#cantidad_tomacorrientes").attr('disabled','disabled');
+      $("#tipo_puerta").attr('disabled','disabled');
+      $("#cantidad_puertas").attr('disabled','disabled');
+      $("#material_puerta").attr('disabled','disabled');
+      $("#tipo_cerradura").attr('disabled','disabled');
+      $("#gato_puerta").attr('disabled','disabled');
+      $("#material_marco_puerta").attr('disabled','disabled');
+      $("#ancho_puerta").attr('disabled','disabled');
+      $("#alto_puerta").attr('disabled','disabled');
+      $("#tipo_ventana").attr('disabled','disabled');
+      $("#cantidad_ventanas").attr('disabled','disabled');
+      $("#material_ventana").attr('disabled','disabled');
+      $("#ancho_ventana").attr('disabled','disabled');
+      $("#alto_ventana").attr('disabled','disabled');
+      $("#tipo_interruptor").attr('disabled','disabled');
+      $("#cantidad_interruptores").attr('disabled','disabled');
+      $("#tiene_espacio_padre").attr('disabled','disabled');
       $("#modificar_sede").show();
       $("#modificar_campus").show();
       $("#modificar_cancha").show();
@@ -3418,6 +3495,7 @@ $(document).ready(function() {
   $("#modificar_campus").click(function (e){
       $("#nombre_campus").removeAttr("disabled");
       $("#modificar_campus").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_campus").show();
   });
 
@@ -3431,6 +3509,7 @@ $(document).ready(function() {
       $("#tipo_pintura").removeAttr("disabled");
       $("#longitud_demarcacion").removeAttr("disabled");
       $("#modificar_cancha").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_cancha").show();
   });
 
@@ -3466,6 +3545,7 @@ $(document).ready(function() {
       $("#botones_iluminacion").show();
       $("#botones_interruptor").show();
       $("#modificar_corredor").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_corredor").show();
   });
 
@@ -3503,6 +3583,7 @@ $(document).ready(function() {
       }
       $("#botones_anadir").show();
       $("#modificar_gradas").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_gradas").show();
   });
 
@@ -3518,6 +3599,7 @@ $(document).ready(function() {
       $("#tipo_pintura").removeAttr("disabled");
       $("#longitud_demarcacion").removeAttr("disabled");
       $("#modificar_parqueadero").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_parqueadero").show();
   });
 
@@ -3531,6 +3613,7 @@ $(document).ready(function() {
       $("#largo").removeAttr("disabled");
       $("#cantidad_puntos_hidraulicos").removeAttr("disabled");
       $("#modificar_piscina").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_piscina").show();
   });
 
@@ -3566,6 +3649,7 @@ $(document).ready(function() {
       $("#largo_cubierta").removeAttr("disabled");
       $("#material_cubierta").removeAttr("disabled");
       $("#modificar_sendero").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_sendero").show();
   });
 
@@ -3578,6 +3662,7 @@ $(document).ready(function() {
       $("#longitud_demarcacion").removeAttr("disabled");
       $("#material_piso").removeAttr("disabled");
       $("#modificar_via").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_via").show();
   });
 
@@ -3593,6 +3678,7 @@ $(document).ready(function() {
       $("#alto_fachada").removeAttr("disabled");
       $("#material_fachada").removeAttr("disabled");
       $("#modificar_edificio").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_edificio").show();
   });
 
@@ -3665,6 +3751,7 @@ $(document).ready(function() {
       }
       $("#botones_anadir").show();
       $("#modificar_espacio").hide();
+      $("#guardar_archivos").hide();
       $("#guardar_modificaciones_espacio").show();
   });
 
@@ -3688,19 +3775,6 @@ $(document).ready(function() {
       $("#nombre_tipo_objeto").removeAttr("disabled");
       $("#modificar_tipo_objeto").hide();
       $("#guardar_modificaciones_tipo_objeto").show();
-  });
-
-  /**
-   * Se captura el evento cuando se da click en el boton modificar_campus y se
-   * realiza la operacion correspondiente.
-   */
-  $("#modificar_cancha").click(function (e){
-      $("#uso_cancha").removeAttr("disabled");
-      $("#material_piso").removeAttr("disabled");
-      $("#tipo_pintura").removeAttr("disabled");
-      $("#longitud_demarcacion").removeAttr("disabled");
-      $("#modificar_cancha").hide();
-      $("#guardar_modificaciones_cancha").show();
   });
 
   /**
@@ -3760,6 +3834,33 @@ $(document).ready(function() {
                       '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Edificio</h3>'+
                       '<div id="bodyContent">'+
                         '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Edificio:</b> '+record.id+'-'+record.nombre_edificio+'</p>'+
+                        '<div id="fotos">'+
+                            '<div class="div_carousel">'+
+                                '<div id="myCarousel" class="carousel slide" data-ride="carousel">'+
+                                  '<!-- Indicators -->'+
+                                  '<ol class="carousel-indicators" id="indicadores_carrusel">'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="0" class="active"></li>'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="1"></li>'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="2"></li>'+
+                                  '</ol>'+
+                                  '<!-- Wrapper for slides -->'+
+                                  '<div class="carousel-inner" id="fotos_carrusel" role="listbox">'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="0" class="active"></li>'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="1"></li>'+
+                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="2"></li>'+
+                                  '</div>'+
+                                  '<!-- Left and right controls -->'+
+                                  '<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">'+
+                                    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>'+
+                                    '<span class="sr-only">Previous</span>'+
+                                  '</a>'+
+                                  '<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">'+
+                                    '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>'+
+                                    '<span class="sr-only">Next</span>'+
+                                  '</a>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
                         '<div class="form_button">'+
                           '<div class="col-xs-12">'+
                             '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_edificio" name="ver_edificio" id="ver_edificio" value="Ver Informaci&oacute;n Edificio" title="Ver la informaci&oacute;n del edificio"/>'+
@@ -4129,12 +4230,137 @@ $(document).ready(function() {
   });
 
   /**
-   * Se captura el evento cuando se da click en el boton modificar_campus y se
+   * Se captura el evento cuando se da click en el boton ver_cancha y se
    * realiza la operacion correspondiente.
    */
-  $("#modificar_campus").click(function (e){
-      $("#modificar_campus").hide();
-      $("#guardar_modificaciones_campus").show();
+  $("#contenido").on("change", ".ver_cancha", function(){
+      var info =  {};
+      var sede = $("#sede_search").val();
+      var campus = $("#campus_search").val();
+      var id = $("#codigo_search").val();
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = limpiarCadena(id);
+      var data = consultarInformacionObjeto("cancha",info);
+      var archivos = consultarArchivosObjeto("cancha",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la cancha</h4>';
+      añadirComponente("tituloModalMapa",componente);
+      componente = '<div id="dataCancha" class="div_izquierda"><b>C&oacute;digo de la Cancha<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="text" name="id_cancha" id="id_cancha" value="" disabled required/><br>'
+      +'<div class="div_izquierda"><b>Uso de la Cancha<font color="red">*</font>:</b></div>'
+      +'<input class="form-control formulario" type="text" name="uso_cancha" id="uso_cancha" maxlength="100" value="" placeholder="Ej: Fútbol Sala" disabled required/><br>'
+      +'<div class="div_izquierda"><b>Material del piso:</b></div>'
+      +'<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'
+      +'<div class="div_izquierda"><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'
+      +'<select class="form-control formulario" name="tipo_pintura" id="tipo_pintura" disabled required></select><br>'
+      +'<div class="div_izquierda"><b>Longitud de la demaraci&oacute;n:</b></div>';
+      añadirComponente("dataObjeto",componente);
+      actualizarSelectMaterial("material_piso",0);
+      actualizarSelectTipoObjeto("tipo_pintura",0);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_cancha").val(record.id);
+              $("#uso_cancha").val(record.uso);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_cancha.png',
+                  title: record.id+" - "+record.uso,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      for (var i = 0; i < numeroPlanos; i++) {
+          eliminarComponente("plano");
+      }
+      numeroFotos = 0;
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(18);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsulta").modal('show');
   });
 
   /**

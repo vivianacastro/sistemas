@@ -6,9 +6,53 @@
         <div id="map" class="mapa_completo"></div>
     <div>
 </div>
-<div class='modal fade' role='dialog' id='divDialogConsulta'>
+<div class='modal fade' role='dialog' id='divDialogConsultaMapa'>
     <div class='modal-dialog' id='divConsulta'>
         <div id="contenido" class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <div id="tituloModalMapa"></div>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacion'>
+                        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_campus' id='nombre_campus' value='' disabled required/><br>
+                        <div id="dataObjeto"></div>
+                        <div class='div_izquierda'><b>Planos:</b></div>
+                        <div id='planos' class="planos"></div><br>
+                        <div class='div_izquierda'><b>Fotos:</b></div>
+                        <div id='fotos'>
+                            <div class="div_carousel">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                  <!-- Indicators -->
+                                  <ol class="carousel-indicators" id="indicadores_carrusel">
+                                  </ol>
+                                  <!-- Wrapper for slides -->
+                                  <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                  </div>
+                                  <!-- Left and right controls -->
+                                  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                  </a>
+                                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                  </a>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class='div_izquierda'><b>Ubicación</b></div>
+                        <div id="map_modificacion" class="mapa_modal"></div>
+                    </div>
+                </div>
+                <div id="botonesModalMapa" class='form_button modal-footer'>
+                    <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_archivos' id='guardar_archivos' value='Guardar Archivos' title='Guardar los archivos seleccionados'/>
+                </div>
+            </div>
         </div>
     </div>
 </div>
