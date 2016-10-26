@@ -191,6 +191,21 @@ $map = array(
         'consultar_informacion_ventana_espacio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_ventana_espacio'),
         'verificar_espacio' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_espacio'),
         //Acciones de modificación
+        'modificar_sede' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_sede'),
+        'modificar_campus' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_campus'),
+        'modificar_cancha' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_cancha'),
+        'modificar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_corredor'),
+        'modificar_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_cubierta'),
+        'modificar_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_gradas'),
+        'modificar_parqueadero' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_parqueadero'),
+        'modificar_piscina' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_piscina'),
+        'modificar_plazoleta' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_plazoleta'),
+        'modificar_sendero' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_sendero'),
+        'modificar_via' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_via'),
+        'modificar_edificio' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_edificio'),
+        'modificar_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_espacio'),
+        'modificar_tipo_material' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_material'),
+        'modificar_tipo_objeto' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_objeto'),
 
     //Acciones Módulo Inventario
         //Acciones de carga de plantillas
