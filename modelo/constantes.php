@@ -71,4 +71,15 @@ const OPERATION_CONSULTAR_EDIFICIO = 'planta_consultar_edificio';
 const OPERATION_CONSULTAR_ESPACIO = 'planta_consultar_espacio';
 const OPERATION_CONSULTAR_TIPO_MATERIAL = 'planta_consultar_tipo_material';
 const OPERATION_CONSULTAR_TIPO_OBJETO = 'planta_consultar_tipo_objeto';
+
+const OPERATION_CREAR_AIRE = 'aires_crear_aire';
+const OPERATION_CREAR_CAPACIDAD_AIRE = 'aires_crear_capacidad_aire';
+const OPERATION_CREAR_MARCA_AIRE = 'aires_crear_marca_aire';
+const OPERATION_CREAR_TIPO_AIRE = 'aires_crear_tipo_aire';
+const OPERATION_REGISTRAR_MANTENIMIENTO_AIRE = 'aires_registrar_mantenimiento_aire';
+const OPERATION_CONSULTAR_AIRE = 'aires_consultar_aire';
+const OPERATION_CONSULTAR_CAPACIDAD_AIRE = 'aires_consultar_capacidad_aire';
+const OPERATION_CONSULTAR_MARCA_AIRE = 'aires_consultar_marca_aire';
+const OPERATION_CONSULTAR_TIPO_AIRE = 'aires_consultar_tipo_aire';
+const OPERATION_CONSULTAR_MANTENIMIENTO_AIRE = 'aires_consultar_mantenimiento_aire';
 ?>

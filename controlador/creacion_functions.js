@@ -327,6 +327,8 @@ $(document).ready(function() {
                             eliminarComponente("interruptor"+tomacorrientesCont);
                             interruptoresCont--;
                         }
+                        $("#añadir_informacion_adicional").removeAttr('disabled');
+                        $("#eliminar_informacion_adicional").attr('disabled','disabled');
                         $("#divTieneEspacioPadre").hide();
                         $('input[name=tiene_espacio_padre]').attr('checked',false);
                         var planos = document.getElementById("planos[]");
@@ -3812,7 +3814,7 @@ $(document).ready(function() {
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
         +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
+        +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta'+puertasCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
         +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -4032,5 +4034,17 @@ $(document).ready(function() {
         $("#eliminar_lavamanos").attr('disabled','disabled');
         $("#eliminar_punto_sanitario").attr('disabled','disabled');
         $("#eliminar_orinal").attr('disabled','disabled');
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el selector tipo_iluminacion y se
+     * realiza la operacion correspondiente.
+     */
+    $("input[name=tipo_iluminacion]").change(function (e){
+        var tipoIluminacion = $("input[name=tipo_iluminacion]").val();
+        console.log(tipoIluminacion);
+        /*for (var i = 1; i < iluminacionCont i++) {
+            $("#tipo_iluminacion"+iluminacionCont).val();
+        }*/
     });
 });

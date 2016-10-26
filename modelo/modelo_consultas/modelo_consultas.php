@@ -43,7 +43,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Sedes 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Sedes presentes en el sistema";
             }
@@ -74,7 +74,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Campus 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Campus de la sede seleccionada presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -113,7 +113,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Canchas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Canchas del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -152,7 +152,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Corredores 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Corredores del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -196,7 +196,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Cubiertas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Cubiertas del edificio seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -240,7 +240,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Gradas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Gradas del edificio seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -279,7 +279,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Parqueaderos 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Parqueaderos del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -318,7 +318,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Piscinas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Piscinas del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -357,7 +357,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Plazoletas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Plazoletas del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -396,7 +396,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Senderos 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Senderos del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -435,7 +435,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Vías 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Vías del campus seleccionado presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -474,7 +474,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Edificios 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Edificios del campus presentes en el sistema";
             }
@@ -510,7 +510,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Espacios del edificio presentes en el sistema";
                 $GLOBALS['sql'] = $sql;
@@ -537,7 +537,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Sede 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la sede seleccionado";
             }
@@ -567,7 +567,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Campus 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del campus seleccionado";
             }
@@ -600,7 +600,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Cancha 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cancha seleccionada";
             }
@@ -634,7 +634,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Corredor 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del corredor seleccionado";
             }
@@ -664,7 +664,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Corredor 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la iluminación del corredor seleccionado";
             }
@@ -694,7 +694,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Corredor 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de los interruptores del corredor seleccionado";
             }
@@ -730,7 +730,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Cubierta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cubierta seleccionada";
             }
@@ -766,7 +766,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Gradas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de las gradas seleccionadas";
             }
@@ -798,7 +798,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Gradas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de las ventanas de las gradas seleccionadas";
             }
@@ -831,7 +831,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Parqueadero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del parqueadero seleccionado";
             }
@@ -864,7 +864,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Piscina 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la piscina seleccionada";
             }
@@ -897,7 +897,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Plazoleta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la plazoleta seleccionada";
             }
@@ -927,7 +927,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Plazoleta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la iluminación de la plazoleta seleccionada";
             }
@@ -960,7 +960,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Sendero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del sendero seleccionado";
             }
@@ -993,7 +993,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Vía 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la vía seleccionada";
             }
@@ -1026,7 +1026,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Edificio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del edificio seleccionado";
             }
@@ -1054,7 +1054,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Campus 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del campus seleccionado";
             }
@@ -1083,7 +1083,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Cancha 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cancha seleccionada";
             }
@@ -1112,7 +1112,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Corredor 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del corredor seleccionado";
             }
@@ -1142,7 +1142,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Cubierta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la cubierta seleccionada";
             }
@@ -1172,7 +1172,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Gradas 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de las gradas seleccionadas";
             }
@@ -1202,7 +1202,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Parqueadero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del parqueadero seleccionado";
             }
@@ -1232,7 +1232,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Piscina 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la piscina seleccionada";
             }
@@ -1262,7 +1262,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Plazoleta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la plazoleta seleccionada";
             }
@@ -1292,7 +1292,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Sendero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del sendero seleccionado";
             }
@@ -1322,7 +1322,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Vía 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos de la vía seleccionada";
             }
@@ -1352,7 +1352,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Edificio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del edificio seleccionado";
             }
@@ -1373,7 +1373,7 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM espacio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."' ORDER BY nombre;";
+        $sql = "SELECT * FROM espacio_archivos WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Espacio 1)";
@@ -1384,7 +1384,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Archivos del espacio seleccionado";
             }
@@ -1412,7 +1412,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Campus 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del campus seleccionado";
             }
@@ -1442,7 +1442,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Cancha 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la cancha seleccionada";
             }
@@ -1472,7 +1472,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Corredor 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del corredor seleccionado";
             }
@@ -1502,7 +1502,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación parqueadero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del parqueadero seleccionado";
             }
@@ -1532,7 +1532,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Piscina 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la piscina seleccionada";
             }
@@ -1562,7 +1562,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Plazoleta 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la plazoleta seleccionada";
             }
@@ -1592,7 +1592,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Sendero 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del sendero seleccionado";
             }
@@ -1622,7 +1622,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Vía 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación de la vía seleccionada";
             }
@@ -1652,7 +1652,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Ubicación Edificio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Ubicación del edificio seleccionado";
             }
@@ -1683,7 +1683,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Pisos Edificio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Número de pisos del edificio";
             }
@@ -1707,7 +1707,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Usos Espacios 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Usos de Espacios presentes en el sistema";
             }
@@ -1733,7 +1733,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Materiales 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Materiales presentes en el sistema";
             }
@@ -1759,7 +1759,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Tipos de objetos presentes en el sistema";
             }
@@ -1791,7 +1791,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Iluminación-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la iluminación del espacio seleccionado";
             }
@@ -1823,7 +1823,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Interruptor-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de los interruptores del espacio seleccionado";
             }
@@ -1855,7 +1855,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de las puertas del espacio seleccionado";
             }
@@ -1879,7 +1879,7 @@ class modelo_consultas
         $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
         $material_puerta = htmlspecialchars(trim($material_puerta));
         $material_marco = htmlspecialchars(trim($material_marco));
-        $sql = "SELECT * FROM puerta_tipo_cerradura WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id = '".$id."'  AND id_tipo_puerta = '".$tipo_puerta."'  AND id_material_puerta = '".$material_puerta."'  AND id_material_marco = '".$material_marco."' ORDER BY id_tipo_cerradura;";
+        $sql = "SELECT * FROM puerta_tipo_cerradura WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."'  AND id_tipo_puerta = '".$tipo_puerta."'  AND id_material_puerta = '".$material_puerta."'  AND id_material_marco = '".$material_marco."' ORDER BY id_tipo_cerradura;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Tipo Cerradura 1)";
@@ -1890,7 +1890,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Puerta-Tipo Cerradura 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la cerradura de las puertas del espacio seleccionado";
             }
@@ -1922,7 +1922,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Suministro Energía-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del suministro de energía del espacio seleccionado";
             }
@@ -1943,7 +1943,7 @@ class modelo_consultas
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM ventana_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_ventana,id_material_ventana,id_espacio;";
+        $sql = "SELECT * FROM ventana_espacio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND id_espacio = '".$id."' ORDER BY id_tipo_ventana,id_material,id_espacio;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Espacio 1)";
@@ -1954,7 +1954,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Ventana-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de las ventanas del espacio seleccionado";
             }
@@ -1990,7 +1990,7 @@ class modelo_consultas
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Espacio 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            if($l_stmt->rowCount() > 0){
+            if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del espacio seleccionado";
             }

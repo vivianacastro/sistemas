@@ -1662,6 +1662,7 @@ class controlador_consultas
                     'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'espacio_padre' =>$valor['espacio_padre'],
                     'piso' =>$valor['piso_edificio'],
                     'uso_espacio' =>$valor['uso_espacio'],
                     'ancho_pared' =>$valor['ancho_pared'],
@@ -1699,10 +1700,10 @@ class controlador_consultas
             $data = $m->buscarInformacionIluminacionEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_iluminacion' =>$valor['id_tipo_iluminacion'],
                     'cantidad' =>$valor['cantidad'],
                 );
@@ -1729,10 +1730,10 @@ class controlador_consultas
             $data = $m->buscarInformacionInterrutorEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_interruptor' =>$valor['id_tipo_interruptor'],
                     'cantidad' =>$valor['cantidad'],
                 );
@@ -1759,16 +1760,16 @@ class controlador_consultas
             $data = $m->buscarInformacionPuertaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_puerta' =>$valor['id_tipo_puerta'],
                     'material_puerta' =>$valor['id_material_puerta'],
                     'cantidad' =>$valor['cantidad'],
                     'material_marco' =>$valor['id_material_marco'],
-                    'ancho' =>$valor['ancho'],
-                    'largo' =>$valor['largo'],
+                    'ancho' =>$valor['ancho_puerta'],
+                    'largo' =>$valor['largo_puerta'],
                     'gato' =>$valor['gato'],
                 );
                 array_push($result, $arrayAux);
@@ -1780,7 +1781,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar la información de las puertas de un espacio
+     * Función que permite consultar la información de las cerraduras de una puerta de un espacio
      * almacenado en el sistema.
      */
     public function consultar_informacion_puerta_tipo_cerradura() {
@@ -1791,20 +1792,17 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionPuertaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["tipo_puerta"],$info["material_puerta"],$info["material_marco"]);
+            $data = $m->buscarInformacionPuertaTipoCerradura($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["tipo_puerta"],$info["material_puerta"],$info["material_marco"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_puerta' =>$valor['id_tipo_puerta'],
                     'material_puerta' =>$valor['id_material_puerta'],
-                    'cantidad' =>$valor['cantidad'],
                     'material_marco' =>$valor['id_material_marco'],
-                    'ancho' =>$valor['ancho'],
-                    'largo' =>$valor['largo'],
-                    'gato' =>$valor['gato'],
+                    'tipo_cerradura' =>$valor['id_tipo_cerradura'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1815,7 +1813,7 @@ class controlador_consultas
     }
 
     /**
-     * Función que permite consultar la información de la iluminación de un espacio
+     * Función que permite consultar la información del suminstro de energía de un espacio
      * almacenado en el sistema.
      */
     public function consultar_informacion_suministro_energia_espacio() {
@@ -1829,10 +1827,10 @@ class controlador_consultas
             $data = $m->buscarInformacionSuministroEnergiaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_suministro_energia' =>$valor['id_tipo_suministro_energia'],
                     'cantidad' =>$valor['cantidad'],
                     'tomacorriente' =>$valor['tomacorriente'],
@@ -1860,15 +1858,15 @@ class controlador_consultas
             $data = $m->buscarInformacionVentanaEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id_espacio'],
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => $valor['id_edificio'],
                     'tipo_ventana' =>$valor['id_tipo_ventana'],
                     'ancho' =>$valor['ancho_ventana'],
                     'alto' =>$valor['alto_ventana'],
                     'cantidad' =>$valor['cantidad'],
-                    'material_ventana' =>$valor['id_material_ventana'],
+                    'material_ventana' =>$valor['id_material'],
                 );
                 array_push($result, $arrayAux);
             }

@@ -25,6 +25,7 @@ class controlador_vista
                 'CREAR_USUARIO'=>'index.php?action='.CREAR_USUARIO,
                 'OLVIDO_CONTRASENIA'=>'index.php?action='.OLVIDO_CONTRASENIA,
                 'CERRAR'=>'index.php?action='.CERRAR_SESION,
+
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
                 'CREAR_CAMPUS'=>'index.php?action='.OPERATION_CREAR_CAMPUS,
                 'CREAR_CANCHA'=>'index.php?action='.OPERATION_CREAR_CANCHA,
@@ -57,7 +58,18 @@ class controlador_vista
                 'CONSULTAR_TIPO_OBJETO'=>'index.php?action='.OPERATION_CONSULTAR_TIPO_OBJETO,
                 'MAPA'=>'index.php?action='.OPERATION_CONSULTAR_MAPA,
                 'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
-                'CREAR_SEDE'=>'index.php?action='.OPERATION_CREAR_SEDE,
+
+                'CREAR_AIRE' =>'index.php?action='.OPERATION_CREAR_AIRE,
+                'CREAR_CAPACIDAD_AIRE' =>'index.php?action='.OPERATION_CREAR_CAPACIDAD_AIRE,
+                'CREAR_MARCA_AIRE' =>'index.php?action='.OPERATION_CREAR_MARCA_AIRE,
+                'CREAR_TIPO_AIRE' =>'index.php?action='.OPERATION_CREAR_TIPO_AIRE,
+                'REGISTRAR_MANTENIMIENTO_AIRE' =>'index.php?action='.OPERATION_REGISTRAR_MANTENIMIENTO_AIRE,
+                'CONSULTAR_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_AIRE,
+                'CONSULTAR_CAPACIDAD_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_CAPACIDAD_AIRE,
+                'CONSULTAR_MARCA_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_MARCA_AIRE,
+                'CONSULTAR_TIPO_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_TIPO_AIRE,
+                'CONSULTAR_MANTENIMIENTO_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_MANTENIMIENTO_AIRE,
+
                 'MODIFICAR_INFORMACION_USUARIO'=>'index.php?action='.OPERATION_MODIFICAR_INFORMACION_USUARIO,
                 'CAMBIAR_CONTRASENIA'=>'index.php?action='.OPERATION_CAMBIAR_CONTRASENIA,
                 'FORM_INICIAR_SESION'=>'index.php?action='.INICIAR_SESION,

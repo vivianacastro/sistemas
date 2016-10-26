@@ -2900,13 +2900,37 @@ $(document).ready(function() {
       info['id'] = limpiarCadena(id);
       var data = consultarInformacionObjeto("espacio",info);
       var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",info);
-      var dataInterruptor = consultarInformacionObjeto("interrutor_espacio",info);
+      var dataInterruptor = consultarInformacionObjeto("interruptor_espacio",info);
       var dataPuerta = consultarInformacionObjeto("puerta_espacio",info);
       var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
       var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
       var archivos = consultarArchivosObjeto("espacio",info);
+      var edificio = {};
+      edificio["nombre_sede"] = $("#sede_search").val();
+      edificio["nombre_campus"] = $("#campus_search").val();
+      edificio["nombre_edificio"] = $("#edificio_search").val();
+      edificio["piso"] = $("#pisos_search").val();
+      var data = buscarObjetos("espacios",edificio);
+      $("#espacio_padre").empty();
+      var row = $("<option value=''/>");
+      row.text("--Seleccionar--");
+      row.appendTo("#espacio_padre");
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              aux = record.id;
+              row = $("<option value='" + record.id + "'/>");
+              row.text(aux);
+              row.appendTo("#espacio_padre");
+          }
+      });
+      $("#espacio_padre option[value='"+limpiarCadena(id)+"']").remove();
       console.log(data);
       console.log(archivos);
+      console.log(dataIluminacion);
+      console.log(dataInterruptor);
+      console.log(dataPuerta);
+      console.log(dataSuministro);
+      console.log(dataVentana);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
@@ -2917,7 +2941,7 @@ $(document).ready(function() {
               usoEspacio = record.uso_espacio;
               $("#uso_espacio").val(usoEspacio);
               $("#ancho_pared").val(record.ancho_pared);
-              $("#alto_pared").val(record.alto_pared);
+              $("#altura_pared").val(record.alto_pared);
               $("#material_pared").val(record.material_pared);
               $("#ancho_piso").val(record.ancho_piso);
               $("#largo_piso").val(record.largo_piso);
@@ -2925,6 +2949,15 @@ $(document).ready(function() {
               $("#ancho_techo").val(record.ancho_techo);
               $("#largo_techo").val(record.largo_techo);
               $("#material_techo").val(record.material_techo);
+              if (record.espacio_padre != null) {
+                  $("input[name=tiene_espacio_padre][value=true]").prop('checked', true);
+                  $("#div_espacio_padre").show();
+                  $("#espacio_padre").val(record.espacio_padre);
+              }else{
+                  $("#div_espacio_padre").hide();
+                  $("input[name=tiene_espacio_padre][value=false]").prop('checked', true);
+              }
+
           }
       });
       $.each(dataIluminacion, function(index, record) {
@@ -2973,10 +3006,10 @@ $(document).ready(function() {
                   $("#tipo_puerta").val(record.tipo_puerta);
                   $("#cantidad_puertas").val(record.cantidad);
                   $("#material_puerta").val(record.material_puerta);
-                  $("#gato_puerta").val(record.gato);
-                  $("#material_marco").val(record.material_marco);
+                  $("input[name=gato_puerta][value="+record.gato+"]").prop('checked', true);
+                  $("#material_marco_puerta").val(record.material_marco);
                   $("#ancho_puerta").val(record.ancho);
-                  $("#alto_puerta").val(record.alto);
+                  $("#alto_puerta").val(record.largo);
               }else{
                   var componente = '<div id="puerta'+puertasCont+'">'
                   +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2993,7 +3026,7 @@ $(document).ready(function() {
                   +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
                   +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
                   +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
+                  +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta'+puertasCont+'" required></select><br>'
                   +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
                   +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
                   +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3005,8 +3038,8 @@ $(document).ready(function() {
                   $("#tipo_puerta"+puertasCont).val(record.tipo_puerta);
                   $("#cantidad_puertas"+puertasCont).val(record.cantidad);
                   $("#material_puerta"+puertasCont).val(record.material_puerta);
-                  $("#gato_puerta"+puertasCont).val(record.gato);
-                  $("#material_marco"+puertasCont).val(record.material_marco);
+                  $("input[name=gato_puerta"+puertasCont+"][value="+record.gato+"]").prop('checked', true);
+                  $("#material_marco_puerta"+puertasCont).val(record.material_marco);
                   $("#ancho_puerta"+puertasCont).val(record.ancho);
                   $("#alto_puerta"+puertasCont).val(record.alto);
               }
@@ -3022,18 +3055,23 @@ $(document).ready(function() {
               infoPuerta['material_puerta'] = materialPuerta;
               infoPuerta['material_marco'] = materialMarco;
               var dataTipoCerradura = consultarInformacionObjeto("puerta_tipo_cerradura",infoPuerta);
-              $.each(dataSuministro, function(index, record) {
-                  if($.isNumeric(index)) {
+              console.log(dataTipoCerradura);
+              $.each(dataTipoCerradura, function(indice, valor) {
+                  if($.isNumeric(indice)) {
                       if (cerraduraCont == 0) {
-                          $("#tipo_cerradura"+cerraduraCont).val(record.tipo_cerradura);
+                          if (puertasCont == 0) {
+                              $("#tipo_cerradura").val(valor.tipo_cerradura);
+                          }else {
+                              $("#tipo_cerradura"+puertasCont).val(valor.tipo_cerradura);
+                          }
                       }else{
                           var componente = '<div id="cerradura'+cerraduraCont+'">'
                           +'<div class="div_izquierda"><b>Tipo de cerradura ('+(cerraduraCont+1)+') de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                          +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+cerraduraCont'" required></select><br>'
+                          +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+cerraduraCont+'" required></select><br>'
                           +'</div>';
                           añadirComponente("cerradura",componente);
                           actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
-                          $("#tipo_cerradura"+cerraduraCont).val(record.tipo_cerradura);
+                          $("#tipo_cerradura"+cerraduraCont).val(valor.tipo_cerradura);
                       }
                       cerraduraCont++;
                   }
@@ -3074,7 +3112,7 @@ $(document).ready(function() {
               if (ventanasCont == 0) {
                   $("#tipo_ventana").val(record.tipo_ventana);
                   $("#cantidad_ventanas").val(record.cantidad);
-                  $("#material_ventana").val(record.material);
+                  $("#material_ventana").val(record.material_ventana);
                   $("#ancho_ventana").val(record.ancho);
                   $("#alto_ventana").val(record.alto);
               }else{
@@ -3095,7 +3133,7 @@ $(document).ready(function() {
                   actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
                   $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
                   $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
-                  $("#material_ventana"+ventanasCont).val(record.material);
+                  $("#material_ventana"+ventanasCont).val(record.material_ventana);
                   $("#ancho_ventana"+ventanasCont).val(record.ancho);
                   $("#alto_ventana"+ventanasCont).val(record.alto);
               }
@@ -3271,20 +3309,20 @@ $(document).ready(function() {
   * Se captura el evento cuando se cierra el modal divDialogConsulta.
   */
   $('#divDialogConsulta').on('hidden.bs.modal', function () {
-      $("#nombre_sede").prop('disabled', true);
-      $("#nombre_campus").prop('disabled', true);
-      $("#nombre_cancha").prop('disabled', true);
-      $("#nombre_corredor").prop('disabled', true);
-      $("#nombre_cubierta").prop('disabled', true);
-      $("#nombre_gradas").prop('disabled', true);
-      $("#nombre_parqueadero").prop('disabled', true);
-      $("#nombre_piscina").prop('disabled', true);
-      $("#nombre_plazoleta").prop('disabled', true);
-      $("#nombre_sendero").prop('disabled', true);
-      $("#nombre_via").prop('disabled', true);
-      $("#nombre_edificio").prop('disabled', true);
-      $("#pisos").prop('disabled', true);
-      $("#id_espacio").prop('disabled', true);
+      $("#nombre_sede").attr('disabled','disabled');
+      $("#nombre_campus").attr('disabled','disabled');
+      $("#nombre_cancha").attr('disabled','disabled');
+      $("#nombre_corredor").attr('disabled','disabled');
+      $("#nombre_cubierta").attr('disabled','disabled');
+      $("#nombre_gradas").attr('disabled','disabled');
+      $("#nombre_parqueadero").attr('disabled','disabled');
+      $("#nombre_piscina").attr('disabled','disabled');
+      $("#nombre_plazoleta").attr('disabled','disabled');
+      $("#nombre_sendero").attr('disabled','disabled');
+      $("#nombre_via").attr('disabled','disabled');
+      $("#nombre_edificio").attr('disabled','disabled');
+      $("#pisos").attr('disabled','disabled');
+      $("#id_espacio").attr('disabled','disabled');
       $("#modificar_sede").show();
       $("#modificar_campus").show();
       $("#modificar_cancha").show();
@@ -3368,7 +3406,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_sede").click(function (e){
-      $("#nombre_sede").prop('disabled', false);
+      $("#nombre_sede").removeAttr("disabled");
       $("#modificar_sede").hide();
       $("#guardar_modificaciones_sede").show();
   });
@@ -3378,7 +3416,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_campus").click(function (e){
-      $("#nombre_campus").prop('disabled', false);
+      $("#nombre_campus").removeAttr("disabled");
       $("#modificar_campus").hide();
       $("#guardar_modificaciones_campus").show();
   });
@@ -3388,10 +3426,10 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_cancha").click(function (e){
-      $("#uso_cancha").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_pintura").prop('disabled', false);
-      $("#longitud_demarcacion").prop('disabled', false);
+      $("#uso_cancha").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#tipo_pintura").removeAttr("disabled");
+      $("#longitud_demarcacion").removeAttr("disabled");
       $("#modificar_cancha").hide();
       $("#guardar_modificaciones_cancha").show();
   });
@@ -3401,29 +3439,29 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_corredor").click(function (e){
-      $("#altura_pared").prop('disabled', false);
-      $("#ancho_pared").prop('disabled', false);
-      $("#material_pared").prop('disabled', false);
-      $("#ancho_piso").prop('disabled', false);
-      $("#largo_piso").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#ancho_techo").prop('disabled', false);
-      $("#largo_techo").prop('disabled', false);
-      $("#material_techo").prop('disabled', false);
-      $("#tipo_suministro_energia").prop('disabled', false);
-      $("#tomacorriente").prop('disabled', false);
-      $("#cantidad_tomacorrientes").prop('disabled', false);
-      $("#tipo_iluminacion").prop('disabled', false);
-      $("#cantidad_iluminacion").prop('disabled', false);
-      $("#tipo_interruptor").prop('disabled', false);
-      $("#cantidad_interruptores").prop('disabled', false);
+      $("#altura_pared").removeAttr("disabled");
+      $("#ancho_pared").removeAttr("disabled");
+      $("#material_pared").removeAttr("disabled");
+      $("#ancho_piso").removeAttr("disabled");
+      $("#largo_piso").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#ancho_techo").removeAttr("disabled");
+      $("#largo_techo").removeAttr("disabled");
+      $("#material_techo").removeAttr("disabled");
+      $("#tipo_suministro_energia").removeAttr("disabled");
+      $("#tomacorriente").removeAttr("disabled");
+      $("#cantidad_tomacorrientes").removeAttr("disabled");
+      $("#tipo_iluminacion").removeAttr("disabled");
+      $("#cantidad_iluminacion").removeAttr("disabled");
+      $("#tipo_interruptor").removeAttr("disabled");
+      $("#cantidad_interruptores").removeAttr("disabled");
       for (var i = 1; i < iluminacionCont; i++) {
-          $("#tipo_iluminacion"+i).prop('disabled', false);
-          $("#cantidad_iluminacion"+i).prop('disabled', false);
+          $("#tipo_iluminacion"+i).removeAttr("disabled");
+          $("#cantidad_iluminacion"+i).removeAttr("disabled");
       }
       for (var i = 1; i < interruptoresCont; i++) {
-          $("#tipo_interruptor"+i).prop('disabled', false);
-          $("#cantidad_interruptores"+i).prop('disabled', false);
+          $("#tipo_interruptor"+i).removeAttr("disabled");
+          $("#cantidad_interruptores"+i).removeAttr("disabled");
       }
       $("#botones_iluminacion").show();
       $("#botones_interruptor").show();
@@ -3436,10 +3474,10 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_cubierta").click(function (e){
-      $("#tipo_cubierta").prop('disabled', false);
-      $("#material_cubierta").prop('disabled', false);
-      $("#ancho").prop('disabled', false);
-      $("#largo").prop('disabled', false);
+      $("#tipo_cubierta").removeAttr("disabled");
+      $("#material_cubierta").removeAttr("disabled");
+      $("#ancho").removeAttr("disabled");
+      $("#largo").removeAttr("disabled");
       $("#modificar_cubierta").hide();
       $("#guardar_modificaciones_cubierta").show();
   });
@@ -3449,19 +3487,19 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_gradas").click(function (e){
-      $("#pasamanos").prop('disabled', false);
-      $("#material_pasamanos").prop('disabled', false);
-      $("#tipo_ventana").prop('disabled', false);
-      $("#cantidad_ventanas").prop('disabled', false);
-      $("#material_ventana").prop('disabled', false);
-      $("#ancho_ventana").prop('disabled', false);
-      $("#alto_ventana").prop('disabled', false);
+      $("input[name=pasamanos]").attr('disabled', false);
+      $("#material_pasamanos").removeAttr("disabled");
+      $("#tipo_ventana").removeAttr("disabled");
+      $("#cantidad_ventanas").removeAttr("disabled");
+      $("#material_ventana").removeAttr("disabled");
+      $("#ancho_ventana").removeAttr("disabled");
+      $("#alto_ventana").removeAttr("disabled");
       for (var i = 1; i < ventanasCont; i++) {
-          $("#tipo_ventana"+i).prop('disabled', false);
-          $("#cantidad_ventanas"+i).prop('disabled', false);
-          $("#material_ventana"+i).prop('disabled', false);
-          $("#ancho_ventana"+i).prop('disabled', false);
-          $("#alto_ventana"+i).prop('disabled', false);
+          $("#tipo_ventana"+i).removeAttr("disabled");
+          $("#cantidad_ventanas"+i).removeAttr("disabled");
+          $("#material_ventana"+i).removeAttr("disabled");
+          $("#ancho_ventana"+i).removeAttr("disabled");
+          $("#alto_ventana"+i).removeAttr("disabled");
       }
       $("#botones_anadir").show();
       $("#modificar_gradas").hide();
@@ -3473,12 +3511,12 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_parqueadero").click(function (e){
-      $("#capacidad").prop('disabled', false);
-      $("#ancho").prop('disabled', false);
-      $("#largo").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_pintura").prop('disabled', false);
-      $("#longitud_demarcacion").prop('disabled', false);
+      $("#capacidad").removeAttr("disabled");
+      $("#ancho").removeAttr("disabled");
+      $("#largo").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#tipo_pintura").removeAttr("disabled");
+      $("#longitud_demarcacion").removeAttr("disabled");
       $("#modificar_parqueadero").hide();
       $("#guardar_modificaciones_parqueadero").show();
   });
@@ -3488,10 +3526,10 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_piscina").click(function (e){
-      $("#alto").prop('disabled', false);
-      $("#ancho").prop('disabled', false);
-      $("#largo").prop('disabled', false);
-      $("#cantidad_puntos_hidraulicos").prop('disabled', false);
+      $("#alto").removeAttr("disabled");
+      $("#ancho").removeAttr("disabled");
+      $("#largo").removeAttr("disabled");
+      $("#cantidad_puntos_hidraulicos").removeAttr("disabled");
       $("#modificar_piscina").hide();
       $("#guardar_modificaciones_piscina").show();
   });
@@ -3501,12 +3539,12 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_plazoleta").click(function (e){
-      $("#nombre").prop('disabled', false);
-      $("#tipo_iluminacion").prop('disabled', false);
-      $("#cantidad_iluminacion").prop('disabled', false);
+      $("#nombre").removeAttr("disabled");
+      $("#tipo_iluminacion").removeAttr("disabled");
+      $("#cantidad_iluminacion").removeAttr("disabled");
       for (var i = 1; i < iluminacionCont; i++) {
-          $("#tipo_iluminacion"+i).prop('disabled', false);
-          $("#cantidad_iluminacion"+i).prop('disabled', false);
+          $("#tipo_iluminacion"+i).removeAttr("disabled");
+          $("#cantidad_iluminacion"+i).removeAttr("disabled");
       }
       $("#botones_anadir").show();
       $("#modificar_plazoleta").hide();
@@ -3518,15 +3556,15 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_sendero").click(function (e){
-      $("#longitud").prop('disabled', false);
-      $("#ancho").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_iluminacion").prop('disabled', false);
-      $("#cantidad_iluminacion").prop('disabled', false);
-      $("#codigo_poste").prop('disabled', false);
-      $("#ancho_cubierta").prop('disabled', false);
-      $("#largo_cubierta").prop('disabled', false);
-      $("#material_cubierta").prop('disabled', false);
+      $("#longitud").removeAttr("disabled");
+      $("#ancho").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#tipo_iluminacion").removeAttr("disabled");
+      $("#cantidad_iluminacion").removeAttr("disabled");
+      $("#codigo_poste").removeAttr("disabled");
+      $("#ancho_cubierta").removeAttr("disabled");
+      $("#largo_cubierta").removeAttr("disabled");
+      $("#material_cubierta").removeAttr("disabled");
       $("#modificar_sendero").hide();
       $("#guardar_modificaciones_sendero").show();
   });
@@ -3536,9 +3574,9 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_via").click(function (e){
-      $("#tipo_pintura").prop('disabled', false);
-      $("#longitud_demarcacion").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
+      $("#tipo_pintura").removeAttr("disabled");
+      $("#longitud_demarcacion").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
       $("#modificar_via").hide();
       $("#guardar_modificaciones_via").show();
   });
@@ -3548,12 +3586,12 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_edificio").click(function (e){
-      $("#nombre_edificio").prop('disabled', false);
-      $("#terraza").prop('disabled', false);
-      $("#sotano").prop('disabled', false);
-      $("#ancho_fachada").prop('disabled', false);
-      $("#alto_fachada").prop('disabled', false);
-      $("#material_fachada").prop('disabled', false);
+      $("#nombre_edificio").removeAttr("disabled");
+      $("#terraza").removeAttr("disabled");
+      $("#sotano").removeAttr("disabled");
+      $("#ancho_fachada").removeAttr("disabled");
+      $("#alto_fachada").removeAttr("disabled");
+      $("#material_fachada").removeAttr("disabled");
       $("#modificar_edificio").hide();
       $("#guardar_modificaciones_edificio").show();
   });
@@ -3563,67 +3601,67 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_espacio").click(function (e){
-      $("#uso_espacio").prop('disabled', false);
-      $("#altura_pared").prop('disabled', false);
-      $("#ancho_pared").prop('disabled', false);
-      $("#material_pared").prop('disabled', false);
-      $("#largo_techo").prop('disabled', false);
-      $("#ancho_techo").prop('disabled', false);
-      $("#material_techo").prop('disabled', false);
-      $("#largo_piso").prop('disabled', false);
-      $("#ancho_piso").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_iluminacion").prop('disabled', false);
-      $("#cantidad_iluminacion").prop('disabled', false);
-      $("#tipo_suministro_energia").prop('disabled', false);
-      $("#tomacorriente").prop('disabled', false);
-      $("#cantidad_tomacorrientes").prop('disabled', false);
-      $("#tipo_puerta").prop('disabled', false);
-      $("#cantidad_puertas").prop('disabled', false);
-      $("#material_puerta").prop('disabled', false);
-      $("#tipo_cerradura").prop('disabled', false);
-      $("#gato_puerta").prop('disabled', false);
-      $("#material_marco_puerta").prop('disabled', false);
-      $("#ancho_puerta").prop('disabled', false);
-      $("#alto_puerta").prop('disabled', false);
-      $("#tipo_ventana").prop('disabled', false);
-      $("#cantidad_ventanas").prop('disabled', false);
-      $("#material_ventana").prop('disabled', false);
-      $("#ancho_ventana").prop('disabled', false);
-      $("#alto_ventana").prop('disabled', false);
-      $("#tipo_interruptor").prop('disabled', false);
-      $("#cantidad_interruptores").prop('disabled', false);
-      $("#tiene_espacio_padre").prop('disabled', false);
-      $("#espacio_padre").prop('disabled', false);
+      $("#uso_espacio").removeAttr("disabled");
+      $("#altura_pared").removeAttr("disabled");
+      $("#ancho_pared").removeAttr("disabled");
+      $("#material_pared").removeAttr("disabled");
+      $("#largo_techo").removeAttr("disabled");
+      $("#ancho_techo").removeAttr("disabled");
+      $("#material_techo").removeAttr("disabled");
+      $("#largo_piso").removeAttr("disabled");
+      $("#ancho_piso").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#tipo_iluminacion").removeAttr("disabled");
+      $("#cantidad_iluminacion").removeAttr("disabled");
+      $("#tipo_suministro_energia").removeAttr("disabled");
+      $("#tomacorriente").removeAttr("disabled");
+      $("#cantidad_tomacorrientes").removeAttr("disabled");
+      $("#tipo_puerta").removeAttr("disabled");
+      $("#cantidad_puertas").removeAttr("disabled");
+      $("#material_puerta").removeAttr("disabled");
+      $("#tipo_cerradura").removeAttr("disabled");
+      $("input[name=gato_puerta]").attr('disabled', false);
+      $("#material_marco_puerta").removeAttr("disabled");
+      $("#ancho_puerta").removeAttr("disabled");
+      $("#alto_puerta").removeAttr("disabled");
+      $("#tipo_ventana").removeAttr("disabled");
+      $("#cantidad_ventanas").removeAttr("disabled");
+      $("#material_ventana").removeAttr("disabled");
+      $("#ancho_ventana").removeAttr("disabled");
+      $("#alto_ventana").removeAttr("disabled");
+      $("#tipo_interruptor").removeAttr("disabled");
+      $("#cantidad_interruptores").removeAttr("disabled");
+      $("input[name=tiene_espacio_padre]").attr('disabled', false);
+      $("#espacio_padre").removeAttr("disabled");
       for (var i = 1; i < iluminacionCont; i++) {
-          $("#tipo_iluminacion"+i).prop('disabled', false);
-          $("#cantidad_iluminacion"+i).prop('disabled', false);
+          $("#tipo_iluminacion"+i).removeAttr("disabled");
+          $("#cantidad_iluminacion"+i).removeAttr("disabled");
       }
       for (var i = 1; i < interruptoresCont; i++) {
-          $("#tipo_interruptor"+i).prop('disabled', false);
-          $("#cantidad_interruptores"+i).prop('disabled', false);
+          $("#tipo_interruptor"+i).removeAttr("disabled");
+          $("#cantidad_interruptores"+i).removeAttr("disabled");
       }
       for (var i = 1; i < tomacorrientesCont; i++) {
-          $("#tipo_suministro_energia"+i).prop('disabled', false);
-          $("#tomacorriente"+i).prop('disabled', false);
-          $("#cantidad_tomacorrientes"+i).prop('disabled', false);
+          $("#tipo_suministro_energia"+i).removeAttr("disabled");
+          $("#tomacorriente"+i).removeAttr("disabled");
+          $("#cantidad_tomacorrientes"+i).removeAttr("disabled");
       }
       for (var i = 1; i < puertasCont; i++) {
-          $("#tipo_puerta"+i).prop('disabled', false);
-          $("#cantidad_puertas"+i).prop('disabled', false);
-          $("#material_puerta"+i).prop('disabled', false);
-          $("#tipo_cerradura"+i).prop('disabled', false);
-          $("#gato_puerta"+i).prop('disabled', false);
-          $("#material_marco_puerta"+i).prop('disabled', false);
-          $("#ancho_puerta"+i).prop('disabled', false);
-          $("#alto_puerta"+i).prop('disabled', false);
+          $("#tipo_puerta"+i).removeAttr("disabled");
+          $("#cantidad_puertas"+i).removeAttr("disabled");
+          $("#material_puerta"+i).removeAttr("disabled");
+          $("#tipo_cerradura"+i).removeAttr("disabled");
+          $("#gato_puerta"+i).removeAttr("disabled");
+          $("#material_marco_puerta"+i).removeAttr("disabled");
+          $("#ancho_puerta"+i).removeAttr("disabled");
+          $("#alto_puerta"+i).removeAttr("disabled");
       }
       for (var i = 1; i < ventanasCont; i++) {
-          $("#tipo_ventana"+i).prop('disabled', false);
-          $("#cantidad_ventanas"+i).prop('disabled', false);
-          $("#material_ventana"+i).prop('disabled', false);
-          $("#ancho_ventana"+i).prop('disabled', false);
-          $("#alto_ventana"+i).prop('disabled', false);
+          $("#tipo_ventana"+i).removeAttr("disabled");
+          $("#cantidad_ventanas"+i).removeAttr("disabled");
+          $("#material_ventana"+i).removeAttr("disabled");
+          $("#ancho_ventana"+i).removeAttr("disabled");
+          $("#alto_ventana"+i).removeAttr("disabled");
       }
       $("#botones_anadir").show();
       $("#modificar_espacio").hide();
@@ -3635,8 +3673,8 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_tipo_material").click(function (e){
-    $("#tipo_material").prop('disabled', false);
-    $("#nombre_tipo_material").prop('disabled', false);
+    $("#tipo_material").removeAttr("disabled");
+    $("#nombre_tipo_material").removeAttr("disabled");
     $("#modificar_tipo_material").hide();
     $("#guardar_modificaciones_tipo_material").show();
   });
@@ -3646,8 +3684,8 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_tipo_objeto").click(function (e){
-      $("#tipo_objeto").prop('disabled', false);
-      $("#nombre_tipo_objeto").prop('disabled', false);
+      $("#tipo_objeto").removeAttr("disabled");
+      $("#nombre_tipo_objeto").removeAttr("disabled");
       $("#modificar_tipo_objeto").hide();
       $("#guardar_modificaciones_tipo_objeto").show();
   });
@@ -3657,10 +3695,10 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#modificar_cancha").click(function (e){
-      $("#uso_cancha").prop('disabled', false);
-      $("#material_piso").prop('disabled', false);
-      $("#tipo_pintura").prop('disabled', false);
-      $("#longitud_demarcacion").prop('disabled', false);
+      $("#uso_cancha").removeAttr("disabled");
+      $("#material_piso").removeAttr("disabled");
+      $("#tipo_pintura").removeAttr("disabled");
+      $("#longitud_demarcacion").removeAttr("disabled");
       $("#modificar_cancha").hide();
       $("#guardar_modificaciones_cancha").show();
   });
@@ -4565,6 +4603,19 @@ $(document).ready(function() {
       if(espaciosCont == 0){
           $("#divBotonesInformacionAdicional").show();
           $("#eliminar_espacio").attr('disabled','disabled');
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
+   * y se actualiza el selector de pisos.
+   */
+  $("#form_espacio_padre").change(function (e) {
+      var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
+      if (espacioPadre == "true") {
+          $('#div_espacio_padre').show();
+      }else{
+          $('#div_espacio_padre').hide();
       }
   });
 });

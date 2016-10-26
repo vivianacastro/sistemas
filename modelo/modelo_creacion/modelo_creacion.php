@@ -702,7 +702,7 @@ class modelo_creacion {
                     $this->guardarInterruptoresEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
-                    $this->guardarPuertasEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
+                  $this->guardarPuertasEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puertas[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
                 }
                 for ($i=0;$i<count($tipo_suministro_energia);$i++) {
                     $this->guardarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_tomacorrientes[$i],$tomacorriente[$i]);
@@ -936,7 +936,7 @@ class modelo_creacion {
      * @param string $gato, si la puerta tiene gato o no.
      * @return array
      */
-    public function guardarPuertasEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
+    public function guardarPuertasEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -976,6 +976,9 @@ class modelo_creacion {
             }else{
                 $GLOBALS['mensaje'] = "Las puertas del espacio se guardaron correctamente";
                 $GLOBALS['sql'] = $sql;
+                for ($i=0;$i<count($tipo_cerradura);$i++) {
+                  $this->guardarPuertaTipoCerradura($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura[$i]);
+                }
                 return true;
             }
         }
@@ -1002,7 +1005,7 @@ class modelo_creacion {
         $material_puerta = htmlspecialchars(trim($material_puerta));
         $material_marco = htmlspecialchars(trim($material_marco));
         $tipo_cerradura = htmlspecialchars(trim($tipo_cerradura));
-        $sql = "INSERT INTO puerta_tipo_cerradura (id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura,id_edificio,id_campus,id_sede) VALUES ('".$id_espacio."','".$tipo_puerta."','".$material_puerta."','".$material_marco."','".$id_tipo_cerradura."','".$id_edificio."','".$id_campus."','".$id_sede."');";
+        $sql = "INSERT INTO puerta_tipo_cerradura (id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura,id_edificio,id_campus,id_sede) VALUES ('".$id_espacio."','".$tipo_puerta."','".$material_puerta."','".$material_marco."','".$tipo_cerradura."','".$id_edificio."','".$id_campus."','".$id_sede."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Puerta-Tipo Cerradura 1)";
@@ -1043,7 +1046,7 @@ class modelo_creacion {
         $campos = "id_espacio,id_edificio,id_campus,id_sede,cantidad,tomacorriente";
         $valores = "'".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$cantidad."','".$tomacorriente."'";
         if (strcasecmp($tipo_suministro_energia,'') != 0) {
-            $campos = $campos.",cantidad";
+            $campos = $campos.",id_tipo_suministro_energia";
             $valores = $valores.",'".$tipo_suministro_energia."'";
             $sql = "INSERT INTO suministro_energia_espacio (".$campos.") VALUES (".$valores.");";
             $l_stmt = $this->conexion->prepare($sql);
