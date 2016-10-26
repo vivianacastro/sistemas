@@ -2909,12 +2909,12 @@ $(document).ready(function() {
       edificio["nombre_campus"] = $("#campus_search").val();
       edificio["nombre_edificio"] = $("#edificio_search").val();
       edificio["piso"] = $("#pisos_search").val();
-      var data = buscarObjetos("espacios",edificio);
+      var dataEspacioPadre = buscarObjetos("espacios",edificio);
       $("#espacio_padre").empty();
       var row = $("<option value=''/>");
       row.text("--Seleccionar--");
       row.appendTo("#espacio_padre");
-      $.each(data, function(index, record) {
+      $.each(dataEspacioPadre, function(index, record) {
           if($.isNumeric(index)) {
               aux = record.id;
               row = $("<option value='" + record.id + "'/>");
@@ -3845,9 +3845,15 @@ $(document).ready(function() {
                                   '</ol>'+
                                   '<!-- Wrapper for slides -->'+
                                   '<div class="carousel-inner" id="fotos_carrusel" role="listbox">'+
-                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="0" class="active"></li>'+
-                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="1"></li>'+
-                                      '<li id="slide_carrusel" data-target="#carrusel_inicio_sesion" data-slide-to="2"></li>'+
+                                          '<div id="item_carrusel" class="item active carouselImg">'+
+                                              'img class="peopleCarouselImg" src="archivos/images/campus/0-26/572264-Agua.jpg" alt=""/>'+
+                                              '/div>'+
+                                              'div id="item_carrusel" class="item carouselImg">'+
+                                              'img class="carouselImg" src="archivos/images/campus/0-26/572264-Energia.jpg" alt=""/>'+
+                                              '/div>'+
+                                              'div id="item_carrusel" class="item carouselImg">'+
+                                              'img class="carouselImg" src="archivos/images/campus/0-26/copiade572264-Agua.jpg" alt=""/>'+
+                                      '</div>'+
                                   '</div>'+
                                   '<!-- Left and right controls -->'+
                                   '<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">'+

@@ -738,15 +738,6 @@ class controlador_consultas
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'piso' => $valor['piso_edificio'],
-                    'ancho_pared' => $valor['ancho_pared'],
-                    'alto_pared' => $valor['alto_pared'],
-                    'material_pared' => $valor['id_material_pared'],
-                    'ancho_piso' => $valor['ancho_piso'],
-                    'largo_piso' => $valor['largo_piso'],
-                    'material_piso' => $valor['id_material_piso'],
-                    'ancho_techo' => $valor['ancho_techo'],
-                    'largo_techo' => $valor['largo_techo'],
-                    'material_techo' => $valor['id_material_techo'],
                 );
                 array_push($result, $arrayAux);
             }
