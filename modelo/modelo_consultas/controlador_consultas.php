@@ -1790,7 +1790,7 @@ class controlador_consultas
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => $valor['id_edificio'],
-                    'tipo_puerta' =>$valor['id_tipo_puerta'],
+                    'tipo_puerta' => $valor['id_tipo_puerta'],
                     'material_puerta' =>$valor['id_material_puerta'],
                     'material_marco' =>$valor['id_material_marco'],
                     'tipo_cerradura' =>$valor['id_tipo_cerradura'],

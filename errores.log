@@ -2424,3 +2424,11 @@
 [26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 247
 [26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 249
 [26-Oct-2016 14:14:53 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 251
+[26-Oct-2016 20:25:20 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:25:34 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:41:48 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:44:55 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:45:34 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:46:31 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:48:44 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877
+[26-Oct-2016 20:49:06 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1877

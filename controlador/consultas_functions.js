@@ -720,9 +720,14 @@ $(document).ready(function() {
               }
               if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
                   $("#edificio_search").empty();
-              }else if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+                  $("#edificio_search").val("");
+              }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
                   $("#edificio_search").empty();
+                  $("#edificio_search").val("");
                   $("#pisos_search").empty();
+                  $("#pisos_search").val("");
+                  $("#espacio_search").empty();
+                  $("#espacio_search").val("");
               }
           }else{
               $("#campus_search").empty();
@@ -1100,16 +1105,21 @@ $(document).ready(function() {
                   }else{
                       getCoordenadas(mapaConsulta);
                   }
-                  if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+                  if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
                       $("#pisos_search").empty();
+                      $("#pisos_search").val("");
+                      $("#espacio_search").empty();
+                      $("#espacio_search").val("");
                   }
               }
           }else{
-              if (URLactual['href'].indexOf('consultar_cubiertas') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacios') >= 0) {
+              if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
                   $("#edificio_search").empty();
-                  $("#pisos_search").empty();
-                  $("#espacio_search").empty();
                   $("#edificio_search").val("");
+                  $("#pisos_search").empty();
+                  $("#pisos_search").val("");
+                  $("#espacio_search").empty();
+                  $("#espacio_search").val("");
               }else{
                   $("#codigo_search").empty();
                   $("#codigo_search").val("");
@@ -1299,6 +1309,8 @@ $(document).ready(function() {
                       break;
                   }
               }
+              $("#espacio_search").empty();
+              $("#espacio_search").val("");
           }else{
               $("#pisos_search").empty();
               $("#pisos_search").val("");
@@ -2904,12 +2916,12 @@ $(document).ready(function() {
       var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
       var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
       var archivos = consultarArchivosObjeto("espacio",info);
-      var edificio = {};
-      edificio["nombre_sede"] = $("#sede_search").val();
-      edificio["nombre_campus"] = $("#campus_search").val();
-      edificio["nombre_edificio"] = $("#edificio_search").val();
-      edificio["piso"] = $("#pisos_search").val();
-      var dataEspacioPadre = buscarObjetos("espacios",edificio);
+      var edificioEspacioPadre = {};
+      edificioEspacioPadre["nombre_sede"] = $("#sede_search").val();
+      edificioEspacioPadre["nombre_campus"] = $("#campus_search").val();
+      edificioEspacioPadre["nombre_edificio"] = $("#edificio_search").val();
+      edificioEspacioPadre["piso"] = $("#pisos_search").val();
+      var dataEspacioPadre = buscarObjetos("espacios",edificioEspacioPadre);
       $("#espacio_padre").empty();
       var row = $("<option value=''/>");
       row.text("--Seleccionar--");
@@ -2975,8 +2987,8 @@ $(document).ready(function() {
                   actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
                   $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
                   $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+                  iluminacionCont++;
               }
-              iluminacionCont++;
           }
       });
       $.each(dataInterruptor, function(index, record) {
@@ -2995,8 +3007,8 @@ $(document).ready(function() {
                   actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
                   $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
                   $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
+                  interruptoresCont++;
               }
-              interruptoresCont++;
           }
       });
       $.each(dataPuerta, function(index, record) {
@@ -3021,7 +3033,7 @@ $(document).ready(function() {
                   +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
                   //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
                   //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
-                  +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                  +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
                   +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
                   +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
                   +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3032,6 +3044,7 @@ $(document).ready(function() {
                   +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
                   +'</div>';
                   añadirComponente("puerta",componente);
+                  actualizarSelectMaterial("material_marco_puerta",puertasCont);
                   actualizarSelectMaterial("material_puerta",puertasCont);
                   actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
                   $("#tipo_puerta"+puertasCont).val(record.tipo_puerta);
@@ -3041,6 +3054,7 @@ $(document).ready(function() {
                   $("#material_marco_puerta"+puertasCont).val(record.material_marco);
                   $("#ancho_puerta"+puertasCont).val(record.ancho);
                   $("#alto_puerta"+puertasCont).val(record.alto);
+                  puertasCont++;
               }
               var tipoPuerta = record.tipo_puerta;
               var materialPuerta = record.material_puerta;
@@ -3071,11 +3085,10 @@ $(document).ready(function() {
                           añadirComponente("cerradura",componente);
                           actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
                           $("#tipo_cerradura"+cerraduraCont).val(valor.tipo_cerradura);
+                          cerraduraCont++;
                       }
-                      cerraduraCont++;
                   }
               });
-              puertasCont++;
           }
       });
       $.each(dataSuministro, function(index, record) {
@@ -3102,8 +3115,8 @@ $(document).ready(function() {
                   $("#tipo_suministro_energia"+tomacorrientesCont).val(record.tipo_suministro_energia);
                   $("#tomacorriente"+tomacorrientesCont).val(record.tomacorriente);
                   $("#cantidad_tomacorrientes"+tomacorrientesCont).val(record.cantidad);
+                  tomacorrientesCont++;
               }
-              tomacorrientesCont++;
           }
       });
       $.each(dataVentana, function(index, record) {
@@ -3135,8 +3148,8 @@ $(document).ready(function() {
                   $("#material_ventana"+ventanasCont).val(record.material_ventana);
                   $("#ancho_ventana"+ventanasCont).val(record.ancho);
                   $("#alto_ventana"+ventanasCont).val(record.alto);
+                  ventanasCont++;
               }
-              ventanasCont++;
           }
       });
       /*if (usoEspacio == '1') { //Salón
@@ -3426,6 +3439,11 @@ $(document).ready(function() {
       $("#guardar_modificaciones_via").hide();
       $("#guardar_modificaciones_edificio").hide();
       $("#guardar_modificaciones_espacio").hide();
+      $("#botones_anadir_iluminacion").hide();
+      $("#botones_anadir_interruptor").hide();
+      $("#botones_anadir_puerta").hide();
+      $("#botones_anadir_tomacorriente").hide();
+      $("#botones_anadir_ventana").hide();
       while (iluminacionCont > 0) {
           eliminarComponente("iluminacion"+iluminacionCont);
           iluminacionCont--;
@@ -3542,8 +3560,8 @@ $(document).ready(function() {
           $("#tipo_interruptor"+i).removeAttr("disabled");
           $("#cantidad_interruptores"+i).removeAttr("disabled");
       }
-      $("#botones_iluminacion").show();
-      $("#botones_interruptor").show();
+      $("#botones_anadir_iluminacion").show();
+      $("#botones_anadir_interruptor").show();
       $("#modificar_corredor").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_corredor").show();
@@ -3581,7 +3599,7 @@ $(document).ready(function() {
           $("#ancho_ventana"+i).removeAttr("disabled");
           $("#alto_ventana"+i).removeAttr("disabled");
       }
-      $("#botones_anadir").show();
+      $("#botones_anadir_ventana").show();
       $("#modificar_gradas").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_gradas").show();
@@ -3629,7 +3647,7 @@ $(document).ready(function() {
           $("#tipo_iluminacion"+i).removeAttr("disabled");
           $("#cantidad_iluminacion"+i).removeAttr("disabled");
       }
-      $("#botones_anadir").show();
+      $("#botones_anadir_iluminacion").show();
       $("#modificar_plazoleta").hide();
       $("#guardar_modificaciones_plazoleta").show();
   });
@@ -3749,7 +3767,11 @@ $(document).ready(function() {
           $("#ancho_ventana"+i).removeAttr("disabled");
           $("#alto_ventana"+i).removeAttr("disabled");
       }
-      $("#botones_anadir").show();
+      $("#botones_anadir_iluminacion").show();
+      $("#botones_anadir_interruptor").show();
+      $("#botones_anadir_puerta").show();
+      $("#botones_anadir_tomacorriente").show();
+      $("#botones_anadir_ventana").show();
       $("#modificar_espacio").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_espacio").show();
@@ -4549,6 +4571,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_iluminacion").click(function (e){
+      iluminacionCont++;
       var componente = '<div id="iluminacion'+iluminacionCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
@@ -4558,7 +4581,6 @@ $(document).ready(function() {
       añadirComponente("iluminacion",componente);
       actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
       $('#eliminar_iluminacion').removeAttr("disabled");
-      iluminacionCont++;
   });
 
   /**
@@ -4578,6 +4600,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_tomacorriente").click(function (e){
+      tomacorrientesCont++;
       var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
@@ -4593,7 +4616,6 @@ $(document).ready(function() {
       añadirComponente("suministro_energia",componente);
       actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
       $('#eliminar_tomacorriente').removeAttr("disabled");
-      tomacorrientesCont++;
   });
 
   /**
@@ -4613,6 +4635,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_puerta").click(function (e){
+      puertasCont++;
       var componente = '<div id="puerta'+puertasCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
@@ -4628,17 +4651,17 @@ $(document).ready(function() {
       +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
       +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
       +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-      +'<select class="form-control formulario" name="material_marco" id="material_marco" required></select><br>'
+      +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta" required></select><br>'
       +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
       +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
       +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
       +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
       +'</div>';
       añadirComponente("puerta",componente);
+      actualizarSelectMaterial("material_marco_puerta",puertasCont);
       actualizarSelectMaterial("material_puerta",puertasCont);
       actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
       $('#eliminar_puerta').removeAttr("disabled");
-      puertasCont++;
   });
 
   /**
@@ -4658,6 +4681,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_ventana").click(function (e){
+      ventanasCont++;
       var componente = '<div id="ventana'+ventanasCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
@@ -4674,7 +4698,6 @@ $(document).ready(function() {
       actualizarSelectMaterial("material_ventana",ventanasCont);
       actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
       $('#eliminar_ventana').removeAttr("disabled");
-      ventanasCont++;
   });
 
   /**
@@ -4694,6 +4717,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_interruptor").click(function (e){
+      interruptoresCont++;
       var componente = '<div id="interruptor'+interruptoresCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
@@ -4703,7 +4727,6 @@ $(document).ready(function() {
       añadirComponente("interruptor",componente);
       actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
       $('#eliminar_interruptor').removeAttr("disabled");
-      interruptoresCont++;
   });
 
   /**
@@ -4723,6 +4746,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_punto_sanitario").click(function (e){
+      puntosSanitariosCont++;
       var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
@@ -4732,7 +4756,6 @@ $(document).ready(function() {
       añadirComponente("punto_sanitario",componente);
       actualizarSelectTipoObjeto("tipo_punto_sanitario",puntosSanitariosCont);
       $('#eliminar_punto_sanitario').removeAttr("disabled");
-      puntosSanitariosCont++;
   });
 
   /**
@@ -4752,6 +4775,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_orinal").click(function (e){
+      orinalesCont++;
       var componente = '<div id="orinal'+orinalesCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" required></select><br>'
@@ -4761,7 +4785,6 @@ $(document).ready(function() {
       añadirComponente("orinal",componente);
       actualizarSelectTipoObjeto("tipo_orinal",orinalesCont);
       $('#eliminar_orinal').removeAttr("disabled");
-      orinalesCont++;
   });
 
   /**
@@ -4781,6 +4804,7 @@ $(document).ready(function() {
    * realiza la operacion correspondiente.
    */
   $("#añadir_lavamanos").click(function (e){
+      lavamanosCont++;
       var componente = '<div id="lavamanos'+lavamanosCont+'">'
       +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
       +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
@@ -4791,7 +4815,6 @@ $(document).ready(function() {
       añadirComponente("lavamanos",componente);
       actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
       $('#eliminar_lavamanos').removeAttr("disabled");
-      lavamanosCont++;
   });
 
   /**

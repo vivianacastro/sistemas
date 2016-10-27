@@ -3810,7 +3810,7 @@ $(document).ready(function() {
         +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
         //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
         //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
-        +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
         +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3821,6 +3821,7 @@ $(document).ready(function() {
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
         +'</div>';
         añadirComponente("puerta",componente);
+        actualizarSelectMaterial("material_marco_puerta",puertasCont);
         actualizarSelectMaterial("material_puerta",puertasCont);
         actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
         $('#eliminar_puerta').removeAttr("disabled");
