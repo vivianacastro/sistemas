@@ -250,7 +250,8 @@ $(document).ready(function() {
      * Se captura el evento cuando de dar click en el boton guardar_usuario y se
      * realiza la operacion correspondiente.
      */
-    $("#guardar_usuario").click(function (e){
+    //$("#guardar_usuario").click(function (e){
+		$("#guardar_usuario").off('click').on('click', function() {
     		try{
             var confirmacion = window.confirm("¿Guardar la información del usuario?");
             if (confirmacion) {
