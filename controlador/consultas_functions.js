@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-  var espaciosCont = 0, iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
+  var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
   var campusSelect = null;
   var marcadores = [], marcadoresModificacion = [];
   var URLactual = window.location;
@@ -2037,7 +2037,7 @@ $(document).ready(function() {
                   piso = 'terraza';
               }
               $("#pisos").val(piso);
-              $("input[name=pasamanos][value=" + record.pasamanos + "]").prop('checked', true);
+              $("input[name=pasamanos][value="+ record.pasamanos + "]").prop('checked', true);
               $("#material_pasamanos").val(record.material_pasamanos);
           }
       });
@@ -2796,8 +2796,8 @@ $(document).ready(function() {
               $("#id_edificio").val(record.id);
               $("#nombre_edificio").val(record.nombre);
               $("#pisos_edificio").val(record.numero_pisos);
-              $("input[name=terraza][value=" + record.terraza + "]").prop('checked', true);
-              $("input[name=sotano][value=" + record.sotano + "]").prop('checked', true);
+              $("input[name=terraza][value="+ record.terraza + "]").prop('checked', true);
+              $("input[name=sotano][value="+ record.sotano + "]").prop('checked', true);
               $("#ancho_fachada").val(record.ancho_fachada);
               $("#alto_fachada").val(record.alto_fachada);
               $("#material_fachada").val(record.material_fachada);
@@ -3475,8 +3475,9 @@ $(document).ready(function() {
   * Se captura el evento cuando se cierra el modal divDialogConsulta.
   */
   $('#divDialogConsultaMapa').on('hidden.bs.modal', function () {
-      eliminarComponente("tituloModalMapa");
-      eliminarComponente("dataObjeto");
+      eliminarComponente("tituloObjeto");
+      eliminarComponente("informacionObjeto");
+      iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
   });
 
   /**
@@ -4007,7 +4008,7 @@ $(document).ready(function() {
                       '</div>'+
                       '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Parqueadero</h3>'+
                       '<div id="bodyContent">'+
-                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>parqueadero:</b> '+record.id+'</p>'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Parqueadero:</b> '+record.id+'</p>'+
                         '<div class="form_button">'+
                           '<div class="col-xs-12">'+
                               '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_parqueadero" name="ver_parqueadero" id="ver_parqueadero" value="Ver Informaci&oacute;n Parqueadero" title="Ver la informaci&oacute;n del parqueadero"/>'+
@@ -4143,12 +4144,12 @@ $(document).ready(function() {
                   var contentString = '<div id="content">'+
                       '<div id="siteNotice">'+
                       '</div>'+
-                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Sendero</h3>'+
+                      '<h3 id="firstHeading" class="firstHeading">Informaci&oacute;n Sendero Peatonal</h3>'+
                       '<div id="bodyContent">'+
-                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Sendero:</b> '+record.id+'</p>'+
+                        '<p><b>Sede:</b> '+record.nombre_sede+'<br><b>Campus:</b> '+record.nombre_campus+'<br><b>Sendero Peatonal:</b> '+record.id+'</p>'+
                         '<div class="form_button">'+
                         '<div class="col-xs-12">'+
-                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero"/>'+
+                            '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_sendero" name="ver_sendero" id="ver_sendero" value="Ver Informaci&oacute;n Sendero" title="Ver la informaci&oacute;n del sendero peatonal"/>'+
                         '</div><br>'+
                         '<div class="col-xs-12">'+
                             '<input type="submit" class="btn btn-primary btn-lg btn-formulario ver_campus" name="ver_campus" id="ver_campus" value="Ver Campus" title="Ver todos los campus"/>'+
@@ -4257,9 +4258,10 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Cancha</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Cancha</h4></div';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div id="dataCancha" class="div_izquierda"><b>C&oacute;digo de la Cancha<font color="red">*</font>:</b></div>'
+      componente = '<div id="informacionObjeto">'+
+          '<div id="dataCancha" class="div_izquierda"><b>C&oacute;digo de la Cancha<font color="red">*</font>:</b></div>'
           +'<input class="form-control formulario" type="text" name="id_cancha" id="id_cancha" value="" disabled required/><br>'
           +'<div class="div_izquierda"><b>Uso de la Cancha<font color="red">*</font>:</b></div>'
           +'<input class="form-control formulario" type="text" name="uso_cancha" id="uso_cancha" maxlength="100" value="" placeholder="Ej: Fútbol Sala" disabled required/><br>'
@@ -4267,8 +4269,9 @@ $(document).ready(function() {
           +'<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'
           +'<div class="div_izquierda"><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'
           +'<select class="form-control formulario" name="tipo_pintura" id="tipo_pintura" disabled required></select><br>'
-          +'<div class="div_izquierda"><b>Longitud de la demaraci&oacute;n:</b>'+
-          +'</div>';
+          +'<div class="div_izquierda"><b>Longitud de la demaraci&oacute;n:</b>'
+          +'</div>'
+      +'</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_piso",0);
       actualizarSelectTipoObjeto("tipo_pintura",0);
@@ -4394,9 +4397,10 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Corredor</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Corredor</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class="form-group">'+
+      componente = '<div id="informacionObjeto">'+
+          '<div class="form-group">'+
               '<div><b><h5>Informaci&oacute;n de las Paredes del Corredor</h5></b></div>'+
               '<div class="div_izquierda"><b>Altura de las paredes:</b></div>'+
               '<div class="input-group">'+
@@ -4473,7 +4477,8 @@ $(document).ready(function() {
                       '<div class="div_izquierda"><b>Cantidad de interruptores:</b></div>'+
                       '<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores" value="" placeholder="Ej: 2" disabled required/>'+
                   '</div>'+
-          '</div>';
+          '</div>'+
+      '</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_pared",0);
       actualizarSelectMaterial("material_techo",0);
@@ -4650,34 +4655,36 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Parqueadero</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Parqueadero</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class=" div_izquierda" ><b>C&oacute;digo del Parqueadero<font color=" red" >*</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" id_parqueadero"  id=" id_parqueadero"  maxlength="50" value=" "  placeholder=" Ej: Parqueadero 1"  disabled required/><br>'+
-          '<div class=" div_izquierda" ><b>Capacidad del Parqueadero:</b></div>'+
+      componente = '<div id="informacionObjeto">'+
+        '<div class="div_izquierda" ><b>C&oacute;digo del Parqueadero<font color="red" >*</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="id_parqueadero"  id="id_parqueadero"  maxlength="50" value=""  placeholder="Ej: Parqueadero 1"  disabled required/><br>'+
+          '<div class="div_izquierda" ><b>Capacidad del Parqueadero:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" capacidad"  id=" capacidad"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="capacidad"  id="capacidad"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
               '<span class="input-group-addon">autos</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Ancho del Parqueadero:</b></div>'+
+          '<div class="div_izquierda" ><b>Ancho del Parqueadero:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="ancho"  id="ancho"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Largo del Parqueadero:</b></div>'+
+          '<div class="div_izquierda" ><b>Largo del Parqueadero:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" largo"  id=" largo"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="largo"  id="largo"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Material del piso:</b></div>'+
-          '<select class=" form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select><br>'+
-          '<div class=" div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
-          '<select class=" form-control formulario"  name=" tipo_pintura"  id=" tipo_pintura"  disabled required></select><br>'+
-          '<div class=" div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
+          '<div class="div_izquierda" ><b>Material del piso:</b></div>'+
+          '<select class="form-control formulario"  name="material_piso"  id="material_piso"  disabled required></select><br>'+
+          '<div class="div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
+          '<select class="form-control formulario"  name="tipo_pintura"  id="tipo_pintura"  disabled required></select><br>'+
+          '<div class="div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" longitud_demarcacion"  id=" longitud_demarcacion"  min="1" class="form-control" value=" "  placeholder=" Ej: 20"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="longitud_demarcacion"  id="longitud_demarcacion"  min="1" class="form-control" value=""  placeholder="Ej: 20"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
-          '</div>';
+          '</div>';+
+      '</div>'
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_piso",0);
       actualizarSelectTipoObjeto("tipo_pintura",0);
@@ -4796,34 +4803,36 @@ $(document).ready(function() {
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = id;
-      var data = consultarInformacionObjeto("parqueadero",info);
-      var archivos = consultarArchivosObjeto("parqueadero",info);
+      var data = consultarInformacionObjeto("piscina",info);
+      var archivos = consultarArchivosObjeto("piscina",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Piscina</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Piscina</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class=" div_izquierda" ><b>C&oacute;digo del Piscina<font color=" red" >*</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" id_piscina"  id=" id_piscina"  value=" "  disabled required/><br>'+
-          '<div class=" div_izquierda" ><b>Profundidad de la Piscina:</b></div>'+
+      componente = '<div id="informacionObjeto">'+
+        '<div class="div_izquierda" ><b>C&oacute;digo del Piscina<font color="red" >*</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="id_piscina"  id="id_piscina"  value=""  disabled required/><br>'+
+          '<div class="div_izquierda" ><b>Profundidad de la Piscina:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" alto"  id=" alto"  min="1" class="form-control" value=" "  placeholder=" Ej: 2"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="alto"  id="alto"  min="1" class="form-control" value=""  placeholder="Ej: 2"  disabled required>'+
               '<span class="input-group-addon">cm</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Ancho de la Piscina:</b></div>'+
+          '<div class="div_izquierda" ><b>Ancho de la Piscina:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="ancho"  id="ancho"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
               '<span class="input-group-addon">cm</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Largo de la Piscina:</b></div>'+
+          '<div class="div_izquierda" ><b>Largo de la Piscina:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" largo"  id=" largo"  min="1" class="form-control" value=" "  placeholder=" Ej: 80"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="largo"  id="largo"  min="1" class="form-control" value=""  placeholder="Ej: 80"  disabled required>'+
               '<span class="input-group-addon">cm</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda" ><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>'+
-          '<input class=" form-control formulario"  type="number" name=" cantidad_puntos_hidraulicos"  id=" cantidad_puntos_hidraulicos"  min="1" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required>';
+          '<div class="div_izquierda" ><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>'+
+          '<input class="form-control formulario"  type="number" name="cantidad_puntos_hidraulicos"  id="cantidad_puntos_hidraulicos"  min="1" class="form-control" value=""  placeholder="Ej: 10"  disabled required>';+
+      '</div>'
       añadirComponente("dataObjeto",componente);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
@@ -4942,29 +4951,32 @@ $(document).ready(function() {
       var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
       var archivos = consultarArchivosObjeto("plazoleta",info);
       console.log(data);
+      console.log(dataIluminacion);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Plazoleta</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Plazoleta</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class=" div_izquierda" ><b>C&oacute;digo de la Plazoleta<font color=" red" >*</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" id_plazoleta"  id=" id_plazoleta"  value=" "  disabled required/><br>'+
-          '<div class=" div_izquierda" ><b>Nombre de la Plazoleta<font color=" red" >*</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" nombre"  id=" nombre"  maxlength="10" value=" "  placeholder=" Ej: Plazoleta Ingenierías"  disabled required/><br>'+
-          '<div class=" form-group" >'+
+      componente = '<div id="informacionObjeto">'+
+        '<div class="div_izquierda" ><b>C&oacute;digo de la Plazoleta<font color="red" >*</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="id_plazoleta"  id="id_plazoleta"  value=""  disabled required/><br>'+
+          '<div class="div_izquierda" ><b>Nombre de la Plazoleta<font color="red" >*</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="nombre"  id="nombre"  maxlength="10" value=""  placeholder="Ej: Plazoleta Ingenierías"  disabled required/><br>'+
+          '<div class="form-group" >'+
               '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n de la Plazoleta</h5></b></div>'+
-              '<div id=" iluminacion" >'+
-                  '<div class=" div_izquierda" ><b>Tipo de l&aacute;mpara:</b></div>'+
-                  '<select class=" form-control formulario"  name=" tipo_iluminacion"  id=" tipo_iluminacion"  disabled required></select><br>'+
-                  '<div class=" div_izquierda" ><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
-                  '<input class=" form-control formulario"  type=" number"  min=" 1"  name=" cantidad_iluminacion"  id=" cantidad_iluminacion"  value=" "  placeholder=" Ej: 2"  disabled required/>'+
+              '<div id="iluminacion" >'+
+                  '<div class="div_izquierda" ><b>Tipo de l&aacute;mpara:</b></div>'+
+                  '<select class="form-control formulario"  name="tipo_iluminacion"  id="tipo_iluminacion"  disabled required></select><br>'+
+                  '<div class="div_izquierda" ><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
+                  '<input class="form-control formulario"  type="number"  min="1"  name="cantidad_iluminacion"  id="cantidad_iluminacion"  value=""  placeholder="Ej: 2"  disabled required/>'+
               '</div>'+
               '<div id="botones_anadir_iluminacion" style="display:none">'+
-                  '<br><input type=" submit"  class=" btn btn-primary btn-lg btn-agregar"  name=" añadir_iluminacion"  id=" añadir_iluminacion"  value=" Añadir Tipo Iluminaci&oacute;n"  title=" Añadir Tipo de Iluminaci&oacute;n" />'+
-                  '<input type=" submit"  class=" btn btn-primary btn-lg btn-agregar"  name=" eliminar_iluminacion"  id=" eliminar_iluminacion"  value=" Eliminar Tipo Iluminaci&oacute;n"  title=" Eliminar Tipo de Iluminaci&oacute;n"  disabled/>'+
+                  '<br><input type="submit"  class="btn btn-primary btn-lg btn-agregar"  name="añadir_iluminacion"  id="añadir_iluminacion"  value="Añadir Tipo Iluminaci&oacute;n"  title="Añadir Tipo de Iluminaci&oacute;n" />'+
+                  '<input type="submit"  class="btn btn-primary btn-lg btn-agregar"  name="eliminar_iluminacion"  id="eliminar_iluminacion"  value="Eliminar Tipo Iluminaci&oacute;n"  title="Eliminar Tipo de Iluminaci&oacute;n"  disabled/>'+
               '</div>'+
-          '</div>';
+          '</div>'+
+      '</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_piso",0);
       actualizarSelectTipoObjeto("tipo_iluminacion",0);
@@ -5100,57 +5112,58 @@ $(document).ready(function() {
       info['nombre_campus'] = campus;
       info['id'] = id;
       var data = consultarInformacionObjeto("sendero",info);
-      var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
       var archivos = consultarArchivosObjeto("sendero",info);
       console.log(data);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Sendero Peatonal</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Sendero Peatonal</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class=" div_izquierda"><b>C&oacute;digo del Sendero<font color=" red"> *</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" id_sendero"  id=" id_sendero"  value=" "  disabled required/><br>'+
-          '<div class=" div_izquierda"> <b>Longitud del Sendero:</b></div>'+
+      componente = '<div id="informacionObjeto">'+
+          '<div class="div_izquierda"><b>C&oacute;digo del Sendero<font color="red"> *</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="id_sendero"  id="id_sendero"  value=""  disabled required/><br>'+
+          '<div class="div_izquierda"> <b>Longitud del Sendero:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" longitud"  id=" longitud"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="longitud"  id="longitud"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda"> <b>Ancho del Sendero:</b></div>'+
+          '<div class="div_izquierda"> <b>Ancho del Sendero:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="ancho"  id="ancho"  min="1" class="form-control" value=""  placeholder="Ej: 10"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class=" div_izquierda"> <b>Material del piso:</b></div>'+
-          '<select class=" form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select><br>'+
-          '<div class=" form-group"> '+
+          '<div class="div_izquierda"> <b>Material del piso:</b></div>'+
+          '<select class="form-control formulario"  name="material_piso"  id="material_piso"  disabled required></select><br>'+
+          '<div class="form-group"> '+
               '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Sendero</h5></b></div>'+
-              '<div id=" iluminacion"> '+
-                  '<div class=" div_izquierda"> <b>Tipo de l&aacute;mpara:</b></div>'+
-                  '<select class=" form-control formulario"  name=" tipo_iluminacion"  id=" tipo_iluminacion"  disabled required></select><br>'+
-                  '<div class=" div_izquierda"> <b>Cantidad:</b></div>'+
-                  '<input class=" form-control formulario"  type="number" name=" cantidad_iluminacion"  id=" cantidad_iluminacion"  min=" 1"  maxlength="10" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required><br>'+
-                  '<div class=" div_izquierda"> <b>C&oacute;digo del poste:</b></div>'+
-                  '<input class=" form-control formulario"  type=" number"  min=" 1"  name=" codigo_poste"  id=" codigo_poste"  value=" "  placeholder=" Ej: 10320"  disabled required/><br>'+
+              '<div id="iluminacion"> '+
+                  '<div class="div_izquierda"> <b>Tipo de l&aacute;mpara:</b></div>'+
+                  '<select class="form-control formulario"  name="tipo_iluminacion"  id="tipo_iluminacion"  disabled required></select><br>'+
+                  '<div class="div_izquierda"> <b>Cantidad:</b></div>'+
+                  '<input class="form-control formulario"  type="number" name="cantidad_iluminacion"  id="cantidad_iluminacion"  min="1"  maxlength="10" class="form-control" value=""  placeholder="Ej: 10"  disabled required><br>'+
+                  '<div class="div_izquierda"> <b>C&oacute;digo del poste:</b></div>'+
+                  '<input class="form-control formulario"  type="number"  min="1"  name="codigo_poste"  id="codigo_poste"  value=""  placeholder="Ej: 10320"  disabled required/><br>'+
               '</div>'+
           '</div>'+
-          '<div class=" form-group">'+
+          '<div class="form-group">'+
               '<div><b><h5>Informaci&oacute;n de la Cubierta del Sendero</h5></b></div>'+
-              '<div id=" cubierta">'+
-                  '<div class=" div_izquierda"> <b>Ancho de la cubierta:</b></div>'+
+              '<div id="cubierta">'+
+                  '<div class="div_izquierda"> <b>Ancho de la cubierta:</b></div>'+
                   '<div class="input-group">'+
-                      '<input class=" form-control formulario"  type="number" name=" ancho_cubierta"  id=" ancho_cubierta"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+                      '<input class="form-control formulario"  type="number" name="ancho_cubierta"  id="ancho_cubierta"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
                       '<span class="input-group-addon">m</span>'+
                   '</div><br>'+
-                  '<div class=" div_izquierda"> <b>Largo de la cubierta:</b></div>'+
+                  '<div class="div_izquierda"> <b>Largo de la cubierta:</b></div>'+
                   '<div class="input-group">'+
-                      '<input class=" form-control formulario"  type="number" name=" largo_cubierta"  id=" largo_cubierta"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+                      '<input class="form-control formulario"  type="number" name="largo_cubierta"  id="largo_cubierta"  min="1" class="form-control" value=""  placeholder="Ej: 30"  disabled required>'+
                       '<span class="input-group-addon">m</span>'+
                   '</div><br>'+
-                  '<div class=" div_izquierda"> <b>Materia de la cubierta:</b></div>'+
-                  '<select class=" form-control formulario"  name=" material_cubierta"  id=" material_cubierta"  disabled required></select>'+
+                  '<div class="div_izquierda"> <b>Materia de la cubierta:</b></div>'+
+                  '<select class="form-control formulario"  name="material_cubierta"  id="material_cubierta"  disabled required></select>'+
               '</div>'+
-          '</div>';
+          '</div>'+
+      '</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_cubierta",0);
       actualizarSelectTipoObjeto("tipo_iluminacion",0);
@@ -5280,19 +5293,21 @@ $(document).ready(function() {
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Vía</h4>';
+      var componente = '<div id="tituloObjeto"><h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Vía</h4></div>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class=" div_izquierda" ><b>C&oacute;digo de la V&iacute;a<font color=" red" >*</font>:</b></div>'+
-          '<input class=" form-control formulario"  type=" text"  name=" id_via"  id=" id_via"  maxlength="10" value=" "  placeholder=" Ej: 1"  disabled required/><br>'+
-          '<div class=" div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
-          '<select class=" form-control formulario"  name=" tipo_pintura"  id=" tipo_pintura"  disabled required></select><br>'+
-          '<div class=" div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
+      componente = '<div id="informacionObjeto">'+
+        '<div class="div_izquierda" ><b>C&oacute;digo de la V&iacute;a<font color="red" >*</font>:</b></div>'+
+          '<input class="form-control formulario"  type="text"  name="id_via"  id="id_via"  maxlength="10" value=""  placeholder="Ej: 1"  disabled required/><br>'+
+          '<div class="div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
+          '<select class="form-control formulario"  name="tipo_pintura"  id="tipo_pintura"  disabled required></select><br>'+
+          '<div class="div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
           '<div class="input-group">'+
-              '<input class=" form-control formulario"  type="number" name=" longitud_demarcacion"  id=" longitud_demarcacion"  min="1" class="form-control" value=" "  placeholder=" Ej: 20"  disabled required>'+
+              '<input class="form-control formulario"  type="number" name="longitud_demarcacion"  id="longitud_demarcacion"  min="1" class="form-control" value=""  placeholder="Ej: 20"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
           '<div class="div_izquierda" ><b>Material del piso:</b></div>'+
-          '<select class="form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select>';
+          '<select class="form-control formulario"  name="material_piso"  id="material_piso"  disabled required></select>'+
+      '</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_piso",0);
       actualizarSelectTipoObjeto("tipo_pintura",0);
