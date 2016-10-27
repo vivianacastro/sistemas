@@ -251,6 +251,7 @@ class controlador_vista
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion).$this->crear_enlace_libreria($operacion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);
             $html = $this->representar_datos_dinamica($html, $data);
         }else{

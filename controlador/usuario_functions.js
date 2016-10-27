@@ -251,7 +251,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#guardar_usuario").click(function (e){
-    	try{
+    		try{
             var confirmacion = window.confirm("¿Guardar la información del usuario?");
             if (confirmacion) {
                 var nombre = $("#nombre_usuario").val();
@@ -261,6 +261,7 @@ $(document).ready(function() {
                 var extension = $("#extension_usuario").val();
                 var contrasenia = $("#contrasenia").val();
                 var contrasenia2 = $("#repita_contrasenia").val();
+								var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
                 if (nombre.length == 0) {
                 	alert('ERROR. Ingrese un nombre de usuario');
                 	$("#nombre_usuario").focus();
@@ -273,55 +274,55 @@ $(document).ready(function() {
                 }else if(!validarCorreo(correo)){
                 	alert("ERROR: Ingrese un correo válido");
                 	$("#correo_usuario").focus();
-                }else if(!contrasenia.match("/[A-z\&.\-]*$/") && !contrasenia.match("/\d/")){
+                }else if(contrasenia.length < 8){
                 	alert('ERROR. La contraseña mínimo debe tener 8 caracteres');
                 	$("#contrasenia").focus();
-                }else if(contrasenia.length < 8){
-                	alert('ERROR. La contraseña debe contener letras y números');
+                }else if(!pattern.test(contrasenia)){
+                	alert('ERROR. La contraseña debe contener por lo menos una letra y un número');
+									console.log(contrasenia);
                 	$("#contrasenia").focus();
                 }else if(contrasenia != contrasenia2){
                 	alert('ERROR. Las contraseñas no coinciden');
                 	//$("#contrasenia").focus();
                 	$("#repita_contrasenia").focus();
                 }else{
-                	var informacion = {};
-                	informacion['nombre'] = limpiarCadena(nombre);
-                	informacion['login'] = limpiarCadena(login);
-                	informacion['correo'] = limpiarCadena(correo);
-                	informacion['telefono'] = limpiarCadena(telefono);
-                	informacion['extension'] = limpiarCadena(extension);
-                	informacion['contrasenia'] = contrasenia;
-                	informacion['mod_planta'] = "true";
-                	informacion['mod_inventario'] = "true";
-                	informacion['mod_aires'] = "true";
-                	informacion['creacion_planta'] = "false";
-                	informacion['creacion_inventario'] = "false";
-                	informacion['creacion_aires'] = "false";
-                	informacion['perfil'] = "normal";
-                	var respuesta = guardarUsuario(informacion);
-                	if (respuesta.verificar) {
-                		mostrarMensaje(respuesta.mensaje);
-	                	$("#nombre_usuario").val("");
-	                	$("#login_usuario").val("");
-	                	$("#correo_usuario").val("");
-	                	$("#telefono_usuario").val("");
-	                	$("#extension_usuario").val("");
-	                	$("#contrasenia").val("");
-	                	$("#repita_contrasenia").val("");
-	                	window.location = "http://192.168.46.53/sistemas/index.php";
-                	}else{
-                		alert("El login ya se ha registrado previamente");
-			        	$("#login_usuario").addClass("resaltarInput");
-			        	$("#guardar_usuario").attr('disabled','disabled');
-                	}
-
+		              	var informacion = {};
+		              	informacion['nombre'] = limpiarCadena(nombre);
+		              	informacion['login'] = limpiarCadena(login);
+		              	informacion['correo'] = limpiarCadena(correo);
+		              	informacion['telefono'] = limpiarCadena(telefono);
+		              	informacion['extension'] = limpiarCadena(extension);
+		              	informacion['contrasenia'] = contrasenia;
+		              	informacion['mod_planta'] = "true";
+		              	informacion['mod_inventario'] = "true";
+		              	informacion['mod_aires'] = "true";
+		              	informacion['creacion_planta'] = "false";
+		              	informacion['creacion_inventario'] = "false";
+		              	informacion['creacion_aires'] = "false";
+		              	informacion['perfil'] = "normal";
+		              	//var respuesta = guardarUsuario(informacion);
+		              	if (respuesta.verificar) {
+			              		mostrarMensaje(respuesta.mensaje);
+			                	$("#nombre_usuario").val("");
+			                	$("#login_usuario").val("");
+			                	$("#correo_usuario").val("");
+			                	$("#telefono_usuario").val("");
+			                	$("#extension_usuario").val("");
+			                	$("#contrasenia").val("");
+			                	$("#repita_contrasenia").val("");
+			                	window.location = "http://192.168.46.53/sistemas/index.php";
+		              	}else{
+		              		alert("El login ya se ha registrado previamente");
+						        	$("#login_usuario").addClass("resaltarInput");
+						        	$("#guardar_usuario").attr('disabled','disabled');
+		              	}
                 }
             }
-        }
-        catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
+	      }
+	      catch(ex){
+	          console.log(ex);
+	          alert("Ocurrió un error, por favor inténtelo nuevamente");
+	      }
     });
 
 	/**

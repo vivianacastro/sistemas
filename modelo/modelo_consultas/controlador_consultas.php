@@ -347,7 +347,11 @@ class controlador_consultas
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_CONSULTAR_MAPA, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
+            }
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
