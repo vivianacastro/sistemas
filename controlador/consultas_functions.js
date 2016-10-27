@@ -2448,7 +2448,6 @@ $(document).ready(function() {
               iluminacionCont++;
           }
       });
-      console.log(iluminacionCont);
       $("#myCarousel").hide();
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
@@ -3473,6 +3472,14 @@ $(document).ready(function() {
   });
 
   /**
+  * Se captura el evento cuando se cierra el modal divDialogConsulta.
+  */
+  $('#divDialogConsultaMapa').on('hidden.bs.modal', function () {
+      eliminarComponente("tituloModalMapa");
+      eliminarComponente("dataObjeto");
+  });
+
+  /**
    * Evento de cambio del selector de archivo del modal de consulta/modificación.
    */
   $("#planos").on("change", ".agregar_archivos", function(){
@@ -4246,7 +4253,6 @@ $(document).ready(function() {
       var data = consultarInformacionObjeto("cancha",info);
       var archivos = consultarArchivosObjeto("cancha",info);
       console.log(data);
-      console.log(info);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
@@ -4254,14 +4260,15 @@ $(document).ready(function() {
       var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Cancha</h4>';
       añadirComponente("tituloModalMapa",componente);
       componente = '<div id="dataCancha" class="div_izquierda"><b>C&oacute;digo de la Cancha<font color="red">*</font>:</b></div>'
-      +'<input class="form-control formulario" type="text" name="id_cancha" id="id_cancha" value="" disabled required/><br>'
-      +'<div class="div_izquierda"><b>Uso de la Cancha<font color="red">*</font>:</b></div>'
-      +'<input class="form-control formulario" type="text" name="uso_cancha" id="uso_cancha" maxlength="100" value="" placeholder="Ej: Fútbol Sala" disabled required/><br>'
-      +'<div class="div_izquierda"><b>Material del piso:</b></div>'
-      +'<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'
-      +'<div class="div_izquierda"><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'
-      +'<select class="form-control formulario" name="tipo_pintura" id="tipo_pintura" disabled required></select><br>'
-      +'<div class="div_izquierda"><b>Longitud de la demaraci&oacute;n:</b></div>';
+          +'<input class="form-control formulario" type="text" name="id_cancha" id="id_cancha" value="" disabled required/><br>'
+          +'<div class="div_izquierda"><b>Uso de la Cancha<font color="red">*</font>:</b></div>'
+          +'<input class="form-control formulario" type="text" name="uso_cancha" id="uso_cancha" maxlength="100" value="" placeholder="Ej: Fútbol Sala" disabled required/><br>'
+          +'<div class="div_izquierda"><b>Material del piso:</b></div>'
+          +'<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'
+          +'<div class="div_izquierda"><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'
+          +'<select class="form-control formulario" name="tipo_pintura" id="tipo_pintura" disabled required></select><br>'
+          +'<div class="div_izquierda"><b>Longitud de la demaraci&oacute;n:</b>'+
+          +'</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_piso",0);
       actualizarSelectTipoObjeto("tipo_pintura",0);
@@ -4383,7 +4390,6 @@ $(document).ready(function() {
       var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
       var archivos = consultarArchivosObjeto("corredor",info);
       console.log(data);
-      console.log(info);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
@@ -4391,83 +4397,83 @@ $(document).ready(function() {
       var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Corredor</h4>';
       añadirComponente("tituloModalMapa",componente);
       componente = '<div class="form-group">'+
-          '<div><b><h5>Informaci&oacute;n de las Paredes del Corredor</h5></b></div>'+
-          '<div class="div_izquierda"><b>Altura de las paredes:</b></div>'+
-          '<div class="input-group">'+
-             '<input class="form-control formulario" type="number" min="1" name="altura_pared" id="altura_pared" value="" placeholder="Ej: 4" disabled required/>'+
-              '<span class="input-group-addon">m</span>'+
-          '</div><br>'+
-          '<div class="div_izquierda"><b>Ancho de las paredes:</b></div>'+
-          '<div class="input-group">'+
-              '<input class="form-control formulario" type="number" min="1" name="ancho_pared" id="ancho_pared" value="" placeholder="Ej: 4" disabled required/>'+
-              '<span class="input-group-addon">m</span>'+
-          '</div><br>'+
-          '<div class="div_izquierda"><b>Material de las paredes:</b></div>'+
-          '<select class="form-control formulario" name="material_pared" id="material_pared" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Techo del Corredor</h5></b></div>'+
-              '<div class="div_izquierda"><b>Largo del techo:</b></div>'+
+              '<div><b><h5>Informaci&oacute;n de las Paredes del Corredor</h5></b></div>'+
+              '<div class="div_izquierda"><b>Altura de las paredes:</b></div>'+
               '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="largo_techo" id="largo_techo" value="" placeholder="Ej: 4" disabled required/>'+
+                 '<input class="form-control formulario" type="number" min="1" name="altura_pared" id="altura_pared" value="" placeholder="Ej: 4" disabled required/>'+
                   '<span class="input-group-addon">m</span>'+
               '</div><br>'+
-              '<div class="div_izquierda"><b>Ancho del techo:</b></div>'+
+              '<div class="div_izquierda"><b>Ancho de las paredes:</b></div>'+
               '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="ancho_techo" id="ancho_techo" value="" placeholder="Ej: 4" disabled required/>'+
+                  '<input class="form-control formulario" type="number" min="1" name="ancho_pared" id="ancho_pared" value="" placeholder="Ej: 4" disabled required/>'+
                   '<span class="input-group-addon">m</span>'+
               '</div><br>'+
-              '<div class="div_izquierda"><b>Material del techo:</b></div>'+
-              '<select class="form-control formulario" name="material_techo" id="material_techo" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Piso del Corredor</h5></b></div>'+
-              '<div class="div_izquierda"><b>Largo del piso:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="largo_piso" id="largo_piso" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Ancho del piso:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="ancho_piso" id="ancho_piso" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Material del piso:</b></div>'+
-              '<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Corredor</h5></b></div>'+
-              '<div id="iluminacion">'+
-                  '<div class="div_izquierda"><b>Tipo de l&aacute;mpara:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion" value="" placeholder="Ej: 2" disabled required/>'+
+              '<div class="div_izquierda"><b>Material de las paredes:</b></div>'+
+              '<select class="form-control formulario" name="material_pared" id="material_pared" disabled required></select><br>'+
               '</div>'+
-          '</div><br>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Suministro de Energ&iacute;a del Corredor</h5></b></div>'+
-              '<div id="suministro_energia">'+
-                  '<div class="div_izquierda"><b>Tipo de suministro de energ&iacute;a:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Tomacorriente:</b></div>'+
-                  '<select class="form-control formulario" name="tomacorriente" id="tomacorriente" disabled required>'+
-                      '<option value="" selected="selected">--Seleccionar--</option>'+
-                      '<option value="regulado">Regulado</option>'+
-                      '<option value="no regulado">No Regulado</option>'+
-                  '</select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes" value="" placeholder="Ej: 2" disabled required/>'+
+              '<div class="form-group">'+
+                  '<div><b><h5>Informaci&oacute;n del Techo del Corredor</h5></b></div>'+
+                  '<div class="div_izquierda"><b>Largo del techo:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class="form-control formulario" type="number" min="1" name="largo_techo" id="largo_techo" value="" placeholder="Ej: 4" disabled required/>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class="div_izquierda"><b>Ancho del techo:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class="form-control formulario" type="number" min="1" name="ancho_techo" id="ancho_techo" value="" placeholder="Ej: 4" disabled required/>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class="div_izquierda"><b>Material del techo:</b></div>'+
+                  '<select class="form-control formulario" name="material_techo" id="material_techo" disabled required></select><br>'+
               '</div>'+
-          '</div><br>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n de los Interruptores del Corredor</h5></b></div>'+
-              '<div id="interruptor">'+
-                  '<div class="div_izquierda"><b>Tipo de interruptor:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de interruptores:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores" value="" placeholder="Ej: 2" disabled required/>'+
+              '<div class="form-group">'+
+                  '<div><b><h5>Informaci&oacute;n del Piso del Corredor</h5></b></div>'+
+                  '<div class="div_izquierda"><b>Largo del piso:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class="form-control formulario" type="number" min="1" name="largo_piso" id="largo_piso" value="" placeholder="Ej: 4" disabled required/>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class="div_izquierda"><b>Ancho del piso:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class="form-control formulario" type="number" min="1" name="ancho_piso" id="ancho_piso" value="" placeholder="Ej: 4" disabled required/>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class="div_izquierda"><b>Material del piso:</b></div>'+
+                  '<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'+
               '</div>'+
-      '</div>';
+              '<div class="form-group">'+
+                  '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Corredor</h5></b></div>'+
+                  '<div id="iluminacion">'+
+                      '<div class="div_izquierda"><b>Tipo de l&aacute;mpara:</b></div>'+
+                      '<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion" disabled required></select><br>'+
+                      '<div class="div_izquierda"><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
+                      '<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion" value="" placeholder="Ej: 2" disabled required/>'+
+                  '</div>'+
+              '</div><br>'+
+              '<div class="form-group">'+
+                  '<div><b><h5>Informaci&oacute;n del Suministro de Energ&iacute;a del Corredor</h5></b></div>'+
+                  '<div id="suministro_energia">'+
+                      '<div class="div_izquierda"><b>Tipo de suministro de energ&iacute;a:</b></div>'+
+                      '<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia" disabled required></select><br>'+
+                      '<div class="div_izquierda"><b>Tomacorriente:</b></div>'+
+                      '<select class="form-control formulario" name="tomacorriente" id="tomacorriente" disabled required>'+
+                          '<option value="" selected="selected">--Seleccionar--</option>'+
+                          '<option value="regulado">Regulado</option>'+
+                          '<option value="no regulado">No Regulado</option>'+
+                      '</select><br>'+
+                      '<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo:</b></div>'+
+                      '<input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes" value="" placeholder="Ej: 2" disabled required/>'+
+                  '</div>'+
+              '</div><br>'+
+              '<div class="form-group">'+
+                  '<div><b><h5>Informaci&oacute;n de los Interruptores del Corredor</h5></b></div>'+
+                  '<div id="interruptor">'+
+                      '<div class="div_izquierda"><b>Tipo de interruptor:</b></div>'+
+                      '<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor" disabled required></select><br>'+
+                      '<div class="div_izquierda"><b>Cantidad de interruptores:</b></div>'+
+                      '<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores" value="" placeholder="Ej: 2" disabled required/>'+
+                  '</div>'+
+          '</div>';
       añadirComponente("dataObjeto",componente);
       actualizarSelectMaterial("material_pared",0);
       actualizarSelectMaterial("material_techo",0);
@@ -4563,12 +4569,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -4577,7 +4583,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -4626,10 +4632,10 @@ $(document).ready(function() {
   });
 
   /**
-   * Se captura el evento cuando se da click en el boton ver_cubierta y se
+   * Se captura el evento cuando se da click en el boton ver_parqueadero y se
    * realiza la operacion correspondiente.
    */
-  $("#contenido").on("click", ".ver_cubierta", function(){
+  $("#contenido").on("click", ".ver_parqueadero", function(){
       var info =  {};
       var sede = sedeSeleccionada;
       var campus = campusSeleccionado;
@@ -4637,126 +4643,344 @@ $(document).ready(function() {
       info['nombre_sede'] = sede;
       info['nombre_campus'] = campus;
       info['id'] = id;
-      var data = consultarInformacionObjeto("corredor",info);
-      var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
-      var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
-      var archivos = consultarArchivosObjeto("corredor",info);
+      var data = consultarInformacionObjeto("parqueadero",info);
+      var archivos = consultarArchivosObjeto("parqueadero",info);
       console.log(data);
-      console.log(info);
       console.log(archivos);
       for (var i = 0; i < marcadoresModificacion.length; i++) {
           marcadoresModificacion[i].setMap(null);
       }
-      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Corredor</h4>';
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Parqueadero</h4>';
       añadirComponente("tituloModalMapa",componente);
-      componente = '<div class="form-group">'+
-          '<div><b><h5>Informaci&oacute;n de las Paredes del Corredor</h5></b></div>'+
-          '<div class="div_izquierda"><b>Altura de las paredes:</b></div>'+
+      componente = '<div class=" div_izquierda" ><b>C&oacute;digo del Parqueadero<font color=" red" >*</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" id_parqueadero"  id=" id_parqueadero"  maxlength="50" value=" "  placeholder=" Ej: Parqueadero 1"  disabled required/><br>'+
+          '<div class=" div_izquierda" ><b>Capacidad del Parqueadero:</b></div>'+
           '<div class="input-group">'+
-             '<input class="form-control formulario" type="number" min="1" name="altura_pared" id="altura_pared" value="" placeholder="Ej: 4" disabled required/>'+
+              '<input class=" form-control formulario"  type="number" name=" capacidad"  id=" capacidad"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<span class="input-group-addon">autos</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda" ><b>Ancho del Parqueadero:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class="div_izquierda"><b>Ancho de las paredes:</b></div>'+
+          '<div class=" div_izquierda" ><b>Largo del Parqueadero:</b></div>'+
           '<div class="input-group">'+
-              '<input class="form-control formulario" type="number" min="1" name="ancho_pared" id="ancho_pared" value="" placeholder="Ej: 4" disabled required/>'+
+              '<input class=" form-control formulario"  type="number" name=" largo"  id=" largo"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
               '<span class="input-group-addon">m</span>'+
           '</div><br>'+
-          '<div class="div_izquierda"><b>Material de las paredes:</b></div>'+
-          '<select class="form-control formulario" name="material_pared" id="material_pared" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Techo del Corredor</h5></b></div>'+
-              '<div class="div_izquierda"><b>Largo del techo:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="largo_techo" id="largo_techo" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Ancho del techo:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="ancho_techo" id="ancho_techo" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Material del techo:</b></div>'+
-              '<select class="form-control formulario" name="material_techo" id="material_techo" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Piso del Corredor</h5></b></div>'+
-              '<div class="div_izquierda"><b>Largo del piso:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="largo_piso" id="largo_piso" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Ancho del piso:</b></div>'+
-              '<div class="input-group">'+
-                  '<input class="form-control formulario" type="number" min="1" name="ancho_piso" id="ancho_piso" value="" placeholder="Ej: 4" disabled required/>'+
-                  '<span class="input-group-addon">m</span>'+
-              '</div><br>'+
-              '<div class="div_izquierda"><b>Material del piso:</b></div>'+
-              '<select class="form-control formulario" name="material_piso" id="material_piso" disabled required></select><br>'+
-          '</div>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Corredor</h5></b></div>'+
-              '<div id="iluminacion">'+
-                  '<div class="div_izquierda"><b>Tipo de l&aacute;mpara:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" id="cantidad_iluminacion" value="" placeholder="Ej: 2" disabled required/>'+
-              '</div>'+
-          '</div><br>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n del Suministro de Energ&iacute;a del Corredor</h5></b></div>'+
-              '<div id="suministro_energia">'+
-                  '<div class="div_izquierda"><b>Tipo de suministro de energ&iacute;a:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Tomacorriente:</b></div>'+
-                  '<select class="form-control formulario" name="tomacorriente" id="tomacorriente" disabled required>'+
-                      '<option value="" selected="selected">--Seleccionar--</option>'+
-                      '<option value="regulado">Regulado</option>'+
-                      '<option value="no regulado">No Regulado</option>'+
-                  '</select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes" value="" placeholder="Ej: 2" disabled required/>'+
-              '</div>'+
-          '</div><br>'+
-          '<div class="form-group">'+
-              '<div><b><h5>Informaci&oacute;n de los Interruptores del Corredor</h5></b></div>'+
-              '<div id="interruptor">'+
-                  '<div class="div_izquierda"><b>Tipo de interruptor:</b></div>'+
-                  '<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor" disabled required></select><br>'+
-                  '<div class="div_izquierda"><b>Cantidad de interruptores:</b></div>'+
-                  '<input class="form-control formulario" type="number" min="1" name="cantidad_interruptores" id="cantidad_interruptores" value="" placeholder="Ej: 2" disabled required/>'+
-              '</div>'+
-      '</div>';
+          '<div class=" div_izquierda" ><b>Material del piso:</b></div>'+
+          '<select class=" form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select><br>'+
+          '<div class=" div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
+          '<select class=" form-control formulario"  name=" tipo_pintura"  id=" tipo_pintura"  disabled required></select><br>'+
+          '<div class=" div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" longitud_demarcacion"  id=" longitud_demarcacion"  min="1" class="form-control" value=" "  placeholder=" Ej: 20"  disabled required>'+
+              '<span class="input-group-addon">m</span>'+
+          '</div>';
       añadirComponente("dataObjeto",componente);
-      actualizarSelectMaterial("material_pared",0);
-      actualizarSelectMaterial("material_techo",0);
       actualizarSelectMaterial("material_piso",0);
-      actualizarSelectTipoObjeto("tipo_iluminacion",0);
-      actualizarSelectTipoObjeto("tipo_interruptor",0);
-      actualizarSelectTipoObjeto("tipo_suministro_energia",0);
+      actualizarSelectTipoObjeto("tipo_pintura",0);
       $.each(data, function(index, record) {
           if($.isNumeric(index)) {
               $("#nombre_sede").val(record.nombre_sede);
               $("#nombre_campus").val(record.nombre_campus);
-              $("#id_corredor").val(record.id);
-              $("#altura_pared").val(record.ancho_pared);
-              $("#ancho_pared").val(record.alto_pared);
-              $("#material_pared").val(record.material_pared);
-              $("#ancho_piso").val(record.ancho_piso);
-              $("#largo_piso").val(record.largo_piso);
+              $("#id_parqueadero").val(record.id);
+              $("#capacidad").val(record.capacidad);
+              $("#ancho").val(record.ancho);
+              $("#largo").val(record.largo);
               $("#material_piso").val(record.material_piso);
-              $("#ancho_techo").val(record.ancho_techo);
-              $("#largo_techo").val(record.largo_techo);
-              $("#material_techo").val(record.material_techo);
-              $("#tomacorriente").val(record.tomacorriente);
-              $("#tipo_suministro_energia").val(record.tipo_suministro_energia);
-              $("#cantidad_tomacorrientes").val(record.cantidad);
+              $("#tipo_pintura").val(record.tipo_pintura_demarcacion);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
               var myLatlng = new google.maps.LatLng(record.lat,record.lng);
               coordsMapaModificacion = myLatlng;
               var marker = new google.maps.Marker({
                   position: myLatlng,
-                  icon: 'vistas/images/icono_corredor.png',
+                  icon: 'vistas/images/icono_parqueadero.png',
                   title: record.id,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      for (var i = 0; i < numeroPlanos; i++) {
+          eliminarComponente("plano");
+      }
+      numeroFotos = 0;
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(18);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsultaMapa").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_piscina y se
+   * realiza la operacion correspondiente.
+   */
+  $("#contenido").on("click", ".ver_piscina", function(){
+      var info =  {};
+      var sede = sedeSeleccionada;
+      var campus = campusSeleccionado;
+      var id = limpiarCadena(codigoSeleccionado);
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = id;
+      var data = consultarInformacionObjeto("parqueadero",info);
+      var archivos = consultarArchivosObjeto("parqueadero",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Piscina</h4>';
+      añadirComponente("tituloModalMapa",componente);
+      componente = '<div class=" div_izquierda" ><b>C&oacute;digo del Piscina<font color=" red" >*</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" id_piscina"  id=" id_piscina"  value=" "  disabled required/><br>'+
+          '<div class=" div_izquierda" ><b>Profundidad de la Piscina:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" alto"  id=" alto"  min="1" class="form-control" value=" "  placeholder=" Ej: 2"  disabled required>'+
+              '<span class="input-group-addon">cm</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda" ><b>Ancho de la Piscina:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<span class="input-group-addon">cm</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda" ><b>Largo de la Piscina:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" largo"  id=" largo"  min="1" class="form-control" value=" "  placeholder=" Ej: 80"  disabled required>'+
+              '<span class="input-group-addon">cm</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda" ><b>Cantidad de Puntos Hidraulicos de la Piscina:</b></div>'+
+          '<input class=" form-control formulario"  type="number" name=" cantidad_puntos_hidraulicos"  id=" cantidad_puntos_hidraulicos"  min="1" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required>';
+      añadirComponente("dataObjeto",componente);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_piscina").val(record.id);
+              $("#alto").val(record.alto);
+              $("#ancho").val(record.ancho);
+              $("#largo").val(record.largo);
+              $("#cantidad_puntos_hidraulicos").val(record.cantidad_punto_hidraulico);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_piscina.png',
+                  title: record.id,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      for (var i = 0; i < numeroPlanos; i++) {
+          eliminarComponente("plano");
+      }
+      numeroFotos = 0;
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(18);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsultaMapa").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_plazoleta y se
+   * realiza la operacion correspondiente.
+   */
+  $("#contenido").on("click", ".ver_plazoleta", function(){
+      var info =  {};
+      var sede = sedeSeleccionada;
+      var campus = campusSeleccionado;
+      var id = limpiarCadena(codigoSeleccionado);
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = id;
+      var data = consultarInformacionObjeto("plazoleta",info);
+      var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
+      var archivos = consultarArchivosObjeto("plazoleta",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Plazoleta</h4>';
+      añadirComponente("tituloModalMapa",componente);
+      componente = '<div class=" div_izquierda" ><b>C&oacute;digo de la Plazoleta<font color=" red" >*</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" id_plazoleta"  id=" id_plazoleta"  value=" "  disabled required/><br>'+
+          '<div class=" div_izquierda" ><b>Nombre de la Plazoleta<font color=" red" >*</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" nombre"  id=" nombre"  maxlength="10" value=" "  placeholder=" Ej: Plazoleta Ingenierías"  disabled required/><br>'+
+          '<div class=" form-group" >'+
+              '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n de la Plazoleta</h5></b></div>'+
+              '<div id=" iluminacion" >'+
+                  '<div class=" div_izquierda" ><b>Tipo de l&aacute;mpara:</b></div>'+
+                  '<select class=" form-control formulario"  name=" tipo_iluminacion"  id=" tipo_iluminacion"  disabled required></select><br>'+
+                  '<div class=" div_izquierda" ><b>Cantidad de l&aacute;mparas del tipo:</b></div>'+
+                  '<input class=" form-control formulario"  type=" number"  min=" 1"  name=" cantidad_iluminacion"  id=" cantidad_iluminacion"  value=" "  placeholder=" Ej: 2"  disabled required/>'+
+              '</div>'+
+              '<div id="botones_anadir_iluminacion" style="display:none">'+
+                  '<br><input type=" submit"  class=" btn btn-primary btn-lg btn-agregar"  name=" añadir_iluminacion"  id=" añadir_iluminacion"  value=" Añadir Tipo Iluminaci&oacute;n"  title=" Añadir Tipo de Iluminaci&oacute;n" />'+
+                  '<input type=" submit"  class=" btn btn-primary btn-lg btn-agregar"  name=" eliminar_iluminacion"  id=" eliminar_iluminacion"  value=" Eliminar Tipo Iluminaci&oacute;n"  title=" Eliminar Tipo de Iluminaci&oacute;n"  disabled/>'+
+              '</div>'+
+          '</div>';
+      añadirComponente("dataObjeto",componente);
+      actualizarSelectMaterial("material_piso",0);
+      actualizarSelectTipoObjeto("tipo_iluminacion",0);
+      actualizarSelectTipoObjeto("tipo_pintura",0);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_plazoleta").val(record.id);
+              $("#nombre").val(record.nombre);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_plazoleta.png',
+                  title: record.id+" - "+record.nombre,
                   id: record.id,
                   id_sede: record.id_sede,
                   id_campus: record.id_campus
@@ -4781,29 +5005,8 @@ $(document).ready(function() {
                   actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
                   $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
                   $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
-
               }
               iluminacionCont++;
-          }
-      });
-      $.each(dataInterruptor, function(index, record) {
-          if($.isNumeric(index)) {
-              if (interruptoresCont == 0) {
-                  $("#tipo_interruptor").val(record.tipo_interruptor);
-                  $("#cantidad_interruptores").val(record.cantidad);
-              }else{
-                  var componente = '<div id="interruptor'+interruptoresCont+'">'
-                  +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
-                  +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
-                  +'</div>';
-                  añadirComponente("interruptor",componente);
-                  actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
-                  $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
-                  $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
-              }
-              interruptoresCont++;
           }
       });
       $("#myCarousel").hide();
@@ -4822,12 +5025,12 @@ $(document).ready(function() {
                   if ((index-1) == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -4836,7 +5039,316 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(18);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsultaMapa").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_sendero y se
+   * realiza la operacion correspondiente.
+   */
+  $("#contenido").on("click", ".ver_sendero", function(){
+      var info =  {};
+      var sede = sedeSeleccionada;
+      var campus = campusSeleccionado;
+      var id = limpiarCadena(codigoSeleccionado);
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = id;
+      var data = consultarInformacionObjeto("sendero",info);
+      var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
+      var archivos = consultarArchivosObjeto("sendero",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n del Sendero Peatonal</h4>';
+      añadirComponente("tituloModalMapa",componente);
+      componente = '<div class=" div_izquierda"><b>C&oacute;digo del Sendero<font color=" red"> *</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" id_sendero"  id=" id_sendero"  value=" "  disabled required/><br>'+
+          '<div class=" div_izquierda"> <b>Longitud del Sendero:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" longitud"  id=" longitud"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+              '<span class="input-group-addon">m</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda"> <b>Ancho del Sendero:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" ancho"  id=" ancho"  min="1" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required>'+
+              '<span class="input-group-addon">m</span>'+
+          '</div><br>'+
+          '<div class=" div_izquierda"> <b>Material del piso:</b></div>'+
+          '<select class=" form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select><br>'+
+          '<div class=" form-group"> '+
+              '<div><b><h5>Informaci&oacute;n de la Iluminaci&oacute;n del Sendero</h5></b></div>'+
+              '<div id=" iluminacion"> '+
+                  '<div class=" div_izquierda"> <b>Tipo de l&aacute;mpara:</b></div>'+
+                  '<select class=" form-control formulario"  name=" tipo_iluminacion"  id=" tipo_iluminacion"  disabled required></select><br>'+
+                  '<div class=" div_izquierda"> <b>Cantidad:</b></div>'+
+                  '<input class=" form-control formulario"  type="number" name=" cantidad_iluminacion"  id=" cantidad_iluminacion"  min=" 1"  maxlength="10" class="form-control" value=" "  placeholder=" Ej: 10"  disabled required><br>'+
+                  '<div class=" div_izquierda"> <b>C&oacute;digo del poste:</b></div>'+
+                  '<input class=" form-control formulario"  type=" number"  min=" 1"  name=" codigo_poste"  id=" codigo_poste"  value=" "  placeholder=" Ej: 10320"  disabled required/><br>'+
+              '</div>'+
+          '</div>'+
+          '<div class=" form-group">'+
+              '<div><b><h5>Informaci&oacute;n de la Cubierta del Sendero</h5></b></div>'+
+              '<div id=" cubierta">'+
+                  '<div class=" div_izquierda"> <b>Ancho de la cubierta:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class=" form-control formulario"  type="number" name=" ancho_cubierta"  id=" ancho_cubierta"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class=" div_izquierda"> <b>Largo de la cubierta:</b></div>'+
+                  '<div class="input-group">'+
+                      '<input class=" form-control formulario"  type="number" name=" largo_cubierta"  id=" largo_cubierta"  min="1" class="form-control" value=" "  placeholder=" Ej: 30"  disabled required>'+
+                      '<span class="input-group-addon">m</span>'+
+                  '</div><br>'+
+                  '<div class=" div_izquierda"> <b>Materia de la cubierta:</b></div>'+
+                  '<select class=" form-control formulario"  name=" material_cubierta"  id=" material_cubierta"  disabled required></select>'+
+              '</div>'+
+          '</div>';
+      añadirComponente("dataObjeto",componente);
+      actualizarSelectMaterial("material_cubierta",0);
+      actualizarSelectTipoObjeto("tipo_iluminacion",0);
+      actualizarSelectMaterial("material_piso",0);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_sendero").val(record.id);
+              $("#longitud").val(record.longitud);
+              $("#ancho").val(record.ancho);
+              $("#material_piso").val(record.material_piso);
+              $("#tipo_iluminacion").val(record.tipo_iluminacion);
+              $("#cantidad_iluminacion").val(record.cantidad);
+              $("#codigo_poste").val(record.codigo_poste);
+              $("#ancho_cubierta").val(record.ancho_cubierta);
+              $("#largo_cubierta").val(record.largo_cubierta);
+              $("#material_cubierta").val(record.material_cubierta);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_sendero.png',
+                  title: record.id,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      for (var i = 0; i < numeroPlanos; i++) {
+          eliminarComponente("plano");
+      }
+      numeroFotos = 0;
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<span>'+record.nombre+'</span>'
+                  +'</a></div>';
+                  numeroPlanos++;
+                  añadirComponente("planos",componente);
+              }
+          }
+      });
+      var componente, componente2;
+      if (numeroFotos == 0) {
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+          componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }else{
+          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+                  +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                  +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                  +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+              +'</div>'
+            +'</div>';
+      }
+      var componentePlano = '<div id="plano" class="div_izquierda">'
+          +'<span>Agregar un plano</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
+          +'<br><br></div>';
+      numeroPlanos++;
+      añadirComponente("planos",componentePlano);
+      numeroFotos++;
+      añadirComponente("indicadores_carrusel",componente);
+      añadirComponente("fotos_carrusel",componente2);
+      $("#myCarousel").show();
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          google.maps.event.addListener(marcadoresModificacion[i], 'click',
+          function () {
+              mapaModificacion.setZoom(18);
+              mapaModificacion.setCenter(this.getPosition());
+          });
+      }
+      $("#divDialogConsultaMapa").modal('show');
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_via y se
+   * realiza la operacion correspondiente.
+   */
+  $("#contenido").on("click", ".ver_via", function(){
+      var info =  {};
+      var sede = sedeSeleccionada;
+      var campus = campusSeleccionado;
+      var id = limpiarCadena(codigoSeleccionado);
+      info['nombre_sede'] = sede;
+      info['nombre_campus'] = campus;
+      info['id'] = id;
+      var data = consultarInformacionObjeto("via",info);
+      var archivos = consultarArchivosObjeto("via",info);
+      console.log(data);
+      console.log(archivos);
+      for (var i = 0; i < marcadoresModificacion.length; i++) {
+          marcadoresModificacion[i].setMap(null);
+      }
+      var componente = '<h4 id="tituloCancha" class="modal-title">Informaci&oacute;n de la Vía</h4>';
+      añadirComponente("tituloModalMapa",componente);
+      componente = '<div class=" div_izquierda" ><b>C&oacute;digo de la V&iacute;a<font color=" red" >*</font>:</b></div>'+
+          '<input class=" form-control formulario"  type=" text"  name=" id_via"  id=" id_via"  maxlength="10" value=" "  placeholder=" Ej: 1"  disabled required/><br>'+
+          '<div class=" div_izquierda" ><b>Tipo de pintura de la demarcaci&oacute;n:</b></div>'+
+          '<select class=" form-control formulario"  name=" tipo_pintura"  id=" tipo_pintura"  disabled required></select><br>'+
+          '<div class=" div_izquierda" ><b>Longitud de la demarcaci&oacute;n:</b></div>'+
+          '<div class="input-group">'+
+              '<input class=" form-control formulario"  type="number" name=" longitud_demarcacion"  id=" longitud_demarcacion"  min="1" class="form-control" value=" "  placeholder=" Ej: 20"  disabled required>'+
+              '<span class="input-group-addon">m</span>'+
+          '</div><br>'+
+          '<div class="div_izquierda" ><b>Material del piso:</b></div>'+
+          '<select class="form-control formulario"  name=" material_piso"  id=" material_piso"  disabled required></select>';
+      añadirComponente("dataObjeto",componente);
+      actualizarSelectMaterial("material_piso",0);
+      actualizarSelectTipoObjeto("tipo_pintura",0);
+      $.each(data, function(index, record) {
+          if($.isNumeric(index)) {
+              $("#nombre_sede").val(record.nombre_sede);
+              $("#nombre_campus").val(record.nombre_campus);
+              $("#id_via").val(record.id);
+              $("#tipo_pintura").val(record.tipo_pintura);
+              $("#longitud_demarcacion").val(record.longitud_demarcacion);
+              $("#material_piso").val(record.material_piso);
+              var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+              coordsMapaModificacion = myLatlng;
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  icon: 'vistas/images/icono_via.png',
+                  title: record.id,
+                  id: record.id,
+                  id_sede: record.id_sede,
+                  id_campus: record.id_campus
+              });
+              marcadoresModificacion.push(marker);
+              marker.setMap(mapaModificacion);
+          }
+      });
+      $("#myCarousel").hide();
+      for (var i = 0; i < numeroFotos; i++) {
+          eliminarComponente("slide_carrusel");
+          eliminarComponente("item_carrusel");
+      }
+      for (var i = 0; i < numeroPlanos; i++) {
+          eliminarComponente("plano");
+      }
+      numeroFotos = 0;
+      numeroPlanos = 0;
+      $.each(archivos, function(index, record) {
+          if($.isNumeric(index)) {
+              if (record.tipo == 'foto') {
+                  if ((index-1) == 0) {
+                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'</div>';
+                 }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                 }
+                  añadirComponente("indicadores_carrusel",componente);
+                  añadirComponente("fotos_carrusel",componente2);
+                  numeroFotos++;
+                  $("#myCarousel").show();
+              }else{
+                  var componente = '<div id="plano" class="div_izquierda">'
+                  +'<a target="_blank" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
