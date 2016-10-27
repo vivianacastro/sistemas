@@ -319,6 +319,11 @@ html, body {
     color: #D51B23;
 }
 
+.resaltarInput{
+    border: #D51B23 1px solid;
+    border-radius: 5px;
+}
+
 .social{
 		padding: 0% 0% 0%;
 }
@@ -405,6 +410,10 @@ html, body {
     width: 60%;
 }
 
+#error_correo, #error_login{
+    color: #D51B23;
+}
+
 
 #fileInputOculto{
     width: 100%;
@@ -416,6 +425,10 @@ html, body {
     background-color: transparent;
     text-align: center;
     padding: 33% 0% 0%;
+}
+
+#iconoErrorCorreo, #iconoErrorLogin{
+    width: 35%;
 }
 
 #icono_foto{
@@ -495,6 +508,10 @@ html, body {
         text-align: center;
         padding: 1% 1% 1%;
         font-size: smalller;
+    }
+
+    .div_carousel{
+        display: none;
     }
 
     .img_boton{

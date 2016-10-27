@@ -7,10 +7,16 @@
         <div class='div_izquierda'><b>Nombre<font color='red'>*</font>:</b></div>
         <input class='form-control formulario' type='text' name='nombre_usuario' id='nombre_usuario' value='' placeholder='Ej: Pepito Pérez' required/><br>
         <div class='div_izquierda'><b>Usuario<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario-minusculas' type='text' name='login_usuario' id='login_usuario' value='' placeholder='Ej: pepito.perez' required/>
+        <div id="divLogin" class="">
+          <input class='form-control formulario-minusculas' type='text' name='login_usuario' id='login_usuario' value='' placeholder='Ej: pepito.perez' required/>
+          <span id="iconoErrorLogin" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
         <div class='div_error' id="error_login" style="display:none"><b>El login ya se encuentra registrado</b></div><br>
         <div class='div_izquierda'><b>Correo<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario-minusculas' type='email' name='correo_usuario' id='correo_usuario' value='' placeholder='Ej: pepito.perez@correounivalle.edu.co' required/>
+        <div id="divCorreo" class="">
+            <input class='form-control formulario-minusculas' type='email' name='correo_usuario' id='correo_usuario' value='' placeholder='Ej: pepito.perez@correounivalle.edu.co' required/>
+            <span id="iconoErrorCorreo" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
         <div class='div_error' id="error_correo" style="display:none"><b>El correo ya se encuentra registrado</b></div><br>
         <div class='div_izquierda'><b>Télefono:</b></div>
         <input class='form-control formulario' type='number' name='telefono_usuario' id='telefono_usuario' value='' placeholder='Ej: 3212100' required/><br>

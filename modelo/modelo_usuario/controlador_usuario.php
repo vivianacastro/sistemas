@@ -296,11 +296,12 @@ class controlador_usuario {
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            if(strcmp(htmlspecialchars(trim($info['correo'])),$_SESSION["correo"]) != 0){
+            /*if(strcmp(htmlspecialchars(trim($info['correo'])),$_SESSION["correo"]) != 0){
                 $verificar = $m->verificarCorreo($info['correo']);
             }else{
                 $verificar = true;
-            }
+            }*/
+            $verificar = $m->verificarCorreo($info['correo']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['verificar'] = $verificar;

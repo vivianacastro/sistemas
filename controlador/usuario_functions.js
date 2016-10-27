@@ -335,7 +335,7 @@ $(document).ready(function() {
             var confirmacion = window.confirm("¿Reestablecer la contraseña del usuario asociado a éste correo?");
             if (confirmacion) {
                 var correo = $("#correo").val();
-				if(correo.length == 0){
+								if(correo.length == 0){
                 	alert('ERROR. Ingrese el correo de usuario');
                 	$("#correo").focus();
                 }else if(!validarCorreo(correo)){
@@ -371,12 +371,12 @@ $(document).ready(function() {
     	try{
             var confirmacion = window.confirm("¿Desea modificar la información del usuario?");
             if (confirmacion) {
-            	var login = $("#login_usuario").val();
+            		var login = $("#login_usuario").val();
                 var nombre = $("#nombre_usuario").val();
                 var correo = $("#correo_usuario").val();
                 var telefono = $("#telefono_usuario").val();
                 var extension = $("#extension_usuario").val();
-				if (nombre.length == 0) {
+								if (nombre.length == 0) {
                 	alert('ERROR. Ingrese un nombre de usuario');
                 	$("#nombre_usuario").focus();
                 }else if(correo.length == 0){
@@ -423,40 +423,43 @@ $(document).ready(function() {
     	try{
             var confirmacion = window.confirm("¿Desea modificar la contraseña?");
             if (confirmacion) {
-            	var antiguaContrasenia = $("#contrasenia_actual").val();
-            	var nuevaContrasenia = $("#contrasenia_nueva").val();
-            	var nuevaContraseniaRep = $("#contrasenia_nueva_rep").val();
-				if(nuevaContrasenia.length == 0){
-                	alert('ERROR. Ingrese una contraseña para el usuario');
-                	$("#contrasenia_nueva").focus();
+	          		var antiguaContrasenia = $("#contrasenia_actual").val();
+	            	var nuevaContrasenia = $("#contrasenia_nueva").val();
+	            	var nuevaContraseniaRep = $("#contrasenia_nueva_rep").val();
+								var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
+								else if(contrasenia.length < 8){
+                	alert('ERROR. La contraseña mínimo debe tener 8 caracteres');
+                	$("#contrasenia").focus();
+                }else if(!pattern.test(contrasenia)){
+                	alert('ERROR. La contraseña debe contener por lo menos una letra y un número');
+									console.log(contrasenia);
+                	$("#contrasenia").focus();
                 }else if(nuevaContrasenia != nuevaContraseniaRep){
-                	alert('ERROR. Las contraseñas no coinciden');
-                	$("#contrasenia_rep").focus();
+                		alert('ERROR. Las contraseñas no coinciden');
+                		$("#contrasenia_rep").focus();
                 }else if(antiguaContrasenia == nuevaContrasenia){
-                	alert('ERROR. La nueva contraseña es igual a la anterior');
-                	$("#contrasenia_nueva").focus();
+                		alert('ERROR. La nueva contraseña es igual a la anterior');
+                		$("#contrasenia_nueva").focus();
                 }else{
-                	var informacion = {};
-                	informacion['contrasenia_actual'] = antiguaContrasenia;
-                	informacion['contrasenia_nueva'] = nuevaContrasenia;
-                	var respuesta = modificarContrasenia(informacion);
-                	if (respuesta.verificar) {
-                		alert(respuesta.mensaje);
-	                	$("#login_usuario").val("");
-	                	$("#nombre_usuario").val("");
-	                	$("#correo_usuario").val("");
-	                	$("#telefono_usuario").val("");
-	                	$("#extension_usuario").val("");
-	                	window.location = "http://192.168.46.53/sistemas/index.php?action=informacion_usuario";
-                	}else{
-                		alert(respuesta.mensaje);
-                		$("#contrasenia_actual").focus();
-                	}
-
+	                	var informacion = {};
+	                	informacion['contrasenia_actual'] = antiguaContrasenia;
+	                	informacion['contrasenia_nueva'] = nuevaContrasenia;
+	                	var respuesta = modificarContrasenia(informacion);
+	                	if (respuesta.verificar) {
+	                		alert(respuesta.mensaje);
+		                	$("#login_usuario").val("");
+		                	$("#nombre_usuario").val("");
+		                	$("#correo_usuario").val("");
+		                	$("#telefono_usuario").val("");
+		                	$("#extension_usuario").val("");
+		                	window.location = "http://192.168.46.53/sistemas/index.php?action=informacion_usuario";
+	                	}else{
+	                		alert(respuesta.mensaje);
+	                		$("#contrasenia_actual").focus();
+	                	}
                 }
             }
-        }
-        catch(ex){
+        }catch(ex){
             console.log(ex);
             alert("Ocurrió un error, por favor inténtelo nuevamente");
         }
@@ -471,11 +474,17 @@ $(document).ready(function() {
         var data = verificarUsuario(login);
         if(!data.verificar){
         	$("#error_login").show();
-        	$("#login_usuario").addClass("resaltarInput");
+					$("#divLogin").addClass("has-error");
+					$("#divLogin").addClass("has-feedback");
+					$("#iconoErrorLogin").show();
+        	//$("#login_usuario").addClass("resaltarInput");
         	$("#guardar_usuario").attr('disabled','disabled');
         }else{
         	$("#error_login").hide();
-        	$("#login_usuario").removeClass("resaltarInput");
+					$("#divLogin").removeClass("has-error");
+					$("#divLogin").removeClass("has-feedback");
+					$("#iconoErrorLogin").hide();
+        	//$("#login_usuario").removeClass("resaltarInput");
         	$('#guardar_usuario').removeAttr("disabled");
         }
     });
@@ -489,12 +498,18 @@ $(document).ready(function() {
         var data = verificarCorreo(correo);
         if(!data.verificar){
         	$("#error_correo").show();
-        	$("#correo_usuario").addClass("resaltarInput");
+					$("#divCorreo").addClass("has-error");
+					$("#divCorreo").addClass("has-feedback");
+					$("#iconoErrorCorreo").show();
+        	//$("#correo_usuario").addClass("resaltarInput");
         	$("#guardar_usuario").attr('disabled','disabled');
         	$('#guardar_informacion').attr('disabled','disabled');
         }else{
         	$("#error_correo").hide();
-        	$("#correo_usuario").removeClass("resaltarInput");
+					$("#divCorreo").removeClass("has-error");
+					$("#divCorreo").removeClass("has-feedback");
+					$("#iconoErrorCorreo").hide();
+        	//$("#correo_usuario").removeClass("resaltarInput");
         	$('#guardar_usuario').removeAttr("disabled");
         	$('#guardar_informacion').removeAttr("disabled");
         }
