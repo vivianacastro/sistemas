@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
+  var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
   var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
   var campusSelect = null;
   var marcadores = [], marcadoresModificacion = [];
@@ -642,6 +642,7 @@ $(document).ready(function() {
               function () {
                   sedeSeleccionada = this.id_sede;
                   campusSeleccionado = this.id;
+                  objetoSeleccionado = "campus",
                   mapaConsulta.setZoom(16);
                   mapaConsulta.setCenter(this.getPosition());
               });
@@ -1528,13 +1529,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -1648,13 +1649,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -1821,13 +1822,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -1941,13 +1942,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2087,13 +2088,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2202,13 +2203,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2322,13 +2323,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2461,13 +2462,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2586,13 +2587,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2705,13 +2706,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -2828,13 +2829,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -3151,230 +3152,406 @@ $(document).ready(function() {
               }
           }
       });
-      /*if (usoEspacio == '1') { //Salón
-          data = consultarInformacionObjeto("salon",info);
-          var componente = '<b><h5>Información del Salón</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>Capacidad del salón<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿El salón tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
-          $.each(data, function(index, record) {
-              if($.isNumeric(index)) {
-                  $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
-                  $("#capacidad").val(record.capacidad);
-                  $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
-              }
-          });
+      var nombreUsoEspacio;
+      if (usoEspacio == '1') { //Salón
+          nombreUsoEspacio ='salon';
       }else if(usoEspacio == '2'){ //Auditorio
-          data = consultarInformacionObjeto("auditorio",info);
-          var componente = '<b><h5>Información del Auditorio</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>Capacidad del auditorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿El auditorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='auditorio';
       }else if(usoEspacio == '3'){ //Laboratorio
-          data = consultarInformacionObjeto("laboratorio",info);
-          var componente = '<b><h5>Información del Laboratorio</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>Capacidad del laboratorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿El laboratorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-              +'<div id="punto_sanitario">'
-              +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-              +'</div>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='laboratorio';
       }else if(usoEspacio == '4'){ //Sala de Cómputo
-          data = consultarInformacionObjeto("sala_computo",info);
-          var componente = '<b><h5>Información de la Sala de Cómputo</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='sala_computo';
       }else if(usoEspacio == '5'){ //Oficina
-          data = consultarInformacionObjeto("oficina",info);
-          var componente = '<b><h5>Información de la Oficina</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿La oficina tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='oficina';
       }else if(usoEspacio == '6'){ //Baño
-          data = consultarInformacionObjeto("bano",info);
-          var componente = '<b><h5>Información del Baño</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          var componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
-              +'<div id="lavamanos">'
-              +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
-              +'</div>'
-              +'</div>'
-              +'<div id="informacion2">'
-              +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" required></select><br>'
-              +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" required></select><br>'
-              +'<div class="div_izquierda"><b>¿El baño tiene ducha?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="ducha" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="ducha" value="false">No</label>'
-              +'<div class="div_izquierda"><b>¿El baño tiene lavatraperos?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false">No</label>'
-              +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
-              +'<div id="orinal">'
-              +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
-              +'</div>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
-          actualizarSelectTipoObjeto("tipo_inodoro",0);
-          actualizarSelectTipoObjeto("tipo_orinal",0);
-          actualizarSelectTipoObjeto("tipo_lavamanos",0);
-          actualizarSelectTipoObjeto("tipo_divisiones",0);
-          actualizarSelectMaterial("material_divisiones",0);
+          nombreUsoEspacio ='bano';
       }else if(usoEspacio == '7'){ //Cuarto Técnico
-          data = consultarInformacionObjeto("cuarto_tecnico",info);
-          var componente = '<b><h5>Información del Cuarto Técnico</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto de videobeam?<font color="red">*</font>:</b></div>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='cuarto_tecnico';
       }else if(usoEspacio == '8'){ //Bodega/Almacen
-          data = consultarInformacionObjeto("bodega",info);
-          var componente = '<b><h5>Información de la Bodega/Almacén</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          var componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='bodega';
       }else if(usoEspacio == '10'){ //Cuarto de Plantas
-          data = consultarInformacionObjeto("cuarto_plantas",info);
-          var componente = '<b><h5>Información del Cuarto de Plantas</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='cuarto_plantas';
       }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
-          data = consultarInformacionObjeto("cuarto_aires_acondicionados",info);
-          var componente = '<b><h5>Información del Cuarto de Aires Acondicionados</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='cuarto_aire_acondicionado';
       }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
-          data = consultarInformacionObjeto("area_deportiva_cerrada",info);
-          var componente = '<b><h5>Información del Área Deportiva Cerrada</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área deportiva cerrada<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='area_deportiva_cerrada';
       }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
-          data = consultarInformacionObjeto("centro_datos",info);
-          var componente = '<b><h5>Información del Centro de Datos</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
+          nombreUsoEspacio ='centro_datos';
       }else if(usoEspacio == '17'){ //Cuarto de Bombas
-          data = consultarInformacionObjeto("cuarto_bombas",info);
-          var componente = '<b><h5>Información del Cuarto de Bombas</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-              +'<div id="punto_sanitario">'
-              +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-              +'</div>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
-          actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+          nombreUsoEspacio ='cuarto_bombas';
       }else if(usoEspacio == '19'){ //Cocineta
-          data = consultarInformacionObjeto("cocineta",info);
-          var componente = '<b><h5>Información de la Cocineta</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-              +'<div id="punto_sanitario">'
-              +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta<font color="red">*</font>:</b></div>'
-              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-              +'</div>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
-          actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+          nombreUsoEspacio ='cocineta';
       }else if(usoEspacio == '20'){ //Sala de Estudio
-          data = consultarInformacionObjeto("sala_estudio",info);
-          var componente = '<b><h5>Información de la Sala de Estudio</h5></b>';
-          añadirComponente("tituloUsoEspacio",componente);
-          componente = '<div id="informacion">'
-              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
-              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-              +'</div>';
-          añadirComponente("informacionEspacio",componente);
-      }*/
+          nombreUsoEspacio ='sala_estudio';
+      }else {
+          nombreUsoEspacio = "";
+      }
+      if (usoEspacio != "") {
+          info['uso_espacio'] = nombreUsoEspacio;
+          if (usoEspacio == '1') { //Salón
+              data = consultarInformacionObjeto("salon",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Salón</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Capacidad del salón<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿El salón tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("#capacidad").val(record.capacidad);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                  }
+              });
+          }else if(usoEspacio == '2'){ //Auditorio
+              data = consultarInformacionObjeto("auditorio",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Auditorio</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Capacidad del auditorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿El auditorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("#capacidad").val(record.capacidad);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                  }
+              });
+          }else if(usoEspacio == '3'){ //Laboratorio
+              data = consultarInformacionObjeto("laboratorio",info);
+              dataSanitario = consultarInformacionObjeto("punto_sanitario",info);
+              console.log(data);
+              console.log(dataSanitario);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Laboratorio</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Capacidad del laboratorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿El laboratorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
+                  +'<div id="punto_sanitario">'
+                  +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
+                  +'</div>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("#capacidad").val(record.capacidad);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                      $("#cantidad_puntos_hidraulicos").val(record.cantidad_puntos_hidraulicos);
+                  }
+              });
+              $.each(dataSanitario, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#tipo_punto_sanitario").val(record.tipo_punto_sanitario);
+                      $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
+                  }
+              });
+          }else if(usoEspacio == '4'){ //Sala de Cómputo
+              data = consultarInformacionObjeto("sala_computo",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Cómputo</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("#capacidad").val(record.capacidad);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                  }
+              });
+          }else if(usoEspacio == '5'){ //Oficina
+              data = consultarInformacionObjeto("oficina",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información de la Oficina</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿La oficina tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                  }
+              });
+          }else if(usoEspacio == '6'){ //Baño
+              data = consultarInformacionObjeto("bano",info);
+              dataLavamanos = consultarInformacionObjeto("lavamanos",info);
+              dataOrinal = consultarInformacionObjeto("orinal",info);
+              console.log(data);
+              console.log(dataLavamanos);
+              console.log(dataOrinal);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Baño</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" disabled required/><br>'
+                  +'<div id="lavamanos">'
+                  +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" disabled required/><br>'
+                  +'</div>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              componente = '<br><div id="informacion2">'
+                  +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>¿El baño tiene ducha?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="ducha" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="ducha" value="false" disabled>No</label>'
+                  +'<div class="div_izquierda"><b>¿El baño tiene lavatraperos?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false" disabled>No</label>'
+                  +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" disabled required/><br>'
+                  +'<div id="orinal">'
+                  +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales" value="" disabled required/><br>'
+                  +'</div>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio2",componente);
+              actualizarSelectTipoObjeto("tipo_inodoro",0);
+              actualizarSelectTipoObjeto("tipo_orinal",0);
+              actualizarSelectTipoObjeto("tipo_lavamanos",0);
+              actualizarSelectTipoObjeto("tipo_divisiones",0);
+              actualizarSelectMaterial("material_divisiones",0);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#tipo_divisiones").val(record.tipo_divisiones);
+                      $("#material_divisiones").val(record.material_divisiones);
+                      $("input[name=ducha][value="+record.ducha+"]").prop('checked', true);
+                      $("input[name=lavatraperos][value="+record.lavatraperos+"]").prop('checked', true);
+                      $("#cantidad_sifones").val(record.cantidad_sifones);
+                  }
+              });
+              $.each(dataLavamanos, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#tipo_lavamanos").val(record.tipo_lavamanos);
+                      $("#cantidad_lavamanos").val(record.cantidad_lavamanos);
+                  }
+              });
+              $.each(dataOrinal, function(index, record) {
+                  if($.isNumeric(index)) {
+                    $("#tipo_orinal").val(record.tipo_orinal);
+                    $("#cantidad_orinales").val(record.cantidad_orinales);
+                  }
+              });
+          }else if(usoEspacio == '7'){ //Cuarto Técnico
+              data = consultarInformacionObjeto("cuarto_tecnico",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto Técnico</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
+                  +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                      $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+                  }
+              });
+          }else if(usoEspacio == '8'){ //Bodega/Almacen
+              data = consultarInformacionObjeto("bodega",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información de la Bodega/Almacén</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              var componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }else if(usoEspacio == '10'){ //Cuarto de Plantas
+              data = consultarInformacionObjeto("cuarto_plantas",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Plantas</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+              data = consultarInformacionObjeto("cuarto_aire_acondicionado",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Aires Acondicionados</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+              data = consultarInformacionObjeto("area_deportiva_cerrada",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Área Deportiva Cerrada</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área deportiva cerrada<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+              data = consultarInformacionObjeto("centro_datos",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Centro de Datos</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }else if(usoEspacio == '17'){ //Cuarto de Bombas
+              data = consultarInformacionObjeto("cuarto_bombas",info);
+              dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",info);
+              console.log(data);
+              console.log(dataPuntoSanitario);
+              var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Bombas</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
+                  +'<div id="punto_sanitario">'
+                  +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas<font color="red">*</font>:</b></div>'
+                  +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" disabled required></select><br>'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
+                  +'</div>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_hidraulicos").val(record.cantidad_puntos_hidraulicos);
+                  }
+              });
+              $.each(dataPuntoSanitario, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#tipo_punto_sanitario").val(record.tipo_punto_sanitario);
+                      $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
+                  }
+              });
+          }else if(usoEspacio == '19'){ //Cocineta
+                data = consultarInformacionObjeto("cocineta",info);
+                dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",info);
+                console.log(data);
+                console.log(dataPuntoSanitario);
+                var componente = '<div id="tituloInfo"><b><h5>Información de la Cocineta</h5></b></div>';
+                añadirComponente("tituloUsoEspacio",componente);
+                componente = '<div id="informacion">'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
+                    +'<div id="punto_sanitario">'
+                    +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta<font color="red">*</font>:</b></div>'
+                    +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" disabled required></select><br>'
+                    +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta<font color="red">*</font>:</b></div>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
+                    +'</div>'
+                    +'</div>';
+                añadirComponente("informacionUsoEspacio",componente);
+                actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+                $.each(data, function(index, record) {
+                    if($.isNumeric(index)) {
+                        $("#cantidad_puntos_hidraulicos").val(record.cantidad_puntos_hidraulicos);
+                    }
+                });
+                $.each(dataPuntoSanitario, function(index, record) {
+                    if($.isNumeric(index)) {
+                        $("#tipo_punto_sanitario").val(record.tipo_punto_sanitario);
+                        $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
+                    }
+                });
+            }else if(usoEspacio == '20'){ //Sala de Estudio
+              data = consultarInformacionObjeto("sala_estudio",info);
+              console.log(data);
+              var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Estudio</h5></b></div>';
+              añadirComponente("tituloUsoEspacio",componente);
+              componente = '<div id="informacion">'
+                  +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
+                  +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
+                  +'</div>';
+              añadirComponente("informacionUsoEspacio",componente);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  }
+              });
+          }
+      }
       $("#myCarousel").hide();
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
@@ -3388,24 +3565,24 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
-                       +'</div>';
-                 }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                  if (numeroFotos == 0) {
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                      +'<img class="carouselImg" src="archivos/images/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                      +'</div>';
+                  }else{
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/espacio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
-                 }
+                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -3507,6 +3684,16 @@ $(document).ready(function() {
               mapaModificacion.setCenter(coordsMapaModificacion);
           }
       }
+      eliminarComponente("slide_carrusel_eliminar");
+      eliminarComponente("item_carrusel_eliminar");
+  });
+
+  /**
+   * Se captura el evento cuando se abre el modal divDialogConsulta.
+   */
+  $("#divDialogConsultaMapa").on("shown.bs.modal", function () {
+      eliminarComponente("slide_carrusel_eliminar");
+      eliminarComponente("item_carrusel_eliminar");
   });
 
   /**
@@ -3642,8 +3829,9 @@ $(document).ready(function() {
       $("#botones_anadir_puerta").hide();
       $("#botones_anadir_tomacorriente").hide();
       $("#botones_anadir_ventana").hide();
-      eliminarComponente("tituloUsoEspacio");
-      eliminarComponente("informacionEspacio");
+      eliminarComponente("tituloInfo");
+      eliminarComponente("informacion");
+      eliminarComponente("informacion2");
       while (iluminacionCont > 0) {
           eliminarComponente("iluminacion"+iluminacionCont);
           iluminacionCont--;
@@ -3711,9 +3899,17 @@ $(document).ready(function() {
       var aux = numeroFotos + fotos.files.length;
       var aux2 = numeroPlanos + planos.files.length;
 			if (aux > numeroFotos) {
-					$("#guardar_archivos").show();
+					if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+              $("#guardar_archivos").removeAttr('disabled');
+          }else{
+              $("#guardar_archivos").show();
+          }
 			}else if(aux2 == numeroPlanos){
-					$("#guardar_archivos").hide();
+          if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+              $("#guardar_archivos").attr('disabled',true);
+          }else{
+              $("#guardar_archivos").hide();
+          }
 			}
   });
 
@@ -3957,7 +4153,23 @@ $(document).ready(function() {
       $("#tipo_interruptor").removeAttr("disabled");
       $("#cantidad_interruptores").removeAttr("disabled");
       $("input[name=tiene_espacio_padre]").attr('disabled', false);
-      $("#espacio_padre").removeAttr("disabled");
+      $("#cantidad_puntos_red").removeAttr("disabled");
+      $("#capacidad").removeAttr("disabled");
+      $("input[name=punto_videobeam]").attr('disabled', false);
+      $("#cantidad_puntos_hidraulicos").removeAttr("disabled");
+      $("#tipo_punto_sanitario").removeAttr("disabled");
+      $("#cantidad_puntos_sanitarios").removeAttr("disabled");
+      $("#tipo_inodoro").removeAttr("disabled");
+      $("#cantidad_inodoro").removeAttr("disabled");
+      $("#ducha").removeAttr("disabled");
+      $("#lavatraperos").removeAttr("disabled");
+      $("#cantidad_sifones").removeAttr("disabled");
+      $("#tipo_divisiones").removeAttr("disabled");
+      $("#material_divisiones").removeAttr("disabled");
+      $("#tipo_lavamanos").removeAttr("disabled");
+      $("#cantidad_lavamanos").removeAttr("disabled");
+      $("#tipo_orinal").removeAttr("disabled");
+      $("#cantidad_orinales").removeAttr("disabled");
       for (var i = 1; i < iluminacionCont; i++) {
           $("#tipo_iluminacion"+i).removeAttr("disabled");
           $("#cantidad_iluminacion"+i).removeAttr("disabled");
@@ -4064,6 +4276,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_edificio.png',
+                      objeto: "edificio",
                       title: "Edificio: " + record.id + "-" + record.nombre_edificio,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4113,6 +4326,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_cancha.png',
+                      objeto: "cancha",
                       title: "Cancha: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4159,6 +4373,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_corredor.png',
+                      objeto: "corredor",
                       title: "Corredor: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4205,6 +4420,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_parqueadero.png',
+                      objeto: "parqueadero",
                       title: "Parqueadero: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4251,6 +4467,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_piscina.png',
+                      objeto: "piscina",
                       title: "Piscina: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4297,6 +4514,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_plazoleta.png',
+                      objeto: "plazoleta",
                       title: "Plazoleta: " + record.id + "-" + record.nombre,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4343,6 +4561,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_sendero.png',
+                      objeto: "sendero",
                       title: "Sendero: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4389,6 +4608,7 @@ $(document).ready(function() {
                   var marker = new google.maps.Marker({
                       position: myLatlng,
                       icon: 'vistas/images/icono_via.png',
+                      objeto: "via",
                       title: "Vía: " + record.id,
                       id: record.id,
                       id_campus: record.id_campus,
@@ -4441,6 +4661,7 @@ $(document).ready(function() {
                   sedeSeleccionada = this.id_sede;
                   campusSeleccionado = this.id_campus;
                   codigoSeleccionado = this.id;
+                  objetoSeleccionado = this.objeto;
               });
           }
       }
@@ -4518,13 +4739,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -4780,13 +5001,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -4935,13 +5156,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -5079,13 +5300,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -5243,13 +5464,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -5418,13 +5639,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -5555,13 +5776,13 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
@@ -5664,7 +5885,7 @@ $(document).ready(function() {
         '<div class="input-group">'+
            '<input class="form-control formulario" type="number" min="1" name="alto_fachada" id="alto_fachada" value="" placeholder="Ej: 4" disabled required/>'+
             '<span class="input-group-addon">m</span>'+
-        '</div>'+
+        '</div><br>'+
         '<div class="div_izquierda"><b>Material de la fachada (m):</b></div>'+
         '<select class="form-control formulario" name="material_fachada" id="material_fachada" disabled required></select>'+
       '</div>';
@@ -5709,15 +5930,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
-                  if ((index-1) == 0) {
+                  if (numeroFotos == 0) {
                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                      var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                       +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                       +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+(index-1)+'"></li>'
+                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                       var componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
@@ -5726,7 +5947,7 @@ $(document).ready(function() {
                   $("#myCarousel").show();
               }else{
                   var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                  +'<a target="_blank" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                   +'<span>'+record.nombre+'</span>'
                   +'</a></div>';
                   numeroPlanos++;
@@ -5873,9 +6094,39 @@ $(document).ready(function() {
                   tipoObjeto = "espacio";
                   informacion["nombre_sede"] = $("#sede_search").val();
                   informacion["nombre_campus"] = $("#campus_search").val();
-                  informacion["nombre_edificio"] = $("#edificio_search").val();
+                  informacion["id_edificio"] = $("#edificio_search").val();
                   informacion["piso"] = $("#pisos_search").val();
                   informacion["id_espacio"] = $("#espacio_search").val();
+              }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+                  tipoObjeto = objetoSeleccionado;
+                  console.log(tipoObjeto);
+                  informacion["nombre_sede"] = sedeSeleccionada;
+                  informacion["nombre_campus"] = campusSeleccionado;
+                  if (tipoObjeto != "campus") {
+                      if (tipoObjeto != "campus") {
+                          if (tipoObjeto == "cancha") {
+                              informacion["id_cancha"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "corredor") {
+                              informacion["id_corredor"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "cubierta") {
+                              informacion["id_cubierta"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "edificio") {
+                              informacion["id_edificio"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "gradas") {
+                              informacion["id_gradas"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "parqueadero") {
+                              informacion["id_parqueadero"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "piscina") {
+                              informacion["id_piscina"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "plazoleta") {
+                              informacion["id_plazoleta"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "sendero") {
+                              informacion["id_sendero"] = limpiarCadena(codigoSeleccionado);
+                          }else if (tipoObjeto == "via") {
+                              informacion["id_via"] = limpiarCadena(codigoSeleccionado);
+                          }
+                      }
+                  }
               }
               arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
               arregloPlanos.append(tipoObjeto,JSON.stringify(informacion));
@@ -5885,16 +6136,6 @@ $(document).ready(function() {
               console.log(resultadoPlanos);
               console.log(resultadoFotos);
               var mensaje = "";
-              if (resultadoPlanos.length > 0) {
-                  for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                      if (!resultadoPlanos.verificar[i]) {
-                          mensaje += resultadoPlanos.mensaje[i];
-                      }
-                      if (i<resultadoPlanos.verificar.length-2) {
-                          mensaje += "\n";
-                      }
-                  }
-              }
               if (resultadoFotos.length > 0) {
                   for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                       if (!resultadoFotos.verificar[i]) {
@@ -5905,6 +6146,17 @@ $(document).ready(function() {
                       }
                   }
               }
+              if (resultadoPlanos.length > 0) {
+                  for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                      if (!resultadoPlanos.verificar[i]) {
+                          mensaje += resultadoPlanos.mensaje[i];
+                      }
+                      if (i<resultadoPlanos.verificar.length-2) {
+                          mensaje += "\n";
+                      }
+                  }
+              }
+              console.log(mensaje);
               if (mensaje.substring(0,0) != "") {
                   alert(mensaje);
               }else{
@@ -5914,6 +6166,7 @@ $(document).ready(function() {
                       alert("El archivo se ha guardado correctamente");
                   }
                   $("#divDialogConsulta").modal('hide');
+                  $("#divDialogConsultaMapa").modal('hide');
                   planos.value = "";
                   fotos.value = "";
               }

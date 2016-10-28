@@ -1174,7 +1174,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
-            $infoSendero = json_decode($_POST['corredor'], true);
+            $infoSendero = json_decode($_POST['sendero'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
                 $verificar = $m->guardarFotoSendero($infoSendero['nombre_sede'],$infoSendero['nombre_campus'],$infoSendero['id_sendero'],$file);
@@ -1222,7 +1222,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
-            $infoVia = json_decode($_POST['corredor'], true);
+            $infoVia = json_decode($_POST['via'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
                 $verificar = $m->guardarFotoVia($infoVia['nombre_sede'],$infoVia['nombre_campus'],$infoVia['id_via'],$file);
@@ -1249,7 +1249,7 @@ class controlador_creacion
             $infoEspacio = json_decode($_POST['espacio'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarPlanoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$infoEspacio['piso'],$infoEspacio['id_espacio'],$file);
+                $verificar = $m->guardarPlanoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$infoEspacio['id_espacio'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['sql'] = $GLOBALS['sql'];
                 $result['verificar'][$i] = $verificar;
@@ -1273,7 +1273,7 @@ class controlador_creacion
             $infoEspacio = json_decode($_POST['espacio'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['id_edificio'],$infoEspacio['piso'],$infoEspacio['id_espacio'],$file);
+                $verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['id_edificio'],$infoEspacio['id_espacio'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['sql'] = $GLOBALS['sql'];
                 $result['verificar'][$i] = $verificar;

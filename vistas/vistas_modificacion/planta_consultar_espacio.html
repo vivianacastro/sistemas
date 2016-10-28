@@ -208,16 +208,17 @@
                             <div id="tituloUsoEspacio"></div>
                             <div id='informacionUsoEspacio'></div>
                             <div id='botones_lavamanos' style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_lavamanos' id='añadir_lavamanos' value='Añadir Tipo' title='Añadir Tipo Lavamanos'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_lavamanos' id='eliminar_lavamanos' value='Eliminar Tipo' title='Eliminar Tipo Lavamanos' disabled/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_lavamanos' id='añadir_lavamanos' value='Añadir Tipo Lavamanos' title='Añadir Tipo Lavamanos'/>&nbsp;
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_lavamanos' id='eliminar_lavamanos' value='Eliminar Tipo Lavamanos' title='Eliminar Tipo Lavamanos' disabled/>
                             </div>
+                            <div id='informacionUsoEspacio2'></div>
                             <div id='botones_punto_sanitario' style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_punto_sanitario' id='añadir_punto_sanitario' value='Añadir Tipo' title='Añadir Tipo Punto Sanitario'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_punto_sanitario' id='eliminar_punto_sanitario' value='Eliminar Tipo' title='Eliminar Tipo Punto Sanitario' disabled/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_punto_sanitario' id='añadir_punto_sanitario' value='Añadir Tipo Punto Sanitario' title='Añadir Tipo Punto Sanitario'/>&nbsp;
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_punto_sanitario' id='eliminar_punto_sanitario' value='Eliminar Tipo Punto Sanitario' title='Eliminar Tipo Punto Sanitario' disabled/>
                             </div>
                             <div id='botones_orinal'  style='display:none'>
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_orinal' id='añadir_orinal' value='Añadir Tipo' title='Añadir Tipo Orinal'/>&nbsp;
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_orinal' id='eliminar_orinal' value='Eliminar Tipo' title='Eliminar Tipo Orinal' disabled/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='añadir_orinal' id='añadir_orinal' value='Añadir Tipo Orinal' title='Añadir Tipo Orinal'/>&nbsp;
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar-modal' name='eliminar_orinal' id='eliminar_orinal' value='Eliminar Tipo Orinal' title='Eliminar Tipo Orinal' disabled/>
                             </div>
                         </div>
                         <div class='div_izquierda'><b>Planos Espacio:</b></div>
@@ -228,9 +229,13 @@
                               <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators" id="indicadores_carrusel">
+                                    <li id="slide_carrusel_eliminar" data-target="#myCarousel" data-slide-to="0" class="active"></li>
                                 </ol>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                    <div id="item_carrusel_eliminar" class="item active carouselImg">
+                                        <img class="carouselImg" src="archivos/images/index/admin.jpg"/>
+                                    </div>
                                 </div>
                                 <!-- Left and right controls -->
                                 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -243,7 +248,7 @@
                                 </a>
                               </div>
                           </div>
-                        </div><br>
+                        </div>
                     </div>
                 </div>
                 <div class='form_button modal-footer'>

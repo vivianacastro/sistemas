@@ -3295,7 +3295,7 @@ $(document).ready(function() {
                                     +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
                                     +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
+                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" required/><br>'
                                     +'<div id="lavamanos">'
                                     +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
                                     +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
@@ -3530,7 +3530,7 @@ $(document).ready(function() {
             informacion["punto_videobeam"] = puntoVideoBeam;
         }else if(usoEspacio == '6'){ //Baño
             var tipoInodoro = $("#tipo_inodoro").val();
-            var cantidadInodoros = $("#cantidad_indoros").val();
+            var cantidadInodoros = $("#cantidad_inodoros").val();
             var tipoLavamanos = $("#tipo_lavamanos").val();
             var cantidadLavamanos = $("#cantidad_lavamanos").val();
             var tipoDivisiones = $("#tipo_divisiones").val();
@@ -3561,7 +3561,7 @@ $(document).ready(function() {
                 }
             }
             informacion["tipo_inodoro"] = tipoInodoro;
-            informacion["cantidad_indoros"] = cantidadInodoros;
+            informacion["cantidad_inodoros"] = cantidadInodoros;
             informacion["tipo_orinal"] = tipoOrinal;
             informacion["cantidad_orinales"] = cantidadOrinales;
             informacion["tipo_lavamanos"] = tipoLavamanos;

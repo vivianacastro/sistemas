@@ -47,25 +47,29 @@
                         <div id='planos'></div><br>
                         <div class='div_izquierda'><b>Fotos Plazoleta:</b></div>
                         <div id='fotos'>
-                            <div class="div_carousel">
-                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                  <!-- Indicators -->
-                                  <ol class="carousel-indicators" id="indicadores_carrusel">
-                                  </ol>
-                                  <!-- Wrapper for slides -->
-                                  <div class="carousel-inner" id="fotos_carrusel" role="listbox">
-                                  </div>
-                                  <!-- Left and right controls -->
-                                  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                  </a>
-                                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                  </a>
+                          <div class="div_carousel">
+                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators" id="indicadores_carrusel">
+                                    <li id="slide_carrusel_eliminar" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                    <div id="item_carrusel_eliminar" class="item active carouselImg">
+                                        <img class="carouselImg" src="archivos/images/index/admin.jpg"/>
+                                    </div>
                                 </div>
-                            </div>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                          </div>
                         </div><br>
                         <div class='div_izquierda'><b>Ubicación de la Plazoleta</b></div>
                         <div id="map_modificacion" class="mapa_modal"></div>

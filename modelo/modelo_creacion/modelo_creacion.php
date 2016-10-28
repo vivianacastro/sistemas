@@ -1936,7 +1936,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = __ROOT__."/archivos/images/campus/".$id_sede."-".$id_campus."/";
-            if (!file_exists($foto["name"], $ruta)) {
+            if (!file_exists($ruta.$foto["name"])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -2524,7 +2524,7 @@ class modelo_creacion {
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
      */
-    public function guardarFotoParquedero($id_sede,$id_campus,$id_parqueadero,$foto){
+    public function guardarFotoParqueadero($id_sede,$id_campus,$id_parqueadero,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
@@ -2967,21 +2967,21 @@ class modelo_creacion {
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
      */
-    public function guardarPlanoEspacio($id_sede,$id_campus,$id_edificio,$piso,$espacio,$plano){
+    public function guardarPlanoEspacio($id_sede,$id_campus,$id_edificio,$id_espacio,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_edificio = htmlspecialchars(trim($id_edificio));
             $piso = htmlspecialchars(trim($piso));
-            $espacio = htmlspecialchars(trim($espacio));
+            $id_espacio = htmlspecialchars(trim($id_espacio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
-            $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
+            $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id_espacio."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
                 move_uploaded_file($plano["tmp_name"], $ruta.$plano['name']);
-                $sql = "INSERT INTO espacio_archivos (id_sede,id_campus,id_edificio,piso,id_espacio,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$id_espacio."','".$plano['name']."','plano');";
+                $sql = "INSERT INTO espacio_archivos (id_sede,id_campus,id_edificio,id_espacio,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$id_espacio."','".$plano['name']."','plano');";
                 $l_stmt = $this->conexion->prepare($sql);
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Plano-Espacio 1)";
@@ -3020,21 +3020,20 @@ class modelo_creacion {
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
      */
-    public function guardarFotoEspacio($id_sede,$id_campus,$id_edificio,$piso,$espacio,$plano){
+    public function guardarFotoEspacio($id_sede,$id_campus,$id_edificio,$id_espacio,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_edificio = htmlspecialchars(trim($id_edificio));
-            $piso = htmlspecialchars(trim($piso));
-            $espacio = htmlspecialchars(trim($espacio));
+            $id_espacio = htmlspecialchars(trim($id_espacio));
             $foto['name'] = str_replace(" ", "",$foto['name']);
-            $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."-".$id_espacio."/";
-            if (!file_exists($foto["name"], $ruta)) {
+            $ruta = __ROOT__."/archivos/images/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id_espacio."/";
+            if (!file_exists($ruta.$foto["name"])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
                 move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
-                $sql = "INSERT INTO espacio_archivos (id_sede,id_campus,id_edificio,piso,id_espacio,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$piso."','".$id_espacio."','".$plano['name']."','foto');";
+                $sql = "INSERT INTO espacio_archivos (id_sede,id_campus,id_edificio,id_espacio,nombre,tipo) VALUES ('".$id_sede."','".$id_campus."','".$id_edificio."','".$id_espacio."','".$foto['name']."','foto');";
                 $l_stmt = $this->conexion->prepare($sql);
                 if(!$l_stmt){
                     $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Espacio 1)";
