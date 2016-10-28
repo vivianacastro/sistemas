@@ -4468,3 +4468,91 @@
 [27-Oct-2016 18:59:26 America/Bogota] PHP Notice:  Array to string conversion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 182
 [27-Oct-2016 18:59:27 America/Bogota] PHP Notice:  Array to string conversion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 182
 [27-Oct-2016 18:59:27 America/Bogota] PHP Notice:  Array to string conversion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 182
+[27-Oct-2016 22:41:10 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 22:41:10 America/Bogota] PHP Notice:  Undefined index: cantidad_puntos_red in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1746
+[27-Oct-2016 22:41:56 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 22:44:31 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 22:54:51 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:01:45 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:01:57 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined index: id_edificio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1276
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3030
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:02:15 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3032
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:02:15 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3037
+[27-Oct-2016 23:02:15 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26--1-/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3047
+[27-Oct-2016 23:02:18 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:07:07 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:07:17 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:07:17 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3030
+[27-Oct-2016 23:07:17 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:07:17 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3032
+[27-Oct-2016 23:07:17 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:07:17 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3037
+[27-Oct-2016 23:07:17 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26-331-1-/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3047
+[27-Oct-2016 23:08:49 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:09:22 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:09:22 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3030
+[27-Oct-2016 23:09:22 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:09:22 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3032
+[27-Oct-2016 23:09:22 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:09:22 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3037
+[27-Oct-2016 23:09:22 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26-331-1-/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3047
+[27-Oct-2016 23:11:18 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:12:07 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:12:07 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3030
+[27-Oct-2016 23:12:07 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:12:07 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3032
+[27-Oct-2016 23:12:07 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:12:07 America/Bogota] PHP Notice:  Undefined variable: id_espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3037
+[27-Oct-2016 23:12:07 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26-331-1-/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3047
+[27-Oct-2016 23:18:05 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:18:12 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:18:12 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3030
+[27-Oct-2016 23:18:12 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3032
+[27-Oct-2016 23:18:12 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:18:12 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26-331-1-1012/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3047
+[27-Oct-2016 23:20:35 America/Bogota] PHP Parse error:  syntax error, unexpected '.' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:21:00 America/Bogota] PHP Parse error:  syntax error, unexpected '.' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:21:46 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:21:53 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:21:53 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3029
+[27-Oct-2016 23:21:53 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:21:53 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3035
+[27-Oct-2016 23:21:53 America/Bogota] PHP Warning:  Illegal string offset 'name' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:21:53 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/planos/espacio/0-26-331-1/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3046
+[27-Oct-2016 23:23:01 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:23:06 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:23:06 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3029
+[27-Oct-2016 23:23:06 America/Bogota] PHP Warning:  file_exists() expects exactly 1 parameter, 2 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3031
+[27-Oct-2016 23:23:06 America/Bogota] PHP Notice:  Undefined index: tmp_name in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3035
+[27-Oct-2016 23:23:49 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 2798
+[27-Oct-2016 23:23:49 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:27:22 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:27:28 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3024
+[27-Oct-2016 23:27:28 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3029
+[27-Oct-2016 23:28:41 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:28:46 America/Bogota] PHP Notice:  Undefined variable: plano in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3036
+[27-Oct-2016 23:30:05 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:31:13 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:31:26 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 2798
+[27-Oct-2016 23:31:27 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:31:41 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 2798
+[27-Oct-2016 23:31:41 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:35:05 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:36:53 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:38:43 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:41:29 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:42:24 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:44:18 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[27-Oct-2016 23:48:02 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 00:14:09 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 00:17:11 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 00:19:22 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 00:19:56 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 00:39:48 America/Bogota] PHP Notice:  Undefined index: id_corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 891
+[28-Oct-2016 00:43:49 America/Bogota] PHP Notice:  Undefined index: id_corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 891
+[28-Oct-2016 00:50:58 America/Bogota] PHP Notice:  Undefined index: corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1177
