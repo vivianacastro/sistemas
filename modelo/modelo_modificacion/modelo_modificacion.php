@@ -110,7 +110,7 @@ class modelo_modificacion {
             $campos = $campos.", id_material_piso = '".$material_piso."'";
         if (strcasecmp($tipo_pintura,'') != 0)
             $campos = $campos.", id_tipo_pintura_demarcacion = '".$tipo_pintura."'";
-        $sql = "UPDATE cancha SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND sede = '".$id_sede."';";
+        $sql = "UPDATE cancha SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"cancha");
         foreach ($data as $clave => $valor) {
             $uso_anterior = $valor['uso'];
@@ -197,7 +197,7 @@ class modelo_modificacion {
             $campos = $campos.", id_material_techo = '".$material_techo."'";
         if (strcasecmp($tipo_suministro_energia,'') != 0)
             $campos = $campos.", id_tipo_suministro_energia = '".$tipo_suministro_energia."'";
-        $sql = "UPDATE corredor SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND sede = '".$id_sede."';";
+        $sql = "UPDATE corredor SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"corredor");
         foreach ($data as $clave => $valor) {
             $ancho_pared_anterior = $valor['ancho_pared'];
@@ -283,7 +283,7 @@ class modelo_modificacion {
             $campos = $campos.", id_tipo_cubierta = '".$material_pared."'";
         if (strcasecmp($material_cubierta,'') != 0)
             $campos = $campos.", id_material_cubierta = '".$material_cubierta."'";
-        $sql = "UPDATE cubiertas_piso SET $campos WHERE id_edificio = '".$id_edificio."' AND piso = '".$id_edificio."' AND id_campus = '".$id_campus."' AND sede = '".$id_sede."';";
+        $sql = "UPDATE cubiertas_piso SET $campos WHERE id_edificio = '".$id_edificio."' AND piso = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoCubierta($id_sede,$id_campus,$id_edificio,$piso);
         foreach ($data as $clave => $valor) {
             $tipo_cubierta_anterior = $valor['id_tipo_cubierta'];
@@ -339,7 +339,7 @@ class modelo_modificacion {
         $campos = "pasamanos = '".$pasamanos."'";
         if (strcasecmp($pasamanos,'true') == 0 && strcasecmp($material_pasamanos,'') != 0)
             $campos = $campos.", id_material_pasamanos = '".$material_pasamanos."'";
-        $sql = "UPDATE gradas SET $campos WHERE id_edificio = '".$id_edificio."' AND piso = '".$id_edificio."' AND id_campus = '".$id_campus."' AND sede = '".$id_sede."';";
+        $sql = "UPDATE gradas SET $campos WHERE id_edificio = '".$id_edificio."' AND piso = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso);
         foreach ($data as $clave => $valor) {
             $pasamanos_anterior = $valor['pasamanos'];
@@ -360,7 +360,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"pasamanos",$pasamanos_anterior,$pasamanos);
                 if (strcasecmp($pasamanos,'true') == 0 && strcasecmp($material_pasamanos,'') != 0)
                     $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material_pasamanos",$material_pasamanos_anterior,$material_pasamanos);
-                /*for ($i=0;$i<count($tipoVentana);$i++) {
+                /*for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->modificarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_ventana[$i],$cantidad_ventana[$i],$material[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }*/
                 $GLOBALS['sql'] = $sql;
@@ -401,7 +401,7 @@ class modelo_modificacion {
             $campos = $campos.", id_material_piso = '".$material_piso."'";
         if (strcasecmp($tipo_pintura,'') != 0)
             $campos = $campos.", id_tipo_pintura_demarcacion = '".$tipo_pintura."'";
-        $sql = "UPDATE parqueadero SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND sede = '".$id_sede."';";
+        $sql = "UPDATE parqueadero SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"parqueadero");
         foreach ($data as $clave => $valor) {
             $material_piso_anterior = $valor['id_material_piso'];
@@ -435,6 +435,434 @@ class modelo_modificacion {
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitud_demarcacion_anterior,$longitud_demarcacion);
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una piscina.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la piscina.
+     * @param string $cantidad_punto_hidraulico, nueva cantidad de puntos hidraulicos de la piscina.
+     * @param string $largo, nuevo largo de la piscina.
+     * @param string $ancho, nuevo largo de la piscina.
+     * @param string $alto, nuevo alto de la piscina.
+     * @param string $lat, nueva lat de la piscina.
+     * @param string $lng, nueva lng de la piscina.
+     * @return array
+     */
+    public function modificarPiscina($id_sede,$id_campus,$id,$cantidad_punto_hidraulico,$largo,$ancho,$alto,$lat,$lng){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $largo = htmlspecialchars(trim($largo));
+        $ancho = htmlspecialchars(trim($ancho));
+        $alto = htmlspecialchars(trim($alto));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."', largo = '".$largo."', ancho = '".$ancho."', alto = '".$alto."', lat = '".$lat."', lng = '".$lng."'";
+        $sql = "UPDATE piscina SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"piscina");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
+            $largo_anterior = $valor['largo'];
+            $ancho_anterior = $valor['ancho'];
+            $alto_anterior = $valor['alto'];
+            $lat_anterior = $valor['lat'];
+            $lng_anterior = $valor['lng'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La piscina se modificó correctamente";
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"cantidad_punto_hidraulico",$cantidad_punto_hidraulico_anterior,$cantidad_punto_hidraulico);
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"largo",$largo_anterior,$largo);
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"ancho",$ancho_anterior,$ancho);
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"alto",$alto_anterior,$alto);
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una plazoleta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la plazoleta.
+     * @param string $tipo_iluminacion, nueva cantidad de puntos hidraulicos de la plazoleta.
+     * @param string $cantidad_iluminacion, nueva cantidad de lámparas de la plazoleta.
+     * @param string $lat, nueva lat de la plazoleta.
+     * @param string $lng, nueva lng de la plazoleta.
+     * @return array
+     */
+    public function modificarPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion,$cantidad_iluminacion,$lat,$lng){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "lat = '".$lat."', lng = '".$lng."'";
+        $sql = "UPDATE plazoleta SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"plazoleta");
+        foreach ($data as $clave => $valor) {
+            $lat_anterior = $valor['lat'];
+            $lng_anterior = $valor['lng'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
+                $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                /*for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                }*/
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un sendero.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de un sendero.
+     * @param string $longitud, nueva longitud del sendero.
+     * @param string $ancho, nuevo ancho del sendero.
+     * @param string $material_piso, nuevo material del piso del sendero.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación del sendero.
+     * @param string $cantidad, nueva cantidad de lámparas del sendero.
+     * @param string $codigo_poste, nuevo código del poste del sendero.
+     * @param string $material_cubierta, nuevo material de la cubierta del sendero.
+     * @param string $ancho_cubierta, nuevo ancho de la cubierta del sendero.
+     * @param string $largo_cubierta, nuevo largo de la cubierta del sendero.
+     * @param string $lat, nueva lat del sendero.
+     * @param string $lng, nueva lng del sendero.
+     * @return array
+     */
+    public function modificarSendero($id_sede,$id_campus,$id,$longitud,$ancho,$material_piso,$tipo_iluminacion,$cantidad,$codigo_poste,$material_cubierta,$ancho_cubierta,$largo_cubierta,$lat,$lng){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $longitud = htmlspecialchars(trim($longitud));
+        $ancho = htmlspecialchars(trim($ancho));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $codigo_poste = htmlspecialchars(trim($codigo_poste));
+        $material_cubierta = htmlspecialchars(trim($material_cubierta));
+        $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
+        $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "longitud = '".$longitud."', ancho = '".$ncho."', cantidad = '".$cantidad."', codigo_poste = '".$codigo_poste."', ancho_cubierta = '".$ancho_cubierta."', largo_cubierta = '".$largo_cubierta."', lat = '".$lat."', lng = '".$lng."'";
+        if (strcasecmp($material_cubierta,'') != 0)
+            $campos = $campos.", id_material_cubierta = '".$material_cubierta."'";
+        if (strcasecmp($material_piso,'') != 0)
+            $campos = $campos.", id_material_piso = '".$material_piso."'";
+          if (strcasecmp($tipo_iluminacion,'') != 0)
+              $campos = $campos.", id_tipo_iluminacion = '".$tipo_iluminacion."'";
+        $sql = "UPDATE sendero SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"sendero");
+        foreach ($data as $clave => $valor) {
+            $longitud_anterior = $valor['longitud'];
+            $ancho_anterior = $valor['ancho'];
+            $material_piso_anterior = $valor['id_material_piso'];
+            $tipo_iluminacion_anterior = $valor['id_tipo_iluminacion'];
+            $cantidad_anterior = $valor['cantidad'];
+            $codigo_poste_anterior = $valor['codigo_poste'];
+            $material_cubierta_anterior = $valor['id_material_cubierta'];
+            $ancho_cubierta_anterior = $valor['ancho_cubierta'];
+            $largo_cubierta_anterior = $valor['largo_cubierta'];
+            $lat_anterior = $valor['lat'];
+            $lng_anterior = $valor['lng'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El sendero peatonal se modificó correctamente";
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"longitud_anterior",$longitud_anterior,$longitud);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"ancho_anterior",$ancho_anterior,$ancho);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"id_material_piso_anterior",$material_piso_anterior,$material_piso);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion_anterior",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"cantidad_anterior",$cantidad_anterior,$cantidad);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"codigo_poste_anterior",$codigo_poste_anterior,$codigo_poste);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"id_material_cubierta_anterior",$material_cubierta_anterior,$material_cubierta);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"ancho_cubierta_anterior",$ancho_cubierta_anterior,$ancho_cubierta);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"largo_cubierta_anterior",$largo_cubierta_anterior,$largo_cubierta);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una vía.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la vía.
+     * @param string $tipo_material, nueva tipo de material de la vía.
+     * @param string $tipo_pintura_demarcacion, nuevo tipo de pintura de la vía.
+     * @param string $longitud_demarcacion, nueva longitud de demarcación la vía.
+     * @param string $lat, nueva lat de la vía.
+     * @param string $lng, nueva lng de la vía.
+     * @return array
+     */
+    public function modificarVia($id_sede,$id_campus,$id,$tipo_material,$tipo_pintura_demarcacion,$longitud_demarcacion,$lat,$lng){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_material = htmlspecialchars(trim($tipo_material));
+        $tipo_pintura_demarcacion = htmlspecialchars(trim($tipo_pintura_demarcacion));
+        $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "longitud_demarcacion = '".$longitud_demarcacion."', lat = '".$lat."', lng = '".$lng."'";
+        if (strcasecmp($tipo_material,'') != 0)
+            $campos = $campos.", id_tipo_material = '".$tipo_material."'";
+        if (strcasecmp($tipo_pintura_demarcacion,'') != 0)
+            $campos = $campos.", id_tipo_pintura_demarcacion = '".$tipo_pintura_demarcacion."'";
+        $sql = "UPDATE via SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"via");
+        foreach ($data as $clave => $valor) {
+            $tipo_material_anterior = $valor['id_tipo_material'];
+            $tipo_pintura_demarcacion_anterior = $valor['id_tipo_pintura_demarcacion'];
+            $longitud_demarcacion_anterior = $valor['longitud_demarcacion'];
+            $lat_anterior = $valor['lat'];
+            $lng_anterior = $valor['lng'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Via 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Via 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La vía se modificó correctamente";
+                if (strcasecmp($tipo_material,'') != 0)
+                    $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"id_tipo_material",$tipo_material_anterior,$tipo_material);
+                if (strcasecmp($tipo_pintura_demarcacion,'') != 0)
+                    $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"id_tipo_pintura_demarcacion",$tipo_material_anterior,$tipo_material);
+                $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"longitud_anterior",$tipo_pintura_demarcacion_anterior,$tipo_pintura_demarcacion);
+                $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitud_demarcacion_anterior,$longitud_demarcacion);
+                $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un edificio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del edificio.
+     * @param string $numero_pisos, nuevo número de pisos del edificio.
+     * @param string $sotano, nuevo valor del sotano del edificio.
+     * @param string $terraza, nuevo valor de la terraza del edificio.
+     * @param string $material_fachada, nuevo material de fachada del edificio.
+     * @param string $ancho_fachada, nuevo ancho de la fachada del edificio.
+     * @param string $alto_fachada, nuevo alto de la fachada del edificio.
+     * @param string $lat, nueva lat del edificio.
+     * @param string $lng, nueva lng del edificio.
+     * @return array
+     */
+    public function modificarEdificio($id_sede,$id_campus,$id,$numero_pisos,$sotano,$terraza,$material_fachada,$ancho_fachada,$alto_fachada,$lat,$lng){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $numero_pisos = htmlspecialchars(trim($numero_pisos));
+        $sotano = htmlspecialchars(trim($sotano));
+        $terraza = htmlspecialchars(trim($terraza));
+        $material_fachada = htmlspecialchars(trim($material_fachada));
+        $ancho_fachada = htmlspecialchars(trim($ancho_fachada));
+        $alto_fachada = htmlspecialchars(trim($alto_fachada));
+        $lat = htmlspecialchars(trim($lat));
+        $lng = htmlspecialchars(trim($lng));
+        $campos = "numero_pisos = '".$numero_pisos."', sotano = '".$sotano."', terraza = '".$terraza."', ancho_fachada = '".$ancho_fachada."', alto_fachada = '".$alto_fachada."', lat = '".$lat."', lng = '".$lng."'";
+        if (strcasecmp($material_fachada,'') != 0)
+            $campos = $campos.", id_material_fachada = '".$material_fachada."'";
+        $sql = "UPDATE edificio SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"edificio");
+        foreach ($data as $clave => $valor) {
+            $numero_pisos_anterior = $valor['numero_pisos'];
+            $sotano_anterior = $valor['sotano'];
+            $terraza_anterior = $valor['terraza'];
+            $material_fachada_anterior = $valor['id_material_fachada'];
+            $ancho_fachada_anterior = $valor['ancho_fachada'];
+            $alto_fachada_anterior = $valor['alto_fachada'];
+            $lat_anterior = $valor['lat'];
+            $lng_anterior = $valor['lng'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El edificio se modificó correctamente";
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"numero_pisos",$numero_pisos_anterior,$numero_pisos);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"sotano",$sotano_anterior,$sotano);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"terraza",$terraza_anterior,$terraza);
+                if (strcasecmp($material_fachada,'') != 0)
+                    $campos = $campos.", id_material_fachada = '".$material_fachada."'";
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"id_material_fachada",$material_fachada_anterior,$material_fachada);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"ancho_fachada",$ancho_fachada_anterior,$ancho_fachada);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"alto_fachada",$alto_fachada_anterior,$alto_fachada);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un edificio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del edificio.
+     * @param string $numero_pisos, nuevo número de pisos del edificio.
+     * @param string $sotano, nuevo valor del sotano del edificio.
+     * @param string $terraza, nuevo valor de la terraza del edificio.
+     * @param string $material_fachada, nuevo material de fachada del edificio.
+     * @param string $ancho_fachada, nuevo ancho de la fachada del edificio.
+     * @param string $alto_fachada, nuevo alto de la fachada del edificio.
+     * @param string $lat, nueva lat del edificio.
+     * @param string $lng, nueva lng del edificio.
+     * @return array
+     */
+    public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$espacio_padre,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptor,$tipo_puerta,$material_puerta,$cantidad_puerta,$tipo_cerradura,$material_marco,$gato_puerta,$ancho_puerta,$alto_puerta,$tipo_suministro_energia,$tomacorriente,$cantidad_suministro_energia,$tipo_ventana,$cantidad_ventana,$material_ventana,$ancho_ventana,$alto_ventana,$tipo_iluminacion,$cantidad_iluminacion){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $piso = htmlspecialchars(trim($piso));
+        $uso_espacio = htmlspecialchars(trim($uso_espacio));
+        $ancho_pared = htmlspecialchars(trim($ancho_pared));
+        $alto_pared = htmlspecialchars(trim($alto_pared));
+        $material_pared = htmlspecialchars(trim($material_pared));
+        $ancho_piso = htmlspecialchars(trim($ancho_piso));
+        $largo_piso = htmlspecialchars(trim($largo_piso));
+        $material_piso = htmlspecialchars(trim($material_piso));
+        $ancho_techo = htmlspecialchars(trim($ancho_techo));
+        $largo_techo = htmlspecialchars(trim($largo_techo));
+        $material_techo = htmlspecialchars(trim($material_techo));
+        $espacio_padre = htmlspecialchars(trim($espacio_padre));
+        $campos = "piso_edificio = '"$piso"', uso_espacio = '".$uso_espacio."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
+        if (strcasecmp($uso_espacio,'') != 0)
+            $campos = $campos.", uso_espacio = '".$uso_espacio."'";
+        if (strcasecmp($material_pared,'') != 0)
+            $campos = $campos.", id_material_pared = '".$material_pared."'";
+        if (strcasecmp($material_piso,'') != 0)
+            $campos = $campos.", id_material_piso = '".$material_piso."'";
+        if (strcasecmp($material_techo,'') != 0)
+            $campos = $campos.", id_material_techo = '".$material_techo."'";
+        if (strcasecmp($espacio_padre,'') != 0)
+            $campos = $campos.", espacio_padre = '".$espacio_padre."', sede_padre = '".$id_sede."', campus_padre = '".$id_campus."', edificio_padre = '".$id_edificio."'";
+        $sql = "UPDATE espacio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"espacio");
+        foreach ($data as $clave => $valor) {
+            $piso_anterior = $valor['piso'];
+            $uso_espacio_anterior = $valor['uso_espacio'];
+            $ancho_pared_anterior = $valor['ancho_pared'];
+            $alto_pared_anterior = $valor['alto_pared'];
+            $material_pared_anterior = $valor['id_material_pared'];
+            $ancho_piso_anterior = $valor['ancho_piso'];
+            $largo_piso_anterior = $valor['largo_piso'];
+            $material_piso_anterior = $valor['id_material_piso'];
+            $ancho_techo_anterior = $valor['ancho_techo'];
+            $largo_techo_anterior = $valor['largo_techo'];
+            $material_techo_anterior = $valor['id_material_techo'];
+            $espacio_padre_anterior = $valor['espacio_padre'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
+                if (strcasecmp($uso_espacio,'') != 0)
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"uso_espacio",$uso_espacio_anterior,$uso_espacio);
+                if (strcasecmp($material_pared,'') != 0)
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_pared",$material_pared_anterior,$material_pared);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_pared",$ancho_pared_anterior,$ancho_pared);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_pared",$alto_pared_anterior,$alto_pared);
+                if (strcasecmp($material_piso,'') != 0)
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_piso",$material_piso_anterior,$material_piso);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_piso",$ancho_piso_anterior,$ancho_piso);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_piso",$largo_piso_anterior,$largo_piso);
+                if (strcasecmp($material_techo,'') != 0)
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$material_techo_anterior,$material_techo);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$ancho_techo_anterior,$ancho_techo);
+                $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largo_techo_anterior,$largo_techo);
+                if (strcasecmp($espacio_padre,'') != 0)
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacio_padre_anterior,$espacio_padre);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                }
+                for ($i=0;$i<count($tipo_interruptor);$i++) {
+                    $this->modificarInterruptoresEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
+                }
+                for ($i=0;$i<count($tipo_puerta);$i++) {
+                  $this->modificarPuertasEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puerta[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
+                }
+                for ($i=0;$i<count($tipo_suministro_energia);$i++) {
+                    $this->modificarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_suministro_energia[$i],$tomacorriente[$i]);
+                }
+                for ($i=0;$i<count($tipo_ventana);$i++) {
+                    $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventana[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
+                }
                 $GLOBALS['sql'] = $sql;
                 return true;
             }

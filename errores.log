@@ -4562,3 +4562,10 @@
 [28-Oct-2016 13:58:22 America/Bogota] PHP Parse error:  syntax error, unexpected '$id' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 135
 [28-Oct-2016 15:47:43 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
 [28-Oct-2016 15:52:14 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 275
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 277
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 279
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 281
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 283
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 285
+[28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 287
