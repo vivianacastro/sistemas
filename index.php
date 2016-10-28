@@ -41,6 +41,7 @@ $map = array(
         'obtener_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'obtener_informacion_usuario'),
         'verificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_usuario'),
         'verificar_correo' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_correo'),
+        'consultar_fotos_index' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_fotos_index'),
         //Acciones de modificación
         'reestablecer_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'reestablecer_contrasenia'),
         'modificar_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_informacion_usuario'),
@@ -265,6 +266,8 @@ if(!call_user_func(array(new controlador_usuario, 'check'))){
         $ruta = 'olvido_contrasenia';
     }elseif(strcmp($_GET['action'],'reestablecer_contrasenia') == 0){
         $ruta = 'reestablecer_contrasenia';
+    }elseif(strcmp($_GET['action'],'consultar_fotos_index') == 0){
+        $ruta = 'consultar_fotos_index';
     }else{
         $ruta = 'iniciar_sesion';
     }

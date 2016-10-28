@@ -427,7 +427,7 @@ $(document).ready(function() {
 	            	var nuevaContrasenia = $("#contrasenia_nueva").val();
 	            	var nuevaContraseniaRep = $("#contrasenia_nueva_rep").val();
 								var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
-								else if(contrasenia.length < 8){
+								if(contrasenia.length < 8){
                 	alert('ERROR. La contraseña mínimo debe tener 8 caracteres');
                 	$("#contrasenia").focus();
                 }else if(!pattern.test(contrasenia)){
