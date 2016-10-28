@@ -244,14 +244,14 @@ class controlador_vista
         if(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, INICIAR_SESION) == 0)){
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
-            $html = str_replace('{librerias_adicionales}', '', $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria("carousel_index"), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);
             $html = $this->representar_datos_dinamica($html, $data);
         }elseif(strcmp($operacion, USUARIO) == 0 && (strcmp($accion, CREAR_USUARIO) == 0 || strcmp($accion, OLVIDO_CONTRASENIA) == 0)) {
             $html = $this->conseguir_plantilla('template1', '');
             $html = str_replace('{operaciones}', ''/*$this->conseguir_operaciones_add($modulo)*/, $html);
             $html = str_replace('{contenido}', $this->conseguir_plantilla($operacion, $accion), $html);
-            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion).$this->crear_enlace_libreria($operacion), $html);
+            $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
             $html = $this->representar_datos_dinamica($html, $diccionario['links']);
             $html = $this->representar_datos_dinamica($html, $data);
         }else{

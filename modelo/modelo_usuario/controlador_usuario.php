@@ -163,7 +163,6 @@ class controlador_usuario {
         }
     }
 
-
     /**
      * Función que permite cerrar una sesion de un usuario.
     */

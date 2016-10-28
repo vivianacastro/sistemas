@@ -99,7 +99,7 @@ html, body {
 }
 
 .carousel-indicators li{
-		border: 1px solid grey;
+		border: 1px solid #D51B23;
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {

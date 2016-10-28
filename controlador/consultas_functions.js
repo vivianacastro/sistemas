@@ -3153,34 +3153,227 @@ $(document).ready(function() {
       });
       /*if (usoEspacio == '1') { //Salón
           data = consultarInformacionObjeto("salon",info);
+          var componente = '<b><h5>Información del Salón</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>Capacidad del salón<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿El salón tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                  $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
+                  $("#capacidad").val(record.capacidad);
+                  $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
+              }
+          });
       }else if(usoEspacio == '2'){ //Auditorio
           data = consultarInformacionObjeto("auditorio",info);
+          var componente = '<b><h5>Información del Auditorio</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>Capacidad del auditorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿El auditorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '3'){ //Laboratorio
           data = consultarInformacionObjeto("laboratorio",info);
+          var componente = '<b><h5>Información del Laboratorio</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>Capacidad del laboratorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿El laboratorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+              +'<div id="punto_sanitario">'
+              +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+              +'</div>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '4'){ //Sala de Cómputo
           data = consultarInformacionObjeto("sala_computo",info);
+          var componente = '<b><h5>Información de la Sala de Cómputo</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '5'){ //Oficina
           data = consultarInformacionObjeto("oficina",info);
+          var componente = '<b><h5>Información de la Oficina</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿La oficina tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '6'){ //Baño
           data = consultarInformacionObjeto("bano",info);
+          var componente = '<b><h5>Información del Baño</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          var componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_indoros" id="cantidad_indoros" value="" required/><br>'
+              +'<div id="lavamanos">'
+              +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
+              +'</div>'
+              +'</div>'
+              +'<div id="informacion2">'
+              +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" required></select><br>'
+              +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" required></select><br>'
+              +'<div class="div_izquierda"><b>¿El baño tiene ducha?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="ducha" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="ducha" value="false">No</label>'
+              +'<div class="div_izquierda"><b>¿El baño tiene lavatraperos?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false">No</label>'
+              +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
+              +'<div id="orinal">'
+              +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
+              +'</div>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
+          actualizarSelectTipoObjeto("tipo_inodoro",0);
+          actualizarSelectTipoObjeto("tipo_orinal",0);
+          actualizarSelectTipoObjeto("tipo_lavamanos",0);
+          actualizarSelectTipoObjeto("tipo_divisiones",0);
+          actualizarSelectMaterial("material_divisiones",0);
       }else if(usoEspacio == '7'){ //Cuarto Técnico
           data = consultarInformacionObjeto("cuarto_tecnico",info);
+          var componente = '<b><h5>Información del Cuarto Técnico</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+              +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '8'){ //Bodega/Almacen
           data = consultarInformacionObjeto("bodega",info);
+          var componente = '<b><h5>Información de la Bodega/Almacén</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          var componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '10'){ //Cuarto de Plantas
           data = consultarInformacionObjeto("cuarto_plantas",info);
+          var componente = '<b><h5>Información del Cuarto de Plantas</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
           data = consultarInformacionObjeto("cuarto_aires_acondicionados",info);
+          var componente = '<b><h5>Información del Cuarto de Aires Acondicionados</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
           data = consultarInformacionObjeto("area_deportiva_cerrada",info);
+          var componente = '<b><h5>Información del Área Deportiva Cerrada</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área deportiva cerrada<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
           data = consultarInformacionObjeto("centro_datos",info);
+          var componente = '<b><h5>Información del Centro de Datos</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }else if(usoEspacio == '17'){ //Cuarto de Bombas
           data = consultarInformacionObjeto("cuarto_bombas",info);
+          var componente = '<b><h5>Información del Cuarto de Bombas</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+              +'<div id="punto_sanitario">'
+              +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+              +'</div>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
+          actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
       }else if(usoEspacio == '19'){ //Cocineta
           data = consultarInformacionObjeto("cocineta",info);
+          var componente = '<b><h5>Información de la Cocineta</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+              +'<div id="punto_sanitario">'
+              +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta<font color="red">*</font>:</b></div>'
+              +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+              +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+              +'</div>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
+          actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
       }else if(usoEspacio == '20'){ //Sala de Estudio
           data = consultarInformacionObjeto("sala_estudio",info);
+          var componente = '<b><h5>Información de la Sala de Estudio</h5></b>';
+          añadirComponente("tituloUsoEspacio",componente);
+          componente = '<div id="informacion">'
+              +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
+              +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+              +'</div>';
+          añadirComponente("informacionEspacio",componente);
       }*/
       $("#myCarousel").hide();
       for (var i = 0; i < numeroFotos; i++) {
@@ -3449,24 +3642,38 @@ $(document).ready(function() {
       $("#botones_anadir_puerta").hide();
       $("#botones_anadir_tomacorriente").hide();
       $("#botones_anadir_ventana").hide();
+      eliminarComponente("tituloUsoEspacio");
+      eliminarComponente("informacionEspacio");
       while (iluminacionCont > 0) {
           eliminarComponente("iluminacion"+iluminacionCont);
           iluminacionCont--;
+      }
+      while (lavamanosCont > 0) {
+          eliminarComponente("lavamanos"+lavamanosCont);
+          lavamanosCont--;
       }
       while (tomacorrientesCont > 0) {
           eliminarComponente("suministro_energia"+tomacorrientesCont);
           tomacorrientesCont--;
       }
+      while (orinalesCont > 0) {
+          eliminarComponente("orinal"+orinalesCont);
+          orinalesCont--;
+      }
       while (puertasCont > 0) {
-          eliminarComponente("puerta"+tomacorrientesCont);
+          eliminarComponente("puerta"+puertasCont);
           puertasCont--;
       }
+      while (puntosSanitariosCont > 0) {
+          eliminarComponente("punto_sanitario"+puntosSanitariosCont);
+          puntosSanitariosCont--;
+      }
       while (ventanasCont > 0) {
-          eliminarComponente("ventana"+tomacorrientesCont);
+          eliminarComponente("ventana"+ventanasCont);
           ventanasCont--;
       }
       while (interruptoresCont > 0) {
-          eliminarComponente("interruptor"+tomacorrientesCont);
+          eliminarComponente("interruptor"+interruptoresCont);
           interruptoresCont--;
       }
   });

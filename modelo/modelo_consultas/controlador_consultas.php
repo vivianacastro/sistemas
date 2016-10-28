@@ -1598,6 +1598,50 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar las imagenes que hay en una carpeta.
+     */
+    public function consultar_fotos_index() {
+        $GLOBALS['mensaje'] = "";
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $directory = __ROOT__."/archivos/images/index/";
+            $dirint = dir($directory);
+            while (($archivo = $dirint->read()) !== false){
+              //if($archivo != '.' && $archivo != '..' && $archivo != '.htaccess'){
+              if (eregi("gif", $archivo) || eregi("jpg", $archivo) || eregi("png", $archivo)){
+                    $arrayAux = array(
+                        'nombre' => $archivo,
+                    );
+                    array_push($result, $arrayAux);
+                }
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que consulta los archivos que hay dentro de una carpeta
+    */
+    public function listar_archivos_ruta($ruta,$arrayFotos=array()){
+    $carpeta = scandir($ruta);
+      foreach($carpeta as $key => $value){
+          $path = realpath($ruta.DIRECTORY_SEPARATOR.$value);
+          if(!is_dir($path)) {
+              $arrayAux = array(
+                'nombre' => $ruta,
+              );
+              array_push($arrayFotos, $arrayAux);
+          } else if($value != "." && $value != "..") {
+              $this->listar_archivos_ruta($path,$arrayFotos);
+          }
+      }
+      /*array_push($arrayFotos, $arrayAux);
+      print_r($arrayFotos);
+      return $arrayFotos;*/
+   }
+
+    /**
      * Función que permite consultar la información de un edificio
      * almacenado en el sistema.
      */
