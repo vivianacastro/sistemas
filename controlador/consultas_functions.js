@@ -1520,6 +1520,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -1529,26 +1531,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                      componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
-                  añadirComponente("indicadores_carrusel",componente);
-                  añadirComponente("fotos_carrusel",componente2);
-                  numeroFotos++;
-                  $("#myCarousel").show();
+                 añadirComponente("indicadores_carrusel",componente);
+                 añadirComponente("fotos_carrusel",componente2);
+                 componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                 añadirComponente("enlace_fotos",componente);
+                 numeroFotos++;
+                 $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -1574,11 +1590,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -1640,6 +1661,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -1649,26 +1672,41 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente;
+                  var componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -1694,11 +1732,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos)
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -1813,6 +1856,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -1822,26 +1867,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -1867,11 +1926,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -1933,6 +1997,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -1942,26 +2008,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                       componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                       componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -1987,11 +2067,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2079,6 +2164,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2088,27 +2175,41 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
-                  numeroPlanos++;
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
+                    numeroPlanos++;
                   añadirComponente("planos",componente);
               }
           }
@@ -2133,11 +2234,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2194,6 +2300,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2203,26 +2311,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2248,11 +2370,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2314,6 +2441,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2323,26 +2452,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2368,11 +2511,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2453,6 +2601,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2462,26 +2612,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2507,11 +2671,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2578,6 +2747,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2587,26 +2758,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2632,11 +2817,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2697,6 +2887,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2706,26 +2898,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2751,11 +2957,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -2820,6 +3031,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -2829,26 +3042,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -2874,11 +3101,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -3556,6 +3788,8 @@ $(document).ready(function() {
       for (var i = 0; i < numeroFotos; i++) {
           eliminarComponente("slide_carrusel");
           eliminarComponente("item_carrusel");
+          eliminarComponente("foto");
+          eliminarComponente("inputFileFotos");
       }
       for (var i = 0; i < numeroPlanos; i++) {
           eliminarComponente("plano");
@@ -3565,26 +3799,40 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
                       var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                       var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                       +'<img class="carouselImg" src="archivos/images/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                       +'</div>';
                   }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                   }
                   añadirComponente("indicadores_carrusel",componente);
                   añadirComponente("fotos_carrusel",componente2);
+                  componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                  añadirComponente("enlace_fotos",componente);
                   numeroFotos++;
                   $("#myCarousel").show();
               }else{
-                  var componente = '<div id="plano" class="div_izquierda">'
-                  +'<a target="_blank" href="archivos/planos/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
-                  +'<span>'+record.nombre+'</span>'
-                  +'</a></div>';
+                  var componente = '<div id="plano">'
+                     +'<div class="col-sm-8 div_izquierda">'
+                     +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
+                     +'<span>'+record.nombre+'</span></a>'
+                     +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
+                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
+                     +'</div>'
+                     +'<br></div>';
                   numeroPlanos++;
                   añadirComponente("planos",componente);
               }
@@ -3610,11 +3858,16 @@ $(document).ready(function() {
               +'</div>'
             +'</div>';
       }
+      var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+          +'<span>Agregar una foto</span><br>'
+          +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+          +'<br><br></div>';
       var componentePlano = '<div id="plano" class="div_izquierda">'
           +'<span>Agregar un plano</span><br>'
           +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
           +'<br><br></div>';
       numeroPlanos++;
+      añadirComponente("enlace_fotos",componenteFotos);
       añadirComponente("planos",componentePlano);
       numeroFotos++;
       añadirComponente("indicadores_carrusel",componente);
@@ -3809,6 +4062,7 @@ $(document).ready(function() {
       $("#modificar_espacio").show();
       $("#modificar_tipo_material").show();
       $("#modificar_tipo_objeto").show();
+      $("#fotos").show();
       $("#guardar_modificaciones_sede").hide();
       $("#guardar_modificaciones_campus").hide();
       $("#guardar_modificaciones_cancha").hide();
@@ -3829,6 +4083,8 @@ $(document).ready(function() {
       $("#botones_anadir_puerta").hide();
       $("#botones_anadir_tomacorriente").hide();
       $("#botones_anadir_ventana").hide();
+      $("#enlace_fotos").hide();
+      $("#divBotonEliminarPlano").hide();
       eliminarComponente("tituloInfo");
       eliminarComponente("informacion");
       eliminarComponente("informacion2");
@@ -3929,6 +4185,10 @@ $(document).ready(function() {
    */
   $("#modificar_campus").click(function (e){
       $("#nombre_campus").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_campus").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_campus").show();
@@ -3943,6 +4203,10 @@ $(document).ready(function() {
       $("#material_piso").removeAttr("disabled");
       $("#tipo_pintura").removeAttr("disabled");
       $("#longitud_demarcacion").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_cancha").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_cancha").show();
@@ -3979,6 +4243,10 @@ $(document).ready(function() {
       }
       $("#botones_anadir_iluminacion").show();
       $("#botones_anadir_interruptor").show();
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_corredor").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_corredor").show();
@@ -3993,6 +4261,10 @@ $(document).ready(function() {
       $("#material_cubierta").removeAttr("disabled");
       $("#ancho").removeAttr("disabled");
       $("#largo").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_cubierta").hide();
       $("#guardar_modificaciones_cubierta").show();
   });
@@ -4017,6 +4289,10 @@ $(document).ready(function() {
           $("#alto_ventana"+i).removeAttr("disabled");
       }
       $("#botones_anadir_ventana").show();
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_gradas").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_gradas").show();
@@ -4033,6 +4309,10 @@ $(document).ready(function() {
       $("#material_piso").removeAttr("disabled");
       $("#tipo_pintura").removeAttr("disabled");
       $("#longitud_demarcacion").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_parqueadero").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_parqueadero").show();
@@ -4047,6 +4327,10 @@ $(document).ready(function() {
       $("#ancho").removeAttr("disabled");
       $("#largo").removeAttr("disabled");
       $("#cantidad_puntos_hidraulicos").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_piscina").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_piscina").show();
@@ -4064,6 +4348,10 @@ $(document).ready(function() {
           $("#tipo_iluminacion"+i).removeAttr("disabled");
           $("#cantidad_iluminacion"+i).removeAttr("disabled");
       }
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#botones_anadir_iluminacion").show();
       $("#modificar_plazoleta").hide();
       $("#guardar_modificaciones_plazoleta").show();
@@ -4083,6 +4371,10 @@ $(document).ready(function() {
       $("#ancho_cubierta").removeAttr("disabled");
       $("#largo_cubierta").removeAttr("disabled");
       $("#material_cubierta").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_sendero").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_sendero").show();
@@ -4096,6 +4388,10 @@ $(document).ready(function() {
       $("#tipo_pintura").removeAttr("disabled");
       $("#longitud_demarcacion").removeAttr("disabled");
       $("#material_piso").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_via").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_via").show();
@@ -4112,6 +4408,10 @@ $(document).ready(function() {
       $("#ancho_fachada").removeAttr("disabled");
       $("#alto_fachada").removeAttr("disabled");
       $("#material_fachada").removeAttr("disabled");
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_edificio").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_edificio").show();
@@ -4205,6 +4505,10 @@ $(document).ready(function() {
       $("#botones_anadir_puerta").show();
       $("#botones_anadir_tomacorriente").show();
       $("#botones_anadir_ventana").show();
+      $("#enlace_fotos").show();
+      $("#divBotonEliminarPlano").show();
+      $("#inputFileFotos").show();
+      $("#fotos").hide();
       $("#modificar_espacio").hide();
       $("#guardar_archivos").hide();
       $("#guardar_modificaciones_espacio").show();
@@ -4228,6 +4532,34 @@ $(document).ready(function() {
       $("#nombre_tipo_objeto").removeAttr("disabled");
       $("#modificar_tipo_objeto").hide();
       $("#guardar_modificaciones_tipo_objeto").show();
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#enlace_fotos").on("click", "#eliminar_archivo", function(){
+      var nombre = $(this).attr('name');
+      console.log(nombre);
+      if ($("#"+nombre).hasClass('texto_tachado')) {
+          $("#"+nombre).removeClass("texto_tachado");
+      }else{
+          $("#"+nombre).addClass("texto_tachado");
+      }
+  });
+
+  /**
+   * Se captura el evento cuando se da click en el boton ver_campus y se
+   * realiza la operacion correspondiente.
+   */
+  $("#planos").on("click", "#eliminar_archivo", function(){
+      var nombre = $(this).attr('name');
+      console.log(nombre);
+      if ($("#"+nombre).hasClass('texto_tachado')) {
+          $("#"+nombre).removeClass("texto_tachado");
+      }else{
+          $("#"+nombre).addClass("texto_tachado");
+      }
   });
 
   /**
@@ -4739,14 +5071,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5001,14 +5334,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5156,14 +5490,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5300,14 +5635,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5464,14 +5800,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5639,14 +5976,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5776,14 +6114,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }
@@ -5930,14 +6269,15 @@ $(document).ready(function() {
       $.each(archivos, function(index, record) {
           if($.isNumeric(index)) {
               if (record.tipo == 'foto') {
+                  var componente, componente2;
                   if (numeroFotos == 0) {
-                     var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
-                     var componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                     componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                     componente2 = '<div id="item_carrusel" class="item active carouselImg">'
                        +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                        +'</div>';
                  }else{
-                      var componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
-                      var componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                      componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                      componente2 = '<div id="item_carrusel" class="item carouselImg">'
                         +'<img class="carouselImg" src="archivos/images/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                  }

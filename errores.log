@@ -4556,3 +4556,9 @@
 [28-Oct-2016 00:39:48 America/Bogota] PHP Notice:  Undefined index: id_corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 891
 [28-Oct-2016 00:43:49 America/Bogota] PHP Notice:  Undefined index: id_corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 891
 [28-Oct-2016 00:50:58 America/Bogota] PHP Notice:  Undefined index: corredor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1177
+[28-Oct-2016 09:42:46 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::consultarCampoCampus() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 176
+[28-Oct-2016 10:54:31 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::consultarCampoTipoMaterial() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 493
+[28-Oct-2016 13:57:37 America/Bogota] PHP Parse error:  syntax error, unexpected '$id_campus' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 76
+[28-Oct-2016 13:58:22 America/Bogota] PHP Parse error:  syntax error, unexpected '$id' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 135
+[28-Oct-2016 15:47:43 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742
+[28-Oct-2016 15:52:14 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1742

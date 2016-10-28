@@ -40,6 +40,11 @@ html, body {
     border: none;
 }
 
+.btn-eliminar-archivos{
+    background-color: transparent !important;
+    color: #D51B23;
+}
+
 .btn-formulario{
     width: auto;
     text-align: center;
@@ -342,6 +347,10 @@ html, body {
 
 .texto-inicio-sesion{
     font-size: medium;
+}
+
+.texto_tachado{
+    text-decoration:line-through;
 }
 
 #agregar_foto{
