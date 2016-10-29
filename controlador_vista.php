@@ -260,7 +260,7 @@ class controlador_vista
             $html = str_replace('{operaciones}', $this->conseguir_operaciones_add($modulo), $html);
             $html = str_replace('{modulo}', $this->conseguir_texto_modulo($modulo), $html);
             if(strcmp($operacion, 'modificacion') == 0) {
-                $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria('consultas').$this->crear_enlace_libreria($operacion), $html);
+                $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria('consultas'), $html);
             }else{
                 $html = str_replace('{librerias_adicionales}', $this->crear_enlace_libreria($operacion), $html);
             }

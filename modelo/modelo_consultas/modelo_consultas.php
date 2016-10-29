@@ -539,7 +539,7 @@ class modelo_consultas
             }
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Información de la sede seleccionado";
+                $GLOBALS['mensaje'] = "Información de la sede seleccionada";
             }
         }
         return $result;

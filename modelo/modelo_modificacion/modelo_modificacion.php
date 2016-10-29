@@ -5,6 +5,26 @@ ini_set('display_errors', '1');*/
  * Clase modelo_modificacion
  */
 class modelo_modificacion {
+    protected $conexion;
+
+    /**
+     * Función contructur de la clase Model
+     * @param string $dbname nombre de la base de datos a la que se va a
+     * conectar el modelo.
+     * @param string $dbuser usuario con el que se va a conectar a la
+     * base de datos.
+     * @param string $dbpass contraseña para poder acceder a la base de datos.
+     * @param string $dbhost Host en donde se encuentra la base de datos.
+     */
+    public function __construct($dbname,$dbuser,$dbpass,$dbhost){
+        $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
+        try {
+            $bd_conexion = new PDO($conn_string, $dbuser, $dbpass);
+            $this->conexion = $bd_conexion;
+        } catch (PDOException $e) {
+            var_dump( $e->getMessage());
+        }
+    }
 
     /**
      * Función que permite modificar una sede.
@@ -14,8 +34,8 @@ class modelo_modificacion {
      */
     public function modificarSede($id_sede,$nombre_sede){
         $id_sede = htmlspecialchars(trim($id_sede));
-        $nombre_sede_nuevo = htmlspecialchars(trim($nombre_sede_nuevo));
-        $sql = "UPDATE sede SET nombre = '".$nombre_sede_nuevo."' WHERE id = '".$id_sede."';";
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $sql = "UPDATE sede SET nombre = '".$nombre_sede."' WHERE id = '".$id_sede."';";
         $data = $this->consultarCampoSede($id_sede);
         foreach ($data as $clave => $valor) {
             $nombre_sede_antiguo = $valor['nombre'];
@@ -793,7 +813,7 @@ class modelo_modificacion {
         $largo_techo = htmlspecialchars(trim($largo_techo));
         $material_techo = htmlspecialchars(trim($material_techo));
         $espacio_padre = htmlspecialchars(trim($espacio_padre));
-        $campos = "piso_edificio = '"$piso"', uso_espacio = '".$uso_espacio."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
+        $campos = "piso_edificio = '".$piso."', uso_espacio = '".$uso_espacio."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
         if (strcasecmp($uso_espacio,'') != 0)
             $campos = $campos.", uso_espacio = '".$uso_espacio."'";
         if (strcasecmp($material_pared,'') != 0)
@@ -869,6 +889,78 @@ class modelo_modificacion {
         }
     }
 
+    /**
+     * Función que permite modificar un tipo de material.
+     * @param string $tipo_material, nombre del tipo de material (material piso, material techo, etc.)
+     * @param string $id, id del tipo de material.
+     * @param string $nombre, nuevo nombre del tipo de material.
+     * @return array
+     */
+    public function modificarTipoMaterial($tipo_material,$id,$nombre){
+        $tipo_material = htmlspecialchars(trim($tipo_material));
+        $id = htmlspecialchars(trim($id));
+        $nombre = htmlspecialchars(trim($nombre));
+        $campos = "material = '".$nombre."'";
+        $sql = "UPDATE ".$tipo_material." SET $campos WHERE id = '".$id."';";
+        $data = $this->consultarCampoTipoMaterial($tipo_material,$id);
+        foreach ($data as $clave => $valor) {
+            $nombre_anterior = $valor['material'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El tipo de material se modificó correctamente";
+                $this->registrarModificacion($tipo_material,$id,"material",$nombre_anterior,$nombre);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un tipo de objeto.
+     * @param string $tipo_objeto, nombre del tipo de objeto (tipo inodoro, tipo puerta, etc.)
+     * @param string $id, id del tipo de objeto.
+     * @param string $nombre, nuevo nombre del tipo de objeto.
+     * @return array
+     */
+    public function modificarTipoObjeto($tipo_objeto,$id,$nombre){
+        $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
+        $id = htmlspecialchars(trim($id));
+        $nombre = htmlspecialchars(trim($nombre));
+        $campos = "tipo = '".$nombre."'";
+        $sql = "UPDATE ".$tipo_objeto." SET $campos WHERE id = '".$id."';";
+        $data = $this->consultarCampoTipoObjeto($tipo_objeto,$id);
+        foreach ($data as $clave => $valor) {
+            $nombre_anterior = $valor['tipo'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El tipo de objeto se modificó correctamente";
+                $this->registrarModificacion($tipo_objeto,$id,"tipo",$nombre_anterior,$nombre);
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
 
     /**
      * Función que registra una modificación en una base de datos.
@@ -886,7 +978,6 @@ class modelo_modificacion {
         $columna = htmlspecialchars(trim($columna));
         $valor_anterior = htmlspecialchars(trim($valor_anterior));
         $valor_nuevo = htmlspecialchars(trim($valor_nuevo));
-        $usuario = htmlspecialchars(trim($usuario));
         if (strcasecmp($valor_anterior,$valor_nuevo) != 0) {
             $sql = "INSERT INTO modificaciones (tabla_modificacion,id_objeto,columna_modificada,valor_antiguo,valor_nuevo,usuario) VALUES ('".$bd."','".$id_objeto."','".$columna."','".$valor_anterior."','".$valor_nuevo."','".$_SESSION["login"]."');";
             $l_stmt = $this->conexion->prepare($sql);
@@ -915,7 +1006,7 @@ class modelo_modificacion {
      */
     public function consultarCampoSede($id_sede){
         $id_sede = htmlspecialchars(trim($id_sede));
-        $sql = "SELECT * FROM sede WHERE id = ".$id_sede.";";
+        $sql = "SELECT * FROM sede WHERE id = '".$id_sede."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Sede 1)";
@@ -941,7 +1032,7 @@ class modelo_modificacion {
     public function consultarCampoCampus($id_sede,$id_campus){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
-        $sql = "SELECT * FROM campus WHERE id = ".$id_campus." AND sede = ".$id_sede.";";
+        $sql = "SELECT * FROM campus WHERE id = '".$id_campus."' AND sede = ".$id_sede.";";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Campus 1)";
@@ -971,7 +1062,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
         $elemento = htmlspecialchars(trim($elemento));
-        $sql = "SELECT * FROM ".$elemento." WHERE id = ".$id." AND id_sede = ".$id_sede." AND id_campus = ".$id_sede.";";
+        $sql = "SELECT * FROM ".$elemento." WHERE id = '".$id."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_sede."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Campus 1)";
@@ -1002,7 +1093,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = ".$id_sede." AND id_campus = ".$id_sede." AND id_edificio = ".$id_edificio." AND piso = ".$piso.";";
+        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_sede."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Cubierta 1)";
@@ -1032,7 +1123,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT * FROM gradas WHERE id_sede = ".$id_sede." AND id_campus = ".$id_sede." AND id_edificio = ".$id_edificio." AND piso_inicio = ".$piso.";";
+        $sql = "SELECT * FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_sede."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Gradas 1)";
@@ -1064,7 +1155,7 @@ class modelo_modificacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $id = htmlspecialchars(trim($id));
         $elemento = htmlspecialchars(trim($elemento));
-        $sql = "SELECT * FROM ".$elemento." WHERE id = ".$id." AND id_edificio = ".$id_edificio." AND id_sede = ".$id_sede." AND id_campus = ".$id_sede.";";
+        $sql = "SELECT * FROM ".$elemento." WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Edificio 1)";
@@ -1084,13 +1175,13 @@ class modelo_modificacion {
     /**
      * Función que permite consultar el valor de un campo de un tipo de material.
      * @param string $tipo_material, tipo de material a consultar.
-     * @param string $nombre_tipo_material, nombre del tipo de mateial.
+     * @param string $id, id del tipo de mateial.
      * @return array
      */
-    public function consultarCampoTipoMaterial($tipo_material,$nombre_tipo_material){
+    public function consultarCampoTipoMaterial($tipo_material,$id){
         $tipo_material = htmlspecialchars(trim($tipo_material));
-        $nombre_tipo_material = htmlspecialchars(trim($nombre_tipo_material));
-        $sql = "SELECT * FROM ".$tipo_material." WHERE material = ".$nombre_tipo_material.";";
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM ".$tipo_material." WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Material 1)";
@@ -1110,13 +1201,13 @@ class modelo_modificacion {
     /**
      * Función que permite consultar el valor de un campo de un tipo de objeto.
      * @param string $tipo_objeto, tipo de objeto a consultar.
-     * @param string $nombre_tipo_objeto, nombre del tipo de mateial.
+     * @param string $id, id del tipo de mateial.
      * @return array
      */
-    public function consultarCampoTipoObjeto($tipo_objeto,$nombre_tipo_objeto){
+    public function consultarCampoTipoObjeto($tipo_objeto,$id){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
-        $nombre_tipo_objeto = htmlspecialchars(trim($nombre_tipo_objeto));
-        $sql = "SELECT * FROM ".$tipo_objeto." WHERE tipo = ".$nombre_tipo_objeto.";";
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM ".$tipo_objeto." WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Objeto 1)";

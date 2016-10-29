@@ -4569,3 +4569,27 @@
 [28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 283
 [28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 285
 [28-Oct-2016 17:07:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 287
+[28-Oct-2016 23:11:10 America/Bogota] PHP Parse error:  syntax error, unexpected '$piso' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 796
+[28-Oct-2016 23:11:41 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/modelo_usuario.php on line 52
+[28-Oct-2016 23:12:35 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:12:35 America/Bogota] PHP Fatal error:  Call to undefined method modelo_creacion::modificarSede() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 22
+[28-Oct-2016 23:13:49 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:13:49 America/Bogota] PHP Fatal error:  Call to undefined method modelo_creacion::modificarSede() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 22
+[28-Oct-2016 23:14:20 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:14:20 America/Bogota] PHP Fatal error:  Call to undefined method modelo_creacion::modificarSede() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 22
+[28-Oct-2016 23:14:43 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:14:43 America/Bogota] PHP Fatal error:  Call to undefined method modelo_creacion::modificarSede() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 22
+[28-Oct-2016 23:16:42 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:16:42 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 17
+[28-Oct-2016 23:16:42 America/Bogota] PHP Notice:  Undefined property: modelo_modificacion::$conexion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 991
+[28-Oct-2016 23:16:42 America/Bogota] PHP Fatal error:  Call to a member function prepare() on null in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 991
+[28-Oct-2016 23:18:31 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:18:31 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 37
+[28-Oct-2016 23:18:31 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1024
+[28-Oct-2016 23:18:31 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 40
+[28-Oct-2016 23:18:31 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_antiguo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 55
+[28-Oct-2016 23:18:31 America/Bogota] PHP Notice:  Undefined variable: usuario in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 981
+[28-Oct-2016 23:23:03 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 21
+[28-Oct-2016 23:23:03 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 37
+[28-Oct-2016 23:23:03 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_antiguo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 55
+[28-Oct-2016 23:24:29 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 37
