@@ -1591,7 +1591,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/campus/'+sede+'-'+campus+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -1733,7 +1733,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/cancha/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -1927,7 +1927,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/corredor/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2068,7 +2068,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/cubierta/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2235,7 +2235,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/gradas/'+sede+'-'+campus+'-'+edificio+'-'+piso+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2371,7 +2371,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/parqueadero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2512,7 +2512,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/piscina/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2672,7 +2672,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/plazoleta/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2818,7 +2818,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/sendero/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -2958,7 +2958,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/via/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -3102,7 +3102,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/edificio/'+sede+'-'+campus+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
@@ -3859,7 +3859,7 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="plano">'
                        +'<div class="col-sm-8 div_izquierda">'
-                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroFotos+'" href="archivos/planos/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
+                       +'<a target="_blank" name="'+record.nombre+'" id="plano'+numeroPlanos+'" href="archivos/planos/espacio/'+sede+'-'+campus+'-'+edificio+'-'+id+'/'+record.nombre+'">'
                        +'<span>'+record.nombre+'</span></a>'
                        +'</div><div class="col-sm-4" id="divBotonEliminarPlano" style="display:none">'
                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="plano'+numeroPlanos+'" id="eliminar_archivo" value="X" title="Eliminar el plano seleccionado"/>'
