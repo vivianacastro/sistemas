@@ -575,11 +575,11 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de los campus presentes en el sistema
-     * @param {array} info, arreglo con la información del campus a buscar.
+     * @param {array} informacion, arreglo con la información del campus a buscar.
      * @returns {data} object json
     **/
-    function ubicacionCampus(info){
-        var jObject = JSON.stringify(info);
+    function ubicacionCampus(informacion){
+        var jObject = JSON.stringify(informacion);
         var dataResult;
         try {
             $.ajax({
@@ -1057,12 +1057,12 @@ $(document).ready(function() {
         var nombreEdificio = $("#nombre_edificio").val();
         var piso = $("#pisos").val();
         if (validarCadena(nombreSede) && validarCadena(nombreCampus) && validarCadena(nombreEdificio) && validarCadena(piso)) {
-            var info = {};
-            info["nombre_sede"] = nombreSede;
-            info["nombre_campus"] = nombreCampus;
-            info["nombre_edificio"] = nombreEdificio;
-            info["piso"] = piso;
-            var data = buscarEspacios(info);
+            var informacion = {};
+            informacion["nombre_sede"] = nombreSede;
+            informacion["nombre_campus"] = nombreCampus;
+            informacion["nombre_edificio"] = nombreEdificio;
+            informacion["piso"] = piso;
+            var data = buscarEspacios(informacion);
             //console.log(data);
             if (data.mensaje != null) {
                 $("#espacio_padre").empty();
@@ -1265,9 +1265,9 @@ $(document).ready(function() {
                 var numeroPisos = $("#pisos_edificio").val();
                 var terraza = $('input[name="terraza"]:checked').val();
                 var sotano = $('input[name="sotano"]:checked').val();
-                var material_fachada = $("#material_fachada").val();
-                var alto_fachada = $("#alto_fachada").val();
-                var ancho_fachada = $("#ancho_fachada").val();
+                var materialFachada = $("#material_fachada").val();
+                var altoFachada = $("#alto_fachada").val();
+                var anchoFachada = $("#ancho_fachada").val();
                 var planos = document.getElementById("planos[]");
                 var fotos = document.getElementById("fotos[]");
                 if(!validarCadena(nombreSede)){
@@ -1302,9 +1302,9 @@ $(document).ready(function() {
                     informacion['numero_pisos'] = numeroPisos;
                     informacion['terraza'] = terraza;
                     informacion['sotano'] = sotano;
-                    informacion['material_fachada'] = material_fachada;
-                    informacion['alto_fachada'] = alto_fachada;
-                    informacion['ancho_fachada'] = ancho_fachada;
+                    informacion['material_fachada'] = materialFachada;
+                    informacion['alto_fachada'] = altoFachada;
+                    informacion['ancho_fachada'] = anchoFachada;
                     informacion['lat'] = coordenadas.lat().toFixed(8);
                     informacion['lng'] = coordenadas.lng().toFixed(8);
                     if (fotos.files.length <= 20 || planos.files.length <= 5) {

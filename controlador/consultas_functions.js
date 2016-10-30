@@ -1500,14 +1500,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarSede").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = "";
-        var data = consultarInformacionObjeto("sede",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = "";
+        var data = consultarInformacionObjeto("sede",informacion);
         console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
             }
         });
@@ -1519,13 +1520,13 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarCampus").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        var data = consultarInformacionObjeto("campus",info);
-        var archivos = consultarArchivosObjeto("campus",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        var data = consultarInformacionObjeto("campus",informacion);
+        var archivos = consultarArchivosObjeto("campus",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -1533,7 +1534,9 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 var myLatlng = new google.maps.LatLng(record.lat,record.lng);
                 coordsMapaModificacion = myLatlng;
@@ -1652,15 +1655,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarCancha").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("cancha",info);
-        var archivos = consultarArchivosObjeto("cancha",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("cancha",informacion);
+        var archivos = consultarArchivosObjeto("cancha",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -1668,8 +1671,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_cancha").attr('name',record.id);
                 $("#id_cancha").val(record.id);
                 $("#uso_cancha").val(record.uso);
                 $("#material_piso").val(record.material_piso);
@@ -1794,17 +1800,17 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarCorredor").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("corredor",info);
-        var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
-        var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
-        var archivos = consultarArchivosObjeto("corredor",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("corredor",informacion);
+        var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",informacion);
+        var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",informacion);
+        var archivos = consultarArchivosObjeto("corredor",informacion);
         console.log(data);
         console.log(dataIluminacion);
         console.log(dataInterruptor);
@@ -1814,8 +1820,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_corredor").attr('name',record.id);
                 $("#id_corredor").val(record.id);
                 $("#altura_pared").val(record.ancho_pared);
                 $("#ancho_pared").val(record.alto_pared);
@@ -1988,29 +1997,32 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarCubierta").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var edificio = $("#edificio_search").val();
         var piso = $("#pisos_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['nombre_edificio'] = limpiarCadena(edificio);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['nombre_edificio'] = limpiarCadena(edificio);
         var piso = piso;
         if (piso == 'sotano') {
             piso = '0';
         }else if(piso == 'terraza'){
             piso = '-1';
         }
-        info['piso'] = piso;
-        var data = consultarInformacionObjeto("cubierta",info);
-        var archivos = consultarArchivosObjeto("cubierta",info);
+        informacion['piso'] = piso;
+        var data = consultarInformacionObjeto("cubierta",informacion);
+        var archivos = consultarArchivosObjeto("cubierta",informacion);
         console.log(data);
         console.log(archivos);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#nombre_edificio").attr('name',record.id_edificio);
                 $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
                 var piso = record.piso;
                 if (piso == '0') {
@@ -2122,31 +2134,34 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarGradas").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var edificio = $("#edificio_search").val();
         var piso = $("#pisos_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['nombre_edificio'] = limpiarCadena(edificio);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['nombre_edificio'] = limpiarCadena(edificio);
         var piso = piso;
         if (piso == 'sotano') {
             piso = '0';
         }else if(piso == 'terraza'){
             piso = '-1';
         }
-        info['piso_inicio'] = piso;
-        var data = consultarInformacionObjeto("gradas",info);
-        var dataVentana = consultarInformacionObjeto("ventana_gradas",info);
-        var archivos = consultarArchivosObjeto("gradas",info);
+        informacion['piso_inicio'] = piso;
+        var data = consultarInformacionObjeto("gradas",informacion);
+        var dataVentana = consultarInformacionObjeto("ventana_gradas",informacion);
+        var archivos = consultarArchivosObjeto("gradas",informacion);
         console.log(data);
         console.log(dataVentana);
         console.log(archivos);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#nombre_edificio").attr('name',record.id_edificio);
                 $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
                 var piso = record.piso_inicio;
                 if (piso == '0') {
@@ -2289,15 +2304,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarParqueadero").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("parqueadero",info);
-        var archivos = consultarArchivosObjeto("parqueadero",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("parqueadero",informacion);
+        var archivos = consultarArchivosObjeto("parqueadero",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2305,8 +2320,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_parqueadero").attr('name',record.id);
                 $("#id_parqueadero").val(record.id);
                 $("#capacidad").val(record.capacidad);
                 $("#ancho").val(record.ancho);
@@ -2432,15 +2450,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarPiscina").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("piscina",info);
-        var archivos = consultarArchivosObjeto("piscina",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("piscina",informacion);
+        var archivos = consultarArchivosObjeto("piscina",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2448,8 +2466,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_piscina").attr('name',record.id);
                 $("#id_piscina").val(record.id);
                 $("#alto").val(record.alto);
                 $("#ancho").val(record.ancho);
@@ -2573,16 +2594,16 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarPlazoleta").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("plazoleta",info);
-        var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
-        var archivos = consultarArchivosObjeto("plazoleta",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("plazoleta",informacion);
+        var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",informacion);
+        var archivos = consultarArchivosObjeto("plazoleta",informacion);
         console.log(data);
         console.log(dataIluminacion);
         console.log(archivos);
@@ -2591,8 +2612,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_plazoleta").attr('name',record.id);
                 $("#id_plazoleta").val(record.id);
                 $("#nombre").val(record.nombre);
                 var myLatlng = new google.maps.LatLng(record.lat,record.lng);
@@ -2733,15 +2757,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarSendero").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("sendero",info);
-        var archivos = consultarArchivosObjeto("sendero",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("sendero",informacion);
+        var archivos = consultarArchivosObjeto("sendero",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2749,8 +2773,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_sendero").attr('name',record.id);
                 $("#id_sendero").val(record.id);
                 $("#longitud").val(record.longitud);
                 $("#ancho").val(record.ancho);
@@ -2879,15 +2906,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarVia").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#codigo_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("via",info);
-        var archivos = consultarArchivosObjeto("via",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("via",informacion);
+        var archivos = consultarArchivosObjeto("via",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -2895,8 +2922,11 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#id_via").attr('name',record.id);
                 $("#id_via").val(record.id);
                 $("#tipo_pintura").val(record.tipo_pintura);
                 $("#longitud_demarcacion").val(record.longitud_demarcacion);
@@ -3019,15 +3049,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarEdificio").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var id = $("#edificio_search").val();
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("edificio",info);
-        var archivos = consultarArchivosObjeto("edificio",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("edificio",informacion);
+        var archivos = consultarArchivosObjeto("edificio",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -3035,7 +3065,9 @@ $(document).ready(function() {
         }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_edificio").val(record.id);
                 $("#nombre_edificio").val(record.nombre);
@@ -3163,23 +3195,23 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarEspacio").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var sede = $("#sede_search").val();
         var campus = $("#campus_search").val();
         var edificio = $("#edificio_search").val();
         var id = $("#espacio_search").val();
         var usoEspacio;
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['nombre_edificio'] = edificio;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("espacio",info);
-        var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",info);
-        var dataInterruptor = consultarInformacionObjeto("interruptor_espacio",info);
-        var dataPuerta = consultarInformacionObjeto("puerta_espacio",info);
-        var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",info);
-        var dataVentana = consultarInformacionObjeto("ventana_espacio",info);
-        var archivos = consultarArchivosObjeto("espacio",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['nombre_edificio'] = edificio;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("espacio",informacion);
+        var dataIluminacion = consultarInformacionObjeto("iluminacion_espacio",informacion);
+        var dataInterruptor = consultarInformacionObjeto("interruptor_espacio",informacion);
+        var dataPuerta = consultarInformacionObjeto("puerta_espacio",informacion);
+        var dataSuministro = consultarInformacionObjeto("suministro_energia_espacio",informacion);
+        var dataVentana = consultarInformacionObjeto("ventana_espacio",informacion);
+        var archivos = consultarArchivosObjeto("espacio",informacion);
         var edificioEspacioPadre = {};
         edificioEspacioPadre["nombre_sede"] = $("#sede_search").val();
         edificioEspacioPadre["nombre_campus"] = $("#campus_search").val();
@@ -3208,8 +3240,11 @@ $(document).ready(function() {
         console.log(dataVentana);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
+                $("#nombre_edificio").attr('name',record.id_edificio);
                 $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
                 $("#pisos").val(record.piso);
                 $("#id_espacio").val(record.id);
@@ -3451,9 +3486,9 @@ $(document).ready(function() {
             nombreUsoEspacio = "";
         }
         if (usoEspacio != "") {
-            info['uso_espacio'] = nombreUsoEspacio;
+            informacion['uso_espacio'] = nombreUsoEspacio;
             if (usoEspacio == '1') { //Salón
-                data = consultarInformacionObjeto("salon",info);
+                data = consultarInformacionObjeto("salon",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Salón</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3475,7 +3510,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '2'){ //Auditorio
-                data = consultarInformacionObjeto("auditorio",info);
+                data = consultarInformacionObjeto("auditorio",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Auditorio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3497,8 +3532,8 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '3'){ //Laboratorio
-                data = consultarInformacionObjeto("laboratorio",info);
-                dataSanitario = consultarInformacionObjeto("punto_sanitario",info);
+                data = consultarInformacionObjeto("laboratorio",informacion);
+                dataSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                 console.log(data);
                 console.log(dataSanitario);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Laboratorio</h5></b></div>';
@@ -3536,7 +3571,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '4'){ //Sala de Cómputo
-                data = consultarInformacionObjeto("sala_computo",info);
+                data = consultarInformacionObjeto("sala_computo",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Cómputo</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3558,7 +3593,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '5'){ //Oficina
-                data = consultarInformacionObjeto("oficina",info);
+                data = consultarInformacionObjeto("oficina",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Oficina</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3577,9 +3612,9 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '6'){ //Baño
-                data = consultarInformacionObjeto("bano",info);
-                dataLavamanos = consultarInformacionObjeto("lavamanos",info);
-                dataOrinal = consultarInformacionObjeto("orinal",info);
+                data = consultarInformacionObjeto("bano",informacion);
+                dataLavamanos = consultarInformacionObjeto("lavamanos",informacion);
+                dataOrinal = consultarInformacionObjeto("orinal",informacion);
                 console.log(data);
                 console.log(dataLavamanos);
                 console.log(dataOrinal);
@@ -3646,7 +3681,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '7'){ //Cuarto Técnico
-                data = consultarInformacionObjeto("cuarto_tecnico",info);
+                data = consultarInformacionObjeto("cuarto_tecnico",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto Técnico</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3665,7 +3700,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '8'){ //Bodega/Almacen
-                data = consultarInformacionObjeto("bodega",info);
+                data = consultarInformacionObjeto("bodega",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Bodega/Almacén</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3680,7 +3715,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '10'){ //Cuarto de Plantas
-                data = consultarInformacionObjeto("cuarto_plantas",info);
+                data = consultarInformacionObjeto("cuarto_plantas",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Plantas</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3695,7 +3730,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
-                data = consultarInformacionObjeto("cuarto_aire_acondicionado",info);
+                data = consultarInformacionObjeto("cuarto_aire_acondicionado",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Aires Acondicionados</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3710,7 +3745,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
-                data = consultarInformacionObjeto("area_deportiva_cerrada",info);
+                data = consultarInformacionObjeto("area_deportiva_cerrada",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Área Deportiva Cerrada</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3725,7 +3760,7 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
-                data = consultarInformacionObjeto("centro_datos",info);
+                data = consultarInformacionObjeto("centro_datos",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Centro de Datos</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3740,8 +3775,8 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '17'){ //Cuarto de Bombas
-                data = consultarInformacionObjeto("cuarto_bombas",info);
-                dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",info);
+                data = consultarInformacionObjeto("cuarto_bombas",informacion);
+                dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                 console.log(data);
                 console.log(dataPuntoSanitario);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Bombas</h5></b></div>';
@@ -3770,8 +3805,8 @@ $(document).ready(function() {
                     }
                 });
             }else if(usoEspacio == '19'){ //Cocineta
-                  data = consultarInformacionObjeto("cocineta",info);
-                  dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",info);
+                  data = consultarInformacionObjeto("cocineta",informacion);
+                  dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                   console.log(data);
                   console.log(dataPuntoSanitario);
                   var componente = '<div id="tituloInfo"><b><h5>Información de la Cocineta</h5></b></div>';
@@ -3800,7 +3835,7 @@ $(document).ready(function() {
                       }
                   });
               }else if(usoEspacio == '20'){ //Sala de Estudio
-                data = consultarInformacionObjeto("sala_estudio",info);
+                data = consultarInformacionObjeto("sala_estudio",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Estudio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
@@ -3913,12 +3948,12 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#visualizarTipoMaterial").click(function (e){
-        var info =  {};
+        var informacion =  {};
         var tipoMaterial = $("#tipo_material_search").val();
         var nombreTipoMaterial = $("#nombre_tipo_material_search").val();
-        /*info['tipo_material'] = tipoMaterial;
-        info['nombre_tipo_materil'] = nombreTipoMaterial;
-        var data = consultarInformacionObjeto("tipo_material",info);
+        /*informacion['tipo_material'] = tipoMaterial;
+        informacion['nombre_tipo_materil'] = nombreTipoMaterial;
+        var data = consultarInformacionObjeto("tipo_material",informacion);
         console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -3936,12 +3971,12 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
      $("#visualizarTipoObjeto").click(function (e){
-         var info =  {};
+         var informacion =  {};
          var tipoObjeto = $("#tipo_objeto_search").val();
          var nombreTipoObjeto = $("#nombre_tipo_objeto_search").val();
-         /*info['tipo_objeto'] = tipoObjeto;
-         info['nombre_tipo_objeto'] = nombreTipoObjeto;
-         var data = consultarInformacionObjeto("tipo_objeto",info);
+         /*informacion['tipo_objeto'] = tipoObjeto;
+         informacion['nombre_tipo_objeto'] = nombreTipoObjeto;
+         var data = consultarInformacionObjeto("tipo_objeto",informacion);
          console.log(data);
          $.each(data, function(index, record) {
              if($.isNumeric(index)) {
@@ -4652,17 +4687,17 @@ $(document).ready(function() {
         for (var i = 0; i < marcadores.length; i++) {
             marcadores[i].setMap(null);
         }
-        var info = {};
-        info["nombre_sede"] = sedeSeleccionada;
-        info["nombre_campus"] = campusSeleccionado;
-        var edificios = buscarObjetos("edificios",info);
-        var canchas = buscarObjetos("canchas",info);
-        var corredores = buscarObjetos("corredores",info);
-        var parqueaderos = buscarObjetos("parqueaderos",info);
-        var piscinas = buscarObjetos("piscinas",info);
-        var plazoletas = buscarObjetos("plazoletas",info);
-        var senderos = buscarObjetos("senderos",info);
-        var vias = buscarObjetos("vias",info);
+        var informacion = {};
+        informacion["nombre_sede"] = sedeSeleccionada;
+        informacion["nombre_campus"] = campusSeleccionado;
+        var edificios = buscarObjetos("edificios",informacion);
+        var canchas = buscarObjetos("canchas",informacion);
+        var corredores = buscarObjetos("corredores",informacion);
+        var parqueaderos = buscarObjetos("parqueaderos",informacion);
+        var piscinas = buscarObjetos("piscinas",informacion);
+        var plazoletas = buscarObjetos("plazoletas",informacion);
+        var senderos = buscarObjetos("senderos",informacion);
+        var vias = buscarObjetos("vias",informacion);
         console.log(edificios);
         console.log(canchas);
         console.log(corredores);
@@ -5078,15 +5113,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_cancha", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("cancha",info);
-        var archivos = consultarArchivosObjeto("cancha",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("cancha",informacion);
+        var archivos = consultarArchivosObjeto("cancha",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -5111,7 +5146,9 @@ $(document).ready(function() {
         actualizarSelectTipoObjeto("tipo_pintura",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_cancha").val(record.id);
                 $("#uso_cancha").val(record.uso);
@@ -5216,17 +5253,17 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_corredor", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("corredor",info);
-        var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",info);
-        var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",info);
-        var archivos = consultarArchivosObjeto("corredor",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("corredor",informacion);
+        var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",informacion);
+        var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",informacion);
+        var archivos = consultarArchivosObjeto("corredor",informacion);
         console.log(data);
         console.log(dataIluminacion);
         console.log(dataInterruptor);
@@ -5325,7 +5362,9 @@ $(document).ready(function() {
         actualizarSelectTipoObjeto("tipo_suministro_energia",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_corredor").val(record.id);
                 $("#altura_pared").val(record.ancho_pared);
@@ -5479,15 +5518,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_parqueadero", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("parqueadero",info);
-        var archivos = consultarArchivosObjeto("parqueadero",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("parqueadero",informacion);
+        var archivos = consultarArchivosObjeto("parqueadero",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -5528,7 +5567,9 @@ $(document).ready(function() {
         actualizarSelectTipoObjeto("tipo_pintura",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_parqueadero").val(record.id);
                 $("#capacidad").val(record.capacidad);
@@ -5635,15 +5676,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_piscina", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("piscina",info);
-        var archivos = consultarArchivosObjeto("piscina",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("piscina",informacion);
+        var archivos = consultarArchivosObjeto("piscina",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -5675,7 +5716,9 @@ $(document).ready(function() {
         añadirComponente("dataObjeto",componente);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_piscina").val(record.id);
                 $("#alto").val(record.alto);
@@ -5780,16 +5823,16 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_plazoleta", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("plazoleta",info);
-        var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",info);
-        var archivos = consultarArchivosObjeto("plazoleta",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("plazoleta",informacion);
+        var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",informacion);
+        var archivos = consultarArchivosObjeto("plazoleta",informacion);
         console.log(data);
         console.log(dataIluminacion);
         console.log(archivos);
@@ -5823,7 +5866,9 @@ $(document).ready(function() {
         actualizarSelectTipoObjeto("tipo_pintura",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_plazoleta").val(record.id);
                 $("#nombre").val(record.nombre);
@@ -5945,15 +5990,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_sendero", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("sendero",info);
-        var archivos = consultarArchivosObjeto("sendero",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("sendero",informacion);
+        var archivos = consultarArchivosObjeto("sendero",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -6011,7 +6056,9 @@ $(document).ready(function() {
         actualizarSelectMaterial("material_piso",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_sendero").val(record.id);
                 $("#longitud").val(record.longitud);
@@ -6121,15 +6168,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_via", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado;
         var id = limpiarCadena(codigoSeleccionado);
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = id;
-        var data = consultarInformacionObjeto("via",info);
-        var archivos = consultarArchivosObjeto("via",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = id;
+        var data = consultarInformacionObjeto("via",informacion);
+        var archivos = consultarArchivosObjeto("via",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -6155,7 +6202,9 @@ $(document).ready(function() {
         actualizarSelectTipoObjeto("tipo_pintura",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_via").val(record.id);
                 $("#tipo_pintura").val(record.tipo_pintura);
@@ -6259,15 +6308,15 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#contenido").on("click", ".ver_edificio", function(){
-        var info =  {};
+        var informacion =  {};
         var sede = sedeSeleccionada;
         var campus = campusSeleccionado
         var id = codigoSeleccionado;
-        info['nombre_sede'] = sede;
-        info['nombre_campus'] = campus;
-        info['id'] = limpiarCadena(id);
-        var data = consultarInformacionObjeto("edificio",info);
-        var archivos = consultarArchivosObjeto("edificio",info);
+        informacion['nombre_sede'] = sede;
+        informacion['nombre_campus'] = campus;
+        informacion['id'] = limpiarCadena(id);
+        var data = consultarInformacionObjeto("edificio",informacion);
+        var archivos = consultarArchivosObjeto("edificio",informacion);
         console.log(data);
         console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
@@ -6306,7 +6355,9 @@ $(document).ready(function() {
         actualizarSelectMaterial("material_fachada",0);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                $("#nombre_sede").attr('name',record.id_sede);
                 $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").attr('name',record.id_campus);
                 $("#nombre_campus").val(record.nombre_campus);
                 $("#id_edificio").val(record.id);
                 $("#nombre_edificio").val(record.nombre);
@@ -6931,17 +6982,23 @@ $(document).ready(function() {
     $("#guardar_modificaciones_sede").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la sede?");
         if (confirmacion) {
-            var info = {};
-            id_sede = limpiarCadena($("#sede_search").val());
-            nombre_sede = limpiarCadena($("#nombre_sede").val());
-            info["id_sede"] = id_sede;
-            info["nombre_sede"] = nombre_sede;
-            var data = modificarObjeto("sede",info);
-            console.log(data);
-            if(data.verificar){
-                alert(data.mensaje);
-                $("#divDialogConsulta").modal('hide');
-                actualizarSelectSede();
+            var informacion = {};
+            var idSede = $("#nombre_sede").attr('name');
+            var nombreSede = limpiarCadena($("#nombre_sede").val());
+            if (nombreSede != "") {
+                informacion["id_sede"] = idSede;
+                informacion["nombre_sede"] = nombreSede;
+                var data = modificarObjeto("sede",informacion);
+                console.log(informacion);
+                console.log(data);
+                if(data.verificar){
+                    alert(data.mensaje);
+                    $("#divDialogConsulta").modal('hide');
+                    actualizarSelectSede();
+                }
+            }else{
+              alert("ERROR. Ingrese el nombre de la sede");
+              $("#nombre_sede").focus();
             }
         }
     });
@@ -6951,18 +7008,264 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#guardar_modificaciones_campus").click(function (e){
-      var confirmacion = window.confirm("¿Guardar la información de la sede?");
+      var confirmacion = window.confirm("¿Guardar la información del campus?");
       if (confirmacion) {
-          var info = {};
-          nombre_sede = limpiarCadena($("#nombre_sede").val());
-          nombre_sede = limpiarCadena($("#nombre_campus").val());
-          info["nombre_sede"] = nombre_sede;
-          info["nombre_campus"] = nombre_sede;
-          info['lat'] = coordenadas.lat().toFixed(8);
-          info['lng'] = coordenadas.lng().toFixed(8);
-          var data = modificarObjeto("campus",info);
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var nombreCampus = limpiarCadena($("#nombre_campus").val());
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          if (nombreCampus != "") {
+              informacion["id_sede"] = idSede;
+              informacion["id_campus"] = idCampus;
+              informacion["nombre_campus"] = nombreCampus;
+              for (var i = 0; i < marcadoresModificacion.length; i++) {
+                  coordenadas = marcadoresModificacion[i].getPosition();
+              }
+              informacion['lat'] = coordenadas.lat().toFixed(8);
+              informacion['lng'] = coordenadas.lng().toFixed(8);
+              console.log(informacion);
+              var data = modificarObjeto("campus",informacion);
+              console.log(data);
+              if(data.verificar){
+                  alert(data.mensaje);
+                  $("#sede_search").val("").change();
+                  $("#divDialogConsulta").modal('hide');
+              }
+          }else{
+              alert("ERROR. Ingrese el nombre del campus");
+              $("#nombre_campus").focus();
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_cancha y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_cancha").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de la cancha?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_cancha").val());
+          var usoCancha = $("#uso_cancha").val();
+          var materialPiso = $("#material_piso").val();
+          var tipoPintura = $("#tipo_pintura").val();
+          var longitudDemarcacion = $("#longitud_demarcacion").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          if (usoCancha == "") {
+              alert("ERROR. Ingrese el uso de la cancha");
+              $("#uso_cancha").focus();
+          }else{
+              informacion["id_sede"] = idSede;
+              informacion["id_campus"] = idCampus;
+              informacion["id"] = id;
+              informacion["uso_cancha"] = usoCancha;
+              informacion["material_piso"] = materialPiso;
+              informacion["tipo_pintura"] = tipoPintura;
+              informacion["longitud_demarcacion"] = longitudDemarcacion;
+              for (var i = 0; i < marcadoresModificacion.length; i++) {
+                  coordenadas = marcadoresModificacion[i].getPosition();
+              }
+              informacion['lat'] = coordenadas.lat().toFixed(8);
+              informacion['lng'] = coordenadas.lng().toFixed(8);
+              var data = modificarObjeto("cancha",informacion);
+              console.log(informacion);
+              console.log(data);
+              if(data.verificar){
+                  alert(data.mensaje);
+                  $("#sede_search").val("").change();
+                  $("#divDialogConsulta").modal('hide');
+              }
+          }
+
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_corredor y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_corredor").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información del corredor?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_corredor").val());
+          var alturaPared = $("#altura_pared").val();
+          var anchoPared = $("#ancho_pared").val();
+          var materialPared = $("#material_pared").val();
+          var largoTecho = $("#largo_techo").val();
+          var anchoTecho = $("#ancho_techo").val();
+          var materialTecho = $("#material_techo").val();
+          var largoPiso = $("#largo_piso").val();
+          var anchoPiso = $("#ancho_piso").val();
+          var materialPiso = $("#material_piso").val();
+          var tipoIluminacion = [];
+          var cantidadIluminacion = [];
+          var tipoSuministroEnergia = [];
+          var tomacorriente = [];
+          var cantidadTomacorrientes = [];
+          var tipoInterruptor = [];
+          var cantidadInterruptores = [];
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['alto_pared'] = alturaPared;
+          informacion['ancho_pared'] = anchoPared;
+          informacion['material_pared'] = materialPared;
+          informacion['largo_techo'] = largoTecho;
+          informacion['ancho_techo'] = anchoTecho;
+          informacion['material_techo'] = materialTecho;
+          informacion['largo_piso'] = largoPiso;
+          informacion['ancho_piso'] = anchoPiso;
+          informacion['material_piso'] = materialPiso;
+          informacion['tipo_suministro_energia'] = $("#tipo_suministro_energia").val();
+          informacion['tomacorriente'] = $("#tomacorriente").val();
+          informacion['cantidad_interruptor'] = $("#cantidad_tomacorrientes").val();
+          for (var i=0;i<=iluminacionCont;i++) {
+              if (i==0) {
+                  tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                  cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+              }else{
+                  tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                  cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+              }
+          }
+          for (var i=0;i<=interruptoresCont;i++) {
+              if (i==0) {
+                  tipoInterruptor[i] = $("#tipo_interruptor").val();
+                  cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+              }else{
+                  tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                  cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+              }
+          }
+          informacion['tipo_iluminacion'] = tipoIluminacion;
+          informacion['cantidad_iluminacion'] = cantidadIluminacion;
+          informacion['tipo_interruptor'] = tipoInterruptor;
+          informacion['cantidad_interruptores'] = cantidadInterruptores;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("corredor",informacion);
+          console.log(data);
           if(data.verificar){
               alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_cubierta y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_cubierta").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de la cubierta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var piso = $("#pisos").val();
+          var tipoCubierta = $("#tipo_cubierta").val();
+          var materialCubierta = $("#material_cubierta").val();
+          var ancho = $("#ancho").val();
+          var largo = $("#largo").val();
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["piso"] = piso;
+          informacion['tipo_cubierta'] = tipoCubierta;
+          informacion['material_cubierta'] = materialCubierta;
+          informacion['ancho'] = ancho;
+          informacion['largo'] = largo;
+          var data = modificarObjeto("cubierta",informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_gradas y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_gradas").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de las gradas?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var piso = $("#pisos").val();
+          var pasamanos = $('input[name="pasamanos"]:checked').val();
+          var materialPasamanos = $("#material_pasamanos").val();
+          var ventanas = $('input[name="ventanas"]:checked').val();
+          var tipoVentana = {};
+          var cantidadVentanas = {};
+          var materialVentana = {};
+          var anchoVentana = {};
+          var altoVentana = {};
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          if (piso == 'sotano') {
+              piso = '0';
+          }else if (piso == 'terraza') {
+              piso = '-1';
+          }
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["piso"] = piso;
+          informacion['pasamanos'] = pasamanos;
+          informacion['material_pasamanos'] = materialPasamanos;
+          informacion['ventana'] = ventanas;
+          for (var i=0;i<=ventanasCont;i++) {
+              if (i==0) {
+                  tipoVentana[i] = $("#tipo_ventana").val();
+                  cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                  materialVentana[i] = $("#material_ventana").val();
+                  anchoVentana[i] = $("#ancho_ventana").val();
+                  altoVentana[i] = $("#alto_ventana").val();
+              }else{
+                  tipoVentana[i] = $("#tipo_ventana"+i).val();
+                  cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                  materialVentana[i] = $("#material_ventana"+i).val();
+                  anchoVentana[i] = $("#ancho_ventana"+i).val();
+                  altoVentana[i] = $("#alto_ventana"+i).val();
+              }
+          }
+          informacion['tipo_ventana'] = tipoVentana;
+          informacion['cantidad_ventanas'] = cantidadVentanas;
+          informacion['material_ventana'] = materialVentana;
+          informacion['ancho_ventana'] = anchoVentana;
+          informacion['alto_ventana'] = altoVentana;
+          var data = modificarObjeto("gradas",informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
           }
       }
     });

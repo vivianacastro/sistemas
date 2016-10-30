@@ -4593,3 +4593,69 @@
 [28-Oct-2016 23:23:03 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 37
 [28-Oct-2016 23:23:03 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_antiguo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 55
 [28-Oct-2016 23:24:29 America/Bogota] PHP Notice:  Undefined variable: nombre_sede_nuevo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 37
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined index: $nombre_campus in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined index: $lat in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined index: $lng in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 19:46:40 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 19:46:40 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined index: $nombre_campus in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined index: $lat in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined index: $lng in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 19:57:53 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 19:57:53 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined index: $nombre_campus in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined index: $lat in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined index: $lng in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 42
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 19:58:47 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 19:58:47 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 20:03:54 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:03:54 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:03:54 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 20:03:54 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 20:03:54 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 20:08:45 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:08:45 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:08:45 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 20:08:45 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 20:08:45 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 20:19:09 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 62
+[29-Oct-2016 20:19:09 America/Bogota] PHP Notice:  Undefined index: uso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 62
+[29-Oct-2016 20:21:41 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 62
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: uso_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 155
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: material_piso_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 157
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: tipo_pintura_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 159
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: longitud_demarcacion_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 160
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 161
+[29-Oct-2016 20:24:36 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 162
+[29-Oct-2016 20:27:43 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:27:43 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:27:43 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 20:27:43 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 20:27:43 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 20:32:53 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:32:53 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:32:53 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 95
+[29-Oct-2016 20:32:53 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 20:32:53 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 20:32:53 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 98
+[29-Oct-2016 20:34:37 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:34:37 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:34:37 America/Bogota] PHP Notice:  Undefined variable: nombre_campus_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 95
+[29-Oct-2016 20:34:37 America/Bogota] PHP Notice:  Undefined variable: lat_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 96
+[29-Oct-2016 20:34:37 America/Bogota] PHP Notice:  Undefined variable: lng_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 97
+[29-Oct-2016 20:35:59 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1049
+[29-Oct-2016 20:35:59 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 79
+[29-Oct-2016 20:44:18 America/Bogota] PHP Notice:  Undefined variable: uso_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 162
+[29-Oct-2016 20:51:59 America/Bogota] PHP Notice:  Undefined index: cantidad in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 82
+[29-Oct-2016 20:51:59 America/Bogota] PHP Notice:  Undefined index: cantidad_interruptor in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 82
+[29-Oct-2016 20:55:18 America/Bogota] PHP Notice:  Undefined index: cantidad in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 82
+[29-Oct-2016 20:57:41 America/Bogota] PHP Notice:  Undefined index: cantidad in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 82
