@@ -51,8 +51,8 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La sede se modificó correctamente";
                 $this->registrarModificacion("sede",$id_sede,"nombre",$nombre_sede_antiguo,$nombre_sede);
+                $GLOBALS['mensaje'] = "La sede se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -92,10 +92,10 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El campus se modificó correctamente";
                 $this->registrarModificacion("campus",$id_sede."-".$id_campus,"nombre",$nombre_campus_anterior,$nombre_campus);
                 $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "El campus se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -125,7 +125,7 @@ class modelo_modificacion {
         $longitud_demarcacion = htmlspecialchars(trim($longitud_demarcacion));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
-        $campos = "uso = '".$uso."', id_material_piso = '".$material_piso."', lat = '".$lat."', lng = '".$lng."'";
+        $campos = "uso = '".$uso."', longitud_demarcacion = '".$longitud_demarcacion."', lat = '".$lat."', lng = '".$lng."'";
         if (strcasecmp($material_piso,'') != 0)
             $campos = $campos.", id_material_piso = '".$material_piso."'";
         if (strcasecmp($tipo_pintura,'') != 0)
@@ -151,7 +151,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La cancha se modificó correctamente";
                 $this->registrarModificacion("cancha",$id_sede."-".$id_campus."-".$id,"uso",$uso_anterior,$uso);
                 if (strcasecmp($material_piso,'') != 0)
                     $this->registrarModificacion("cancha",$id_sede."-".$id_campus."-".$id,"id_material_piso",$material_piso_anterior,$material_piso);
@@ -160,6 +159,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("cancha",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitud_demarcacion_anterior,$longitud_demarcacion);
                 $this->registrarModificacion("cancha",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("cancha",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "La cancha se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -202,13 +202,13 @@ class modelo_modificacion {
         $material_techo = htmlspecialchars(trim($material_techo));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
-        $cantidad = htmlspecialchars(trim($cantidad));
+        $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."',
                     ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."',
                     ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."',
-                    tomacorriente = '".$tomacorriente."', cantidad = '".$cantidad."', lat = '".$lat."', lng = '".$lng."'";
+                    tomacorriente = '".$tomacorriente."', cantidad = '".$cantidad_interruptor."', lat = '".$lat."', lng = '".$lng."'";
         if (strcasecmp($material_pared,'') != 0)
             $campos = $campos.", id_material_pared = '".$material_pared."'";
         if (strcasecmp($material_piso,'') != 0)
@@ -246,7 +246,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"ancho_pared",$ancho_pared_anterior,$ancho_pared);
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"alto_pared",$alto_pared_anterior,$alto_pared);
                 if (strcasecmp($material_pared,'') != 0)
@@ -271,6 +270,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
                     $this->modificarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$cantidad_interruptor[$i]);
                 }*/
+                $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -322,13 +322,13 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 if (strcasecmp($tipo_cubierta,'') != 0)
                     $this->registrarModificacion("cubierta",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_tipo_cubierta",$tipo_cubierta_anterior,$tipo_cubierta);
                 if (strcasecmp($material_cubierta,'') != 0)
                     $this->registrarModificacion("cubierta",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material_cubierta",$material_cubierta_anterior,$material_cubierta);
                 $this->registrarModificacion("cubierta",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"largo_cubierta",$largo_cubierta_anterior,$largo_cubierta);
                 $this->registrarModificacion("cubierta",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"ancho_cubierta",$ancho_cubierta_anterior,$ancho_cubierta);
+                $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -376,13 +376,13 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "Las gradas se modificaron correctamente";
                 $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"pasamanos",$pasamanos_anterior,$pasamanos);
                 if (strcasecmp($pasamanos,'true') == 0 && strcasecmp($material_pasamanos,'') != 0)
                     $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material_pasamanos",$material_pasamanos_anterior,$material_pasamanos);
                 /*for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->modificarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_ventana[$i],$cantidad_ventana[$i],$material[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }*/
+                $GLOBALS['mensaje'] = "Las gradas se modificaron correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -444,7 +444,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El parqueadero se modificó correctamente";
                 if (strcasecmp($material_piso,'') != 0)
                     $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"id_material_piso",$material_piso_anterior,$material_piso);
                 if (strcasecmp($tipo_pintura,'') != 0)
@@ -455,6 +454,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitud_demarcacion_anterior,$longitud_demarcacion);
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "El parqueadero se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -506,13 +506,13 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La piscina se modificó correctamente";
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"cantidad_punto_hidraulico",$cantidad_punto_hidraulico_anterior,$cantidad_punto_hidraulico);
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"largo",$largo_anterior,$largo);
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"ancho",$ancho_anterior,$ancho);
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"alto",$alto_anterior,$alto);
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "La piscina se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -554,12 +554,12 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
                 /*for ($i=0;$i<count($tipo_iluminacion);$i++) {
                     $this->modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }*/
+                $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -632,7 +632,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El sendero peatonal se modificó correctamente";
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"longitud_anterior",$longitud_anterior,$longitud);
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"ancho_anterior",$ancho_anterior,$ancho);
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"id_material_piso_anterior",$material_piso_anterior,$material_piso);
@@ -644,6 +643,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"largo_cubierta_anterior",$largo_cubierta_anterior,$largo_cubierta);
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "El sendero peatonal se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -696,7 +696,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "La vía se modificó correctamente";
                 if (strcasecmp($tipo_material,'') != 0)
                     $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"id_tipo_material",$tipo_material_anterior,$tipo_material);
                 if (strcasecmp($tipo_pintura_demarcacion,'') != 0)
@@ -705,6 +704,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitud_demarcacion_anterior,$longitud_demarcacion);
                 $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "La vía se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -764,7 +764,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El edificio se modificó correctamente";
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"numero_pisos",$numero_pisos_anterior,$numero_pisos);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"sotano",$sotano_anterior,$sotano);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"terraza",$terraza_anterior,$terraza);
@@ -775,6 +774,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"alto_fachada",$alto_fachada_anterior,$alto_fachada);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                $GLOBALS['mensaje'] = "El edificio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -851,7 +851,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
                 if (strcasecmp($uso_espacio,'') != 0)
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"uso_espacio",$uso_espacio_anterior,$uso_espacio);
                 if (strcasecmp($material_pared,'') != 0)
@@ -883,6 +882,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventana[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
+                $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -917,8 +917,8 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El tipo de material se modificó correctamente";
                 $this->registrarModificacion($tipo_material,$id,"material",$nombre_anterior,$nombre);
+                $GLOBALS['mensaje'] = "El tipo de material se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -953,8 +953,8 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = "El tipo de objeto se modificó correctamente";
                 $this->registrarModificacion($tipo_objeto,$id,"tipo",$nombre_anterior,$nombre);
+                $GLOBALS['mensaje'] = "El tipo de objeto se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -1032,7 +1032,7 @@ class modelo_modificacion {
     public function consultarCampoCampus($id_sede,$id_campus){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
-        $sql = "SELECT * FROM campus WHERE id = '".$id_campus."' AND sede = ".$id_sede.";";
+        $sql = "SELECT * FROM campus WHERE id = '".$id_campus."' AND sede = '".$id_sede."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Campus 1)";
@@ -1062,7 +1062,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
         $elemento = htmlspecialchars(trim($elemento));
-        $sql = "SELECT * FROM ".$elemento." WHERE id = '".$id."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_sede."';";
+        $sql = "SELECT * FROM ".$elemento." WHERE id = '".$id."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Campus 1)";
@@ -1075,6 +1075,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1093,7 +1094,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_sede."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
+        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Cubierta 1)";
@@ -1105,6 +1106,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1135,6 +1137,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1167,6 +1170,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1193,6 +1197,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1219,6 +1224,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
