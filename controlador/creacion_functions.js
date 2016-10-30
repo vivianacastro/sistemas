@@ -328,7 +328,7 @@ $(document).ready(function() {
                             interruptoresCont--;
                         }
                         $("#añadir_informacion_adicional").removeAttr('disabled');
-                        $("#eliminar_informacion_adicional").attr('disabled','disabled');
+                        $("#eliminar_informacion_adicional").attr('disabled',true);
                         $("#divTieneEspacioPadre").hide();
                         $('input[name=tiene_espacio_padre]').attr('checked',false);
                         var planos = document.getElementById("planos[]");
@@ -339,7 +339,7 @@ $(document).ready(function() {
                             eliminarComponente("espacio"+espaciosCont);
                         }
                         espaciosCont = 0;
-                        $("#eliminar_espacio").attr('disabled','disabled');
+                        $("#eliminar_espacio").attr('disabled',true);
                         window.scrollTo(0,0);
                     }
                 }
@@ -3715,7 +3715,7 @@ $(document).ready(function() {
      */
     $("#añadir_informacion_adicional").click(function (e){
         $("#informacion-adicional").show();
-        $("#añadir_informacion_adicional").attr('disabled','disabled');
+        $("#añadir_informacion_adicional").attr('disabled',true);
         $('#eliminar_informacion_adicional').removeAttr("disabled");
     });
 
@@ -3725,7 +3725,7 @@ $(document).ready(function() {
      */
     $("#eliminar_informacion_adicional").click(function (e){
         $("#informacion-adicional").hide();
-        $("#eliminar_informacion_adicional").attr('disabled','disabled');
+        $("#eliminar_informacion_adicional").attr('disabled',true);
         $('#añadir_informacion_adicional').removeAttr("disabled");
     });
 
@@ -3754,7 +3754,7 @@ $(document).ready(function() {
         eliminarComponente("iluminacion"+iluminacionCont);
         iluminacionCont--;
         if(iluminacionCont == 0){
-            $("#eliminar_iluminacion").attr('disabled','disabled');
+            $("#eliminar_iluminacion").attr('disabled',true);
         }
     });
 
@@ -3789,7 +3789,7 @@ $(document).ready(function() {
         eliminarComponente("suministro_energia"+tomacorrientesCont);
         tomacorrientesCont--;
         if(tomacorrientesCont == 0){
-            $("#eliminar_tomacorriente").attr('disabled','disabled');
+            $("#eliminar_tomacorriente").attr('disabled',true);
         }
     });
 
@@ -3835,7 +3835,7 @@ $(document).ready(function() {
         eliminarComponente("puerta"+puertasCont);
         puertasCont--;
         if(puertasCont == 0){
-            $("#eliminar_puerta").attr('disabled','disabled');
+            $("#eliminar_puerta").attr('disabled',true);
         }
     });
 
@@ -3871,7 +3871,7 @@ $(document).ready(function() {
         eliminarComponente("ventana"+ventanasCont);
         ventanasCont--;
         if(ventanasCont == 0){
-            $("#eliminar_ventana").attr('disabled','disabled');
+            $("#eliminar_ventana").attr('disabled',true);
         }
     });
 
@@ -3900,7 +3900,7 @@ $(document).ready(function() {
         eliminarComponente("interruptor"+interruptoresCont);
         interruptoresCont--;
         if(interruptoresCont == 0){
-            $("#eliminar_interruptor").attr('disabled','disabled');
+            $("#eliminar_interruptor").attr('disabled',true);
         }
     });
 
@@ -3929,7 +3929,7 @@ $(document).ready(function() {
         eliminarComponente("punto_sanitario"+puntosSanitariosCont);
         puntosSanitariosCont--;
         if(puntosSanitariosCont == 0){
-            $("#eliminar_punto_sanitario").attr('disabled','disabled');
+            $("#eliminar_punto_sanitario").attr('disabled',true);
         }
     });
 
@@ -3958,7 +3958,7 @@ $(document).ready(function() {
         eliminarComponente("orinal"+orinalesCont);
         orinalesCont--;
         if(orinalesCont == 0){
-            $("#eliminar_orinal").attr('disabled','disabled');
+            $("#eliminar_orinal").attr('disabled',true);
         }
     });
 
@@ -3988,7 +3988,7 @@ $(document).ready(function() {
         eliminarComponente("lavamanos"+lavamanosCont);
         lavamanosCont--;
         if(lavamanosCont == 0){
-            $("#eliminar_lavamanos").attr('disabled','disabled');
+            $("#eliminar_lavamanos").attr('disabled',true);
         }
     });
 
@@ -4020,7 +4020,7 @@ $(document).ready(function() {
         espaciosCont--;
         if(espaciosCont == 0){
             $("#divBotonesInformacionAdicional").show();
-            $("#eliminar_espacio").attr('disabled','disabled');
+            $("#eliminar_espacio").attr('disabled',true);
         }
     });
 
@@ -4032,9 +4032,9 @@ $(document).ready(function() {
         puntosSanitariosCont = 0;
         lavamanosCont = 0;
         orinalesCont = 0;
-        $("#eliminar_lavamanos").attr('disabled','disabled');
-        $("#eliminar_punto_sanitario").attr('disabled','disabled');
-        $("#eliminar_orinal").attr('disabled','disabled');
+        $("#eliminar_lavamanos").attr('disabled',true);
+        $("#eliminar_punto_sanitario").attr('disabled',true);
+        $("#eliminar_orinal").attr('disabled',true);
     });
 
     /**

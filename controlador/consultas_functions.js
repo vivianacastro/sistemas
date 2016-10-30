@@ -694,7 +694,7 @@ $(document).ready(function() {
             if (validarCadena(sede)) {
                 $('#visualizarSede').removeAttr("disabled");
             }else{
-                $('#visualizarSede').attr('disabled','disabled');
+                $('#visualizarSede').attr('disabled',true);
             }
         }else{
             if (validarCadena($("#sede_search").val())) {
@@ -705,7 +705,7 @@ $(document).ready(function() {
                 var bounds  = new google.maps.LatLngBounds();
                 $("#campus_search").empty();
                 if (URLactual['href'].indexOf('consultar_campus') >= 0) {
-                    $('#visualizarCampus').attr('disabled','disabled');
+                    $('#visualizarCampus').attr('disabled',true);
                 }
                 if (validarCadena($("#sede_search").val())) {
                     sede["nombre_sede"] = $("#sede_search").val();
@@ -796,7 +796,7 @@ $(document).ready(function() {
             if (validarCadena(campus)) {
                 $('#visualizarCampus').removeAttr("disabled");
             }else{
-                $('#visualizarCampus').attr('disabled','disabled');
+                $('#visualizarCampus').attr('disabled',true);
             }
         }else{
             for (var i = 0; i < marcadores.length; i++) {
@@ -1098,7 +1098,7 @@ $(document).ready(function() {
                     var data = buscarObjetos("edificios",campus);
                     $("#edificio_search").empty();
                     if(URLactual['href'].indexOf('consultar_edificio') >= 0){
-                        $('#visualizarEdificio').attr('disabled','disabled');
+                        $('#visualizarEdificio').attr('disabled',true);
                     }
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
@@ -1202,19 +1202,19 @@ $(document).ready(function() {
             }
         }else{
             if(URLactual['href'].indexOf('consultar_cancha') >= 0){
-                $('#visualizarCancha').attr('disabled','disabled');
+                $('#visualizarCancha').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
-                $('#visualizarCorredor').attr('disabled','disabled');
+                $('#visualizarCorredor').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
-                $('#visualizarParqueadero').attr('disabled','disabled');
+                $('#visualizarParqueadero').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
-                $('#visualizarPiscina').attr('disabled','disabled');
+                $('#visualizarPiscina').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
-                $('#visualizarPlazoleta').attr('disabled','disabled');
+                $('#visualizarPlazoleta').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
-                $('#visualizarSendero').attr('disabled','disabled');
+                $('#visualizarSendero').attr('disabled',true);
             }else if(URLactual['href'].indexOf('consultar_via') >= 0){
-                $('#visualizarVia').attr('disabled','disabled');
+                $('#visualizarVia').attr('disabled',true);
             }
             var campus = $("#campus_search").val();
             $("#campus_search").val(campus).change();
@@ -1239,9 +1239,9 @@ $(document).ready(function() {
                 $('#visualizarGradas').removeAttr("disabled");
                 $('#visualizarEdificio').removeAttr("disabled");
             }else{
-                $('#visualizarCubierta').attr('disabled','disabled');
-                $('#visualizarGradas').attr('disabled','disabled');
-                $('#visualizarEdificio').attr('disabled','disabled');
+                $('#visualizarCubierta').attr('disabled',true);
+                $('#visualizarGradas').attr('disabled',true);
+                $('#visualizarEdificio').attr('disabled',true);
 
             }
         }else{
@@ -1372,8 +1372,8 @@ $(document).ready(function() {
                 $('#visualizarGradas').removeAttr("disabled");
                 $('#visualizarEspacio').removeAttr("disabled");
             }else{
-                $('#visualizarCubierta').attr('disabled','disabled');
-                $('#visualizarGradas').attr('disabled','disabled');
+                $('#visualizarCubierta').attr('disabled',true);
+                $('#visualizarGradas').attr('disabled',true);
                 $('#visualizarEspacio').removeAttr("disabled");
             }
         }else{
@@ -1415,7 +1415,7 @@ $(document).ready(function() {
         if (validarCadena($("#espacio_search").val())) {
             $('#visualizarEspacio').removeAttr("disabled");
         }else{
-            $('#visualizarEspacio').attr('disabled','disabled');
+            $('#visualizarEspacio').attr('disabled',true);
         }
     });
 
@@ -1453,7 +1453,7 @@ $(document).ready(function() {
         if (validarCadena($("#nombre_tipo_material_search").val())) {
             $('#visualizarTipoMaterial').removeAttr("disabled");
         }else{
-            $('#visualizarTipoMaterial').attr('disabled','disabled');
+            $('#visualizarTipoMaterial').attr('disabled',true);
         }
     });
 
@@ -1491,7 +1491,7 @@ $(document).ready(function() {
         if (validarCadena($("#nombre_tipo_objeto_search").val())) {
             $('#visualizarTipoObjeto').removeAttr("disabled");
         }else{
-            $('#visualizarTipoObjeto').attr('disabled','disabled');
+            $('#visualizarTipoObjeto').attr('disabled',true);
         }
     });
 
@@ -2172,6 +2172,9 @@ $(document).ready(function() {
                 $("#pisos").val(piso);
                 $("input[name=pasamanos][value="+ record.pasamanos + "]").prop('checked', true);
                 $("#material_pasamanos").val(record.material_pasamanos);
+                if (record.pasamanos == 'true') {
+                    $("#divPasamanos").show();
+                }
             }
         });
         $.each(dataVentana, function(index, record) {
@@ -4020,100 +4023,100 @@ $(document).ready(function() {
     * Se captura el evento cuando se cierra el modal divDialogConsulta.
     */
     $('#divDialogConsulta').on('hidden.bs.modal', function () {
-        $("#nombre_sede").attr('disabled','disabled');
-        $("#nombre_campus").attr('disabled','disabled');
-        $("#id_cancha").attr('disabled','disabled');
-        $("#uso_cancha").attr('disabled','disabled');
-        $("#material_piso").attr('disabled','disabled');
-        $("#tipo_pintura").attr('disabled','disabled');
-        $("#longitud_demarcacion").attr('disabled','disabled');
-        $("#id_corredor").attr('disabled','disabled');
-        $("#altura_pared").attr('disabled','disabled');
-        $("#ancho_pared").attr('disabled','disabled');
-        $("#material_pared").attr('disabled','disabled');
-        $("#tipo_cubierta").attr('disabled','disabled');
-        $("#material_cubierta").attr('disabled','disabled');
-        $("#ancho").attr('disabled','disabled');
-        $("#largo").attr('disabled','disabled');
-        $("#pasamanos").attr('disabled','disabled');
-        $("#material_pasamanos").attr('disabled','disabled');
-        $("#tipo_ventana").attr('disabled','disabled');
-        $("#cantidad_ventanas").attr('disabled','disabled');
-        $("#material_ventana").attr('disabled','disabled');
-        $("#ancho_ventana").attr('disabled','disabled');
-        $("#alto_ventana").attr('disabled','disabled');
-        $("#id_parqueadero").attr('disabled','disabled');
-        $("#capacidad").attr('disabled','disabled');
-        $("#ancho").attr('disabled','disabled');
-        $("#largo").attr('disabled','disabled');
-        $("#material_piso").attr('disabled','disabled');
-        $("#tipo_pintura").attr('disabled','disabled');
-        $("#longitud_demarcacion").attr('disabled','disabled');
-        $("#id_piscina").attr('disabled','disabled');
-        $("#alto").attr('disabled','disabled');
-        $("#ancho").attr('disabled','disabled');
-        $("#largo").attr('disabled','disabled');
-        $("#cantidad_puntos_hidraulicos").attr('disabled','disabled');
-        $("#id_plazoleta").attr('disabled','disabled');
-        $("#nombre").attr('disabled','disabled');
-        $("#tipo_iluminacion").attr('disabled','disabled');
-        $("#cantidad_iluminacion").attr('disabled','disabled');
-        $("#id_sendero").attr('disabled','disabled');
-        $("#longitud").attr('disabled','disabled');
-        $("#ancho").attr('disabled','disabled');
-        $("#material_piso").attr('disabled','disabled');
-        $("#tipo_iluminacion").attr('disabled','disabled');
-        $("#cantidad_iluminacion").attr('disabled','disabled');
-        $("#codigo_poste").attr('disabled','disabled');
-        $("#ancho_cubierta").attr('disabled','disabled');
-        $("#largo_cubierta").attr('disabled','disabled');
-        $("#material_cubierta").attr('disabled','disabled');
-        $("#id_via").attr('disabled','disabled');
-        $("#tipo_pintura").attr('disabled','disabled');
-        $("#longitud_demarcacion").attr('disabled','disabled');
-        $("#material_piso").attr('disabled','disabled');
-        $("#nombre_edificio").attr('disabled','disabled');
-        $("#pisos_edificio").attr('disabled','disabled');
-        $("#terraza").attr('disabled','disabled');
-        $("#sotano").attr('disabled','disabled');
-        $("#ancho_fachada").attr('disabled','disabled');
-        $("#alto_fachada").attr('disabled','disabled');
-        $("#material_fachada").attr('disabled','disabled');
-        $("#id_espacio").attr('disabled','disabled');
-        $("#pisos").attr('disabled','disabled');
-        $("#uso_espacio").attr('disabled','disabled');
-        $("#altura_pared").attr('disabled','disabled');
-        $("#ancho_pared").attr('disabled','disabled');
-        $("#material_pared").attr('disabled','disabled');
-        $("#largo_techo").attr('disabled','disabled');
-        $("#ancho_techo").attr('disabled','disabled');
-        $("#material_techo").attr('disabled','disabled');
-        $("#largo_piso").attr('disabled','disabled');
-        $("#ancho_piso").attr('disabled','disabled');
-        $("#material_piso").attr('disabled','disabled');
-        $("#tipo_iluminacion").attr('disabled','disabled');
-        $("#cantidad_iluminacion").attr('disabled','disabled');
-        $("#tipo_suministro_energia").attr('disabled','disabled');
-        $("#tomacorriente").attr('disabled','disabled');
-        $("#cantidad_tomacorrientes").attr('disabled','disabled');
-        $("#tipo_puerta").attr('disabled','disabled');
-        $("#cantidad_puertas").attr('disabled','disabled');
-        $("#material_puerta").attr('disabled','disabled');
-        $("#tipo_cerradura").attr('disabled','disabled');
-        $("#gato_puerta").attr('disabled','disabled');
-        $("#material_marco_puerta").attr('disabled','disabled');
-        $("#ancho_puerta").attr('disabled','disabled');
-        $("#alto_puerta").attr('disabled','disabled');
-        $("#tipo_ventana").attr('disabled','disabled');
-        $("#cantidad_ventanas").attr('disabled','disabled');
-        $("#material_ventana").attr('disabled','disabled');
-        $("#ancho_ventana").attr('disabled','disabled');
-        $("#alto_ventana").attr('disabled','disabled');
-        $("#tipo_interruptor").attr('disabled','disabled');
-        $("#cantidad_interruptores").attr('disabled','disabled');
-        $("#tiene_espacio_padre").attr('disabled','disabled');
-        $("#nombre_tipo_material").attr('disabled','disabled');
-        $("#nombre_tipo_objeto").attr('disabled','disabled');
+        $("#nombre_sede").attr('disabled',true);
+        $("#nombre_campus").attr('disabled',true);
+        $("#id_cancha").attr('disabled',true);
+        $("#uso_cancha").attr('disabled',true);
+        $("#material_piso").attr('disabled',true);
+        $("#tipo_pintura").attr('disabled',true);
+        $("#longitud_demarcacion").attr('disabled',true);
+        $("#id_corredor").attr('disabled',true);
+        $("#altura_pared").attr('disabled',true);
+        $("#ancho_pared").attr('disabled',true);
+        $("#material_pared").attr('disabled',true);
+        $("#tipo_cubierta").attr('disabled',true);
+        $("#material_cubierta").attr('disabled',true);
+        $("#ancho").attr('disabled',true);
+        $("#largo").attr('disabled',true);
+        $("input[name=pasamanos]").attr('disabled', true);
+        $("#material_pasamanos").attr('disabled',true);
+        $("#tipo_ventana").attr('disabled',true);
+        $("#cantidad_ventanas").attr('disabled',true);
+        $("#material_ventana").attr('disabled',true);
+        $("#ancho_ventana").attr('disabled',true);
+        $("#alto_ventana").attr('disabled',true);
+        $("#id_parqueadero").attr('disabled',true);
+        $("#capacidad").attr('disabled',true);
+        $("#ancho").attr('disabled',true);
+        $("#largo").attr('disabled',true);
+        $("#material_piso").attr('disabled',true);
+        $("#tipo_pintura").attr('disabled',true);
+        $("#longitud_demarcacion").attr('disabled',true);
+        $("#id_piscina").attr('disabled',true);
+        $("#alto").attr('disabled',true);
+        $("#ancho").attr('disabled',true);
+        $("#largo").attr('disabled',true);
+        $("#cantidad_puntos_hidraulicos").attr('disabled',true);
+        $("#id_plazoleta").attr('disabled',true);
+        $("#nombre").attr('disabled',true);
+        $("#tipo_iluminacion").attr('disabled',true);
+        $("#cantidad_iluminacion").attr('disabled',true);
+        $("#id_sendero").attr('disabled',true);
+        $("#longitud").attr('disabled',true);
+        $("#ancho").attr('disabled',true);
+        $("#material_piso").attr('disabled',true);
+        $("#tipo_iluminacion").attr('disabled',true);
+        $("#cantidad_iluminacion").attr('disabled',true);
+        $("#codigo_poste").attr('disabled',true);
+        $("#ancho_cubierta").attr('disabled',true);
+        $("#largo_cubierta").attr('disabled',true);
+        $("#material_cubierta").attr('disabled',true);
+        $("#id_via").attr('disabled',true);
+        $("#tipo_pintura").attr('disabled',true);
+        $("#longitud_demarcacion").attr('disabled',true);
+        $("#material_piso").attr('disabled',true);
+        $("#nombre_edificio").attr('disabled',true);
+        $("#pisos_edificio").attr('disabled',true);
+        $("#terraza").attr('disabled',true);
+        $("#sotano").attr('disabled',true);
+        $("#ancho_fachada").attr('disabled',true);
+        $("#alto_fachada").attr('disabled',true);
+        $("#material_fachada").attr('disabled',true);
+        $("#id_espacio").attr('disabled',true);
+        $("#pisos").attr('disabled',true);
+        $("#uso_espacio").attr('disabled',true);
+        $("#altura_pared").attr('disabled',true);
+        $("#ancho_pared").attr('disabled',true);
+        $("#material_pared").attr('disabled',true);
+        $("#largo_techo").attr('disabled',true);
+        $("#ancho_techo").attr('disabled',true);
+        $("#material_techo").attr('disabled',true);
+        $("#largo_piso").attr('disabled',true);
+        $("#ancho_piso").attr('disabled',true);
+        $("#material_piso").attr('disabled',true);
+        $("#tipo_iluminacion").attr('disabled',true);
+        $("#cantidad_iluminacion").attr('disabled',true);
+        $("#tipo_suministro_energia").attr('disabled',true);
+        $("#tomacorriente").attr('disabled',true);
+        $("#cantidad_tomacorrientes").attr('disabled',true);
+        $("#tipo_puerta").attr('disabled',true);
+        $("#cantidad_puertas").attr('disabled',true);
+        $("#material_puerta").attr('disabled',true);
+        $("#tipo_cerradura").attr('disabled',true);
+        $("input[name=gato_puerta]").attr('disabled', true);
+        $("#material_marco_puerta").attr('disabled',true);
+        $("#ancho_puerta").attr('disabled',true);
+        $("#alto_puerta").attr('disabled',true);
+        $("#tipo_ventana").attr('disabled',true);
+        $("#cantidad_ventanas").attr('disabled',true);
+        $("#material_ventana").attr('disabled',true);
+        $("#ancho_ventana").attr('disabled',true);
+        $("#alto_ventana").attr('disabled',true);
+        $("#tipo_interruptor").attr('disabled',true);
+        $("#cantidad_interruptores").attr('disabled',true);
+        $("input[name=tiene_espacio_padre]").attr('disabled', true);
+        $("#nombre_tipo_material").attr('disabled',true);
+        $("#nombre_tipo_objeto").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -4212,6 +4215,19 @@ $(document).ready(function() {
   			}else if(aux2 == numeroFotos){
   					$("#guardar_archivos").hide();
   			}
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del radio button pasamanos
+     * y se actualiza el selector de pisos.
+     */
+    $("#form_pasamanos").change(function (e) {
+        var pasamanos = $('input[name="pasamanos"]:checked').val();
+        if (pasamanos == "true") {
+            $('#divPasamanos').show();
+        }else{
+            $('#divPasamanos').hide();
+        }
     });
 
     /**
@@ -6653,7 +6669,7 @@ $(document).ready(function() {
      */
     $("#añadir_informacion_adicional").click(function (e){
         $("#informacion-adicional").show();
-        $("#añadir_informacion_adicional").attr('disabled','disabled');
+        $("#añadir_informacion_adicional").attr('disabled',true);
         $('#eliminar_informacion_adicional').removeAttr("disabled");
     });
 
@@ -6663,7 +6679,7 @@ $(document).ready(function() {
      */
     $("#eliminar_informacion_adicional").click(function (e){
         $("#informacion-adicional").hide();
-        $("#eliminar_informacion_adicional").attr('disabled','disabled');
+        $("#eliminar_informacion_adicional").attr('disabled',true);
         $('#añadir_informacion_adicional').removeAttr("disabled");
     });
 
@@ -6692,7 +6708,7 @@ $(document).ready(function() {
         eliminarComponente("iluminacion"+iluminacionCont);
         iluminacionCont--;
         if(iluminacionCont == 0){
-            $("#eliminar_iluminacion").attr('disabled','disabled');
+            $("#eliminar_iluminacion").attr('disabled',true);
         }
     });
 
@@ -6727,7 +6743,7 @@ $(document).ready(function() {
         eliminarComponente("suministro_energia"+tomacorrientesCont);
         tomacorrientesCont--;
         if(tomacorrientesCont == 0){
-            $("#eliminar_tomacorriente").attr('disabled','disabled');
+            $("#eliminar_tomacorriente").attr('disabled',true);
         }
     });
 
@@ -6773,7 +6789,7 @@ $(document).ready(function() {
         eliminarComponente("puerta"+puertasCont);
         puertasCont--;
         if(puertasCont == 0){
-            $("#eliminar_puerta").attr('disabled','disabled');
+            $("#eliminar_puerta").attr('disabled',true);
         }
     });
 
@@ -6809,7 +6825,7 @@ $(document).ready(function() {
         eliminarComponente("ventana"+ventanasCont);
         ventanasCont--;
         if(ventanasCont == 0){
-            $("#eliminar_ventana").attr('disabled','disabled');
+            $("#eliminar_ventana").attr('disabled',true);
         }
     });
 
@@ -6838,7 +6854,7 @@ $(document).ready(function() {
         eliminarComponente("interruptor"+interruptoresCont);
         interruptoresCont--;
         if(interruptoresCont == 0){
-            $("#eliminar_interruptor").attr('disabled','disabled');
+            $("#eliminar_interruptor").attr('disabled',true);
         }
     });
 
@@ -6867,7 +6883,7 @@ $(document).ready(function() {
         eliminarComponente("punto_sanitario"+puntosSanitariosCont);
         puntosSanitariosCont--;
         if(puntosSanitariosCont == 0){
-            $("#eliminar_punto_sanitario").attr('disabled','disabled');
+            $("#eliminar_punto_sanitario").attr('disabled',true);
         }
     });
 
@@ -6896,7 +6912,7 @@ $(document).ready(function() {
         eliminarComponente("orinal"+orinalesCont);
         orinalesCont--;
         if(orinalesCont == 0){
-            $("#eliminar_orinal").attr('disabled','disabled');
+            $("#eliminar_orinal").attr('disabled',true);
         }
     });
 
@@ -6926,7 +6942,7 @@ $(document).ready(function() {
         eliminarComponente("lavamanos"+lavamanosCont);
         lavamanosCont--;
         if(lavamanosCont == 0){
-            $("#eliminar_lavamanos").attr('disabled','disabled');
+            $("#eliminar_lavamanos").attr('disabled',true);
         }
     });
 
@@ -6958,7 +6974,7 @@ $(document).ready(function() {
         espaciosCont--;
         if(espaciosCont == 0){
             $("#divBotonesInformacionAdicional").show();
-            $("#eliminar_espacio").attr('disabled','disabled');
+            $("#eliminar_espacio").attr('disabled',true);
         }
     });
 
@@ -7033,6 +7049,7 @@ $(document).ready(function() {
                   alert(data.mensaje);
                   $("#sede_search").val("").change();
                   $("#divDialogConsulta").modal('hide');
+                  marcadores = [];
               }
           }else{
               alert("ERROR. Ingrese el nombre del campus");
@@ -7082,6 +7099,7 @@ $(document).ready(function() {
                   alert(data.mensaje);
                   $("#sede_search").val("").change();
                   $("#divDialogConsulta").modal('hide');
+                  marcadores = [];
               }
           }
 
@@ -7166,6 +7184,7 @@ $(document).ready(function() {
               alert(data.mensaje);
               $("#sede_search").val("").change();
               $("#divDialogConsulta").modal('hide');
+              marcadores = [];
           }
       }
     });
@@ -7194,8 +7213,8 @@ $(document).ready(function() {
           informacion["piso"] = piso;
           informacion['tipo_cubierta'] = tipoCubierta;
           informacion['material_cubierta'] = materialCubierta;
-          informacion['ancho'] = ancho;
-          informacion['largo'] = largo;
+          informacion['ancho_cubierta'] = ancho;
+          informacion['largo_cubierta'] = largo;
           var data = modificarObjeto("cubierta",informacion);
           console.log(data);
           if(data.verificar){
@@ -7261,6 +7280,441 @@ $(document).ready(function() {
           informacion['ancho_ventana'] = anchoVentana;
           informacion['alto_ventana'] = altoVentana;
           var data = modificarObjeto("gradas",informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_parqueadero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_parqueadero").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información del parqueadero?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_parqueadero").val());
+          var capacidad = $("#capacidad").val();
+          var ancho = $("#ancho").val();
+          var largo = $("#largo").val();
+          var material_piso = $("#material_piso").val();
+          var tipo_pintura = $("#tipo_pintura").val();
+          var longitud_demarcacion = $("#longitud_demarcacion").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['capacidad'] = capacidad;
+          informacion['ancho'] = ancho;
+          informacion['largo'] = largo;
+          informacion['material_piso'] = material_piso;
+          informacion['tipo_pintura'] = tipo_pintura;
+          informacion['longitud_demarcacion'] = longitud_demarcacion;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("parqueadero",informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_piscina y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_piscina").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de la piscina?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_piscina").val());
+          var alto = $("#alto").val();
+          var ancho = $("#ancho").val();
+          var largo = $("#largo").val();
+          var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['alto'] = alto;
+          informacion['ancho'] = ancho;
+          informacion['largo'] = largo;
+          informacion['cantidad_punto_hidraulico'] = cantidadPuntosHidraulicos;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("piscina",informacion);
+          console.log(informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_parqueadero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_plazoleta").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de la plazoleta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_plazoleta").val());
+          var nombre = limpiarCadena($("#nombre").val());
+          var tipoIluminacion = $("#tipo_iluminacion").val();
+          var cantidadIluminacion = $("#cantidad_iluminacion").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['nombre'] = nombre;
+          informacion['tipo_iluminacion'] = tipoIluminacion;
+          informacion['cantidad_iluminacion'] = cantidadIluminacion;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("plazoleta",informacion);
+          console.log(informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_sendero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_sendero").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información del sendero?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_sendero").val());
+          var longitud = $("#longitud").val();
+          var ancho = $("#ancho").val();
+          var materialPiso = $("#material_piso").val();
+          var tipoIluminacion = $("#tipo_iluminacion").val();
+          var cantidadIluminacion = $("#cantidad_iluminacion").val();
+          var codigoPoste = $("#codigo_poste").val();
+          var anchoCubierta = $("#ancho_cubierta").val();
+          var largoCubierta = $("#largo_cubierta").val();
+          var materialCubierta = $("#material_cubierta").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['longitud'] = longitud;
+          informacion['ancho'] = ancho;
+          informacion['material_piso'] = materialPiso;
+          informacion['cantidad'] = cantidadIluminacion;
+          informacion['tipo_iluminacion'] = tipoIluminacion;
+          informacion['codigo_poste'] = codigoPoste;
+          informacion['ancho_cubierta'] = anchoCubierta;
+          informacion['largo_cubierta'] = largoCubierta;
+          informacion['material_cubierta'] = materialCubierta;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("sendero",informacion);
+          console.log(informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_via y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_via").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información de la vía?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_via").val());
+          var tipoPintura = $("#tipo_pintura").val();
+          var longitudDemarcacion = $("#longitud_demarcacion").val();
+          var materialPiso = $("#material_piso").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion['tipo_pintura'] = tipoPintura;
+          informacion['longitud_demarcacion'] = longitudDemarcacion;
+          informacion['material_piso'] = materialPiso;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("via",informacion);
+          console.log(informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_edificio y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_edificio").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información del edificio?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_edificio").val());
+          var nombre = limpiarCadena($("#nombre_edificio").val());
+          var piso = $("#pisos_edificio").val();
+          var terraza = $('input[name="terraza"]:checked').val();
+          var sotano = $('input[name="sotano"]:checked').val();
+          var materialFachada = $("#material_fachada").val();
+          var altoFachada = $("#alto_fachada").val();
+          var anchoFachada = $("#ancho_fachada").val();
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          informacion["nombre"] = nombre;
+          informacion["numero_pisos"] = piso;
+          informacion['terraza'] = terraza;
+          informacion['sotano'] = sotano;
+          informacion['material_fachada'] = materialFachada;
+          informacion['alto_fachada'] = altoFachada;
+          informacion['ancho_fachada'] = anchoFachada;
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("edificio",informacion);
+          console.log(informacion);
+          console.log(data);
+          if(data.verificar){
+              alert(data.mensaje);
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+              marcadores = [];
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_espacio y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_espacio").click(function (e){
+      var confirmacion = window.confirm("¿Guardar la información del espacio?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").val();
+          var id = limpiarCadena($("#id_espacio").val());
+          var usoEspacio = $("#uso_espacio").val();
+          var alturaPared = $("#altura_pared").val();
+          var anchoPared = $("#ancho_pared").val();
+          var materialPared = $("#material_pared").val();
+          var largoTecho = $("#largo_techo").val();
+          var anchoTecho = $("#ancho_techo").val();
+          var materialTecho = $("#material_techo").val();
+          var largoPiso = $("#largo_piso").val();
+          var anchoPiso = $("#ancho_piso").val();
+          var materialPiso = $("#material_piso").val();
+          var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
+          var numero_espacio_padre = $("#espacio_padre").val();
+          var tipoIluminacion = [];
+          var cantidadIluminacion = [];
+          var tipoSuministroEnergia = [];
+          var tomacorriente = [];
+          var cantidadTomacorrientes = [];
+          var tipoPuerta = [];
+          var cantidadPuertas = [];
+          var materialPuerta = [];
+          var tipoCerradura = [];
+          var gatoPuerta = [];
+          var materialMarco = [];
+          var anchoPuerta = [];
+          var altoPuerta = [];
+          var tipoVentana = [];
+          var cantidadVentanas = [];
+          var materialVentana = [];
+          var anchoVentana = [];
+          var altoVentana = [];
+          var tipoInterruptor = [];
+          var cantidadInterruptores = [];
+          var coordenadas;
+          var planos = document.getElementById("planos[]");
+          var fotos = document.getElementById("fileInputOculto");
+          if (piso == 'sotano') {
+              piso = '0';
+          }
+          if (piso == 'terraza') {
+              piso = '-1';
+          }
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["id"] = id;
+          informacion['uso_espacio'] = usoEspacio;
+          informacion['altura_pared'] = alturaPared;
+          informacion['ancho_pared'] = anchoPared;
+          informacion['material_pared'] = materialPared;
+          informacion['largo_techo'] = largoTecho;
+          informacion['ancho_techo'] = anchoTecho;
+          informacion['material_techo'] = materialTecho;
+          informacion['largo_piso'] = largoPiso;
+          informacion['ancho_piso'] = anchoPiso;
+          informacion['material_piso'] = materialPiso;
+          informacion['numero_espacio_padre'] = numero_espacio_padre;
+          for (var i=0;i<=iluminacionCont;i++) {
+              if (i==0) {
+                  tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                  cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+              }else{
+                  tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                  cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+              }
+          }
+          for (var i=0;i<=tomacorrientesCont;i++) {
+              if (i==0) {
+                  tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
+                  tomacorriente[i] = $("#tomacorriente").val();
+                  cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
+              }else{
+                  tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
+                  tomacorriente[i] = $("#tomacorriente"+i).val();
+                  cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
+              }
+          }
+          for (var i=0;i<=puertasCont;i++) {
+              if (i==0) {
+                  tipoPuerta[i] = $("#tipo_puerta").val();
+                  cantidadPuertas[i] = $("#cantidad_puertas").val();
+                  materialPuerta[i] = $("#material_puerta").val();
+                  tipoCerradura[i] = $("#tipo_cerradura").val();
+                  gatoPuerta[i] = $('input[name="gato_puerta"]:checked').val();
+                  materialMarco[i] = $("#material_marco_puerta").val();
+                  anchoPuerta[i] = $("#ancho_puerta").val();
+                  altoPuerta[i] = $("#alto_puerta").val();
+              }else{
+                  tipoPuerta[i] = $("#tipo_puerta"+i).val();
+                  cantidadPuertas[i] = $("#cantidad_puertas"+i).val();
+                  materialPuerta[i] = $("#material_puerta"+i).val();
+                  tipoCerradura[i] = $("#tipo_cerradura"+i).val();
+                  gatoPuerta[i] = $('input[name="gato_puerta"'+i+']:checked').val();
+                  materialMarco[i] = $("#material_marco_puerta"+i).val();
+                  anchoPuerta[i] = $("#ancho_puerta"+i).val();
+                  altoPuerta[i] = $("#alto_puerta"+i).val();
+              }
+          }
+          for (var i=0;i<=ventanasCont;i++) {
+              if (i==0) {
+                  tipoVentana[i] = $("#tipo_ventana").val();
+                  cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                  materialVentana[i] = $("#material_ventana").val();
+                  anchoVentana[i] = $("#ancho_ventana").val();
+                  altoVentana[i] = $("#alto_ventana").val();
+              }else{
+                  tipoVentana[i] = $("#tipo_ventana"+i).val();
+                  cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                  materialVentana[i] = $("#material_ventana"+i).val();
+                  anchoVentana[i] = $("#ancho_ventana"+i).val();
+                  altoVentana[i] = $("#alto_ventana"+i).val();
+              }
+          }
+          for (var i=0;i<=interruptoresCont;i++) {
+              if (i==0) {
+                  tipoInterruptor[i] = $("#tipo_interruptor").val();
+                  cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+              }else{
+                  tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                  cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+              }
+          }
+          for (var i = 0; i < marcadoresModificacion.length; i++) {
+              coordenadas = marcadoresModificacion[i].getPosition();
+          }
+          informacion['tipo_iluminacion'] = tipoIluminacion;
+          informacion['cantidad_iluminacion'] = cantidadIluminacion;
+          informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
+          informacion['tomacorriente'] = tomacorriente;
+          informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
+          informacion['tipo_puerta'] = tipoPuerta;
+          informacion['cantidad_puertas'] = cantidadPuertas;
+          informacion['material_puerta'] = materialPuerta;
+          informacion['tipo_cerradura'] = tipoCerradura;
+          informacion['gato_puerta'] = gatoPuerta;
+          informacion['material_marco'] = materialMarco;
+          informacion['ancho_puerta'] = anchoPuerta;
+          informacion['alto_puerta'] = altoPuerta;
+          informacion['tipo_ventana'] = tipoVentana;
+          informacion['cantidad_ventanas'] = cantidadVentanas;
+          informacion['material_ventana'] = materialVentana;
+          informacion['ancho_ventana'] = anchoVentana;
+          informacion['alto_ventana'] = altoVentana;
+          informacion['tipo_interruptor'] = tipoInterruptor;
+          informacion['cantidad_interruptores'] = cantidadInterruptores;
+          informacion['lat'] = coordenadas.lat().toFixed(8);
+          informacion['lng'] = coordenadas.lng().toFixed(8);
+          var data = modificarObjeto("espacio",informacion);
           console.log(data);
           if(data.verificar){
               alert(data.mensaje);

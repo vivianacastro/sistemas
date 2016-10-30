@@ -119,7 +119,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['material'],$info['alto_ventana'],$info['ancho_ventana']);
+            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['material_ventana'],$info['alto_ventana'],$info['ancho_ventana']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -179,7 +179,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -219,7 +219,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarVia($info['id_sede'],$info['id_campus'],$info['id'],$info['tipo_material'],$info['tipo_pintura_demarcacion'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarVia($info['id_sede'],$info['id_campus'],$info['id'],$info['material_piso'],$info['tipo_pintura'],$info['longitud_demarcacion'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -239,7 +239,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarEdificio($info['id_sede'],$info['id_campus'],$info['id'],$info['numero_pisos'],$info['sotano'],$info['terraza'],$info['material_fachada'],$info['ancho_fachada'],$info['alto_fachada'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarEdificio($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['numero_pisos'],$info['sotano'],$info['terraza'],$info['material_fachada'],$info['ancho_fachada'],$info['alto_fachada'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
