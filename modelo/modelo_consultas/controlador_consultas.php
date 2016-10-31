@@ -1739,7 +1739,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1770,7 +1770,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1801,7 +1801,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1833,7 +1833,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1863,7 +1863,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1894,7 +1894,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1924,7 +1924,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1959,7 +1959,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -1989,7 +1989,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2019,7 +2019,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2049,7 +2049,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2078,7 +2078,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2107,7 +2107,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2136,7 +2136,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2165,7 +2165,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2194,7 +2194,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2223,7 +2223,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
@@ -2252,7 +2252,7 @@ class controlador_consultas
             $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),

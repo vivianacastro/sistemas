@@ -4544,7 +4544,6 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#modificar_espacio").click(function (e){
-        $("#uso_espacio").removeAttr("disabled");
         $("#altura_pared").removeAttr("disabled");
         $("#ancho_pared").removeAttr("disabled");
         $("#material_pared").removeAttr("disabled");
@@ -7132,7 +7131,7 @@ $(document).ready(function() {
           var tomacorriente = [];
           var cantidadTomacorrientes = [];
           var tipoInterruptor = [];
-          var cantidadInterruptores = [];
+          var cantidad_interruptor = [];
           var coordenadas;
           var planos = document.getElementById("planos[]");
           var fotos = document.getElementById("fileInputOculto");
@@ -7163,16 +7162,16 @@ $(document).ready(function() {
           for (var i=0;i<=interruptoresCont;i++) {
               if (i==0) {
                   tipoInterruptor[i] = $("#tipo_interruptor").val();
-                  cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                  cantidad_interruptor[i] = $("#cantidad_interruptores").val();
               }else{
                   tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
-                  cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                  cantidad_interruptor[i] = $("#cantidad_interruptores"+i).val();
               }
           }
           informacion['tipo_iluminacion'] = tipoIluminacion;
           informacion['cantidad_iluminacion'] = cantidadIluminacion;
           informacion['tipo_interruptor'] = tipoInterruptor;
-          informacion['cantidad_interruptores'] = cantidadInterruptores;
+          informacion['cantidad_interruptor'] = cantidad_interruptor;
           for (var i = 0; i < marcadoresModificacion.length; i++) {
               coordenadas = marcadoresModificacion[i].getPosition();
           }
@@ -7566,7 +7565,8 @@ $(document).ready(function() {
           var informacion = {};
           var idSede = $("#nombre_sede").attr('name');
           var idCampus = $("#nombre_campus").attr('name');
-          var idEdificio = $("#nombre_edificio").val();
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var piso = $("#pisos").val();
           var id = limpiarCadena($("#id_espacio").val());
           var usoEspacio = $("#uso_espacio").val();
           var alturaPared = $("#altura_pared").val();
@@ -7599,7 +7599,7 @@ $(document).ready(function() {
           var anchoVentana = [];
           var altoVentana = [];
           var tipoInterruptor = [];
-          var cantidadInterruptores = [];
+          var cantidadInterruptor = [];
           var coordenadas;
           var planos = document.getElementById("planos[]");
           var fotos = document.getElementById("fileInputOculto");
@@ -7612,9 +7612,10 @@ $(document).ready(function() {
           informacion["id_sede"] = idSede;
           informacion["id_campus"] = idCampus;
           informacion["id_edificio"] = idEdificio;
+          informacion["piso"] = piso;
           informacion["id"] = id;
           informacion['uso_espacio'] = usoEspacio;
-          informacion['altura_pared'] = alturaPared;
+          informacion['alto_pared'] = alturaPared;
           informacion['ancho_pared'] = anchoPared;
           informacion['material_pared'] = materialPared;
           informacion['largo_techo'] = largoTecho;
@@ -7623,7 +7624,7 @@ $(document).ready(function() {
           informacion['largo_piso'] = largoPiso;
           informacion['ancho_piso'] = anchoPiso;
           informacion['material_piso'] = materialPiso;
-          informacion['numero_espacio_padre'] = numero_espacio_padre;
+          informacion['espacio_padre'] = numero_espacio_padre;
           for (var i=0;i<=iluminacionCont;i++) {
               if (i==0) {
                   tipoIluminacion[i] = $("#tipo_iluminacion").val();
@@ -7683,22 +7684,19 @@ $(document).ready(function() {
           for (var i=0;i<=interruptoresCont;i++) {
               if (i==0) {
                   tipoInterruptor[i] = $("#tipo_interruptor").val();
-                  cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                  cantidadInterruptor[i] = $("#cantidad_interruptores").val();
               }else{
                   tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
-                  cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                  cantidadInterruptor[i] = $("#cantidad_interruptores"+i).val();
               }
-          }
-          for (var i = 0; i < marcadoresModificacion.length; i++) {
-              coordenadas = marcadoresModificacion[i].getPosition();
           }
           informacion['tipo_iluminacion'] = tipoIluminacion;
           informacion['cantidad_iluminacion'] = cantidadIluminacion;
           informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
           informacion['tomacorriente'] = tomacorriente;
-          informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
+          informacion['cantidad_suministro_energia'] = cantidadTomacorrientes;
           informacion['tipo_puerta'] = tipoPuerta;
-          informacion['cantidad_puertas'] = cantidadPuertas;
+          informacion['cantidad_puerta'] = cantidadPuertas;
           informacion['material_puerta'] = materialPuerta;
           informacion['tipo_cerradura'] = tipoCerradura;
           informacion['gato_puerta'] = gatoPuerta;
@@ -7706,14 +7704,12 @@ $(document).ready(function() {
           informacion['ancho_puerta'] = anchoPuerta;
           informacion['alto_puerta'] = altoPuerta;
           informacion['tipo_ventana'] = tipoVentana;
-          informacion['cantidad_ventanas'] = cantidadVentanas;
+          informacion['cantidad_ventana'] = cantidadVentanas;
           informacion['material_ventana'] = materialVentana;
           informacion['ancho_ventana'] = anchoVentana;
           informacion['alto_ventana'] = altoVentana;
           informacion['tipo_interruptor'] = tipoInterruptor;
-          informacion['cantidad_interruptores'] = cantidadInterruptores;
-          informacion['lat'] = coordenadas.lat().toFixed(8);
-          informacion['lng'] = coordenadas.lng().toFixed(8);
+          informacion['cantidad_interruptor'] = cantidadInterruptor;
           var data = modificarObjeto("espacio",informacion);
           console.log(data);
           if(data.verificar){

@@ -822,9 +822,7 @@ class modelo_modificacion {
         $largo_techo = htmlspecialchars(trim($largo_techo));
         $material_techo = htmlspecialchars(trim($material_techo));
         $espacio_padre = htmlspecialchars(trim($espacio_padre));
-        $campos = "piso_edificio = '".$piso."', uso_espacio = '".$uso_espacio."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
-        if (strcasecmp($uso_espacio,'') != 0)
-            $campos = $campos.", uso_espacio = '".$uso_espacio."'";
+        $campos = "piso_edificio = '".$piso."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
         if (strcasecmp($material_pared,'') != 0)
             $campos = $campos.", id_material_pared = '".$material_pared."'";
         if (strcasecmp($material_piso,'') != 0)
@@ -833,10 +831,10 @@ class modelo_modificacion {
             $campos = $campos.", id_material_techo = '".$material_techo."'";
         if (strcasecmp($espacio_padre,'') != 0)
             $campos = $campos.", espacio_padre = '".$espacio_padre."', sede_padre = '".$id_sede."', campus_padre = '".$id_campus."', edificio_padre = '".$id_edificio."'";
-        $sql = "UPDATE espacio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $sql = "UPDATE espacio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"espacio");
         foreach ($data as $clave => $valor) {
-            $piso_anterior = $valor['piso'];
+            $piso_anterior = $valor['piso_edificio'];
             $uso_espacio_anterior = $valor['uso_espacio'];
             $ancho_pared_anterior = $valor['ancho_pared'];
             $alto_pared_anterior = $valor['alto_pared'];
@@ -874,7 +872,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$material_techo_anterior,$material_techo);
                 $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$ancho_techo_anterior,$ancho_techo);
                 $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largo_techo_anterior,$largo_techo);
-                if (strcasecmp($espacio_padre,'') != 0)
+                /*if (strcasecmp($espacio_padre,'') != 0)
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacio_padre_anterior,$espacio_padre);
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
                     $this->modificarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
@@ -890,7 +888,7 @@ class modelo_modificacion {
                 }
                 for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventana[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
-                }
+                }*/
                 $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;

@@ -79,7 +79,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarCorredor($info['id_sede'],$info['id_campus'],$info['id'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptor'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarCorredor($info['id_sede'],$info['id_campus'],$info['id'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptor']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
