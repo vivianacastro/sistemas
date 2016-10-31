@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
     var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
-    var campusSelect = null;
+    var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
     var infoWindowActiva;
@@ -1856,7 +1856,9 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (iluminacionCont == 0) {
                     $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
+                    $("#cantidad_iluminacion").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -1867,7 +1869,9 @@ $(document).ready(function() {
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
                     $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+                    $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
 
                 }
                 iluminacionCont++;
@@ -1877,6 +1881,7 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (interruptoresCont == 0) {
                     $("#tipo_interruptor").val(record.tipo_interruptor);
+                    $("#tipo_interruptor").attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores").val(record.cantidad);
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
@@ -1888,6 +1893,7 @@ $(document).ready(function() {
                     añadirComponente("interruptor",componente);
                     actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
                     $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
+                    $("#tipo_interruptor"+interruptoresCont).attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
                 }
                 interruptoresCont++;
@@ -2181,10 +2187,15 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (ventanasCont == 0) {
                     $("#tipo_ventana").val(record.tipo_ventana);
+                    $("#tipo_ventana").attr('name',record.tipo_ventana);
                     $("#cantidad_ventanas").val(record.cantidad);
+                    $("#cantidad_ventanas").attr('name',record.cantidad);
                     $("#material_ventana").val(record.material);
+                    $("#material_ventana").attr('name',record.material);
                     $("#ancho_ventana").val(record.ancho);
+                    $("#ancho_ventana").attr('name',record.ancho);
                     $("#alto_ventana").val(record.alto);
+                    $("#alto_ventana").attr('name',record.alto);
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2202,10 +2213,15 @@ $(document).ready(function() {
                     actualizarSelectMaterial("material_ventana",ventanasCont);
                     actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
                     $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
+                    $("#tipo_ventana"+ventanasCont).attr('name',record.tipo_ventana);
                     $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
+                    $("#cantidad_ventanas"+ventanasCont).attr('name',record.cantidad);
                     $("#material_ventana"+ventanasCont).val(record.material);
+                    $("#material_ventana"+ventanasCont).attr('name',record.material);
                     $("#ancho_ventana"+ventanasCont).val(record.ancho);
+                    $("#ancho_ventana"+ventanasCont).attr('name',record.ancho);
                     $("#alto_ventana"+ventanasCont).val(record.alto);
+                    $("#alto_ventana"+ventanasCont).attr('name',record.alto);
                 }
                 ventanasCont++;
             }
@@ -2640,7 +2656,9 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (iluminacionCont == 0) {
                     $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
+                    $("#cantidad_iluminacion").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2651,7 +2669,9 @@ $(document).ready(function() {
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
                     $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+                    $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
                 }
                 iluminacionCont++;
             }
@@ -3203,7 +3223,6 @@ $(document).ready(function() {
         var campus = $("#campus_search").val();
         var edificio = $("#edificio_search").val();
         var id = $("#espacio_search").val();
-        var usoEspacio;
         informacion['nombre_sede'] = sede;
         informacion['nombre_campus'] = campus;
         informacion['nombre_edificio'] = edificio;
@@ -3251,8 +3270,8 @@ $(document).ready(function() {
                 $("#nombre_edificio").val(record.id_edificio+" - "+record.nombre_edificio);
                 $("#pisos").val(record.piso);
                 $("#id_espacio").val(record.id);
-                usoEspacio = record.uso_espacio;
-                $("#uso_espacio").val(usoEspacio);
+                usoEspacioSelect = record.uso_espacio;
+                $("#uso_espacio").val(usoEspacioSelect);
                 $("#ancho_pared").val(record.ancho_pared);
                 $("#altura_pared").val(record.alto_pared);
                 $("#material_pared").val(record.material_pared);
@@ -3277,7 +3296,9 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (iluminacionCont == 0) {
                     $("#tipo_iluminacion").val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
+                    $("#cantidad_iluminacion").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3288,7 +3309,9 @@ $(document).ready(function() {
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
                     $("#tipo_iluminacion"+iluminacionCont).val(record.tipo_iluminacion);
+                    $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
+                    $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
                     iluminacionCont++;
                 }
             }
@@ -3297,7 +3320,9 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (interruptoresCont == 0) {
                     $("#tipo_interruptor").val(record.tipo_interruptor);
+                    $("#tipo_interruptor").attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores").val(record.cantidad);
+                    $("#cantidad_interruptores").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3308,7 +3333,9 @@ $(document).ready(function() {
                     añadirComponente("interruptor",componente);
                     actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
                     $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
+                    $("#tipo_interruptor"+interruptoresCont).attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
+                    $("#cantidad_interruptores"+interruptoresCont).attr('name',record.cantidad);
                     interruptoresCont++;
                 }
             }
@@ -3317,12 +3344,18 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (puertasCont == 0) {
                     $("#tipo_puerta").val(record.tipo_puerta);
+                    $("#tipo_puerta").attr('name',record.tipo_puerta);
                     $("#cantidad_puertas").val(record.cantidad);
+                    $("#cantidad_puertas").attr('name',record.cantidad);
                     $("#material_puerta").val(record.material_puerta);
+                    $("#material_puerta").attr('name',record.material_puerta);
                     $("input[name=gato_puerta][value="+record.gato+"]").prop('checked', true);
                     $("#material_marco_puerta").val(record.material_marco);
+                    $("#material_marco_puerta").attr('name',record.material_marco);
                     $("#ancho_puerta").val(record.ancho);
+                    $("#ancho_puerta").attr('name',record.ancho);
                     $("#alto_puerta").val(record.largo);
+                    $("#alto_puerta").attr('name',record.largo);
                 }else{
                     var componente = '<div id="puerta'+puertasCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3350,12 +3383,18 @@ $(document).ready(function() {
                     actualizarSelectMaterial("material_puerta",puertasCont);
                     actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
                     $("#tipo_puerta"+puertasCont).val(record.tipo_puerta);
+                    $("#tipo_puerta"+puertasCont).attr('name',record.tipo_puerta);
                     $("#cantidad_puertas"+puertasCont).val(record.cantidad);
+                    $("#cantidad_puertas"+puertasCont).attr('name',record.cantidad);
                     $("#material_puerta"+puertasCont).val(record.material_puerta);
+                    $("#material_puerta"+puertasCont).attr('name',record.material_puerta);
                     $("input[name=gato_puerta"+puertasCont+"][value="+record.gato+"]").prop('checked', true);
                     $("#material_marco_puerta"+puertasCont).val(record.material_marco);
+                    $("#material_marco_puerta"+puertasCont).attr('name',record.material_marco);
                     $("#ancho_puerta"+puertasCont).val(record.ancho);
+                    $("#ancho_puerta"+puertasCont).attr('name',record.ancho);
                     $("#alto_puerta"+puertasCont).val(record.alto);
+                    $("#alto_puerta"+puertasCont).attr('name',record.largo);
                     puertasCont++;
                 }
                 var tipoPuerta = record.tipo_puerta;
@@ -3376,8 +3415,10 @@ $(document).ready(function() {
                         if (cerraduraCont == 0) {
                             if (puertasCont == 0) {
                                 $("#tipo_cerradura").val(valor.tipo_cerradura);
+                                $("#tipo_cerradura").attr('name',record.tipo_cerradura);
                             }else {
                                 $("#tipo_cerradura"+puertasCont).val(valor.tipo_cerradura);
+                                $("#tipo_cerradura"+puertasCont).attr('name',record.tipo_cerradura);
                             }
                         }else{
                             var componente = '<div id="cerradura'+cerraduraCont+'">'
@@ -3387,6 +3428,7 @@ $(document).ready(function() {
                             añadirComponente("cerradura",componente);
                             actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
                             $("#tipo_cerradura"+cerraduraCont).val(valor.tipo_cerradura);
+                            $("#tipo_cerradura"+cerraduraCont).attr('name',record.tipo_cerradura);
                             cerraduraCont++;
                         }
                     }
@@ -3397,8 +3439,11 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (tomacorrientesCont == 0) {
                     $("#tipo_suministro_energia").val(record.tipo_suministro_energia);
+                    $("#tipo_suministro_energia").attr('name',record.tipo_suministro_energia);
                     $("#tomacorriente").val(record.tomacorriente);
+                    $("#tomacorriente").attr('name',record.tomacorriente);
                     $("#cantidad_tomacorrientes").val(record.cantidad);
+                    $("#cantidad_tomacorrientes").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3415,8 +3460,11 @@ $(document).ready(function() {
                     añadirComponente("suministro_energia",componente);
                     actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
                     $("#tipo_suministro_energia"+tomacorrientesCont).val(record.tipo_suministro_energia);
+                    $("#tipo_suministro_energia"+tomacorrientesCont).attr('name',record.tipo_suministro_energia);
                     $("#tomacorriente"+tomacorrientesCont).val(record.tomacorriente);
+                    $("#tomacorriente"+tomacorrientesCont).attr('name',record.tomacorriente);
                     $("#cantidad_tomacorrientes"+tomacorrientesCont).val(record.cantidad);
+                    $("#cantidad_tomacorrientes"+tomacorrientesCont).attr('name',record.cantidad);
                     tomacorrientesCont++;
                 }
             }
@@ -3425,10 +3473,15 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 if (ventanasCont == 0) {
                     $("#tipo_ventana").val(record.tipo_ventana);
+                    $("#tipo_ventana").attr('name',record.tipo_ventana);
                     $("#cantidad_ventanas").val(record.cantidad);
+                    $("#cantidad_ventanas").attr('name',record.cantidad);
                     $("#material_ventana").val(record.material_ventana);
+                    $("#material_ventana").attr('name',record.material_ventana);
                     $("#ancho_ventana").val(record.ancho);
+                    $("#ancho_ventana").attr('name',record.ancho);
                     $("#alto_ventana").val(record.alto);
+                    $("#alto_ventana").attr('name',record.alto);
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3446,51 +3499,56 @@ $(document).ready(function() {
                     actualizarSelectMaterial("material_ventana",ventanasCont);
                     actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
                     $("#tipo_ventana"+ventanasCont).val(record.tipo_ventana);
+                    $("#tipo_ventana"+ventanasCont).attr('name',record.tipo_ventana);
                     $("#cantidad_ventanas"+ventanasCont).val(record.cantidad);
+                    $("#cantidad_ventanas"+ventanasCont).attr('name',record.cantidad);
                     $("#material_ventana"+ventanasCont).val(record.material_ventana);
+                    $("#material_ventana"+ventanasCont).attr('name',record.material_ventana);
                     $("#ancho_ventana"+ventanasCont).val(record.ancho);
+                    $("#ancho_ventana"+ventanasCont).attr('name',record.ancho);
                     $("#alto_ventana"+ventanasCont).val(record.alto);
+                    $("#alto_ventana"+ventanasCont).attr('name',record.alto);
                     ventanasCont++;
                 }
             }
         });
         var nombreUsoEspacio;
-        if (usoEspacio == '1') { //Salón
+        if (usoEspacioSelect == '1') { //Salón
             nombreUsoEspacio ='salon';
-        }else if(usoEspacio == '2'){ //Auditorio
+        }else if(usoEspacioSelect == '2'){ //Auditorio
             nombreUsoEspacio ='auditorio';
-        }else if(usoEspacio == '3'){ //Laboratorio
+        }else if(usoEspacioSelect == '3'){ //Laboratorio
             nombreUsoEspacio ='laboratorio';
-        }else if(usoEspacio == '4'){ //Sala de Cómputo
+        }else if(usoEspacioSelect == '4'){ //Sala de Cómputo
             nombreUsoEspacio ='sala_computo';
-        }else if(usoEspacio == '5'){ //Oficina
+        }else if(usoEspacioSelect == '5'){ //Oficina
             nombreUsoEspacio ='oficina';
-        }else if(usoEspacio == '6'){ //Baño
+        }else if(usoEspacioSelect == '6'){ //Baño
             nombreUsoEspacio ='bano';
-        }else if(usoEspacio == '7'){ //Cuarto Técnico
+        }else if(usoEspacioSelect == '7'){ //Cuarto Técnico
             nombreUsoEspacio ='cuarto_tecnico';
-        }else if(usoEspacio == '8'){ //Bodega/Almacen
+        }else if(usoEspacioSelect == '8'){ //Bodega/Almacen
             nombreUsoEspacio ='bodega';
-        }else if(usoEspacio == '10'){ //Cuarto de Plantas
+        }else if(usoEspacioSelect == '10'){ //Cuarto de Plantas
             nombreUsoEspacio ='cuarto_plantas';
-        }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+        }else if(usoEspacioSelect == '11'){ //Cuarto de Aires Acondicionados
             nombreUsoEspacio ='cuarto_aire_acondicionado';
-        }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+        }else if(usoEspacioSelect == '12'){ //Área Deportiva Cerrada
             nombreUsoEspacio ='area_deportiva_cerrada';
-        }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+        }else if(usoEspacioSelect == '14'){ //Centro de Datos/Teléfono
             nombreUsoEspacio ='centro_datos';
-        }else if(usoEspacio == '17'){ //Cuarto de Bombas
+        }else if(usoEspacioSelect == '17'){ //Cuarto de Bombas
             nombreUsoEspacio ='cuarto_bombas';
-        }else if(usoEspacio == '19'){ //Cocineta
+        }else if(usoEspacioSelect == '19'){ //Cocineta
             nombreUsoEspacio ='cocineta';
-        }else if(usoEspacio == '20'){ //Sala de Estudio
+        }else if(usoEspacioSelect == '20'){ //Sala de Estudio
             nombreUsoEspacio ='sala_estudio';
         }else {
             nombreUsoEspacio = "";
         }
-        if (usoEspacio != "") {
+        if (usoEspacioSelect != "") {
             informacion['uso_espacio'] = nombreUsoEspacio;
-            if (usoEspacio == '1') { //Salón
+            if (usoEspacioSelect == '1') { //Salón
                 data = consultarInformacionObjeto("salon",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Salón</h5></b></div>';
@@ -3512,7 +3570,7 @@ $(document).ready(function() {
                         $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
                     }
                 });
-            }else if(usoEspacio == '2'){ //Auditorio
+            }else if(usoEspacioSelect == '2'){ //Auditorio
                 data = consultarInformacionObjeto("auditorio",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Auditorio</h5></b></div>';
@@ -3534,7 +3592,7 @@ $(document).ready(function() {
                         $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
                     }
                 });
-            }else if(usoEspacio == '3'){ //Laboratorio
+            }else if(usoEspacioSelect == '3'){ //Laboratorio
                 data = consultarInformacionObjeto("laboratorio",informacion);
                 dataSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                 console.log(data);
@@ -3573,7 +3631,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                     }
                 });
-            }else if(usoEspacio == '4'){ //Sala de Cómputo
+            }else if(usoEspacioSelect == '4'){ //Sala de Cómputo
                 data = consultarInformacionObjeto("sala_computo",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Cómputo</h5></b></div>';
@@ -3595,7 +3653,7 @@ $(document).ready(function() {
                         $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
                     }
                 });
-            }else if(usoEspacio == '5'){ //Oficina
+            }else if(usoEspacioSelect == '5'){ //Oficina
                 data = consultarInformacionObjeto("oficina",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Oficina</h5></b></div>';
@@ -3614,7 +3672,7 @@ $(document).ready(function() {
                         $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
                     }
                 });
-            }else if(usoEspacio == '6'){ //Baño
+            }else if(usoEspacioSelect == '6'){ //Baño
                 data = consultarInformacionObjeto("bano",informacion);
                 dataLavamanos = consultarInformacionObjeto("lavamanos",informacion);
                 dataOrinal = consultarInformacionObjeto("orinal",informacion);
@@ -3683,7 +3741,7 @@ $(document).ready(function() {
                       $("#cantidad_orinales").val(record.cantidad_orinales);
                     }
                 });
-            }else if(usoEspacio == '7'){ //Cuarto Técnico
+            }else if(usoEspacioSelect == '7'){ //Cuarto Técnico
                 data = consultarInformacionObjeto("cuarto_tecnico",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto Técnico</h5></b></div>';
@@ -3702,7 +3760,7 @@ $(document).ready(function() {
                         $("input[name=punto_videobeam][value="+record.punto_videobeam+"]").prop('checked', true);
                     }
                 });
-            }else if(usoEspacio == '8'){ //Bodega/Almacen
+            }else if(usoEspacioSelect == '8'){ //Bodega/Almacen
                 data = consultarInformacionObjeto("bodega",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Bodega/Almacén</h5></b></div>';
@@ -3717,7 +3775,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
                     }
                 });
-            }else if(usoEspacio == '10'){ //Cuarto de Plantas
+            }else if(usoEspacioSelect == '10'){ //Cuarto de Plantas
                 data = consultarInformacionObjeto("cuarto_plantas",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Plantas</h5></b></div>';
@@ -3732,7 +3790,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
                     }
                 });
-            }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+            }else if(usoEspacioSelect == '11'){ //Cuarto de Aires Acondicionados
                 data = consultarInformacionObjeto("cuarto_aire_acondicionado",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Aires Acondicionados</h5></b></div>';
@@ -3747,7 +3805,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
                     }
                 });
-            }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+            }else if(usoEspacioSelect == '12'){ //Área Deportiva Cerrada
                 data = consultarInformacionObjeto("area_deportiva_cerrada",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Área Deportiva Cerrada</h5></b></div>';
@@ -3762,7 +3820,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
                     }
                 });
-            }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+            }else if(usoEspacioSelect == '14'){ //Centro de Datos/Teléfono
                 data = consultarInformacionObjeto("centro_datos",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Centro de Datos</h5></b></div>';
@@ -3777,7 +3835,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_red").val(record.cantidad_puntos_red);
                     }
                 });
-            }else if(usoEspacio == '17'){ //Cuarto de Bombas
+            }else if(usoEspacioSelect == '17'){ //Cuarto de Bombas
                 data = consultarInformacionObjeto("cuarto_bombas",informacion);
                 dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                 console.log(data);
@@ -3807,7 +3865,7 @@ $(document).ready(function() {
                         $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                     }
                 });
-            }else if(usoEspacio == '19'){ //Cocineta
+            }else if(usoEspacioSelect == '19'){ //Cocineta
                   data = consultarInformacionObjeto("cocineta",informacion);
                   dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
                   console.log(data);
@@ -3837,7 +3895,7 @@ $(document).ready(function() {
                           $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                       }
                   });
-              }else if(usoEspacio == '20'){ //Sala de Estudio
+              }else if(usoEspacioSelect == '20'){ //Sala de Estudio
                 data = consultarInformacionObjeto("sala_estudio",informacion);
                 console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Estudio</h5></b></div>';
@@ -4155,6 +4213,9 @@ $(document).ready(function() {
         $("#botones_anadir_ventana").hide();
         $("#enlace_fotos").hide();
         $("#divBotonEliminarPlano").hide();
+        $("#botones_lavamanos").hide();
+        $("#botones_orinal").hide();
+        $("#guardar_modificaciones_espacio").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
         eliminarComponente("informacion2");
@@ -4632,7 +4693,12 @@ $(document).ready(function() {
         $("#fotos").hide();
         $("#modificar_espacio").hide();
         $("#guardar_archivos").hide();
-        $("#guardar_modificaciones_espacio").show();
+        if (usoEspacioSelect == '6'){
+            $('#botones_lavamanos').show();
+            $('#botones_orinal').show();
+        }else if(usoEspacioSelect = '3' || usoEspacioSelect = '17' || usoEspacioSelect = '19'){
+            $("#botones_punto_sanitario").show();
+        }
         $('#divDialogConsulta').scrollTop(0);
     });
 
