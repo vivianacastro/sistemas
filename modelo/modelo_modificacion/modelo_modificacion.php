@@ -202,13 +202,13 @@ class modelo_modificacion {
         $material_techo = htmlspecialchars(trim($material_techo));
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
         $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
-        $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
+        $cantidad = htmlspecialchars(trim($cantidad));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."',
                     ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."',
                     ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."',
-                    tomacorriente = '".$tomacorriente."', cantidad = '".$cantidad_interruptor."', lat = '".$lat."', lng = '".$lng."'";
+                    tomacorriente = '".$tomacorriente."', cantidad = '".$cantidad."', lat = '".$lat."', lng = '".$lng."'";
         if (strcasecmp($material_pared,'') != 0)
             $campos = $campos.", id_material_pared = '".$material_pared."'";
         if (strcasecmp($material_piso,'') != 0)
@@ -264,14 +264,14 @@ class modelo_modificacion {
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_anterior,$cantidad);
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
-                for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
-                }
-                for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->modificarInterruptorCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptor[$i],$cantidad_interruptor_anterior[$i]);
-                }
                 $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                  $this->modificarIluminacionCorredor($id_sede,$id_campus,$id,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                }
+                for ($i=0;$i<count($tipo_interruptor);$i++) {
+                  $this->modificarInterruptorCorredor($id_sede,$id_campus,$id,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptor[$i],$cantidad_interruptor_anterior[$i]);
+                }
                 return true;
             }
         }
@@ -472,7 +472,7 @@ class modelo_modificacion {
                 if (strcasecmp($material_pasamanos,'') != 0)
                     $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material_pasamanos",$material_pasamanos_anterior,$material_pasamanos);
                 for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->modificarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material[$i],$material_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
+                    $this->modificarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material[$i],$material_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
                 }
                 $GLOBALS['mensaje'] = "Las gradas se modificaron correctamente";
                 $GLOBALS['sql'] = $sql;
@@ -715,7 +715,7 @@ class modelo_modificacion {
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                    $this->modificarIluminacionPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
                 }
                 $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
@@ -1070,19 +1070,19 @@ class modelo_modificacion {
                 if (strcasecmp($espacio_padre,'') != 0)
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacio_padre_anterior,$espacio_padre);
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                    $this->modificarIluminacionEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->modificarInterruptorEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptores[$i],$cantidad_interruptores_anterior[$i]);
+                    $this->modificarInterruptorEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptores[$i],$cantidad_interruptores_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
-                  $this->modificarPuertaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta[$i],$tipo_puerta_anterior[$i],$material_puerta[$i],$material_puerta_anterior[$i],$cantidad_puerta[$i],$cantidad_puerta_anterior[$i],$material_marco[$i],$material_marco_anterior[$i],$ancho_puerta[$i],$ancho_puerta_anterior[$i],$alto_puerta[$i],$alto_puerta_anterior[$i],$gato_puerta[$i]);
+                  $this->modificarPuertaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta[$i],$tipo_puerta_anterior[$i],$material_puerta[$i],$material_puerta_anterior[$i],$cantidad_puerta[$i],$cantidad_puerta_anterior[$i],$material_marco[$i],$material_marco_anterior[$i],$ancho_puerta[$i],$ancho_puerta_anterior[$i],$alto_puerta[$i],$alto_puerta_anterior[$i],$gato_puerta[$i]);
                 }
                 for ($i=0;$i<count($tipo_suministro_energia);$i++) {
-                    $this->modificarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$tipo_suministro_energia_anterior[$i],$cantidad_suministro_energia[$i],$cantidad_suministro_energia_anterior[$i],$tomacorriente[$i],$tomacorriente_anterior[$i]);
+                    $this->modificarSuministroEnergiaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_suministro_energia[$i],$tipo_suministro_energia_anterior[$i],$cantidad_suministro_energia[$i],$cantidad_suministro_energia_anterior[$i],$tomacorriente[$i],$tomacorriente_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material_ventana[$i],$material_ventana_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
+                    $this->modificarVentanaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material_ventana[$i],$material_ventana_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
                 }
                 $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;

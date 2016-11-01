@@ -1862,9 +1862,9 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
@@ -1883,18 +1883,20 @@ $(document).ready(function() {
                     $("#tipo_interruptor").val(record.tipo_interruptor);
                     $("#tipo_interruptor").attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores").val(record.cantidad);
+                    $("#cantidad_interruptores").attr('name',record.cantidad);
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
                     actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
                     $("#tipo_interruptor"+interruptoresCont).val(record.tipo_interruptor);
                     $("#tipo_interruptor"+interruptoresCont).attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
+                    $("#cantidad_interruptores"+interruptoresCont).attr('name',record.cantidad);
                 }
                 interruptoresCont++;
             }
@@ -2199,15 +2201,15 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
                     +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
                     +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("ventana",componente);
                     actualizarSelectMaterial("material_ventana",ventanasCont);
@@ -2662,9 +2664,9 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
@@ -3302,9 +3304,9 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
                     actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
@@ -3326,9 +3328,9 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
                     actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
@@ -3359,24 +3361,24 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="puerta'+puertasCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_puerta'+puertasCont+'" required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
                     +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
+                    +'<select class="form-control formulario" name="" id="material_puerta'+puertasCont+'" required></select><br>'
                     +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_cerradura'+puertasCont+'" required></select><br>'
                     //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
                     //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
                     +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
                     +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
                     +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
                     +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta'+puertasCont+'" required></select><br>'
+                    +'<select class="form-control formulario" name="" id="material_marco_puerta'+puertasCont+'" required></select><br>'
                     +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
                     +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_puerta'+puertasCont+'" value="" required/><br>'
                     +'</div>';
                     añadirComponente("puerta",componente);
                     actualizarSelectMaterial("material_marco_puerta",puertasCont);
@@ -3423,7 +3425,7 @@ $(document).ready(function() {
                         }else{
                             var componente = '<div id="cerradura'+cerraduraCont+'">'
                             +'<div class="div_izquierda"><b>Tipo de cerradura ('+(cerraduraCont+1)+') de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-                            +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+cerraduraCont+'" required></select><br>'
+                            +'<select class="form-control formulario" name="" id="tipo_cerradura'+puertasCont+cerraduraCont+'" required></select><br>'
                             +'</div>';
                             añadirComponente("cerradura",componente);
                             actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
@@ -3447,15 +3449,15 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
                     +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
+                    +'<select class="form-control formulario" name="" id="tomacorriente'+tomacorrientesCont+'" required>'
                     +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
                     +'<option value="regulado">Regulado</option>'
                     +'<option value="no regulado">No Regulado</option>'
                     +'</select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
                     +'</div>';
                     añadirComponente("suministro_energia",componente);
                     actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
@@ -3485,15 +3487,15 @@ $(document).ready(function() {
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
                     +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
+                    +'<select class="form-control formulario" name="" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
                     +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_ventana'+ventanasCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("ventana",componente);
                     actualizarSelectMaterial("material_ventana",ventanasCont);
@@ -7394,8 +7396,8 @@ $(document).ready(function() {
           var cantidadIluminacionAnterior = [];
           var tipoInterruptor = [];
           var tipoInterruptorAnterior = [];
-          var cantidad_interruptor = [];
-          var cantidad_interruptorAnterior = [];
+          var cantidadInterruptor = [];
+          var cantidadInterruptorAnterior = [];
           var coordenadas;
           var planos = document.getElementById("planos[]");
           var fotos = document.getElementById("fotos[]");
@@ -7423,10 +7425,12 @@ $(document).ready(function() {
                   tipoIluminacion[i] = $("#tipo_iluminacion").val();
                   tipoIluminacionAnterior[i] = $("#tipo_iluminacion").attr('name');
                   cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                  cantidadIluminacionAnterior[i] = $("#cantidad_iluminacion").attr('name');
               }else{
                   tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
                   tipoIluminacionAnterior[i] = $("#tipo_iluminacion"+i).attr('name');
                   cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                  cantidadIluminacionAnterior[i] = $("#cantidad_iluminacion"+i).attr('name');
               }
           }
           for (var i=0;i<=interruptoresCont;i++) {
@@ -7434,24 +7438,29 @@ $(document).ready(function() {
                   tipoInterruptor[i] = $("#tipo_interruptor").val();
                   tipoInterruptorAnterior[i] = $("#tipo_interruptor").attr('name');
                   cantidadInterruptor[i] = $("#cantidad_interruptores").val();
+                  cantidadInterruptorAnterior[i] = $("#cantidad_interruptores").attr('name');
               }else{
                   tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
                   tipoInterruptorAnterior[i] = $("#tipo_interruptor"+i).attr('name');
-                  cantidad_interruptor[i] = $("#cantidad_interruptores"+i).val();
+                  cantidadInterruptor[i] = $("#cantidad_interruptores"+i).val();
+                  cantidadInterruptorAnterior[i] = $("#cantidad_interruptores"+i).attr('name');
               }
           }
           informacion['tipo_iluminacion'] = tipoIluminacion;
           informacion['tipo_iluminacion_anterior'] = tipoIluminacionAnterior;
           informacion['cantidad_iluminacion'] = cantidadIluminacion;
+          informacion['cantidad_iluminacion_anterior'] = cantidadIluminacionAnterior;
           informacion['tipo_interruptor'] = tipoInterruptor;
           informacion['tipo_interruptor_anterior'] = tipoInterruptorAnterior;
-          informacion['cantidad_interruptor'] = cantidad_interruptor;
+          informacion['cantidad_interruptor'] = cantidadInterruptor;
+          informacion['cantidad_interruptor_anterior'] = cantidadInterruptorAnterior;
           for (var i = 0; i < marcadoresModificacion.length; i++) {
               coordenadas = marcadoresModificacion[i].getPosition();
           }
           informacion['lat'] = coordenadas.lat().toFixed(8);
           informacion['lng'] = coordenadas.lng().toFixed(8);
           var data = modificarObjeto("corredor",informacion);
+          console.log(informacion);
           console.log(data);
           if(data.verificar){
               alert(data.mensaje);
