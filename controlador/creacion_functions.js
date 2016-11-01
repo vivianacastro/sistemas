@@ -246,7 +246,7 @@ $(document).ready(function() {
                     console.log(resultadoPlanos);
                     console.log(resultadoFotos);
                     var mensaje = "";
-                    if (resultadoPlanos.length > 0) {
+                    if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             if (!resultadoPlanos.verificar[i]) {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -256,7 +256,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                    if (resultadoFotos.length > 0) {
+                    if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
                                 mensaje += resultadoFotos.mensaje[i];
@@ -266,7 +266,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                    if (mensaje.substring(0,0) != "") {
+                    if (mensaje.substring(0,1) != "") {
                         console.log(mensaje.length);
                         alert(mensaje);
                     }
@@ -1174,7 +1174,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -1201,7 +1201,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -1211,7 +1211,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1221,7 +1221,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             alert(mensaje);
                         }
                         planos.value = "";
@@ -1315,7 +1315,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -1343,7 +1343,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -1353,7 +1353,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1363,7 +1363,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -1456,7 +1456,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -1484,7 +1484,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -1494,7 +1494,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1504,7 +1504,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -1636,7 +1636,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -1664,7 +1664,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -1674,7 +1674,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1684,7 +1684,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -1805,7 +1805,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -1833,7 +1833,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -1843,7 +1843,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -1853,7 +1853,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -1969,7 +1969,7 @@ $(document).ready(function() {
                           }else{
                               var nombreArchivo = foto.name;
                               if(nombreArchivo.length > 50){
-                                  nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                  nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                               }
                               arregloFotos.append('archivo'+i,foto,nombreArchivo);
                           }
@@ -1997,7 +1997,7 @@ $(document).ready(function() {
                       console.log(resultadoPlanos);
                       console.log(resultadoFotos);
                       var mensaje = "";
-                      if (resultadoPlanos.length > 0) {
+                      if (resultadoPlanos.length != 0) {
                           for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                               if (!resultadoPlanos.verificar[i]) {
                                   mensaje += resultadoPlanos.mensaje[i];
@@ -2007,7 +2007,7 @@ $(document).ready(function() {
                               }
                           }
                       }
-                      if (resultadoFotos.length > 0) {
+                      if (resultadoFotos.length != 0) {
                           for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                               if (!resultadoFotos.verificar[i]) {
                                   mensaje += resultadoFotos.mensaje[i];
@@ -2017,7 +2017,7 @@ $(document).ready(function() {
                               }
                           }
                       }
-                      if (mensaje.substring(0,0) != "") {
+                      if (mensaje.substring(0,1) != "") {
                           console.log(mensaje.length);
                           alert(mensaje);
                       }
@@ -2113,7 +2113,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -2141,7 +2141,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -2151,7 +2151,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -2161,7 +2161,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -2253,7 +2253,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -2281,7 +2281,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -2291,7 +2291,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -2301,7 +2301,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -2392,7 +2392,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -2420,7 +2420,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -2430,7 +2430,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -2440,7 +2440,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -2543,7 +2543,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -2571,7 +2571,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -2581,7 +2581,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -2591,7 +2591,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -2685,7 +2685,7 @@ $(document).ready(function() {
                             }else{
                                 var nombreArchivo = foto.name;
                                 if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                 }
                                 arregloFotos.append('archivo'+i,foto,nombreArchivo);
                             }
@@ -2713,7 +2713,7 @@ $(document).ready(function() {
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";
-                        if (resultadoPlanos.length > 0) {
+                        if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -2723,7 +2723,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (resultadoFotos.length > 0) {
+                        if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
                                     mensaje += resultadoFotos.mensaje[i];
@@ -2733,7 +2733,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-                        if (mensaje.substring(0,0) != "") {
+                        if (mensaje.substring(0,1) != "") {
                             console.log(mensaje.length);
                             alert(mensaje);
                         }
@@ -3179,7 +3179,7 @@ $(document).ready(function() {
                                 }else{
                                     var nombreArchivo = foto.name;
                                     if(nombreArchivo.length > 50){
-                                        nombreArchivo = foto.name = foto.name.substring(foto.name.length-50, foto.name.length);
+                                        nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                     }
                                     arregloFotos.append('archivo'+i,foto,nombreArchivo);
                                 }

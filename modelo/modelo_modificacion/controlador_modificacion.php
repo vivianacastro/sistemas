@@ -79,7 +79,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarCorredor($info['id_sede'],$info['id_campus'],$info['id'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptor']);
+            $verificar = $m->modificarCorredor($info['id_sede'],$info['id_campus'],$info['id'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['tomacorriente'],$info['tipo_suministro_energia'],$info['cantidad_suministro_energia'],$info['tipo_iluminacion'],$info['tipo_iluminacion_anterior'],$info['cantidad_iluminacion'],$info['cantidad_iluminacion_anterior'],$info['tipo_interruptor'],$info['tipo_interruptor_anterior'],$info['cantidad_interruptor'],$info['cantidad_interruptor_anterior'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -119,7 +119,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['material_ventana'],$info['alto_ventana'],$info['ancho_ventana']);
+            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['tipo_ventana_anterior'],$info['material_ventana'],$info['material_ventana_anterior'],$info['cantidad_ventana'],$info['alto_ventana'],$info['ancho_ventana']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -179,7 +179,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo_iluminacion'],$info['tipo_iluminacion_anterior'],$info['cantidad_iluminacion'],$info['cantidad_iluminacion_anterior'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -259,7 +259,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarEspacio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['id'],$info['uso_espacio'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['espacio_padre'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['tipo_interruptor'],$info['cantidad_interruptor'],$info['tipo_puerta'],$info['material_puerta'],$info['cantidad_puerta'],$info['tipo_cerradura'],$info['material_marco'],$info['gato_puerta'],$info['ancho_puerta'],$info['alto_puerta'],$info['tipo_suministro_energia'],$info['tomacorriente'],$info['cantidad_suministro_energia'],$info['tipo_ventana'],$info['cantidad_ventana'],$info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana'],$info['tipo_iluminacion'],$info['cantidad_iluminacion'],$info['lat'],$info['lng']);
+            $verificar = $m->modificarEspacio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['id'],$info['uso_espacio'],$info['ancho_pared'],$info['alto_pared'],$info['material_pared'],$info['ancho_piso'],$info['largo_piso'],$info['material_piso'],$info['ancho_techo'],$info['largo_techo'],$info['material_techo'],$info['espacio_padre'],$info['tipo_iluminacion'],$info['tipo_iluminacion_anterior'],$info['cantidad_iluminacion'],$info['cantidad_iluminacion_anterior'],$info['tipo_interruptor'],$info['tipo_interruptor_anterior'],$info['cantidad_interruptor'],$info['cantidad_interruptor_anterior'],$info['tipo_puerta'],$info['tipo_puerta_anterior'],$info['material_puerta'],$info['material_puerta_anterior'],$info['cantidad_puerta'],$info['cantidad_puerta_anterior'],$info['tipo_cerradura'],$info['tipo_cerradura_anterior'],$info['material_marco'],$info['material_marco_anterior'],$info['gato_puerta'],$info['ancho_puerta'],$info['ancho_puerta_anterior'],$info['alto_puerta'],$info['alto_puerta_anterior'],$info['tipo_suministro_energia'],$info['tipo_suministro_energia_anterior'],$info['tomacorriente'],$info['tomacorriente_anterior'],$info['cantidad_suministro_energia'],$info['cantidad_suministro_energia_anterior'],$info['tipo_ventana'],$info['tipo_ventana_anterior'],$info['cantidad_ventana'],$info['cantidad_ventana_anterior'],$info['material_ventana'],$info['material_ventana_anterior'],$info['ancho_ventana'],$info['ancho_ventana_anterior'],$info['alto_ventana'],$info['alto_ventana_anterior'],$info['tipo_iluminacion'],$info['tipo_iluminacion_anterior'],$info['cantidad_iluminacion'],$info['cantidad_iluminacion_anterior'],$info['lat'],$info['lng']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

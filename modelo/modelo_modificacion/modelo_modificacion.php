@@ -187,7 +187,7 @@ class modelo_modificacion {
      * @param string $lng, nueva lng del corredor.
      * @return array
      */
-    public function modificarCorredor($id_sede,$id_campus,$id,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptor,$lat,$lng){
+    public function modificarCorredor($id_sede,$id_campus,$id,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
@@ -264,15 +264,103 @@ class modelo_modificacion {
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_anterior,$cantidad);
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
-                /*for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->modificarIluminacionCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$cantidad_interruptor[$i]);
-                }*/
+                    $this->modificarInterruptorCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptor[$i],$cantidad_interruptor_anterior[$i]);
+                }
                 $GLOBALS['mensaje'] = "El corredor se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar la iluminación de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación del corredor.
+     * @param string $tipo_iluminacion_anterior, tipo anterior de iluminación del corredor.
+     * @param string $cantidad_iluminacion, nueva cantidad de iluminación del corredor.
+     * @param string $cantidad_iluminacion_anterior, cantidad anterior de iluminación del corredor.
+     * @return array
+     */
+    public function modificarIluminacionCorredor($id_sede,$id_campus,$id,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $tipo_iluminacion_anterior = htmlspecialchars(trim($tipo_iluminacion_anterior));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
+        $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_iluminacion,'') != 0){
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+            $sql = "UPDATE iluminacion_corredor SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
+                    $GLOBALS['mensaje'] = "La iluminación del corredor se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar los interruptores de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $tipo_interruptor, nuevo tipo de interruptor del corredor.
+     * @param string $tipo_interruptor_anterior, tipo anterior de interruptor del corredor.
+     * @param string $cantidad_interruptor, nueva cantidad de interruptor del corredor.
+     * @param string $cantidad_interruptor_anterior, cantidad anterior de interruptores del corredor.
+     * @return array
+     */
+    public function modificarInterruptorCorredor($id_sede,$id_campus,$id,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
+        $tipo_interruptor_anterior = htmlspecialchars(trim($tipo_interruptor_anterior));
+        $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
+        $cantidad_interruptor_anterior = htmlspecialchars(trim($cantidad_interruptor_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_interruptor,'') != 0){
+            $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
+            $sql = "UPDATE interruptor_corredor SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
+                    $GLOBALS['mensaje'] = "El interruptor del corredor se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -349,7 +437,7 @@ class modelo_modificacion {
      * @param string $ancho_ventana, ancho de las ventanas de las gradas.
      * @return array
      */
-    public function modificarGradas($id_sede,$id_campus,$id_edificio,$piso,$pasamanos,$material_pasamanos,$tipo_ventana,$material,$alto_ventana,$ancho_ventana){
+    public function modificarGradas($id_sede,$id_campus,$id_edificio,$piso,$pasamanos,$material_pasamanos,$tipo_ventana,$tipo_ventana_anterior,$material,$material_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -364,7 +452,7 @@ class modelo_modificacion {
         elseif (strcasecmp($material_pasamanos,'') != 0)
                 $campos = $campos.", id_material_pasamanos = '".$material_pasamanos."'";
         $sql = "UPDATE gradas SET $campos WHERE id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso);
+        $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso,"gradas");
         foreach ($data as $clave => $valor) {
             $pasamanos_anterior = $valor['pasamanos'];
             $material_pasamanos_anterior = $valor['id_material_pasamanos'];
@@ -383,12 +471,73 @@ class modelo_modificacion {
                 $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"pasamanos",$pasamanos_anterior,$pasamanos);
                 if (strcasecmp($material_pasamanos,'') != 0)
                     $this->registrarModificacion("gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material_pasamanos",$material_pasamanos_anterior,$material_pasamanos);
-                /*for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->modificarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_ventana[$i],$cantidad_ventana[$i],$material[$i],$ancho_ventana[$i],$alto_ventana[$i]);
-                }*/
+                for ($i=0;$i<count($tipo_ventana);$i++) {
+                    $this->modificarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material[$i],$material_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
+                }
                 $GLOBALS['mensaje'] = "Las gradas se modificaron correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar las ventanas de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio id del edificio.
+     * @param string $piso, piso del edificio donde comienzan las gradas.
+     * @param string $tipo_ventana, nuevo tipo de ventana de las gradas.
+     * @param string $tipo_ventana_anterior, tipo anterior de ventana de las gradas.
+     * @param string $cantidad_ventana, nueva cantidad de ventanas de las gradas.
+     * @param string $cantidad_ventana_anterior, antigua cantidad de ventanas de las gradas.
+     * @param string $material, nuevo tipo de material de las ventanas de las gradas.
+     * @param string $material_anterior, anterior de material de las ventanas de las gradas.
+     * @param string $ancho_ventana, nueva ancho de las ventanas de las gradas.
+     * @param string $ancho_ventana_anterior, anterior ancho de ventanas de las gradas.
+     * @param string $alto_ventana, nuevo alto de las ventanas de las gradas.
+     * @param string $alto_ventana_anterior, antiguo alto de las ventanas de las gradas.
+     * @return array
+     */
+    public function modificarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material,$material_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $tipo_ventana = htmlspecialchars(trim($tipo_ventana));
+        $tipo_ventana_anterior = htmlspecialchars(trim($tipo_ventana_anterior));
+        $cantidad_ventana = htmlspecialchars(trim($cantidad_ventana));
+        $cantidad_ventana_anterior = htmlspecialchars(trim($cantidad_ventana_anterior));
+        $material = htmlspecialchars(trim($material));
+        $material_anterior = htmlspecialchars(trim($material_anterior));
+        $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
+        $ancho_ventana_anterior = htmlspecialchars(trim($ancho_ventana_anterior));
+        $alto_ventana = htmlspecialchars(trim($alto_ventana));
+        $alto_ventana_anterior = htmlspecialchars(trim($alto_ventana_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_ventana,'') != 0 && strcasecmp($material,'') != 0){
+            $campos = "id_tipo_ventana = '".$tipo_ventana."', id_material = '".$material.", cantidad = '".$cantidad_ventana.", alto_ventana = '".$alto_ventana.", ancho_ventana = '".$ancho_ventana."'";
+            $sql = "UPDATE ventana_gradas SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material =  '".$material_anterior."' AND piso_inicio = '".$piso."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material",$material_anterior,$material);
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
+                    $GLOBALS['mensaje'] = "Las ventanas de las gradas se modificaron correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -528,13 +677,15 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
      * @param string $id, id de la plazoleta.
-     * @param string $tipo_iluminacion, nueva cantidad de puntos hidraulicos de la plazoleta.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación de la plazoleta.
+     * @param string $tipo_iluminacion_anterior, anterior tipo de iluminación de la plazoleta.
      * @param string $cantidad_iluminacion, nueva cantidad de lámparas de la plazoleta.
+     * @param string $cantidad_iluminacion_anterior, anterior cantidad de lámparas de la plazoleta.
      * @param string $lat, nueva lat de la plazoleta.
      * @param string $lng, nueva lng de la plazoleta.
      * @return array
      */
-    public function modificarPlazoleta($id_sede,$id_campus,$id,$nombre,$tipo_iluminacion,$cantidad_iluminacion,$lat,$lng){
+    public function modificarPlazoleta($id_sede,$id_campus,$id,$nombre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
@@ -563,10 +714,54 @@ class modelo_modificacion {
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"nombre",$nombre_anterior,$nombre);
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
                 $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
-                /*for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
-                }*/
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_corredor,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                }
                 $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar la iluminación de una plazoleta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la plazoleta.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación de la plazoleta.
+     * @param string $tipo_iluminacion_anterior, anterior tipo de iluminación de la plazoleta.
+     * @param string $cantidad_iluminacion, nueva cantidad de iluminación de la plazoleta.
+     * @param string $cantidad_iluminacion_anterior, anterior cantidad de lámparas de la plazoleta.
+     * @return array
+     */
+    public function modificarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id,$id_corredor,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $tipo_iluminacion_anterior = htmlspecialchars(trim($tipo_iluminacion_anterior));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
+        $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_iluminacion,'') != 0){
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+        }
+        $sql = "UPDATE iluminacion_plazoleta SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
+                $GLOBALS['mensaje'] = "La iluminación de la plazoleta se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
@@ -791,7 +986,7 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite modificar un edificio.
+     * Función que permite modificar un espacio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
      * @param string $id, id del edificio.
@@ -805,7 +1000,7 @@ class modelo_modificacion {
      * @param string $lng, nueva lng del edificio.
      * @return array
      */
-    public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$espacio_padre,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptor,$tipo_puerta,$material_puerta,$cantidad_puerta,$tipo_cerradura,$material_marco,$gato_puerta,$ancho_puerta,$alto_puerta,$tipo_suministro_energia,$tomacorriente,$cantidad_suministro_energia,$tipo_ventana,$cantidad_ventana,$material_ventana,$ancho_ventana,$alto_ventana,$tipo_iluminacion,$cantidad_iluminacion){
+    public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$espacio_padre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$tipo_cerradura,$tipo_cerradura_anterior,$material_marco,$material_marco_anterior,$gato_puerta,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -872,26 +1067,351 @@ class modelo_modificacion {
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$material_techo_anterior,$material_techo);
                 $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$ancho_techo_anterior,$ancho_techo);
                 $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largo_techo_anterior,$largo_techo);
-                /*if (strcasecmp($espacio_padre,'') != 0)
+                if (strcasecmp($espacio_padre,'') != 0)
                     $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacio_padre_anterior,$espacio_padre);
                 for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
+                    $this->modificarIluminacionEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->modificarInterruptoresEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
+                    $this->modificarInterruptorEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptores[$i],$cantidad_interruptores_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
-                  $this->modificarPuertasEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura,$tipo_puerta[$i],$material_puerta[$i],$cantidad_puerta[$i],$material_marco[$i],$ancho_puerta[$i],$alto_puerta[$i],$gato_puerta[$i]);
+                  $this->modificarPuertaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta[$i],$tipo_puerta_anterior[$i],$material_puerta[$i],$material_puerta_anterior[$i],$cantidad_puerta[$i],$cantidad_puerta_anterior[$i],$material_marco[$i],$material_marco_anterior[$i],$ancho_puerta[$i],$ancho_puerta_anterior[$i],$alto_puerta[$i],$alto_puerta_anterior[$i],$gato_puerta[$i]);
                 }
                 for ($i=0;$i<count($tipo_suministro_energia);$i++) {
-                    $this->modificarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$cantidad_suministro_energia[$i],$tomacorriente[$i]);
+                    $this->modificarSuministroEnergiaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_suministro_energia[$i],$tipo_suministro_energia_anterior[$i],$cantidad_suministro_energia[$i],$cantidad_suministro_energia_anterior[$i],$tomacorriente[$i],$tomacorriente_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_ventana);$i++) {
-                    $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventana[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
-                }*/
+                    $this->modificarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material_ventana[$i],$material_ventana_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
+                }
                 $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar la iluminación de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación del espacio.
+     * @param string $tipo_iluminacion_anterior, tipo anterior de iluminación del espacio.
+     * @param string $cantidad_iluminacion, nueva cantidad de iluminación del espacio.
+     * @param string $cantidad_iluminacion_anterior, anterior cantidad de iluminación del espacio.
+     * @return array
+     */
+    public function modificarIluminacionEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_iluminacion = htmlspecialchars(trim($tipo_iluminacion));
+        $tipo_iluminacion_anterior = htmlspecialchars(trim($tipo_iluminacion_anterior));
+        $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
+        $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_iluminacion,'') != 0){
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+            $sql = "UPDATE iluminacion_espacio SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
+                    $GLOBALS['mensaje'] = "La iluminación del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar los interruptores de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_interruptor, nuevo tipo de interruptor del espacio.
+     * @param string $tipo_interruptor_anterior, tipo anterior de interruptor del espacio.
+     * @param string $cantidad_interruptor, nueva cantidad de interruptor del espacio.
+     * @param string $cantidad_interruptor_anterior, anterior cantidad de interruptor del espacio.
+     * @return array
+     */
+    public function modificarInterruptorEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_interruptor = htmlspecialchars(trim($tipo_interruptor));
+        $tipo_interruptor_anterior = htmlspecialchars(trim($tipo_interruptor_anterior));
+        $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
+        $cantidad_interruptor_anterior = htmlspecialchars(trim($cantidad_interruptor_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_interruptor,'') != 0){
+            $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
+            $sql = "UPDATE interruptor_espacio SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
+                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
+                    $GLOBALS['mensaje'] = "El interruptor del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar las puertas de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_cerradura, nuevo tipo de cerradura del espacio.
+     * @param string $tipo_cerradura_anterior, tipo anterior de cerradura del espacio.
+     * @param string $tipo_puerta, nueva cantidad de puerta del espacio.
+     * @param string $tipo_puerta_anterior, anterior tipo de puerta del espacio.
+     * @param string $material_puerta, nuevo tipo de material de la puerta del espacio.
+     * @param string $material_puerta_anterior, anterior tipo de meterial de la puerta del espacio.
+     * @param string $cantidad_puerta, nueva cantidad de puertas del espacio.
+     * @param string $cantidad_puerta_anterior, anterior cantidad de puertas del espacio.
+     * @param string $material_marco, nuevo tipo de marco de las puertas del espacio.
+     * @param string $material_marco_anterior, anterior tipo de marco de las puertas del espacio.
+     * @param string $ancho_puerta, nuevo ancho de las puertas del espacio.
+     * @param string $alto_puerta, nuevo alto de las puertas del espacio.
+     * @param string $alto_puerta_anterior, anterior alto de las puertas del espacio.
+     * @param string $gato_puerta, nuevo valor del gato de las puertas del espacio.
+     * @param string $gato_puerta_anterior, anterior valor del gato de las puertas del espacio.
+     * @return array
+     */
+    public function modificarPuertaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_cerradura_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$material_marco,$material_marco_anterior,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$gato_puerta){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
+        $tipo_puerta_anterior = htmlspecialchars(trim($tipo_puerta_anterior));
+        $material_puerta = htmlspecialchars(trim($material_puerta));
+        $material_puerta_anterior = htmlspecialchars(trim($material_puerta_anterior));
+        $cantidad_puerta = htmlspecialchars(trim($cantidad_puerta));
+        $cantidad_puerta_anterior = htmlspecialchars(trim($cantidad_puerta_anterior));
+        $material_marco = htmlspecialchars(trim($material_marco));
+        $material_marco_anterior = htmlspecialchars(trim($material_marco_anterior));
+        $ancho_puerta = htmlspecialchars(trim($ancho_puerta));
+        $ancho_puerta_anterior = htmlspecialchars(trim($ancho_puerta_anterior));
+        $alto_puerta = htmlspecialchars(trim($alto_puerta));
+        $alto_puerta_anterior = htmlspecialchars(trim($alto_puerta_anterior));
+        $gato_puerta = htmlspecialchars(trim($gato_puerta));
+        $campos = "";
+        if (strcasecmp($tipo_puerta,'') != 0 && strcasecmp($material_puerta,'') != 0 && strcasecmp($material_marco,'') != 0){
+            $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta.", cantidad_puerta = '".$cantidad_puerta.", id_material_marco = '".$material_marco.", ancho_puerta = '".$ancho_puerta.", alto_puerta = '".$alto_puerta.", gato_puerta = '".$gato_puerta."'";
+            $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta_anterior,$tipo_puerta);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta_anterior,$material_puerta);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_puerta",$cantidad_puerta_anterior,$cantidad_puerta);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$material_marco_anterior,$material_marco);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho_puerta_anterior,$ancho_puerta);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_puerta",$alto_puerta_anterior,$alto_puerta);
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato_puerta",$gato_puerta_anterior,$gato_puerta);
+                    for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                        $this->modificarCerraduraPuerta($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
+                    }
+                    $GLOBALS['mensaje'] = "Las Puertas del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar las cerraduras de las puertas de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_cerradura, nuevo tipo de cerradura del espacio.
+     * @param string $tipo_cerradura_anterior, tipo anterior de cerradura del espacio.
+     * @param string $tipo_puerta, nueva cantidad de puerta del espacio.
+     * @param string $material_puerta, nuevo tipo de material de la puerta del espacio.
+     * @param string $material_marco, nuevo tipo de marco de las puertas del espacio.
+     * @return array
+     */
+    public function modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_cerradura_anterior,$tipo_puerta,$material_puerta,$material_marco){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_cerradura = htmlspecialchars(trim($tipo_cerradura));
+        $tipo_cerradura_anterior = htmlspecialchars(trim($tipo_cerradura_anterior));
+        $tipo_puerta = htmlspecialchars(trim($tipo_puerta));
+        $material_puerta = htmlspecialchars(trim($material_puerta));
+        $material_marco = htmlspecialchars(trim($material_marco));
+        $campos = "";
+        if (strcasecmp($tipo_cerradura,'') != 0){
+            $campos = "id_tipo_cerradura = '".$tipo_cerradura."'";
+            $sql = "UPDATE puerta_tipo_cerradura SET $campos WHERE id_tipo_cerradura = '".$tipo_cerradura_anterior."' AND id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura_anterior,$tipo_cerradura);
+                    $GLOBALS['mensaje'] = "El tipo de cerradura de las puertas del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar los interruptores de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_suministro_energia, nuevo tipo de suministro de energía del espacio.
+     * @param string $tipo_suministro_energia_anterior, tipo anterior de suministro de energía del espacio.
+     * @param string $cantidad_suministro_energia, nueva cantidad de tomacorrientes del espacio.
+     * @param string $cantidad_suministro_energia_anterior, anterior cantidad de tomacorrientes del espacio.
+     * @param string $tomacorriente, nuevo valor de tomacorrientes del espacio.
+     * @param string $tomacorriente_anterior, anterior valor de tomacorrientes del espacio.
+     * @return array
+     */
+    public function modificarSuministroEnergiaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_suministro_energia = htmlspecialchars(trim($tipo_suministro_energia));
+        $tipo_suministro_energia_anterior = htmlspecialchars(trim($tipo_suministro_energia_anterior));
+        $cantidad_suministro_energia = htmlspecialchars(trim($cantidad_suministro_energia));
+        $cantidad_suministro_energia_anterior = htmlspecialchars(trim($cantidad_suministro_energia_anterior));
+        $tomacorriente = htmlspecialchars(trim($tomacorriente));
+        $tomacorriente_anterior = htmlspecialchars(trim($tomacorriente_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_suministro_energia,'') != 0 && strcasecmp($tomacorriente,'') != 0){
+            $campos = "id_tipo_suministro_energia = '".$tipo_suministro_energia."', cantidad = '".$cantidad_suministro_energia.", tomacorriente = '".$tomacorriente."'";
+            $sql = "UPDATE suministro_energia_espacio SET $campos WHERE id_tipo_suministro_energia = '".$tipo_suministro_energia_anterior."' AND tomacorriente = '".$tomacorriente_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_suministro_energia",$tipo_suministro_energia_anterior,$tipo_suministro_energia);
+                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_suministro_energia_anterior,$cantidad_suministro_energia);
+                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tomacorriente",$tomacorriente_anterior,$tomacorriente);
+                    $GLOBALS['mensaje'] = "El suministro de energía del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar los interruptores de un espacio.
+     * @param string $id, id del espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $tipo_ventana, nuevo tipo de ventanas del espacio.
+     * @param string $tipo_ventana_anterior, tipo anterior de ventanas del espacio.
+     * @param string $cantidad_ventana, nueva cantidad de ventanas del espacio.
+     * @param string $cantidad_ventana_anterior, anterior cantidad de ventanas del espacio.
+     * @param string $material_ventana, nuevo material de ventanas del espacio.
+     * @param string $material_ventana_anterior, tipo anterior de ventanas del espacio.
+     * @param string $ancho_ventana, nueva ancho de las ventanas del espacio.
+     * @param string $ancho_ventana_anterior, anterior ancho de las ventanas del espacio.
+     * @param string $alto_ventana, nueva alto de las ventanas del espacio.
+     * @param string $alto_ventana_anterior, anterior alto de las ventanas del espacio.
+     * @return array
+     */
+    public function modificarVentanaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior){
+        $id = htmlspecialchars(trim($id));
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $tipo_ventana = htmlspecialchars(trim($tipo_ventana));
+        $tipo_ventana_anterior = htmlspecialchars(trim($tipo_ventana_anterior));
+        $cantidad_ventana = htmlspecialchars(trim($cantidad_ventana));
+        $cantidad_ventana_anterior = htmlspecialchars(trim($cantidad_ventana_anterior));
+        $material_ventana = htmlspecialchars(trim($material_ventana));
+        $material_ventana_anterior = htmlspecialchars(trim($material_ventana_anterior));
+        $ancho_ventana = htmlspecialchars(trim($ancho_ventana));
+        $ancho_ventana_anterior = htmlspecialchars(trim($ancho_ventana_anterior));
+        $alto_ventana = htmlspecialchars(trim($alto_ventana));
+        $alto_ventana_anterior = htmlspecialchars(trim($alto_ventana_anterior));
+        $campos = "";
+        if (strcasecmp($tipo_interruptor,'') != 0){
+            $campos = "id_tipo_ventana = '".$tipo_ventana."', cantidad = '".$cantidad_ventana.", id_material_ventana = '".$material_ventana.", ancho_ventana = '".$ancho_ventana.", alto_ventana = '".$alto_ventana."'";
+            $sql = "UPDATE ventana_espacio SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material_ventana = '".$material_ventana_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_ventana",$material_ventana_anterior,$material_ventana);
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
+                    $GLOBALS['mensaje'] = "Las ventanas del espacio se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -1127,12 +1647,12 @@ class modelo_modificacion {
      * @param string $piso, piso del edificio.
      * @return array
      */
-    public function consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso){
+    public function consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $sql = "SELECT * FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
+        $sql = "SELECT * FROM ".$elemento." WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Gradas 1)";

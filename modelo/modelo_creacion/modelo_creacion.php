@@ -1889,7 +1889,7 @@ class modelo_creacion {
             $id_campus = htmlspecialchars(trim($id_campus));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = __ROOT__."/archivos/planos/campus/".$id_sede."-".$id_campus."/";
-            if (!file_exists($ruta.$foto['name'])) {
+            if (!file_exists($ruta.$plano['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }

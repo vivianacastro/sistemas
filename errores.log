@@ -4747,3 +4747,22 @@
 [31-Oct-2016 10:57:39 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::modificarIluminacionEspacio() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 878
 [31-Oct-2016 11:07:39 America/Bogota] PHP Notice:  Undefined index: lat in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 262
 [31-Oct-2016 11:07:39 America/Bogota] PHP Notice:  Undefined index: lng in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 262
+[31-Oct-2016 21:16:40 America/Bogota] PHP Parse error:  syntax error, unexpected ')' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 82
+[31-Oct-2016 21:17:27 America/Bogota] PHP Parse error:  syntax error, unexpected ',', expecting variable (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1003
+[31-Oct-2016 21:18:40 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::modificarPuertaEspacio() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1273
+[31-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined index: nombre_sede in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 714
+[31-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined index: nombre_campus in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 714
+[31-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3579
+[31-Oct-2016 22:46:22 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 715
+[31-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined index: nombre_sede in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 718
+[31-Oct-2016 22:46:22 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:52:32 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3579
+[31-Oct-2016 22:52:32 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 715
+[31-Oct-2016 22:52:32 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:53:36 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:55:09 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:56:07 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:57:48 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:58:41 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 22:59:58 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
+[31-Oct-2016 23:00:55 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 1892
