@@ -119,7 +119,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['tipo_ventana_anterior'],$info['material_ventana'],$info['material_ventana_anterior'],$info['cantidad_ventana'],$info['alto_ventana'],$info['ancho_ventana']);
+            $verificar = $m->modificarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['tipo_ventana_anterior'],$info['material_ventana'],$info['material_ventana_anterior'],$info['cantidad_ventana'],$info['cantidad_ventana_anterior'],$info['alto_ventana'],$info['alto_ventana_anterior'],$info['ancho_ventana'],$info['ancho_ventana_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
