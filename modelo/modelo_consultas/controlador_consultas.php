@@ -1830,7 +1830,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
+            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],"punto_sanitario_".$info["uso_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
@@ -1956,7 +1956,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
+            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],"lavamanos_bano");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
@@ -1964,7 +1964,7 @@ class controlador_consultas
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
                     'tipo_lavamanos' => $valor['id_tipo_lavamanos'],
-                    'cantidad_lavamanos' => $valor['cantidad_lavamanos'],
+                    'cantidad_lavamanos' => $valor['cantidad'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1986,15 +1986,15 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],$info["uso_espacio"]);
+            $data = $m->buscarInformacionUsoEspacio($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["id"],"orinal_bano");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],
                     'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo_orinal' => $valor['tipo_orinal'],
-                    'cantidad_orinales' => $valor['cantidad_orinal'],
+                    'tipo_orinal' => $valor['id_tipo_orinal'],
+                    'cantidad_orinales' => $valor['cantidad'],
                 );
                 array_push($result, $arrayAux);
             }

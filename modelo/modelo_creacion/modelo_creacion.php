@@ -1269,7 +1269,6 @@ class modelo_creacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $tipo_orinal = htmlspecialchars(trim($tipo_orinal));
         $cantidad_orinal = htmlspecialchars(trim($cantidad_orinal));
-
         $sql = "INSERT INTO orinal_bano (id_espacio,id_edificio,id_campus,id_sede,id_tipo_orinal,cantidad) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_orinal."','".$cantidad_orinal."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1515,7 +1514,9 @@ class modelo_creacion {
         $cantidad_sifon = htmlspecialchars(trim($cantidad_sifon));
         $tipo_divisiones = htmlspecialchars(trim($tipo_divisiones));
         $material_divisiones = htmlspecialchars(trim($material_divisiones));
-        $sql = "INSERT INTO oficina (id_espacio,id_edificio,id_campus,id_sede,id_tipo_inodoro,cantidad_inodoro,ducha,lavatraperos,cantidad_sifon,id_tipo_divisiones,id_material_divisiones) VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_inodoro."','".$cantidad_inodoro."','".$ducha."','".$lavatraperos."','".$cantidad_sifon."','".$tipo_divisiones."','".$material_divisiones."');";
+        $sql = "INSERT INTO bano
+                            (id_espacio,id_edificio,id_campus,id_sede,id_tipo_inodoro,cantidad_inodoro,ducha,lavatraperos,cantidad_sifon,id_tipo_divisiones,id_material_divisiones)
+                        VALUES ('".$id_espacio."','".$id_edificio."','".$id_campus."','".$id_sede."','".$tipo_inodoro."','".$cantidad_inodoro."','".$ducha."','".$lavatraperos."','".$cantidad_sifon."','".$tipo_divisiones."','".$material_divisiones."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Baño 1)";
@@ -1527,14 +1528,14 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
+                //$GLOBALS['mensaje'] = "El baño se guardó correctamente";
                 for ($i=0;$i<count($tipo_lavamanos);$i++) {
-                    $this->guardarLavamanosBano($id_espacio,$id_campus,$id_edificio,$tipo_lavamanos[$i],$cantidad_lavamanos[$i]);
+                    $this->guardarLavamanosBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_lavamanos[$i],$cantidad_lavamanos[$i]);
                 }
                 for ($i=0;$i<count($tipo_orinal);$i++) {
-                    $this->guardarOrinalBano($id_espacio,$id_campus,$id_edificio,$tipo_orinal[$i],$cantidad_orinal[$i]);
+                    $this->guardarOrinalBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_orinal[$i],$cantidad_orinal[$i]);
                 }
-                $GLOBALS['sql'] = $sql;
+                //$GLOBALS['sql'] = $sql;
                 return true;
             }
         }

@@ -3561,9 +3561,9 @@ $(document).ready(function() {
                 }
             }
             informacion["tipo_inodoro"] = tipoInodoro;
-            informacion["cantidad_inodoros"] = cantidadInodoros;
+            informacion["cantidad_inodoro"] = cantidadInodoros;
             informacion["tipo_orinal"] = tipoOrinal;
-            informacion["cantidad_orinales"] = cantidadOrinales;
+            informacion["cantidad_orinal"] = cantidadOrinales;
             informacion["tipo_lavamanos"] = tipoLavamanos;
             informacion["cantidad_lavamanos"] = cantidadLavamanos;
             informacion["tipo_divisiones"] = tipoDivisiones;

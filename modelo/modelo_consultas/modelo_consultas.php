@@ -1990,7 +1990,8 @@ class modelo_consultas
             }
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Información del salón seleccionado";
+                $GLOBALS['mensaje'] = "Información del tipo de espacio seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

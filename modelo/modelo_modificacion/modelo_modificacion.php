@@ -298,29 +298,30 @@ class modelo_modificacion {
         $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
         $campos = "";
         if (strcasecmp($tipo_iluminacion,'') != 0){
-            if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
-                $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
-                $sql = "UPDATE iluminacion_corredor SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO iluminacion_corredor (id,id_sede,id_campus,id_tipo_iluminacion,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 1)";
+            $tipo_iluminacion == 'NULL';
+        }
+        if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+            $sql = "UPDATE iluminacion_corredor SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO iluminacion_corredor (id,id_sede,id_campus,id_tipo_iluminacion,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Corredor 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
-                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
-                    $GLOBALS['mensaje'] = "La iluminación del corredor se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
+                $GLOBALS['mensaje'] = "La iluminación del corredor se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -346,29 +347,30 @@ class modelo_modificacion {
         $cantidad_interruptor_anterior = htmlspecialchars(trim($cantidad_interruptor_anterior));
         $campos = "";
         if (strcasecmp($tipo_interruptor,'') != 0){
-            if(strcasecmp($tipo_interruptor_anterior,'') != 0){
-                $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
-                $sql = "UPDATE interruptor_corredor SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO interruptor_corredor (id,id_sede,id_campus,id_tipo_interruptor,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$tipo_interruptor."', '".$cantidad_interruptor_anterior."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 1)";
+            $tipo_interruptor == 'NULL';
+        }
+        if(strcasecmp($tipo_interruptor_anterior,'') != 0){
+            $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
+            $sql = "UPDATE interruptor_corredor SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO interruptor_corredor (id,id_sede,id_campus,id_tipo_interruptor,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$tipo_interruptor."', '".$cantidad_interruptor_anterior."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Corredor 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
-                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
-                    $GLOBALS['mensaje'] = "El interruptor del corredor se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
+                $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
+                $GLOBALS['mensaje'] = "El interruptor del corredor se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -523,33 +525,37 @@ class modelo_modificacion {
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
         $alto_ventana_anterior = htmlspecialchars(trim($alto_ventana_anterior));
         $campos = "";
-        if (strcasecmp($tipo_ventana,'') != 0 && strcasecmp($material,'') != 0){
-            if ((strcasecmp($tipo_ventana_anterior,'') != 0 || strcasecmp($material_anterior,'') != 0)){
-                $campos = "id_tipo_ventana = '".$tipo_ventana."', id_material = '".$material."', cantidad = '".$cantidad_ventana."', alto_ventana = '".$alto_ventana."', ancho_ventana = '".$ancho_ventana."'";
-                $sql = "UPDATE ventana_gradas SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material =  '".$material_anterior."' AND piso_inicio = '".$piso."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO ventana_gradas (id_sede,id_campus,id_edificio,piso_inicio,id_tipo_ventana,id_material,cantidad,alto_ventana,ancho_ventana) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$piso."', '".$tipo_ventana."', '".$material."', '".$cantidad_ventana."', '".$ancho_ventana."', '".$alto_ventana."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 1)";
+        if (strcasecmp($tipo_ventana,'') != 0){
+            $tipo_ventana == 'NULL';
+        }
+        if (strcasecmp($material,'') != 0){
+            $material == 'NULL';
+        }
+        if ((strcasecmp($tipo_ventana_anterior,'') != 0 || strcasecmp($material_anterior,'') != 0)){
+            $campos = "id_tipo_ventana = '".$tipo_ventana."', id_material = '".$material."', cantidad = '".$cantidad_ventana."', alto_ventana = '".$alto_ventana."', ancho_ventana = '".$ancho_ventana."'";
+            $sql = "UPDATE ventana_gradas SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material =  '".$material_anterior."' AND piso_inicio = '".$piso."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO ventana_gradas (id_sede,id_campus,id_edificio,piso_inicio,id_tipo_ventana,id_material,cantidad,alto_ventana,ancho_ventana) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$piso."', '".$tipo_ventana."', '".$material."', '".$cantidad_ventana."', '".$ancho_ventana."', '".$alto_ventana."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Gradas 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
-                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
-                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material",$material_anterior,$material);
-                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
-                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
-                    $GLOBALS['mensaje'] = "Las ventanas de las gradas se modificaron correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
+                $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
+                $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material",$material_anterior,$material);
+                $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
+                $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
+                $GLOBALS['mensaje'] = "Las ventanas de las gradas se modificaron correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -758,8 +764,9 @@ class modelo_modificacion {
         $campos = "";
         if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
             if (strcasecmp($tipo_iluminacion,'') != 0){
-                $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+                $tipo_iluminacion == 'NULL';
             }
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
             $sql = "UPDATE iluminacion_plazoleta SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         }else{
             $sql = "INSERT INTO iluminacion_corredor (id,id_sede,id_campus,id_tipo_iluminacion,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
@@ -1016,7 +1023,7 @@ class modelo_modificacion {
      * @param string $lng, nueva lng del edificio.
      * @return array
      */
-    public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$espacio_padre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$tipo_cerradura,$tipo_cerradura_anterior,$material_marco,$material_marco_anterior,$gato_puerta,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
+    public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tiene_espacio_padre,$espacio_padre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$tipo_cerradura,$tipo_cerradura_anterior,$material_marco,$material_marco_anterior,$gato_puerta,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
@@ -1032,6 +1039,7 @@ class modelo_modificacion {
         $ancho_techo = htmlspecialchars(trim($ancho_techo));
         $largo_techo = htmlspecialchars(trim($largo_techo));
         $material_techo = htmlspecialchars(trim($material_techo));
+        $tiene_espacio_padre = htmlspecialchars(trim($tiene_espacio_padre));
         $espacio_padre = htmlspecialchars(trim($espacio_padre));
         $campos = "piso_edificio = '".$piso."', ancho_pared = '".$ancho_pared."', alto_pared = '".$alto_pared."', ancho_piso = '".$ancho_piso."', largo_piso = '".$largo_piso."', ancho_techo = '".$ancho_techo."', largo_techo = '".$largo_techo."'";
         if (strcasecmp($material_pared,'') != 0)
@@ -1040,7 +1048,9 @@ class modelo_modificacion {
             $campos = $campos.", id_material_piso = '".$material_piso."'";
         if (strcasecmp($material_techo,'') != 0)
             $campos = $campos.", id_material_techo = '".$material_techo."'";
-        if (strcasecmp($espacio_padre,'') != 0)
+        if (strcasecmp($tiene_espacio_padre,'false') == 0)
+            $campos = $campos.", espacio_padre = NULL, sede_padre = NULL, campus_padre = NULL, edificio_padre = NULL";
+        if ((strcasecmp($tiene_espacio_padre,'true') == 0) && (strcasecmp($espacio_padre,'') != 0))
             $campos = $campos.", espacio_padre = '".$espacio_padre."', sede_padre = '".$id_sede."', campus_padre = '".$id_campus."', edificio_padre = '".$id_edificio."'";
         $sql = "UPDATE espacio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"espacio");
@@ -1089,7 +1099,7 @@ class modelo_modificacion {
                     $this->modificarIluminacionEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_interruptor);$i++) {
-                    $this->modificarInterruptorEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptores[$i],$cantidad_interruptores_anterior[$i]);
+                    $this->modificarInterruptorEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_interruptor[$i],$tipo_interruptor_anterior[$i],$cantidad_interruptor[$i],$cantidad_interruptor_anterior[$i]);
                 }
                 for ($i=0;$i<count($tipo_puerta);$i++) {
                   $this->modificarPuertaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta[$i],$tipo_puerta_anterior[$i],$material_puerta[$i],$material_puerta_anterior[$i],$cantidad_puerta[$i],$cantidad_puerta_anterior[$i],$material_marco[$i],$material_marco_anterior[$i],$ancho_puerta[$i],$ancho_puerta_anterior[$i],$alto_puerta[$i],$alto_puerta_anterior[$i],$gato_puerta[$i]);
@@ -1129,30 +1139,31 @@ class modelo_modificacion {
         $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
         $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
         $campos = "";
-        if (strcasecmp($tipo_iluminacion,'') != 0){
-            if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
-                $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
-                $sql = "UPDATE iluminacion_espacio SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO iluminacion_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_iluminacion,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edifico."', '".$id."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 1)";
+        if (strcasecmp($tipo_iluminacion,'') == 0){
+            $tipo_iluminacion = 'NULL';
+        }
+        if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
+            $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
+            $sql = "UPDATE iluminacion_espacio SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO iluminacion_espacio (id_espacio,id_sede,id_campus,id_edificio,id_espacio,id_tipo_iluminacion,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Iluminación-Espacio 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
-                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
-                    $GLOBALS['mensaje'] = "La iluminación del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion_anterior,$tipo_iluminacion);
+                $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_iluminacion_anterior,$cantidad_iluminacion);
+                $GLOBALS['mensaje'] = "La iluminación del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -1179,30 +1190,31 @@ class modelo_modificacion {
         $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
         $cantidad_interruptor_anterior = htmlspecialchars(trim($cantidad_interruptor_anterior));
         $campos = "";
-        if (strcasecmp($tipo_interruptor,'') != 0){
-            if(strcasecmp($tipo_interruptor_anterior,'') != 0){
-                $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
-                $sql = "UPDATE interruptor_espacio SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO interruptor_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_interruptor,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edifico."', '".$id."', '".$tipo_interruptor."', '".$cantidad_interruptor."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 1)";
+        if (strcasecmp($tipo_interruptor,'') == 0){
+            $tipo_interruptor = 'NULL';
+        }
+        if(strcasecmp($tipo_interruptor_anterior,'') != 0){
+            $campos = "id_tipo_interruptor = '".$tipo_interruptor."', cantidad = '".$cantidad_interruptor."'";
+            $sql = "UPDATE interruptor_espacio SET $campos WHERE id_tipo_interruptor = '".$tipo_interruptor_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO interruptor_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_interruptor,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_interruptor."', '".$cantidad_interruptor."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Interruptor-Espacio 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
-                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
-                    $GLOBALS['mensaje'] = "El interruptor del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_interruptor",$tipo_interruptor_anterior,$tipo_interruptor);
+                $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_interruptor_anterior,$cantidad_interruptor);
+                $GLOBALS['mensaje'] = "El interruptor del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -1249,38 +1261,45 @@ class modelo_modificacion {
         $alto_puerta_anterior = htmlspecialchars(trim($alto_puerta_anterior));
         $gato_puerta = htmlspecialchars(trim($gato_puerta));
         $campos = "";
-        if (strcasecmp($tipo_puerta,'') != 0 && strcasecmp($material_puerta,'') != 0 && strcasecmp($material_marco,'') != 0){
-            if(strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
-                $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad_puerta = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', alto_puerta = '".$alto_puerta."', gato_puerta = '".$gato_puerta."'";
-                $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato,) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edifico."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 1)";
+        if (strcasecmp($tipo_puerta,'') == 0){
+            $tipo_puerta = 'NULL';
+        }
+        if (strcasecmp($material_puerta,'') == 0){
+            $material_puerta = 'NULL';
+        }
+        if (strcasecmp($material_marco,'') == 0){
+            $material_marco = 'NULL';
+        }
+        if(strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
+            $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad_puerta = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', alto_puerta = '".$alto_puerta."', gato_puerta = '".$gato_puerta."'";
+            $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato,) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta_anterior,$tipo_puerta);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta_anterior,$material_puerta);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_puerta",$cantidad_puerta_anterior,$cantidad_puerta);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$material_marco_anterior,$material_marco);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho_puerta_anterior,$ancho_puerta);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_puerta",$alto_puerta_anterior,$alto_puerta);
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato_puerta",$gato_puerta_anterior,$gato_puerta);
-                    for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                        $this->modificarCerraduraPuerta($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
-                    }
-                    $GLOBALS['mensaje'] = "Las Puertas del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta_anterior,$tipo_puerta);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta_anterior,$material_puerta);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_puerta",$cantidad_puerta_anterior,$cantidad_puerta);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$material_marco_anterior,$material_marco);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho_puerta_anterior,$ancho_puerta);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_puerta",$alto_puerta_anterior,$alto_puerta);
+                $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato_puerta",$gato_puerta_anterior,$gato_puerta);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarCerraduraPuerta($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
                 }
+                $GLOBALS['mensaje'] = "Las Puertas del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -1310,28 +1329,29 @@ class modelo_modificacion {
         $material_marco = htmlspecialchars(trim($material_marco));
         $campos = "";
         if (strcasecmp($tipo_cerradura,'') != 0){
-            if(strcasecmp($tipo_cerradura_anterior,'') != 0 || strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
-                $campos = "id_tipo_cerradura = '".$tipo_cerradura."'";
-                $sql = "UPDATE puerta_tipo_cerradura SET $campos WHERE id_tipo_cerradura = '".$tipo_cerradura_anterior."' AND id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO puerta_tipo_cerradura (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edifico."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$material_marco."', '".$tipo_cerradura."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 1)";
+            $tipo_cerradura = 'NULL';
+        }
+        if(strcasecmp($tipo_cerradura_anterior,'') != 0 || strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
+            $campos = "id_tipo_cerradura = '".$tipo_cerradura."'";
+            $sql = "UPDATE puerta_tipo_cerradura SET $campos WHERE id_tipo_cerradura = '".$tipo_cerradura_anterior."' AND id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO puerta_tipo_cerradura (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$material_marco."', '".$tipo_cerradura."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Tipo-Cerradura 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura_anterior,$tipo_cerradura);
-                    $GLOBALS['mensaje'] = "El tipo de cerradura de las puertas del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura_anterior,$tipo_cerradura);
+                $GLOBALS['mensaje'] = "El tipo de cerradura de las puertas del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -1362,31 +1382,35 @@ class modelo_modificacion {
         $tomacorriente = htmlspecialchars(trim($tomacorriente));
         $tomacorriente_anterior = htmlspecialchars(trim($tomacorriente_anterior));
         $campos = "";
-        if (strcasecmp($tipo_suministro_energia,'') != 0 && strcasecmp($tomacorriente,'') != 0){
-            if(strcasecmp($tipo_suministro_energia_anterior,'') != 0 || strcasecmp($tomacorriente_anterior,'') != 0){
-                $campos = "id_tipo_suministro_energia = '".$tipo_suministro_energia."', cantidad = '".$cantidad_suministro_energia."', tomacorriente = '".$tomacorriente."'";
-                $sql = "UPDATE suministro_energia_espacio SET $campos WHERE id_tipo_suministro_energia = '".$tipo_suministro_energia_anterior."' AND tomacorriente = '".$tomacorriente_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO suministro_energia_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_suministro_energia,tomacorriente,cantidad) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edifico."', '".$id."', '".$tipo_suministro_energia."', '".$tomacorriente."', '".$cantidad_suministro_energia."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 1)";
+        if (strcasecmp($tipo_suministro_energia,'') != 0){
+            $tipo_suministro_energia = 'NULL';
+        }
+        if (strcasecmp($tomacorriente,'') != 0){
+            $tomacorriente = 'NULL';
+        }
+        if(strcasecmp($tipo_suministro_energia_anterior,'') != 0 || strcasecmp($tomacorriente_anterior,'') != 0){
+            $campos = "id_tipo_suministro_energia = '".$tipo_suministro_energia."', cantidad = '".$cantidad_suministro_energia."', tomacorriente = '".$tomacorriente."'";
+            $sql = "UPDATE suministro_energia_espacio SET $campos WHERE id_tipo_suministro_energia = '".$tipo_suministro_energia_anterior."' AND tomacorriente = '".$tomacorriente_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO suministro_energia_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_suministro_energia,tomacorriente,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_suministro_energia."', '".$tomacorriente."', '".$cantidad_suministro_energia."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Suministro-Energía-Espacio 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_suministro_energia",$tipo_suministro_energia_anterior,$tipo_suministro_energia);
-                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_suministro_energia_anterior,$cantidad_suministro_energia);
-                    $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tomacorriente",$tomacorriente_anterior,$tomacorriente);
-                    $GLOBALS['mensaje'] = "El suministro de energía del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_suministro_energia",$tipo_suministro_energia_anterior,$tipo_suministro_energia);
+                $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_suministro_energia_anterior,$cantidad_suministro_energia);
+                $this->registrarModificacion("suministro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tomacorriente",$tomacorriente_anterior,$tomacorriente);
+                $GLOBALS['mensaje'] = "El suministro de energía del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
@@ -1425,33 +1449,37 @@ class modelo_modificacion {
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
         $alto_ventana_anterior = htmlspecialchars(trim($alto_ventana_anterior));
         $campos = "";
-        if (strcasecmp($tipo_interruptor,'') != 0){
-            if ((strcasecmp($tipo_ventana_anterior,'') != 0 || strcasecmp($material_anterior,'') != 0)){
-                $campos = "id_tipo_ventana = '".$tipo_ventana."', cantidad = '".$cantidad_ventana."', id_material_ventana = '".$material_ventana."', ancho_ventana = '".$ancho_ventana."', alto_ventana = '".$alto_ventana."'";
-                $sql = "UPDATE ventana_espacio SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material_ventana = '".$material_ventana_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-            }else{
-                $sql = "INSERT INTO ventana_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_ventana,id_material,cantidad,alto_ventana,ancho_ventana) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_ventana."', '".$material."', '".$cantidad_ventana."', '".$ancho_ventana."', '".$alto_ventana."');";
-            }
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 1)";
+        if (strcasecmp($tipo_ventana,'') != 0){
+            $tipo_ventana = 'NULL';
+        }
+        if (strcasecmp($material_ventana,'') != 0){
+            $material_ventana = 'NULL';
+        }
+        if ((strcasecmp($tipo_ventana_anterior,'') != 0 || strcasecmp($material_ventana_anterior,'') != 0)){
+            $campos = "id_tipo_ventana = '".$tipo_ventana."', cantidad = '".$cantidad_ventana."', id_material_ventana = '".$material_ventana."', ancho_ventana = '".$ancho_ventana."', alto_ventana = '".$alto_ventana."'";
+            $sql = "UPDATE ventana_espacio SET $campos WHERE id_tipo_ventana = '".$tipo_ventana_anterior."' AND id_material_ventana = '".$material_ventana_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO ventana_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_ventana,id_material,cantidad,alto_ventana,ancho_ventana) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_ventana."', '".$material_ventana."', '".$cantidad_ventana."', '".$ancho_ventana."', '".$alto_ventana."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Ventana-Espacio 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
-                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
-                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_ventana",$material_ventana_anterior,$material_ventana);
-                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
-                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
-                    $GLOBALS['mensaje'] = "Las ventanas del espacio se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
+                $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_ventana",$tipo_ventana_anterior,$tipo_ventana);
+                $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_ventana_anterior,$cantidad_ventana);
+                $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_ventana",$material_ventana_anterior,$material_ventana);
+                $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
+                $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
+                $GLOBALS['mensaje'] = "Las ventanas del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
             }
         }
     }
