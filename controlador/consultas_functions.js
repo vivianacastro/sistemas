@@ -1435,7 +1435,7 @@ $(document).ready(function() {
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     aux = record.nombre_material;
-                    row = $("<option value='" + limpiarCadena(record.nombre_material) + "'/>");
+                    row = $("<option name='"+record.id+"' value='" + limpiarCadena(record.nombre_material) + "'/>");
                     row.text(aux);
                     row.appendTo("#nombre_tipo_material_search");
                 }
@@ -1473,7 +1473,7 @@ $(document).ready(function() {
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     aux = record.tipo_objeto;
-                    row = $("<option value='" + limpiarCadena(record.tipo_objeto) + "'/>");
+                    row = $("<option name='"+record.id+"' value='" + limpiarCadena(record.tipo_objeto) + "'/>");
                     row.text(aux);
                     row.appendTo("#nombre_tipo_objeto_search");
                 }
@@ -4107,6 +4107,7 @@ $(document).ready(function() {
         var informacion =  {};
         var tipoMaterial = $("#tipo_material_search").val();
         var nombreTipoMaterial = $("#nombre_tipo_material_search").val();
+        var idNombreTipoMaterial = $("#nombre_tipo_material_search").attr('name');
         /*informacion['tipo_material'] = tipoMaterial;
         informacion['nombre_tipo_materil'] = nombreTipoMaterial;
         var data = consultarInformacionObjeto("tipo_material",informacion);
@@ -4119,6 +4120,7 @@ $(document).ready(function() {
         });*/
         $("#tipo_material").val(tipoMaterial);
         $("#nombre_tipo_material").val(nombreTipoMaterial);
+        $("#nombre_tipo_material").attr('name',idNombreTipoMaterial);
         $("#divDialogConsulta").modal('show');
     });
 
@@ -4130,6 +4132,7 @@ $(document).ready(function() {
          var informacion =  {};
          var tipoObjeto = $("#tipo_objeto_search").val();
          var nombreTipoObjeto = $("#nombre_tipo_objeto_search").val();
+         var idNombreTipoObjeto = $("#nombre_tipo_objeto_search").attr('name');
          /*informacion['tipo_objeto'] = tipoObjeto;
          informacion['nombre_tipo_objeto'] = nombreTipoObjeto;
          var data = consultarInformacionObjeto("tipo_objeto",informacion);
@@ -4142,6 +4145,7 @@ $(document).ready(function() {
          });*/
          $("#tipo_objeto").val(tipoObjeto);
          $("#nombre_tipo_objeto").val(nombreTipoObjeto);
+         $("#nombre_tipo_objeto").attr('name',idNombreTipoObjeto);
          $("#divDialogConsulta").modal('show');
      });
 
@@ -4772,7 +4776,7 @@ $(document).ready(function() {
         $("#tipo_punto_sanitario").removeAttr("disabled");
         $("#cantidad_puntos_sanitarios").removeAttr("disabled");
         $("#tipo_inodoro").removeAttr("disabled");
-        $("#cantidad_inodoro").removeAttr("disabled");
+        $("#cantidad_inodoros").removeAttr("disabled");
         $("#ducha").removeAttr("disabled");
         $("#lavatraperos").removeAttr("disabled");
         $("#cantidad_sifones").removeAttr("disabled");
@@ -9141,7 +9145,7 @@ $(document).ready(function() {
                         var tipoPuntosSanitariosAnterior = [];
                         var cantidadPuntosSanitarios = [];
                         var cantidadPuntosSanitariosAnterior = [];
-                        for (var i=0;i<=puntosSanitariosCont;i++) {
+                        for (var i=0;i<=puntosSanitariosCont-1;i++) {
                             if (i==0) {
                                 tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
                                 tipoPuntosSanitariosAnterior[i] = $("#tipo_punto_sanitario").attr('name');
@@ -9184,7 +9188,7 @@ $(document).ready(function() {
                         var tipoLavamanosAnterior = [];
                         var cantidadLavamanos = [];
                         var cantidadLavamanosAnterior = [];
-                        for (var i=0;i<=lavamanosCont;i++) {
+                        for (var i=0;i<=lavamanosCont-1;i++) {
                             if (i==0) {
                                 tipoLavamanos[i] = $("#tipo_lavamanos").val();
                                 tipoLavamanosAnterior[i] = $("#tipo_lavamanos").attr('name');
@@ -9198,7 +9202,7 @@ $(document).ready(function() {
                                     cantidadLavamanosAnterior[i] = $("#cantidad_lavamanos"+i).attr('name');
                                 }else{
                                     alert("ERROR. Hay uno o más tipos de lavamanos repetidos");
-                                    $("#tipo_interruptor"+i).focus();
+                                    $("#tipo_lavamanos"+i).focus();
                                     error = true;
                                     break;
                                 }
@@ -9213,7 +9217,7 @@ $(document).ready(function() {
                             var tipoOrinalAnterior = [];
                             var cantidadOrinal = [];
                             var cantidadOrinalAnterior = [];
-                            for (var i=0;i<=lavamanosCont;i++) {
+                            for (var i=0;i<=orinalesCont-1;i++) {
                                 if (i==0) {
                                     tipoOrinal[i] = $("#tipo_orinal").val();
                                     tipoOrinalAnterior[i] = $("#tipo_orinal").attr('name');
@@ -9227,7 +9231,7 @@ $(document).ready(function() {
                                         cantidadOrinalAnterior[i] = $("#cantidad_orinales"+i).attr('name');
                                     }else{
                                         alert("ERROR. Hay uno o más tipos de orinal repetidos");
-                                        $("#tipo_interruptor"+i).focus();
+                                        $("#tipo_orinal"+i).focus();
                                         error = true;
                                         break;
                                     }
@@ -9253,24 +9257,24 @@ $(document).ready(function() {
                         informacion['cantidad_puntos_red'] = $("#cantidad_puntos_red").val();
                     }else if(usoEspacioSelect == '17'){ //Cuarto de Bombas
                         informacion['cantidad_puntos_hidraulicos'] = $("#cantidad_puntos_hidraulicos").val();
-                        var tipoLavamanos = [];
-                        var tipoLavamanosAnterior = [];
-                        var cantidadLavamanos = [];
-                        var cantidadLavamanosAnterior = [];
-                        for (var i=0;i<=lavamanosCont;i++) {
+                        var tipoPuntosSanitarios = [];
+                        var tipoPuntosSanitariosAnterior = [];
+                        var cantidadPuntosSanitarios = [];
+                        var cantidadPuntosSanitariosAnterior = [];
+                        for (var i=0;i<=puntosSanitariosCont-1;i++) {
                             if (i==0) {
-                                tipoLavamanos[i] = $("#tipo_lavamanos").val();
-                                tipoLavamanosAnterior[i] = $("#tipo_lavamanos").attr('name');
-                                cantidadLavamanos[i] = $("#cantidad_lavamanos").val();
-                                cantidadLavamanosAnterior[i] = $("#cantidad_lavamanos").attr('name');
+                                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
+                                tipoPuntosSanitariosAnterior[i] = $("#tipo_punto_sanitario").attr('name');
+                                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
+                                cantidadPuntosSanitariosAnterior[i] = $("#cantidad_puntos_sanitarios").attr('name');
                             }else{
-                                if (tipoLavamanos.indexOf($("#tipo_lavamanos"+i).val()) == -1) {
-                                    tipoLavamanos[i] = $("#tipo_lavamanos"+i).val();
-                                    tipoLavamanosAnterior[i] = $("#tipo_lavamanos"+i).attr('name');
-                                    cantidadLavamanos[i] = $("#cantidad_lavamanos"+i).val();
-                                    cantidadLavamanosAnterior[i] = $("#cantidad_lavamanos"+i).attr('name');
+                                if (tipoInterruptor.indexOf($("#tipo_punto_sanitario"+i).val()) == -1) {
+                                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
+                                    tipoPuntosSanitariosAnterior[i] = $("#tipo_punto_sanitario"+i).attr('name');
+                                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+                                    cantidadPuntosSanitariosAnterior[i] = $("#cantidad_puntos_sanitarios"+i).attr('name');
                                 }else{
-                                    alert("ERROR. Hay uno o más tipos de lavamanos repetidos");
+                                    alert("ERROR. Hay uno o más tipos de punto sanitario repetidos");
                                     $("#tipo_interruptor"+i).focus();
                                     error = true;
                                     break;
@@ -9283,24 +9287,24 @@ $(document).ready(function() {
                         informacion['cantidad_puntos_sanitarios_anterior'] = cantidadPuntosSanitariosAnterior;
                     }else if(usoEspacioSelect == '19'){ //Cocineta
                         informacion['cantidad_puntos_hidraulicos'] = $("#cantidad_puntos_hidraulicos").val();
-                        var tipoLavamanos = [];
-                        var tipoLavamanosAnterior = [];
-                        var cantidadLavamanos = [];
-                        var cantidadLavamanosAnterior = [];
-                        for (var i=0;i<=lavamanosCont;i++) {
+                        var tipoPuntosSanitarios = [];
+                        var tipoPuntosSanitariosAnterior = [];
+                        var cantidadPuntosSanitarios = [];
+                        var cantidadPuntosSanitariosAnterior = [];
+                        for (var i=0;i<=puntosSanitariosCont-1;i++) {
                             if (i==0) {
-                                tipoLavamanos[i] = $("#tipo_lavamanos").val();
-                                tipoLavamanosAnterior[i] = $("#tipo_lavamanos").attr('name');
-                                cantidadLavamanos[i] = $("#cantidad_lavamanos").val();
-                                cantidadLavamanosAnterior[i] = $("#cantidad_lavamanos").attr('name');
+                                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
+                                tipoPuntosSanitariosAnterior[i] = $("#tipo_punto_sanitario").attr('name');
+                                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
+                                cantidadPuntosSanitariosAnterior[i] = $("#cantidad_puntos_sanitarios").attr('name');
                             }else{
-                                if (tipoLavamanos.indexOf($("#tipo_lavamanos"+i).val()) == -1) {
-                                    tipoLavamanos[i] = $("#tipo_lavamanos"+i).val();
-                                    tipoLavamanosAnterior[i] = $("#tipo_lavamanos"+i).attr('name');
-                                    cantidadLavamanos[i] = $("#cantidad_lavamanos"+i).val();
-                                    cantidadLavamanosAnterior[i] = $("#cantidad_lavamanos"+i).attr('name');
+                                if (tipoInterruptor.indexOf($("#tipo_punto_sanitario"+i).val()) == -1) {
+                                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
+                                    tipoPuntosSanitariosAnterior[i] = $("#tipo_punto_sanitario"+i).attr('name');
+                                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+                                    cantidadPuntosSanitariosAnterior[i] = $("#cantidad_puntos_sanitarios"+i).attr('name');
                                 }else{
-                                    alert("ERROR. Hay uno o más tipos de lavamanos repetidos");
+                                    alert("ERROR. Hay uno o más tipos de punto sanitario repetidos");
                                     $("#tipo_interruptor"+i).focus();
                                     error = true;
                                     break;
@@ -9372,6 +9376,39 @@ $(document).ready(function() {
                 }else{
                     alert("ERROR. El número máximo de fotos es 20");
                     fotos.focus();
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton modificar_tipo_material y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_tipo_material").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del tipo de material?");
+        if (confirmacion) {
+            var tipoMaterial = $("#tipo_material").val();
+            var idCampus = $("#nombre_tipo_material").attr('name');
+            var nombreTipoMaterial = $("#nombre_tipo_material").val();
+            if(!validarCadena(tipoMaterial)){
+                alert("ERROR. Seleccione un tipo de material");
+                $("#tipo_material").focus();
+            }else if(!validarCadena(nombreTipoMaterial)){
+                alert("ERROR. Ingrese el nombre del tipo de material");
+                $("#nombre_tipo_material").focus();
+            }else{
+                var informacion = {};
+                informacion['tipo_material'] = limpiarCadena(tipoMaterial);
+                informacion['id'] = limpiarCadena(nombreTipoMaterial);
+                informacion['nombre'] = limpiarCadena(nombreTipoMaterial);
+                var resultado = modificarObjeto(informacion,"tipo_material");
+                mostrarMensaje(resultado.mensaje);
+                console.log(resultado);
+                if(resultado.verificar){
+                    alert(data.mensaje);
+                    $("#tipo_material_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
                 }
             }
         }

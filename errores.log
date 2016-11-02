@@ -4963,3 +4963,5 @@
 [02-Nov-2016 11:56:20 America/Bogota] PHP Notice:  Undefined index: tipo_orinal in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1996
 [02-Nov-2016 11:56:20 America/Bogota] PHP Notice:  Undefined index: cantidad in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1997
 [02-Nov-2016 11:57:49 America/Bogota] PHP Notice:  Undefined index: tipo_orinal in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1996
+[02-Nov-2016 13:47:40 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::guardarBano() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 274
+[02-Nov-2016 13:57:53 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::guardarBano() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 274
