@@ -1274,7 +1274,7 @@ class modelo_modificacion {
             $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad_puerta = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', alto_puerta = '".$alto_puerta."', gato_puerta = '".$gato_puerta."'";
             $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         }else{
-            $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato,) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
+            $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
         }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1478,6 +1478,832 @@ class modelo_modificacion {
                 $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho_ventana_anterior,$ancho_ventana);
                 $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto_ventana_anterior,$alto_ventana);
                 $GLOBALS['mensaje'] = "Las ventanas del espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un salón.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del salón.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
+     * @param string $capacidad, nueva capacidad del salón.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarSalon($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
+        $sql = "UPDATE salon SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"salon");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $capacidad_anterior = $valor['capacidad'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Salón 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Salón 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("salon",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("salon",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad_anterior,$capacidad);
+                $this->registrarModificacion("salon",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $GLOBALS['mensaje'] = "El salón se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un auditorio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del auditorio.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del auditorio.
+     * @param string $capacidad, nueva capacidad del auditorio.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarAuditorio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
+        $sql = "UPDATE auditorio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"auditorio");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $capacidad_anterior = $valor['capacidad'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Auditorio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Auditorio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("auditorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("auditorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad_anterior,$capacidad);
+                $this->registrarModificacion("auditorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $GLOBALS['mensaje'] = "El auditorio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un salón.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del salón.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
+     * @param string $capacidad, nueva capacidad del salón.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarLaboratorio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."', cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
+        $sql = "UPDATE laboratorio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"laboratorio");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $capacidad_anterior = $valor['capacidad'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+            $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Laboratorio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Laboratorio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad_anterior,$capacidad);
+                $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_hidraulico",$cantidad_punto_hidraulico_anterior,$cantidad_punto_hidraulico);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarPuntoSanitario($id_sede,$id_campus,$id_edificio,$id,$tipo_punto_sanitario[$i],$tipo_punto_sanitario_anterior[$i],$cantidad_puntos_sanitarios[$i],$cantidad_puntos_sanitarios_anterior[$i]);
+                }
+                $GLOBALS['mensaje'] = "El laboratorio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una sala de cómputo.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la sala de cómputo.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la sala de cómputo..
+     * @param string $capacidad, nueva capacidad de la sala de cómputo..
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarSalaComputo($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
+        $sql = "UPDATE sala_computo SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"sala_computo");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $capacidad_anterior = $valor['capacidad'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Sala de Cómputo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Sala de Cómputo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("sala_computo",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("sala_computo",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad_anterior,$capacidad);
+                $this->registrarModificacion("sala_computo",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $GLOBALS['mensaje'] = "La sala de cómputo se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una oficina.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la oficina.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la oficina.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarOficina($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$punto_video_beam){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', punto_video_beam = '".$punto_video_beam."'";
+        $sql = "UPDATE oficina SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"oficina");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Oficina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Oficina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("oficina",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("oficina",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $GLOBALS['mensaje'] = "La oficina se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un salón.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del salón.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
+     * @param string $capacidad, nueva capacidad del salón.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarBano($id_sede,$id_campus,$id_edificio,$id,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$tipo_orinal_anterior,$cantidad_orinal,$cantidad_orinal_anterior,$tipo_lavamanos,$tipo_lavamanos_anterior,$cantidad_lavamanos,$cantidad_lavamanos_anterior,$ducha,$lavatraperos,$cantidad_sifones,$tipo_divisiones,$material_divisiones){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_inodoro = htmlspecialchars(trim($tipo_inodoro));
+        $cantidad_inodoro = htmlspecialchars(trim($cantidad_inodoro));
+        $ducha = htmlspecialchars(trim($ducha));
+        $lavatraperos = htmlspecialchars(trim($lavatraperos));
+        $cantidad_sifones = htmlspecialchars(trim($cantidad_sifones));
+        $tipo_divisiones = htmlspecialchars(trim($tipo_divisiones));
+        $material_divisiones = htmlspecialchars(trim($material_divisiones));
+        if (strcasecmp($tipo_inodoro,'') != 0){
+            $tipo_inodoro = 'NULL';
+        }
+        if (strcasecmp($tipo_divisiones,'') != 0){
+            $tipo_divisiones = 'NULL';
+        }
+        if (strcasecmp($material_divisiones,'') != 0){
+            $material_divisiones = 'NULL';
+        }
+        $campos = "cantidad_inodoro = '".$cantidad_inodoro."', ducha = '".$ducha."', lavatraperos = '".$lavatraperos."', cantidad_sifon = '".$cantidad_sifones."'";
+        $sql = "UPDATE bano SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"bano");
+        foreach ($data as $clave => $valor) {
+            $tipo_inodoro_anterior = $valor['tipo_inodoro'];
+            $cantidad_inodoro_anterior = $valor['cantidad_inodoro'];
+            $ducha_anterior = $valor['ducha'];
+            $lavatraperos_anterior = $valor['lavatraperos'];
+            $cantidad_sifones_anterior = $valor['cantidad_sifon'];
+            $tipo_divisiones_anterior = $valor['tipo_divisiones'];
+            $material_divisiones_anterior = $valor['material_divisiones'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Baño 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Baño 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tipo_inodoro",$tipo_inodoro_anterior,$tipo_inodoro);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_inodoro",$cantidad_inodoro_anterior,$cantidad_inodoro);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ducha",$ducha_anterior,$ducha);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"lavatraperos",$lavatraperos_anterior,$lavatraperos);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_sifon",$cantidad_sifones_anterior,$cantidad_sifones);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tipo_divisiones",$tipo_divisiones_anterior,$tipo_divisiones);
+                $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"material_divisiones",$material_divisiones_anterior,$material_divisiones);
+                for ($i=0;$i<count($tipo_iluminacion);$i++)
+                    $this->modificarOrinal($id_sede,$id_campus,$id_edificio,$id,$tipo_orinal[$i],$tipo_orinal_anterior[$i],$cantidad_orinal[$i],$cantidad_orinal_anterior[$i]);
+                for ($i=0;$i<count($tipo_iluminacion);$i++)
+                    $this->modificarLavamanos($id_sede,$id_campus,$id_edificio,$id,$tipo_lavamanos[$i],$tipo_lavamanos_anterior[$i],$cantidad_lavamanos[$i],$cantidad_lavamanos_anterior[$i]);
+                $GLOBALS['mensaje'] = "El baño se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un cuarto técnico.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del cuarto técnico.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto técnico.
+     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @return array
+     */
+    public function modificarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$punto_video_beam){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."', punto_video_beam = '".$punto_video_beam."'";
+        $sql = "UPDATE cuarto_tecnico SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_tecnico");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+            $punto_video_beam_anterior = $valor['punto_video_beam'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Técnico 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Técnico 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("cuarto_tecnico",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $this->registrarModificacion("cuarto_tecnico",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$punto_video_beam_anterior,$punto_video_beam);
+                $GLOBALS['mensaje'] = "El cuarto técnico se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una bodega.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la bodega.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la bodega.
+     * @return array
+     */
+    public function modificarBodega($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE bodega SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"bodega");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Bodega 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Bodega 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("bodega",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "La bodega se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un cuarto de plantas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del cuarto de plantas.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de plantas.
+     * @return array
+     */
+    public function modificarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE cuarto_plantas SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_plantas");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Plantas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Plantas 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("cuarto_plantas",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "El cuarto de plantas se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un cuarto de aires acondicionados.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del cuarto de aires acondicionados.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de aires acondicionados.
+     * @return array
+     */
+    public function modificarCuartoAireAcondicionado($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE cuarto_aire_acondicionado SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_aire_acondicionado");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Aires Acondiconados 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Aires Acondiconados 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("cuarto_aire_acondicionado",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "El cuarto de aires acondicionados se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un área deportiva cerrada.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del área deportiva cerrada.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del área deportiva cerrada.
+     * @return array
+     */
+    public function modificarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE area_deportiva_cerrada SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"area_deportiva_cerrada");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Área Deportiva Cerrada 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Área Deportiva Cerrada 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("area_deportiva_cerrada",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "El área deportiva cerrada se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un centro de datos.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del centro de datos.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del centro de datos.
+     * @return array
+     */
+    public function modificarCentroDatos($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE centro_datos SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"centro_datos");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Centro Datos 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Centro Datos 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("centro_datos",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "El centro de datos se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un cuarto de bombas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del cuarto de bombas.
+     * @param string $tipo_punto_sanitario, nueva cantidad de puntos de red del cuarto de bombas.
+     * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario del cuarto de bombas.
+     * @param string $tipo_punto_sanitario_anterior, anterior tipo de punto sanitario del cuarto de bombas.
+     * @param string $cantidad_puntos_sanitarios, nueva cantidad de puntos sanitarios del cuarto de bombas.
+     * @param string $cantidad_puntos_sanitarios_anterior, anterior cantidad de puntos sanitarios del cuarto de bombas.
+     * @return array
+     */
+    public function modificarCuartoBombas($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $campos = "cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
+        $sql = "UPDATE cuarto_bombas SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_bombas");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Bombas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Cuarto Bombas 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("cuarto_bombas",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_hidraulico",$cantidad_punto_hidraulico_anterior,$cantidad_punto_hidraulico);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarPuntoSanitario($id_sede,$id_campus,$id_edificio,$id,$tipo_punto_sanitario[$i],$tipo_punto_sanitario_anterior[$i],$cantidad_puntos_sanitarios[$i],$cantidad_puntos_sanitarios_anterior[$i]);
+                }
+                $GLOBALS['mensaje'] = "El cuarto de bombas se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una cocineta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la cocineta.
+     * @param string $tipo_punto_sanitario, nueva cantidad de puntos de red de la cocineta.
+     * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario de la cocineta.
+     * @param string $tipo_punto_sanitario_anterior, anterior tipo de punto sanitario de la cocineta.
+     * @param string $cantidad_puntos_sanitarios, nueva cantidad de puntos sanitarios de la cocineta.
+     * @param string $cantidad_puntos_sanitarios_anterior, anterior cantidad de puntos sanitarios de la cocineta.
+     * @return array
+     */
+    public function modificarCocineta($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
+        $campos = "cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
+        $sql = "UPDATE cocineta SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cocineta");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Cocineta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Salón 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("cocineta",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_hidraulico",$cantidad_punto_hidraulico_anterior,$cantidad_punto_hidraulico);
+                for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                    $this->modificarPuntoSanitario($id_sede,$id_campus,$id_edificio,$id,$tipo_punto_sanitario[$i],$tipo_punto_sanitario_anterior[$i],$cantidad_puntos_sanitarios[$i],$cantidad_puntos_sanitarios_anterior[$i]);
+                }
+                $GLOBALS['mensaje'] = "La cocineta se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una sala de estudios.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la sala de estudios.
+     * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la sala de estudios.
+     * @return array
+     */
+    public function modificarSalaEstudio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
+        $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
+        $sql = "UPDATE sala_estudio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"sala_estudio");
+        foreach ($data as $clave => $valor) {
+            $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Sala Estudio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Sala Estudio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("sala_estudio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$cantidad_punto_red_anterior,$cantidad_punto_red);
+                $GLOBALS['mensaje'] = "La sala de estudio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un punto sanitario.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario del espacio.
+     * @param string $tipo_punto_sanitario_anterior, anterior tipo de punto sanitario del espacio.
+     * @param string $cantidad, nueva cantidad de puntos sanitarios del espacio.
+     * @param string $cantidad_anterior, anterior cantidad de puntos sanitarios del espacio.
+     * @return array
+     */
+    public function modificarPuntoSanitario($id_sede,$id_campus,$id_edificio,$id,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad,$cantidad_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_punto_sanitario = htmlspecialchars(trim($tipo_punto_sanitario));
+        $tipo_punto_sanitario_anterior = htmlspecialchars(trim($tipo_punto_sanitario_anterior));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
+        if (strcasecmp($tipo_punto_sanitario,'') != 0){
+            $tipo_punto_sanitario = 'NULL';
+        }
+        if(strcasecmp($tipo_punto_sanitario_anterior,'') != 0){
+            $campos = "id_tipo = '".$tipo_punto_sanitario."', cantidad = '".$cantidad."'";
+            $sql = "UPDATE punto_sanitario SET $campos WHERE id_tipo = '".$tipo_punto_sanitario_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO punto_sanitario (id_sede,id_campus,id_edificio,id_espacio,id_tipo,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_punto_sanitario."', '".$cantidad."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Punto Sanitario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Punto Sanitario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("punto_sanitario",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo",$tipo_punto_sanitario_anterior,$tipo_punto_sanitario);
+                $this->registrarModificacion("punto_sanitario",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_anterior,$cantidad);
+                $GLOBALS['mensaje'] = "El punto sanitario se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un orinal.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @param string $tipo_orinal, nuevo tipo de orinal del espacio.
+     * @param string $tipo_orinal_anterior, anterior tipo de orinal del espacio.
+     * @param string $cantidad, nueva cantidad de orinales del espacio.
+     * @param string $cantidad_anterior, anterior cantidad de orinales del espacio.
+     * @return array
+     */
+    public function modificarOrinal($id_sede,$id_campus,$id_edificio,$id,$tipo_orinal,$tipo_orinal_anterior,$cantidad,$cantidad_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_orinal = htmlspecialchars(trim($tipo_orinal));
+        $tipo_orinal_anterior = htmlspecialchars(trim($tipo_orinal_anterior));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
+        if (strcasecmp($tipo_orinal,'') != 0){
+            $tipo_orinal = 'NULL';
+        }
+        if(strcasecmp($tipo_orinal_anterior,'') != 0){
+            $campos = "id_tipo_orinal = '".$tipo_orinal_anterior."', cantidad = '".$cantidad."'";
+            $sql = "UPDATE orinal_bano SET $campos WHERE id_tipo_orinal = '".$tipo_orinal_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO orinal_bano (id_sede,id_campus,id_edificio,id_espacio,id_tipo_orinal,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_orinal."', '".$cantidad."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Orinal 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Orinal 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("orinal_bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_orinal",$tipo_orinal_anterior,$tipo_orinal);
+                $this->registrarModificacion("orinal_bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_anterior,$cantidad);
+                $GLOBALS['mensaje'] = "El orinal se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un lavamanos.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @param string $tipo_lavamanos, nuevo tipo de lavamanos del espacio.
+     * @param string $tipo_lavamanos_anterior, anterior tipo de lavamanos del espacio.
+     * @param string $cantidad, nueva cantidad de lavamanos del espacio.
+     * @param string $cantidad_anterior, anterior cantidad de lavamanos del espacio.
+     * @return array
+     */
+    public function modificarLavamanos($id_sede,$id_campus,$id_edificio,$id,$tipo_lavamanos,$tipo_lavamanos_anterior,$cantidad,$cantidad_anterior){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_lavamanos = htmlspecialchars(trim($tipo_lavamanos));
+        $tipo_lavamanos_anterior = htmlspecialchars(trim($tipo_lavamanos_anterior));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
+        if (strcasecmp($tipo_lavamanos,'') != 0){
+            $tipo_lavamanos = 'NULL';
+        }
+        if(strcasecmp($tipo_lavamanos_anterior,'') != 0){
+            $campos = "id_tipo = '".$tipo_punto_sanitario."', cantidad = '".$cantidad."'";
+            $sql = "UPDATE lavamanos_bano SET $campos WHERE id_tipo_lavamanos = '".$tipo_lavamanos_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        }else{
+            $sql = "INSERT INTO lavamanos_bano (id_sede,id_campus,id_edificio,id_espacio,id_tipo,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_punto_sanitario."', '".$cantidad."');";
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Lavamanos 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Lavamanos 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("lavamanos_bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tipo_punto_sanitario",$tipo_punto_sanitario_anterior,$tipo_punto_sanitario);
+                $this->registrarModificacion("lavamanos_bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad_anterior,$cantidad);
+                $GLOBALS['mensaje'] = "El lavamanos se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
