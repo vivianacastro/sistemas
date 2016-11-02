@@ -2,8 +2,8 @@
 *funciones globales de la aplicacion
 */
 $(document).ready(function () {
-		//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
-		var URLactual = window.location;
+	//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
+	var URLactual = window.location;
     if(URLactual['href'].indexOf('menu_principal') >= 0 || URLactual['href'].indexOf('iniciar_sesion') >= 0){
   			$('#home').addClass("opcion_activa");
     }else if(URLactual['href'].indexOf('modulo_planta') >= 0 || URLactual['href'].indexOf('planta') >= 0){
@@ -76,14 +76,14 @@ $(document).ready(function () {
     }else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuarios') >= 0){
     		$('#usuarios').addClass("opcion_activa");
     }
-		setTimeout(function() {
+	setTimeout(function() {
 		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){
 				$("#divDialogTimeOut").modal('show');
 		}
-    },600000);
-		$('#divDialogTimeOut').on('hidden.bs.modal', function () {
-  			location.reload();
-		});
+	},1200000);
+	$('#divDialogTimeOut').on('hidden.bs.modal', function () {
+			location.reload();
+	});
 });
 
 /**

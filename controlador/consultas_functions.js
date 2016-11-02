@@ -3703,7 +3703,7 @@ $(document).ready(function() {
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
                     +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
-                    +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
+                    +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" disabled required/><br>'
                     +'<div id="lavamanos">'
@@ -9176,7 +9176,7 @@ $(document).ready(function() {
                         informacion['punto_videobeam'] = $('input[name="punto_videobeam"]:checked').val();
                     }else if(usoEspacioSelect == '6'){ //Baño
                         informacion['tipo_inodoro'] = $("#tipo_inodoro").val();
-                        informacion['cantidad_inodoros'] = $("#cantidad_inodoros").val();
+                        informacion['cantidad_inodoro'] = $("#cantidad_inodoros").val();
                         informacion['tipo_divisiones'] = $("#tipo_divisiones").val();
                         informacion['material_divisiones'] = $("#material_divisiones").val();
                         informacion['ducha'] = $('input[name="ducha"]:checked').val();
@@ -9237,8 +9237,8 @@ $(document).ready(function() {
                             }
                             informacion['tipo_orinal'] = tipoOrinal;
                             informacion['tipo_orinal_anterior'] = tipoOrinalAnterior;
-                            informacion['cantidad_orinales'] = cantidadOrinal;
-                            informacion['cantidad_orinales_anterior'] = cantidadOrinalAnterior;
+                            informacion['cantidad_orinal'] = cantidadOrinal;
+                            informacion['cantidad_orinal_anterior'] = cantidadOrinalAnterior;
                         }
                     }else if(usoEspacioSelect == '7'){ //Cuarto Técnico
                         informacion['cantidad_puntos_red'] = $("#cantidad_puntos_red").val();

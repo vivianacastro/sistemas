@@ -297,7 +297,7 @@ class modelo_modificacion {
         $cantidad_iluminacion = htmlspecialchars(trim($cantidad_iluminacion));
         $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
         $campos = "";
-        if (strcasecmp($tipo_iluminacion,'') != 0){
+        if (strcasecmp($tipo_iluminacion,'') == 0){
             $tipo_iluminacion == 'NULL';
         }
         if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
@@ -346,7 +346,7 @@ class modelo_modificacion {
         $cantidad_interruptor = htmlspecialchars(trim($cantidad_interruptor));
         $cantidad_interruptor_anterior = htmlspecialchars(trim($cantidad_interruptor_anterior));
         $campos = "";
-        if (strcasecmp($tipo_interruptor,'') != 0){
+        if (strcasecmp($tipo_interruptor,'') == 0){
             $tipo_interruptor == 'NULL';
         }
         if(strcasecmp($tipo_interruptor_anterior,'') != 0){
@@ -525,10 +525,10 @@ class modelo_modificacion {
         $alto_ventana = htmlspecialchars(trim($alto_ventana));
         $alto_ventana_anterior = htmlspecialchars(trim($alto_ventana_anterior));
         $campos = "";
-        if (strcasecmp($tipo_ventana,'') != 0){
+        if (strcasecmp($tipo_ventana,'') == 0){
             $tipo_ventana == 'NULL';
         }
-        if (strcasecmp($material,'') != 0){
+        if (strcasecmp($material,'') == 0){
             $material == 'NULL';
         }
         if ((strcasecmp($tipo_ventana_anterior,'') != 0 || strcasecmp($material_anterior,'') != 0)){
@@ -763,7 +763,7 @@ class modelo_modificacion {
         $cantidad_iluminacion_anterior = htmlspecialchars(trim($cantidad_iluminacion_anterior));
         $campos = "";
         if(strcasecmp($tipo_iluminacion_anterior,'') != 0){
-            if (strcasecmp($tipo_iluminacion,'') != 0){
+            if (strcasecmp($tipo_iluminacion,'') == 0){
                 $tipo_iluminacion == 'NULL';
             }
             $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
@@ -1260,6 +1260,7 @@ class modelo_modificacion {
         $alto_puerta = htmlspecialchars(trim($alto_puerta));
         $alto_puerta_anterior = htmlspecialchars(trim($alto_puerta_anterior));
         $gato_puerta = htmlspecialchars(trim($gato_puerta));
+        $gato_puerta_anterior = 'true';
         $campos = "";
         if (strcasecmp($tipo_puerta,'') == 0){
             $tipo_puerta = 'NULL';
@@ -1269,6 +1270,9 @@ class modelo_modificacion {
         }
         if (strcasecmp($material_marco,'') == 0){
             $material_marco = 'NULL';
+        }
+        if (strcasecmp($gato_puerta,'true') == 0){
+            $gato_puerta_anterior = 'false';
         }
         if(strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
             $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad_puerta = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', alto_puerta = '".$alto_puerta."', gato_puerta = '".$gato_puerta."'";
@@ -1294,8 +1298,8 @@ class modelo_modificacion {
                 $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho_puerta_anterior,$ancho_puerta);
                 $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_puerta",$alto_puerta_anterior,$alto_puerta);
                 $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato_puerta",$gato_puerta_anterior,$gato_puerta);
-                for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarCerraduraPuerta($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
+                for ($i=0;$i<count($tipo_cerradura);$i++) {
+                    $this->modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
                 }
                 $GLOBALS['mensaje'] = "Las Puertas del espacio se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
@@ -1331,7 +1335,7 @@ class modelo_modificacion {
         if (strcasecmp($tipo_cerradura,'') != 0){
             $tipo_cerradura = 'NULL';
         }
-        if(strcasecmp($tipo_cerradura_anterior,'') != 0 || strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
+        if(strcasecmp($tipo_cerradura_anterior,'') != 0){
             $campos = "id_tipo_cerradura = '".$tipo_cerradura."'";
             $sql = "UPDATE puerta_tipo_cerradura SET $campos WHERE id_tipo_cerradura = '".$tipo_cerradura_anterior."' AND id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         }else{
@@ -1503,8 +1507,8 @@ class modelo_modificacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
-        $sql = "UPDATE salon SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"salon");
+        $sql = "UPDATE salon SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"salon");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $capacidad_anterior = $valor['capacidad'];
@@ -1550,8 +1554,8 @@ class modelo_modificacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
-        $sql = "UPDATE auditorio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"auditorio");
+        $sql = "UPDATE auditorio SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"auditorio");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $capacidad_anterior = $valor['capacidad'];
@@ -1598,8 +1602,8 @@ class modelo_modificacion {
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."', cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
-        $sql = "UPDATE laboratorio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"laboratorio");
+        $sql = "UPDATE laboratorio SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"laboratorio");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $capacidad_anterior = $valor['capacidad'];
@@ -1650,8 +1654,8 @@ class modelo_modificacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', capacidad = '".$capacidad."', punto_video_beam = '".$punto_video_beam."'";
-        $sql = "UPDATE sala_computo SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"sala_computo");
+        $sql = "UPDATE sala_computo SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"sala_computo");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $capacidad_anterior = $valor['capacidad'];
@@ -1696,8 +1700,8 @@ class modelo_modificacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', punto_video_beam = '".$punto_video_beam."'";
-        $sql = "UPDATE oficina SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"oficina");
+        $sql = "UPDATE oficina SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"oficina");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $punto_video_beam_anterior = $valor['punto_video_beam'];
@@ -1744,26 +1748,26 @@ class modelo_modificacion {
         $cantidad_sifones = htmlspecialchars(trim($cantidad_sifones));
         $tipo_divisiones = htmlspecialchars(trim($tipo_divisiones));
         $material_divisiones = htmlspecialchars(trim($material_divisiones));
-        if (strcasecmp($tipo_inodoro,'') != 0){
+        if (strcasecmp($tipo_inodoro,'') == 0){
             $tipo_inodoro = 'NULL';
         }
-        if (strcasecmp($tipo_divisiones,'') != 0){
+        if (strcasecmp($tipo_divisiones,'') == 0){
             $tipo_divisiones = 'NULL';
         }
-        if (strcasecmp($material_divisiones,'') != 0){
+        if (strcasecmp($material_divisiones,'') == 0){
             $material_divisiones = 'NULL';
         }
         $campos = "cantidad_inodoro = '".$cantidad_inodoro."', ducha = '".$ducha."', lavatraperos = '".$lavatraperos."', cantidad_sifon = '".$cantidad_sifones."'";
-        $sql = "UPDATE bano SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"bano");
+        $sql = "UPDATE bano SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"bano");
         foreach ($data as $clave => $valor) {
-            $tipo_inodoro_anterior = $valor['tipo_inodoro'];
+            $tipo_inodoro_anterior = $valor['id_tipo_inodoro'];
             $cantidad_inodoro_anterior = $valor['cantidad_inodoro'];
             $ducha_anterior = $valor['ducha'];
             $lavatraperos_anterior = $valor['lavatraperos'];
             $cantidad_sifones_anterior = $valor['cantidad_sifon'];
-            $tipo_divisiones_anterior = $valor['tipo_divisiones'];
-            $material_divisiones_anterior = $valor['material_divisiones'];
+            $tipo_divisiones_anterior = $valor['id_tipo_divisiones'];
+            $material_divisiones_anterior = $valor['id_material_divisiones'];
         }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1783,9 +1787,9 @@ class modelo_modificacion {
                 $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_sifon",$cantidad_sifones_anterior,$cantidad_sifones);
                 $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tipo_divisiones",$tipo_divisiones_anterior,$tipo_divisiones);
                 $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"material_divisiones",$material_divisiones_anterior,$material_divisiones);
-                for ($i=0;$i<count($tipo_iluminacion);$i++)
+                for ($i=0;$i<count($tipo_orinal);$i++)
                     $this->modificarOrinal($id_sede,$id_campus,$id_edificio,$id,$tipo_orinal[$i],$tipo_orinal_anterior[$i],$cantidad_orinal[$i],$cantidad_orinal_anterior[$i]);
-                for ($i=0;$i<count($tipo_iluminacion);$i++)
+                for ($i=0;$i<count($tipo_lavamanos);$i++)
                     $this->modificarLavamanos($id_sede,$id_campus,$id_edificio,$id,$tipo_lavamanos[$i],$tipo_lavamanos_anterior[$i],$cantidad_lavamanos[$i],$cantidad_lavamanos_anterior[$i]);
                 $GLOBALS['mensaje'] = "El baño se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
@@ -1811,8 +1815,8 @@ class modelo_modificacion {
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $punto_video_beam = htmlspecialchars(trim($punto_video_beam));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."', punto_video_beam = '".$punto_video_beam."'";
-        $sql = "UPDATE cuarto_tecnico SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_tecnico");
+        $sql = "UPDATE cuarto_tecnico SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"cuarto_tecnico");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
             $punto_video_beam_anterior = $valor['punto_video_beam'];
@@ -1852,8 +1856,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE bodega SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"bodega");
+        $sql = "UPDATE bodega SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"bodega");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -1891,8 +1895,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE cuarto_plantas SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_plantas");
+        $sql = "UPDATE cuarto_plantas SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"cuarto_plantas");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -1930,8 +1934,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE cuarto_aire_acondicionado SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_aire_acondicionado");
+        $sql = "UPDATE cuarto_aire_acondicionado SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"cuarto_aire_acondicionado");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -1969,8 +1973,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE area_deportiva_cerrada SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"area_deportiva_cerrada");
+        $sql = "UPDATE area_deportiva_cerrada SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"area_deportiva_cerrada");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -2008,8 +2012,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE centro_datos SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"centro_datos");
+        $sql = "UPDATE centro_datos SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"centro_datos");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -2051,8 +2055,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
         $campos = "cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
-        $sql = "UPDATE cuarto_bombas SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cuarto_bombas");
+        $sql = "UPDATE cuarto_bombas SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"cuarto_bombas");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
         }
@@ -2097,8 +2101,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_hidraulico = htmlspecialchars(trim($cantidad_punto_hidraulico));
         $campos = "cantidad_punto_hidraulico = '".$cantidad_punto_hidraulico."'";
-        $sql = "UPDATE cocineta SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"cocineta");
+        $sql = "UPDATE cocineta SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"cocineta");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_hidraulico_anterior = $valor['cantidad_punto_hidraulico'];
         }
@@ -2139,8 +2143,8 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $cantidad_punto_red = htmlspecialchars(trim($cantidad_punto_red));
         $campos = "cantidad_punto_red = '".$cantidad_punto_red."'";
-        $sql = "UPDATE sala_estudio SET $campos WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
-        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"sala_estudio");
+        $sql = "UPDATE sala_estudio SET $campos WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"sala_estudio");
         foreach ($data as $clave => $valor) {
             $cantidad_punto_red_anterior = $valor['cantidad_punto_red'];
         }
@@ -2183,7 +2187,7 @@ class modelo_modificacion {
         $tipo_punto_sanitario_anterior = htmlspecialchars(trim($tipo_punto_sanitario_anterior));
         $cantidad = htmlspecialchars(trim($cantidad));
         $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        if (strcasecmp($tipo_punto_sanitario,'') != 0){
+        if (strcasecmp($tipo_punto_sanitario,'') == 0){
             $tipo_punto_sanitario = 'NULL';
         }
         if(strcasecmp($tipo_punto_sanitario_anterior,'') != 0){
@@ -2232,7 +2236,7 @@ class modelo_modificacion {
         $tipo_orinal_anterior = htmlspecialchars(trim($tipo_orinal_anterior));
         $cantidad = htmlspecialchars(trim($cantidad));
         $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        if (strcasecmp($tipo_orinal,'') != 0){
+        if (strcasecmp($tipo_orinal,'') == 0){
             $tipo_orinal = 'NULL';
         }
         if(strcasecmp($tipo_orinal_anterior,'') != 0){
@@ -2281,11 +2285,11 @@ class modelo_modificacion {
         $tipo_lavamanos_anterior = htmlspecialchars(trim($tipo_lavamanos_anterior));
         $cantidad = htmlspecialchars(trim($cantidad));
         $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        if (strcasecmp($tipo_lavamanos,'') != 0){
+        if (strcasecmp($tipo_lavamanos,'') == 0){
             $tipo_lavamanos = 'NULL';
         }
         if(strcasecmp($tipo_lavamanos_anterior,'') != 0){
-            $campos = "id_tipo = '".$tipo_punto_sanitario."', cantidad = '".$cantidad."'";
+            $campos = "id_tipo = '".$tipo_lavamanos."', cantidad = '".$cantidad."'";
             $sql = "UPDATE lavamanos_bano SET $campos WHERE id_tipo_lavamanos = '".$tipo_lavamanos_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         }else{
             $sql = "INSERT INTO lavamanos_bano (id_sede,id_campus,id_edificio,id_espacio,id_tipo,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_punto_sanitario."', '".$cantidad."');";
@@ -2580,6 +2584,39 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $elemento = htmlspecialchars(trim($elemento));
         $sql = "SELECT * FROM ".$elemento." WHERE id = '".$id."' AND id_edificio = '".$id_edificio."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el valor de un campo de un elemento de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del elemento.
+     * @param string $elemento, elemento a consultar (cancha, edificio, parqueadero, etc.).
+     * @return array
+     */
+    public function consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,$elemento){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $elemento = htmlspecialchars(trim($elemento));
+        $sql = "SELECT * FROM ".$elemento." WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Elemento Edificio 1)";
