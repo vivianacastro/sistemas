@@ -4107,7 +4107,6 @@ $(document).ready(function() {
         var informacion =  {};
         var tipoMaterial = $("#tipo_material_search").val();
         var nombreTipoMaterial = $("#nombre_tipo_material_search").val();
-        var idNombreTipoMaterial = $("#nombre_tipo_material_search").attr('name');
         /*informacion['tipo_material'] = tipoMaterial;
         informacion['nombre_tipo_materil'] = nombreTipoMaterial;
         var data = consultarInformacionObjeto("tipo_material",informacion);
@@ -4120,7 +4119,7 @@ $(document).ready(function() {
         });*/
         $("#tipo_material").val(tipoMaterial);
         $("#nombre_tipo_material").val(nombreTipoMaterial);
-        $("#nombre_tipo_material").attr('name',idNombreTipoMaterial);
+        $("#nombre_tipo_material").attr('name',nombreTipoMaterial);
         $("#divDialogConsulta").modal('show');
     });
 
@@ -4132,7 +4131,6 @@ $(document).ready(function() {
          var informacion =  {};
          var tipoObjeto = $("#tipo_objeto_search").val();
          var nombreTipoObjeto = $("#nombre_tipo_objeto_search").val();
-         var idNombreTipoObjeto = $("#nombre_tipo_objeto_search").attr('name');
          /*informacion['tipo_objeto'] = tipoObjeto;
          informacion['nombre_tipo_objeto'] = nombreTipoObjeto;
          var data = consultarInformacionObjeto("tipo_objeto",informacion);
@@ -4145,7 +4143,7 @@ $(document).ready(function() {
          });*/
          $("#tipo_objeto").val(tipoObjeto);
          $("#nombre_tipo_objeto").val(nombreTipoObjeto);
-         $("#nombre_tipo_objeto").attr('name',idNombreTipoObjeto);
+         $("#nombre_tipo_objeto").attr('name',nombreTipoObjeto);
          $("#divDialogConsulta").modal('show');
      });
 
@@ -9382,14 +9380,14 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton modificar_tipo_material y se
+     * Se captura el evento cuando se da click en el boton guardar_modificaciones_tipo_material y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_modificaciones_tipo_material").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del tipo de material?");
         if (confirmacion) {
             var tipoMaterial = $("#tipo_material").val();
-            var idCampus = $("#nombre_tipo_material").attr('name');
+            var nombreTipoMaterialAnterior = $("#nombre_tipo_material").attr('name');
             var nombreTipoMaterial = $("#nombre_tipo_material").val();
             if(!validarCadena(tipoMaterial)){
                 alert("ERROR. Seleccione un tipo de material");
@@ -9400,14 +9398,47 @@ $(document).ready(function() {
             }else{
                 var informacion = {};
                 informacion['tipo_material'] = limpiarCadena(tipoMaterial);
-                informacion['id'] = limpiarCadena(nombreTipoMaterial);
                 informacion['nombre'] = limpiarCadena(nombreTipoMaterial);
-                var resultado = modificarObjeto(informacion,"tipo_material");
-                mostrarMensaje(resultado.mensaje);
+                informacion['nombre_anterior'] = limpiarCadena(nombreTipoMaterialAnterior);
+                var resultado = modificarObjeto("tipo_material",informacion);
+                console.log(informacion);
                 console.log(resultado);
+                mostrarMensaje(resultado.mensaje);
                 if(resultado.verificar){
-                    alert(data.mensaje);
-                    $("#tipo_material_search").val("").change();
+                    $("#tipo_material_search").val("seleccionar").change();
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_modificaciones_tipo_objeto y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_tipo_objeto").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del tipo de objeto?");
+        if (confirmacion) {
+            var tipoMaterial = $("#tipo_objeto").val();
+            var nombreTipoMaterialAnterior = $("#nombre_tipo_objeto").attr('name');
+            var nombreTipoMaterial = $("#nombre_tipo_objeto").val();
+            if(!validarCadena(tipoMaterial)){
+                alert("ERROR. Seleccione un tipo de objeto");
+                $("#tipo_objeto").focus();
+            }else if(!validarCadena(nombreTipoMaterial)){
+                alert("ERROR. Ingrese el nombre del tipo de objeto");
+                $("#nombre_tipo_objeto").focus();
+            }else{
+                var informacion = {};
+                informacion['tipo_objeto'] = limpiarCadena(tipoMaterial);
+                informacion['nombre'] = limpiarCadena(nombreTipoMaterial);
+                informacion['nombre_anterior'] = limpiarCadena(nombreTipoMaterialAnterior);
+                var resultado = modificarObjeto("tipo_objeto",informacion);
+                console.log(informacion);
+                console.log(resultado);
+                mostrarMensaje(resultado.mensaje);
+                if(resultado.verificar){
+                    $("#tipo_objeto_search").val("seleccionar").change();
                     $("#divDialogConsulta").modal('hide');
                 }
             }

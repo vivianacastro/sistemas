@@ -310,7 +310,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarTipoMaterial($info['tipo_material'],$info['id'],$info['nombre']);
+            $verificar = $m->modificarTipoMaterial($info['tipo_material'],$info['nombre_anterior'],$info['nombre']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -329,7 +329,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarTipoObjeto($info['tipo_objeto'],$info['id'],$info['nombre']);
+            $verificar = $m->modificarTipoObjeto($info['tipo_objeto'],$info['nombre_anterior'],$info['nombre']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

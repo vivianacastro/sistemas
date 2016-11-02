@@ -4965,3 +4965,9 @@
 [02-Nov-2016 11:57:49 America/Bogota] PHP Notice:  Undefined index: tipo_orinal in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1996
 [02-Nov-2016 13:47:40 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::guardarBano() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 274
 [02-Nov-2016 13:57:53 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::guardarBano() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 274
+[02-Nov-2016 14:42:35 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1511
+[02-Nov-2016 14:43:53 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1511
+[02-Nov-2016 14:44:03 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1511
+[02-Nov-2016 14:44:11 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1511
+[02-Nov-2016 14:45:36 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1543
+[02-Nov-2016 14:45:45 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 1543

@@ -1487,19 +1487,19 @@ class modelo_modificacion {
     /**
      * Función que permite modificar un tipo de material.
      * @param string $tipo_material, nombre del tipo de material (material piso, material techo, etc.)
-     * @param string $id, id del tipo de material.
+     * @param string $nombre_anterior, nombre anterior del tipo de material.
      * @param string $nombre, nuevo nombre del tipo de material.
      * @return array
      */
-    public function modificarTipoMaterial($tipo_material,$id,$nombre){
+    public function modificarTipoMaterial($tipo_material,$nombre_anterior,$nombre){
         $tipo_material = htmlspecialchars(trim($tipo_material));
-        $id = htmlspecialchars(trim($id));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
         $nombre = htmlspecialchars(trim($nombre));
         $campos = "material = '".$nombre."'";
-        $sql = "UPDATE ".$tipo_material." SET $campos WHERE id = '".$id."';";
-        $data = $this->consultarCampoTipoMaterial($tipo_material,$id);
+        $sql = "UPDATE ".$tipo_material." SET $campos WHERE material = '".$nombre_anterior."';";
+        $data = $this->consultarCampoTipoMaterial($tipo_material,$nombre_anterior);
         foreach ($data as $clave => $valor) {
-            $nombre_anterior = $valor['material'];
+            $id = $valor['id'];
         }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1523,19 +1523,19 @@ class modelo_modificacion {
     /**
      * Función que permite modificar un tipo de objeto.
      * @param string $tipo_objeto, nombre del tipo de objeto (tipo inodoro, tipo puerta, etc.)
-     * @param string $id, id del tipo de objeto.
+     * @param string $nombre_anterior, nombre anterior del tipo de objeto.
      * @param string $nombre, nuevo nombre del tipo de objeto.
      * @return array
      */
-    public function modificarTipoObjeto($tipo_objeto,$id,$nombre){
+    public function modificarTipoObjeto($tipo_objeto,$nombre_anterior,$nombre){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
-        $id = htmlspecialchars(trim($id));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
         $nombre = htmlspecialchars(trim($nombre));
         $campos = "tipo = '".$nombre."'";
-        $sql = "UPDATE ".$tipo_objeto." SET $campos WHERE id = '".$id."';";
-        $data = $this->consultarCampoTipoObjeto($tipo_objeto,$id);
+        $sql = "UPDATE ".$tipo_objeto." SET $campos WHERE tipo = '".$nombre_anterior."';";
+        $data = $this->consultarCampoTipoObjeto($tipo_objeto,$nombre_anterior);
         foreach ($data as $clave => $valor) {
-            $nombre_anterior = $valor['tipo'];
+            $id = $valor['id'];
         }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1780,7 +1780,7 @@ class modelo_modificacion {
     public function consultarCampoTipoMaterial($tipo_material,$id){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM ".$tipo_material." WHERE id = '".$id."';";
+        $sql = "SELECT * FROM ".$tipo_material." WHERE material = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Material 1)";
@@ -1807,7 +1807,7 @@ class modelo_modificacion {
     public function consultarCampoTipoObjeto($tipo_objeto,$id){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM ".$tipo_objeto." WHERE id = '".$id."';";
+        $sql = "SELECT * FROM ".$tipo_objeto." WHERE tipo = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Objeto 1)";
