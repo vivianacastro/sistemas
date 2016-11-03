@@ -1260,14 +1260,23 @@ class modelo_modificacion {
         $gato_puerta_anterior = 'true';
         $campos = "";
         if (strcasecmp($tipo_puerta,'') != 0 && strcasecmp($material_puerta,'') != 0 && strcasecmp($material_marco,'') != 0){
-            if (strcasecmp($gato_puerta,'true') == 0){
+            /*if (strcasecmp($gato_puerta,'true') == 0){
                 $gato_puerta_anterior = 'false';
+            }*/
+            $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"puerta_espacio");
+            foreach ($data as $clave => $valor) {
+                if ((strcasecmp($tipo_puerta,$valor['id_tipo_puerta']) == 0) && (strcasecmp($material_puerta,$valor['id_material_puerta']) == 0) && (strcasecmp($material_marco,$valor['id_material_marco']) == 0)) {
+                    $gato_puerta_anterior = $valor['gato'];
+                }
             }
             if(strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
                 $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', largo_puerta = '".$alto_puerta."', gato = '".$gato_puerta."'";
                 $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
             }else{
                 $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
+            }
+            for ($i=0;$i<count($tipo_cerradura);$i++) {
+                $this->modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
             }
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
@@ -1291,9 +1300,6 @@ class modelo_modificacion {
                     $GLOBALS['sql'] = $sql;
                     return true;
                 }
-            }
-            for ($i=0;$i<count($tipo_cerradura);$i++) {
-                $this->modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
             }
         }
     }
@@ -2620,6 +2626,7 @@ class modelo_modificacion {
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $id = htmlspecialchars(trim($id));
         $elemento = htmlspecialchars(trim($elemento));
+        $result = "";
         $sql = "SELECT * FROM ".$elemento." WHERE id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

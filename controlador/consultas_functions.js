@@ -3447,13 +3447,12 @@ $(document).ready(function() {
                     $("#material_marco_puerta"+puertasCont).attr('name',record.material_marco);
                     $("#ancho_puerta"+puertasCont).val(record.ancho);
                     $("#ancho_puerta"+puertasCont).attr('name',record.ancho);
-                    $("#alto_puerta"+puertasCont).val(record.alto);
+                    $("#alto_puerta"+puertasCont).val(record.largo);
                     $("#alto_puerta"+puertasCont).attr('name',record.largo);
                     $("#tipo_puerta"+puertasCont+" option[value='']").hide();
                     $("#material_puerta"+puertasCont+" option[value='']").hide();
                     $("#material_marco_puerta"+puertasCont+" option[value='']").hide();
                 }
-                puertasCont++;
                 var tipoPuerta = record.tipo_puerta;
                 var materialPuerta = record.material_puerta;
                 var materialMarco = record.material_marco;
@@ -3493,6 +3492,7 @@ $(document).ready(function() {
                         cerraduraCont++;
                     }
                 });
+                puertasCont++;
             }
         });
         $.each(dataSuministro, function(index, record) {
@@ -9062,18 +9062,19 @@ $(document).ready(function() {
                             cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
                             cantidadTomacorrientesAnterior[i] = $("#cantidad_tomacorrientes").attr('name');
                         }else{
-                            if ((tipoSuministroEnergia.indexOf($("#tipo_suministro_energia"+i).val()) == -1) && (tomacorriente.indexOf($("#tomacorriente"+i).val()) == -1)) {
+                            if ((tipoSuministroEnergia.indexOf($("#tipo_suministro_energia"+i).val()) != -1) && (tomacorriente.indexOf($("#tomacorriente"+i).val()) != -1)) {
+                                alert("ERROR. Hay uno o más tipo de suministro de energía y tipo de tomacorriente repetidos");
+                                $("#tomacorriente"+i).focus();
+                                error = true;
+                                break;
+
+                            }else{
                                 tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
                                 tipoSuministroEnergiaAnterior[i] = $("#tipo_suministro_energia"+i).attr('name');
                                 tomacorriente[i] = $("#tomacorriente"+i).val();
                                 tomacorrienteAnterior[i] = $("#tomacorriente"+i).attr('name');
                                 cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
                                 cantidadTomacorrientesAnterior[i] = $("#cantidad_tomacorrientes"+i).attr('name');
-                            }else{
-                                alert("ERROR. Hay uno o más tipo de suministro de energía y tipo de tomacorriente repetidos");
-                                $("#tomacorriente"+i).focus();
-                                error = true;
-                                break;
                             }
                         }
                     }
@@ -9097,7 +9098,12 @@ $(document).ready(function() {
                             altoPuerta[i] = $("#alto_puerta").val();
                             altoPuertaAnterior[i] = $("#alto_puerta").attr('name');
                         }else{
-                            if ((tipoPuerta.indexOf($("#tipo_puerta"+i).val()) == -1) && (materialPuerta.indexOf($("#material_puerta"+i).val()) == -1) && (tipoCerradura.indexOf($("#tipo_cerradura"+i).val()) == -1) && (materialMarco.indexOf($("#material_marco_puerta"+i).val()) == -1)) {
+                            if ((tipoPuerta.indexOf($("#tipo_puerta"+i).val()) != -1) && (materialPuerta.indexOf($("#material_puerta"+i).val()) != -1) && (tipoCerradura.indexOf($("#tipo_cerradura"+i).val()) != -1) && (materialMarco.indexOf($("#material_marco_puerta"+i).val()) != -1)) {
+                                alert("ERROR. Hay uno o más tipo de puerta, material de puerta, tipo de cerradura y material del marco de la puerta repetidos");
+                                $("#material_marco_puerta"+i).focus();
+                                error = true;
+                                break;
+                            }else{
                                 tipoPuerta[i] = $("#tipo_puerta"+i).val();
                                 tipoPuertaAnterior[i] = $("#tipo_puerta"+i).attr('name');
                                 cantidadPuertas[i] = $("#cantidad_puertas"+i).val();
@@ -9106,18 +9112,13 @@ $(document).ready(function() {
                                 materialPuertaAnterior[i] = $("#material_puerta"+i).attr('name');
                                 tipoCerradura[i] = $("#tipo_cerradura"+i).val();
                                 tipoCerraduraAnterior[i] = $("#tipo_cerradura"+i).attr('name');
-                                gatoPuerta[i] = $('input[name="gato_puerta"'+i+']:checked').val();
+                                gatoPuerta[i] = $('input[name="gato_puerta'+i+'"]:checked').val();
                                 materialMarco[i] = $("#material_marco_puerta"+i).val();
                                 materialMarcoAnterior[i] = $("#material_marco_puerta"+i).attr('name');
                                 anchoPuerta[i] = $("#ancho_puerta"+i).val();
                                 anchoPuertaAnterior[i] = $("#ancho_puerta"+i).attr('name');
                                 altoPuerta[i] = $("#alto_puerta"+i).val();
                                 altoPuertaAnterior[i] = $("#alto_puerta"+i).attr('name');
-                            }else{
-                                alert("ERROR. Hay uno o más tipo de puerta, material de puerta, tipo de cerradura y material del marco de la puerta repetidos");
-                                $("#material_marco_puerta"+i).focus();
-                                error = true;
-                                break;
                             }
                         }
                     }
@@ -9136,8 +9137,12 @@ $(document).ready(function() {
                             altoVentana[i] = $("#alto_ventana").val();
                             altoVentanaAnterior[i] = $("#alto_ventana").attr('name');
                         }else{
-                            if ((tipoVentana.indexOf($("#tipo_ventana"+i).val()) == -1) && (materialVentana.indexOf($("#material_ventana"+i).val()) == -1)) {
-                                tipoVentana[i] = $("#tipo_ventana"+i).val();
+                            if ((tipoVentana.indexOf($("#tipo_ventana"+i).val()) != -1) && (materialVentana.indexOf($("#material_ventana"+i).val()) != -1)) {
+                                alert("ERROR. Hay uno o más tipo y material de ventana repetidos");
+                                $("#material_ventana"+i).focus();
+                                error = true;
+                                break;
+                            }else{tipoVentana[i] = $("#tipo_ventana"+i).val();
                                 tipoVentanaAnterior[i] = $("#tipo_ventana"+i).attr('name');
                                 cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
                                 cantidadVentanasAnterior[i] = $("#cantidad_ventanas"+i).attr('name');
@@ -9147,11 +9152,6 @@ $(document).ready(function() {
                                 anchoVentanaAnterior[i] = $("#ancho_ventana"+i).attr('name');
                                 altoVentana[i] = $("#alto_ventana"+i).val();
                                 altoVentanaAnterior[i] = $("#alto_ventana"+i).attr('name');
-                            }else{
-                                alert("ERROR. Hay uno o más tipo y material de ventana repetidos");
-                                $("#material_ventana"+i).focus();
-                                error = true;
-                                break;
                             }
 
                         }
@@ -9427,11 +9427,11 @@ $(document).ready(function() {
                         arregloFotos.append("espacio",JSON.stringify(info));
                         arregloPlanos.append("espacio",JSON.stringify(info));
                         var data = modificarObjeto("espacio",informacion);
-                        var dataEliminarIluminacion = eliminarObjeto("eliminar_iluminacion_espacio",info);
-                        var dataEliminarInterruptor = eliminarObjeto("eliminar_interruptor_espacio",info);
-                        var dataEliminarPuerta = eliminarObjeto("eliminar_puerta_espacio",info);
-                        var dataEliminarSuministroEnergia = eliminarObjeto("eliminar_suministro_energia_espacio",info);
-                        var dataEliminarVentana = eliminarObjeto("eliminar_ventana_espacio",info);
+                        var dataEliminarIluminacion = eliminarObjeto("iluminacion_espacio",info);
+                        var dataEliminarInterruptor = eliminarObjeto("interruptor_espacio",info);
+                        var dataEliminarPuerta = eliminarObjeto("puerta_espacio",info);
+                        var dataEliminarSuministroEnergia = eliminarObjeto("suministro_energia_espacio",info);
+                        var dataEliminarVentana = eliminarObjeto("ventana_espacio",info);
                         var resultadoPlanos = guardarPlanos("espacio",arregloPlanos);
                         var resultadoFotos = guardarFotos("espacio",arregloFotos);
                         console.log(informacion);

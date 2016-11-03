@@ -350,7 +350,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $tipoIluminacion = $info['tipo_iluminacion_eliminar'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoIluminacion); $i++) {
                 $verificar = $m->eliminarIluminacionCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$tipoIluminacion[$i]);
             }
         }
@@ -373,7 +373,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $tipoInterruptor = $info['tipo_interruptor_eliminar'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoInterruptor); $i++) {
                 $verificar = $m->eliminarInterruptorCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$tipoInterruptor[$i]);
             }
         }
@@ -443,7 +443,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $tipoIluminacion = $info['tipo_iluminacion_eliminar'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoIluminacion); $i++) {
                 $verificar = $m->eliminarIluminacionEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoIluminacion[$i]);
             }
         }
@@ -466,7 +466,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $tipoInterruptor = $info['tipo_interruptor_eliminar'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoInterruptor); $i++) {
                 $verificar = $m->eliminarInterruptorEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoInterruptor[$i]);
             }
         }
@@ -515,7 +515,7 @@ class controlador_modificacion{
             $info = json_decode($_POST['jObject'], true);
             $tipoSuministroEnergia = $info['tipo_suministro_energia_eliminar'];
             $tomacorriente = $info['tomacorriente'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoSuministroEnergia); $i++) {
                 $verificar = $m->eliminarSuministroEnergiaEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoSuministroEnergia[$i],$tomacorriente[$i]);
             }
         }
@@ -539,7 +539,7 @@ class controlador_modificacion{
             $info = json_decode($_POST['jObject'], true);
             $tipoVentana = $info['tipo_ventana_eliminar'];
             $materialVentana = $info['material_ventana_eliminar'];
-            for ($i=0; $i<count($eliminar); $i++) {
+            for ($i=0; $i<count($tipoVentana); $i++) {
                 $verificar = $m->eliminarVentanaEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoVentana[$i],$materialVentana[$i]);
             }
         }

@@ -5091,3 +5091,16 @@
 [03-Nov-2016 10:36:18 America/Bogota] PHP Notice:  Undefined variable: cantidad in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2863
 [03-Nov-2016 10:38:20 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 429
 [03-Nov-2016 10:38:55 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 429
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: eliminar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 446
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 452
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: eliminar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 469
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 475
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 500
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: eliminar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 518
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 524
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: eliminar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 542
+[03-Nov-2016 11:34:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 548
+[03-Nov-2016 11:38:23 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 475
+[03-Nov-2016 11:38:23 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2644
+[03-Nov-2016 11:38:23 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3082
+[03-Nov-2016 11:38:23 America/Bogota] PHP Notice:  Undefined index: id_material_ventana in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3129
