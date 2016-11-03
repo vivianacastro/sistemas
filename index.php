@@ -232,6 +232,13 @@ $map = array(
         'eliminar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_corredor'),*/
         'eliminar_iluminacion_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_iluminacion_corredor'),
         'eliminar_interruptor_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_interruptor_corredor'),
+        'eliminar_ventana_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_ventana_gradas'),
+        'eliminar_iluminacion_plazoleta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_iluminacion_plazoleta'),
+        'eliminar_iluminacion_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_iluminacion_espacio'),
+        'eliminar_interruptor_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_interruptor_espacio'),
+        'eliminar_puerta_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_puerta_espacio'),
+        'eliminar_suministro_energia_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_suministro_energia_espacio'),
+        'eliminar_ventana_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_ventana_espacio'),
         /*'eliminar_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cubierta'),
         'eliminar_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_gradas'),
         'eliminar_parqueadero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_parqueadero'),

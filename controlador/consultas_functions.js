@@ -1924,7 +1924,7 @@ $(document).ready(function() {
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
                     +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
+                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
                     actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
@@ -7750,9 +7750,9 @@ $(document).ready(function() {
                     informacion['cantidad_interruptor_anterior'] = cantidadInterruptorAnterior;
                     info["nombre_sede"] = idSede;
                     info["nombre_campus"] = idCampus;
-                    info["id_cancha"] = id;
-                    info["iluminacion_eliminar"] = tipoIluminacionEliminar;
-                    info["interruptor_eliminar"] = tipoInterruptorEliminar;
+                    info["id_corredor"] = id;
+                    info["tipo_iluminacion_eliminar"] = tipoIluminacionEliminar;
+                    info["tipo_interruptor_eliminar"] = tipoInterruptorEliminar;
                     for (var i = 0; i < marcadoresModificacion.length; i++) {
                         coordenadas = marcadoresModificacion[i].getPosition();
                     }
@@ -8007,7 +8007,7 @@ $(document).ready(function() {
                 informacion["piso"] = piso;
                 informacion['pasamanos'] = pasamanos;
                 informacion['material_pasamanos'] = materialPasamanos;
-                for (var i=0;i<=ventanasCont;i++) {
+                for (var i=0;i<ventanasCont;i++) {
                     if (i==0) {
                         tipoVentana[i] = $("#tipo_ventana").val();
                         tipoVentanaAnterior[i] = $("#tipo_ventana").attr('name');
@@ -8020,7 +8020,12 @@ $(document).ready(function() {
                         altoVentana[i] = $("#alto_ventana").val();
                         altoVentanaAnterior[i] = $("#alto_ventana").attr('name');
                     }else{
-                        if ((tipoVentana.indexOf($("#tipo_ventana"+i).val()) == -1) && (materialVentana.indexOf($("#material_ventana"+i).val()) == -1)) {
+                        if ((tipoVentana.indexOf($("#tipo_ventana"+i).val()) != -1) && (materialVentana.indexOf($("#material_ventana"+i).val()) != -1)) {
+                            alert("ERROR. Hay uno o más tipo y material de ventana repetidos");
+                            $("#material_ventana"+i).focus();
+                            error = true;
+                            break;
+                        }else{
                             tipoVentana[i] = $("#tipo_ventana"+i).val();
                             tipoVentanaAnterior[i] = $("#tipo_ventana"+i).attr('name');
                             cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
@@ -8031,11 +8036,6 @@ $(document).ready(function() {
                             anchoVentanaAnterior[i] = $("#ancho_ventana"+i).attr('name');
                             altoVentana[i] = $("#alto_ventana"+i).val();
                             altoVentanaAnterior[i] = $("#alto_ventana"+i).attr('name');
-                        }else{
-                            alert("ERROR. Hay uno o más tipo y material de ventana repetidos");
-                            $("#material_ventana"+i).focus();
-                            error = true;
-                            break;
                         }
                     }
                 }
@@ -8054,14 +8054,18 @@ $(document).ready(function() {
                     info['nombre_campus'] = idCampus;
                     info['nombre_edificio'] = idEdificio;
                     info['piso'] = piso;
+                    info["tipo_ventana_eliminar"] = tipoVentanaEliminar;
+                    info["material_ventana_eliminar"] = materialVentanaEliminar;
                     arregloFotos.append("gradas",JSON.stringify(info));
                     arregloPlanos.append("gradas",JSON.stringify(info));
                     var data = modificarObjeto("gradas",informacion);
+                    var dataEliminarVentana = eliminarObjeto("ventana_gradas",info);
                     var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
                     var resultadoFotos = guardarFotos("gradas",arregloFotos);
                     console.log(informacion);
                     console.log(info);
                     console.log(data);
+                    console.log(dataEliminarVentana);
                     console.log(resultadoPlanos);
                     console.log(resultadoFotos);
                     var mensaje = "";
@@ -8456,14 +8460,17 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_plazoleta'] = id;
+                info["tipo_iluminacion_eliminar"] = tipoIluminacionEliminar;
                 arregloFotos.append("plazoleta",JSON.stringify(info));
                 arregloPlanos.append("plazoleta",JSON.stringify(info));
                 var data = modificarObjeto("plazoleta",informacion);
+                var dataEliminarIluminacion = eliminarObjeto("iluminacion_plazoleta",info)
                 var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
                 var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarIluminacion);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -9407,14 +9414,34 @@ $(document).ready(function() {
                         info['nombre_campus'] = idCampus;
                         info['id_edificio'] = idEdificio;
                         info['id_espacio'] = id;
+                        info["tipo_iluminacion_eliminar"] = tipoIluminacionEliminar;
+                        info["tipo_interruptor_eliminar"] = tipoInterruptorEliminar;
+                        info["tipo_puerta_eliminar"] = tipoPuertaEliminar;
+                        info["material_puerta_eliminar"] = materialPuertaEliminar;
+                        info["material_marco_eliminar"] = materialMarcoPuertaEliminar;
+                        info["tipo_cerradura_eliminar"] = tipoCerraduraEliminar;
+                        info["tipo_suministro_energia_eliminar"] = tipoSuministroEnergiaEliminar;
+                        info["tomacorriente"] = tomacorrienteEliminar;
+                        info["tipo_ventana_eliminar"] = tipoVentanaEliminar;
+                        info["material_ventana_eliminar"] = materialVentanaEliminar;
                         arregloFotos.append("espacio",JSON.stringify(info));
                         arregloPlanos.append("espacio",JSON.stringify(info));
                         var data = modificarObjeto("espacio",informacion);
+                        var dataEliminarIluminacion = eliminarObjeto("eliminar_iluminacion_espacio",info);
+                        var dataEliminarInterruptor = eliminarObjeto("eliminar_interruptor_espacio",info);
+                        var dataEliminarPuerta = eliminarObjeto("eliminar_puerta_espacio",info);
+                        var dataEliminarSuministroEnergia = eliminarObjeto("eliminar_suministro_energia_espacio",info);
+                        var dataEliminarVentana = eliminarObjeto("eliminar_ventana_espacio",info);
                         var resultadoPlanos = guardarPlanos("espacio",arregloPlanos);
                         var resultadoFotos = guardarFotos("espacio",arregloFotos);
                         console.log(informacion);
                         console.log(info);
                         console.log(data);
+                        console.log(dataEliminarIluminacion);
+                        console.log(dataEliminarInterruptor);
+                        console.log(dataEliminarPuerta);
+                        console.log(dataEliminarSuministroEnergia);
+                        console.log(dataEliminarVentana);
                         console.log(resultadoPlanos);
                         console.log(resultadoFotos);
                         var mensaje = "";

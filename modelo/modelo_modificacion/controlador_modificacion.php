@@ -337,9 +337,8 @@ class controlador_modificacion{
         echo json_encode($result);
     }
 
-
     /**
-     * Funcion que permite eliminar la iluminación de un corredor.
+     * Funcion que permite eliminar un tipo de iluminación de un corredor.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
      */
     public function eliminar_iluminacion_corredor(){
@@ -350,9 +349,9 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $eliminar = $info['iluminacion_eliminar'];
-            for ($i=0; $i < count($eliminar); $i++) {
-                $verificar = $m->eliminarIluminacionCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$eliminar[$i]);
+            $tipoIluminacion = $info['tipo_iluminacion_eliminar'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarIluminacionCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$tipoIluminacion[$i]);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -362,7 +361,7 @@ class controlador_modificacion{
     }
 
     /**
-     * Funcion que permite eliminar un interruptor de un corredor.
+     * Funcion que permite eliminar un tipo de interruptor de un corredor.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
      */
     public function eliminar_interruptor_corredor(){
@@ -373,9 +372,175 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $eliminar = $info['interruptor_eliminar'];
-            for ($i=0; $i < count($eliminar); $i++) {
-                $verificar = $m->eliminarInterruptorCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$eliminar[$i]);
+            $tipoInterruptor = $info['tipo_interruptor_eliminar'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarInterruptorCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_corredor'],$tipoInterruptor[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de ventana de unas gradas.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_ventana_gradas(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoVentana = $info['tipo_ventana_eliminar'];
+            $materialVentana = $info['material_ventana_eliminar'];
+            for ($i=0; $i<count($tipoVentana); $i++) {
+                $verificar = $m->eliminarVentanaGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso'],$tipoVentana[$i],$materialVentana[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de iluminación de una plazoleta.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_iluminacion_plazoleta(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoIluminacion = $info['tipo_iluminacion_eliminar'];
+            for ($i=0; $i<count($tipoIluminacion); $i++) {
+                $verificar = $m->eliminarIluminacionPlazoleta($info['nombre_sede'],$info['nombre_campus'],$info['id_plazoleta'],$tipoIluminacion[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de iluminación de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_iluminacion_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoIluminacion = $info['tipo_iluminacion_eliminar'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarIluminacionEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoIluminacion[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de interruptor de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_interruptor_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoInterruptor = $info['tipo_interruptor_eliminar'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarInterruptorEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoInterruptor[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de puerta de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_puerta_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoPuerta = $info['tipo_puerta_eliminar'];
+            $materialPuerta = $info['material_puerta_eliminar'];
+            $materialMarcoPuerta = $info['material_marco_eliminar'];
+            for ($i=0; $i<count($tipoPuerta); $i++) {
+                $verificar = $m->eliminarPuertaEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoPuerta[$i],$materialPuerta[$i],$materialMarcoPuerta[$i],$info['tipo_cerradura_eliminar']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de suministro de energía de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_suministro_energia_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoSuministroEnergia = $info['tipo_suministro_energia_eliminar'];
+            $tomacorriente = $info['tomacorriente'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarSuministroEnergiaEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoSuministroEnergia[$i],$tomacorriente[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un tipo de ventana de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_ventana_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $tipoVentana = $info['tipo_ventana_eliminar'];
+            $materialVentana = $info['material_ventana_eliminar'];
+            for ($i=0; $i<count($eliminar); $i++) {
+                $verificar = $m->eliminarVentanaEspacio($info['nombre_sede'],$info['nombre_campus'],$info['id_edificio'],$info['id_espacio'],$tipoVentana[$i],$materialVentana[$i]);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
