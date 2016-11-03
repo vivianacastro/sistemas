@@ -2740,5 +2740,46 @@ class modelo_modificacion {
             }
         }
     }
+
+    /**
+     * Función que permite eliminar un tipo de ventana de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $objeto, tipo de interruptor a eliminar.
+     * @return array
+     */
+    public function eliminarVentanaGradas($id_sede,$id_campus,$id,$objeto){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $objeto = htmlspecialchars(trim($objeto));
+        if (strcasecmp($objeto,'') != 0){
+            $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"interruptor_corredor");
+            foreach ($data as $clave => $valor) {
+                $cantidad = $valor['cantidad'];
+            }
+            $sql = "DELETE FROM interruptor_corredor WHERE id_tipo_interruptor = '".$objeto."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptor Corredor 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptor Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$objeto,"eliminado");
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
+                    $GLOBALS['mensaje'] = "El interruptor del corredor ha sido eliminada";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
 }
 ?>

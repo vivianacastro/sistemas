@@ -7669,7 +7669,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -7685,7 +7684,7 @@ $(document).ready(function() {
                         arregloPlanos.append('archivo'+i,plano,nombreArchivo);
                     }
                 }
-                for (var i=0;i<=iluminacionCont;i++) {
+                for (var i=0;i<iluminacionCont;i++) {
                     if (i==0) {
                         tipoIluminacion[i] = $("#tipo_iluminacion").val();
                         tipoIluminacionAnterior[i] = $("#tipo_iluminacion").attr('name');
@@ -7705,7 +7704,7 @@ $(document).ready(function() {
                         }
                     }
                 }
-                for (var i=0;i<=interruptoresCont;i++) {
+                for (var i=0;i<interruptoresCont;i++) {
                     if (i==0) {
                         tipoInterruptor[i] = $("#tipo_interruptor").val();
                         tipoInterruptorAnterior[i] = $("#tipo_interruptor").attr('name');
