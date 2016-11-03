@@ -336,5 +336,52 @@ class controlador_modificacion{
         $result['verificar'] = $verificar;
         echo json_encode($result);
     }
+
+
+    /**
+     * Funcion que permite eliminar la iluminación de un corredor.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_iluminacion_corredor(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $eliminar = $info['iluminacion_eliminar'];
+            for ($i=0; $i < count($eliminar); $i++) {
+                $verificar = $m->eliminarIluminacionCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$eliminar[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un interruptor de un corredor.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_interruptor_corredor(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $eliminar = $info['interruptor_eliminar'];
+            for ($i=0; $i < count($eliminar); $i++) {
+                $verificar = $m->eliminarInterruptorCorredor($info['nombre_sede'],$info['nombre_campus'],$info['id_cancha'],$eliminar[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
 }
 ?>

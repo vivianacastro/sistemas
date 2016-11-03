@@ -1109,8 +1109,8 @@ class modelo_modificacion {
                 for ($i=0;$i<count($tipo_ventana);$i++) {
                     $this->modificarVentanaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_ventana[$i],$tipo_ventana_anterior[$i],$cantidad_ventana[$i],$cantidad_ventana_anterior[$i],$material_ventana[$i],$material_ventana_anterior[$i],$ancho_ventana[$i],$ancho_ventana_anterior[$i],$alto_ventana[$i],$alto_ventana_anterior[$i]);
                 }
-                //$GLOBALS['mensaje'] = "El espacio se modificó correctamente";
-                //$GLOBALS['sql'] = $sql;
+                $GLOBALS['mensaje'] = "El espacio se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1143,7 +1143,7 @@ class modelo_modificacion {
                 $campos = "id_tipo_iluminacion = '".$tipo_iluminacion."', cantidad = '".$cantidad_iluminacion."'";
                 $sql = "UPDATE iluminacion_espacio SET $campos WHERE id_tipo_iluminacion = '".$tipo_iluminacion_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
             }else{
-                $sql = "INSERT INTO iluminacion_espacio (id_espacio,id_sede,id_campus,id_edificio,id_espacio,id_tipo_iluminacion,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
+                $sql = "INSERT INTO iluminacion_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_iluminacion,cantidad) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_iluminacion."', '".$cantidad_iluminacion."');";
             }
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
@@ -1264,7 +1264,7 @@ class modelo_modificacion {
                 $gato_puerta_anterior = 'false';
             }
             if(strcasecmp($tipo_puerta_anterior,'') != 0 || strcasecmp($material_puerta_anterior,'') != 0 || strcasecmp($material_marco_anterior,'') != 0){
-                $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad_puerta = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', alto_puerta = '".$alto_puerta."', gato_puerta = '".$gato_puerta."'";
+                $campos = "id_tipo_puerta = '".$tipo_puerta."', id_material_puerta = '".$material_puerta."', cantidad = '".$cantidad_puerta."', id_material_marco = '".$material_marco."', ancho_puerta = '".$ancho_puerta."', largo_puerta = '".$alto_puerta."', gato = '".$gato_puerta."'";
                 $sql = "UPDATE puerta_espacio SET $campos WHERE id_tipo_puerta = '".$tipo_puerta_anterior."' AND id_material_puerta = '".$material_puerta_anterior."' AND id_material_marco = '".$material_marco_anterior."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
             }else{
                 $sql = "INSERT INTO puerta_espacio (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,cantidad,id_material_marco,ancho_puerta,largo_puerta,gato) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$cantidad_puerta."', '".$material_marco."', '".$ancho_puerta."', '".$alto_puerta."', '".$gato_puerta."');";
@@ -1278,7 +1278,7 @@ class modelo_modificacion {
                 if(!$l_stmt->execute()){
                     $GLOBALS['mensaje'] = "Error: SQL (Modificar Puerta-Espacio 2)";
                     $GLOBALS['sql'] = $sql;
-                    return false;
+                    //return false;
                 }else{
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta_anterior,$tipo_puerta);
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta_anterior,$material_puerta);
@@ -1287,13 +1287,13 @@ class modelo_modificacion {
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho_puerta_anterior,$ancho_puerta);
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_puerta",$alto_puerta_anterior,$alto_puerta);
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato_puerta",$gato_puerta_anterior,$gato_puerta);
-                    for ($i=0;$i<count($tipo_cerradura);$i++) {
-                        $this->modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
-                    }
                     $GLOBALS['mensaje'] = "Las Puertas del espacio se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
                 }
+            }
+            for ($i=0;$i<count($tipo_cerradura);$i++) {
+                $this->modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura[$i],$tipo_cerradura_anterior[$i],$tipo_puerta,$material_puerta,$material_marco);
             }
         }
     }
@@ -1327,7 +1327,7 @@ class modelo_modificacion {
                 $campos = "id_tipo_cerradura = '".$tipo_cerradura."'";
                 $sql = "UPDATE puerta_tipo_cerradura SET $campos WHERE id_tipo_cerradura = '".$tipo_cerradura_anterior."' AND id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_espacio = '".$id."' AND id_edificio = '".$id_edificio."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
             }else{
-                $sql = "INSERT INTO puerta_tipo_cerradura (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura) VALUES ('".$id."', '".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$material_marco."', '".$tipo_cerradura."');";
+                $sql = "INSERT INTO puerta_tipo_cerradura (id_sede,id_campus,id_edificio,id_espacio,id_tipo_puerta,id_material_puerta,id_material_marco,id_tipo_cerradura) VALUES ('".$id_sede."', '".$id_campus."', '".$id_edificio."', '".$id."', '".$tipo_puerta."', '".$material_puerta."', '".$material_marco."', '".$tipo_cerradura."');";
             }
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
@@ -2657,6 +2657,88 @@ class modelo_modificacion {
             }
         }
         return $result;
+    }
+
+    /**
+     * Función que permite eliminar un tipo de iluminación de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $objeto, tipo de iluminación a eliminar.
+     * @return array
+     */
+    public function eliminarIluminacionCorredor($id_sede,$id_campus,$id,$objeto){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $objeto = htmlspecialchars(trim($objeto));
+        if (strcasecmp($objeto,'') != 0){
+            $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"iluminacion_corredor");
+            foreach ($data as $clave => $valor) {
+                $cantidad = $valor['cantidad'];
+            }
+            $sql = "DELETE FROM iluminacion_corredor WHERE id_tipo_iluminacion = '".$objeto."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminación Corredor 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminación Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$objeto,"eliminado");
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
+                    $GLOBALS['mensaje'] = "La iluminación del corredor ha sido eliminada";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un tipo de interruptor de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $objeto, tipo de interruptor a eliminar.
+     * @return array
+     */
+    public function eliminarInterruptorCorredor($id_sede,$id_campus,$id,$objeto){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $objeto = htmlspecialchars(trim($objeto));
+        if (strcasecmp($objeto,'') != 0){
+            $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"interruptor_corredor");
+            foreach ($data as $clave => $valor) {
+                $cantidad = $valor['cantidad'];
+            }
+            $sql = "DELETE FROM interruptor_corredor WHERE id_tipo_interruptor = '".$objeto."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptor Corredor 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptor Corredor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$objeto,"eliminado");
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
+                    $GLOBALS['mensaje'] = "El interruptor del corredor ha sido eliminada";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
     }
 }
 ?>

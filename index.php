@@ -226,6 +226,24 @@ $map = array(
         'modificar_tipo_material' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_material'),
         'modificar_tipo_objeto' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_objeto'),
 
+        /*'eliminar_sede' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_sede'),
+        'eliminar_campus' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_campus'),
+        'eliminar_cancha' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cancha'),
+        'eliminar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_corredor'),*/
+        'eliminar_iluminacion_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_iluminacion_corredor'),
+        'eliminar_interruptor_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_interruptor_corredor'),
+        /*'eliminar_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cubierta'),
+        'eliminar_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_gradas'),
+        'eliminar_parqueadero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_parqueadero'),
+        'eliminar_piscina' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_piscina'),
+        'eliminar_plazoleta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_plazoleta'),
+        'eliminar_sendero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_sendero'),
+        'eliminar_via' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_via'),
+        'eliminar_edificio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_edificio'),
+        'eliminar_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_espacio'),
+        'eliminar_tipo_material' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_tipo_material'),
+        'eliminar_tipo_objeto' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_tipo_objeto'),*/
+
     //Acciones Módulo Inventario
         //Acciones de carga de plantillas
         //Acciones de creación
