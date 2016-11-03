@@ -1859,6 +1859,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
                     $("#cantidad_iluminacion").attr('name',record.cantidad);
+                    $("#tipo_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -1872,7 +1873,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
                     $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
-
+                    $("#tipo_iluminacion"+iluminacionCont+" option[value='']").hide();
                 }
                 iluminacionCont++;
             }
@@ -1884,6 +1885,7 @@ $(document).ready(function() {
                     $("#tipo_interruptor").attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores").val(record.cantidad);
                     $("#cantidad_interruptores").attr('name',record.cantidad);
+                    $("#tipo_interruptor option[value='']").hide();
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
@@ -1897,6 +1899,7 @@ $(document).ready(function() {
                     $("#tipo_interruptor"+interruptoresCont).attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
                     $("#cantidad_interruptores"+interruptoresCont).attr('name',record.cantidad);
+                    $("#tipo_interruptor"+interruptoresCont+" option[value='']").hide();
                 }
                 interruptoresCont++;
             }
@@ -2198,6 +2201,8 @@ $(document).ready(function() {
                     $("#ancho_ventana").attr('name',record.ancho);
                     $("#alto_ventana").val(record.alto);
                     $("#alto_ventana").attr('name',record.alto);
+                    $("#tipo_ventana option[value='']").hide();
+                    $("#cantidad_ventanas option[value='']").hide();
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2224,6 +2229,8 @@ $(document).ready(function() {
                     $("#ancho_ventana"+ventanasCont).attr('name',record.ancho);
                     $("#alto_ventana"+ventanasCont).val(record.alto);
                     $("#alto_ventana"+ventanasCont).attr('name',record.alto);
+                    $("#tipo_ventana"+ventanasCont+" option[value='']").hide();
+                    $("#material_ventana"+ventanasCont+" option[value='']").hide();
                 }
                 ventanasCont++;
             }
@@ -2661,6 +2668,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
                     $("#cantidad_iluminacion").attr('name',record.cantidad);
+                    $("#cantidad_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -2674,6 +2682,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
                     $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
+                    $("#cantidad_iluminacion"+iluminacionCont+" option[value='']").hide();
                 }
                 iluminacionCont++;
             }
@@ -3301,6 +3310,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion").attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion").val(record.cantidad);
                     $("#cantidad_iluminacion").attr('name',record.cantidad);
+                    $("#cantidad_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3314,6 +3324,7 @@ $(document).ready(function() {
                     $("#tipo_iluminacion"+iluminacionCont).attr('name',record.tipo_iluminacion);
                     $("#cantidad_iluminacion"+iluminacionCont).val(record.cantidad);
                     $("#cantidad_iluminacion"+iluminacionCont).attr('name',record.cantidad);
+                    $("#cantidad_iluminacion"+iluminacionCont+" option[value='']").hide();
                     iluminacionCont++;
                 }
             }
@@ -3325,6 +3336,7 @@ $(document).ready(function() {
                     $("#tipo_interruptor").attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores").val(record.cantidad);
                     $("#cantidad_interruptores").attr('name',record.cantidad);
+                    $("#cantidad_interruptores option[value='']").hide();
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3338,6 +3350,7 @@ $(document).ready(function() {
                     $("#tipo_interruptor"+interruptoresCont).attr('name',record.tipo_interruptor);
                     $("#cantidad_interruptores"+interruptoresCont).val(record.cantidad);
                     $("#cantidad_interruptores"+interruptoresCont).attr('name',record.cantidad);
+                    $("#cantidad_interruptores"+interruptoresCont+" option[value='']").hide();
                     interruptoresCont++;
                 }
             }
@@ -3358,6 +3371,9 @@ $(document).ready(function() {
                     $("#ancho_puerta").attr('name',record.ancho);
                     $("#alto_puerta").val(record.largo);
                     $("#alto_puerta").attr('name',record.largo);
+                    $("#tipo_puerta option[value='']").hide();
+                    $("#material_puerta option[value='']").hide();
+                    $("#material_marco_puerta option[value='']").hide();
                 }else{
                     var componente = '<div id="puerta'+puertasCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3397,6 +3413,9 @@ $(document).ready(function() {
                     $("#ancho_puerta"+puertasCont).attr('name',record.ancho);
                     $("#alto_puerta"+puertasCont).val(record.alto);
                     $("#alto_puerta"+puertasCont).attr('name',record.largo);
+                    $("#tipo_puerta"+puertasCont+" option[value='']").hide();
+                    $("#material_puerta"+puertasCont+" option[value='']").hide();
+                    $("#material_marco_puerta"+puertasCont+" option[value='']").hide();
                     puertasCont++;
                 }
                 var tipoPuerta = record.tipo_puerta;
@@ -3418,9 +3437,11 @@ $(document).ready(function() {
                             if (puertasCont == 0) {
                                 $("#tipo_cerradura").val(valor.tipo_cerradura);
                                 $("#tipo_cerradura").attr('name',record.tipo_cerradura);
+                                $("#tipo_cerradura option[value='']").hide();
                             }else {
                                 $("#tipo_cerradura"+puertasCont).val(valor.tipo_cerradura);
                                 $("#tipo_cerradura"+puertasCont).attr('name',record.tipo_cerradura);
+                                $("#tipo_cerradura"+puertasCont+" option[value='']").hide();
                             }
                         }else{
                             var componente = '<div id="cerradura'+cerraduraCont+'">'
@@ -3431,6 +3452,7 @@ $(document).ready(function() {
                             actualizarSelectTipoObjeto("tipo_cerradura",cerraduraCont);
                             $("#tipo_cerradura"+cerraduraCont).val(valor.tipo_cerradura);
                             $("#tipo_cerradura"+cerraduraCont).attr('name',record.tipo_cerradura);
+                            $("#tipo_cerradura"+cerraduraCont+" option[value='']").hide();
                             cerraduraCont++;
                         }
                     }
@@ -3446,6 +3468,8 @@ $(document).ready(function() {
                     $("#tomacorriente").attr('name',record.tomacorriente);
                     $("#cantidad_tomacorrientes").val(record.cantidad);
                     $("#cantidad_tomacorrientes").attr('name',record.cantidad);
+                    $("#tipo_suministro_energia option[value='']").hide();
+                    $("#tomacorriente option[value='']").hide();
                 }else{
                     var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
                     +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3467,6 +3491,8 @@ $(document).ready(function() {
                     $("#tomacorriente"+tomacorrientesCont).attr('name',record.tomacorriente);
                     $("#cantidad_tomacorrientes"+tomacorrientesCont).val(record.cantidad);
                     $("#cantidad_tomacorrientes"+tomacorrientesCont).attr('name',record.cantidad);
+                    $("#tipo_suministro_energia"+tomacorrientesCont+" option[value='']").hide();
+                    $("#tomacorriente"+tomacorrientesCont+" option[value='']").hide();
                     tomacorrientesCont++;
                 }
             }
@@ -3484,6 +3510,8 @@ $(document).ready(function() {
                     $("#ancho_ventana").attr('name',record.ancho);
                     $("#alto_ventana").val(record.alto);
                     $("#alto_ventana").attr('name',record.alto);
+                    $("#tipo_ventana option[value='']").hide();
+                    $("#material_ventana option[value='']").hide();
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
                     +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3510,6 +3538,8 @@ $(document).ready(function() {
                     $("#ancho_ventana"+ventanasCont).attr('name',record.ancho);
                     $("#alto_ventana"+ventanasCont).val(record.alto);
                     $("#alto_ventana"+ventanasCont).attr('name',record.alto);
+                    $("#tipo_ventana"+ventanasCont+" option[value='']").hide();
+                    $("#material_ventana"+ventanasCont+" option[value='']").hide();
                     ventanasCont++;
                 }
             }
@@ -3634,6 +3664,7 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario").attr('name',record.tipo_punto_sanitario);
                             $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                             $("#cantidad_puntos_sanitarios").attr('name',record.cantidad_puntos_sanitarios);
+                            $("#tipo_punto_sanitario option[value='']").hide();
                         }else{
                             var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
                             +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3647,8 +3678,9 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario"+puntosSanitariosCont).attr('name',record.tipo_punto_sanitario);
                             $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).val(record.cantidad_puntos_sanitarios);
                             $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).attr('name',record.cantidad_puntos_sanitarios);
+                            $("#tipo_punto_sanitario"+puntosSanitariosCont+" option[value='']").hide();
+                            puntosSanitariosCont++;
                         }
-                        puntosSanitariosCont++;
                     }
                 });
             }else if(usoEspacioSelect == '4'){ //Sala de Cómputo
@@ -3758,6 +3790,7 @@ $(document).ready(function() {
                             $("#tipo_lavamanos").attr('name',record.tipo_lavamanos);
                             $("#cantidad_lavamanos").val(record.cantidad_lavamanos);
                             $("#cantidad_lavamanos").attr('name',record.cantidad_lavamanos);
+                            $("#tipo_lavamanos option[value='']").hide();
                         }else{
                             var componente = '<div id="lavamanos'+lavamanosCont+'">'
                             +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3772,8 +3805,9 @@ $(document).ready(function() {
                             $("#tipo_lavamanos"+lavamanosCont).attr('name',record.tipo_lavamanos);
                             $("#cantidad_lavamanos"+lavamanosCont).val(record.cantidad_lavamanos);
                             $("#cantidad_lavamanos"+lavamanosCont).attr('name',record.cantidad_lavamanos);
+                            $("#tipo_lavamanos"+lavamanosCont+" option[value='']").hide();
+                            lavamanosCont++;
                         }
-                        lavamanosCont++;
                     }
                 });
                 $.each(dataOrinal, function(index, record) {
@@ -3783,6 +3817,7 @@ $(document).ready(function() {
                             $("#tipo_orinal").attr('name',record.tipo_orinal);
                             $("#cantidad_orinales").val(record.cantidad_orinales);
                             $("#cantidad_orinales").attr('name',record.cantidad_orinales);
+                            $("#tipo_orinal option[value='']").hide();
                         }else{
                             var componente = '<div id="orinal'+orinalesCont+'">'
                             +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3796,8 +3831,9 @@ $(document).ready(function() {
                             $("#tipo_orinal"+orinalesCont).attr('name',record.tipo_orinal);
                             $("#cantidad_orinales"+orinalesCont).val(record.cantidad_orinales);
                             $("#cantidad_orinales"+orinalesCont).attr('name',record.cantidad_orinales);
+                            $("#tipo_orinal"+orinalesCont+" option[value='']").hide();
+                            orinalesCont++;
                         }
-                        orinalesCont++;
                     }
                 });
             }else if(usoEspacioSelect == '7'){ //Cuarto Técnico
@@ -3925,6 +3961,7 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario").attr('name',record.tipo_punto_sanitario);
                             $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                             $("#cantidad_puntos_sanitarios").attr('name',record.cantidad_puntos_sanitarios);
+                            $("#tipo_punto_sanitario option[value='']").hide();
                         }else{
                             var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
                             +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3938,6 +3975,7 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario"+puntosSanitariosCont).attr('name',record.tipo_punto_sanitario);
                             $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).val(record.cantidad_puntos_sanitarios);
                             $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).attr('name',record.cantidad_puntos_sanitarios);
+                            $("#tipo_punto_sanitario"+puntosSanitariosCont+" option[value='']").hide();
                             puntosSanitariosCont++;
                         }
                     }
@@ -3973,6 +4011,7 @@ $(document).ready(function() {
                               $("#tipo_punto_sanitario").attr('name',record.tipo_punto_sanitario);
                               $("#cantidad_puntos_sanitarios").val(record.cantidad_puntos_sanitarios);
                               $("#cantidad_puntos_sanitarios").attr('name',record.cantidad_puntos_sanitarios);
+                              $("#tipo_punto_sanitario option[value='']").hide();
                           }else{
                               var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
                               +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
@@ -3986,6 +4025,7 @@ $(document).ready(function() {
                               $("#tipo_punto_sanitario"+puntosSanitariosCont).attr('name',record.tipo_punto_sanitario);
                               $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).val(record.cantidad_puntos_sanitarios);
                               $("#cantidad_puntos_sanitarios"+puntosSanitariosCont).attr('name',record.cantidad_puntos_sanitarios);
+                              $("#tipo_punto_sanitario"+puntosSanitariosCont+" option[value='']").hide();
                               puntosSanitariosCont++;
                           }
                       }
@@ -8900,17 +8940,10 @@ $(document).ready(function() {
                 informacion['espacio_padre'] = numero_espacio_padre;
                 for (var i=0;i<=iluminacionCont;i++) {
                     if (i==0) {
-                        if ((($("#tipo_iluminacion").val() == "") && ($("#tipo_iluminacion_anterior").val() != "")) || (($("#tipo_iluminacion").val() != "") && ($("#tipo_iluminacion_anterior").val() == ""))) {
-                            alert("ERROR. Seleccione el tipo de iluminación del espacio");
-                            $("#tipo_iluminacion").focus();
-                            error = true;
-                            break;
-                        }else{
-                            tipoIluminacion[i] = $("#tipo_iluminacion").val();
-                            tipoIluminacionAnterior[i] = $("#tipo_iluminacion_anterior").val();
-                            cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
-                            cantidadIluminacionAnterior[i] = $("#cantidad_iluminacion_anterior").val();
-                        }
+                        tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                        tipoIluminacionAnterior[i] = $("#tipo_iluminacion_anterior").val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                        cantidadIluminacionAnterior[i] = $("#cantidad_iluminacion_anterior").val();
                     }else{
                         if (tipoIluminacion.indexOf($("#tipo_iluminacion"+i).val()) == -1) {
                             tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
@@ -8928,24 +8961,12 @@ $(document).ready(function() {
                 if (!error) {
                     for (var i=0;i<=tomacorrientesCont;i++) {
                         if (i==0) {
-                            if (($("#tipo_suministro_energia").val() != "") && ($("#tomacorriente").val() != "")) {
-                                tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
-                                tipoSuministroEnergiaAnterior[i] = $("#tipo_suministro_energia_anterior").val();
-                                tomacorriente[i] = $("#tomacorriente").val();
-                                tomacorrienteAnterior[i] = $("#tomacorriente_anterior").val();
-                                cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
-                                cantidadTomacorrientesAnterior[i] = $("#cantidad_tomacorrientes_anterior").val();
-                            }else if ($("#tipo_suministro_energia").val() != ""){
-                                alert("ERROR. Seleccione el tipo de suministro de energía del espacio");
-                                $("#tipo_suministro_energia").focus();
-                                error = true;
-                                break;
-                            }else{
-                                alert("ERROR. Seleccione el tipo de tomacorrientes del espacio");
-                                $("#tomacorriente").focus();
-                                error = true;
-                                break;
-                            }
+                            tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
+                            tipoSuministroEnergiaAnterior[i] = $("#tipo_suministro_energia_anterior").val();
+                            tomacorriente[i] = $("#tomacorriente").val();
+                            tomacorrienteAnterior[i] = $("#tomacorriente_anterior").val();
+                            cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
+                            cantidadTomacorrientesAnterior[i] = $("#cantidad_tomacorrientes_anterior").val();
                         }else{
                             if ((tipoSuministroEnergia.indexOf($("#tipo_suministro_energia"+i).val()) == -1) && (tomacorriente.indexOf($("#tomacorriente"+i).val()) == -1)) {
                                 tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
@@ -8966,43 +8987,21 @@ $(document).ready(function() {
                 if (!error) {
                     for (var i=0;i<=puertasCont;i++) {
                         if (i==0) {
-                            if (($("#tipo_puerta").val() != "") && ($("#material_puerta").val() != "") && ($("#tipo_cerradura").val() != "") && ($("#material_marco_puerta").val() != "")) {
-                                tipoPuerta[i] = $("#tipo_puerta").val();
-                                tipoPuertaAnterior[i] = $("#tipo_puerta_anterior").val();
-                                cantidadPuertas[i] = $("#cantidad_puertas").val();
-                                cantidadPuertasAnterior[i] = $("#cantidad_puertas_anterior").val();
-                                materialPuerta[i] = $("#material_puerta").val();
-                                materialPuertaAnterior[i] = $("#material_puerta_anterior").val();
-                                tipoCerradura[i] = $("#tipo_cerradura").val();
-                                tipoCerraduraAnterior[i] = $("#tipo_cerradura_anterior").val();
-                                gatoPuerta[i] = $('input[name="gato_puerta"]:checked').val();
-                                materialMarco[i] = $("#material_marco_puerta").val();
-                                materialMarcoAnterior[i] = $("#material_marco_puerta_anterior").val();
-                                anchoPuerta[i] = $("#ancho_puerta").val();
-                                anchoPuertaAnterior[i] = $("#ancho_puerta_anterior").val();
-                                altoPuerta[i] = $("#alto_puerta").val();
-                                altoPuertaAnterior[i] = $("#alto_puerta_anterior").val();
-                            }else if ($("#tipo_puerta").val() != ""){
-                                alert("ERROR. Seleccione el tipo de puerta del espacio");
-                                $("#tipo_puerta").focus();
-                                error = true;
-                                break;
-                            }else if ($("#material_puerta").val() != ""){
-                                alert("ERROR. Seleccione el material de las puertas del espacio");
-                                $("#material_puerta").focus();
-                                error = true;
-                                break;
-                            }else if ($("#tipo_cerradura").val() != ""){
-                                alert("ERROR. Seleccione el tipo de cerradura de las puertas del espacio");
-                                $("#tipo_cerradura").focus();
-                                error = true;
-                                break;
-                            }else{
-                                alert("ERROR. Seleccione el material del marco de las puertas del espacio");
-                                $("#material_marco_puerta").focus();
-                                error = true;
-                                break;
-                            }
+                            tipoPuerta[i] = $("#tipo_puerta").val();
+                            tipoPuertaAnterior[i] = $("#tipo_puerta_anterior").val();
+                            cantidadPuertas[i] = $("#cantidad_puertas").val();
+                            cantidadPuertasAnterior[i] = $("#cantidad_puertas_anterior").val();
+                            materialPuerta[i] = $("#material_puerta").val();
+                            materialPuertaAnterior[i] = $("#material_puerta_anterior").val();
+                            tipoCerradura[i] = $("#tipo_cerradura").val();
+                            tipoCerraduraAnterior[i] = $("#tipo_cerradura_anterior").val();
+                            gatoPuerta[i] = $('input[name="gato_puerta"]:checked').val();
+                            materialMarco[i] = $("#material_marco_puerta").val();
+                            materialMarcoAnterior[i] = $("#material_marco_puerta_anterior").val();
+                            anchoPuerta[i] = $("#ancho_puerta").val();
+                            anchoPuertaAnterior[i] = $("#ancho_puerta_anterior").val();
+                            altoPuerta[i] = $("#alto_puerta").val();
+                            altoPuertaAnterior[i] = $("#alto_puerta_anterior").val();
                         }else{
                             if ((tipoPuerta.indexOf($("#tipo_puerta"+i).val()) == -1) && (materialPuerta.indexOf($("#material_puerta"+i).val()) == -1) && (tipoCerradura.indexOf($("#tipo_cerradura"+i).val()) == -1) && (materialMarco.indexOf($("#material_marco_puerta"+i).val()) == -1)) {
                                 tipoPuerta[i] = $("#tipo_puerta"+i).val();
