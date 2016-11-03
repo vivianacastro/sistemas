@@ -2699,6 +2699,408 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar los archivos de un campus.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @return array
+     */
+    public function eliminarArchivosCampus($id_sede,$id_campus){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $sql = "DELETE FROM campus_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/campus/".$id_sede."-".$id_campus);
+                $this->eliminarDir(__ROOT__. "/archivos/images/campus/".$id_sede."-".$id_campus);
+                $GLOBALS['mensaje'] = "Los archivos del campus se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de una cancha.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la cancha.
+     * @return array
+     */
+    public function eliminarArchivosCancha($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM cancha_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/cancha/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos de la cancha se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @return array
+     */
+    public function eliminarArchivosCorredor($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM corredor_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del corredor se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de una cubierta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @return array
+     */
+    public function eliminarArchivosCubierta($id_sede,$id_campus,$id_edificio,$piso){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "DELETE FROM cubierta_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cubierta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cubierta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
+                $this->eliminarDir(__ROOT__. "/archivos/images/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
+                $GLOBALS['mensaje'] = "Los archivos de la cubierta se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @return array
+     */
+    public function eliminarArchivosGradas($id_sede,$id_campus,$id_edificio,$piso){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "DELETE FROM gradas_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
+                $this->eliminarDir(__ROOT__. "/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
+                $GLOBALS['mensaje'] = "Los archivos de las gradas se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un parqueadero.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del parqueadero.
+     * @return array
+     */
+    public function eliminarArchivosParqueadero($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM parqueadero_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Parqueadero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Parqueadero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/parqueadero/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/parqueadero/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del parqueadero se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de una piscina.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la piscina.
+     * @return array
+     */
+    public function eliminarArchivosPiscina($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM piscina_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos de la piscina se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de una plazoleta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la plazoleta.
+     * @return array
+     */
+    public function eliminarArchivosPlazoleta($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM plazoleta_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/plazoleta/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/plazoleta/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos de la plazoleta se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un sendero.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del sendero.
+     * @return array
+     */
+    public function eliminarArchivosSendero($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM sendero_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del sendero se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un vía.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del vía.
+     * @return array
+     */
+    public function eliminarArchivosVia($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM via_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Vía 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Vía 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/via/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/via/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del vía se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un edificio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del edificio.
+     * @return array
+     */
+    public function eliminarArchivosEdificio($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM edificio_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del edificio se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @return array
+     */
+    public function eliminarArchivosEspacio($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM espacio_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id);
+                $this->eliminarDir(__ROOT__. "/archivos/images/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id);
+                $GLOBALS['mensaje'] = "Los archivos del espacio se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los una carpeta y sus archivos.
+     * @param string $carpeta, nombre de la carpeta a eliminar.
+     * @return array
+     */
+    function eliminarDir($carpeta){
+        foreach(glob($carpeta . "/*") as $archivos_carpeta){
+            if (is_dir($archivos_carpeta)){
+                eliminarDir($archivos_carpeta);
+            }else{
+                unlink($archivos_carpeta);
+            }
+        }
+        rmdir($carpeta);
+    }
+
+    /**
      * Función que permite eliminar un tipo de iluminación de un corredor.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -2733,9 +3135,50 @@ class modelo_modificacion {
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion,"eliminado");
                     $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de iluminación del corredor ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de iluminación del corredor ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un todos los tipos de iluminación de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @return array
+     */
+    public function eliminarIluminacionesCorredor($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_iluminacion = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"iluminacion_corredor");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_iluminacion, $valor['id_tipo_iluminacion']);
+            array_push($cantidad, $valor['cantidad']);
+        }
+        $sql = "DELETE FROM iluminacion_corredor WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_iluminacion); $i++) {
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion[$i],"eliminado");
+                    $this->registrarModificacion("iluminacion_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de iluminación del corredor ha sido eliminado";
+                return true;
             }
         }
     }
@@ -2775,9 +3218,50 @@ class modelo_modificacion {
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$tipo_interruptor,"eliminado");
                     $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de interruptor del corredor ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de interruptor del corredor ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipo de interruptor de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @return array
+     */
+    public function eliminarInterruptoresCorredor($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_interruptor = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"interruptor_corredor");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_interruptor, $valor['id_tipo_interruptor']);
+            array_push($cantidad, $valor['cantidad']);
+        }
+        $sql = "DELETE FROM interruptor_corredor WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptores Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptores Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_interruptor); $i++) {
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"id_tipo_interruptor",$tipo_interruptor[$i],"eliminado");
+                    $this->registrarModificacion("interruptor_corredor",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de interruptor del corredor ha sido eliminado";
+                return true;
             }
         }
     }
@@ -2834,6 +3318,60 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un tipo de ventana de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param string $tipo_ventana, tipo de ventana a eliminar.
+     * @param string $material_ventana, material de la ventana a eliminar.
+     * @return array
+     */
+    public function eliminarVentanasGradas($id_sede,$id_campus,$id_edificio,$piso){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $tipo_ventana = array();
+        $material_ventana = array();
+        $cantidad = array();
+        $alto = array();
+        $ancho = array();
+        $data = $this->consultarElementoGradas($id_sede,$id_campus,$id_edificio,$piso,"ventana_gradas");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_ventana,$valor['id_tipo_ventana']);
+            array_push($material_ventana,$valor['id_material']);
+            array_push($cantidad,$valor['cantidad']);
+            array_push($alto,$valor['alto_ventana']);
+            array_push($ancho,$valor['ancho_ventana']);
+        }
+        $sql = "DELETE FROM ventana_gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Ventanas Gradas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Ventanas Gradas 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_ventana); $i++) {
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_tipo_ventana",$tipo_ventana[$i],"eliminado");
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"id_material",$material_ventana[$i],"eliminado");
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"cantidad",$cantidad[$i],"eliminado");
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"alto_ventana",$alto[$i],"eliminado");
+                    $this->registrarModificacion("ventana_gradas",$id_sede."-".$id_campus."-".$id_edificio."-".$piso,"ancho_ventana",$ancho[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de ventana de las gradas ha sido eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar un tipo de iluminación de una plazoleta.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -2868,9 +3406,50 @@ class modelo_modificacion {
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id,"id_tipo_iluminacion",$tipo_iluminacion,"eliminado");
                     $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de iluminación de la plazoleta ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de iluminación de la plazoleta ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un todos los tipos de iluminación de una plazoleta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la plazoleta.
+     * @return array
+     */
+    public function eliminarIluminacionesPlazoleta($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $tipo_iluminacion = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"iluminacion_plazoleta");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_iluminacion, $valor['id_tipo_iluminacion']);
+            array_push($cantidad, $valor['cantidad']);
+        }
+        $sql = "DELETE FROM iluminacion_plazoleta WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_iluminacion); $i++) {
+                    $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion[$i],"eliminado");
+                    $this->registrarModificacion("iluminacion_plazoleta",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de iluminación de la plazoleta ha sido eliminado";
+                return true;
             }
         }
     }
@@ -2911,9 +3490,51 @@ class modelo_modificacion {
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion,"eliminado");
                     $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de iluminación del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de iluminación del espacio ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipos de iluminación de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarIluminacionesEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_iluminacion = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"iluminacion_espacio");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_iluminacion, $valor['id_tipo_iluminacion']);
+            array_push($cantidad, $valor['cantidad']);
+        }
+        $sql = "DELETE FROM iluminacion_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Iluminaciones Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_iluminacion); $i++) {
+                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_iluminacion",$tipo_iluminacion[$i],"eliminado");
+                    $this->registrarModificacion("iluminacion_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de iluminación del espacio ha sido eliminado";
+                return true;
             }
         }
     }
@@ -2954,9 +3575,51 @@ class modelo_modificacion {
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_interruptor",$tipo_interruptor,"eliminado");
                     $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de interruptor del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de interruptor del espacio ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipos de interruptor de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarInterruptoresEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_interruptor = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"interruptor_espacio");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_interruptor, $valor['id_tipo_interruptor']);
+            array_push($cantidad, $valor['cantidad']);
+        }
+        $sql = "DELETE FROM interruptor_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptores Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Interruptores Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_interruptor); $i++) {
+                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_interruptor",$tipo_interruptor[$i],"eliminado");
+                    $this->registrarModificacion("interruptor_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de interruptor del espacio ha sido eliminado";
+                return true;
             }
         }
     }
@@ -2991,6 +3654,9 @@ class modelo_modificacion {
                 }
             }
             $sql = "DELETE FROM puerta_espacio WHERE id_tipo_puerta = '".$tipo_puerta."' AND id_material_puerta = '".$material_puerta."' AND id_material_marco = '".$material_marco."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+            for ($i=0;$i<count($tipo_cerradura);$i++) {
+                $this->eliminarCerraduraPuerta($id_sede,$id_campus,$id_edificio,$id,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura[$i]);
+            }
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
                 $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puerta Espacio 1)";
@@ -3003,19 +3669,76 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $result = $l_stmt->fetchAll();
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$material_puerta,"eliminado");
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_marco,"eliminado");
-                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$tipo_cerradura,"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta,"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta,"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$material_marco,"eliminado");
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad,"eliminado");
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho,"eliminado");
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_puerta",$largo,"eliminado");
                     $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato",$gato,"eliminado");
-                    for ($i=0;$i<count($tipo_cerradura);$i++) {
-                        $this->eliminarCerraduraPuerta($id_sede,$id_campus,$id_edificio,$id,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura[$i]);
-                    }
-                    $GLOBALS['mensaje'] = "El tipo de puerta del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de puerta del espacio ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipos de puerta de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_puerta = array();
+        $material_puerta = array();
+        $material_marco = array();
+        $cantidad = array();
+        $ancho = array();
+        $largo = array();
+        $gato = array();
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"puerta_espacio");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_puerta,$valor['id_tipo_puerta']);
+            array_push($material_puerta,$valor['id_material_puerta']);
+            array_push($material_marco,$valor['id_material_marco']);
+            array_push($cantidad,$valor['cantidad']);
+            array_push($ancho,$valor['ancho_puerta']);
+            array_push($largo,$valor['largo_puerta']);
+            array_push($gato,$valor['gato']);
+        }
+        $sql = "DELETE FROM puerta_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        for ($i=0;$i<count($tipo_cerradura);$i++) {
+            $this->eliminarCerradurasPuerta($id_sede,$id_campus,$id_edificio,$id);
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puertas Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puertas Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_puerta); $i++) {
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_puerta",$tipo_puerta[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_puerta",$material_puerta[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_marco",$material_marco[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_puerta",$ancho[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_puerta",$largo[$i],"eliminado");
+                    $this->registrarModificacion("puerta_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"gato",$gato[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de puerta del espacio ha sido eliminado";
+                return true;
             }
         }
     }
@@ -3055,7 +3778,7 @@ class modelo_modificacion {
                 }else{
                     $result = $l_stmt->fetchAll();
                     $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de cerrdura de la puerta del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de cerrdura de la puerta del espacio ha sido eliminado";
                     return true;
                 }
             }
@@ -3063,14 +3786,53 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite eliminar un tipo de suministro de energía de un espacio.
+     * Función que permite eliminar un todos los tipos de cerradura de una puerta de un espacio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
-     * @param string $tipo_suministro_energia, tipo de suministro de energía a eliminar.
-     * @param string $tomacorriente, tipo de tomacorriente a eliminar.
      * @return array
      */
+    public function eliminarCerradurasPuerta($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_cerradura = array();
+        $sql = "DELETE FROM puerta_tipo_cerradura WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"puerta_tipo_cerradura");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_cerradura,$valor['id_tipo_cerradura']);
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puerta Tipos-Cerraduras 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puerta Tipos-Cerraduras 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_puerta); $i++) {
+                    $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de cerrdura de la puerta del espacio ha sido eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+    * Función que permite eliminar un tipo de suministro de energía de un espacio.
+    * @param string $id_sede, id de la sede.
+    * @param string $id_campus, id del campus.
+    * @param string $id, id del espacio.
+    * @param string $tipo_suministro_energia, tipo de suministro de energía a eliminar.
+    * @param string $tomacorriente, tipo de tomacorriente a eliminar.
+    * @return array
+    */
     public function eliminarSuministroEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_suministro_energia,$tomacorriente){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3085,7 +3847,7 @@ class modelo_modificacion {
                     $cantidad = $valor['cantidad'];
                 }
             }
-            $sql = "DELETE FROM sumunistro_energia_espacio WHERE id_tipo_suministro_energia = '".$tipo_suministro_energia."' AND tomacorriente = '".$tomacorriente."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+            $sql = "DELETE FROM suministro_energia_espacio WHERE id_tipo_suministro_energia = '".$tipo_suministro_energia."' AND tomacorriente = '".$tomacorriente."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
                 $GLOBALS['mensaje'] = "Error: SQL (Eliminar Suministro Energía Espacio 1)";
@@ -3101,9 +3863,54 @@ class modelo_modificacion {
                     $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_suministro_energia",$tipo_suministro_energia,"eliminado");
                     $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tomacorriente",$tomacorriente,"eliminado");
                     $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de suministro de energía del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de suministro de energía del espacio ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipos de suministro de energía de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_suministro_energia = array();
+        $tomacorriente = array();
+        $cantidad = array();
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"sumunistro_energia_espacio");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_suministro_energia,$valor['id_tipo_suministro_energia']);
+            array_push($tomacorriente,$valor['tomacorriente']);
+            array_push($cantidad,$valor['cantidad']);
+        }
+        $sql = "DELETE FROM suministro_energia_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Suministros Energía Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Suministro Energía Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_suministro_energia); $i++) {
+                    $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_suministro_energia",$tipo_suministro_energia[$i],"eliminado");
+                    $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"tomacorriente",$tomacorriente[$i],"eliminado");
+                    $this->registrarModificacion("sumunistro_energia_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de suministro de energía del espacio ha sido eliminado";
+                return true;
             }
         }
     }
@@ -3151,9 +3958,60 @@ class modelo_modificacion {
                     $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad,"eliminado");
                     $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho,"eliminado");
                     $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto,"eliminado");
-                    $GLOBALS['mensaje'] = "El tipo de ventana del espacio ha sido eliminada";
+                    $GLOBALS['mensaje'] = "El tipo de ventana del espacio ha sido eliminado";
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar todos los tipos de ventana de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $tipo_ventana = array();
+        $material_ventana = array();
+        $cantidad = array();
+        $ancho = array();
+        $alto = array();
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"ventana_espacio");
+        foreach ($data as $clave => $valor) {
+            array_push($tipo_ventana,$valor['id_tipo_ventana']);
+            array_push($material_ventana,$valor['id_material_ventana']);
+            array_push($cantidad,$valor['cantidad']);
+            array_push($ancho,$valor['ancho_ventana']);
+            array_push($alto,$valor['alto_ventana']);
+        }
+        $sql = "DELETE FROM ventana_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Ventanas Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Ventanas Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($tipo_ventana); $i++) {
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_ventana",$tipo_ventana[$i],"eliminado");
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_ventana",$material_ventana[$i],"eliminado");
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad",$cantidad[$i],"eliminado");
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_ventana",$ancho[$i],"eliminado");
+                    $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El tipo de ventana del espacio ha sido eliminado";
+                return true;
             }
         }
     }
