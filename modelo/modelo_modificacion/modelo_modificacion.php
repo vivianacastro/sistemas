@@ -2706,6 +2706,77 @@ class modelo_modificacion {
      * @param string $id, id del espacio.
      * @return array
      */
+    public function eliminarEdificio($id_sede,$id_campus,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM edificio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $this->eliminarEspaciosEdificio($id_sede,$id_campus,$id);
+        $this->eliminarArchivosEdificio($id_sede,$id_campus,$id);
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "El edificio se han eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function eliminarEspaciosEdificio($id_sede,$id_campus,$id_edificio){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = array();
+        $uso_espacio = array();
+        $sql = "SELECT * FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacios Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacios Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                foreach ($result as $clave => $valor) {
+                    array_push($puntoRed,$valor['cantidad_punto_red']);
+                    array_push($capacidad,$valor['capacidad']);
+                    array_push($puntoVideoBeam,$valor['punto_video_beam']);
+                }
+                //$GLOBALS['mensaje'] = "El espacio se han eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del espacio.
+     * @return array
+     */
     public function eliminarEspacio($id_sede,$id_campus,$id_edificio,$id,$uso_espacio){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
