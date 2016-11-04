@@ -2725,7 +2725,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 for ($i=0;$i<count($nombre); $i++) {
-                    $this->registrarModificacion("sede",$id_sede."-".$id,"nombre",$nombre[$i],"eliminado");
+                    $this->registrarModificacion("sede",$id,"nombre",$nombre[$i],"eliminado");
                 }
                 $GLOBALS['mensaje'] = "La sede se ha eliminado correctamente";
                 return true;

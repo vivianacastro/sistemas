@@ -9766,6 +9766,27 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando de dar click en el boton eliminar_sede y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_sede").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la sede y todos los elementos (campus, canchas, corredores, edificios, espacios, fotos, planos, etc.) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          informacion["id"] = idSede;
+          var data = eliminarObjeto("sede",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              actualizarSelectSede();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
      * Se captura el evento cuando de dar click en el boton eliminar_campus y se
      * realiza la operacion correspondiente.
      */
