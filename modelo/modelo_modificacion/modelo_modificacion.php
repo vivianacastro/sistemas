@@ -1005,15 +1005,63 @@ class modelo_modificacion {
      * Función que permite modificar un espacio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
-     * @param string $id, id del edificio.
-     * @param string $numero_pisos, nuevo número de pisos del edificio.
-     * @param string $sotano, nuevo valor del sotano del edificio.
-     * @param string $terraza, nuevo valor de la terraza del edificio.
-     * @param string $material_fachada, nuevo material de fachada del edificio.
-     * @param string $ancho_fachada, nuevo ancho de la fachada del edificio.
-     * @param string $alto_fachada, nuevo alto de la fachada del edificio.
-     * @param string $lat, nueva lat del edificio.
-     * @param string $lng, nueva lng del edificio.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del espacio.
+     * @param string $uso_espacio, uso del espacio.
+     * @param string $ancho_pared, nuevo ancho de pared del espacio.
+     * @param string $alto_pared, nuevo alto de pared del espacio.
+     * @param string $material_pared, nuevo material de pared del espacio.
+     * @param string $ancho_piso, nuevo ancho del piso del espacio.
+     * @param string $largo_piso, nuevo largo del piso del espacio.
+     * @param string $material_piso, nuevo material del piso del espacio.
+     * @param string $ancho_techo, nuevo ancho del techo del espacio.
+     * @param string $largo_techo, nuevo largo del techo del espacio.
+     * @param string $material_techo, nuevo material del techo.
+     * @param string $tiene_espacio_padre, si tiene o no espacio padre.
+     * @param string $espacio_padre, nuevo espacio padre.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación del espacio.
+     * @param string $tipo_iluminacion_anterior, anterior tipo de iluminación del espacio.
+     * @param string $cantidad_iluminacion, nueva cantidad de iluminación del espacio.
+     * @param string $cantidad_iluminacion_anterior, anterior cantidad de iluminación del espacio.
+     * @param string $tipo_interruptor, nuevo tipo de interruptor del espacio.
+     * @param string $tipo_interruptor_anterior, anterior tipo de interruptor del espacio.
+     * @param string $cantidad_interruptor, nueva cantidad de interruuptores del espacio.
+     * @param string $cantidad_interruptor_anterior, anterior cantidad de interruptores del espacio.
+     * @param string $tipo_puerta, nuevo tipo de puerta del espacio.
+     * @param string $tipo_puerta_anterior, anterior tipo de puerta del espacio.
+     * @param string $material_puerta, nuevo material de la puerta del espacio.
+     * @param string $material_puerta_anterior, anterior material de la puerta del espacio.
+     * @param string $cantidad_puerta, nueva cantidad de puertas del espacio.
+     * @param string $cantidad_puerta_anterior, anterior cantidad de puertas del espacio.
+     * @param string $tipo_cerradura, nuevo tipo de cerradura de las puertas del espacio.
+     * @param string $tipo_cerradura_anterior, anterior tipo de cerradura de las puertas del espacio.
+     * @param string $material_marco, nuevo material del marco de las puertas del espacio.
+     * @param string $material_marco_anterior, anterior material del marco de las puertas del espacio.
+     * @param string $gato_puerta, si la puerta tiene o no gato.s
+     * @param string $ancho_puerta, nuevo ancho de las puertas del espacio.
+     * @param string $ancho_puerta_anterior, anterior ancho de las puertas del espacio.
+     * @param string $alto_puerta, nuevo alto de las puertas del espacio.
+     * @param string $alto_puerta_anterior, anterior alto de las puertas del espacio.
+     * @param string $tipo_suministro_energia, nuevo tipo de suministro de energía del espacio.
+     * @param string $tipo_suministro_energia_anterior, anterior tipo de suministro de energía del espacio.
+     * @param string $tomacorriente, nuevo tipo de tomacorriente del espacio.
+     * @param string $tomacorriente_anterior, anterior valor del tomacorriente.
+     * @param string $cantidad_suministro_energia, nueva cantidad del suministro de energía del espacio.
+     * @param string $cantidad_suministro_energia_anterior, anterior cantidad del suministro de energía del espacio.
+     * @param string $tipo_ventana, nuevo tipo de ventana del espacio.
+     * @param string $tipo_ventana_anterior, anterior tipo de ventana del espacio.
+     * @param string $cantidad_ventana, nueva cantidad de ventanas del espacio.
+     * @param string $cantidad_ventana_anterior, anterior cantidad de ventanas del espacio.
+     * @param string $material_ventana, nuevo material de las ventanas del espacio.
+     * @param string $material_ventana_anterior, anterior material de las ventanas del espacio.
+     * @param string $ancho_ventana, nuevo ancho de las ventanas del espacio.
+     * @param string $ancho_ventana_anterior, anterior ancho de las ventanas del espacio.
+     * @param string $alto_ventana, nuevo alto de las ventanas del espacio.
+     * @param string $alto_ventana_anterior, anterior alto de las ventanas del espacio.
+     * @param string $tipo_iluminacion, nuevo tipo de iluminación del espacio.
+     * @param string $tipo_iluminacion_anterior, anterior tipo de iluminación del espacio.
+     * @param string $cantidad_iluminacion, nueva cantidad de la iluminación del espacio.
+     * @param string $cantidad_iluminacion_anterior, anterior cantidad de la iluminación del espacio.
      * @return array
      */
     public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tiene_espacio_padre,$espacio_padre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$tipo_cerradura,$tipo_cerradura_anterior,$material_marco,$material_marco_anterior,$gato_puerta,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
@@ -1479,6 +1527,7 @@ class modelo_modificacion {
      * Función que permite modificar un salón.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del salón.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
      * @param string $capacidad, nueva capacidad del salón.
@@ -1526,6 +1575,7 @@ class modelo_modificacion {
      * Función que permite modificar un auditorio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del auditorio.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del auditorio.
      * @param string $capacidad, nueva capacidad del auditorio.
@@ -1573,6 +1623,7 @@ class modelo_modificacion {
      * Función que permite modificar un salón.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del salón.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
      * @param string $capacidad, nueva capacidad del salón.
@@ -1626,6 +1677,7 @@ class modelo_modificacion {
      * Función que permite modificar una sala de cómputo.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id de la sala de cómputo.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la sala de cómputo.
      * @param string $capacidad, nueva capacidad de la sala de cómputo.
@@ -1673,6 +1725,7 @@ class modelo_modificacion {
      * Función que permite modificar una oficina.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id de la oficina.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la oficina.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
@@ -1714,13 +1767,26 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite modificar un salón.
+     * Función que permite modificar un baño.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
-     * @param string $id, id del salón.
-     * @param string $cantidad_punto_red, nueva cantidad de puntos de red del salón.
-     * @param string $capacidad, nueva capacidad del salón.
-     * @param string $punto_video_beam, nuevo valor de campus punto video beam.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del baño.
+     * @param string $tipo_inodoro, nueva cantidad de puntos de red del salón.
+     * @param string $cantidad_inodoro, nueva capacidad del salón.
+     * @param string $tipo_orinal, nuevo tipo de orinal del baño.
+     * @param string $tipo_orinal_anterior, anterior tipo de orinal del baño.
+     * @param string $cantidad_orinal, nueva cantidad de orinales del baño.
+     * @param string $cantidad_orinal_anterior, anterior cantidad de orinales del baño.
+     * @param string $tipo_lavamanos, nuevo tipo de lavamanos del baño.
+     * @param string $tipo_lavamanos_anterior, anterior tipo de lavamanos del baño.
+     * @param string $cantidad_lavamanos, nueva cantidad de lavamanos del baño.
+     * @param string $cantidad_lavamanos_anterior, anterior cantidad de lavamanos del baño.
+     * @param string $ducha, nuevo valor de ducha.
+     * @param string $lavatraperos, nuevo valor de lavatraperos.
+     * @param string $cantidad_sifones, nueva cantidad de sifones.
+     * @param string $tipo_divisiones, nuevo tipo de divisiones del baño.
+     * @param string $material_divisiones, nuevo tipo de material de diviones del baño.
      * @return array
      */
     public function modificarBano($id_sede,$id_campus,$id_edificio,$id,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$tipo_orinal_anterior,$cantidad_orinal,$cantidad_orinal_anterior,$tipo_lavamanos,$tipo_lavamanos_anterior,$cantidad_lavamanos,$cantidad_lavamanos_anterior,$ducha,$lavatraperos,$cantidad_sifones,$tipo_divisiones,$material_divisiones){
@@ -1782,6 +1848,7 @@ class modelo_modificacion {
      * Función que permite modificar un cuarto técnico.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto técnico.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto técnico.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
@@ -1864,6 +1931,7 @@ class modelo_modificacion {
      * Función que permite modificar un cuarto de plantas.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de plantas.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de plantas.
      * @return array
@@ -1903,6 +1971,7 @@ class modelo_modificacion {
      * Función que permite modificar un cuarto de aires acondicionados.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de aires acondicionados.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de aires acondicionados.
      * @return array
@@ -1942,6 +2011,7 @@ class modelo_modificacion {
      * Función que permite modificar un área deportiva cerrada.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del área deportiva cerrada.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del área deportiva cerrada.
      * @return array
@@ -1981,6 +2051,7 @@ class modelo_modificacion {
      * Función que permite modificar un centro de datos.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del centro de datos.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del centro de datos.
      * @return array
@@ -2020,6 +2091,7 @@ class modelo_modificacion {
      * Función que permite modificar un cuarto de bombas.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de bombas.
      * @param string $tipo_punto_sanitario, nueva cantidad de puntos de red del cuarto de bombas.
      * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario del cuarto de bombas.
@@ -2066,6 +2138,7 @@ class modelo_modificacion {
      * Función que permite modificar una cocineta.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id de la cocineta.
      * @param string $tipo_punto_sanitario, nueva cantidad de puntos de red de la cocineta.
      * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario de la cocineta.
@@ -2112,6 +2185,7 @@ class modelo_modificacion {
      * Función que permite modificar una sala de estudios.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id de la sala de estudios.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la sala de estudios.
      * @return array
@@ -2151,6 +2225,7 @@ class modelo_modificacion {
      * Función que permite modificar un punto sanitario.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @param string $tipo_punto_sanitario, nuevo tipo de punto sanitario del espacio.
      * @param string $tipo_punto_sanitario_anterior, anterior tipo de punto sanitario del espacio.
@@ -2199,6 +2274,7 @@ class modelo_modificacion {
      * Función que permite modificar un orinal.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @param string $tipo_orinal, nuevo tipo de orinal del espacio.
      * @param string $tipo_orinal_anterior, anterior tipo de orinal del espacio.
@@ -2247,6 +2323,7 @@ class modelo_modificacion {
      * Función que permite modificar un lavamanos.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @param string $tipo_lavamanos, nuevo tipo de lavamanos del espacio.
      * @param string $tipo_lavamanos_anterior, anterior tipo de lavamanos del espacio.
@@ -5565,14 +5642,16 @@ class modelo_modificacion {
      * @return array
      */
     function eliminarDir($carpeta){
-        foreach(glob($carpeta . "/*") as $archivos_carpeta){
+        foreach(glob($carpeta."/*") as $archivos_carpeta){
             if (is_dir($archivos_carpeta)){
                 eliminarDir($archivos_carpeta);
             }else{
                 unlink($archivos_carpeta);
             }
         }
-        rmdir($carpeta);
+        if (file_exists($carpeta)) {
+            rmdir($carpeta);
+        }
     }
 
     /**
