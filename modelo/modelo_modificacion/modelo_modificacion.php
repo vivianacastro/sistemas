@@ -2471,7 +2471,7 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $GLOBALS['mensaje'] = "Se registró la modificación correctamente";
-                    $GLOBALS['sql'] = $sql;
+                    //$GLOBALS['sql'] = $sql;
                     return true;
                 }
             }
@@ -3882,7 +3882,7 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 2)";
-                $GLOBALS['sql'] = $sql;
+                //$GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
@@ -4109,7 +4109,7 @@ class modelo_modificacion {
         $id = htmlspecialchars(trim($id));
         $puntoRed = array();
         $puntoVideoBeam = array();
-        $sql = "DELETE FROM oficina WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_espacio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $sql = "DELETE FROM oficina WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
         $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"oficina");
         foreach ($data as $clave => $valor) {
             array_push($puntoRed,$valor['cantidad_punto_red']);
