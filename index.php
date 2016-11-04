@@ -228,7 +228,7 @@ $map = array(
         'eliminar_sede' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_sede'),
         'eliminar_campus' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_campus'),
         'eliminar_cancha' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cancha'),
-        'eliminar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_corredor'),*/
+        'eliminar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_corredor'),
         'eliminar_iluminacion_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_iluminacion_corredor'),
         'eliminar_interruptor_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_interruptor_corredor'),
         'eliminar_ventana_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_ventana_gradas'),

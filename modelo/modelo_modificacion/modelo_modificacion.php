@@ -5046,9 +5046,9 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 if (strcasecmp($tipo,'foto') == 0){
-                    unlink(__ROOT__."/archivos/images/via/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                    unlink(__ROOT__."/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
                 }else{
-                    unlink(__ROOT__."/archivos/planos/via/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                    unlink(__ROOT__."/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
                 }
                 $GLOBALS['mensaje'] = "Se ha eliminado el archivo de las gradas";
                 return true;

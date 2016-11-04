@@ -5107,3 +5107,17 @@
 [03-Nov-2016 16:20:33 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::eliminarInterruptoresCorredor() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3592
 [03-Nov-2016 16:21:18 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::eliminarVentanaEspacio() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3975
 [04-Nov-2016 10:44:48 America/Bogota] PHP Parse error:  syntax error, unexpected '$sql' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2776
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 300
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 302
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 304
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 306
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 308
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 310
+[04-Nov-2016 11:39:02 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 312
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 297
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 299
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 301
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 303
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 305
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 307
+[04-Nov-2016 11:39:17 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 309
