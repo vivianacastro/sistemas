@@ -2699,18 +2699,173 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite eliminar un espacio.
+     * Función que permite eliminar una sede.
+     * @param string $id, id de la sede.
+     * @return array
+     */
+    public function eliminarSede($id){
+        $id = htmlspecialchars(trim($id));
+        $nombre = array();
+        $sql = "DELETE FROM sede WHERE id = '".$id."';";
+        $data = $this->consultarCampoSede($id);
+        foreach ($data as $clave => $valor) {
+            array_push($nombre,$valor['nombre']);
+        }
+        $this->eliminarCampusSede($id);
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Sede 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Sede 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($nombre); $i++) {
+                    $this->registrarModificacion("sede",$id_sede."-".$id,"nombre",$nombre[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "La sede se ha eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los campus de una sede.
+     * @param string $id, id de la sede.
+     * @return array
+     */
+    public function eliminarCampusSede($id){
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM campus WHERE sede = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus Sede 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus Sede 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                foreach ($result as $clave => $valor) {
+                    $this->eliminarCampus($id,$valor['id']);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un campus.
+     * @param string $id_sede, id de la sede.
+     * @param string $id, id del campus.
+     * @return array
+     */
+    public function eliminarCampus($id_sede,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id = htmlspecialchars(trim($id));
+        $nombre = array();
+        $lat = array();
+        $lng = array()
+        $sql = "DELETE FROM campus WHERE sede = '".$id_sede."' AND id = '".$id."';";
+        $data = $this->consultarCampoCampus($id_sede,$id,"campus");
+        foreach ($data as $clave => $valor) {
+            array_push($nombre,$valor['nombre']);
+            array_push($lat,$valor['lat']);
+            array_push($lng,$valor['lng']);
+        }
+        $this->eliminarEdificioscampus($id_sede,$id);
+        $this->eliminarArchivosCampus($id_sede,$id);
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($nombre); $i++) {
+                    $this->registrarModificacion("campus",$id_sede."-".$id,"nombre",$nombre[$i],"eliminado");
+                    $this->registrarModificacion("campus",$id_sede."-".$id,"lat",$lat[$i],"eliminado");
+                    $this->registrarModificacion("campus",$id_sede."-".$id,"lng",$lng[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El campus se ha eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los edificios de un campus.
+     * @param string $id_sede, id de la sede.
+     * @param string $id, id del campus.
+     * @return array
+     */
+    public function eliminarEdificiosCampus($id_sede,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM edificio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Edificios Campus 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Edificios Campus 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                foreach ($result as $clave => $valor) {
+                    $this->eliminarEdificio($id_sede,$id_campus,$id_edificio,$valor['id']);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un edificio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
-     * @param string $id_edificio, id del edificio.
-     * @param string $id, id del espacio.
+     * @param string $id, id del edificio.
      * @return array
      */
     public function eliminarEdificio($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
+        $numeroPisos = array();
+        $sotano = array();
+        $terraza = array();
+        $materialFachada = array();
+        $anchoFachada = array();
+        $altoFachada = array();
+        $lat = array();
+        $lng = array();
         $sql = "DELETE FROM edificio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"edificio");
+        foreach ($data as $clave => $valor) {
+            array_push($numeroPisos,$valor['numero_pisos']);
+            array_push($sotano,$valor['sotano']);
+            array_push($terraza,$valor['terraza']);
+            array_push($materialFachada,$valor['id_material_fachada']);
+            array_push($anchoFachada,$valor['ancho_fachada']);
+            array_push($altoFachada,$valor['alto_fachada']);
+            array_push($lat,$valor['lat']);
+            array_push($lng,$valor['lng']);
+        }
         $this->eliminarEspaciosEdificio($id_sede,$id_campus,$id);
         $this->eliminarArchivosEdificio($id_sede,$id_campus,$id);
         $l_stmt = $this->conexion->prepare($sql);
@@ -2725,7 +2880,17 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "El edificio se han eliminado correctamente";
+                for ($i=0;$i<count($numeroPisos); $i++) {
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"numero_pisos",$numeroPisos[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"sotano",$sotano[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"terraza",$terraza[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"id_material_fachada",$materialFachada[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"ancho_fachada",$anchoFachada[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"alto_fachada",$altoFachada[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lat",$lat[$i],"eliminado");
+                    $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"lng",$lng[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El edificio se ha eliminado correctamente";
                 return true;
             }
         }
@@ -2739,13 +2904,11 @@ class modelo_modificacion {
      * @param string $id, id del espacio.
      * @return array
      */
-    public function eliminarEspaciosEdificio($id_sede,$id_campus,$id_edificio){
+    public function eliminarEspaciosEdificio($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
-        $id_edificio = htmlspecialchars(trim($id_edificio));
-        $id = array();
-        $uso_espacio = array();
-        $sql = "SELECT * FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."';";
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacios Edificio 1)";
@@ -2759,11 +2922,8 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 foreach ($result as $clave => $valor) {
-                    array_push($puntoRed,$valor['cantidad_punto_red']);
-                    array_push($capacidad,$valor['capacidad']);
-                    array_push($puntoVideoBeam,$valor['punto_video_beam']);
+                    $this->eliminarEspacio($id_sede,$id_campus,$id,$valor['id']);
                 }
-                //$GLOBALS['mensaje'] = "El espacio se han eliminado correctamente";
                 return true;
             }
         }
@@ -2777,47 +2937,73 @@ class modelo_modificacion {
      * @param string $id, id del espacio.
      * @return array
      */
-    public function eliminarEspacio($id_sede,$id_campus,$id_edificio,$id,$uso_espacio){
+    public function eliminarEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $id = htmlspecialchars(trim($id));
-        $uso_espacio = htmlspecialchars(trim($uso_espacio));
+        $usoEspacio = array();
+        $anchoPared = array();
+        $altoPared = array();
+        $materialPared = array();
+        $anchoPiso = array();
+        $largoPiso = array();
+        $materialPiso = array();
+        $anchoTecho = array();
+        $largoTecho = array();
+        $materialTecho = array();
+        $espacioPadre = array();
+        $pisoEdificio = array();
+        $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"espacio");
         $sql = "DELETE FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id = '".$id."';";
+        foreach ($data as $clave => $valor) {
+            array_push($usoEspacio,$valor['uso_espacio']);
+            array_push($anchoPared,$valor['ancho_pared']);
+            array_push($altoPared,$valor['alto_pared']);
+            array_push($materialPared,$valor['id_material_pared']);
+            array_push($anchoPiso,$valor['ancho_piso']);
+            array_push($largoPiso,$valor['largo_piso']);
+            array_push($materialPiso,$valor['id_material_piso']);
+            array_push($anchoTecho,$valor['ancho_techo']);
+            array_push($largoTecho,$valor['largo_techo']);
+            array_push($materialTecho,$valor['id_material_techo']);
+            array_push($espacioPadre,$valor['espacio_padre']);
+            array_push($pisoEdificio,$valor['piso_edificio']);
+        }
         $this->eliminarIluminacionesEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarInterruptoresEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id);
-        if (strcasecmp($uso_espacio,'1') == 0) { //Salón
+        if (strcasecmp($usoEspacio,'1') == 0) { //Salón
             $m->eliminarSalon($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'2') == 0) { //Auditorio
+        }else if (strcasecmp($usoEspacio,'2') == 0) { //Auditorio
             $m->eliminarAuditorio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'3') == 0) { //Laboratorio
+        }else if (strcasecmp($usoEspacio,'3') == 0) { //Laboratorio
             $m->eliminarLaboratorio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'4') == 0) { //Sala de Cómputo
+        }else if (strcasecmp($usoEspacio,'4') == 0) { //Sala de Cómputo
             $m->eliminarSalaComputo($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'5') == 0) { //Oficina
+        }else if (strcasecmp($usoEspacio,'5') == 0) { //Oficina
             $m->eliminarOficina($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'6') == 0) { //Baño
+        }else if (strcasecmp($usoEspacio,'6') == 0) { //Baño
             $m->eliminarBano($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'7') == 0) { //Cuarto Técnico
+        }else if (strcasecmp($usoEspacio,'7') == 0) { //Cuarto Técnico
             $m->eliminarCuartoTecnico($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'8') == 0) { //Bodega/Almacen
+        }else if (strcasecmp($usoEspacio,'8') == 0) { //Bodega/Almacen
             $m->eliminarBodega($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'10') == 0) { //Cuarto de Plantas
+        }else if (strcasecmp($usoEspacio,'10') == 0) { //Cuarto de Plantas
             $m->eliminarCuartoPlantas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'11') == 0) { //Cuarto de Aires Acondicionados
+        }else if (strcasecmp($usoEspacio,'11') == 0) { //Cuarto de Aires Acondicionados
             $m->eliminarCuartoAireAcondicionado($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'12') == 0) { //Área Deportiva Cerrada
+        }else if (strcasecmp($usoEspacio,'12') == 0) { //Área Deportiva Cerrada
             $m->eliminarAreaDeportivaCerrada($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'14') == 0) { //Centro de Datos/Teléfono
+        }else if (strcasecmp($usoEspacio,'14') == 0) { //Centro de Datos/Teléfono
             $m->eliminarCentroDatos($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'17') == 0) { //Cuarto de Bombas
+        }else if (strcasecmp($usoEspacio,'17') == 0) { //Cuarto de Bombas
             $m->eliminarCuartoBombas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'19') == 0) { //Cocineta
+        }else if (strcasecmp($usoEspacio,'19') == 0) { //Cocineta
             $m->eliminarCocineta($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($uso_espacio,'20') == 0) { //Sala de Estudio
+        }else if (strcasecmp($usoEspacio,'20') == 0) { //Sala de Estudio
             $m->eliminarSalaEstudio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
         }
         $this->eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id);
@@ -2833,7 +3019,21 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "El espacio se han eliminado correctamente";
+                for ($i=0;$i<count($usoEspacio); $i++) {
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"uso_espacio",$usoEspacio[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_pared",$anchoPared[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_pared",$altoPared[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_pared",$materialPared[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_piso",$anchoPiso[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_piso",$largoPiso[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_piso",$materialPiso[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$anchoTecho[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largoTecho[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$materialTecho[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacioPadre[$i],"eliminado");
+                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"piso_edificio",$pisoEdificio[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El espacio se ha eliminado correctamente";
                 return true;
             }
         }
@@ -2879,7 +3079,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("salon",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad[$i],"eliminado");
                     $this->registrarModificacion("salon",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El salón se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El salón se ha eliminado correctamente";
                 return true;
             }
         }
@@ -2925,7 +3125,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("auditorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad[$i],"eliminado");
                     $this->registrarModificacion("auditorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El auditorio se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El auditorio se ha eliminado correctamente";
                 return true;
             }
         }
@@ -2975,7 +3175,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                     $this->registrarModificacion("laboratorio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_hidraulico",$puntoHidraulico[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El laboratorio se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El laboratorio se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3021,7 +3221,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("sala_computo",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"capacidad",$capacidad[$i],"eliminado");
                     $this->registrarModificacion("sala_computo",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "La sala de cómputo se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "La sala de cómputo se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3064,7 +3264,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("oficina",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                     $this->registrarModificacion("oficina",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "La oficina se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "La oficina se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3124,7 +3324,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_divisiones",$tipoDivisiones[$i],"eliminado");
                     $this->registrarModificacion("bano",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_divisiones",$materialDivisiones[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El baño se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El baño se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3167,7 +3367,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("cuarto_tecnico",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                     $this->registrarModificacion("cuarto_tecnico",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"punto_video_beam",$puntoVideoBeam[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El cuato técnico se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El cuato técnico se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3207,7 +3407,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("bodega",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "La bodega se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "La bodega se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3247,7 +3447,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("cuarto_plantas",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El cuarto de plantas se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El cuarto de plantas se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3287,7 +3487,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("cuarto_aire_acondicionado",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El cuarto de aires acondicionados se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El cuarto de aires acondicionados se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3327,7 +3527,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("area_deportiva_cerrada",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El área deportiva cerrada se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El área deportiva cerrada se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3367,7 +3567,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("centro_datos",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El centro de datos se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El centro de datos se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3408,7 +3608,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("cuarto_bombas",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_hidraulico",$puntoHidraulico[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "El cuarto de bombas se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "El cuarto de bombas se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3489,7 +3689,7 @@ class modelo_modificacion {
                 for ($i=0;$i<count($puntoRed); $i++) {
                     $this->registrarModificacion("sala_estudio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"cantidad_punto_red",$puntoRed[$i],"eliminado");
                 }
-                $GLOBALS['mensaje'] = "La sala de estudio se han eliminado correctamente";
+                $GLOBALS['mensaje'] = "La sala de estudio se ha eliminado correctamente";
                 return true;
             }
         }
@@ -3739,6 +3939,43 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de un campus.
+     * @param string $id_sede, id de la sede.
+     * @param string $id, id del campus.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoCampus($id_sede,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM campus_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/campus/".$id_sede."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/campus/".$id_sede."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del campus";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de una cancha.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -3771,6 +4008,45 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de una cancha.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la cancha.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoCancha($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM cancha_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/cancha/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de la cancha";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de un corredor.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -3797,6 +4073,45 @@ class modelo_modificacion {
                 $this->eliminarDir(__ROOT__."/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id);
                 $this->eliminarDir(__ROOT__. "/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id);
                 $GLOBALS['mensaje'] = "Los archivos del corredor se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un archivo de un corredor.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del corredor.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoCorredor($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM corredor_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Corredor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Corredor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/corredor/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/corredor/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del corredor";
                 return true;
             }
         }
@@ -3837,6 +4152,47 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de una cubierta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoCubierta($id_sede,$id_campus,$id_edificio,$piso,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM cubierta_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cubierta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cubierta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/cubierta/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de la cubierta";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de unas gradas.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -3865,6 +4221,47 @@ class modelo_modificacion {
                 $this->eliminarDir(__ROOT__."/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
                 $this->eliminarDir(__ROOT__. "/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
                 $GLOBALS['mensaje'] = "Los archivos de las gradas se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un archivo de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoGradas($id_sede,$id_campus,$id_edificio,$piso,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM gradas_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/via/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/via/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de las gradas";
                 return true;
             }
         }
@@ -3903,6 +4300,45 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de un parqueadero.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del parqueadero.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoParqueadero($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM parqueadero_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Parqueadero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Parqueadero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/parqueadero/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/parqueadero/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del parqueadero";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de una piscina.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -3929,6 +4365,45 @@ class modelo_modificacion {
                 $this->eliminarDir(__ROOT__."/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id);
                 $this->eliminarDir(__ROOT__. "/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id);
                 $GLOBALS['mensaje'] = "Los archivos de la piscina se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un archivo de una piscina.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la piscina.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoPiscina($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM piscina_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Piscina 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Piscina 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/piscina/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/piscina/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de la piscina";
                 return true;
             }
         }
@@ -3967,6 +4442,45 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de una plazoleta.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la plazoleta.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoPlazoleta($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM plazoleta_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/plazoleta/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/plazoleta/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de la plazoleta";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de un sendero.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -3993,6 +4507,45 @@ class modelo_modificacion {
                 $this->eliminarDir(__ROOT__."/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id);
                 $this->eliminarDir(__ROOT__. "/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id);
                 $GLOBALS['mensaje'] = "Los archivos del sendero se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un archivo de un sendero.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del sendero.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoSendero($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM sendero_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Sendero 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Sendero 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/sendero/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/sendero/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del sendero";
                 return true;
             }
         }
@@ -4031,6 +4584,45 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un archivo de una vía.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id de la vía.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoVia($id_sede,$id_campus,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM via_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Vía 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Vía 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/via/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/via/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo de la vía";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de un edificio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -4063,17 +4655,59 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite eliminar los archivos de un espacio.
+     * Función que permite eliminar un archivo de un edificio.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
-     * @param string $id, id del corredor.
+     * @param string $id, id del edificio.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
      */
-    public function eliminarArchivosEspacio($id_sede,$id_campus,$id){
+    public function eliminarArchivoEdificio($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
         $id = htmlspecialchars(trim($id));
-        $sql = "DELETE FROM espacio_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_espacio = '".$id."';";
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM edificio_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del edificio";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los archivos de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $id, id del esoacio.
+     * @return array
+     */
+    public function eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $id = htmlspecialchars(trim($id));
+        $sql = "DELETE FROM espacio_archivos WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Espacio 1)";
@@ -4089,6 +4723,46 @@ class modelo_modificacion {
                 $this->eliminarDir(__ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id);
                 $this->eliminarDir(__ROOT__. "/archivos/images/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id);
                 $GLOBALS['mensaje'] = "Los archivos del espacio se han eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un archivo de un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @param string $archivo, nombre del archivo.
+     * @param string $tipo, tipo de archivo (foto o plano).
+     * @return array
+     */
+    public function eliminarArchivoEspacio($id_sede,$id_campus,$id_edificio,$id,$archivo,$tipo){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $archivo = htmlspecialchars(trim($archivo));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "DELETE FROM espacio_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                if (strcasecmp($tipo,'foto') == 0){
+                    unlink(__ROOT__."/archivos/images/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id."/".$archivo);
+                }else{
+                    unlink(__ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id."/".$archivo);
+                }
+                $GLOBALS['mensaje'] = "Se ha eliminado el archivo del espacio";
                 return true;
             }
         }
