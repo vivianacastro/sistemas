@@ -225,8 +225,7 @@ $map = array(
         'modificar_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_espacio'),
         'modificar_tipo_material' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_material'),
         'modificar_tipo_objeto' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_tipo_objeto'),
-
-        /*'eliminar_sede' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_sede'),
+        'eliminar_sede' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_sede'),
         'eliminar_campus' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_campus'),
         'eliminar_cancha' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cancha'),
         'eliminar_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_corredor'),*/
@@ -239,7 +238,7 @@ $map = array(
         'eliminar_puerta_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_puerta_espacio'),
         'eliminar_suministro_energia_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_suministro_energia_espacio'),
         'eliminar_ventana_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_ventana_espacio'),
-        /*'eliminar_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cubierta'),
+        'eliminar_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_cubierta'),
         'eliminar_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_gradas'),
         'eliminar_parqueadero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_parqueadero'),
         'eliminar_piscina' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_piscina'),
@@ -248,8 +247,6 @@ $map = array(
         'eliminar_via' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_via'),
         'eliminar_edificio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_edificio'),
         'eliminar_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_espacio'),
-        'eliminar_tipo_material' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_tipo_material'),
-        'eliminar_tipo_objeto' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_tipo_objeto'),*/
 
     //Acciones Módulo Inventario
         //Acciones de carga de plantillas
