@@ -338,6 +338,266 @@ class controlador_modificacion{
     }
 
     /**
+     * Funcion que permite eliminar una sede.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_sede(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarSede($info['id_sede']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un campus.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_campus(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarCampus($info['id_sede'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar una cancha.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_cancha(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarCancha($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un corredor.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_corredor(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarCorredor($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar una cubierta.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_cubierta(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarCubierta($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar unas gradas.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_gradas(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarGradas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un parqueadero.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_parqueadero(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarParqueadero($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar una piscina.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_piscina(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarPiscina($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar una plazoleta.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_plazoleta(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarPlazoleta($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un sendero.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_sendero(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarSendero($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar una vía.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_via(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarVia($info['id_sede'],$info['id_campus'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un edificio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_edificio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarEdificio($info['id_sede'],$info['id_campus'],$info['id_edificio']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_espacio(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarEspacio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
      * Funcion que permite eliminar un tipo de iluminación de un corredor.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
      */

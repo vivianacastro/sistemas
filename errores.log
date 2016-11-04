@@ -5106,3 +5106,4 @@
 [03-Nov-2016 11:38:23 America/Bogota] PHP Notice:  Undefined index: id_material_ventana in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3129
 [03-Nov-2016 16:20:33 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::eliminarInterruptoresCorredor() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3592
 [03-Nov-2016 16:21:18 America/Bogota] PHP Fatal error:  Cannot redeclare modelo_modificacion::eliminarVentanaEspacio() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3975
+[04-Nov-2016 10:44:48 America/Bogota] PHP Parse error:  syntax error, unexpected '$sql' (T_VARIABLE) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2776
