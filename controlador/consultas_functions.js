@@ -9808,4 +9808,285 @@ $(document).ready(function() {
           }
       }
     });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_cancha y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_cancha").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la cancha y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_cancha").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("cancha",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_corredor y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_corredor").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el corredor y todos los elementos (fotos y planos) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_corredor").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("corredor",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_cubierta y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_cubierta").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la cubierta y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var piso = $("#pisos").val();
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["piso"] = piso;
+          var data = eliminarObjeto("cubierta",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_gradas y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_gradas").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar las gradas y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var piso = $("#pisos").val();
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["piso"] = piso;
+          var data = eliminarObjeto("gradas",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_parqueadero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_parqueadero").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el parqueadero y todos los elementos (fotos y planos) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_parqueadero").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("parqueadero",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_piscina y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_piscina").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la piscina y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_piscina").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("piscina",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_plazoleta y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_plazoleta").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la plazoleta y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_plazoleta").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("plazoleta",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_sendero y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_sendero").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el sendero peatonal y todos los elementos (fotos y planos) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_sendero").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("sendero",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_via y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_via").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar la vía y todos los elementos (fotos y planos) de ésta?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_via").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("via",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_edificio y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_edificio").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el edificio y todos los elementos (cubiertas, gradas, espacios, fotos y planos) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var id = limpiarCadena($("#id_edificio").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id"] = id;
+          var data = eliminarObjeto("edificio",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_espacio y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_espacio").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el espacio y todos los elementos (fotos y planos) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          var idEdificio = $("#nombre_edificio").attr('name');
+          var id = limpiarCadena($("#id_espacio").val());
+          informacion["id_sede"] = idSede;
+          informacion["id_campus"] = idCampus;
+          informacion["id_edificio"] = idEdificio;
+          informacion["id"] = id;
+          var data = eliminarObjeto("espacio",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
+    });
 });
