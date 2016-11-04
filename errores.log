@@ -5152,3 +5152,4 @@
 [04-Nov-2016 17:09:40 America/Bogota] PHP Notice:  Undefined variable: info in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3846
 [04-Nov-2016 17:09:40 America/Bogota] PHP Notice:  Undefined variable: info in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3846
 [04-Nov-2016 17:09:40 America/Bogota] PHP Notice:  Undefined variable: info in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3846
+[04-Nov-2016 17:14:59 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 6441

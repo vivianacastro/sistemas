@@ -6437,7 +6437,7 @@ class modelo_modificacion {
         $tipo_suministro_energia = array();
         $tomacorriente = array();
         $cantidad = array();
-        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"sumunistro_energia_espacio");
+        $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"suministro_energia_espacio");
         foreach ($data as $clave => $valor) {
             array_push($tipo_suministro_energia,$valor['id_tipo_suministro_energia']);
             array_push($tomacorriente,$valor['tomacorriente']);
