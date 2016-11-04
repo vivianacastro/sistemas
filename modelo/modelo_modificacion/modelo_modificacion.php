@@ -3093,8 +3093,9 @@ class modelo_modificacion {
      */
     public function eliminarCubiertasEdificio($id_sede,$id_campus,$id_edificio){
         $id_sede = htmlspecialchars(trim($id_sede));
-        $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$id_sede."' AND id_campus = '".$id."' AND id_edificio = '".$id_edificio."';";
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $sql = "SELECT * FROM cubiertas_piso WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Eliminar Cubiertas Edificio 1)";
@@ -3175,8 +3176,9 @@ class modelo_modificacion {
      */
     public function eliminarGradasEdificio($id_sede,$id_campus,$id_edificio){
         $id_sede = htmlspecialchars(trim($id_sede));
-        $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id."' AND id_edificio = '".$id_edificio."';";
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $sql = "SELECT * FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Eliminar Gradas Edificio 1)";
@@ -3693,7 +3695,7 @@ class modelo_modificacion {
             }else{
                 $result = $l_stmt->fetchAll();
                 foreach ($result as $clave => $valor) {
-                    $this->eliminarEdificio($id_sede,$id_campus,$id_edificio,$valor['id']);
+                    $this->eliminarEdificio($id_sede,$id,$valor['id']);
                 }
                 return true;
             }
