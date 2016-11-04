@@ -7,7 +7,7 @@ $(document).ready(function() {
     var infoWindowActiva;
     var coordsMapaModificacion;
     var coordenadas = {};
-    var tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
+    var fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
 
     /**
      * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -294,7 +294,7 @@ $(document).ready(function() {
        * @param {array} informacion, información del tipo de objeto.
        * @returns {data} object json
       **/
-        function eliminarObjeto(tipo_objeto,informacion){
+      function eliminarObjeto(tipo_objeto,informacion){
             var jObject = JSON.stringify(informacion);
             var dataResult;
             try {
@@ -3400,7 +3400,7 @@ $(document).ready(function() {
                     $("#cantidad_puertas").attr('name',record.cantidad);
                     $("#material_puerta").val(record.material_puerta);
                     $("#material_puerta").attr('name',record.material_puerta);
-                    $("input[name=gato_puerta][value="+record.gato+"]").prop('checked', true);
+                    $("input[name=gato_puerta][value='"+record.gato+"']").prop('checked', true);
                     $("#material_marco_puerta").val(record.material_marco);
                     $("#material_marco_puerta").attr('name',record.material_marco);
                     $("#ancho_puerta").val(record.ancho);
@@ -4429,7 +4429,7 @@ $(document).ready(function() {
         $("#eliminar_tomacorriente").attr('disabled', true);
         $("#eliminar_puerta").attr('disabled', true);
         $("#eliminar_ventana").attr('disabled', true);
-        tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
+        fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
         window.scrollTo(0,0);
     });
 
@@ -4973,12 +4973,17 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#enlace_fotos").on("click", "#eliminar_archivo", function(){
-        var nombre = $(this).attr('name');
-        console.log(nombre);
-        if ($("#"+nombre).hasClass('texto_tachado')) {
-            $("#"+nombre).removeClass("texto_tachado");
+        var nombreId = $(this).attr('name');
+        var nombreArchivo = $("#"+nombreId).attr('name');
+        if ($("#"+nombreId).hasClass('texto_tachado')) {
+            $("#"+nombreId).removeClass("texto_tachado");
+            var posicion = fotosEliminar.indexOf(nombreArchivo);
+            if (posicion > -1) {
+                fotosEliminar.splice(posicion,1);
+            }
         }else{
-            $("#"+nombre).addClass("texto_tachado");
+            $("#"+nombreId).addClass("texto_tachado");
+            fotosEliminar.push(nombreArchivo);
         }
     });
 
@@ -4987,12 +4992,17 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#planos").on("click", "#eliminar_archivo", function(){
-        var nombre = $(this).attr('name');
-        console.log(nombre);
-        if ($("#"+nombre).hasClass('texto_tachado')) {
-            $("#"+nombre).removeClass("texto_tachado");
+        var nombreId = $(this).attr('name');
+        var nombreArchivo = $("#"+nombreId).attr('name');
+        if ($("#"+nombreId).hasClass('texto_tachado')) {
+            $("#"+nombreId).removeClass("texto_tachado");
+            var posicion = planosEliminar.indexOf(nombreArchivo);
+            if (posicion > -1) {
+                planosEliminar.splice(posicion,1);
+            }
         }else{
-            $("#"+nombre).addClass("texto_tachado");
+            $("#"+nombreId).addClass("texto_tachado");
+            planosEliminar.push(nombreArchivo);
         }
     });
 
@@ -7333,6 +7343,7 @@ $(document).ready(function() {
                     }else if (fotos.files.length == 1 || planos.files.length == 1) {
                         alert("El archivo se ha guardado correctamente");
                     }
+                    $("#sede_search").val("").change();
                     $("#divDialogConsulta").modal('hide');
                     $("#divDialogConsultaMapa").modal('hide');
                     planos.value = "";
@@ -7432,6 +7443,16 @@ $(document).ready(function() {
                   informacion["nombre_campus"] = nombreCampus;
                   info["nombre_sede"] = idSede;
                   info["nombre_campus"] = nombreCampus;
+                  var arregloFotosEliminar = {};
+                  var arregloPlanosEliminar = {};
+                  arregloFotosEliminar["id_sede"] = idSede;
+                  arregloFotosEliminar["id"] = idCampus;
+                  arregloFotosEliminar["nombre"] = fotosEliminar;
+                  arregloFotosEliminar["tipo"] = "foto";
+                  arregloPlanosEliminar["id_sede"] = idSede;
+                  arregloPlanosEliminar["id"] = idCampus;
+                  arregloPlanosEliminar["nombre"] = planosEliminar;
+                  arregloPlanosEliminar["tipo"] = "plano";
                   for (var i = 0; i < marcadoresModificacion.length; i++) {
                       coordenadas = marcadoresModificacion[i].getPosition();
                   }
@@ -7440,11 +7461,15 @@ $(document).ready(function() {
                   arregloFotos.append("campus",JSON.stringify(info));
                   arregloPlanos.append("campus",JSON.stringify(info));
                   var data = modificarObjeto("campus",informacion);
+                  var dataEliminarFotos = eliminarObjeto("archivo_campus",arregloFotosEliminar);
+                  var dataEliminarPlanos = eliminarObjeto("archivo_campus",arregloPlanosEliminar);
                   var resultadoPlanos = guardarPlanos("campus",arregloPlanos);
                   var resultadoFotos = guardarFotos("campus",arregloFotos);
                   console.log(info);
                   console.log(informacion);
                   console.log(data);
+                  console.log(dataEliminarFotos);
+                  console.log(dataEliminarPlanos);
                   console.log(resultadoPlanos);
                   console.log(resultadoFotos);
                   var mensaje = "";
@@ -7557,6 +7582,18 @@ $(document).ready(function() {
                     info["nombre_sede"] = idSede;
                     info["nombre_campus"] = idCampus;
                     info["id_cancha"] = id;
+                    var arregloFotosEliminar = {};
+                    var arregloPlanosEliminar = {};
+                    arregloFotosEliminar["id_sede"] = idSede;
+                    arregloFotosEliminar["id_campus"] = idCampus;
+                    arregloFotosEliminar["id"] = id;
+                    arregloFotosEliminar["nombre"] = fotosEliminar;
+                    arregloFotosEliminar["tipo"] = "foto";
+                    arregloPlanosEliminar["id_sede"] = idSede;
+                    arregloPlanosEliminar["id_campus"] = idCampus;
+                    arregloPlanosEliminar["id"] = id;
+                    arregloPlanosEliminar["nombre"] = planosEliminar;
+                    arregloPlanosEliminar["tipo"] = "plano";
                     for (var i = 0; i < marcadoresModificacion.length; i++) {
                         coordenadas = marcadoresModificacion[i].getPosition();
                     }
@@ -7565,11 +7602,15 @@ $(document).ready(function() {
                     arregloFotos.append("cancha",JSON.stringify(info));
                     arregloPlanos.append("cancha",JSON.stringify(info));
                     var data = modificarObjeto("cancha",informacion);
+                    var dataEliminarFotos = eliminarObjeto("archivo_cancha",arregloFotosEliminar);
+                    var dataEliminarPlanos = eliminarObjeto("archivo_cancha",arregloPlanosEliminar);
                     var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
                     var resultadoFotos = guardarFotos("cancha",arregloFotos);
                     console.log(info);
                     console.log(informacion);
                     console.log(data);
+                    console.log(dataEliminarFotos);
+                    console.log(dataEliminarPlanos);
                     console.log(resultadoPlanos);
                     console.log(resultadoFotos);
                     var mensaje = "";
@@ -7753,6 +7794,18 @@ $(document).ready(function() {
                     info["id_corredor"] = id;
                     info["tipo_iluminacion_eliminar"] = tipoIluminacionEliminar;
                     info["tipo_interruptor_eliminar"] = tipoInterruptorEliminar;
+                    var arregloFotosEliminar = {};
+                    var arregloPlanosEliminar = {};
+                    arregloFotosEliminar["id_sede"] = idSede;
+                    arregloFotosEliminar["id_campus"] = idCampus;
+                    arregloFotosEliminar["id"] = id;
+                    arregloFotosEliminar["nombre"] = fotosEliminar;
+                    arregloFotosEliminar["tipo"] = "foto";
+                    arregloPlanosEliminar["id_sede"] = idSede;
+                    arregloPlanosEliminar["id_campus"] = idCampus;
+                    arregloPlanosEliminar["id"] = id;
+                    arregloPlanosEliminar["nombre"] = planosEliminar;
+                    arregloPlanosEliminar["tipo"] = "plano";
                     for (var i = 0; i < marcadoresModificacion.length; i++) {
                         coordenadas = marcadoresModificacion[i].getPosition();
                     }
@@ -7761,6 +7814,8 @@ $(document).ready(function() {
                     arregloFotos.append("corredor",JSON.stringify(info));
                     arregloPlanos.append("corredor",JSON.stringify(info));
                     var data = modificarObjeto("corredor",informacion);
+                    var dataEliminarFotos = eliminarObjeto("archivo_corredor",arregloFotosEliminar);
+                    var dataEliminarPlanos = eliminarObjeto("archivo_corredor",arregloPlanosEliminar);
                     var dataEliminarIluminacion = eliminarObjeto("iluminacion_corredor",info);
                     var dataEliminarInterruptor = eliminarObjeto("interruptor_corredor",info);
                     var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
@@ -7768,6 +7823,8 @@ $(document).ready(function() {
                     console.log(informacion);
                     console.log(data);
                     console.log(info);
+                    console.log(dataEliminarFotos);
+                    console.log(dataEliminarPlanos);
                     console.log(dataEliminarIluminacion);
                     console.log(dataEliminarInterruptor);
                     console.log(resultadoPlanos);
@@ -7882,14 +7939,32 @@ $(document).ready(function() {
                 info['nombre_campus'] = idCampus;
                 info['nombre_edificio'] = idEdificio;
                 info['piso'] = piso;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id_edificio"] = idEdificio;
+                arregloFotosEliminar["piso"] = piso;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id_edificio"] = idEdificio;
+                arregloPlanosEliminar["piso"] = piso;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("cubierta",JSON.stringify(info));
                 arregloPlanos.append("cubierta",JSON.stringify(info));
                 var data = modificarObjeto("cubierta",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_cubierta",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_cubierta",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
                 var resultadoFotos = guardarFotos("cubierta",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -8056,15 +8131,33 @@ $(document).ready(function() {
                     info['piso'] = piso;
                     info["tipo_ventana_eliminar"] = tipoVentanaEliminar;
                     info["material_ventana_eliminar"] = materialVentanaEliminar;
+                    var arregloFotosEliminar = {};
+                    var arregloPlanosEliminar = {};
+                    arregloFotosEliminar["id_sede"] = idSede;
+                    arregloFotosEliminar["id_campus"] = idCampus;
+                    arregloFotosEliminar["id_edificio"] = idEdificio;
+                    arregloFotosEliminar["piso"] = piso;
+                    arregloFotosEliminar["nombre"] = fotosEliminar;
+                    arregloFotosEliminar["tipo"] = "foto";
+                    arregloPlanosEliminar["id_sede"] = idSede;
+                    arregloPlanosEliminar["id_campus"] = idCampus;
+                    arregloPlanosEliminar["id_edificio"] = idEdificio;
+                    arregloPlanosEliminar["piso"] = piso;
+                    arregloPlanosEliminar["nombre"] = planosEliminar;
+                    arregloPlanosEliminar["tipo"] = "plano";
                     arregloFotos.append("gradas",JSON.stringify(info));
                     arregloPlanos.append("gradas",JSON.stringify(info));
                     var data = modificarObjeto("gradas",informacion);
+                    var dataEliminarFotos = eliminarObjeto("archivo_gradas",arregloFotosEliminar);
+                    var dataEliminarPlanos = eliminarObjeto("archivo_gradas",arregloPlanosEliminar);
                     var dataEliminarVentana = eliminarObjeto("ventana_gradas",info);
                     var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
                     var resultadoFotos = guardarFotos("gradas",arregloFotos);
                     console.log(informacion);
                     console.log(info);
                     console.log(data);
+                    console.log(dataEliminarFotos);
+                    console.log(dataEliminarPlanos);
                     console.log(dataEliminarVentana);
                     console.log(resultadoPlanos);
                     console.log(resultadoFotos);
@@ -8189,14 +8282,30 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_parqueadero'] = id;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("parqueadero",JSON.stringify(info));
                 arregloPlanos.append("parqueadero",JSON.stringify(info));
                 var data = modificarObjeto("parqueadero",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_parqueadero",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_parqueadero",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
                 var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -8315,14 +8424,30 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_piscina'] = id;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("piscina",JSON.stringify(info));
                 arregloPlanos.append("piscina",JSON.stringify(info));
                 var data = modificarObjeto("piscina",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_piscina",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_piscina",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
                 var resultadoFotos = guardarFotos("piscina",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -8461,15 +8586,31 @@ $(document).ready(function() {
                 info['nombre_campus'] = idCampus;
                 info['id_plazoleta'] = id;
                 info["tipo_iluminacion_eliminar"] = tipoIluminacionEliminar;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("plazoleta",JSON.stringify(info));
                 arregloPlanos.append("plazoleta",JSON.stringify(info));
                 var data = modificarObjeto("plazoleta",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_plazoleta",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_plazoleta",arregloPlanosEliminar);
                 var dataEliminarIluminacion = eliminarObjeto("iluminacion_plazoleta",info)
                 var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
                 var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(dataEliminarIluminacion);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
@@ -8599,14 +8740,30 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_sendero'] = id;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("sendero",JSON.stringify(info));
                 arregloPlanos.append("sendero",JSON.stringify(info));
                 var data = modificarObjeto("sendero",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_sendero",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_sendero",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
                 var resultadoFotos = guardarFotos("sendero",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -8723,14 +8880,30 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_via'] = id;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("via",JSON.stringify(info));
                 arregloPlanos.append("via",JSON.stringify(info));
                 var data = modificarObjeto("via",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_via",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_via",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("via",arregloPlanos);
                 var resultadoFotos = guardarFotos("via",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -8851,14 +9024,30 @@ $(document).ready(function() {
                 info['nombre_sede'] = idSede;
                 info['nombre_campus'] = idCampus;
                 info['id_edificio'] = id;
+                var arregloFotosEliminar = {};
+                var arregloPlanosEliminar = {};
+                arregloFotosEliminar["id_sede"] = idSede;
+                arregloFotosEliminar["id_campus"] = idCampus;
+                arregloFotosEliminar["id"] = id;
+                arregloFotosEliminar["nombre"] = fotosEliminar;
+                arregloFotosEliminar["tipo"] = "foto";
+                arregloPlanosEliminar["id_sede"] = idSede;
+                arregloPlanosEliminar["id_campus"] = idCampus;
+                arregloPlanosEliminar["id"] = id;
+                arregloPlanosEliminar["nombre"] = planosEliminar;
+                arregloPlanosEliminar["tipo"] = "plano";
                 arregloFotos.append("edificio",JSON.stringify(info));
                 arregloPlanos.append("edificio",JSON.stringify(info));
                 var data = modificarObjeto("edificio",informacion);
+                var dataEliminarFotos = eliminarObjeto("archivo_edificio",arregloFotosEliminar);
+                var dataEliminarPlanos = eliminarObjeto("archivo_edificio",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
                 var resultadoFotos = guardarFotos("edificio",arregloFotos);
                 console.log(informacion);
                 console.log(info);
                 console.log(data);
+                console.log(dataEliminarFotos);
+                console.log(dataEliminarPlanos);
                 console.log(resultadoPlanos);
                 console.log(resultadoFotos);
                 var mensaje = "";
@@ -9424,9 +9613,25 @@ $(document).ready(function() {
                         info["tomacorriente"] = tomacorrienteEliminar;
                         info["tipo_ventana_eliminar"] = tipoVentanaEliminar;
                         info["material_ventana_eliminar"] = materialVentanaEliminar;
+                        var arregloFotosEliminar = {};
+                        var arregloPlanosEliminar = {};
+                        arregloFotosEliminar["id_sede"] = idSede;
+                        arregloFotosEliminar["id_campus"] = idCampus;
+                        arregloFotosEliminar["id_edificio"] = idEdificio;
+                        arregloFotosEliminar["id"] = id;
+                        arregloFotosEliminar["nombre"] = fotosEliminar;
+                        arregloFotosEliminar["tipo"] = "foto";
+                        arregloPlanosEliminar["id_sede"] = idSede;
+                        arregloPlanosEliminar["id_campus"] = idCampus;
+                        arregloPlanosEliminar["id_edificio"] = idEdificio;
+                        arregloPlanosEliminar["id"] = id;
+                        arregloPlanosEliminar["nombre"] = planosEliminar;
+                        arregloPlanosEliminar["tipo"] = "plano";
                         arregloFotos.append("espacio",JSON.stringify(info));
                         arregloPlanos.append("espacio",JSON.stringify(info));
                         var data = modificarObjeto("espacio",informacion);
+                        var dataEliminarFotos = eliminarObjeto("archivo_espacio",arregloFotosEliminar);
+                        var dataEliminarPlanos = eliminarObjeto("archivo_espacio",arregloPlanosEliminar);
                         var dataEliminarIluminacion = eliminarObjeto("iluminacion_espacio",info);
                         var dataEliminarInterruptor = eliminarObjeto("interruptor_espacio",info);
                         var dataEliminarPuerta = eliminarObjeto("puerta_espacio",info);
@@ -9437,6 +9642,8 @@ $(document).ready(function() {
                         console.log(informacion);
                         console.log(info);
                         console.log(data);
+                        console.log(dataEliminarFotos);
+                        console.log(dataEliminarPlanos);
                         console.log(dataEliminarIluminacion);
                         console.log(dataEliminarInterruptor);
                         console.log(dataEliminarPuerta);
@@ -9556,5 +9763,28 @@ $(document).ready(function() {
                 }
             }
         }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_campus y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_campus").click(function (e){
+      var confirmacion = window.confirm("¿Desea eliminar el campus y todos los elementos (canchas, corredores, edificios, espacios, fotos, planos, etc.) de éste?");
+      if (confirmacion) {
+          var informacion = {};
+          var idSede = $("#nombre_sede").attr('name');
+          var idCampus = $("#nombre_campus").attr('name');
+          informacion["id_sede"] = idSede;
+          informacion["id"] = idCampus;
+          var data = eliminarObjeto("campus",informacion);
+          console.log(informacion);
+          console.log(data);
+          alert(data.mensaje);
+          if (data.verificar) {
+              $("#sede_search").val("").change();
+              $("#divDialogConsulta").modal('hide');
+          }
+      }
     });
 });

@@ -247,6 +247,18 @@ $map = array(
         'eliminar_via' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_via'),
         'eliminar_edificio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_edificio'),
         'eliminar_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_espacio'),
+        'eliminar_archivo_campus' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_campus'),
+        'eliminar_archivo_cancha' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_cancha'),
+        'eliminar_archivo_corredor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_corredor'),
+        'eliminar_archivo_cubierta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_cubierta'),
+        'eliminar_archivo_gradas' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_gradas'),
+        'eliminar_archivo_parqueadero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_parqueadero'),
+        'eliminar_archivo_plazoleta' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_plazoleta'),
+        'eliminar_archivo_piscina' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_piscina'),
+        'eliminar_archivo_sendero' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_sendero'),
+        'eliminar_archivo_via' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_via'),
+        'eliminar_archivo_edificio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_edificio'),
+        'eliminar_archivo_espacio' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_archivo_espacio'),
 
     //Acciones Módulo Inventario
         //Acciones de carga de plantillas

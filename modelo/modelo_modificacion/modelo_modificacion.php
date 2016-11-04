@@ -2807,6 +2807,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("campus",$id_sede."-".$id,"lng",$lng[$i],"eliminado");
                 }
                 $GLOBALS['mensaje'] = "El campus se ha eliminado correctamente";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -4759,6 +4760,7 @@ class modelo_modificacion {
                     unlink(__ROOT__."/archivos/planos/campus/".$id_sede."-".$id."/".$archivo);
                 }
                 $GLOBALS['mensaje'] = "Se ha eliminado el archivo del campus";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }

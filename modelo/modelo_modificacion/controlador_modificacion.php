@@ -609,7 +609,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoCampus($info['id_sede'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoCampus($info['id_sede'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -629,7 +632,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoCancha($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoCancha($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -649,7 +655,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoCorredor($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoCorredor($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -669,7 +678,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoCUbierta($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoCUbierta($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -689,7 +701,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoCancha($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoCancha($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['piso'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -709,27 +724,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoParqueadero($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        $result['verificar'] = $verificar;
-        echo json_encode($result);
-    }
-
-    /**
-     * Funcion que permite eliminar un archivo de una plazoleta.
-     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
-     */
-    public function eliminar_archivo_plazoleta(){
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $result = array();
-        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoParqueadero($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -749,7 +747,33 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoPiscina($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoPiscina($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un archivo de una plazoleta.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_archivo_plazoleta(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoPlazoleta($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -769,7 +793,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoSendero($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoSendero($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -789,7 +816,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoVia($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoVia($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -809,7 +839,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoEdificio($info['id_sede'],$info['id_campus'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoEdificio($info['id_sede'],$info['id_campus'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -829,7 +862,10 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->eliminarArchivoEspacio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id'],$info['nombre'],$info['tipo']);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarArchivoEspacio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id'],$archivo[$i],$info['tipo']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
