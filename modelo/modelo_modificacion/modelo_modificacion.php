@@ -3842,36 +3842,36 @@ class modelo_modificacion {
         $this->eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id);
         $this->eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id);
-        if (strcasecmp($usoEspacio,'1') == 0) { //Salón
-            $m->eliminarSalon($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'2') == 0) { //Auditorio
-            $m->eliminarAuditorio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'3') == 0) { //Laboratorio
-            $m->eliminarLaboratorio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'4') == 0) { //Sala de Cómputo
-            $m->eliminarSalaComputo($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'5') == 0) { //Oficina
-            $m->eliminarOficina($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'6') == 0) { //Baño
-            $m->eliminarBano($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'7') == 0) { //Cuarto Técnico
-            $m->eliminarCuartoTecnico($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'8') == 0) { //Bodega/Almacen
-            $m->eliminarBodega($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'10') == 0) { //Cuarto de Plantas
-            $m->eliminarCuartoPlantas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'11') == 0) { //Cuarto de Aires Acondicionados
-            $m->eliminarCuartoAireAcondicionado($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'12') == 0) { //Área Deportiva Cerrada
-            $m->eliminarAreaDeportivaCerrada($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'14') == 0) { //Centro de Datos/Teléfono
-            $m->eliminarCentroDatos($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'17') == 0) { //Cuarto de Bombas
-            $m->eliminarCuartoBombas($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'19') == 0) { //Cocineta
-            $m->eliminarCocineta($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
-        }else if (strcasecmp($usoEspacio,'20') == 0) { //Sala de Estudio
-            $m->eliminarSalaEstudio($info['id_sede'],$info['id_campus'],$info['id_edificio'],$info['id']);
+        if (strcasecmp($usoEspacio[0],'1') == 0) { //Salón
+            $this->eliminarSalon($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'2') == 0) { //Auditorio
+            $this->eliminarAuditorio($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'3') == 0) { //Laboratorio
+            $this->eliminarLaboratorio($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'4') == 0) { //Sala de Cómputo
+            $this->eliminarSalaComputo($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'5') == 0) { //Oficina
+            $this->eliminarOficina($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'6') == 0) { //Baño
+            $this->eliminarBano($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'7') == 0) { //Cuarto Técnico
+            $this->eliminarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'8') == 0) { //Bodega/Almacen
+            $this->eliminarBodega($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'10') == 0) { //Cuarto de Plantas
+            $this->eliminarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'11') == 0) { //Cuarto de Aires Acondicionados
+            $this->eliminarCuartoAireAcondicionado($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'12') == 0) { //Área Deportiva Cerrada
+            $this->eliminarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'14') == 0) { //Centro de Datos/Teléfono
+            $this->eliminarCentroDatos($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'17') == 0) { //Cuarto de Bombas
+            $this->eliminarCuartoBombas($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'19') == 0) { //Cocineta
+            $this->eliminarCocineta($id_sede,$id_campus,$id_edificio,$id);
+        }else if (strcasecmp($usoEspacio[0],'20') == 0) { //Sala de Estudio
+            $this->eliminarSalaEstudio($id_sede,$id_campus,$id_edificio,$id);
         }
         $this->eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id);
         $l_stmt = $this->conexion->prepare($sql);
@@ -6267,9 +6267,7 @@ class modelo_modificacion {
             array_push($gato,$valor['gato']);
         }
         $sql = "DELETE FROM puerta_espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."';";
-        for ($i=0;$i<count($tipo_cerradura);$i++) {
-            $this->eliminarCerradurasPuerta($id_sede,$id_campus,$id_edificio,$id);
-        }
+        $this->eliminarCerradurasPuerta($id_sede,$id_campus,$id_edificio,$id);
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Eliminar Puertas Espacio 1)";
@@ -6369,7 +6367,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($tipo_puerta); $i++) {
+                for ($i=0;$i<count($tipo_cerradura); $i++) {
                     $this->registrarModificacion("puerta_tipo_cerradura",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_tipo_cerradura",$tipo_cerradura[$i],"eliminado");
                 }
                 $GLOBALS['mensaje'] = "El tipo de cerrdura de la puerta del espacio ha sido eliminado";
@@ -6539,7 +6537,7 @@ class modelo_modificacion {
         $data = $this->consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,"ventana_espacio");
         foreach ($data as $clave => $valor) {
             array_push($tipo_ventana,$valor['id_tipo_ventana']);
-            array_push($material_ventana,$valor['id_material_ventana']);
+            array_push($material_ventana,$valor['id_material']);
             array_push($cantidad,$valor['cantidad']);
             array_push($ancho,$valor['ancho_ventana']);
             array_push($alto,$valor['alto_ventana']);
