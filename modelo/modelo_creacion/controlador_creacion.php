@@ -291,6 +291,82 @@ class controlador_creacion
         }
     }
 
+	/**
+    * Función que despliega el panel que permite crear
+    * un aire acondicionado en el sistema.
+    **/
+    public function crear_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Aire Acondicionado',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+    * Función que despliega el panel que permite crear
+    * una capacidad de aires acondicionados en el sistema.
+    **/
+    public function crear_capacidad_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Capacidad de Aires Acondicionados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_CAPACIDAD_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+    * Función que despliega el panel que permite crear
+    * una marca de airea acondicionados en el sistema.
+    **/
+    public function aires_crear_marca_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Marca de Aires Acondicionados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_MARCA_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+    * Función que despliega el panel que permite crear
+    * un tipo de aires acondicionados en el sistema.
+    **/
+    public function aires_crear_tipo_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Tipo de Aires Acondicionados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_TIPO_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
     /**
      * Funcion que permite guardar una sede en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado

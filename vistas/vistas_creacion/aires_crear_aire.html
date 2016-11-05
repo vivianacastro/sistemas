@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Aire Acondicionado</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n del Aire Acondicionado</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Sede a la que pertenece<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_sede' id='nombre_sede' required></select><br>
+        <div class='div_izquierda'><b>Nombre del Campus<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
+        <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio' required></select><br>
+        <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
+        <div class='div_izquierda'><b>Espacio<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='id_espacio' id='id_espacio' required></select><br>
+        <div class='div_izquierda'><b>Número Inventario<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' maxlength="50" name='numero_inventario' id='numero_inventario' value='' placeholder='Ej: 10000' required/><br>
+        <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='marca' id='marca' required></select><br>
+        <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='tipo' id='tipo' required></select><br>
+        <div class='div_izquierda'><b>Capacidad<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='capacidad' id='capacidad' required></select><br>
+        <div class='div_izquierda'><b>Ubicación del Aire<font color='red'>*</font></b></div>
+        <div id="map" class="mapa"></div>
+    <div><br>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_aire' id='guardar_aire' value='Crear Aire Acondicionado' title='Guardar información del Aire Acondicionado' disabled/>
+    </div>
+</div>
