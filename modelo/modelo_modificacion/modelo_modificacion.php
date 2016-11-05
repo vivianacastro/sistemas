@@ -2470,8 +2470,7 @@ class modelo_modificacion {
                     $GLOBALS['sql'] = $sql;
                     return false;
                 }else{
-                    $GLOBALS['mensaje'] = "Se registró la modificación correctamente";
-                    //$GLOBALS['sql'] = $sql;
+                    $GLOBALS['sql'] = $sql;
                     return true;
                 }
             }
@@ -2496,7 +2495,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
             }
         }
         return $result;
@@ -2522,7 +2520,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
             }
         }
         return $result;
@@ -2553,8 +2550,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2584,8 +2579,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2616,8 +2609,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2649,8 +2640,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del elemento seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2682,8 +2671,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2716,8 +2703,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2743,8 +2728,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2770,7 +2753,6 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Valor del campo seleccionado";
             }
         }
         return $result;
@@ -2874,8 +2856,8 @@ class modelo_modificacion {
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus 2)";
-                $GLOBALS['sql'] = $sql;
+                //$GLOBALS['mensaje'] = "Error: SQL (Eliminar Campus 2)";
+                //$GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
@@ -3063,7 +3045,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($anchoPared); $i++) {
+                for ($i=0;$i<count($lat); $i++) {
                     $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"ancho_pared",$anchoPared[$i],"eliminado");
                     $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"alto_pared",$altoPared[$i],"eliminado");
                     $this->registrarModificacion("corredor",$id_sede."-".$id_campus."-".$id,"id_material_pared",$materialPared[$i],"eliminado");
@@ -3218,6 +3200,7 @@ class modelo_modificacion {
         $lng = array();
         $sql = "DELETE FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
         $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso,"gradas");
+        $this->eliminarVentanasGradas($id_sede,$id_campus,$id_edificio, $piso);
         $this->eliminarArchivosGradas($id_sede,$id_campus,$id_edificio, $piso);
         foreach ($data as $clave => $valor) {
             array_push($pasamanos,$valor['pasamanos']);
@@ -3319,7 +3302,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($materialPiso); $i++) {
+                for ($i=0;$i<count($lat); $i++) {
                     $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"id_material_piso",$materialPiso[$i],"eliminado");
                     $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"id_tipo_pintura_demarcacion",$tipoPinturaDemarcacion[$i],"eliminado");
                     $this->registrarModificacion("parqueadero",$id_sede."-".$id_campus."-".$id,"largo",$largo[$i],"eliminado");
@@ -3405,7 +3388,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($uso); $i++) {
+                for ($i=0;$i<count($lat); $i++) {
                     $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"cantidad_punto_hidraulico",$cantidadPuntoHidraulico[$i],"eliminado");
                     $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"ancho",$ancho[$i],"eliminado");
                     $this->registrarModificacion("piscina",$id_sede."-".$id_campus."-".$id,"largo",$largo[$i],"eliminado");
@@ -3482,7 +3465,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($uso); $i++) {
+                for ($i=0;$i<count($lat); $i++) {
                     $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat[$i],"eliminado");
                     $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng[$i],"eliminado");
                 }
@@ -3572,7 +3555,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($uso); $i++) {
+                for ($i=0;$i<count($lat); $i++) {
                     $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"longitud",$longitud[$i],"eliminado");
                     $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"ancho",$ancho[$i],"eliminado");
                     $this->registrarModificacion("sendero",$id_sede."-".$id_campus."-".$id,"id_material_piso",$materialPiso[$i],"eliminado");
@@ -3659,7 +3642,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($uso); $i++) {
+                for ($i=0;$i<count($longitudDemarcacion); $i++) {
                     $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"id_tipo_material",$tipoMaterial[$i],"eliminado");
                     $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"id_tipo_pintura_demarcacion",$tipoPinturaDemarcacion[$i],"eliminado");
                     $this->registrarModificacion("via",$id_sede."-".$id_campus."-".$id,"longitud_demarcacion",$longitudDemarcacion[$i],"eliminado");
@@ -3884,7 +3867,7 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 2)";
-                //$GLOBALS['sql'] = $sql;
+                $GLOBALS['sql'] = $sql;
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
@@ -4801,7 +4784,6 @@ class modelo_modificacion {
                 $result = $l_stmt->fetchAll();
                 $this->eliminarDir(__ROOT__."/archivos/planos/campus/".$id_sede."-".$id_campus);
                 $this->eliminarDir(__ROOT__. "/archivos/images/campus/".$id_sede."-".$id_campus);
-                $GLOBALS['mensaje'] = "Los archivos del campus se han eliminado";
                 return true;
             }
         }
@@ -4823,12 +4805,12 @@ class modelo_modificacion {
         $sql = "DELETE FROM campus_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Campus 1)";
             $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Campus 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Campus 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
@@ -4895,12 +4877,12 @@ class modelo_modificacion {
         $sql = "DELETE FROM cancha_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Cancha 1)";
             $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Cancha 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Cancha 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
@@ -5090,7 +5072,7 @@ class modelo_modificacion {
                 $result = $l_stmt->fetchAll();
                 $this->eliminarDir(__ROOT__."/archivos/planos/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
                 $this->eliminarDir(__ROOT__. "/archivos/images/gradas/".$id_sede."-".$id_campus."-".$id_edificio."-".$piso);
-                $GLOBALS['mensaje'] = "Los archivos de las gradas se han eliminado";
+                //$GLOBALS['mensaje'] = "Los archivos de las gradas se han eliminado";
                 return true;
             }
         }
@@ -5116,12 +5098,12 @@ class modelo_modificacion {
         $sql = "DELETE FROM gradas_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Gradas 1)";
             $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Gradas 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Gradas 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
@@ -5518,7 +5500,7 @@ class modelo_modificacion {
                 $result = $l_stmt->fetchAll();
                 $this->eliminarDir(__ROOT__."/archivos/planos/edificio/".$id_sede."-".$id_campus."-".$id);
                 $this->eliminarDir(__ROOT__. "/archivos/images/edificio/".$id_sede."-".$id_campus."-".$id);
-                $GLOBALS['mensaje'] = "Los archivos del edificio se han eliminado";
+                //$GLOBALS['mensaje'] = "Los archivos del edificio se han eliminado";
                 return true;
             }
         }
@@ -5542,12 +5524,12 @@ class modelo_modificacion {
         $sql = "DELETE FROM edificio_archivos WHERE nombre = '".$archivo."' AND tipo = '".$tipo."' AND id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Edificio 1)";
             $GLOBALS['sql'] = $sql;
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Edificio 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivo Edificio 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{

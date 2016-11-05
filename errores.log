@@ -5260,3 +5260,6 @@
 [05-Nov-2016 08:41:24 America/Bogota] PHP Notice:  Undefined index: nombre_edificio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1252
 [05-Nov-2016 08:41:24 America/Bogota] PHP Notice:  Undefined variable: piso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2976
 [05-Nov-2016 08:42:01 America/Bogota] PHP Notice:  Undefined variable: piso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2976
+[05-Nov-2016 08:55:08 America/Bogota] PHP Notice:  Undefined variable: uso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3662
+[05-Nov-2016 08:55:09 America/Bogota] PHP Notice:  Undefined variable: uso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3662
+[05-Nov-2016 08:55:09 America/Bogota] PHP Notice:  Undefined variable: uso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3662
