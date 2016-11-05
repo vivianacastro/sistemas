@@ -38,6 +38,7 @@ class modelo_usuario {
         $l = htmlspecialchars($l);
         $sql = "SELECT password FROM usuarios WHERE login = '".$l."';";
         $l_stmt = $this->conexion->prepare($sql);
+        $result = array();
         if (!$l_stmt) {
             $GLOBALS['mensaje'] = "Error: SQL (Retornar Contraseña 1)";
             return false;

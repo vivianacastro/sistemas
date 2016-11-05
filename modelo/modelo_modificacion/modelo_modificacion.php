@@ -2604,6 +2604,7 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
+        $result = array();
         $sql = "SELECT * FROM ".$elemento." WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -3212,12 +3213,11 @@ class modelo_modificacion {
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $piso = htmlspecialchars(trim($piso));
-        $id = htmlspecialchars(trim($id));
         $pasamanos = array();
         $materialPasamanos = array();
         $lng = array();
         $sql = "DELETE FROM gradas WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND piso_inicio = '".$piso."';";
-        $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio, $piso);
+        $data = $this->consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso,"gradas");
         $this->eliminarArchivosGradas($id_sede,$id_campus,$id_edificio, $piso);
         foreach ($data as $clave => $valor) {
             array_push($pasamanos,$valor['pasamanos']);
