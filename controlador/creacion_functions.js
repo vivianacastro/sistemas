@@ -4283,4 +4283,117 @@ $(document).ready(function() {
             $("#tipo_iluminacion"+iluminacionCont).val();
         }*/
     });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_capacidad_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_capacidad_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la capacidad de aires acondicionados?");
+        if (confirmacion) {
+            var capacidad = limpiarCadena($("#capacidad").val());
+            if (validarCadena(capacidad)) {
+                var informacion = {};
+                informacion["capacidad"] = capacidad;
+                var data = guardarObjeto("capacidad_aire",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#capacidad").val("");
+                }
+            }else{
+                alert("ERROR. Ingrese la capacidad de aires acondicionados");
+                $("#capacidad").focus();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_marca_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_marca_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la marca de aires acondicionados?");
+        if (confirmacion) {
+            var capacidad = limpiarCadena($("#nombre_marca").val());
+            if (validarCadena(capacidad)) {
+                var informacion = {};
+                informacion["nombre"] = capacidad;
+                var data = guardarObjeto("marca_aire",informacion);
+                alert(data.mensaje);
+                console.log(data);
+                if (data.verificar) {
+                    $("#nombre_marca").val("");
+                }
+            }else{
+                alert("ERROR. Ingrese la marca de aires acondicionados");
+                $("#nombre_marca").focus();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_marca_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_tipo_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
+        if (confirmacion) {
+            var numeroInventario = limpiarCadena($("#numero_inventario").val());
+            var sede = limpiarCadena($("#nombre_sede").val());
+            var campus = limpiarCadena($("#nombre_campus").val());
+            var edificio = limpiarCadena($("#nombre_edificio").val());
+            var espacio = limpiarCadena($("#id_espacio").val());
+            var capacidad = limpiarCadena($("#marca_aire").val());
+            var marca = limpiarCadena($("#tipo_aire").val());
+            var tipo = limpiarCadena($("#capacidad_aire").val());
+            if (validarCadena(numeroInventario)) {
+                alert("ERROR. Ingrese el número de inventario del aire acondicionado");
+                $("#numero_inventario").focus();
+            }else if(validarCadena(sede)){
+                alert("ERROR. Seleccione la sede donde está el aire acondicionado");
+                $("#nombre_sede").focus();
+            }else if(validarCadena(campus)){
+                alert("ERROR. Seleccione el campus donde está el aire acondicionado");
+                $("#nombre_campus").focus();
+            }else if(validarCadena(edificio)){
+                alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
+                $("#nombre_edificio").focus();
+            }else if(validarCadena(espacio)){
+                alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
+                $("#id_espacio").focus();
+            }else if(validarCadena(capacidad)){
+                alert("ERROR. Seleccione la capacidad del aire acondicionado");
+                $("#capacidad_aire").focus();
+            }else if(validarCadena(marca)){
+                alert("ERROR. Seleccione la marca del aire acondicionado");
+                $("#marca_aire").focus();
+            }else if(validarCadena(tipo)){
+                alert("ERROR. Seleccione el tipo del aire acondicionado");
+                $("#tipo_aire").focus();
+            }else{
+                var informacion = {};
+                informacion["numero_inventario"] = numeroInventario;
+                informacion["sede"] = sede;
+                informacion["campus"] = campus;
+                informacion["edificio"] = edificio;
+                informacion["espacio"] = espacio;
+                informacion["capacidad"] = capacidad;
+                informacion["marca"] = marca;
+                informacion["tipo"] = tipo;
+                var data = guardarObjeto("aire",informacion);
+                alert(data.mensaje);
+                console.log(data);
+                if (data.verificar) {
+                    $("#numero_inventario").val("");
+                    $("#nombre_sede").val("");
+                    $("#nombre_campus").val("");
+                    $("#nombre_edificio").val("");
+                    $("#id_espacio").val("");
+                    $("#marca_aire").val("");
+                    $("#tipo_aire").val("");
+                    $("#capacidad_aire").val("");
+                }
+            }
+        }
+    });
 });

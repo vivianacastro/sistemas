@@ -1357,5 +1357,97 @@ class controlador_creacion
         }
         echo json_encode($result);
     }
+
+	/**
+     * Funcion que permite un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarAire($info['numero_inventario']);
+            if($verificar){
+                $m->guardarAire($info['numero_inventario'],$info['sede'],$info['campus'],$info['edificio'],$info['espacio'],$info['capacidad'],$info['marca'],$info['tipo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+     * Funcion que permite una capacidad de un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_capacidad_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarCapacidadAire($info['capacidad']);
+            if($verificar){
+                $m->guardarCapacidadAire($info['capacidad']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+     * Funcion que permite una marca de un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_marca_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarMarcaAire($info['nombre']);
+            if($verificar){
+                $m->guardarMarcaAire($info['nombre']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+     * Funcion que permite un tipo de un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_tipo_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarTipoObjeto("tipo_aire",$info['tipo']);
+            if($verificar){
+                $m->guardarTipoAire($info['tipo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
 }
 ?>

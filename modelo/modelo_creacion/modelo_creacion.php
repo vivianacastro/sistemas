@@ -46,7 +46,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La sede se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -76,7 +75,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El campus se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -129,7 +127,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El edificio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -180,7 +177,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La cancha se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -251,7 +247,6 @@ class modelo_creacion {
                     $this->guardarInterruptoresCorredor($nombre_sede,$nombre_campus,$id_corredor,$tipo_interruptor[$i],$cantidad_interruptores[$i]);
                 }
                 $GLOBALS['mensaje'] = "El corredor se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -300,7 +295,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La cubierta se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -408,7 +402,6 @@ class modelo_creacion {
             }else{
                 $GLOBALS['mensaje'] = "El parqueadero se guardó correctamente";
                 $GLOBALS['sql'] = $sql;
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -452,7 +445,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La piscina se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -495,7 +487,6 @@ class modelo_creacion {
                     $this->guardarIluminacionPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$tipo_iluminacion[$i],$cantidad_iluminacion[$i]);
                 }
                 $GLOBALS['mensaje'] = "La plazoleta se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -553,7 +544,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El sendero peatonal se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -602,7 +592,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La vía se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -711,7 +700,6 @@ class modelo_creacion {
                     $this->guardarVentanaEspacio($numero_espacio,$nombre_sede,$nombre_campus,$nombre_edificio,$tipo_ventana[$i],$cantidad_ventanas[$i],$material_ventana[$i],$ancho_ventana[$i],$alto_ventana[$i]);
                 }
                 $GLOBALS['mensaje'] = "El(los) espacio(s) se guardó(aron) correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -975,7 +963,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "Las puertas del espacio se guardaron correctamente";
-                $GLOBALS['sql'] = $sql;
                 for ($i=0;$i<count($tipo_cerradura);$i++) {
                   $this->guardarPuertaTipoCerradura($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura[$i]);
                 }
@@ -1018,7 +1005,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo se cerradura de la puerta del espacio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1114,7 +1100,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana del espacio se guardaró correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1174,7 +1159,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "La ventana de las gradas se guardaron correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1210,7 +1194,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "La ventana del espacio se guardaron correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1246,7 +1229,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El lavamanos del baño se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1282,7 +1264,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El orinal del baño se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1320,7 +1301,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El salón se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1358,7 +1338,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1441,7 +1420,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1477,7 +1455,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1569,7 +1546,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1603,7 +1579,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1637,7 +1612,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1671,7 +1645,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1705,7 +1678,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1739,7 +1711,6 @@ class modelo_creacion {
                 return false;
             }else{
                 //$GLOBALS['mensaje'] = "El auditorio se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1843,7 +1814,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de material se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -1871,7 +1841,6 @@ class modelo_creacion {
                 return false;
             }else{
                 $GLOBALS['mensaje'] = "El tipo de objeto se guardó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -3061,6 +3030,120 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de un aire acondicionado.
+     * @param string $numero_inventario, número de inventario del aire acondicionado.
+     * @param string $sede, sede donde está el aire acondicionado.
+     * @param string $campus, campus donde está el aire acondicionado.
+     * @param string $edificio, edificio donde está el aire acondicionado.
+     * @param string $espacio, espacio donde está el aire acondicionado.
+     * @param string $capacidad, capacidad del aire acondicionado.
+     * @param string $marca, marca del aire acondicionado.
+     * @param string $tipo, tipo de aire acondicionado.
+     * @return array
+     */
+    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$espacio,$capacidad,$marca,$tipo){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $sede = htmlspecialchars(trim($sede));
+        $campus = htmlspecialchars(trim($campus));
+        $edificio = htmlspecialchars(trim($edificio));
+        $espacio = htmlspecialchars(trim($espacio));
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $marca = htmlspecialchars(trim($marca));
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El aire acondicionado se ha guardado correctamente en el sistema.";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una capacidad de aire acondicionado.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function guardarCapacidadAire($capacidad){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $sql = "INSERT INTO capacidad_aire (capacidad) VALUES ('".$capacidad."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Capacidad Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Capacidad Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La capacidad de aires acondicionados se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de una marca de aire acondicionado.
+     * @param string $marca, marca de aire acondicionado.
+     * @return array
+     */
+    public function guardarMarcaAire($marca){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "INSERT INTO marca_aire (nombre) VALUES ('".$marca."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La marca de aires acondicionados se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un tipo de aire acondicionado.
+     * @param string $tipo, tipo de aire acondicionado.
+     * @return array
+     */
+    public function guardarTipoAire($tipo){
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "INSERT INTO tipo_aire (tipo) VALUES ('".$tipo."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Tipo Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El tipo de aires acondicionados se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
@@ -3541,7 +3624,98 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "ERROR. El tipo de objeto ya se encuentra registrado en el sistema";
+                if (strcmp($tipo_objeto,"tipo_aire") == 0) {
+                    $GLOBALS['mensaje'] = "ERROR. El tipo de aire acondicionado ya se encuentra registrado en el sistema";
+                }else{
+                    $GLOBALS['mensaje'] = "ERROR. El tipo de objeto ya se encuentra registrado en el sistema";
+                }
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un aire acondicionado ya esta registrada en el sistema.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function verificarAire($numero_inventario){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $sql = "SELECT * FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = 'ERROR. El aire acondicionado con número de inventario "'.$numero_inventario.'" ya se encuentra registrada en el sistema.';
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una capacidad de aires acondicionados ya esta registrada en el sistema.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function verificarCapacidadAire($capacidad){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $sql = "SELECT * FROM capacidad_aire WHERE capacidad = '".$capacidad."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Capacidad Aires Acondicionados 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Capacidad Aires Acondicionados 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La capacidad ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una marca de aires acondicionados ya esta registrada en el sistema.
+     * @param string $marca, marca de aire acondicionado.
+     * @return array
+     */
+    public function verificarMarcaAire($marca){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $sql = "SELECT * FROM marca_aire WHERE nombre = '".$marca."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Aires Acondicionados 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Aires Acondicionados 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La marca de aires acondicionados ya se encuentra regisrada en el sistema.";
                 return false;
             }
             else{

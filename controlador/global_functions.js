@@ -71,6 +71,25 @@ $(document).ready(function () {
 	    	}
     }else if(URLactual['href'].indexOf('modulo_aires') >= 0 || URLactual['href'].indexOf('aires') >= 0){
     		$('#aires').addClass("opcion_activa");
+			if ((URLactual['href'].indexOf('aires_crear_aire') >= 0)) {
+		    	$('#option_crear_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_crear_aire') >= 0)) {
+		    	$('#option_crear_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_crear_capacidad_aire') >= 0)) {
+		    	$('#option_crear_capacidad_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_crear_marca_aire') >= 0)) {
+		    	$('#option_crear_marca_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_crear_tipo_aire') >= 0)) {
+		    	$('#option_crear_tipo_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_consultar_aire') >= 0)) {
+		    	$('#option_consultar_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_consultar_capacidad_aire') >= 0)) {
+		    	$('#option_consultar_capacidad_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_consultar_marca_aire') >= 0)) {
+		    	$('#option_consultar_marca_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_consultar_tipo_aire') >= 0)) {
+		    	$('#option_consultar_tipo_aire').addClass("opcion_activa_seleccion");
+	    	}
     }else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
     		$('#inventario').addClass("opcion_activa");
     }else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuarios') >= 0){

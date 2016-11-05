@@ -279,6 +279,10 @@ $map = array(
         'aires_consultar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_tipo_aire'),
         'aires_consultar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_mantenimiento_aire'),
         //Acciones de creación
+        'guardar_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_aire'),
+        'guardar_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_capacidad_aire'),
+        'guardar_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_marca_aire'),
+        'guardar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_tipo_aire'),
         //Acciones de consulta
         'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
