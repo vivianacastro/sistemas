@@ -333,7 +333,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * una marca de airea acondicionados en el sistema.
     **/
-    public function aires_crear_marca_aire() {
+    public function crear_marca_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
@@ -352,7 +352,7 @@ class controlador_creacion
     * Función que despliega el panel que permite crear
     * un tipo de aires acondicionados en el sistema.
     **/
-    public function aires_crear_tipo_aire() {
+    public function crear_tipo_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
