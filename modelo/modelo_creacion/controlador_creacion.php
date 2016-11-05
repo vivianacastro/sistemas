@@ -11,7 +11,7 @@ class controlador_creacion
     * una sede en el sistema.
     **/
     public function crear_sede() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Sede',
@@ -30,7 +30,7 @@ class controlador_creacion
     * un campus en el sistema.
     **/
     public function crear_campus() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Campus',
@@ -49,7 +49,7 @@ class controlador_creacion
     * una cancha en el sistema.
     **/
     public function crear_cancha() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Cancha',
@@ -68,7 +68,7 @@ class controlador_creacion
     * un corredor en el sistema.
     **/
     public function crear_corredor() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Corredor',
@@ -87,7 +87,7 @@ class controlador_creacion
     * una cubierta en el sistema.
     **/
     public function crear_cubierta() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Cubierta',
@@ -106,7 +106,7 @@ class controlador_creacion
     * las gradas en el sistema.
     **/
     public function crear_gradas() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Gradas',
@@ -125,7 +125,7 @@ class controlador_creacion
     * una cancha en el sistema.
     **/
     public function crear_parqueadero() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Parqueadero',
@@ -144,7 +144,7 @@ class controlador_creacion
     * una piscina en el sistema.
     **/
     public function crear_piscina() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Piscina',
@@ -163,7 +163,7 @@ class controlador_creacion
     * una plazoleta en el sistema.
     **/
     public function crear_plazoleta() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Plazoleta',
@@ -182,7 +182,7 @@ class controlador_creacion
     * un sendero en el sistema.
     **/
     public function crear_sendero() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Sendero Peatonal',
@@ -201,7 +201,7 @@ class controlador_creacion
     * una via en el sistema.
     **/
     public function crear_via() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Vía',
@@ -220,7 +220,7 @@ class controlador_creacion
     * un edificio en el sistema.
     **/
     public function crear_edificio() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Edificio',
@@ -239,7 +239,7 @@ class controlador_creacion
     * un espacio en el sistema.
     **/
     public function crear_espacio() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Espacio',
@@ -258,7 +258,7 @@ class controlador_creacion
     * un tipo de material en el sistema.
     **/
     public function crear_tipo_material() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Tipo Material',
@@ -277,7 +277,7 @@ class controlador_creacion
     * un tipo de material en el sistema.
     **/
     public function crear_tipo_objeto() {
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $data = array(
             'mensaje' => 'Crear Tipo Objeto',
@@ -296,7 +296,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_sede(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -319,7 +319,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_campus(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -342,7 +342,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_edificio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -365,7 +365,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_cancha(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -388,7 +388,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_corredor(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -411,7 +411,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_cubierta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -434,7 +434,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
     */
     public function guardar_gradas(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -457,7 +457,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_parqueadero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -480,7 +480,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_piscina(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -503,7 +503,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_plazoleta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -526,7 +526,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_sendero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -549,7 +549,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_via(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -572,7 +572,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_espacio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -634,7 +634,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_tipo_material(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -657,7 +657,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_tipo_objeto(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -680,7 +680,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function verificar_espacio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -700,7 +700,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_campus(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -729,7 +729,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_campus(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -758,7 +758,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_edificio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -782,7 +782,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_edificio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -806,7 +806,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_cancha(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -830,7 +830,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_cancha(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -840,7 +840,7 @@ class controlador_creacion
             $infoCancha = json_decode($_POST['cancha'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarFotoEdificio($infoCancha['nombre_sede'],$infoCancha['nombre_campus'],$infoCancha['id_cancha'],$file);
+                $verificar = $m->guardarFotoCancha($infoCancha['nombre_sede'],$infoCancha['nombre_campus'],$infoCancha['id_cancha'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['sql'] = $GLOBALS['sql'];
                 $result['verificar'][$i] = $verificar;
@@ -854,7 +854,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_corredor(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -878,7 +878,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_corredor(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -902,7 +902,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_cubierta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -926,7 +926,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_cubierta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -950,7 +950,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_gradas(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -974,7 +974,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_gradas(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -998,7 +998,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_parqueadero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1022,7 +1022,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_parqueadero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1046,7 +1046,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_piscina(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1070,7 +1070,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_piscina(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1094,7 +1094,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_plazoleta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
 
@@ -1119,7 +1119,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_plazoleta(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1143,7 +1143,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_sendero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1167,7 +1167,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_sendero(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1191,7 +1191,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_via(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1215,7 +1215,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_via(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1239,7 +1239,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_espacio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1263,7 +1263,7 @@ class controlador_creacion
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_espacio(){
-        $GLOBALSGLOBALS['mensaje'] = "";
+        $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
         $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,

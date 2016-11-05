@@ -7318,7 +7318,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -7328,7 +7332,11 @@ $(document).ready(function() {
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -7476,7 +7484,11 @@ $(document).ready(function() {
                   if (resultadoFotos.length != 0) {
                       for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                           if (!resultadoFotos.verificar[i]) {
-                              mensaje += "\n" + resultadoFotos.mensaje[i];
+                              if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                           }
                           if (i<resultadoFotos.verificar.length-1) {
                               mensaje += "\n";
@@ -7487,7 +7499,11 @@ $(document).ready(function() {
                       for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                           console.log(resultadoPlanos.verificar[i]);
                           if (!resultadoPlanos.verificar[i]) {
-                              mensaje += resultadoPlanos.mensaje[i] + "\n";
+                              if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                           }
                           if (i<resultadoPlanos.verificar.length-2) {
                               mensaje += "\n";
@@ -7617,7 +7633,11 @@ $(document).ready(function() {
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
                                 mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                             }
                             if (i<resultadoFotos.verificar.length-1) {
                                 mensaje += "\n";
@@ -7628,7 +7648,11 @@ $(document).ready(function() {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
-                                mensaje += resultadoPlanos.mensaje[i] + "\n";
+                                if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                             }
                             if (i<resultadoPlanos.verificar.length-2) {
                                 mensaje += "\n";
@@ -7833,7 +7857,11 @@ $(document).ready(function() {
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
                                 mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                             }
                             if (i<resultadoFotos.verificar.length-1) {
                                 mensaje += "\n";
@@ -7844,7 +7872,11 @@ $(document).ready(function() {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
-                                mensaje += resultadoPlanos.mensaje[i] + "\n";
+                                if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                             }
                             if (i<resultadoPlanos.verificar.length-2) {
                                 mensaje += "\n";
@@ -7971,7 +8003,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -7982,7 +8018,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8165,7 +8205,11 @@ $(document).ready(function() {
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
                                 mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                             }
                             if (i<resultadoFotos.verificar.length-1) {
                                 mensaje += "\n";
@@ -8176,7 +8220,11 @@ $(document).ready(function() {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
-                                mensaje += resultadoPlanos.mensaje[i] + "\n";
+                                if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                             }
                             if (i<resultadoPlanos.verificar.length-2) {
                                 mensaje += "\n";
@@ -8312,7 +8360,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8323,7 +8375,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8454,7 +8510,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8465,7 +8525,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8618,7 +8682,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8629,7 +8697,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8770,7 +8842,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8781,7 +8857,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoPlanos.verificar.length-2) {
                             mensaje += "\n";
@@ -8910,7 +8990,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -8921,7 +9005,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -9054,7 +9142,11 @@ $(document).ready(function() {
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                         if (!resultadoFotos.verificar[i]) {
-                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -9065,7 +9157,11 @@ $(document).ready(function() {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                         console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
-                            mensaje += resultadoPlanos.mensaje[i] + "\n";
+                            if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                         }
                         /*if (i<resultadoFotos.verificar.length-1) {
                             mensaje += "\n";
@@ -9655,7 +9751,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
                                 }
                                 if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -9666,7 +9766,11 @@ $(document).ready(function() {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 console.log(resultadoPlanos.verificar[i]);
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += resultadoPlanos.mensaje[i] + "\n";
+                                    if (mensaje == "") {
+                                mensaje += resultadoPlanos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                            }
                                 }
                                 if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";

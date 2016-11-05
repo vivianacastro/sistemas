@@ -180,6 +180,7 @@ $(document).ready(function() {
                 drawingManager.setOptions({
                     drawingControl: true
                 });
+                coordenadas = null;
                 drawingManager.setDrawingMode(google.maps.drawing.OverlayType.MARKER);
             });
         });
@@ -249,7 +250,11 @@ $(document).ready(function() {
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             if (!resultadoPlanos.verificar[i]) {
-                                mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                             }
                             if (i<resultadoPlanos.verificar.length-2) {
                                 mensaje += "\n";
@@ -259,7 +264,11 @@ $(document).ready(function() {
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
-                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                                if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                             }
                             if (i<resultadoFotos.verificar.length-1) {
                                 mensaje += "\n";
@@ -274,8 +283,11 @@ $(document).ready(function() {
                         $('#divDialogCreacion').modal('hide');
                         $("#nombre_sede").val("");
                         $("#nombre_campus").empty();
+                        $("#nombre_campus").val("");
                         $("#nombre_edificio").empty();
+                        $("#nombre_edificio").val("");
                         $("#pisos").empty();
+                        $("#pisos").val("");
                         $("#id_espacio").val("");
                         $("#uso_espacio").val("");
                         $("#altura_pared").val("");
@@ -1204,7 +1216,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -1214,7 +1230,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -1351,7 +1371,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -1361,7 +1385,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -1375,6 +1403,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_edificio").val("");
                             $("#nombre_edificio").val("");
                             $("#pisos_edificio").val("");
@@ -1492,7 +1521,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -1502,7 +1535,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -1510,12 +1547,12 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_cancha").val("");
                             $("#uso_cancha").val("");
                             $("#material_piso").val("");
@@ -1672,7 +1709,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -1682,7 +1723,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -1696,6 +1741,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_corredor").val("");
                             $("#altura_pared").val("");
                             $("#ancho_pared").val("");
@@ -1841,7 +1887,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -1851,7 +1901,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -1865,8 +1919,11 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#nombre_edificio").empty();
+                            $("#nombre_edificio").val("");
                             $("#pisos").empty();
+                            $("#pisos").val("");
                             $("#tipo_cubierta").val("");
                             $("#material_cubierta").val("");
                             $("#ancho").val("");
@@ -2005,7 +2062,11 @@ $(document).ready(function() {
                       if (resultadoPlanos.length != 0) {
                           for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                               if (!resultadoPlanos.verificar[i]) {
-                                  mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                  if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                               }
                               if (i<resultadoPlanos.verificar.length-2) {
                                   mensaje += "\n";
@@ -2015,7 +2076,11 @@ $(document).ready(function() {
                       if (resultadoFotos.length != 0) {
                           for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                               if (!resultadoFotos.verificar[i]) {
-                                  mensaje += "\n" + resultadoFotos.mensaje[i];
+                                  if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                               }
                               if (i<resultadoFotos.verificar.length-1) {
                                   mensaje += "\n";
@@ -2029,8 +2094,11 @@ $(document).ready(function() {
                       if(resultado.verificar){
                           $("#nombre_sede").val("");
                           $("#nombre_campus").empty();
+                          $("#nombre_campus").val("");
                           $("#nombre_edificio").empty();
+                          $("#nombre_edificio").val("");
                           $("#pisos").empty();
+                          $("#pisos").val("");
                           $('input[name=pasamanos]').attr('checked',false);
                           $("#divPasamanos").hide();
                           $("#tipo_ventana").val("");
@@ -2149,7 +2217,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -2159,7 +2231,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -2173,6 +2249,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_parqueadero").val("");
                             $("#capacidad").val("");
                             $("#ancho").val("");
@@ -2289,7 +2366,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -2299,7 +2380,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -2313,6 +2398,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_piscina").val("");
                             $("#alto").val("");
                             $("#ancho").val("");
@@ -2428,7 +2514,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -2438,7 +2528,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -2452,6 +2546,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_plazoleta").val("");
                             $("#nombre").val("");
                             $("#tipo_iluminacion").val("");
@@ -2579,7 +2674,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -2589,7 +2688,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -2603,6 +2706,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_sendero").val("");
                             $("#longitud").val("");
                             $("#ancho").val("");
@@ -2721,7 +2825,11 @@ $(document).ready(function() {
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                                 if (!resultadoPlanos.verificar[i]) {
-                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoPlanos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
                                     mensaje += "\n";
@@ -2731,7 +2839,11 @@ $(document).ready(function() {
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                                 if (!resultadoFotos.verificar[i]) {
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                                 /*if (i<resultadoFotos.verificar.length-1) {
                                     mensaje += "\n";
@@ -2745,6 +2857,7 @@ $(document).ready(function() {
                         if(resultado.verificar){
                             $("#nombre_sede").val("");
                             $("#nombre_campus").empty();
+                            $("#nombre_campus").val("");
                             $("#id_via").val("");
                             $("#tipo_pintura").val("");
                             $("#longitud_demarcacion").val("");

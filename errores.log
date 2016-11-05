@@ -5244,3 +5244,14 @@
 [05-Nov-2016 06:11:01 America/Bogota] PHP Notice:  Undefined variable: elemento in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2607
 [05-Nov-2016 06:11:01 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2622
 [05-Nov-2016 06:11:01 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3222
+[05-Nov-2016 06:42:47 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2087
+[05-Nov-2016 06:55:02 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2878
+[05-Nov-2016 07:04:27 America/Bogota] PHP Notice:  Undefined index: ventana in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 446
+[05-Nov-2016 07:04:27 America/Bogota] PHP Notice:  Undefined variable: foto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2387
+[05-Nov-2016 07:05:40 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
+[05-Nov-2016 07:05:40 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
+[05-Nov-2016 07:05:46 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
+[05-Nov-2016 07:05:46 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
+[05-Nov-2016 07:05:46 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
+[05-Nov-2016 07:05:50 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1249
+[05-Nov-2016 07:05:50 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1273
