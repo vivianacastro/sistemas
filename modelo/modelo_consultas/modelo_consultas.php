@@ -1998,6 +1998,52 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar las capacidades de los aires acondicionados en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarCapacidadesAire(){
+        $sql = "SELECT * FROM capacidad_aire ORDER BY capacidad;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Capacidades Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Capacidades Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar las marcas de los aires acondicionados en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarMarcasAire(){
+        $sql = "SELECT * FROM marca_aire ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un espacio en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
      * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.

@@ -2806,5 +2806,53 @@ class controlador_consultas
         $result['sql'] = $GLOBALS['sql'];
         echo json_encode($result);
     }
+
+    /**
+     * Función que permite consultar las capacidades de los aires aconidcionados.
+     */
+    public function consultar_capacidades_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarCapacidadesAire();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'capacidad' => $valor['capacidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las marcas de los aires aconidcionados.
+     */
+    public function consultar_marcas_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarMarcasAire();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre' => $valor['nombre'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
 }
 ?>

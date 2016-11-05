@@ -268,18 +268,20 @@ $map = array(
 
     //Acciones Módulo Aires Acondicionados
         //Acciones de carga de plantillas
-          'aires_crear_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_aire'),
-          'aires_crear_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_capacidad_aire'),
-          'aires_crear_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_marca_aire'),
-          'aires_crear_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_aire'),
-          'aires_registrar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_registrar_mantenimiento_aire'),
-          'aires_consultar_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_aire'),
-          'aires_consultar_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_capacidad_aire'),
-          'aires_consultar_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_marca_aire'),
-          'aires_consultar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_tipo_aire'),
-          'aires_consultar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_mantenimiento_aire'),
+        'aires_crear_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_aire'),
+        'aires_crear_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_capacidad_aire'),
+        'aires_crear_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_marca_aire'),
+        'aires_crear_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_aire'),
+        'aires_registrar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_registrar_mantenimiento_aire'),
+        'aires_consultar_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_aire'),
+        'aires_consultar_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_capacidad_aire'),
+        'aires_consultar_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_marca_aire'),
+        'aires_consultar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_tipo_aire'),
+        'aires_consultar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'aires_consultar_mantenimiento_aire'),
         //Acciones de creación
         //Acciones de consulta
+        'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
+        'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación
 
         //Acciones Módulo Usuarios

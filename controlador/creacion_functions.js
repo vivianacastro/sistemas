@@ -101,6 +101,12 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_puerta",0);
             actualizarSelectTipoObjeto("tipo_suministro_energia",0);
             actualizarSelectTipoObjeto("tipo_ventana",0);
+        }else if(URLactual['href'].indexOf('crear_aire') >= 0){
+            actualizarSelectSede();
+            actualizarSelectCapacidadAire();
+            actualizarSelectMarcaAire();
+            actualizarSelectTipoObjeto("tipo_aire",0);
+            icono = 'vistas/images/icono_edificio.png';
         }
     })();
 
@@ -135,7 +141,7 @@ $(document).ready(function() {
         });
         if(URLactual['href'].indexOf('crear_campus') >= 0){
             icono = 'vistas/images/icono_campus.png';
-        }else if(URLactual['href'].indexOf('crear_edificio') >= 0){
+        }else if(URLactual['href'].indexOf('crear_edificio') >= 0 || URLactual['href'].indexOf('crear_aire') >= 0){
             icono = 'vistas/images/icono_edificio.png';
         }else if(URLactual['href'].indexOf('crear_cancha') >= 0){
             icono = 'vistas/images/icono_cancha.png';
@@ -527,7 +533,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de las sedes presentes en el sistema
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarSedes(){
         var dataResult;
@@ -557,7 +563,7 @@ $(document).ready(function() {
     /**
      * Función que realiza una consulta de los campus presentes en el sistema
      * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarCampus(sede){
         var jObject = JSON.stringify(sede);
@@ -588,7 +594,7 @@ $(document).ready(function() {
     /**
      * Función que realiza una consulta de los campus presentes en el sistema
      * @param {array} informacion, arreglo con la información del campus a buscar.
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function ubicacionCampus(informacion){
         var jObject = JSON.stringify(informacion);
@@ -620,7 +626,7 @@ $(document).ready(function() {
      * Función que realiza una consulta de los edificios del campus seleccionado
      * presentes en el sistema.
      * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarEdificios(campus){
         var jObject = JSON.stringify(campus);
@@ -651,7 +657,7 @@ $(document).ready(function() {
     /**
      * Función que realiza una consulta el número de pisos de un edificio
      * @param {array} edificio, arreglo que contiene el edificio a buscar.
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarPisosEdificio(edificio){
         var jObject = JSON.stringify(edificio);
@@ -681,7 +687,7 @@ $(document).ready(function() {
 
     /**
      * Función que realiza una consulta de las sedes presentes en el sistema
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarUsosEspacios(){
         var dataResult;
@@ -711,7 +717,7 @@ $(document).ready(function() {
     /**
      * Función que realiza una consulta de los materiales presentes en el sistema
      * @param {array} informacion, arreglo que contiene el tipo de material a buscar
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarMateriales(informacion){
         var dataResult;
@@ -742,7 +748,7 @@ $(document).ready(function() {
     /**
      * Función que realiza una consulta de los objetos presentes en el sistema
      * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function buscarTipoObjetos(informacion){
         var dataResult;
@@ -771,9 +777,65 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de las capacidades de los aires acondicionados.
+     * @returns {data} object json.
+    **/
+    function buscarCapacidadAire(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_capacidades_aire",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de las marcas de los aires acondicionados.
+     * @returns {data} object json.
+    **/
+    function buscarMarcaAire(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_marcas_aire",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que realiza una consulta de los espacios presentes en el sistema.
      * @param {string} informacion, arreglo que contiene el espacio a buscar.
-     * @returns {data} object json
+     * @returns {data} object json.
     **/
     function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio){
         var espacio = {};
@@ -807,7 +869,7 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de campus.
+     * Función que llena y actualiza el selector de sede..
      * @returns {undefined}
     **/
     function actualizarSelectSede(){
@@ -822,6 +884,46 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#nombre_sede");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
+    **/
+    function actualizarSelectCapacidadAire(){
+        var data = buscarCapacidadAire();
+        $("#capacidad_aire").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#capacidad_aire");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.capacidad;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#capacidad_aire");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
+    **/
+    function actualizarSelectMarcaAire(){
+        var data = buscarMarcaAire();
+        $("#marca_aire").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#marca_aire");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#marca_aire");
             }
         });
     }
@@ -1076,22 +1178,37 @@ $(document).ready(function() {
             informacion["piso"] = piso;
             var data = buscarEspacios(informacion);
             //console.log(data);
-            if (data.mensaje != null) {
-                $("#espacio_padre").empty();
+            if(URLactual['href'].indexOf('crear_aire') >= 0){
+                $("#id_espacio").empty();
                 var row = $("<option value=''/>");
                 row.text("--Seleccionar--");
-                row.appendTo("#espacio_padre");
+                row.appendTo("#id_espacio");
                 $.each(data, function(index, record) {
                     if($.isNumeric(index)) {
                         aux = record.id;
                         row = $("<option value='" + record.id + "'/>");
                         row.text(aux);
-                        row.appendTo("#espacio_padre");
+                        row.appendTo("#id_espacio");
                     }
                 });
-                $("#divTieneEspacioPadre").show();
             }else{
-                $("#divTieneEspacioPadre").hide();
+                if (data.mensaje != null) {
+                    $("#espacio_padre").empty();
+                    var row = $("<option value=''/>");
+                    row.text("--Seleccionar--");
+                    row.appendTo("#espacio_padre");
+                    $.each(data, function(index, record) {
+                        if($.isNumeric(index)) {
+                            aux = record.id;
+                            row = $("<option value='" + record.id + "'/>");
+                            row.text(aux);
+                            row.appendTo("#espacio_padre");
+                        }
+                    });
+                    $("#divTieneEspacioPadre").show();
+                }else{
+                    $("#divTieneEspacioPadre").hide();
+                }
             }
         }
     });

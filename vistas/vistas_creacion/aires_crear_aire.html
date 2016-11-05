@@ -17,15 +17,16 @@
         <div class='div_izquierda'><b>Número Inventario<font color='red'>*</font>:</b></div>
         <input class='form-control formulario' type='text' maxlength="50" name='numero_inventario' id='numero_inventario' value='' placeholder='Ej: 10000' required/><br>
         <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='marca' id='marca' required></select><br>
+        <select class='form-control formulario' name='marca_aire' id='marca_aire' required></select><br>
         <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='tipo' id='tipo' required></select><br>
+        <select class='form-control formulario' name='tipo_aire' id='tipo_aire' required></select><br>
         <div class='div_izquierda'><b>Capacidad<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='capacidad' id='capacidad' required></select><br>
-        <div class='div_izquierda'><b>Ubicación del Aire<font color='red'>*</font></b></div>
-        <div id="map" class="mapa"></div>
+        <div class="input-group">
+            <select class='form-control formulario' name='capacidad_aire' id='capacidad_aire' required></select><br>
+            <span class="input-group-addon">BTU</span>
+        </div><br>        
     <div><br>
     <div class='form_button'>
-        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_aire' id='guardar_aire' value='Crear Aire Acondicionado' title='Guardar información del Aire Acondicionado' disabled/>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_aire' id='guardar_aire' value='Crear Aire Acondicionado' title='Guardar información del Aire Acondicionado'/>
     </div>
 </div>
