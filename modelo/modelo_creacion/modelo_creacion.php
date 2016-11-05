@@ -3050,7 +3050,7 @@ class modelo_creacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $marca = htmlspecialchars(trim($marca));
         $tipo = htmlspecialchars(trim($tipo));
-        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."');";
+        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$_SESSION["login"]."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 1)";

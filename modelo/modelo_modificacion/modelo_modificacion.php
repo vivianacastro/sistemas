@@ -3807,86 +3807,89 @@ class modelo_modificacion {
         $espacioPadre = array();
         $pisoEdificio = array();
         $data = $this->consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,"espacio");
-        $sql = "DELETE FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id = '".$id."';";
-        foreach ($data as $clave => $valor) {
-            array_push($usoEspacio,$valor['uso_espacio']);
-            array_push($anchoPared,$valor['ancho_pared']);
-            array_push($altoPared,$valor['alto_pared']);
-            array_push($materialPared,$valor['id_material_pared']);
-            array_push($anchoPiso,$valor['ancho_piso']);
-            array_push($largoPiso,$valor['largo_piso']);
-            array_push($materialPiso,$valor['id_material_piso']);
-            array_push($anchoTecho,$valor['ancho_techo']);
-            array_push($largoTecho,$valor['largo_techo']);
-            array_push($materialTecho,$valor['id_material_techo']);
-            array_push($espacioPadre,$valor['espacio_padre']);
-            array_push($pisoEdificio,$valor['piso_edificio']);
-        }
-        $this->eliminarIluminacionesEspacio($id_sede,$id_campus,$id_edificio,$id);
-        $this->eliminarInterruptoresEspacio($id_sede,$id_campus,$id_edificio,$id);
-        $this->eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id);
-        $this->eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id);
-        $this->eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id);
-        if (strcasecmp($usoEspacio[0],'1') == 0) { //Salón
-            $this->eliminarSalon($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'2') == 0) { //Auditorio
-            $this->eliminarAuditorio($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'3') == 0) { //Laboratorio
-            $this->eliminarLaboratorio($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'4') == 0) { //Sala de Cómputo
-            $this->eliminarSalaComputo($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'5') == 0) { //Oficina
-            $this->eliminarOficina($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'6') == 0) { //Baño
-            $this->eliminarBano($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'7') == 0) { //Cuarto Técnico
-            $this->eliminarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'8') == 0) { //Bodega/Almacen
-            $this->eliminarBodega($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'10') == 0) { //Cuarto de Plantas
-            $this->eliminarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'11') == 0) { //Cuarto de Aires Acondicionados
-            $this->eliminarCuartoAireAcondicionado($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'12') == 0) { //Área Deportiva Cerrada
-            $this->eliminarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'14') == 0) { //Centro de Datos/Teléfono
-            $this->eliminarCentroDatos($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'17') == 0) { //Cuarto de Bombas
-            $this->eliminarCuartoBombas($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'19') == 0) { //Cocineta
-            $this->eliminarCocineta($id_sede,$id_campus,$id_edificio,$id);
-        }else if (strcasecmp($usoEspacio[0],'20') == 0) { //Sala de Estudio
-            $this->eliminarSalaEstudio($id_sede,$id_campus,$id_edificio,$id);
-        }
-        $this->eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id);
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 2)";
+        $verificarAire = $this->consultarAireAcondicionadoEspacio($id_sede,$id_campus,$id_edificio,$id);
+        if($verificarAire){
+            $sql = "DELETE FROM espacio WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id = '".$id."';";
+            foreach ($data as $clave => $valor) {
+                array_push($usoEspacio,$valor['uso_espacio']);
+                array_push($anchoPared,$valor['ancho_pared']);
+                array_push($altoPared,$valor['alto_pared']);
+                array_push($materialPared,$valor['id_material_pared']);
+                array_push($anchoPiso,$valor['ancho_piso']);
+                array_push($largoPiso,$valor['largo_piso']);
+                array_push($materialPiso,$valor['id_material_piso']);
+                array_push($anchoTecho,$valor['ancho_techo']);
+                array_push($largoTecho,$valor['largo_techo']);
+                array_push($materialTecho,$valor['id_material_techo']);
+                array_push($espacioPadre,$valor['espacio_padre']);
+                array_push($pisoEdificio,$valor['piso_edificio']);
+            }
+            $this->eliminarIluminacionesEspacio($id_sede,$id_campus,$id_edificio,$id);
+            $this->eliminarInterruptoresEspacio($id_sede,$id_campus,$id_edificio,$id);
+            $this->eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id);
+            $this->eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id);
+            $this->eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id);
+            if (strcasecmp($usoEspacio[0],'1') == 0) { //Salón
+                $this->eliminarSalon($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'2') == 0) { //Auditorio
+                $this->eliminarAuditorio($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'3') == 0) { //Laboratorio
+                $this->eliminarLaboratorio($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'4') == 0) { //Sala de Cómputo
+                $this->eliminarSalaComputo($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'5') == 0) { //Oficina
+                $this->eliminarOficina($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'6') == 0) { //Baño
+                $this->eliminarBano($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'7') == 0) { //Cuarto Técnico
+                $this->eliminarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'8') == 0) { //Bodega/Almacen
+                $this->eliminarBodega($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'10') == 0) { //Cuarto de Plantas
+                $this->eliminarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'11') == 0) { //Cuarto de Aires Acondicionados
+                $this->eliminarCuartoAireAcondicionado($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'12') == 0) { //Área Deportiva Cerrada
+                $this->eliminarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'14') == 0) { //Centro de Datos/Teléfono
+                $this->eliminarCentroDatos($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'17') == 0) { //Cuarto de Bombas
+                $this->eliminarCuartoBombas($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'19') == 0) { //Cocineta
+                $this->eliminarCocineta($id_sede,$id_campus,$id_edificio,$id);
+            }else if (strcasecmp($usoEspacio[0],'20') == 0) { //Sala de Estudio
+                $this->eliminarSalaEstudio($id_sede,$id_campus,$id_edificio,$id);
+            }
+            $this->eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id);
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $result = $l_stmt->fetchAll();
-                for ($i=0;$i<count($usoEspacio); $i++) {
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"uso_espacio",$usoEspacio[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_pared",$anchoPared[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_pared",$altoPared[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_pared",$materialPared[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_piso",$anchoPiso[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_piso",$largoPiso[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_piso",$materialPiso[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$anchoTecho[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largoTecho[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$materialTecho[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacioPadre[$i],"eliminado");
-                    $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"piso_edificio",$pisoEdificio[$i],"eliminado");
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Espacio 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    for ($i=0;$i<count($usoEspacio); $i++) {
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"uso_espacio",$usoEspacio[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_pared",$anchoPared[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_pared",$altoPared[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_pared",$materialPared[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_piso",$anchoPiso[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_piso",$largoPiso[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_piso",$materialPiso[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"ancho_techo",$anchoTecho[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"largo_techo",$largoTecho[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"id_material_techo",$materialTecho[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"espacio_padre",$espacioPadre[$i],"eliminado");
+                        $this->registrarModificacion("espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"piso_edificio",$pisoEdificio[$i],"eliminado");
+                    }
+                    $GLOBALS['mensaje'] = "El espacio se ha eliminado correctamente";
+                    return true;
                 }
-                $GLOBALS['mensaje'] = "El espacio se ha eliminado correctamente";
-                return true;
             }
         }
     }
@@ -6547,6 +6550,40 @@ class modelo_modificacion {
                     $this->registrarModificacion("ventana_espacio",$id_sede."-".$id_campus."-".$id_edificio."-".$id,"alto_ventana",$alto[$i],"eliminado");
                 }
                 $GLOBALS['mensaje'] = "El tipo de ventana del espacio ha sido eliminado";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar los aires acondicionados que tiene un espacio.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id, id del espacio.
+     * @return array
+     */
+    public function consultarAireAcondicionadoEspacio($id_sede,$id_campus,$id_edificio,$id){
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM aire_acondicionado WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id."'";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Aire Acondicionado-Espacio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Aire Acondicionado-Espacio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. Hay uno o varios aires acondicionados registrados en el espacio ".$id.". Para eliminar el espacio, primero elimine o modifique la ubicación de los aires acondicionados";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
