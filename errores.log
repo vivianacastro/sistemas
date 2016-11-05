@@ -5255,3 +5255,8 @@
 [05-Nov-2016 07:05:46 America/Bogota] PHP Notice:  Undefined index: mensaje in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 692
 [05-Nov-2016 07:05:50 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1249
 [05-Nov-2016 07:05:50 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1273
+[05-Nov-2016 08:38:05 America/Bogota] PHP Notice:  Undefined index: nombre_edificio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1252
+[05-Nov-2016 08:38:05 America/Bogota] PHP Notice:  Undefined variable: piso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2976
+[05-Nov-2016 08:41:24 America/Bogota] PHP Notice:  Undefined index: nombre_edificio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1252
+[05-Nov-2016 08:41:24 America/Bogota] PHP Notice:  Undefined variable: piso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2976
+[05-Nov-2016 08:42:01 America/Bogota] PHP Notice:  Undefined variable: piso in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 2976

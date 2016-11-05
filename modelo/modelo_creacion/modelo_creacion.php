@@ -2963,7 +2963,6 @@ class modelo_creacion {
      * @param string $id_sede, variable con la información de la sede.
      * @param string $id_campus, variable con la información del campus.
      * @param string $id_edificio, variable con la información del edificio.
-     * @param string $piso, variable con la información del piso.
      * @param string $id_espacio, variable con la información del espacio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
@@ -2973,7 +2972,6 @@ class modelo_creacion {
             $id_sede = htmlspecialchars(trim($id_sede));
             $id_campus = htmlspecialchars(trim($id_campus));
             $id_edificio = htmlspecialchars(trim($id_edificio));
-            $piso = htmlspecialchars(trim($piso));
             $id_espacio = htmlspecialchars(trim($id_espacio));
             $plano['name'] = str_replace(" ", "",$plano['name']);
             $ruta = __ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id_espacio."/";
@@ -3016,7 +3014,6 @@ class modelo_creacion {
      * @param string $id_sede, variable con la información de la sede.
      * @param string $id_campus, variable con la información del campus.
      * @param string $id_edificio, variable con la información del edificio.
-     * @param string $piso, variable con la información del piso.
      * @param string $id_espacio, variable con la información del espacio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
@@ -3462,7 +3459,6 @@ class modelo_creacion {
      * @param string $nombre_sede, nombre de la sede a la que pertenece el espacio.
      * @param string $nombre_campus, nombre del campus al que pertenece el espacio.
      * @param string $nombre_edificio, nombre del edificio al que pertenece el espacio.
-     * @param string $piso, piso del edificio donde se encuentra el espacio
      * @param string $numero_espacio, número del espacio.
      * @return array
      */

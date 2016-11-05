@@ -4447,25 +4447,21 @@ $(document).ready(function() {
      */
     $("#planos").on("change", ".agregar_archivos", function(){
         var planos = document.getElementById("planos[]");
-  			var fotos = document.getElementById("fotos[]");
-          var aux = (numeroFotos-1) + fotos.files.length;
-          var aux2 = (numeroFotos-1) + planos.files.length;
         var aux = numeroPlanos + planos.files.length;
-        var aux2 = numeroFotos + fotos.files.length;
-  			if (aux > numeroPlanos) {
+        if (aux > numeroPlanos) {
             if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                 $("#guardar_archivos").removeAttr('disabled');
             }else{
                 if (!$("#guardar_modificaciones_campus").is(':visible'))
                     $("#guardar_archivos").show();
             }
-  			}else if(aux2 == numeroFotos){
-          if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+        }else if(aux2 == numeroFotos){
+            if(URLactual['href'].indexOf('consultar_mapa') >= 0){
               $("#guardar_archivos").attr('disabled',true);
-          }else{
+            }else{
               $("#guardar_archivos").hide();
-          }
-  			}
+            }
+		}
     });
 
     /**
@@ -4485,25 +4481,21 @@ $(document).ready(function() {
      * Evento de cambio del selector de archivo del modal de consulta/modificación.
      */
     $("#myCarousel").on("change", ".upload", function(){
-        var fotos = document.getElementById("fotos[]");
-          var aux = (numeroFotos-1) + fotos.files.length;
-          var aux2 = (numeroFotos-1) + planos.files.length;
-        var planos = document.getElementById("planos[]");
+        var fotos = document.getElementById("fileInputOculto");
         var aux = numeroFotos + fotos.files.length;
-        var aux2 = numeroPlanos + planos.files.length;
-  			if (aux > numeroFotos) {
-  					if(URLactual['href'].indexOf('consultar_mapa') >= 0){
+		if (aux > numeroFotos) {
+  			if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                 $("#guardar_archivos").removeAttr('disabled');
             }else{
                 $("#guardar_archivos").show();
             }
-  			}else if(aux2 == numeroPlanos){
+		}else if(aux2 == numeroPlanos){
             if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                 $("#guardar_archivos").attr('disabled',true);
             }else{
                 $("#guardar_archivos").hide();
             }
-  			}
+		}
     });
 
     /**
@@ -6795,7 +6787,6 @@ $(document).ready(function() {
         $("#divDialogConsultaMapa").modal('show');
     });
 
-
     /**
      * Se captura el evento cuando se da click en el boton añadir_informacion_adicional y se
      * realiza la operacion correspondiente.
@@ -7179,9 +7170,7 @@ $(document).ready(function() {
     $("#guardar_archivos").click(function (e){
         if (window.confirm("¿Guardar los archivos seleccionados?")) {
             var planos = document.getElementById("planos[]");
-            var fotos = document.getElementById("fotos[]");
-          var aux = (numeroFotos-1) + fotos.files.length;
-          var aux2 = (numeroFotos-1) + planos.files.length;
+            var fotos = document.getElementById("fileInputOculto");
             var aux = (numeroFotos-1) + fotos.files.length;
             var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
@@ -7273,8 +7262,7 @@ $(document).ready(function() {
                     tipoObjeto = "espacio";
                     informacion["nombre_sede"] = $("#sede_search").val();
                     informacion["nombre_campus"] = $("#campus_search").val();
-                    informacion["id_edificio"] = $("#edificio_search").val();
-                    informacion["piso"] = $("#pisos_search").val();
+                    informacion["nombre_edificio"] = $("#edificio_search").val();
                     informacion["id_espacio"] = $("#espacio_search").val();
                 }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                     tipoObjeto = objetoSeleccionado;
@@ -8278,10 +8266,6 @@ $(document).ready(function() {
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
             var aux2 = (numeroFotos-1) + planos.files.length;
-            var planos = document.getElementById("planos[]");
-            var fotos = document.getElementById("fotos[]");
-            var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -8426,10 +8410,6 @@ $(document).ready(function() {
             var largo = $("#largo").val();
             var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
             var coordenadas;
-            var planos = document.getElementById("planos[]");
-            var fotos = document.getElementById("fotos[]");
-            var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
@@ -8757,10 +8737,6 @@ $(document).ready(function() {
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
             var aux2 = (numeroFotos-1) + planos.files.length;
-            var planos = document.getElementById("planos[]");
-            var fotos = document.getElementById("fotos[]");
-            var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -8907,10 +8883,6 @@ $(document).ready(function() {
             var longitudDemarcacion = $("#longitud_demarcacion").val();
             var materialPiso = $("#material_piso").val();
             var coordenadas;
-            var planos = document.getElementById("planos[]");
-            var fotos = document.getElementById("fotos[]");
-            var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;

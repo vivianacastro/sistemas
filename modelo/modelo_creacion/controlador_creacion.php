@@ -1273,7 +1273,7 @@ class controlador_creacion
             $infoEspacio = json_decode($_POST['espacio'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['id_edificio'],$infoEspacio['id_espacio'],$file);
+                $verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$infoEspacio['id_espacio'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['sql'] = $GLOBALS['sql'];
                 $result['verificar'][$i] = $verificar;
