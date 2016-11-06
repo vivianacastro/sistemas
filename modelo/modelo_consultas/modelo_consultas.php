@@ -2103,6 +2103,78 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar una capacidad de aires acondicionados.
+     * @param string $id, id de la capacidad.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarCapacidadAires($id){
+        $sql = "SELECT * FROM capacidad_aire WHERE id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Capacidad Aires 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Capacidad Aires 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar una marca de aires acondicionados.
+     * @param string $id, id de la marca.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarMarcaAires($id){
+        $sql = "SELECT * FROM marca_aire WHERE id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Marca Aires 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Marca Aires 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar un tipo de aires acondicionados.
+     * @param string $id, id del tipo.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarTipoAires($id){
+        $sql = "SELECT * FROM tipo_aire WHERE id = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Aires 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Aires 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un espacio en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
      * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.

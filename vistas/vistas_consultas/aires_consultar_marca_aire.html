@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--Consulta Rango Fechas-->
+<div>
+    <div class='form-group'>
+        <div><b><h2>Buscar Marca Aires Acondicionados</h2></b><br></div>
+        <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='marca_aire' id='marca_aire' required></select><br>
+    <div><br>
+    <div class='form_button'>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarMarcaAires" id="visualizarMarcaAires" value="Ver Información" title="Ver la información de la marca de aires acondicionados seleccionada" disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Informaci&oacute;n de la Marca</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionCampus'>
+                        <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
+                        <div class="input-group">
+                            <select class='form-control formulario' name='marca_aire_nueva' id='marca_aire_nueva' disabled required></select><br>
+                            <span class="input-group-addon">BTU</span>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

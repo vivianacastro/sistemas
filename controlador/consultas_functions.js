@@ -110,6 +110,12 @@ $(document).ready(function() {
             actualizarSelectCapacidadAire();
             actualizarSelectMarcaAire();
             actualizarSelectTipoObjeto("tipo_aire",0);
+        }else if(URLactual['href'].indexOf('consultar_capacidad_aire') >= 0){
+            actualizarSelectCapacidadAire();
+        }else if(URLactual['href'].indexOf('consultar_marca_aire') >= 0){
+            actualizarSelectMarcaAire();
+        }else if(URLactual['href'].indexOf('consultar_tipo_aire') >= 0){
+            actualizarSelectTipoObjeto("tipo_aire",0);
         }
     })();
 
@@ -4433,8 +4439,8 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el boton visualizarTipoObjeto y se
      * realiza la operacion correspondiente.
-     */
-     $("#visualizarTipoObjeto").click(function (e){
+    */
+    $("#visualizarTipoObjeto").click(function (e){
          var informacion =  {};
          var tipoObjeto = $("#tipo_objeto_search").val();
          var nombreTipoObjeto = $("#nombre_tipo_objeto_search").val();
@@ -4454,44 +4460,119 @@ $(document).ready(function() {
          $("#divDialogConsulta").modal('show');
      });
 
-     /**
-      * Se captura el evento cuando se da click en el boton visualizarAire y se
-      * realiza la operacion correspondiente.
-      */
-      $("#visualizarAire").click(function (e){
-          var informacion =  {};
-          var registros = 0;
-          var numeroInventario = $("#numero_inventario_search").val();
-          if (validarCadena(numeroInventario)) {
-              informacion['numero_inventario'] = numeroInventario;
-              var data = consultarInformacionObjeto("aire",informacion);
-              $.each(data, function(index, record) {
-                  if($.isNumeric(index)) {
-                     $("#nombre_sede").val(record.nombre_sede);
-                     $("#nombre_campus").val(record.nombre_campus);
-                     $("#nombre_edificio").val(record.id_edificio+"-"+record.nombre_edificio);
-                     $("#pisos").val(record.piso);
-                     $("#id_espacio").val(record.id_espacio);
-                     $("#numero_inventario").val(record.numero_inventario);
-                     $("#capacidad_aire").val(record.capacidad);
-                     $("#capacidad_aire").attr('name',record.capacidad);
-                     $("#marca_aire").val(record.marca);
-                     $("#marca_aire").attr('name',record.marca);
-                     $("#tipo_aire").val(record.tipo);
-                     $("#tipo_aire").attr('name',record.tipo);
-                     registros++;
-                  }
-              });
-              if (registros > 0) {
-                  $("#divDialogConsulta").modal('show');
-              }else {
-                  alert(data.mensaje);
+    /**
+    * Se captura el evento cuando se da click en el boton visualizarAire y se
+    * realiza la operacion correspondiente.
+    */
+    $("#visualizarAire").click(function (e){
+      var informacion =  {};
+      var registros = 0;
+      var numeroInventario = $("#numero_inventario_search").val();
+      if (validarCadena(numeroInventario)) {
+          informacion['numero_inventario'] = numeroInventario;
+          var data = consultarInformacionObjeto("aire",informacion);
+          $.each(data, function(index, record) {
+              if($.isNumeric(index)) {
+                 $("#nombre_sede").val(record.nombre_sede);
+                 $("#nombre_campus").val(record.nombre_campus);
+                 $("#nombre_edificio").val(record.id_edificio+"-"+record.nombre_edificio);
+                 var piso = record.piso;
+                 if (piso == '0') {
+                     piso = 'Sótano';
+                 }else if(piso == '-1'){
+                     piso = 'Terraza';
+                 }
+                 $("#pisos").val(piso);
+                 $("#id_espacio").val(record.id_espacio);
+                 $("#numero_inventario").val(record.numero_inventario);
+                 $("#capacidad_aire").val(record.capacidad);
+                 $("#capacidad_aire").attr('name',record.capacidad);
+                 $("#marca_aire").val(record.marca);
+                 $("#marca_aire").attr('name',record.marca);
+                 $("#tipo_aire").val(record.tipo);
+                 $("#tipo_aire").attr('name',record.tipo);
+                 registros++;
               }
-          }else{
-              alert("ERROR. Ingrese el número de inventario");
-              $("#numero_inventario").focus();
+          });
+          if (registros > 0) {
+              $("#divDialogConsulta").modal('show');
+          }else {
+              alert(data.mensaje);
           }
-      });
+      }else{
+          alert("ERROR. Ingrese el número de inventario");
+          $("#numero_inventario").focus();
+      }
+    });
+
+    /**
+    * Se captura el evento cuando se da click en el boton visualizarCapacidadAires y se
+    * realiza la operacion correspondiente.
+    */
+    $("#visualizarCapacidadAires").click(function (e){
+       var informacion =  {};
+       var capacidad = $("#capacidad_aire").val();
+       if (validarCadena(capacidad)) {
+           informacion['capacidad'] = capacidad;
+           var data = consultarInformacionObjeto("capacidad_aire",informacion);
+           $.each(data, function(index, record) {
+               if($.isNumeric(index)) {
+                   $("#capacidad_aire_nueva").attr('name',record.id);
+                   $("#capacidad_aire_nueva").val(record.capacidad);
+               }
+           });
+           $("#divDialogConsulta").modal('show');
+       }else{
+           alert("ERROR. Seleccione la capacidad de aires acondicionados");
+           $("#capacidad_aire").focus();
+       }
+    });
+
+   /**
+    * Se captura el evento cuando se da click en el boton visualizarMarcaAires y se
+    * realiza la operacion correspondiente.
+    */
+    $("#visualizarMarcaAires").click(function (e){
+        var informacion =  {};
+        var marca = $("#marca_aire").val();
+        if (validarCadena(numeroInventario)) {
+            informacion['marca'] = marca;
+            var data = consultarInformacionObjeto("marca_aires",informacion);
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    $("#marca_aire_nueva").attr('name',record.id);
+                    $("#marca_aire_nueva").val(record.nombre);
+                }
+            });
+            $("#divDialogConsulta").modal('show');
+        }else{
+            alert("ERROR. Seleccione la marca de aires acondicionados");
+            $("#marca_aire").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton visualizarTipoAires y se
+     * realiza la operacion correspondiente.
+     */
+     $("#visualizarTipoAires").click(function (e){
+         var informacion =  {};
+         var numeroInventario = $("#tipo_aire").val();
+         if (validarCadena(numeroInventario)) {
+             informacion['numero_inventario'] = numeroInventario;
+             var data = consultarInformacionObjeto("aire",informacion);
+             $.each(data, function(index, record) {
+                 if($.isNumeric(index)) {
+                     $("#tipo_aire_nuevo").attr('name',record.id);
+                     $("#tipo_aire_nuevo").val(record.tipo);
+                 }
+             });
+             $("#divDialogConsulta").modal('show');
+         }else{
+             alert("ERROR. Seleccione el tipo de aires acondicionados");
+             $("#tipo_aire").focus();
+         }
+     });
 
     /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
