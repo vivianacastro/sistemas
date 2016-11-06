@@ -2044,6 +2044,58 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar un aire acondicionado por número de inventario.
+     * @param string $numero_inventario, número de inventario del aire acondicionado.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarAireNumeroInventario($numero_inventario){
+        $sql = "SELECT * FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del aire acondicionado seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar un aire acondicionado por ubicación.
+     * @param string $id_sede, id de la sede donde está el aire.
+     * @param string $id_campus, id del campus donde está el aire.
+     * @param string $id_edificio, id del edificio donde está el aire.
+     * @param string $id_espacio, id del espacio donde está el aire.
+     * @return metadata con el resultado de la búsqueda.
+     */
+    public function buscarAiresUbicacion($id_sede,$id_campus,$id_edificio,$id_espacio){
+        $sql = "SELECT * FROM aire_acondicionado WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire-Ubicación 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire-Ubicación 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un espacio en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
      * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.

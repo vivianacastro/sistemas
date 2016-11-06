@@ -105,6 +105,11 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
             initMapConsulta();
             rellenarMapaConsulta();
+        }else if(URLactual['href'].indexOf('consultar_aire') >= 0){
+            actualizarSelectSede();
+            actualizarSelectCapacidadAire();
+            actualizarSelectMarcaAire();
+            actualizarSelectTipoObjeto("tipo_aire",0);
         }
     })();
 
@@ -509,6 +514,62 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de las capacidades de los aires acondicionados.
+     * @returns {data} object json.
+    **/
+    function buscarCapacidadAire(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_capacidades_aire",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de las marcas de los aires acondicionados.
+     * @returns {data} object json.
+    **/
+    function buscarMarcaAire(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_marcas_aire",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que llena y actualiza el selector de campus.
      * @returns {undefined}
     **/
@@ -570,6 +631,46 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#"+material+id);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
+    **/
+    function actualizarSelectCapacidadAire(){
+        var data = buscarCapacidadAire();
+        $("#capacidad_aire").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#capacidad_aire");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.capacidad;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#capacidad_aire");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
+    **/
+    function actualizarSelectMarcaAire(){
+        var data = buscarMarcaAire();
+        $("#marca_aire").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#marca_aire");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#marca_aire");
             }
         });
     }
@@ -731,69 +832,89 @@ $(document).ready(function() {
             }
         }else{
             if (validarCadena($("#sede_search").val())) {
-                for (var i = 0; i < marcadores.length; i++) {
-                    marcadores[i].setMap(null);
-                }
-                var sede = {};
-                var bounds  = new google.maps.LatLngBounds();
-                $("#campus_search").empty();
-                if (URLactual['href'].indexOf('consultar_campus') >= 0) {
-                    $('#visualizarCampus').attr('disabled',true);
-                }
-                if (validarCadena($("#sede_search").val())) {
+                if (URLactual['href'].indexOf('consultar_aire') >= 0) {
+                    var sede = {};
+                    $("#campus_search").empty();
+                    $("#campus_search").val("");
                     sede["nombre_sede"] = $("#sede_search").val();
                     var data = buscarObjetos("campus",sede);
+                    var row = $("<option value=''/>");
+                    row.text("--Seleccionar--");
+                    row.appendTo("#campus_search");
+                    $.each(data, function(index, record) {
+                        if($.isNumeric(index)) {
+                            aux = record.nombre_campus;
+                            row = $("<option value='" + record.id + "'/>");
+                            row.text(aux);
+                            row.appendTo("#campus_search");
+                        }
+                    });
                 }else{
-                    rellenarMapa(mapaConsulta);
-                }
-                var row = $("<option value=''/>");
-                row.text("--Seleccionar--");
-                row.appendTo("#campus_search");
-                $.each(data, function(index, record) {
-                    if($.isNumeric(index)) {
-                        aux = record.nombre_campus;
-                        row = $("<option value='" + record.id + "'/>");
-                        row.text(aux);
-                        row.appendTo("#campus_search");
-                        var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                        var marker = new google.maps.Marker({
-                            position: myLatlng,
-                            icon: 'vistas/images/icono_campus.png',
-                            title: record.nombre_campus,
-                            id: record.id,
-                            id_sede: record.id_sede
-                        });
-                        marcadores.push(marker);
-                        marker.setMap(mapaConsulta);
-                        var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                        bounds.extend(loc);
-                    }
-                });
-                if (data.mensaje != "") {
-                    mapaConsulta.fitBounds(bounds);
-                    mapaConsulta.panToBounds(bounds);
                     for (var i = 0; i < marcadores.length; i++) {
-                        google.maps.event.addListener(marcadores[i], 'click',
-                        function () {
-                            $("#sede_search").val(this.id_sede);
-                            $("#campus_search").val(this.id).change();
-                            mapaConsulta.setZoom(15);
-                            mapaConsulta.setCenter(this.getPosition());
-                        });
+                        marcadores[i].setMap(null);
                     }
-                }else{
-                    getCoordenadas(mapaConsulta);
-                }
-                if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
-                    $("#edificio_search").empty();
-                    $("#edificio_search").val("");
-                }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
-                    $("#edificio_search").empty();
-                    $("#edificio_search").val("");
-                    $("#pisos_search").empty();
-                    $("#pisos_search").val("");
-                    $("#espacio_search").empty();
-                    $("#espacio_search").val("");
+                    var sede = {};
+                    var bounds  = new google.maps.LatLngBounds();
+                    $("#campus_search").empty();
+                    $("#campus_search").val("");
+                    if (URLactual['href'].indexOf('consultar_campus') >= 0) {
+                        $('#visualizarCampus').attr('disabled',true);
+                    }
+                    if (validarCadena($("#sede_search").val())) {
+                        sede["nombre_sede"] = $("#sede_search").val();
+                        var data = buscarObjetos("campus",sede);
+                    }else{
+                        rellenarMapa(mapaConsulta);
+                    }
+                    var row = $("<option value=''/>");
+                    row.text("--Seleccionar--");
+                    row.appendTo("#campus_search");
+                    $.each(data, function(index, record) {
+                        if($.isNumeric(index)) {
+                            aux = record.nombre_campus;
+                            row = $("<option value='" + record.id + "'/>");
+                            row.text(aux);
+                            row.appendTo("#campus_search");
+                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                            var marker = new google.maps.Marker({
+                                position: myLatlng,
+                                icon: 'vistas/images/icono_campus.png',
+                                title: record.nombre_campus,
+                                id: record.id,
+                                id_sede: record.id_sede
+                            });
+                            marcadores.push(marker);
+                            marker.setMap(mapaConsulta);
+                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                            bounds.extend(loc);
+                        }
+                    });
+                    if (data.mensaje != "") {
+                        mapaConsulta.fitBounds(bounds);
+                        mapaConsulta.panToBounds(bounds);
+                        for (var i = 0; i < marcadores.length; i++) {
+                            google.maps.event.addListener(marcadores[i], 'click',
+                            function () {
+                                $("#sede_search").val(this.id_sede);
+                                $("#campus_search").val(this.id).change();
+                                mapaConsulta.setZoom(15);
+                                mapaConsulta.setCenter(this.getPosition());
+                            });
+                        }
+                    }else{
+                        getCoordenadas(mapaConsulta);
+                    }
+                    if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
+                        $("#edificio_search").empty();
+                        $("#edificio_search").val("");
+                    }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
+                        $("#edificio_search").empty();
+                        $("#edificio_search").val("");
+                        $("#pisos_search").empty();
+                        $("#pisos_search").val("");
+                        $("#espacio_search").empty();
+                        $("#espacio_search").val("");
+                    }
                 }
             }else{
                 $("#campus_search").empty();
@@ -806,8 +927,25 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
+                $("#numero_inventario_search").empty();
+                $("#numero_inventario_search").val("");
+                $('#visualizarCampus').attr('disabled',true);
+                $('#visualizarCancha').attr('disabled',true);
+                $('#visualizarCorredor').attr('disabled',true);
+                $('#visualizarParqueadero').attr('disabled',true);
+                $('#visualizarPiscina').attr('disabled',true);
+                $('#visualizarPlazoleta').attr('disabled',true);
+                $('#visualizarSendero').attr('disabled',true);
+                $('#visualizarVia').attr('disabled',true);
+                $('#visualizarCubierta').attr('disabled',true);
+                $('#visualizarGradas').attr('disabled',true);
+                $('#visualizarEdificio').attr('disabled',true);
+                $('#visualizarEspacio').attr('disabled',true);
+                $('#visualizarAire').attr('disabled',true);
                 var sede = $("#sede_search").val();
-                rellenarMapa(mapaConsulta);
+                if (URLactual['href'].indexOf('consultar_aire') == -1) {
+                    rellenarMapa(mapaConsulta);
+                }
             }
         }
     });
@@ -832,374 +970,410 @@ $(document).ready(function() {
                 $('#visualizarCampus').attr('disabled',true);
             }
         }else{
-            for (var i = 0; i < marcadores.length; i++) {
-              marcadores[i].setMap(null);
-            }
-            var campus = {};
-            var bounds  = new google.maps.LatLngBounds();
-            if (validarCadena($("#campus_search").val())) {
-                campus["nombre_sede"] = $("#sede_search").val();
-                campus["nombre_campus"] = $("#campus_search").val();
-                if (URLactual['href'].indexOf('consultar_cancha') >= 0) {
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("canchas",campus);
+            if (URLactual['href'].indexOf('consultar_aire') >= 0) {
+                var campus = {};
+                if (validarCadena($("#campus_search").val())) {
                     var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id + " - " + record.uso;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_cancha.png',
-                                title: record.id + " - " + record.uso,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("corredores",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_corredor.png',
-                                title: record.id,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("parqueaderos",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_parqueadero.png',
-                                title: record.id,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("piscinas",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_piscina.png',
-                                title: record.id,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("plazoletas",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id + " - " + record.nombre;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_plazoleta.png',
-                                title: record.id + " - " + record.nombre,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("senderos",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_sendero.png',
-                                title: record.id,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else if(URLactual['href'].indexOf('consultar_via') >= 0){
-                    $("#codigo_search").empty();
-                    var data = buscarObjetos("vias",campus);
-                    var row = $("<option value=''/>");
-                    row.text("--Seleccionar--");
-                    row.appendTo("#codigo_search");
-                    $.each(data, function(index, record) {
-                        if($.isNumeric(index)) {
-                            aux = record.id;
-                            row = $("<option value='" + record.id + "'/>");
-                            row.text(aux);
-                            row.appendTo("#codigo_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_via.png',
-                                title: record.id,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
-                        }
-                    });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#codigo_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                }else{
+                    campus["nombre_sede"] = $("#sede_search").val();
+                    campus["nombre_campus"] = $("#campus_search").val();
                     var data = buscarObjetos("edificios",campus);
                     $("#edificio_search").empty();
-                    if(URLactual['href'].indexOf('consultar_edificio') >= 0){
-                        $('#visualizarEdificio').attr('disabled',true);
-                    }
-                    var row = $("<option value=''/>");
+                    $("#edificio_search").val("");
                     row.text("--Seleccionar--");
                     row.appendTo("#edificio_search");
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
-                            aux = record.id + "-" + record.nombre_edificio;
+                            aux = record.id + " - " + record.nombre_edificio;
                             row = $("<option value='" + record.id + "'/>");
                             row.text(aux);
                             row.appendTo("#edificio_search");
-                            var myLatlng = new google.maps.LatLng(record.lat,record.lng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                icon: 'vistas/images/icono_edificio.png',
-                                title: record.id + "-" + record.nombre_edificio,
-                                id: record.id,
-                                id_sede: record.id_sede,
-                                id_campus: record.id_campus
-                            });
-                            marcadores.push(marker);
-                            marker.setMap(mapaConsulta);
-                            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-                            bounds.extend(loc);
                         }
                     });
-                    if (data.mensaje != "") {
-                        mapaConsulta.fitBounds(bounds);
-                        mapaConsulta.panToBounds(bounds);
-                        for (var i = 0; i < marcadores.length; i++) {
-                            google.maps.event.addListener(marcadores[i], 'click',
-                            function () {
-                                $("#edificio_search").val(this.id).change();
-                                mapaConsulta.setZoom(19);
-                                mapaConsulta.setCenter(this.getPosition());
-                            });
-                        }
-                    }else{
-                        getCoordenadas(mapaConsulta);
-                    }
-                    if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
-                        $("#pisos_search").empty();
-                        $("#pisos_search").val("");
-                        $("#espacio_search").empty();
-                        $("#espacio_search").val("");
-                    }
-                }
-            }else{
-                if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
+                }else{
                     $("#edificio_search").empty();
                     $("#edificio_search").val("");
                     $("#pisos_search").empty();
                     $("#pisos_search").val("");
                     $("#espacio_search").empty();
                     $("#espacio_search").val("");
-                }else{
-                    $("#codigo_search").empty();
-                    $("#codigo_search").val("");
+                    $("#numero_inventario_search").empty();
+                    $("#numero_inventario_search").val("");
+                    $('#visualizarAire').attr('disabled',true);
                 }
-                $("#codigo_search").empty();
-                $("#codigo_search").val("");
-                $("#edificio_search").empty();
-                $("#edificio_search").val("");
-                $("#pisos_search").empty();
-                $("#pisos_search").val("");
-                $("#espacio_search").empty();
-                $("#espacio_search").val("");
-                var sede = $("#sede_search").val();
-                $("#sede_search").val(sede).change();
+            }else{
+                for (var i = 0; i < marcadores.length; i++) {
+                  marcadores[i].setMap(null);
+                }
+                var campus = {};
+                var bounds  = new google.maps.LatLngBounds();
+                if (validarCadena($("#campus_search").val())) {
+                    campus["nombre_sede"] = $("#sede_search").val();
+                    campus["nombre_campus"] = $("#campus_search").val();
+                    if (URLactual['href'].indexOf('consultar_cancha') >= 0) {
+                        $("#codigo_search").empty();
+                        $("#codigo_search").val("");
+                        var data = buscarObjetos("canchas",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id + " - " + record.uso;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_cancha.png',
+                                    title: record.id + " - " + record.uso,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_corredor') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("corredores",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_corredor.png',
+                                    title: record.id,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_parqueadero') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("parqueaderos",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_parqueadero.png',
+                                    title: record.id,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_piscina') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("piscinas",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_piscina.png',
+                                    title: record.id,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_plazoleta') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("plazoletas",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id + " - " + record.nombre;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_plazoleta.png',
+                                    title: record.id + " - " + record.nombre,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_sendero') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("senderos",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_sendero.png',
+                                    title: record.id,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else if(URLactual['href'].indexOf('consultar_via') >= 0){
+                        $("#codigo_search").empty();
+                        var data = buscarObjetos("vias",campus);
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#codigo_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#codigo_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_via.png',
+                                    title: record.id,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#codigo_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                    }else{
+                        var data = buscarObjetos("edificios",campus);
+                        $("#edificio_search").empty();
+                        if(URLactual['href'].indexOf('consultar_edificio') >= 0){
+                            $('#visualizarEdificio').attr('disabled',true);
+                        }
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#edificio_search");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id + "-" + record.nombre_edificio;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#edificio_search");
+                                var myLatlng = new google.maps.LatLng(record.lat,record.lng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    icon: 'vistas/images/icono_edificio.png',
+                                    title: record.id + "-" + record.nombre_edificio,
+                                    id: record.id,
+                                    id_sede: record.id_sede,
+                                    id_campus: record.id_campus
+                                });
+                                marcadores.push(marker);
+                                marker.setMap(mapaConsulta);
+                                var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                                bounds.extend(loc);
+                            }
+                        });
+                        if (data.mensaje != "") {
+                            mapaConsulta.fitBounds(bounds);
+                            mapaConsulta.panToBounds(bounds);
+                            for (var i = 0; i < marcadores.length; i++) {
+                                google.maps.event.addListener(marcadores[i], 'click',
+                                function () {
+                                    $("#edificio_search").val(this.id).change();
+                                    mapaConsulta.setZoom(19);
+                                    mapaConsulta.setCenter(this.getPosition());
+                                });
+                            }
+                        }else{
+                            getCoordenadas(mapaConsulta);
+                        }
+                        if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
+                            $("#pisos_search").empty();
+                            $("#pisos_search").val("");
+                            $("#espacio_search").empty();
+                            $("#espacio_search").val("");
+                        }
+                    }
+                }else{
+                    if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0 || URLactual['href'].indexOf('consultar_espacio') >= 0) {
+                        $("#edificio_search").empty();
+                        $("#edificio_search").val("");
+                        $("#pisos_search").empty();
+                        $("#pisos_search").val("");
+                        $("#espacio_search").empty();
+                        $("#espacio_search").val("");
+                        $('#visualizarCubierta').attr('disabled',true);
+                        $('#visualizarGradas').attr('disabled',true);
+                        $('#visualizarEspacio').attr('disabled',true);
+                    }else{
+                        $("#codigo_search").empty();
+                        $("#codigo_search").val("");
+                        $('#visualizarEdificio').attr('disabled',true);
+                        $('#visualizarAire').attr('disabled',true);
+                    }
+                    $("#edificio_search").empty();
+                    $("#edificio_search").val("");
+                    $("#pisos_search").empty();
+                    $("#pisos_search").val("");
+                    $("#espacio_search").empty();
+                    $("#espacio_search").val("");
+                    var sede = $("#sede_search").val();
+                    $("#sede_search").val(sede).change();
+                }
             }
         }
     });
@@ -1294,6 +1468,7 @@ $(document).ready(function() {
                 }
                 if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
                     $("#pisos_search").empty();
+                    $("#pisos_search").val("");
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
                     row.appendTo("#pisos_search");
@@ -1338,6 +1513,7 @@ $(document).ready(function() {
                     }
                 }else{
                     $("#pisos_search").empty();
+                    $("#pisos_search").val("");
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
                     row.appendTo("#pisos_search");
@@ -1382,8 +1558,13 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
+                $("#numero_inventario_search").val("");
+                $("#numero_inventario_search").empty();
                 var campus = $("#campus_search").val();
                 $("#campus_search").val(campus).change();
+                $('#visualizarEdificio').attr('disabled',true);
+                $('#visualizarEspacio').attr('disabled',true);
+                $('#visualizarAire').attr('disabled',true);
             }
         }
     });
@@ -1400,17 +1581,15 @@ $(document).ready(function() {
                     break;
                 }
             }
-            if (validarCadena($("#edificio_search").val())) {
+            if (validarCadena($("#pisos_search").val())) {
                 $('#visualizarCubierta').removeAttr("disabled");
                 $('#visualizarGradas').removeAttr("disabled");
-                $('#visualizarEspacio').removeAttr("disabled");
             }else{
                 $('#visualizarCubierta').attr('disabled',true);
                 $('#visualizarGradas').attr('disabled',true);
-                $('#visualizarEspacio').removeAttr("disabled");
             }
         }else{
-            if (validarCadena($("#edificio_search").val())) {
+            if (validarCadena($("#pisos_search").val())) {
                 var edificio = {};
                 edificio["nombre_sede"] = $("#sede_search").val();
                 edificio["nombre_campus"] = $("#campus_search").val();
@@ -1418,6 +1597,9 @@ $(document).ready(function() {
                 edificio["piso"] = $("#pisos_search").val();
                 var data = buscarObjetos("espacios",edificio);
                 $("#espacio_search").empty();
+                $("#espacio_search").val("");
+                $("#numero_inventario_search").empty();
+                $("#numero_inventario_search").val("");
                 var row = $("<option value=''/>");
                 row.text("--Seleccionar--");
                 row.appendTo("#espacio_search");
@@ -1434,8 +1616,13 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
+                $("#numero_inventario_search").empty();
+                $("#numero_inventario_search").val("");
                 var edificio = $("#edificio_search").val();
                 $("#edificio_search").val(edificio).change();
+                $('#visualizarEdificio').attr('disabled',true);
+                $('#visualizarEspacio').attr('disabled',true);
+                $('#visualizarAire').attr('disabled',true);
             }
         }
     });
@@ -1445,10 +1632,54 @@ $(document).ready(function() {
      * y se actualiza el selector de espacios.
      */
     $("#espacio_search").change(function (e) {
-        if (validarCadena($("#espacio_search").val())) {
-            $('#visualizarEspacio').removeAttr("disabled");
+        if(URLactual['href'].indexOf('consultar_aire') >= 0){
+            var sede = $("#sede_search");
+            var campus = $("#campus_search");
+            var edificio = $("#edificio_search");
+            var espacio = $("#espacio_search");
+            if (validarCadena($("#espacio_search").val())) {
+                var informacion = {};
+                informacion["id_sede"] = $("#sede_search").val();
+                informacion["id_campus"] = $("#campus_search").val();
+                informacion["id_edificio"] = $("#edificio_search").val();
+                informacion["id_espacio"] = $("#espacio_search").val();
+                var data = buscarObjetos("aires_ubicacion",informacion);
+                $("#numero_inventario_search").empty();
+                $("#numero_inventario_search").val("");
+                var row = $("<option value=''/>");
+                row.text("--Seleccionar--");
+                row.appendTo("#numero_inventario_search");
+                $.each(data, function(index, record) {
+                    if($.isNumeric(index)) {
+                        aux = record.numero_inventario;
+                        row = $("<option value='" + record.numero_inventario + "'/>");
+                        row.text(aux);
+                        row.appendTo("#numero_inventario_search");
+                    }
+                });
+            }else{
+                $("#numero_inventario_search").empty();
+                $("#numero_inventario_search").val("");
+                $('#visualizarAire').attr('disabled',true);
+            }
         }else{
-            $('#visualizarEspacio').attr('disabled',true);
+            if (validarCadena($("#espacio_search").val())) {
+                $('#visualizarEspacio').removeAttr("disabled");
+            }else{
+                $('#visualizarEspacio').attr('disabled',true);
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector espacio_search
+     * y se actualiza el selector de espacios.
+     */
+    $("#numero_inventario_search").change(function (e) {
+        if (validarCadena($("#numero_inventario_search").val())) {
+            $('#visualizarAire').removeAttr("disabled");
+        }else{
+            $('#visualizarAire').attr('disabled',true);
         }
     });
 

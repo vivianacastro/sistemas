@@ -338,6 +338,28 @@ class controlador_consultas
 
     /**
     * Función que despliega el panel que permite consultar
+    * un aire acondicionado en el sistema.
+    **/
+    public function consultar_aire() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Aire Acondicionado',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
+                $v->retornar_vista(MOD_AIRES, MODIFICACION, OPERATION_CONSULTAR_AIRE, $data);
+            }else{
+                $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_AIRE, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+    * Función que despliega el panel que permite consultar
     * el mapa con todos los campus, edificios, etc. creados en el sistema.
     **/
     public function consultar_mapa() {
@@ -847,6 +869,68 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
                     'tipo_objeto' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los aires acondicionados almacenados en el sistema.
+     */
+    public function consultar_aire_numero_inventario() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarAireNumeroInventario($info["numero_inventario"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => mb_convert_case($valor['id_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => mb_convert_case($valor['id_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_espacio' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'capacidad' => mb_convert_case($valor['capacidad'],MB_CASE_TITLE,"UTF-8"),
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los aires acondicionados almacenados en el sistema.
+     */
+    public function consultar_aires_ubicacion() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarAiresUbicacion($info["id_sede"],$info["id_campus"],$info["id_edificio"],$info["id_espacio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => mb_convert_case($valor['id_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => mb_convert_case($valor['id_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'id_espacio' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'capacidad' => mb_convert_case($valor['capacidad'],MB_CASE_TITLE,"UTF-8"),
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
