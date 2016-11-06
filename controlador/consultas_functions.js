@@ -4460,11 +4460,11 @@ $(document).ready(function() {
       */
       $("#visualizarAire").click(function (e){
           var informacion =  {};
+          var registros = 0;
           var numeroInventario = $("#numero_inventario_search").val();
           if (validarCadena(numeroInventario)) {
               informacion['numero_inventario'] = numeroInventario;
               var data = consultarInformacionObjeto("aire",informacion);
-              console.log(data);
               $.each(data, function(index, record) {
                   if($.isNumeric(index)) {
                      $("#nombre_sede").val(record.nombre_sede);
@@ -4479,9 +4479,14 @@ $(document).ready(function() {
                      $("#marca_aire").attr('name',record.marca);
                      $("#tipo_aire").val(record.tipo);
                      $("#tipo_aire").attr('name',record.tipo);
+                     registros++;
                   }
               });
-              $("#divDialogConsulta").modal('show');
+              if (registros > 0) {
+                  $("#divDialogConsulta").modal('show');
+              }else {
+                  alert(data.mensaje);
+              }
           }else{
               alert("ERROR. Ingrese el número de inventario");
               $("#numero_inventario").focus();
@@ -4613,6 +4618,9 @@ $(document).ready(function() {
         $("input[name=tiene_espacio_padre]").attr('disabled', true);
         $("#nombre_tipo_material").attr('disabled',true);
         $("#nombre_tipo_objeto").attr('disabled',true);
+        $("#capacidad_aire").attr('disabled',true);
+        $("#marca_aire").attr('disabled',true);
+        $("#tipo_aire").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();

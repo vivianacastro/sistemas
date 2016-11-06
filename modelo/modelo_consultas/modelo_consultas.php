@@ -2064,8 +2064,10 @@ class modelo_consultas
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 2)";
                 $GLOBALS['sql'] = $sql;
-            }
-            if($l_stmt->rowCount() >= 0){
+            }elseif($l_stmt->rowCount() == 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "El aire acondicionado con número de inventario ".$numero_inventario." no se encuentra registrado en el sistema";
+            }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del aire acondicionado seleccionado";
             }
