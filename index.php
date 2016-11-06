@@ -273,7 +273,8 @@ $map = array(
         'aires_crear_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_marca_aire'),
         'aires_crear_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'crear_tipo_aire'),
         'aires_registrar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'registrar_mantenimiento_aire'),
-        'aires_consultar_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aire'),
+        'aires_consultar_aire_ubicacion' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aire_ubicacion'),
+        'aires_consultar_aire_numero_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aire_numero_inventario'),
         'aires_consultar_capacidad_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidad_aire'),
         'aires_consultar_marca_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marca_aire'),
         'aires_consultar_tipo_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_aire'),
@@ -285,7 +286,7 @@ $map = array(
         'guardar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_tipo_aire'),
         //Acciones de consulta
         'consultar_aires_ubicacion' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aires_ubicacion'),
-        'consultar_aire_numero_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aire_numero_inventario'),
+        'consultar_informacion_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_aire'),
         'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación

@@ -832,7 +832,7 @@ $(document).ready(function() {
             }
         }else{
             if (validarCadena($("#sede_search").val())) {
-                if (URLactual['href'].indexOf('consultar_aire') >= 0) {
+                if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
                     var sede = {};
                     $("#campus_search").empty();
                     $("#campus_search").val("");
@@ -970,7 +970,7 @@ $(document).ready(function() {
                 $('#visualizarCampus').attr('disabled',true);
             }
         }else{
-            if (URLactual['href'].indexOf('consultar_aire') >= 0) {
+            if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
                 var campus = {};
                 if (validarCadena($("#campus_search").val())) {
                     var row = $("<option value=''/>");
@@ -4454,6 +4454,40 @@ $(document).ready(function() {
          $("#divDialogConsulta").modal('show');
      });
 
+     /**
+      * Se captura el evento cuando se da click en el boton visualizarAire y se
+      * realiza la operacion correspondiente.
+      */
+      $("#visualizarAire").click(function (e){
+          var informacion =  {};
+          var numeroInventario = $("#numero_inventario_search").val();
+          if (validarCadena(numeroInventario)) {
+              informacion['numero_inventario'] = numeroInventario;
+              var data = consultarInformacionObjeto("aire",informacion);
+              console.log(data);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                     $("#nombre_sede").val(record.nombre_sede);
+                     $("#nombre_campus").val(record.nombre_campus);
+                     $("#nombre_edificio").val(record.id_edificio+"-"+record.nombre_edificio);
+                     $("#pisos").val(record.piso);
+                     $("#id_espacio").val(record.id_espacio);
+                     $("#numero_inventario").val(record.numero_inventario);
+                     $("#capacidad_aire").val(record.capacidad);
+                     $("#capacidad_aire").attr('name',record.capacidad);
+                     $("#marca_aire").val(record.marca);
+                     $("#marca_aire").attr('name',record.marca);
+                     $("#tipo_aire").val(record.tipo);
+                     $("#tipo_aire").attr('name',record.tipo);
+                  }
+              });
+              $("#divDialogConsulta").modal('show');
+          }else{
+              alert("ERROR. Ingrese el número de inventario");
+              $("#numero_inventario").focus();
+          }
+      });
+
     /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
      */
@@ -4463,7 +4497,7 @@ $(document).ready(function() {
                 mapaModificacion.setZoom(15);
                 google.maps.event.trigger(mapaModificacion, "resize");
                 mapaModificacion.setCenter(coordsMapaModificacion);
-            }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1))){
+            }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1) && (URLactual['href'].indexOf('consultar_aire') == -1))){
                 mapaModificacion.setZoom(18);
                 google.maps.event.trigger(mapaModificacion, "resize");
                 mapaModificacion.setCenter(coordsMapaModificacion);
@@ -5188,6 +5222,19 @@ $(document).ready(function() {
         $("#nombre_tipo_objeto").removeAttr("disabled");
         $("#modificar_tipo_objeto").hide();
         $("#guardar_modificaciones_tipo_objeto").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton modificar_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#modificar_aire").click(function (e){
+        $("#marca_aire").removeAttr("disabled");
+        $("#tipo_aire").removeAttr("disabled");
+        $("#capacidad_aire").removeAttr("disabled");
+        $("#modificar_aire").hide();
+        $("#guardar_modificaciones_aire").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 

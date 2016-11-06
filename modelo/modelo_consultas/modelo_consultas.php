@@ -2049,7 +2049,12 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarAireNumeroInventario($numero_inventario){
-        $sql = "SELECT * FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."';";
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.numero_inventario, a.capacidad, a.marca, a.tipo
+                FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
+                                            JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
+                                            JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
+                                            JOIN sede e ON a.id_sede = e.id
+                WHERE numero_inventario = '".$numero_inventario."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 1)";

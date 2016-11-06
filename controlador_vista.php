@@ -64,7 +64,8 @@ class controlador_vista
                 'CREAR_MARCA_AIRE' =>'index.php?action='.OPERATION_CREAR_MARCA_AIRE,
                 'CREAR_TIPO_AIRE' =>'index.php?action='.OPERATION_CREAR_TIPO_AIRE,
                 'REGISTRAR_MANTENIMIENTO_AIRE' =>'index.php?action='.OPERATION_REGISTRAR_MANTENIMIENTO_AIRE,
-                'CONSULTAR_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_AIRE,
+                'CONSULTAR_AIRE_UBICACION' =>'index.php?action='.OPERATION_CONSULTAR_AIRE_UBICACION,
+                'CONSULTAR_AIRE_NUMERO_INVENTARIO' =>'index.php?action='.OPERATION_CONSULTAR_AIRE_NUMERO_INVENTARIO,
                 'CONSULTAR_CAPACIDAD_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_CAPACIDAD_AIRE,
                 'CONSULTAR_MARCA_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_MARCA_AIRE,
                 'CONSULTAR_TIPO_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_TIPO_AIRE,
@@ -107,18 +108,18 @@ class controlador_vista
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_admin.html';
         }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_todos.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') != 0 && strcmp($_SESSION['creacion_aires'],'true') != 0){
-            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pcr_ic_ac.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') != 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') != 0){
-            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pc_icr_ac.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') != 0 && strcmp($_SESSION['creacion_inventario'],'true') != 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
-            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pc_ic_acr.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') != 0){
+        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'false') == 0){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pcr_icr_ac.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') != 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
+        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'false') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pcr_ic_acr.html';
-        }else if(strcmp($_SESSION['creacion_planta'],'true') != 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
+        }else if(strcmp($_SESSION['creacion_planta'],'false') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pc_icr_acr.html';
+        }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'false') == 0 && strcmp($_SESSION['creacion_aires'],'false') == 0){
+            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pcr_ic_ac.html';
+        }else if(strcmp($_SESSION['creacion_planta'],'false') == 0 && strcmp($_SESSION['creacion_inventario'],'false') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
+            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pc_ic_acr.html';
+        }else if(strcmp($_SESSION['creacion_planta'],'false') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'false') == 0){
+            $file = dirname(__FILE__).'/vistas/vistas_menu/menu_pc_icr_ac.html';
         }else{
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_consulta_todos.html';
         }
