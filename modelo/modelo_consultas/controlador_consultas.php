@@ -1749,7 +1749,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarAireNumeroInventario($info["capacidad"]);
+            $data = $m->buscarCapacidadAires($info["capacidad"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
@@ -1774,7 +1774,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarAireNumeroInventario($info["marca"]);
+            $data = $m->buscarMarcaAires($info["marca"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
@@ -1799,7 +1799,7 @@ class controlador_consultas
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarAireNumeroInventario($info["tipo"]);
+            $data = $m->buscarTipoAires($info["tipo"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],

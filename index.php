@@ -290,6 +290,8 @@ $map = array(
         'consultar_informacion_capacidad_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_capacidad_aires'),
         'consultar_informacion_marca_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_marca_aires'),
         'consultar_informacion_tipo_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_tipo_aires'),
+        'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
+        'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación
 
         //Acciones Módulo Usuarios

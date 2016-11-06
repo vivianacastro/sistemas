@@ -4,7 +4,7 @@
     <div class='form-group'>
         <div><b><h2>Buscar Tipo Aires Acondicionados</h2></b><br></div>
         <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
-        <select class='form-control formulario' name='tipo_aire' id='tipo_aire' required></select><br>
+        <select class='form-control formulario' name='tipo_aire_search' id='tipo_aire_search' required></select><br>
     <div><br>
     <div class='form_button'>
         <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarTipoAires" id="visualizarTipoAires" value="Ver Información" title="Ver la información del tipo de aires acondicionados seleccionado" disabled/>
@@ -21,10 +21,7 @@
                 <div class='form-group'>
                     <div id='informacionCampus'>
                         <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
-                        <div class="input-group">
-                            <select class='form-control formulario' name='tipo_aire_nueva' id='tipo_aire_nueva' disabled required></select><br>
-                            <span class="input-group-addon">BTU</span>
-                        </div><br>
+                        <input class='form-control formulario' type='text' maxlength="100" name='tipo_aire_nuevo' id='tipo_aire_nuevo' value='' placeholder='Ej: Split' disabled required/><br>
                     </div>
                 </div>
             </div>
