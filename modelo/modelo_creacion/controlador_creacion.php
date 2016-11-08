@@ -17,7 +17,7 @@ class controlador_creacion
             'mensaje' => 'Crear Sede',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SEDE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -36,7 +36,7 @@ class controlador_creacion
             'mensaje' => 'Crear Campus',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CAMPUS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -55,7 +55,7 @@ class controlador_creacion
             'mensaje' => 'Crear Cancha',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CANCHA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -74,7 +74,7 @@ class controlador_creacion
             'mensaje' => 'Crear Corredor',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CORREDOR, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -93,7 +93,7 @@ class controlador_creacion
             'mensaje' => 'Crear Cubierta',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CUBIERTA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -112,7 +112,7 @@ class controlador_creacion
             'mensaje' => 'Crear Gradas',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_GRADAS, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -131,7 +131,7 @@ class controlador_creacion
             'mensaje' => 'Crear Parqueadero',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PARQUEADERO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -150,7 +150,7 @@ class controlador_creacion
             'mensaje' => 'Crear Piscina',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PISCINA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -169,7 +169,7 @@ class controlador_creacion
             'mensaje' => 'Crear Plazoleta',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PLAZOLETA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -188,7 +188,7 @@ class controlador_creacion
             'mensaje' => 'Crear Sendero Peatonal',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SENDERO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -207,7 +207,7 @@ class controlador_creacion
             'mensaje' => 'Crear Vía',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_VIA, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -226,7 +226,7 @@ class controlador_creacion
             'mensaje' => 'Crear Edificio',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_EDIFICIO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -245,7 +245,7 @@ class controlador_creacion
             'mensaje' => 'Crear Espacio',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_ESPACIO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -264,7 +264,7 @@ class controlador_creacion
             'mensaje' => 'Crear Tipo Material',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_TIPO_MATERIAL, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -283,7 +283,7 @@ class controlador_creacion
             'mensaje' => 'Crear Tipo Objeto',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_TIPO_OBJETO, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -302,7 +302,7 @@ class controlador_creacion
             'mensaje' => 'Crear Aire Acondicionado',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_AIRE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -321,7 +321,7 @@ class controlador_creacion
             'mensaje' => 'Crear Capacidad de Aires Acondicionados',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_CAPACIDAD_AIRE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -340,7 +340,7 @@ class controlador_creacion
             'mensaje' => 'Crear Marca de Aires Acondicionados',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_MARCA_AIRE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -359,8 +359,27 @@ class controlador_creacion
             'mensaje' => 'Crear Tipo de Aires Acondicionados',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_TIPO_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+    * Función que despliega el panel que permite registrar un mantenimiento
+	* realizado a un aire acondicionado que esté registrado en el sistema.
+    **/
+    public function registrar_mantenimiento_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Registrar Mantenimiento Aire Acondicionado',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_REGISTRAR_MANTENIMIENTO_AIRE, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
