@@ -3668,6 +3668,36 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite consultar si una orden de mantenimiento existe.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function verificarOrdenMantenimiento($numero_orden){
+        $numero_orden = htmlspecialchars(trim($numero_orden));
+        $sql = "SELECT * FROM ordenes_mantenimiento WHERE numero_solicitud = '".$numero_orden."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Orden Mantenimiento 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Orden Mantenimiento 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+            else{
+                $GLOBALS['mensaje'] = 'ERROR. La orden de mantenimiento no se encuentra registrada en el sistema.';
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una capacidad de aires acondicionados ya esta registrada en el sistema.
      * @param string $capacidad, capacidad.
      * @return array

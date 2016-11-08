@@ -1378,7 +1378,7 @@ class controlador_creacion
     }
 
 	/**
-     * Funcion que permite un aire acondicionado.
+     * Funcion que permite crear un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_aire(){
@@ -1401,7 +1401,7 @@ class controlador_creacion
     }
 
 	/**
-     * Funcion que permite una capacidad de un aire acondicionado.
+     * Funcion que permite crear una capacidad de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_capacidad_aire(){
@@ -1424,7 +1424,7 @@ class controlador_creacion
     }
 
 	/**
-     * Funcion que permite una marca de un aire acondicionado.
+     * Funcion que permite crear una marca de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_marca_aire(){
@@ -1447,7 +1447,7 @@ class controlador_creacion
     }
 
 	/**
-     * Funcion que permite un tipo de un aire acondicionado.
+     * Funcion que permite crear un tipo de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_tipo_aire(){
@@ -1461,6 +1461,32 @@ class controlador_creacion
             $verificar = $m->verificarTipoObjeto("tipo_aire",$info['tipo']);
             if($verificar){
                 $m->guardarTipoAire($info['tipo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+     * Funcion que permite registrar un mantenimiento a un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_mantenimiento_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+		$n = new modelo_creacion(Config::$mvc_bd_ordenes_mantenimiento, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarAire($info['numero_inventario']);
+			$verificarOrden = $n->verificarOrdenMantenimiento($info['numero_orden']);
+            if(!$verificar && $verificarOrden){
+                $m->guardarMantenimientoAire($info['numero_inventario'],$info['numero_orden'],$info['descripcion']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];

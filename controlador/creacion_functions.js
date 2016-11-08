@@ -4332,7 +4332,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton guardar_marca_aire y se
+     * Se captura el evento cuando se da click en el boton guardar_aire y se
      * realiza la operacion correspondiente.
      */
     $("#guardar_aire").click(function (e){
@@ -4393,6 +4393,43 @@ $(document).ready(function() {
                     $("#marca_aire").val("");
                     $("#tipo_aire").val("");
                     $("#capacidad_aire").val("");
+                    window.scrollTo(0,0);
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_mantenimiento_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del mantenimiento al aire acondicionado?");
+        if (confirmacion) {
+            var numeroInventario = limpiarCadena($("#numero_inventario").val());
+            var numeroOrden = limpiarCadena($("#numero_orden").val());
+            var descripcionTrabajo = limpiarCadena($("#descripcion_trabajo").val());
+            if (!validarCadena(numeroInventario)) {
+                alert("ERROR. Ingrese el número de inventario del aire acondicionado");
+                $("#numero_inventario").focus();
+            }else if(!validarCadena(numeroOrden)){
+                alert("ERROR. Ingrese el número de la orden de mantenimiento");
+                $("#numero_orden").focus();
+            }else if(!validarCadena(descripcionTrabajo)){
+                alert("ERROR. Ingrese una descripción del trabajo realizado en el aire acondicionado");
+                $("#descripcion_trabajo").focus();
+            }else{
+                var informacion = {};
+                informacion["numero_inventario"] = numeroInventario;
+                informacion["numero_orden"] = numeroOrden;
+                informacion["descripcion_trabajo"] = descripcionTrabajo;
+                var data = guardarObjeto("mantenimiento_aire",informacion);
+                alert(data.mensaje);
+                console.log(data);
+                if (data.verificar) {
+                    $("#numero_inventario").val("");
+                    $("#numero_orden").val("");
+                    $("#descripcion_trabajo").val("");
                     window.scrollTo(0,0);
                 }
             }
