@@ -6,7 +6,7 @@ ini_set('display_errors', '1');*
  */
 class controlador_creacion
 {
-		/**
+	/**
     * Función que despliega el panel que permite crear
     * una sede en el sistema.
     **/
@@ -82,7 +82,7 @@ class controlador_creacion
         }
     }
 
-		/**
+	/**
     * Función que despliega el panel que permite crear
     * una cubierta en el sistema.
     **/
@@ -101,7 +101,7 @@ class controlador_creacion
         }
     }
 
-		/**
+	/**
     * Función que despliega el panel que permite crear
     * las gradas en el sistema.
     **/
@@ -455,7 +455,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar una cancha en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -478,7 +478,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar un corredor en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -501,7 +501,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar una cubierta en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -524,7 +524,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar unas gradas en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
     */
@@ -547,7 +547,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar un parqueadero en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -570,7 +570,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar una piscina en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -593,7 +593,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar una plazoleta en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -616,7 +616,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar un sendero en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -639,7 +639,7 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
+	/**
      * Funcion que permite guardar una vía en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -791,7 +791,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar los planos que el usuario seleccione
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_campus(){
@@ -820,7 +820,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_campus(){
@@ -849,7 +849,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar los planos que el usuario seleccione
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_edificio(){
@@ -873,7 +873,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_edificio(){
@@ -896,8 +896,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_cancha(){
@@ -921,7 +921,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_cancha(){
@@ -944,8 +944,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_corredor(){
@@ -969,7 +969,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_corredor(){
@@ -992,8 +992,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_cubierta(){
@@ -1017,7 +1017,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_cubierta(){
@@ -1040,8 +1040,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_gradas(){
@@ -1065,7 +1065,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_gradas(){
@@ -1088,8 +1088,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_parqueadero(){
@@ -1113,7 +1113,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_parqueadero(){
@@ -1136,8 +1136,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_piscina(){
@@ -1161,7 +1161,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_piscina(){
@@ -1184,8 +1184,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_plazoleta(){
@@ -1210,7 +1210,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_plazoleta(){
@@ -1233,8 +1233,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_sendero(){
@@ -1258,7 +1258,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_sendero(){
@@ -1281,8 +1281,8 @@ class controlador_creacion
         echo json_encode($result);
     }
 
-		/**
-     * Funcion que permite guardar los planos que el usuario seleccione
+	/**
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_via(){
@@ -1306,7 +1306,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_via(){
@@ -1330,7 +1330,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar los planos que el usuario seleccione
+     * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_planos_espacio(){
@@ -1354,7 +1354,7 @@ class controlador_creacion
     }
 
     /**
-     * Funcion que permite guardar las fotos que el usuario seleccione
+     * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
     public function guardar_fotos_espacio(){
@@ -1391,12 +1391,36 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarAire($info['numero_inventario']);
             if($verificar){
-                $verificar = $m->guardarAire($info['numero_inventario'],$info['sede'],$info['campus'],$info['edificio'],$info['espacio'],$info['capacidad'],$info['marca'],$info['tipo']);
+                $verificar = $m->guardarAire($info['numero_inventario'],$info['sede'],$info['campus'],$info['edificio'],$info['espacio'],$info['capacidad'],$info['marca'],$info['tipo'],$info['tecnologia_aire'],$info['fecha_instalacion'],$info['instalador'],$info['periodicidad_mantenimiento'],$info['ubicacion_condensadora']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
         $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+     * Funcion que permite guardar las fotos que el usuario seleccione.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_fotos_aire(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = $_FILES;
+            $infoAire = json_decode($_POST['aire_acondicionado'], true);
+            for ($i=0; $i < count($info); $i++) {
+                $file = $info['archivo'.$i];
+                $verificar = $m->guardarFotoAire($infoCancha['id_aire'],$file);
+                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+                $result['sql'] = $GLOBALS['sql'];
+                $result['verificar'][$i] = $verificar;
+            }
+        }
         echo json_encode($result);
     }
 

@@ -3041,7 +3041,7 @@ class modelo_creacion {
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
      */
-    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$espacio,$capacidad,$marca,$tipo){
+    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$espacio,$capacidad,$marca,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sede = htmlspecialchars(trim($sede));
         $campus = htmlspecialchars(trim($campus));
@@ -3050,7 +3050,12 @@ class modelo_creacion {
         $capacidad = htmlspecialchars(trim($capacidad));
         $marca = htmlspecialchars(trim($marca));
         $tipo = htmlspecialchars(trim($tipo));
-        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$_SESSION["login"]."');";
+        $tecnologia_aire = htmlspecialchars(trim($tecnologia_aire));
+        $fecha_instalacion = htmlspecialchars(trim($fecha_instalacion));
+        $instalador = htmlspecialchars(trim($instalador));
+        $periodicidad_mantenimiento = htmlspecialchars(trim($periodicidad_mantenimiento));
+        $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
+        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,tecnologia,fecha_instalacion,instalador,periodicidad_mantenimiento,ubicacion_condensadora,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$tecnologia_aire."','".$fecha_instalacion."','".$instalador."','".$periodicidad_mantenimiento."','".$ubicacion_condensadora."','".$_SESSION["login"]."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 1)";
@@ -3664,6 +3669,51 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return true;
             }
+        }
+    }
+
+    /**
+     * Función que permite guardar fotos de un aire acondicionado que el usuario selecionó.
+     * @param string $id_aire, id del aire.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+     */
+    public function guardarFotoAire($id_aire,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_aire = htmlspecialchars(trim($id_aire));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = __ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/";
+            if (!file_exists($ruta.$plano['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO aire_acondicionado_archivos (id_aire,nombre,tipo) VALUES ('".$id_aire."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        $GLOBALS['sql'] = $sql;
+                return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
         }
     }
 

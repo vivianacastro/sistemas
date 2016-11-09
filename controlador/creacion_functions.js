@@ -4478,6 +4478,11 @@ $(document).ready(function() {
                     informacion["capacidad"] = capacidad;
                     informacion["marca"] = marca;
                     informacion["tipo"] = tipo;
+                    informacion["tecnologia_aire"] = tecnologia;
+                    informacion["fecha_instalacion"] = fechaInstalacion;
+                    informacion["instalador"] = instalador;
+                    informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
+                    informacion["ubicacion_condensadora"] = ubicacionCondensadora;
                     var data = guardarObjeto("aire_acondicionado",informacion);
                     var resultadoFotos = guardarFotos("aire_acondicionado",arregloFotos);
                     alert(data.mensaje);
