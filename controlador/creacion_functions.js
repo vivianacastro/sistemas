@@ -105,6 +105,8 @@ $(document).ready(function() {
             actualizarSelectSede();
             actualizarSelectCapacidadAire();
             actualizarSelectMarcaAire();
+            actualizarSelectTipoObjeto("tipo_tecnologia_aire",0);
+            actualizarSelectTipoObjeto("tipo_periodicidad_mantenimiento",0);
             actualizarSelectTipoObjeto("tipo_aire",0);
             icono = 'vistas/images/icono_edificio.png';
         }
@@ -805,6 +807,36 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de las capacidades de los aires acondicionados.
+     * @returns {data} object json.
+    **/
+    function buscarAiresEspacio(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_aires_ubicacion",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que realiza una consulta de las marcas de los aires acondicionados.
      * @returns {data} object json.
     **/
@@ -1024,7 +1056,11 @@ $(document).ready(function() {
             }
         });
         $("#nombre_edificio").empty();
+        $("#nombre_edificio").val("");
         $("#pisos").empty();
+        $("#pisos").val("");
+        $("#id_espacio").empty();
+        $("#id_espacio").val("");
     });
 
     /**
@@ -1074,6 +1110,9 @@ $(document).ready(function() {
             }
         });
         $("#pisos").empty();
+        $("#pisos").val("");
+        $("#id_espacio").empty();
+        $("#id_espacio").val("");
     });
 
     /**
@@ -1156,11 +1195,12 @@ $(document).ready(function() {
                 }
             }
         }
+        $("#id_espacio").empty();
+        $("#id_espacio").val("");
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del radio button pasamanos
-     * y se actualiza el selector de pisos.
+     * Se captura el evento cuando se modifica el valor del selector de pisos.
      */
     $("#pisos").change(function (e) {
         $("#divTieneEspacioPadre").hide();
@@ -1208,6 +1248,44 @@ $(document).ready(function() {
                     $("#divTieneEspacioPadre").show();
                 }else{
                     $("#divTieneEspacioPadre").hide();
+                }
+            }
+        }
+        $("#id_espacio").val("");
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector de espacio.
+     */
+    $("#id_espacio").change(function (e) {
+        eliminarComponente("tr_tabla_aires");
+        if(URLactual['href'].indexOf('crear_aire') >= 0){
+            var sede = $("#nombre_sede").val();
+            var campus = $("#nombre_campus").val();
+            var edificio = $("#nombre_edificio").val();
+            var espacio = $("#id_espacio").val();
+            if (validarCadena(espacio)) {
+                var informacion = {};
+                informacion["id_sede"] = sede;
+                informacion["id_campus"] = campus;
+                informacion["id_edificio"] = edificio;
+                informacion["id_espacio"] = espacio;
+                var aires = buscarAiresEspacio(informacion);
+                var numeroAires = 0;
+                $.each(aires, function(index, record) {
+                    if($.isNumeric(index)) {
+                        var id_aire = record.id;
+                        var numero_inventario = record.numero_inventario;
+                        var marca = record.marca_aire;
+                        var capacidad = record.numero_capacidad+" BTU";
+                        var tipo = record.tipo_aire;
+                        var tecnologia = record.tecnologia_aire;
+                        $("#tabla_aires").append("<tr id='tr_tabla_aires'><td>"+id_aire+"</td><td>"+numero_inventario+"</td><td>"+marca+"</td><td>"+capacidad+"</td><td>"+tipo+"</td><td>"+tecnologia+"</td></tr>");
+                        numeroAires++;
+                    }
+                });
+                if (numeroAires > 0) {
+                    $("#divDialogAiresEspacio").modal('show');
                 }
             }
         }
@@ -4346,54 +4424,103 @@ $(document).ready(function() {
             var capacidad = limpiarCadena($("#capacidad_aire").val());
             var marca = limpiarCadena($("#marca_aire").val());
             var tipo = limpiarCadena($("#tipo_aire").val());
-            if (!validarCadena(numeroInventario)) {
-                alert("ERROR. Ingrese el número de inventario del aire acondicionado");
-                $("#numero_inventario").focus();
-            }else if(!validarCadena(sede)){
-                alert("ERROR. Seleccione la sede donde está el aire acondicionado");
-                $("#nombre_sede").focus();
-            }else if(!validarCadena(campus)){
-                alert("ERROR. Seleccione el campus donde está el aire acondicionado");
-                $("#nombre_campus").focus();
-            }else if(!validarCadena(edificio)){
-                alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
-                $("#nombre_edificio").focus();
-            }else if(!validarCadena(espacio)){
-                alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
-                $("#id_espacio").focus();
-            }else if(!validarCadena(capacidad)){
-                alert("ERROR. Seleccione la capacidad del aire acondicionado");
-                $("#capacidad_aire").focus();
-            }else if(!validarCadena(marca)){
-                alert("ERROR. Seleccione la marca del aire acondicionado");
-                $("#marca_aire").focus();
-            }else if(!validarCadena(tipo)){
-                alert("ERROR. Seleccione el tipo del aire acondicionado");
-                $("#tipo_aire").focus();
+            var tecnologia = limpiarCadena($("#tipo_tecnologia_aire").val());
+            var fechaInstalacion = limpiarCadena($("#fecha_instalacion").val());
+            var instalador = limpiarCadena($("#instalador").val());
+            var periodicidadMantenimiento = limpiarCadena($("#tipo_periodicidad_mantenimiento").val());
+            var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
+            var fotos = document.getElementById("fotos[]");
+            if (fotos.files.length <= 20) {
+                for (var i=0;i<fotos.files.length;i++) {
+                    var foto = fotos.files[i];
+                    if (foto.size > 2000000) {
+                        alert('La foto: "'+foto.name+"' es muy grande");
+                    }else{
+                        var nombreArchivo = foto.name;
+                        if(nombreArchivo.length > 50){
+                            nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                        }
+                        arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                    }
+                }
+                arregloFotos.append('aire_acondicionado',JSON.stringify(informacion));
+                /*if (!validarCadena(numeroInventario)) {
+                    alert("ERROR. Ingrese el número de inventario del aire acondicionado");
+                    $("#numero_inventario").focus();
+                }else */if(!validarCadena(sede)){
+                    alert("ERROR. Seleccione la sede donde está el aire acondicionado");
+                    $("#nombre_sede").focus();
+                }else if(!validarCadena(campus)){
+                    alert("ERROR. Seleccione el campus donde está el aire acondicionado");
+                    $("#nombre_campus").focus();
+                }else if(!validarCadena(edificio)){
+                    alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
+                    $("#nombre_edificio").focus();
+                }else if(!validarCadena(espacio)){
+                    alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
+                    $("#id_espacio").focus();
+                }else if(!validarCadena(capacidad)){
+                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
+                    $("#capacidad_aire").focus();
+                }else if(!validarCadena(marca)){
+                    alert("ERROR. Seleccione la marca del aire acondicionado");
+                    $("#marca_aire").focus();
+                }else if(!validarCadena(tipo)){
+                    alert("ERROR. Seleccione el tipo del aire acondicionado");
+                    $("#tipo_aire").focus();
+                }else{
+                    var informacion = {};
+                    informacion["numero_inventario"] = numeroInventario;
+                    informacion["sede"] = sede;
+                    informacion["campus"] = campus;
+                    informacion["edificio"] = edificio;
+                    informacion["espacio"] = espacio;
+                    informacion["capacidad"] = capacidad;
+                    informacion["marca"] = marca;
+                    informacion["tipo"] = tipo;
+                    var data = guardarObjeto("aire_acondicionado",informacion);
+                    var resultadoFotos = guardarFotos("aire_acondicionado",arregloFotos);
+                    alert(data.mensaje);
+                    console.log(data);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoFotos.length != 0) {
+                        for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                            if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                }
+                            }
+                        }
+                    }
+                    if (mensaje.substring(0,1) != "") {
+                        console.log(mensaje.length);
+                        alert(mensaje);
+                    }else{
+                        alert(data.mensaje);
+                    }
+                    if (data.verificar) {
+                        $("#numero_inventario").val("");
+                        $("#nombre_sede").val("").change();
+                        $("#nombre_campus").val("");
+                        $("#nombre_edificio").val("");
+                        $("#pisos").val("");
+                        $("#id_espacio").val("");
+                        $("#marca_aire").val("");
+                        $("#tipo_aire").val("");
+                        $("#capacidad_aire").val("");
+                        window.scrollTo(0,0);
+                    }
+                }
             }else{
-                var informacion = {};
-                informacion["numero_inventario"] = numeroInventario;
-                informacion["sede"] = sede;
-                informacion["campus"] = campus;
-                informacion["edificio"] = edificio;
-                informacion["espacio"] = espacio;
-                informacion["capacidad"] = capacidad;
-                informacion["marca"] = marca;
-                informacion["tipo"] = tipo;
-                var data = guardarObjeto("aire",informacion);
-                alert(data.mensaje);
-                console.log(data);
-                if (data.verificar) {
-                    $("#numero_inventario").val("");
-                    $("#nombre_sede").val("").change();
-                    $("#nombre_campus").val("");
-                    $("#nombre_edificio").val("");
-                    $("#pisos").val("");
-                    $("#id_espacio").val("");
-                    $("#marca_aire").val("");
-                    $("#tipo_aire").val("");
-                    $("#capacidad_aire").val("");
-                    window.scrollTo(0,0);
+                if (planos.files.length <= 5) {
+                    alert("ERROR. El número máximo de planos por cubierta es 5");
+                    planos.focus();
+                }else{
+                    alert("ERROR. El número máximo de fotos por cubierta es 20");
+                    fotos.focus();
                 }
             }
         }

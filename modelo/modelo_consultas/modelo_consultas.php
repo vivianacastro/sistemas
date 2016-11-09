@@ -1748,7 +1748,11 @@ class modelo_consultas
      */
     public function buscarTipoObjetos($tipo_objeto){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
-        $sql = "SELECT id,tipo FROM ".$tipo_objeto." ORDER BY tipo;";
+        if (strcmp($tipo_objeto,"tipo_periodicidad_mantenimiento") == 0) {
+            $sql = "SELECT id,tipo FROM ".$tipo_objeto." ORDER BY id ASC;";
+        }else{
+            $sql = "SELECT id,tipo FROM ".$tipo_objeto." ORDER BY tipo;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipo Objeto 1)";
@@ -2049,6 +2053,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarAireNumeroInventario($numero_inventario){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.numero_inventario, a.capacidad, a.marca, a.tipo
                 FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
                                             JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
@@ -2084,7 +2089,16 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarAiresUbicacion($id_sede,$id_campus,$id_edificio,$id_espacio){
-        $sql = "SELECT * FROM aire_acondicionado WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."';";
+        $id_sede = htmlspecialchars(trim($id_sede));
+        $id_campus = htmlspecialchars(trim($id_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $id_espacio = htmlspecialchars(trim($id_espacio));
+        $sql = "SELECT a.id_aire, a.numero_inventario, a.id_sede, a.id_campus, a.id_edificio, a.id_espacio, a.capacidad, a.marca, b.nombre as marca_aire, a.capacidad, c.capacidad as numero_capacidad, a.tipo, d.tipo as tipo_aire, a.tecnologia, e.tipo as tecnologia_aire, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
+                FROM aire_acondicionado a  JOIN marca_aire b ON a.marca = b.id
+                                                    JOIN capacidad_aire c ON a.capacidad = c.id
+                                                    JOIN tipo_aire d ON a.tipo = d.id
+                                                    JOIN tipo_tecnologia_aire e ON a.tecnologia = e.id
+                WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire-Ubicación 1)";
@@ -2097,6 +2111,7 @@ class modelo_consultas
             }
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -2108,6 +2123,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarCapacidadAires($id){
+        $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM capacidad_aire WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -2132,6 +2148,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarMarcaAires($id){
+        $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM marca_aire WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -2156,6 +2173,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
      */
     public function buscarTipoAires($id){
+        $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM tipo_aire WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

@@ -1487,7 +1487,9 @@ class controlador_creacion
 			$verificarOrden = $n->verificarOrdenMantenimiento($info['numero_orden']);
             if(!$verificar && $verificarOrden){
                 $m->guardarMantenimientoAire($info['numero_inventario'],$info['numero_orden'],$info['descripcion']);
-            }
+            }elseif(!$verificar){
+				$GLOBALS['mensaje'] = "ERROR. El aire con número de inventario ".$info['numero_inventario']." no se encuentra registrado en el sistema";
+			}
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

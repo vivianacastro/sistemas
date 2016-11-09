@@ -980,14 +980,24 @@ class controlador_consultas
             $data = $m->buscarAiresUbicacion($info["id_sede"],$info["id_campus"],$info["id_edificio"],$info["id_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
+                    'id' => $valor['id_aire'],
                     'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
-                    'id_sede' => mb_convert_case($valor['id_sede'],MB_CASE_TITLE,"UTF-8"),
-                    'id_campus' => mb_convert_case($valor['id_campus'],MB_CASE_TITLE,"UTF-8"),
-                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
-                    'id_espacio' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
-                    'capacidad' => mb_convert_case($valor['capacidad'],MB_CASE_TITLE,"UTF-8"),
-                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
-                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
+                    'id_sede' => $valor['id_sede'],
+                    'id_campus' => $valor['id_campus'],
+                    'id_edificio' => $valor['id_edificio'],
+                    'id_espacio' => $valor['id_espacio'],
+                    'capacidad' => $valor['capacidad'],
+                    'numero_capacidad' => mb_convert_case($valor['numero_capacidad'],MB_CASE_TITLE,"UTF-8"),
+                    'marca' => $valor['marca'],
+                    'marca_aire' => mb_convert_case($valor['marca_aire'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo' => $valor['tipo'],
+                    'tipo_aire' => mb_convert_case($valor['tipo_aire'],MB_CASE_TITLE,"UTF-8"),
+                    'tecnologia' => $valor['tecnologia'],
+                    'tecnologia_aire' => mb_convert_case($valor['tecnologia_aire'],MB_CASE_TITLE,"UTF-8"),
+                    'fecha_instalacion' => $valor['fecha_instalacion'],
+                    'instalador' => $valor['instalador'],
+                    'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
+                    'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
                 );
                 array_push($result, $arrayAux);
             }

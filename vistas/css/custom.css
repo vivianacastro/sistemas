@@ -452,25 +452,34 @@ html, body {
 }
 
 #navbar{
-	   background-color: #D51B23;
-	  color: white;
+    background-color: #D51B23;
+    color: white;
 }
 
 #spanRegistrar{
     color: #D51B23;
 }
 
+#tabla_aires{
+    width: 65%;
+    text-align: center;
+}
+
+#tabla_aires>thead>tr>th{
+    text-align: center;
+}
+
 #top{
-	   background-color: white;
-	    color: black;
+    background-color: white;
+    color: black;
 }
 
 #top .social a{
-	   color: black;
+    color: black;
 }
 
 #top .social a:hover{
-	   color: red;
+    color: red;
 }
 
 #ver_campus, #ver_cancha, #ver_corredor, #ver_parqueadero, #ver_piscina, #ver_plazoleta, #ver_sendero, #ver_via, #ver_edificio, #ver_edificios, #ver_espacios{
@@ -483,76 +492,76 @@ html, body {
     		width: 25%;
     }
 
-		.modal-dialog{
+    .modal-dialog{
         width: 80%;
     }
 
-		#divTimeOut{
-				width: 80%;
-		}
+	#divTimeOut{
+	     width: 80%;
+	}
 }
 
 @media screen and (min-width: 992px) and (max-width:1200px){
     .texto-inicio-sesion{
-        font-size: small;
+       font-size: small;
     }
 }
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media screen and (min-width: 768px) and (max-width:991px) {
     .texto-inicio-sesion{
-        font-size: smaller;
+       font-size: smaller;
     }
 }
 
 @media screen and (min-width:768px) {
 		.img_boton{
-        width: 35%;
+       width: 35%;
     }
 }
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
     .btn-formulario{
-        text-align: center;
-        padding: 1% 1% 1%;
-        font-size: smalller;
+       text-align: center;
+       padding: 1% 1% 1%;
+       font-size: smalller;
     }
 
     .div_carousel{
-        display: none;
+       display: none;
     }
 
     .img_boton{
-        width: 20%;
+       width: 20%;
     }
 
     .modal-dialog{
-        width: 100%;
+       width: 100%;
     }
 
     .navbar .yamm-content h5{
-      border-bottom: double 2px white;
-      color: white;
+     border-bottom: double 2px white;
+     color: white;
     }
 
     .navbar .yamm-content ul li a{
-      color: white;
+     color: white;
     }
 
     .texto-inicio-sesion{
-        font-size: x-small;
+       font-size: x-small;
     }
 
     #divTimeOut{
-        width: 100%;
+       width: 100%;
     }
 
     #logoUnivalle{
-        display: none;
+       display: none;
     }
 
     #carrusel_inicio_sesion{
-        display: none;
+       display: none;
     }
 }

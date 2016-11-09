@@ -14,19 +14,63 @@
         <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
         <div class='div_izquierda'><b>Espacio<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='id_espacio' id='id_espacio' required></select><br>
-        <div class='div_izquierda'><b>Número Inventario<font color='red'>*</font>:</b></div>
+        <div class='div_izquierda'><b>Número Inventario:</b></div>
         <input class='form-control formulario' type='text' maxlength="50" name='numero_inventario' id='numero_inventario' value='' placeholder='Ej: 10000' required/><br>
         <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='marca_aire' id='marca_aire' required></select><br>
         <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='tipo_aire' id='tipo_aire' required></select><br>
+        <div class='div_izquierda'><b>Tecnolog&iacute;a<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='tipo_tecnologia_aire' id='tipo_tecnologia_aire' required></select><br>
         <div class='div_izquierda'><b>Capacidad<font color='red'>*</font>:</b></div>
         <div class="input-group">
             <select class='form-control formulario' name='capacidad_aire' id='capacidad_aire' required></select><br>
             <span class="input-group-addon">BTU</span>
-        </div><br>        
-    <div><br>
+        </div><br>
+        <div class='div_izquierda'><b>Fecha Instalaci&oacute;n:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_instalacion' id='fecha_instalacion' value='' required/><br>
+        <div class='div_izquierda'><b>Instalador:</b></div>
+        <input class='form-control formulario' type='text' maxlength="50" name='instalador' id='instalador' value='' required/><br>
+        <div class='div_izquierda'><b>Periodicidad Mantenimiento:</b></div>
+        <select class='form-control formulario' name='tipo_periodicidad_mantenimiento' id='tipo_periodicidad_mantenimiento' required></select><br>
+        <div class='div_izquierda'><b>Ubicaci&oacute;n Unidad Condensadora/Compresora:</b></div>
+        <input class='form-control formulario' type='text' name='ubicacion_condensadora' id='ubicacion_condensadora' value='' required/><br>
+        <div class='div_izquierda'><b>Fotos Aire Acondicionado (Tama&ntilde;o m&aacute;ximo por foto: 1,5Mb - Número m&aacute;ximo de archivos: 20)</b></div>
+        <input class='form-control formulario' type='file' id='fotos[]' name='fotos[]' multiple accept='image/*'>
+    </div><br>
     <div class='form_button'>
         <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_aire' id='guardar_aire' value='Crear Aire Acondicionado' title='Guardar información del Aire Acondicionado'/>
+    </div>
+    <div class='modal fade' role='dialog' id='divDialogAiresEspacio'>
+        <div class='modal-dialog' id='divConsulta'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                  <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                  <h4 class='modal-title'>Aires Registrados en el Sistema en el Espacio Seleccionado</h4>
+                </div>
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <div class="container">
+                            <div class="table-responsive">
+                                <table id="tabla_aires" class="table table-bordered">
+                                <thead align="center">
+                                  <tr>
+                                    <th>Id Aire</th>
+                                    <th>N&uacute;mero de Inventario</th>
+                                    <th>Marca</th>
+                                    <th>Capacidad</th>
+                                    <th>Tipo</th>
+                                    <th>Tecnolog&iacute;a</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
