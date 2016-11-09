@@ -81,6 +81,8 @@ $(document).ready(function () {
 		    	$('#option_crear_marca_aire').addClass("opcion_activa_seleccion");
 	    	}else if ((URLactual['href'].indexOf('aires_crear_tipo_aire') >= 0)) {
 		    	$('#option_crear_tipo_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_crear_tecnologia_aire') >= 0)) {
+		    	$('#option_crear_tecnologia_aire').addClass("opcion_activa_seleccion");
 	    	}else if ((URLactual['href'].indexOf('aires_consultar_aire_ubicacion') >= 0)) {
 		    	$('#option_consultar_aire_ubicacion').addClass("opcion_activa_seleccion");
 	    	}else if ((URLactual['href'].indexOf('aires_consultar_aire_numero_inventario') >= 0)) {
@@ -91,6 +93,8 @@ $(document).ready(function () {
 		    	$('#option_consultar_marca_aire').addClass("opcion_activa_seleccion");
 	    	}else if ((URLactual['href'].indexOf('aires_consultar_tipo_aire') >= 0)) {
 		    	$('#option_consultar_tipo_aire').addClass("opcion_activa_seleccion");
+	    	}else if ((URLactual['href'].indexOf('aires_consultar_tecnologia_aire') >= 0)) {
+		    	$('#option_consultar_tecnologia_aire').addClass("opcion_activa_seleccion");
 	    	}
     }else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
     		$('#inventario').addClass("opcion_activa");
@@ -258,7 +262,7 @@ function eliminarComponente(idComponente) {
  * @param {string} componente, cadena con el componente a eliminar.
  */
 function validarFormatoFecha(campo) {
-	var RegExPattern = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+	var RegExPattern = /^\d{2,4}\/\d{1,2}\/\d{1,2}$/;
 	if ((campo.match(RegExPattern)) && (campo!='')) {
 		return true;
 	} else {
@@ -272,7 +276,7 @@ function validarFormatoFecha(campo) {
  * @param {string} componente, cadena con el componente a eliminar.
  */
 function validarFechaMenorActual(date){
-      var x=new Date();
+      var x = new Date();
       var fecha = date.split("/");
       x.setFullYear(fecha[2],fecha[1]-1,fecha[0]);
       var today = new Date();

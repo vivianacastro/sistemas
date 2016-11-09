@@ -350,6 +350,25 @@ class controlador_creacion
 
 	/**
     * Función que despliega el panel que permite crear
+    * una tecnología de aires acondicionados en el sistema.
+    **/
+    public function crear_tecnologia_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Tecnología de Aires Acondicionados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
+            $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_TECNOLOGIA_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+    * Función que despliega el panel que permite crear
     * un tipo de aires acondicionados en el sistema.
     **/
     public function crear_tipo_aire() {

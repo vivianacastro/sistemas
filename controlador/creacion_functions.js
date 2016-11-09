@@ -4413,6 +4413,56 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el boton guardar_tipo_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_tipo_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar el tipo de aires acondicionados?");
+        if (confirmacion) {
+            var tipo = limpiarCadena($("#nombre_tipo").val());
+            if (validarCadena(tipo)) {
+                var informacion = {};
+                informacion["tipo_objeto"] = "tipo_aire";
+                informacion["nombre_tipo_objeto"] = tipo;
+                var data = guardarTipoObjeto(informacion);
+                alert(data.mensaje);
+                console.log(data);
+                if (data.verificar) {
+                    $("#nombre_tipo").val("");
+                }
+            }else{
+                alert("ERROR. Ingrese el tipo de aires acondicionados");
+                $("#nombre_tipo").focus();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton guardar_tecnologia_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_tecnologia_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la tecnología de aires acondicionados?");
+        if (confirmacion) {
+            var tecnologia = limpiarCadena($("#nombre_tecnologia").val());
+            if (validarCadena(tecnologia)) {
+                var informacion = {};
+                informacion["tipo_objeto"] = "tipo_tecnologia_aire";
+                informacion["nombre_tipo_objeto"] = tecnologia;
+                var data = guardarTipoObjeto(informacion);
+                alert(data.mensaje);
+                console.log(data);
+                if (data.verificar) {
+                    $("#nombre_tecnologia").val("");
+                }
+            }else{
+                alert("ERROR. Ingrese el nombre de la tecnología de aires acondicionados");
+                $("#nombre_tecnologia").focus();
+            }
+        }
+    });
+
+    /**
      * Se captura el evento cuando se da click en el boton guardar_aire y se
      * realiza la operacion correspondiente.
      */
@@ -4462,9 +4512,6 @@ $(document).ready(function() {
                 }else if(!validarCadena(espacio)){
                     alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
                     $("#id_espacio").focus();
-                }else if(!validarCadena(capacidad)){
-                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
-                    $("#capacidad_aire").focus();
                 }else if(!validarCadena(marca)){
                     alert("ERROR. Seleccione la marca del aire acondicionado");
                     $("#marca_aire").focus();
@@ -4474,6 +4521,9 @@ $(document).ready(function() {
                 }else if(!validarCadena(tecnologia)){
                     alert("ERROR. Seleccione la tecnolodía del aire acondicionado");
                     $("#tipo_tecnologia_aire").focus();
+                }else if(!validarCadena(capacidad)){
+                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
+                    $("#capacidad_aire").focus();
                 }else{
                     var informacion = {};
                     informacion["numero_inventario"] = numeroInventario;
@@ -4498,7 +4548,7 @@ $(document).ready(function() {
                     });
                     console.log(data);
                     console.log(informacion);
-                    if (data.verificar != 'false') {
+                    if (data.verificar != false) {
                         informacion["id_aire"] = id_aire;
                         arregloFotos.append('aire_acondicionado',JSON.stringify(informacion));
                         var resultadoFotos = guardarFotos("aire",arregloFotos);
@@ -4507,11 +4557,13 @@ $(document).ready(function() {
                         mensaje += data.mensaje;
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                if (resultadoFotos.mensaje[i].indexOf("Error: SQL") == -1) {
+                                    if (!resultadoFotos.verificar[i]) {
+                                        if (mensaje == "") {
+                                            mensaje += resultadoFotos.mensaje[i];
+                                        }else{
+                                            mensaje += "\n" + resultadoFotos.mensaje[i];
+                                        }
                                     }
                                 }
                             }
@@ -4534,9 +4586,11 @@ $(document).ready(function() {
                         $("#instalador").val("");
                         $("#tipo_periodicidad_mantenimiento").val("");
                         $("#ubicacion_condensadora").val("");
+                        fotos.value = "";
                         window.scrollTo(0,0);
                     }else{
                         alert(data.mensaje);
+                        $("#numero_inventario").focus();
                     }
                 }
             }else{

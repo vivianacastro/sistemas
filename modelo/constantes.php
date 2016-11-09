@@ -76,11 +76,13 @@ const OPERATION_CREAR_AIRE = 'aires_crear_aire';
 const OPERATION_CREAR_CAPACIDAD_AIRE = 'aires_crear_capacidad_aire';
 const OPERATION_CREAR_MARCA_AIRE = 'aires_crear_marca_aire';
 const OPERATION_CREAR_TIPO_AIRE = 'aires_crear_tipo_aire';
+const OPERATION_CREAR_TECNOLOGIA_AIRE = 'aires_crear_tecnologia_aire';
 const OPERATION_REGISTRAR_MANTENIMIENTO_AIRE = 'aires_registrar_mantenimiento_aire';
 const OPERATION_CONSULTAR_AIRE_UBICACION = 'aires_consultar_aire_ubicacion';
 const OPERATION_CONSULTAR_AIRE_NUMERO_INVENTARIO = 'aires_consultar_aire_numero_inventario';
 const OPERATION_CONSULTAR_CAPACIDAD_AIRE = 'aires_consultar_capacidad_aire';
 const OPERATION_CONSULTAR_MARCA_AIRE = 'aires_consultar_marca_aire';
 const OPERATION_CONSULTAR_TIPO_AIRE = 'aires_consultar_tipo_aire';
+const OPERATION_CONSULTAR_TECNOLOGIA_AIRE = 'aires_consultar_tecnologia_aire';
 const OPERATION_CONSULTAR_MANTENIMIENTO_AIRE = 'aires_consultar_mantenimiento_aire';
 ?>

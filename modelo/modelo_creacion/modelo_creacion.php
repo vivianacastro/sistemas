@@ -3055,7 +3055,16 @@ class modelo_creacion {
         $instalador = htmlspecialchars(trim($instalador));
         $periodicidad_mantenimiento = htmlspecialchars(trim($periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
-        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,tecnologia,fecha_instalacion,instalador,periodicidad_mantenimiento,ubicacion_condensadora,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$tecnologia_aire."','".$fecha_instalacion."','".$instalador."','".$periodicidad_mantenimiento."','".$ubicacion_condensadora."','".$_SESSION["login"]."') RETURNING id_aire;";
+        $campos = "numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,tecnologia,instalador,ubicacion_condensadora,usuario_crea";
+        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$tecnologia_aire."','".$instalador."','".$ubicacion_condensadora."','".$_SESSION["login"]."'";
+        if (strcasecmp($fecha_instalacion,'') != 0) {
+            $campos = $campos.",fecha_instalacion" ;
+            $valores = $valores.",'".$fecha_instalacion."'";
+        }if (strcasecmp($periodicidad_mantenimiento,'') != 0) {
+            $campos = $campos.",periodicidad_mantenimiento" ;
+            $valores = $valores.",'".$periodicidad_mantenimiento."'";
+        }
+        $sql = "INSERT INTO aire_acondicionado (".$campos.") VALUES (".$valores.") RETURNING id_aire;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 1)";

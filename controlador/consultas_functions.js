@@ -110,12 +110,15 @@ $(document).ready(function() {
             actualizarSelectCapacidadAire("capacidad_aire");
             actualizarSelectMarcaAire("marca_aire");
             actualizarSelectTipoObjeto("tipo_aire",0);
+            actualizarSelectTipoObjeto("tipo_tecnologia_aire",0);
         }else if(URLactual['href'].indexOf('consultar_capacidad_aire') >= 0){
             actualizarSelectCapacidadAire("capacidad_aire_search");
         }else if(URLactual['href'].indexOf('consultar_marca_aire') >= 0){
             actualizarSelectMarcaAire("marca_aire_search");
         }else if(URLactual['href'].indexOf('consultar_tipo_aire') >= 0){
             actualizarSelectTipoAire("tipo_aire_search");
+        }else if(URLactual['href'].indexOf('consultar_tecnologia_aire') >= 0){
+            actualizarSelectTipoAire("tecnologia_aire_search");
         }
     })();
 
@@ -687,6 +690,29 @@ $(document).ready(function() {
      * @returns {undefined}
     **/
     function actualizarSelectTipoAire(input){
+        var informacion = {};
+        informacion['tipo_objeto'] = "tipo_aire";
+        var data = buscarTipoObjetos(informacion);
+        $("#"+input).empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#"+input);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.tipo_objeto;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#"+input);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de tecnología de aires acondicionados.
+     * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
+     * @returns {undefined}
+    **/
+    function actualizarSelectTecnologiaAire(input){
         var informacion = {};
         informacion['tipo_objeto'] = "tipo_aire";
         var data = buscarTipoObjetos(informacion);
@@ -1821,6 +1847,18 @@ $(document).ready(function() {
             $('#visualizarTipoAires').removeAttr("disabled");
         }else{
             $('#visualizarTipoAires').attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector tecnologia_aire_search
+     * y se actualiza el selector de tipo de objeto.
+     */
+    $("#tecnologia_aire_search").change(function (e) {
+        if (validarCadena($("#tecnologia_aire_search").val())) {
+            $('#visualizarTecnologiaAires').removeAttr("disabled");
+        }else{
+            $('#visualizarTecnologiaAires').attr('disabled',true);
         }
     });
 
@@ -4635,6 +4673,30 @@ $(document).ready(function() {
              $("#tipo_aire_search").focus();
          }
      });
+
+     /**
+      * Se captura el evento cuando se da click en el boton visualizarTecnologiaAires y se
+      * realiza la operacion correspondiente.
+      */
+      $("#visualizarTecnologiaAires").click(function (e){
+          var informacion =  {};
+          var tecnologiaAire = $("#tecnologia_aire_search").val();
+          if (validarCadena(tecnologiaAire)) {
+              informacion['tipo'] = tecnologiaAire;
+              var data = consultarInformacionObjeto("tecnologia_aire",informacion);
+              console.log(data);
+              $.each(data, function(index, record) {
+                  if($.isNumeric(index)) {
+                      $("#tecnologia_aire_nuevo").attr('name',record.id);
+                      $("#tecnologia_aire_nuevo").val(record.tipo);
+                  }
+              });
+              $("#divDialogConsulta").modal('show');
+          }else{
+              alert("ERROR. Seleccione la tecnología de aires acondicionados");
+              $("#tecnologia_aire_search").focus();
+          }
+      });
 
     /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
