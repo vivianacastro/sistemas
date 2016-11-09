@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
+    var numeroAires, espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
     var coordenadas = {};
     var dataEspacio = {};
     var map;
@@ -1258,7 +1258,9 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del selector de espacio.
      */
     $("#id_espacio").change(function (e) {
-        eliminarComponente("tr_tabla_aires");
+        for (var i=0;i<numeroAires;i++) {
+            eliminarComponente("tr_tabla_aires");
+        }
         if(URLactual['href'].indexOf('crear_aire') >= 0){
             var sede = $("#nombre_sede").val();
             var campus = $("#nombre_campus").val();
@@ -1271,7 +1273,7 @@ $(document).ready(function() {
                 informacion["id_edificio"] = edificio;
                 informacion["id_espacio"] = espacio;
                 var aires = buscarAiresEspacio(informacion);
-                var numeroAires = 0;
+                numeroAires = 0;
                 $.each(aires, function(index, record) {
                     if($.isNumeric(index)) {
                         var id_aire = record.id;
@@ -1285,6 +1287,7 @@ $(document).ready(function() {
                     }
                 });
                 if (numeroAires > 0) {
+                    alert("A continuación, se mostrarán los aires acondiconados registrados en el espacio seleccionado");
                     $("#divDialogAiresEspacio").modal('show');
                 }
             }
@@ -4417,17 +4420,17 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
         if (confirmacion) {
             var numeroInventario = limpiarCadena($("#numero_inventario").val());
-            var sede = limpiarCadena($("#nombre_sede").val());
-            var campus = limpiarCadena($("#nombre_campus").val());
-            var edificio = limpiarCadena($("#nombre_edificio").val());
-            var espacio = limpiarCadena($("#id_espacio").val());
-            var capacidad = limpiarCadena($("#capacidad_aire").val());
-            var marca = limpiarCadena($("#marca_aire").val());
-            var tipo = limpiarCadena($("#tipo_aire").val());
-            var tecnologia = limpiarCadena($("#tipo_tecnologia_aire").val());
-            var fechaInstalacion = limpiarCadena($("#fecha_instalacion").val());
+            var sede = $("#nombre_sede").val();
+            var campus = $("#nombre_campus").val();
+            var edificio = $("#nombre_edificio").val();
+            var espacio = $("#id_espacio").val();
+            var capacidad = $("#capacidad_aire").val();
+            var marca = $("#marca_aire").val();
+            var tipo = $("#tipo_aire").val();
+            var tecnologia = $("#tipo_tecnologia_aire").val();
+            var fechaInstalacion = $("#fecha_instalacion").val();
             var instalador = limpiarCadena($("#instalador").val());
-            var periodicidadMantenimiento = limpiarCadena($("#tipo_periodicidad_mantenimiento").val());
+            var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
             var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
             var fotos = document.getElementById("fotos[]");
             if (fotos.files.length <= 20) {
@@ -4444,7 +4447,6 @@ $(document).ready(function() {
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
-                arregloFotos.append('aire_acondicionado',JSON.stringify(informacion));
                 /*if (!validarCadena(numeroInventario)) {
                     alert("ERROR. Ingrese el número de inventario del aire acondicionado");
                     $("#numero_inventario").focus();
@@ -4488,31 +4490,38 @@ $(document).ready(function() {
                     informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
                     informacion["ubicacion_condensadora"] = ubicacionCondensadora;
                     var data = guardarObjeto("aire",informacion);
-                    var resultadoFotos = guardarFotos("aire",arregloFotos);
-                    alert(data.mensaje);
+                    var id_aire = "";
+                    $.each(data.verificar, function(index, record) {
+                        if($.isNumeric(index)) {
+                            id_aire = record.id_aire;
+                        }
+                    });
                     console.log(data);
-                    console.log(resultadoFotos);
-                    var mensaje = "";
-                    if (resultadoFotos.length != 0) {
-                        for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                            if (!resultadoFotos.verificar[i]) {
-                                if (mensaje == "") {
-                                    mensaje += resultadoFotos.mensaje[i];
-                                }else{
-                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                    console.log(informacion);
+                    if (data.verificar != 'false') {
+                        informacion["id_aire"] = id_aire;
+                        arregloFotos.append('aire_acondicionado',JSON.stringify(informacion));
+                        var resultadoFotos = guardarFotos("aire",arregloFotos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        mensaje += data.mensaje;
+                        if (resultadoFotos.length != 0) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
                                 }
                             }
                         }
-                    }
-                    if (mensaje.substring(0,1) != "") {
-                        console.log(mensaje.length);
-                        alert(mensaje);
-                    }else{
-                        alert(data.mensaje);
-                    }
-                    if (data.verificar) {
+                        if (mensaje.substring(0,1) != "") {
+                            alert(mensaje);
+                        }
                         $("#numero_inventario").val("");
                         $("#nombre_sede").val("").change();
+                        $("#nombre_campus").empty();
                         $("#nombre_campus").val("");
                         $("#nombre_edificio").val("");
                         $("#pisos").val("");
@@ -4520,7 +4529,14 @@ $(document).ready(function() {
                         $("#marca_aire").val("");
                         $("#tipo_aire").val("");
                         $("#capacidad_aire").val("");
+                        $("#tipo_tecnologia_aire").val("");
+                        $("#fecha_instalacion").val("");
+                        $("#instalador").val("");
+                        $("#tipo_periodicidad_mantenimiento").val("");
+                        $("#ubicacion_condensadora").val("");
                         window.scrollTo(0,0);
+                    }else{
+                        alert(data.mensaje);
                     }
                 }
             }else{

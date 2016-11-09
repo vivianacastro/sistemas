@@ -3055,7 +3055,7 @@ class modelo_creacion {
         $instalador = htmlspecialchars(trim($instalador));
         $periodicidad_mantenimiento = htmlspecialchars(trim($periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
-        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,tecnologia,fecha_instalacion,instalador,periodicidad_mantenimiento,ubicacion_condensadora,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$tecnologia_aire."','".$fecha_instalacion."','".$instalador."','".$periodicidad_mantenimiento."','".$ubicacion_condensadora."','".$_SESSION["login"]."');";
+        $sql = "INSERT INTO aire_acondicionado (numero_inventario,id_sede,id_campus,id_edificio,id_espacio,capacidad,marca,tipo,tecnologia,fecha_instalacion,instalador,periodicidad_mantenimiento,ubicacion_condensadora,usuario_crea) VALUES ('".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$capacidad."','".$marca."','".$tipo."','".$tecnologia_aire."','".$fecha_instalacion."','".$instalador."','".$periodicidad_mantenimiento."','".$ubicacion_condensadora."','".$_SESSION["login"]."') RETURNING id_aire;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Aire 1)";
@@ -3067,8 +3067,9 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
+                $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "El aire acondicionado se ha guardado correctamente en el sistema.";
-                return true;
+                return $result;
             }
         }
     }
@@ -3650,24 +3651,28 @@ class modelo_creacion {
      */
     public function verificarAire($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
-        $sql = "SELECT * FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
+        if (strcmp($numero_inventario,"") == 0) {
+            return true;
         }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 2)";
+            $sql = "SELECT * FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
-            }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = 'ERROR. El aire acondicionado con número de inventario "'.$numero_inventario.'" ya se encuentra registrada en el sistema.';
-                return false;
-            }
-            else{
-                $GLOBALS['sql'] = $sql;
-                return true;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }elseif($l_stmt->rowCount() > 0){
+                    $GLOBALS['mensaje'] = 'ERROR. El aire acondicionado con número de inventario "'.$numero_inventario.'" ya se encuentra registrada en el sistema.';
+                    return false;
+                }
+                else{
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }

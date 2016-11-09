@@ -111,14 +111,14 @@ $(document).ready(function () {
  * Evento de cambio del selector de archivo del modal de consulta/modificación.
  */
 $("#myCarousel").on("change", ".upload", function(){
-			var fotos = document.getElementById("fileInputOculto");
-			var texto = "";
-			if (fotos.files.length > 1) {
-					texto = fotos.files.length + " archivos";
-			}else if (fotos.files.length == 1){
-					texto = fotos.files[0].name;
-			}
-			$("#fileInputVisible").val(texto);
+	var fotos = document.getElementById("fileInputOculto");
+	var texto = "";
+	if (fotos.files.length > 1) {
+			texto = fotos.files.length + " archivos";
+	}else if (fotos.files.length == 1){
+			texto = fotos.files[0].name;
+	}
+	$("#fileInputVisible").val(texto);
 });
 
 
@@ -130,7 +130,7 @@ $("#myCarousel").on("change", ".upload", function(){
 function mostrarMensaje(texto) {
     //$('#divMensaje').empty();
     //$('#divMensaje').text(texto);
-		alert(texto);
+	alert(texto);
 }
 
 /**
@@ -192,20 +192,20 @@ function validarNumero(numero) {
  * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró el número que no cumple.
  */
 function validarArregloNumeros(arreglo) {
-		var posicion = null;
-		for (var i=0;i<arreglo.length;i++) {
-				if (arreglo[i] == '' || isNaN(arreglo[i])) {
-						posicion = i;
-						break;
-				}else if(arreglo[i] < 0){
-						posicion = i;
-						if(posicion == 0){
-								posicion = '';
-						}
-						break;
-				}
-		}
-		return posicion;
+	var posicion = null;
+	for (var i=0;i<arreglo.length;i++) {
+			if (arreglo[i] == '' || isNaN(arreglo[i])) {
+					posicion = i;
+					break;
+			}else if(arreglo[i] < 0){
+					posicion = i;
+					if(posicion == 0){
+							posicion = '';
+					}
+					break;
+			}
+	}
+	return posicion;
 }
 
 /**
@@ -214,7 +214,7 @@ function validarArregloNumeros(arreglo) {
  * @returns {boolean} valido, booleano.
  */
 function validarCorreo(correo) {
-		var valido = true;
+	var valido = true;
     expr = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!expr.test(correo)){
         valido = false;
@@ -228,10 +228,10 @@ function validarCorreo(correo) {
  * @returns {string} cadenaMinus, Cadena convertida.
  */
 function limpiarCadena(cadena) {
-		var cadenaMinus = cadena.toLowerCase();
-		cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
-		cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,'');
-		return cadenaMinus;
+	var cadenaMinus = cadena.toLowerCase();
+	cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
+	cadenaMinus = cadenaMinus.replace(/^\s*|\s*$/g,'');
+	return cadenaMinus;
 }
 
 /**
@@ -240,13 +240,44 @@ function limpiarCadena(cadena) {
  * @param {string} componente, cadena con el componente a añadir.
  */
 function añadirComponente(divPadre,componente) {
-		$('#'+divPadre).append(componente);
+	$('#'+divPadre).append(componente);
 }
 
 /**
  * Función que elimina un componente a un div.
+ * @param {string} idComponente, id del componente a eliminar.
  * @param {string} componente, cadena con el componente a eliminar.
  */
 function eliminarComponente(idComponente) {
-		$('#'+idComponente).remove();
+	$('#'+idComponente).remove();
+}
+
+/**
+ + Función que valida el formato de una fecha.
+ * @param {string} campo, fecha.
+ * @param {string} componente, cadena con el componente a eliminar.
+ */
+function validarFormatoFecha(campo) {
+	var RegExPattern = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+	if ((campo.match(RegExPattern)) && (campo!='')) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ + Función que valida el si una fecha es menor que la fecha actual.
+ * @param {string} date, fecha.
+ * @param {string} componente, cadena con el componente a eliminar.
+ */
+function validarFechaMenorActual(date){
+      var x=new Date();
+      var fecha = date.split("/");
+      x.setFullYear(fecha[2],fecha[1]-1,fecha[0]);
+      var today = new Date();
+      if (x >= today)
+        return false;
+      else
+        return true;
 }

@@ -5305,3 +5305,13 @@
 [09-Nov-2016 11:25:00 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 983
 [09-Nov-2016 14:17:17 America/Bogota] PHP Notice:  Undefined variable: infoCancha in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
 [09-Nov-2016 14:17:17 America/Bogota] PHP Notice:  Undefined variable: plano in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3686
+[09-Nov-2016 14:47:15 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 14:55:34 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 14:56:50 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 14:58:53 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 15:01:39 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 15:02:53 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1415
+[09-Nov-2016 15:06:18 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 15:09:13 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 15:14:36 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 15:15:16 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
