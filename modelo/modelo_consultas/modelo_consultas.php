@@ -2199,7 +2199,7 @@ class modelo_consultas
     */
     public function buscarTecnologiaAires($id){
         $id = htmlspecialchars(trim($id));
-        $sql = "SELECT * FROM tecnologia_aire WHERE id = '".$id."';";
+        $sql = "SELECT * FROM tipo_tecnologia_aire WHERE id = '".$id."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Tecnlogia Aires 1)";

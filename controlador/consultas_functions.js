@@ -4651,10 +4651,10 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton visualizarTipoAires y se
-     * realiza la operacion correspondiente.
-     */
-     $("#visualizarTipoAires").click(function (e){
+    * Se captura el evento cuando se da click en el boton visualizarTipoAires y se
+    * realiza la operacion correspondiente.
+    */
+    $("#visualizarTipoAires").click(function (e){
          var informacion =  {};
          var tipoAire = $("#tipo_aire_search").val();
          if (validarCadena(tipoAire)) {
@@ -4674,16 +4674,16 @@ $(document).ready(function() {
          }
      });
 
-     /**
-      * Se captura el evento cuando se da click en el boton visualizarTecnologiaAires y se
-      * realiza la operacion correspondiente.
-      */
-      $("#visualizarTecnologiaAires").click(function (e){
+    /**
+    * Se captura el evento cuando se da click en el boton visualizarTecnologiaAires y se
+    * realiza la operacion correspondiente.
+    */
+    $("#visualizarTecnologiaAires").click(function (e){
           var informacion =  {};
           var tecnologiaAire = $("#tecnologia_aire_search").val();
           if (validarCadena(tecnologiaAire)) {
               informacion['tipo'] = tecnologiaAire;
-              var data = consultarInformacionObjeto("tecnologia_aire",informacion);
+              var data = consultarInformacionObjeto("tecnologia_aires",informacion);
               console.log(data);
               $.each(data, function(index, record) {
                   if($.isNumeric(index)) {
@@ -4699,8 +4699,8 @@ $(document).ready(function() {
       });
 
     /**
-     * Se captura el evento cuando se abre el modal divDialogConsulta.
-     */
+    * Se captura el evento cuando se abre el modal divDialogConsulta.
+    */
     $("#divDialogConsulta").on("shown.bs.modal", function () {
         if (URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_gradas') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1 && URLactual['href'].indexOf('consultar_sede') == -1) {
             if (URLactual['href'].indexOf('consultar_campus') >= 0) {
@@ -4718,8 +4718,8 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se abre el modal divDialogConsulta.
-     */
+    * Se captura el evento cuando se abre el modal divDialogConsulta.
+    */
     $("#divDialogConsultaMapa").on("shown.bs.modal", function () {
         eliminarComponente("slide_carrusel_eliminar");
         eliminarComponente("item_carrusel_eliminar");
@@ -4829,6 +4829,7 @@ $(document).ready(function() {
         $("#capacidad_aire_nueva").attr('disabled',true);
         $("#marca_aire_nueva").attr('disabled',true);
         $("#tipo_aire_nuevo").attr('disabled',true);
+        $("#tecnologia_aire_nuevo").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -4849,6 +4850,7 @@ $(document).ready(function() {
         $("#modificar_capacidad_aire").show();
         $("#modificar_marca_aire").show();
         $("#modificar_tipo_aire").show();
+        $("#modificar_tecnologia_aire").show();
         $("#guardar_modificaciones_sede").hide();
         $("#guardar_modificaciones_campus").hide();
         $("#guardar_modificaciones_cancha").hide();
@@ -4878,6 +4880,7 @@ $(document).ready(function() {
         $("#guardar_modificaciones_capacidad_aire").hide();
         $("#guardar_modificaciones_marca_aire").hide();
         $("#guardar_modificaciones_tipo_aire").hide();
+        $("#guardar_modificaciones_tecnologia_aire").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
         eliminarComponente("informacion2");
@@ -5492,6 +5495,17 @@ $(document).ready(function() {
         $("#tipo_aire_nuevo").removeAttr("disabled");
         $("#modificar_tipo_aire").hide();
         $("#guardar_modificaciones_tipo_aire").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el boton modificar_tecnologia_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#modificar_tecnologia_aire").click(function (e){
+        $("#tecnologia_aire_nuevo").removeAttr("disabled");
+        $("#modificar_tecnologia_aire").hide();
+        $("#guardar_modificaciones_tecnologia_aire").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 
