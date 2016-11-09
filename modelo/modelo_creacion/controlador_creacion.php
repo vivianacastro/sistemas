@@ -1415,7 +1415,7 @@ class controlador_creacion
             $infoAire = json_decode($_POST['aire_acondicionado'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarFotoAire($infoCancha['id_aire'],$file);
+                $verificar = $m->guardarFotoAire($infoAire['id_aire'],$file);
                 $result['mensaje'][$i] = $GLOBALS['mensaje'];
                 $result['sql'] = $GLOBALS['sql'];
                 $result['verificar'][$i] = $verificar;

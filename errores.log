@@ -5303,3 +5303,5 @@
 [09-Nov-2016 11:19:33 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 979
 [09-Nov-2016 11:20:00 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 979
 [09-Nov-2016 11:25:00 America/Bogota] PHP Notice:  Undefined index: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 983
+[09-Nov-2016 14:17:17 America/Bogota] PHP Notice:  Undefined variable: infoCancha in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1418
+[09-Nov-2016 14:17:17 America/Bogota] PHP Notice:  Undefined variable: plano in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/modelo_creacion.php on line 3686

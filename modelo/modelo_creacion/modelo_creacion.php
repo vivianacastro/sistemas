@@ -2102,7 +2102,7 @@ class modelo_creacion {
             $id_cancha = htmlspecialchars(trim($id_cancha));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = __ROOT__."/archivos/images/cancha/".$id_sede."-".$id_campus."-".$id_cancha."/";
-            if (!file_exists($ruta.$plano['name'])) {
+            if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
@@ -3683,7 +3683,7 @@ class modelo_creacion {
             $id_aire = htmlspecialchars(trim($id_aire));
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = __ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/";
-            if (!file_exists($ruta.$plano['name'])) {
+            if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
