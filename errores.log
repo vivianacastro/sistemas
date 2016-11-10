@@ -5328,3 +5328,4 @@
 [10-Nov-2016 09:53:18 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1926
 [10-Nov-2016 09:57:41 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 2109
 [10-Nov-2016 09:57:41 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1926
+[10-Nov-2016 10:57:11 America/Bogota] PHP Notice:  Undefined index: aire_acondicionado in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1434

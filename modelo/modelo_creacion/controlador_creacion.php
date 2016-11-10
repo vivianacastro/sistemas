@@ -1431,7 +1431,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = $_FILES;
-            $infoAire = json_decode($_POST['aire_acondicionado'], true);
+            $infoAire = json_decode($_POST['aire'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
                 $verificar = $m->guardarFotoAire($infoAire['id_aire'],$file);

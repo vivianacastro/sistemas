@@ -983,8 +983,8 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
-                $("#numero_inventario_search").empty();
-                $("#numero_inventario_search").val("");
+                $("#id_aire_search").empty();
+                $("#id_aire_search").val("");
                 $('#visualizarCampus').attr('disabled',true);
                 $('#visualizarCancha').attr('disabled',true);
                 $('#visualizarCorredor').attr('disabled',true);
@@ -1052,8 +1052,8 @@ $(document).ready(function() {
                     $("#pisos_search").val("");
                     $("#espacio_search").empty();
                     $("#espacio_search").val("");
-                    $("#numero_inventario_search").empty();
-                    $("#numero_inventario_search").val("");
+                    $("#id_aire_search").empty();
+                    $("#id_aire_search").val("");
                     $('#visualizarAire').attr('disabled',true);
                 }
             }else{
@@ -1614,8 +1614,8 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
-                $("#numero_inventario_search").val("");
-                $("#numero_inventario_search").empty();
+                $("#id_aire_search").val("");
+                $("#id_aire_search").empty();
                 var campus = $("#campus_search").val();
                 $("#campus_search").val(campus).change();
                 $('#visualizarEdificio').attr('disabled',true);
@@ -1654,8 +1654,8 @@ $(document).ready(function() {
                 var data = buscarObjetos("espacios",edificio);
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
-                $("#numero_inventario_search").empty();
-                $("#numero_inventario_search").val("");
+                $("#id_aire_search").empty();
+                $("#id_aire_search").val("");
                 var row = $("<option value=''/>");
                 row.text("--Seleccionar--");
                 row.appendTo("#espacio_search");
@@ -1672,8 +1672,8 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
-                $("#numero_inventario_search").empty();
-                $("#numero_inventario_search").val("");
+                $("#id_aire_search").empty();
+                $("#id_aire_search").val("");
                 var edificio = $("#edificio_search").val();
                 $("#edificio_search").val(edificio).change();
                 $('#visualizarEdificio').attr('disabled',true);
@@ -4937,7 +4937,7 @@ $(document).ready(function() {
         $("#capacidad_aire_nueva").attr('disabled',true);
         $("#marca_aire_nueva").attr('disabled',true);
         $("#tipo_aire_nuevo").attr('disabled',true);
-        $("#tecnologia_aire_nuevo").attr('disabled',true);
+        $("#tipo_tecnologia_aire").attr('disabled',true);
         $("#fecha_instalacion").attr('disabled',true);
         $("#instalador").attr('disabled',true);
         $("#tipo_periodicidad_mantenimiento").attr('disabled',true);
@@ -5090,8 +5090,10 @@ $(document).ready(function() {
 		if (aux > numeroFotos) {
   			if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                 $("#guardar_archivos").removeAttr('disabled');
+                $("#guardar_fotos").removeAttr('disabled');
             }else{
                 $("#guardar_archivos").show();
+                $("#guardar_fotos").show();
             }
 		}else if(aux2 == numeroPlanos){
             if(URLactual['href'].indexOf('consultar_mapa') >= 0){
@@ -7890,9 +7892,6 @@ $(document).ready(function() {
                     informacion["nombre_campus"] = $("#campus_search").val();
                     informacion["nombre_edificio"] = $("#edificio_search").val();
                     informacion["id_espacio"] = $("#espacio_search").val();
-                }else if(URLactual['href'].indexOf('consultar_aire') >= 0){
-                    tipoObjeto = "aire";
-                    informacion["id_aire"] = $("#id_aire").val();
                 }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                     tipoObjeto = objetoSeleccionado;
                     console.log(tipoObjeto);
@@ -7926,11 +7925,7 @@ $(document).ready(function() {
                 }
                 arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
                 arregloPlanos.append(tipoObjeto,JSON.stringify(informacion));
-                if(URLactual['href'].indexOf('consultar_aire') == -1){
-                    var resultadoPlanos = guardarPlanos(tipoObjeto,arregloPlanos);
-                }else{
-                    var resultadoPlanos = {};
-                }
+                var resultadoPlanos = guardarPlanos(tipoObjeto,arregloPlanos);
                 var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
                 console.log(informacion);
                 console.log(resultadoPlanos);
@@ -8044,7 +8039,6 @@ $(document).ready(function() {
                     }
                     $("#sede_search").val("").change();
                     $("#divDialogConsulta").modal('hide');
-                    $("#divDialogConsultaMapa").modal('hide');
                     fotos.value = "";
                 }
             }else{

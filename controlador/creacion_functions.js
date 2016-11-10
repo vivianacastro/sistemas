@@ -4539,7 +4539,7 @@ $(document).ready(function() {
                     informacion["instalador"] = instalador;
                     informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
                     informacion["ubicacion_condensadora"] = ubicacionCondensadora;
-                    var data = guardarObjeto("aire",informacion);
+                    var data = guardarObjeto("aire_acondicionado",informacion);
                     var id_aire = "";
                     $.each(data.verificar, function(index, record) {
                         if($.isNumeric(index)) {
@@ -4550,7 +4550,7 @@ $(document).ready(function() {
                     console.log(informacion);
                     if (data.verificar != false) {
                         informacion["id_aire"] = id_aire;
-                        arregloFotos.append('aire_acondicionado',JSON.stringify(informacion));
+                        arregloFotos.append('aire',JSON.stringify(informacion));
                         var resultadoFotos = guardarFotos("aire",arregloFotos);
                         console.log(resultadoFotos);
                         var mensaje = "";
