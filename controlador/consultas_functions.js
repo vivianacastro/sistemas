@@ -111,6 +111,7 @@ $(document).ready(function() {
             actualizarSelectMarcaAire("marca_aire");
             actualizarSelectTipoObjeto("tipo_aire",0);
             actualizarSelectTipoObjeto("tipo_tecnologia_aire",0);
+            actualizarSelectTipoObjeto("tipo_periodicidad_mantenimiento",0);
         }else if(URLactual['href'].indexOf('consultar_capacidad_aire') >= 0){
             actualizarSelectCapacidadAire("capacidad_aire_search");
         }else if(URLactual['href'].indexOf('consultar_marca_aire') >= 0){
@@ -1699,22 +1700,22 @@ $(document).ready(function() {
                 informacion["id_edificio"] = $("#edificio_search").val();
                 informacion["id_espacio"] = $("#espacio_search").val();
                 var data = buscarObjetos("aires_ubicacion",informacion);
-                $("#numero_inventario_search").empty();
-                $("#numero_inventario_search").val("");
+                $("#id_aire_search").empty();
+                $("#id_aire_search").val("");
                 var row = $("<option value=''/>");
                 row.text("--Seleccionar--");
-                row.appendTo("#numero_inventario_search");
+                row.appendTo("#id_aire_search");
                 $.each(data, function(index, record) {
                     if($.isNumeric(index)) {
-                        aux = record.numero_inventario;
-                        row = $("<option value='" + record.numero_inventario + "'/>");
+                        aux = record.id_aire+" - "+record.numero_inventario;
+                        row = $("<option value='" + record.id_aire + "'/>");
                         row.text(aux);
-                        row.appendTo("#numero_inventario_search");
+                        row.appendTo("#id_aire_search");
                     }
                 });
             }else{
-                $("#numero_inventario_search").empty();
-                $("#numero_inventario_search").val("");
+                $("#id_aire_search").empty();
+                $("#id_aire_search").val("");
                 $('#visualizarAire').attr('disabled',true);
             }
         }else{
@@ -1727,11 +1728,23 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector espacio_search
+     * Se captura el evento cuando se modifica el valor del selector numero_inventario_search
      * y se actualiza el selector de espacios.
      */
     $("#numero_inventario_search").change(function (e) {
         if (validarCadena($("#numero_inventario_search").val())) {
+            $('#visualizarAire').removeAttr("disabled");
+        }else{
+            $('#visualizarAire').attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector numero_inventario_search
+     * y se actualiza el selector de espacios.
+     */
+    $("#id_aire_search").change(function (e) {
+        if (validarCadena($("#id_aire_search").val())) {
             $('#visualizarAire').removeAttr("disabled");
         }else{
             $('#visualizarAire').attr('disabled',true);
@@ -4565,9 +4578,18 @@ $(document).ready(function() {
       var informacion =  {};
       var registros = 0;
       var numeroInventario = $("#numero_inventario_search").val();
-      if (validarCadena(numeroInventario)) {
-          informacion['numero_inventario'] = numeroInventario;
-          var data = consultarInformacionObjeto("aire",informacion);
+      var idAire = $("#id_aire_search").val();
+      if (validarCadena(numeroInventario) || validarCadena(idAire)) {
+          if(URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0){
+              informacion['id_aire'] = idAire;
+              var data = consultarInformacionObjeto("aire_id",informacion);
+              var archivos = consultarArchivosObjeto("aire_id",informacion);
+          }else{
+              informacion['numero_inventario'] = numeroInventario;
+              var data = consultarInformacionObjeto("aire_numero_inventario",informacion);
+              var archivos = consultarArchivosObjeto("aire_numero_inventario",informacion);
+          }
+          console.log(data);
           $.each(data, function(index, record) {
               if($.isNumeric(index)) {
                  $("#nombre_sede").val(record.nombre_sede);
@@ -4580,6 +4602,8 @@ $(document).ready(function() {
                      piso = 'Terraza';
                  }
                  $("#pisos").val(piso);
+                 $("#id_aire").val(record.id_aire);
+                 idAire = record.id_aire;
                  $("#id_espacio").val(record.id_espacio);
                  $("#numero_inventario").val(record.numero_inventario);
                  $("#capacidad_aire").val(record.capacidad);
@@ -4588,9 +4612,93 @@ $(document).ready(function() {
                  $("#marca_aire").attr('name',record.marca);
                  $("#tipo_aire").val(record.tipo);
                  $("#tipo_aire").attr('name',record.tipo);
+                 $("#tipo_tecnologia_aire").val(record.tecnologia);
+                 $("#tipo_tecnologia_aire").attr('name',record.tecnologia);
+                 fecha_instalacion = record.fecha_instalacion;
+                 fecha_instalacion = fecha_instalacion.substring(0,10);
+                 $("#fecha_instalacion").val(fecha_instalacion);
+                 $("#fecha_instalacion").attr('name',fecha_instalacion);
+                 $("#instalador").val(record.instalador);
+                 $("#instalador").attr('name',record.instalador);
+                 $("#tipo_periodicidad_mantenimiento").val(record.periodicidad_mantenimiento);
+                 $("#tipo_periodicidad_mantenimiento").attr('name',record.periodicidad_mantenimiento);
+                 $("#ubicacion_condensadora").val(record.ubicacion_condensadora);
+                 $("#ubicacion_condensadora").attr('name',record.ubicacion_condensadora);
                  registros++;
               }
           });
+          $("#myCarousel").hide();
+          for (var i = 0; i < numeroFotos; i++) {
+              eliminarComponente("slide_carrusel");
+              eliminarComponente("item_carrusel");
+              eliminarComponente("foto");
+              eliminarComponente("inputFileFotos");
+          }
+          for (var i = 0; i < numeroPlanos; i++) {
+              eliminarComponente("plano");
+          }
+          numeroFotos = 0;
+          numeroPlanos = 0;
+          $.each(archivos, function(index, record) {
+              if($.isNumeric(index)) {
+                  if (record.tipo == 'foto') {
+                      var componente, componente2;
+                      if (numeroFotos == 0) {
+                         componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                         componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                           +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                           +'</div>';
+                     }else{
+                          componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                          componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                            +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                            +'</div>';
+                     }
+                      añadirComponente("indicadores_carrusel",componente);
+                      añadirComponente("fotos_carrusel",componente2);
+                      componente = '<div id="foto">'
+                        +'<div class="col-sm-8 div_izquierda">'
+                        +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'">'
+                        +'<span>'+record.nombre+'</span></a>'
+                        +'</div><div class="col-sm-4">'
+                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                        +'</div>'
+                        +'<br></div>';
+                      añadirComponente("enlace_fotos",componente);
+                      numeroFotos++;
+                      $("#myCarousel").show();
+                  }
+              }
+          });
+          var componente, componente2;
+          if (numeroFotos == 0) {
+              componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+              componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                +'<div class="fileUpload btn boton_agregar_foto">'
+                      +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                      +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                      +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+                  +'</div>'
+                +'</div>';
+          }else{
+              componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+              componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                +'<div class="fileUpload btn boton_agregar_foto">'
+                      +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                      +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                      +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+                  +'</div>'
+                +'</div>';
+          }
+          var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+              +'<span>Agregar una foto</span><br>'
+              +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+              +'<br><br></div>';
+          añadirComponente("enlace_fotos",componenteFotos);
+          numeroFotos++;
+          añadirComponente("indicadores_carrusel",componente);
+          añadirComponente("fotos_carrusel",componente2);
+          $("#myCarousel").show();
           if (registros > 0) {
               $("#divDialogConsulta").modal('show');
           }else {
@@ -4830,6 +4938,10 @@ $(document).ready(function() {
         $("#marca_aire_nueva").attr('disabled',true);
         $("#tipo_aire_nuevo").attr('disabled',true);
         $("#tecnologia_aire_nuevo").attr('disabled',true);
+        $("#fecha_instalacion").attr('disabled',true);
+        $("#instalador").attr('disabled',true);
+        $("#tipo_periodicidad_mantenimiento").attr('disabled',true);
+        $("#ubicacion_condensadora").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -5459,9 +5571,17 @@ $(document).ready(function() {
     $("#modificar_aire").click(function (e){
         $("#marca_aire").removeAttr("disabled");
         $("#tipo_aire").removeAttr("disabled");
+        $("#tipo_tecnologia_aire").removeAttr("disabled");
         $("#capacidad_aire").removeAttr("disabled");
+        $("#fecha_instalacion").removeAttr("disabled");
+        $("#instalador").removeAttr("disabled");
+        $("#tipo_periodicidad_mantenimiento").removeAttr("disabled");
+        $("#ubicacion_condensadora").removeAttr("disabled");
         $("#modificar_aire").hide();
         $("#guardar_modificaciones_aire").show();
+        $("#enlace_fotos").show();
+        $("#inputFileFotos").show();
+        $("#fotos").hide();
         $('#divDialogConsulta').scrollTop(0);
     });
 

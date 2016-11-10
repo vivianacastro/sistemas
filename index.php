@@ -290,7 +290,10 @@ $map = array(
         'guardar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_mantenimiento_aire'),
         //Acciones de consulta
         'consultar_aires_ubicacion' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aires_ubicacion'),
-        'consultar_informacion_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_aire'),
+        'consultar_informacion_aire_numero_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_aire_numero_inventario'),
+        'consultar_informacion_aire_id' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_aire_id'),
+        'consultar_archivos_aire_numero_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_aire_numero_inventario'),
+        'consultar_archivos_aire_id' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_aire_id'),
         'consultar_informacion_capacidad_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_capacidad_aires'),
         'consultar_informacion_marca_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_marca_aires'),
         'consultar_informacion_tipo_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_tipo_aires'),

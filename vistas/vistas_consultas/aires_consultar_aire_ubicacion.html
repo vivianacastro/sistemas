@@ -13,7 +13,7 @@
         <select class='form-control formulario' name='pisos_search' id='pisos_search' required></select><br>
         <div class='div_izquierda'><b>Espacio<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='espacio_search' id='espacio_search' required></select><br>
-        <div class='div_izquierda'><b>N&uacute;mero Inventario<font color='red'>*</font>:</b></div>
+        <div class='div_izquierda'><b>Id Aire - N&uacute;mero Inventario<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='numero_inventario_search' id='numero_inventario_search' required></select><br>
     <div><br>
     <div class='form_button'>
@@ -30,6 +30,10 @@
             <div class='modal-body'>
                 <div class='form-group'>
                     <div id='informacionCampus'>
+                        <div class='div_izquierda'><b>Id Aire Acondicionado<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='id_aire' id='id_aire' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>N&uacute;mero Inventario<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='numero_inventario' id='numero_inventario' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Sede<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='nombre_sede' id='nombre_sede' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
@@ -40,17 +44,51 @@
                         <input class='form-control formulario' type='text' name='pisos' id='pisos' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Espacio<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='text' name='id_espacio' id='id_espacio' value='' disabled required/><br>
-                        <div class='div_izquierda'><b>N&uacute;mero Inventario<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' name='numero_inventario' id='numero_inventario' value='' disabled required/><br>
                         <div class='div_izquierda'><b>Marca<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='marca_aire' id='marca_aire' disabled required></select><br>
                         <div class='div_izquierda'><b>Tipo<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='tipo_aire' id='tipo_aire' disabled required></select><br>
+                        <div class='div_izquierda'><b>Tecnolog&iacute;a<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='tipo_tecnologia_aire' id='tipo_tecnologia_aire' disabled required></select><br>
                         <div class='div_izquierda'><b>Capacidad<font color='red'>*</font>:</b></div>
                         <div class="input-group">
                             <select class='form-control formulario' name='capacidad_aire' id='capacidad_aire' disabled required></select><br>
                             <span class="input-group-addon">BTU</span>
                         </div><br>
+                        <div class='div_izquierda'><b>Fecha Instalaci&oacute;n:</b></div>
+                        <input class='form-control formulario' type='date' name='fecha_instalacion' id='fecha_instalacion' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Instalador:</b></div>
+                        <input class='form-control formulario' type='text' maxlength="50" name='instalador' id='instalador' value='' disabled required/><br>
+                        <div class='div_izquierda'><b>Periodicidad Mantenimiento:</b></div>
+                        <select class='form-control formulario' name='tipo_periodicidad_mantenimiento' id='tipo_periodicidad_mantenimiento' disabled required></select><br>
+                        <div class='div_izquierda'><b>Ubicaci&oacute;n Unidad Condensadora/Compresora:</b></div>
+                        <input class='form-control formulario' type='text' name='ubicacion_condensadora' id='ubicacion_condensadora' value='' disabled required/><br>
+                        <div id='fotos'>
+                          <div class="div_carousel">
+                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators" id="indicadores_carrusel">
+                                    <li id="slide_carrusel_eliminar" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                    <div id="item_carrusel_eliminar" class="item active carouselImg">
+                                        <img class="carouselImg" src="archivos/images/index/admin.jpg"/>
+                                    </div>
+                                </div>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                          </div>
+                        </div>
+                        <div id='enlace_fotos' style="display:none"></div>
                     </div>
                 </div>
             </div>

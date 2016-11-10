@@ -1393,6 +1393,58 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar los archivos de un aire acondicionado en el sistema.
+     * @param string $id_aire, id del aire.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function buscarArchivosAireId($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."' ORDER BY tipo,nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Archivos del aire acondicionado seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar los archivos de un aire acondicionado en el sistema.
+     * @param string $numero_inventario, numero de inventario del aire.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function buscarArchivosAireNumeroInventario($numero_inventario){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $sql = "SELECT * FROM aire_acondicionado_archivos WHERE numero_inventario = '".$numero_inventario."' ORDER BY tipo,nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Archivos del aire acondicionado seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la ubicación de un campus en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
@@ -2054,7 +2106,7 @@ class modelo_consultas
     */
     public function buscarAireNumeroInventario($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
-        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.numero_inventario, a.capacidad, a.marca, a.tipo
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
                 FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
                                             JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
                                             JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
@@ -2062,16 +2114,45 @@ class modelo_consultas
                 WHERE numero_inventario = '".$numero_inventario."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire Número Inventario 1)";
             $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire Número Inventario 2)";
                 $GLOBALS['sql'] = $sql;
             }elseif($l_stmt->rowCount() == 0){
-                $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "El aire acondicionado con número de inventario ".$numero_inventario." no se encuentra registrado en el sistema";
+            }else{
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del aire acondicionado seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar un aire acondicionado por número de inventario.
+     * @param string $idAire, id del aire acondicionado.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function buscarAireId($idAire){
+        $numero_inventario = htmlspecialchars(trim($idAire));
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
+                FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
+                                            JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
+                                            JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
+                                            JOIN sede e ON a.id_sede = e.id
+                WHERE id_aire = '".$idAire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire Id 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire Id 2)";
+                $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del aire acondicionado seleccionado";
