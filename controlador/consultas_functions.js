@@ -7790,50 +7790,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica alguno de los selectores del tipo de iluminación y se
-     * realiza la operacion correspondiente.
-     */
-    /*$("#iluminacion").on("change", ".formulario", function(){
-        var id = $(this).attr("id");
-        if (id.indexOf("tipo_iluminacion") >= 0){
-            console.log($(this).val());
-            for (var i = 0; i < iluminacionCont; i++) {
-                if($(this).attr("id") != $("tipo_iluminacion"+iluminacionCont).attr("id")){
-                    if (i == 0) {
-                        $("#tipo_iluminacion option[value='"+$(this).val()+"']").hide();
-                    }else{
-                        $("#tipo_iluminacion"+i+" option[value='"+$(this).val()+"']").hide();
-                    }
-                    console.log("tipo_iluminacion"+i);
-                }
-            }
-        }
-    });*/
-
-    /**
-     * Se captura el evento cuando se modifica alguno de los selectores del tipo de interruptor y se
-     * realiza la operacion correspondiente.
-     */
-    /*$("#interruptor").on("change", ".formulario", function(){
-        var id = $(this).attr("id");
-        if (id.indexOf("tipo_iluminacion") >= 0){
-            console.log($(this).val());
-            var aux;
-            for (var i = 0; i < iluminacionCont; i++) {
-                if($(this).attr("id") != $("tipo_iluminacion"+iluminacionCont).attr("id")){
-                    if (i == 0) {
-                        $("#tipo_iluminacion option[value='"+$(this).val()+"']").hide();
-                    }else{
-                        $("#tipo_iluminacion"+i+" option[value='"+$(this).val()+"']").hide();
-                    }
-                    console.log("tipo_iluminacion"+i);
-                }
-            }
-        }
-    });*/
-
-    /**
-    * Se captura el evento cuando se da click en el boton modificar_campus y se
+    * Se captura el evento cuando se da click en el boton guardar_archivos y se
     * realiza la operacion correspondiente.
     */
     $("#guardar_archivos").click(function (e){
@@ -7933,6 +7890,9 @@ $(document).ready(function() {
                     informacion["nombre_campus"] = $("#campus_search").val();
                     informacion["nombre_edificio"] = $("#edificio_search").val();
                     informacion["id_espacio"] = $("#espacio_search").val();
+                }else if(URLactual['href'].indexOf('consultar_aire') >= 0){
+                    tipoObjeto = "aire";
+                    informacion["id_aire"] = $("#id_aire").val();
                 }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                     tipoObjeto = objetoSeleccionado;
                     console.log(tipoObjeto);
@@ -7966,7 +7926,11 @@ $(document).ready(function() {
                 }
                 arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
                 arregloPlanos.append(tipoObjeto,JSON.stringify(informacion));
-                var resultadoPlanos = guardarPlanos(tipoObjeto,arregloPlanos);
+                if(URLactual['href'].indexOf('consultar_aire') == -1){
+                    var resultadoPlanos = guardarPlanos(tipoObjeto,arregloPlanos);
+                }else{
+                    var resultadoPlanos = {};
+                }
                 var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
                 console.log(informacion);
                 console.log(resultadoPlanos);
@@ -8022,6 +7986,70 @@ $(document).ready(function() {
                     alert("ERROR. El número máximo de fotos es 20");
                     fotos.focus();
                 }
+            }
+        }
+    });
+
+    /**
+    * Se captura el evento cuando se da click en el boton guardar_fotos y se
+    * realiza la operacion correspondiente.
+    */
+    $("#guardar_fotos").click(function (e){
+        if (window.confirm("¿Guardar las fotos seleccionados?")) {
+            var fotos = document.getElementById("fileInputOculto");
+            var aux = (numeroFotos-1) + fotos.files.length;
+            if (aux <= 20) {
+                var arregloFotos = new FormData();
+                var informacion = {};
+                for (var i=0;i<fotos.files.length;i++) {
+                    var foto = fotos.files[i];
+                    if (foto.size > 2000000) {
+                        alert('La foto: "'+foto.name+"' es muy grande");
+                    }else{
+                        var nombreArchivo = foto.name;
+                        if(nombreArchivo.length > 50){
+                            nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                        }
+                        arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                    }
+                }
+                var tipoObjeto;
+                if(URLactual['href'].indexOf('consultar_aire') >= 0){
+                    tipoObjeto = "aire";
+                    informacion["id_aire"] = $("#id_aire").val();
+                }
+                arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
+                var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
+                console.log(informacion);
+                console.log(resultadoFotos);
+                var mensaje = "";
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                    }
+                }
+                if (mensaje.substring(0,1) != "") {
+                    alert(mensaje);
+                }else{
+                    if (fotos.files.length > 1) {
+                        alert("Los archivos se han guardado correctamente");
+                    }else if (fotos.files.length == 1) {
+                        alert("El archivo se ha guardado correctamente");
+                    }
+                    $("#sede_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
+                    $("#divDialogConsultaMapa").modal('hide');
+                    fotos.value = "";
+                }
+            }else{
+                alert("ERROR. El número máximo de fotos es 20");
+                fotos.focus();
             }
         }
     });
