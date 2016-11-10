@@ -2008,11 +2008,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -2153,11 +2153,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos)
         añadirComponente("planos",componentePlano);
@@ -2361,11 +2361,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -2505,11 +2505,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -2692,11 +2692,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -2831,11 +2831,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -2975,11 +2975,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -3144,11 +3144,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -3293,11 +3293,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -3436,11 +3436,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -3582,11 +3582,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -4507,11 +4507,11 @@ $(document).ready(function() {
         var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
             +'<span>Agregar una foto</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-            +'<br><br></div>';
+            +'<br></div>';
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("enlace_fotos",componenteFotos);
         añadirComponente("planos",componentePlano);
@@ -4693,7 +4693,7 @@ $(document).ready(function() {
           var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
               +'<span>Agregar una foto</span><br>'
               +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
-              +'<br><br></div>';
+              +'<br></div>';
           añadirComponente("enlace_fotos",componenteFotos);
           numeroFotos++;
           añadirComponente("indicadores_carrusel",componente);
@@ -6229,7 +6229,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -6494,7 +6494,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -6652,7 +6652,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -6799,7 +6799,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -6966,7 +6966,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -7144,7 +7144,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -7284,7 +7284,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
@@ -7441,7 +7441,7 @@ $(document).ready(function() {
         var componentePlano = '<div id="plano" class="div_izquierda">'
             +'<span>Agregar un plano</span><br>'
             +'<input class="form-control formulario agregar_archivos" type="file" id="planos[]" name="planos[]" multiple accept=".dwg,.dxf">'
-            +'<br><br></div>';
+            +'<br></div>';
         numeroPlanos++;
         añadirComponente("planos",componentePlano);
         numeroFotos++;
