@@ -4961,6 +4961,7 @@ $(document).ready(function() {
         $("input[name=tiene_espacio_padre]").attr('disabled', true);
         $("#nombre_tipo_material").attr('disabled',true);
         $("#nombre_tipo_objeto").attr('disabled',true);
+        $("#numero_inventario").attr('disabled',true);
         $("#capacidad_aire").attr('disabled',true);
         $("#marca_aire").attr('disabled',true);
         $("#tipo_aire").attr('disabled',true);
@@ -10637,6 +10638,7 @@ $(document).ready(function() {
                         var arregloFotosEliminar = {};
                         arregloFotosEliminar["id_aire"] = idAire;
                         arregloFotosEliminar["nombre"] = fotosEliminar;
+                        console.log(fotosEliminar);
                         arregloFotosEliminar["tipo"] = "foto";
                         arregloFotos.append("aire",JSON.stringify(informacion));
                         var data = modificarObjeto("aire",informacion);

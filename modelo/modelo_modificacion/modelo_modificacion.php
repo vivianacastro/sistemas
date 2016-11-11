@@ -5719,7 +5719,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre de la foto.
      * @return array
      */
-    public function eliminarFotoAire($id_aire,$id,$archivo){
+    public function eliminarFotoAire($id_aire,$archivo){
         $id_aire = htmlspecialchars(trim($id_aire));
         $archivo = htmlspecialchars(trim($archivo));
         $sql = "DELETE FROM aire_acondicionado_archivos WHERE nombre = '".$archivo."' AND tipo = 'foto' AND id_aire = '".$id_aire."';";
@@ -5737,6 +5737,7 @@ class modelo_modificacion {
                 $result = $l_stmt->fetchAll();
                 unlink(__ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/".$archivo);
                 $GLOBALS['mensaje'] = "Se ha eliminado la foto del aire acondiconado";
+                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
