@@ -11024,6 +11024,7 @@ $(document).ready(function() {
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
+                $("#numero_inventario_search").val("").change();
                 $("#divDialogConsulta").modal('hide');
             }
         }

@@ -4908,7 +4908,7 @@ class modelo_modificacion {
             array_push($capacidad,$valor['capacidad']);
             array_push($tipo,$valor['tipo']);
             array_push($tecnologia,$valor['tecnologia']);
-            array_push($fechaInstalacion,$valor['fecha_instalacion']);
+            array_push($fechaInstalacion,substr($valor['fecha_instalacion'],0,10));
             array_push($instalador,$valor['instalador']);
             array_push($periodicidadMantenimiento,$valor['periodicidad_mantenimiento']);
             array_push($ubicacionCondensadora,$valor['ubicacion_condensadora']);

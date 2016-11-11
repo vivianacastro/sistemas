@@ -5362,3 +5362,7 @@
 [11-Nov-2016 10:12:31 America/Bogota] PHP Warning:  unlink(/media/windows/Users/juanc_000/Downloads/sistemas/archivos/images/aire_acondicionado/9/): Is a directory in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 5738
 [11-Nov-2016 14:49:53 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3177
 [11-Nov-2016 14:52:00 America/Bogota] PHP Fatal error:  Call to undefined method modelo_modificacion::eliminarFotosAire() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 4917
+[11-Nov-2016 14:59:01 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 2131
+[11-Nov-2016 14:59:01 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1885
+[11-Nov-2016 14:59:01 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3177
+[11-Nov-2016 14:59:24 America/Bogota] PHP Warning:  substr() expects at least 2 parameters, 1 given in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 4911

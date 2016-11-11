@@ -2106,6 +2106,7 @@ class modelo_consultas
     */
     public function buscarAireNumeroInventario($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $result = array();
         $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
                 FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
                                             JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
