@@ -2468,7 +2468,7 @@ class modelo_modificacion {
         if (strcasecmp($tipo_periodicidad_mantenimiento,'') != 0)
             $campos = $campos.", periodicidad_mantenimiento = '".$tipo_periodicidad_mantenimiento."'";
         $sql = "UPDATE aire_acondicionado SET $campos WHERE id_aire = '".$id_aire."';";
-        $data = $this->consultarCampoAire($id_aire,"aire");
+        $data = $this->consultarCampoAire($id_aire,"aire_mantenimiento");
         foreach ($data as $clave => $valor) {
             $numero_inventario_anterior = $valor['numero_inventario'];
             $marca_aire_anterior = $valor['marca'];
@@ -2542,29 +2542,6 @@ class modelo_modificacion {
                 }
             }
         }
-    }
-
-    /**
-     * Función que permite consultar el valor de un campo de la tabla aire_acondicionado.
-     * @param string $id_aire, id del aire acondicionado.
-     * @return array
-     */
-    public function consultarCampoAire($id_aire){
-        $id_aire = htmlspecialchars(trim($id_aire));
-        $sql = "SELECT * FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 1)";
-            $GLOBALS['sql'] = $sql;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 2)";
-                $GLOBALS['sql'] = $sql;
-            }else{
-                $result = $l_stmt->fetchAll();
-            }
-        }
-        return $result;
     }
 
     /**
@@ -2840,6 +2817,54 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Objeto 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el valor de un campo de una tabla.
+     * @param string $id_aire, id del aire acondicionado.
+     * @param string $tabla, tabla a realizar la consulta.
+     * @return array
+     */
+    public function consultarCampoAire($id_aire,$tabla){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM ".$tabla." WHERE id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el valor de un campo de la tabla aire_acondicionado.
+     * @param string $id_aire, id del aire acondicionado.
+     * @param string $id_orden, numero de la orden de mantenimiento.
+     * @return array
+     */
+    public function consultarCampoMantenimientoAires($id_aire,$id_orden){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$id_orden."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Mantenimiento Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Mantenimiento Aire 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
@@ -4854,6 +4879,163 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un aire acondicionado.
+     * @param string $id_aire, id del aire.
+     * @return array
+     */
+    public function eliminarAire($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $numeroInventario = array();
+        $idSede = array();
+        $idCampus = array();
+        $idEdificio = array();
+        $idEspacio = array();
+        $capacidad = array();
+        $tipo = array();
+        $tecnologia = array();
+        $fechaInstalacion = array();
+        $instalador = array();
+        $periodicidadMantenimiento = array();
+        $ubicacionCondensadora = array();
+        $data = $this->consultarCampoAire($id_aire,"aire_acondicionado");
+        $sql = "DELETE FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
+        foreach ($data as $clave => $valor) {
+            array_push($numeroInventario,$valor['numero_inventario']);
+            array_push($idSede,$valor['id_sede']);
+            array_push($idCampus,$valor['id_campus']);
+            array_push($idEdificio,$valor['id_edificio']);
+            array_push($idEspacio,$valor['id_espacio']);
+            array_push($capacidad,$valor['capacidad']);
+            array_push($tipo,$valor['tipo']);
+            array_push($tecnologia,$valor['tecnologia']);
+            array_push($fechaInstalacion,$valor['fecha_instalacion']);
+            array_push($instalador,$valor['instalador']);
+            array_push($periodicidadMantenimiento,$valor['periodicidad_mantenimiento']);
+            array_push($ubicacionCondensadora,$valor['ubicacion_condensadora']);
+        }
+        $this->eliminarMantenimientosAire($id_aire);
+        $this->eliminarFotosAire($id_aire);
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($numeroInventario); $i++) {
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"numero_inventario",$numeroInventario[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"id_sede",$idSede[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"id_campus",$idCampus[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"id_edificio",$idEdificio[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"id_espacio",$idEspacio[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"capacidad",$capacidad[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"tipo",$tipo[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"tecnologia",$tecnologia[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"fecha_instalacion",$fechaInstalacion[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"instalador",$instalador[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"periodicidad_mantenimiento",$periodicidadMantenimiento[$i],"eliminado");
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"ubicacion_condensadora",$ubicacionCondensadora[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El aire acondicionado se ha eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar los mantenimientos de un aire acondicionado.
+     * @param string $id_aire, id del aire.
+     * @return array
+     */
+    public function eliminarMantenimientosAire($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $descripcion = array();
+        $fecha = array();
+        $realizado = array();
+        $revisado = array();
+        $data = $this->consultarCampoAire($id_aire,"mantenimiento_aire");
+        $sql = "DELETE FROM mantenimiento_aire WHERE id_aire = '".$id_aire."';";
+        foreach ($data as $clave => $valor) {
+            array_push($descripcion,$valor['descripcion']);
+            array_push($fecha,$valor['fecha']);
+            array_push($realizado,$valor['realizado']);
+            array_push($revisado,$valor['revisado']);
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Mantenimientos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Mantenimientos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($descripcion); $i++) {
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"descripcion",$descripcion[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"fecha",$fecha[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"realizado",$realizado[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"revisado",$revisado[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "Los mantenimientos del aire acondicionado se han eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un mantenimiento de un aire acondicionado.
+     * @param string $id_aire, id del aire.
+     * @param string $id_orden, id de la orden de mantenimiento.
+     * @return array
+     */
+    public function eliminarMantenimientoAire($id_aire,$id_orden){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $id_orden = htmlspecialchars(trim($id_orden));
+        $descripcion = array();
+        $fecha = array();
+        $realizado = array();
+        $revisado = array();
+        $data = $this->consultarCampoMantenimientoAire($id_aire,$id_orden);
+        $sql = "DELETE FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$id_orden."';";
+        foreach ($data as $clave => $valor) {
+            array_push($descripcion,$valor['descripcion']);
+            array_push($fecha,$valor['fecha']);
+            array_push($realizado,$valor['realizado']);
+            array_push($revisado,$valor['revisado']);
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Mantenimiento Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Mantenimiento Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                for ($i=0;$i<count($usoEspacio); $i++) {
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"descripcion",$descripcion[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"fecha",$fecha[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"realizado",$realizado[$i],"eliminado");
+                    $this->registrarModificacion("mantenimiento_aire",$id_aire,"revisado",$revisado[$i],"eliminado");
+                }
+                $GLOBALS['mensaje'] = "El mantenimiento del aire acondicionado se han eliminado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los archivos de un campus.
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
@@ -5708,6 +5890,33 @@ class modelo_modificacion {
                     unlink(__ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id."/".$archivo);
                 }
                 $GLOBALS['mensaje'] = "Se ha eliminado el archivo del espacio";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar las fotos de un aire acondicionado.
+     * @param string $id_aire, id de la sede.
+     * @return array
+     */
+    public function eliminarFotosEspacio($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "DELETE FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Fotos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Fotos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $this->eliminarDir(__ROOT__. "/archivos/images/aire_acondicionado/".$id_aire);
+                $GLOBALS['mensaje'] = "Las fotos del aire acondicionado se han eliminado";
                 return true;
             }
         }

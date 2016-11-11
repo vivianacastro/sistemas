@@ -303,6 +303,8 @@ $map = array(
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación
         'modificar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_aire'),
+        'eliminar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_aire'),
+        'eliminar_mantenimiento_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_mantenimiento_aire'),
         'eliminar_foto_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_aire'),
 
         //Acciones Módulo Usuarios

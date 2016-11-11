@@ -11006,4 +11006,48 @@ $(document).ready(function() {
           }
       }
     });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_aire").click(function (e){
+        var confirmacion = window.confirm("¿Desea eliminar el aire acondicionado y todos los elementos (fotos y mantenimientos) de éste?");
+        if (confirmacion) {
+            var informacion = {};
+            var idAire = $("#id_aire").val();
+            informacion["id_aire"] = idAire;
+            var data = eliminarObjeto("aire",informacion);
+            console.log(informacion);
+            console.log(data);
+            alert(data.mensaje);
+            if (data.verificar) {
+                $("#sede_search").val("").change();
+                $("#divDialogConsulta").modal('hide');
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton eliminar_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#eliminar_mantenimiento_aire").click(function (e){
+        var confirmacion = window.confirm("¿Desea eliminar el mantenimiento al aire acondicionado?");
+        if (confirmacion) {
+            var informacion = {};
+            var idAire = $("#id_aire").val();
+            var idOrden = $("#numero_orden").val();
+            informacion["id_aire"] = idAire;
+            informacion["id_orden"] = idOrden;
+            var data = eliminarObjeto("mantenimiento_aire",informacion);
+            console.log(informacion);
+            console.log(data);
+            alert(data.mensaje);
+            if (data.verificar) {
+                $("#sede_search").val("").change();
+                $("#divDialogConsulta").modal('hide');
+            }
+        }
+    });
 });
