@@ -1002,7 +1002,7 @@ class controlador_consultas
             $data = $m->buscarAiresUbicacion($info["id_sede"],$info["id_campus"],$info["id_edificio"],$info["id_espacio"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_aire' => $valor['id_aire'],
+                    'id_aire' => strval($valor['id_aire']),
                     'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
                     'id_sede' => $valor['id_sede'],
                     'id_campus' => $valor['id_campus'],

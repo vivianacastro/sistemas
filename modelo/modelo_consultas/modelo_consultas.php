@@ -2179,7 +2179,7 @@ class modelo_consultas
                                                     JOIN capacidad_aire c ON a.capacidad = c.id
                                                     JOIN tipo_aire d ON a.tipo = d.id
                                                     JOIN tipo_tecnologia_aire e ON a.tecnologia = e.id
-                WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."';";
+                WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."' ORDER BY cast(a.id_aire as int);";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Aire-Ubicación 1)";

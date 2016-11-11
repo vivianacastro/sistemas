@@ -894,6 +894,29 @@ class controlador_modificacion{
     }
 
     /**
+     * Funcion que permite eliminar un archivo de un espacio.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
+     */
+    public function eliminar_foto_aire(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarFotoAire($info['id_aire'],$archivo[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
      * Funcion que permite eliminar un tipo de iluminación de un corredor.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado.
      */

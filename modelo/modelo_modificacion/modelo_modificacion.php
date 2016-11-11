@@ -2550,7 +2550,7 @@ class modelo_modificacion {
      * @return array
      */
     public function consultarCampoAire($id_aire){
-        $id = htmlspecialchars(trim($id));
+        $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -5708,6 +5708,35 @@ class modelo_modificacion {
                     unlink(__ROOT__."/archivos/planos/espacio/".$id_sede."-".$id_campus."-".$id_edificio."-".$id."/".$archivo);
                 }
                 $GLOBALS['mensaje'] = "Se ha eliminado el archivo del espacio";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar una foto de un aire acondicionado.
+     * @param string $id_aire, id del aire.
+     * @param string $archivo, nombre de la foto.
+     * @return array
+     */
+    public function eliminarFotoAire($id_aire,$id,$archivo){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $archivo = htmlspecialchars(trim($archivo));
+        $sql = "DELETE FROM aire_acondicionado_archivos WHERE nombre = '".$archivo."' AND tipo = 'foto' AND id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                unlink(__ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/".$archivo);
+                $GLOBALS['mensaje'] = "Se ha eliminado la foto del aire acondiconado";
                 return true;
             }
         }

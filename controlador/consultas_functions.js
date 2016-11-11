@@ -10640,7 +10640,7 @@ $(document).ready(function() {
                         arregloFotosEliminar["tipo"] = "foto";
                         arregloFotos.append("aire",JSON.stringify(informacion));
                         var data = modificarObjeto("aire",informacion);
-                        var dataEliminarFotos = eliminarObjeto("archivo_aire",arregloFotosEliminar);
+                        var dataEliminarFotos = eliminarObjeto("foto_aire",arregloFotosEliminar);
                         var resultadoFotos = guardarFotos("aire",arregloFotos);
                         console.log(informacion);
                         console.log(data);
