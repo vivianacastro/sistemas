@@ -299,7 +299,7 @@ class controlador_modificacion{
     }
 
     /**
-     * Funcion que permite modificar un edificio en el sistema.
+     * Funcion que permite modificar un aire acondicionado en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
      */
     public function modificar_aire(){
@@ -311,6 +311,46 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->modificarAire($info['id_aire'],$info['numero_inventario'],$info['marca_aire'],$info['tipo_aire'],$info['tipo_tecnologia_aire'],$info['capacidad_aire'],$info['fecha_instalacion'],$info['instalador'],$info['tipo_periodicidad_mantenimiento'],$info['ubicacion_condensadora']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite modificar una capacidad de aires acondicionados en el sistema.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+     */
+    public function modificar_capacidad_aire(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->modificarCapacidadAire($info['capacidad'],$info['capacidad_anterior']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite modificar una marca de aires acondicionados en el sistema.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+     */
+    public function modificar_marca_aire(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->modificarMarcaAire($info['nombre'],$info['nombre_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -337,6 +377,7 @@ class controlador_modificacion{
         $result['verificar'] = $verificar;
         echo json_encode($result);
     }
+
     /**
      * Funcion que permite modificar un tipo de objeto en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.

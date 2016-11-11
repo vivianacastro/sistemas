@@ -3159,6 +3159,31 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de un tipo de tecnología de aires acondicionados.
+     * @param string $tipo, tipo de aire acondicionado.
+     * @return array
+     */
+    public function guardarTipoTecnologiaAire($tipo){
+        $tipo = htmlspecialchars(trim($tipo));
+        $sql = "INSERT INTO tipo_tecnologia_aire (tipo) VALUES ('".$tipo."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Tecnología Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Tecnología Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El tipo de tecnología de aires acondicionados se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
@@ -3796,7 +3821,7 @@ class modelo_creacion {
      * @return array
      */
     public function verificarMarcaAire($marca){
-        $capacidad = htmlspecialchars(trim($capacidad));
+        $marca = htmlspecialchars(trim($marca));
         $sql = "SELECT * FROM marca_aire WHERE nombre = '".$marca."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

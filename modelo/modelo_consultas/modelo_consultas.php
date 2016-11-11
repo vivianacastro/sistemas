@@ -2058,7 +2058,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     */
     public function buscarCapacidadesAire(){
-        $sql = "SELECT * FROM capacidad_aire ORDER BY capacidad;";
+        $sql = "SELECT * FROM capacidad_aire ORDER BY cast(capacidad as int);";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Capacidades Aire 1)";

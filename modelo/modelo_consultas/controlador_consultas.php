@@ -937,6 +937,30 @@ class controlador_consultas
     }
 
     /**
+     * Función que permite consultar las capacidades de los aires aconidcionados.
+    */
+    public function consultar_capacidades_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarCapacidadesAire();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'capacidad' => strval($valor['capacidad']),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar los diferentes materiales
      * almacenados en el sistema.
     */
@@ -951,7 +975,7 @@ class controlador_consultas
             $data = $m->buscarMateriales($info["tipo_material"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'nombre_material' => mb_convert_case($valor['material'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -977,7 +1001,7 @@ class controlador_consultas
             $data = $m->buscarTipoObjetos($info["tipo_objeto"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => mb_convert_case($valor['id'],MB_CASE_TITLE,"UTF-8"),
+                    'id' => $valor['id'],
                     'tipo_objeto' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -3207,30 +3231,6 @@ class controlador_consultas
                     'id_aire' => $valor['id_aire'],
                     'nombre' => $valor['nombre'],
                     'tipo' => $valor['tipo'],
-                );
-                array_push($result, $arrayAux);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        echo json_encode($result);
-    }
-
-    /**
-     * Función que permite consultar las capacidades de los aires aconidcionados.
-    */
-    public function consultar_capacidades_aire() {
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result = array();
-            $data = $m->buscarCapacidadesAire();
-            while (list($clave, $valor) = each($data)){
-                $arrayAux = array(
-                    'id' => $valor['id'],
-                    'capacidad' => $valor['capacidad'],
                 );
                 array_push($result, $arrayAux);
             }

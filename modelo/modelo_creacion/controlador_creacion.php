@@ -546,7 +546,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar unas gradas en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-    */
+     */
     public function guardar_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1513,6 +1513,29 @@ class controlador_creacion
     }
 
 	/**
+     * Funcion que permite crear una tecnología de un aire acondicionado.
+     * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+     */
+    public function guardar_tecnologia_aire(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarTipoObjeto("tipo_tecnologia_aire",$info['tipo']);
+            if($verificar){
+                $m->guardarTipoTecnologiaAire($info['tipo']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
      * Funcion que permite registrar un mantenimiento a un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
      */
@@ -1539,5 +1562,85 @@ class controlador_creacion
         $result['verificar'] = $verificar;
         echo json_encode($result);
     }
+
+	/**
+	* Funcion que permite verificar si una capacidad de aires acondicionados ya existe en el sistema.
+	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	*/
+	public function verificar_capacidad_aire(){
+		$GLOBALS['mensaje'] = "";
+		$GLOBALS['sql'] = "";
+		$result = array();
+		$m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+		Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$info = json_decode($_POST['jObject'], true);
+			$verificar = $m->verificarCapacidadAire($info['capacidad']);
+		}
+		$result['mensaje'] = $GLOBALS['mensaje'];
+		$result['sql'] = $GLOBALS['sql'];
+		$result['verificar'] = $verificar;
+		echo json_encode($result);
+	}
+
+	/**
+	* Funcion que permite verificar si una marca de aires acondicionados ya existe en el sistema.
+	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	*/
+	public function verificar_marca_aire(){
+		$GLOBALS['mensaje'] = "";
+		$GLOBALS['sql'] = "";
+		$result = array();
+		$m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+		Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$info = json_decode($_POST['jObject'], true);
+			$verificar = $m->verificarMarcaAire($info['nombre']);
+		}
+		$result['mensaje'] = $GLOBALS['mensaje'];
+		$result['sql'] = $GLOBALS['sql'];
+		$result['verificar'] = $verificar;
+		echo json_encode($result);
+	}
+
+	/**
+	* Funcion que permite verificar si un tipo de aires acondicionados ya existe en el sistema.
+	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	*/
+	public function verificar_tipo_aire(){
+		$GLOBALS['mensaje'] = "";
+		$GLOBALS['sql'] = "";
+		$result = array();
+		$m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+		Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$info = json_decode($_POST['jObject'], true);
+			$verificar = $m->verificarTipoObjeto("tipo_aire",$info['tipo']);
+		}
+		$result['mensaje'] = $GLOBALS['mensaje'];
+		$result['sql'] = $GLOBALS['sql'];
+		$result['verificar'] = $verificar;
+		echo json_encode($result);
+	}
+
+	/**
+	* Funcion que permite verificar si un tipo de tecnología de aires acondicionados ya existe en el sistema.
+	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	*/
+	public function verificar_tecnologia_aire(){
+		$GLOBALS['mensaje'] = "";
+		$GLOBALS['sql'] = "";
+		$result = array();
+		$m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+		Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$info = json_decode($_POST['jObject'], true);
+			$verificar = $m->verificarTipoObjeto("tipo_tecnologia_aire",$info['tipo']);
+		}
+		$result['mensaje'] = $GLOBALS['mensaje'];
+		$result['sql'] = $GLOBALS['sql'];
+		$result['verificar'] = $verificar;
+		echo json_encode($result);
+	}
 }
 ?>

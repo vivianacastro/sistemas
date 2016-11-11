@@ -2509,6 +2509,72 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite modificar una capacidad de aires acondicionados.
+     * @param string $capacidad, nuevo valor de la capacidad.
+     * @param string $capacidad_anterior, anterior valor de la capacidad.
+     * @return array
+     */
+    public function modificarCapacidadAire($capacidad,$capacidad_anterior){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $capacidad_anterior = htmlspecialchars(trim($capacidad_anterior));
+        $sql = "UPDATE capacidad_aire SET capacidad = '".$capacidad."' WHERE capacidad = '".$capacidad_anterior."';";
+        $data = $this->consultarCampoCapacidadAire($capacidad_anterior);
+        foreach ($data as $clave => $valor) {
+            $id = $valor['id'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("capacidad_aire",$id,"capacidad",$capacidad_anterior,$capacidad);
+                $GLOBALS['mensaje'] = "La información de la capacidad de aires acondicionados se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar una marca de aires acondicionados.
+     * @param string $id, id de la marca.
+     * @param string $nombre, nuevo nombre de la marca.
+     * @return array
+     */
+    public function modificarMarcaAire($nombre,$nombre_anterior){
+        $nombre = htmlspecialchars(trim($nombre));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
+        $sql = "UPDATE marca_aire SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $data = $this->consultarCampoMarcaAire($nombre_anterior);
+        foreach ($data as $clave => $valor) {
+            $id = $valor['id'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("marca_aire",$id,"nombre",$nombre_anterior,$nombre);
+                $GLOBALS['mensaje'] = "La información de la marca de aires acondicionados se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que registra una modificación en una base de datos.
      * @param string $bd, nombre de la base de datos donde se realizó la modificación.
      * @param string $id_objeto, id del objeto modificado.
@@ -2682,14 +2748,14 @@ class modelo_modificacion {
     }
 
     /**
-    * Función que permite consultar el valor de un elemento de unas gradas.
-    * @param string $id_sede, id de la sede.
-    * @param string $id_campus, id del campus.
-    * @param string $id_edificio, id del edificio.
-    * @param string $piso, piso del edificio.
-    * @param string $elemento, elemento de las gradas.
-    * @return array
-    */
+     * Función que permite consultar el valor de un elemento de unas gradas.
+     * @param string $id_sede, id de la sede.
+     * @param string $id_campus, id del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param string $elemento, elemento de las gradas.
+     * @return array
+     */
     public function consultarElementoGradas($id_sede,$id_campus,$id_edificio,$piso,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2817,6 +2883,52 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Tipo Objeto 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el valor de una capacidad.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function consultarCampoCapacidadAire($capacidad){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $sql = "SELECT * FROM capacidad_aire WHERE capacidad = '".$capacidad."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Capacidad Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Capacidad Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el nombre de una marca.
+     * @param string $capacidad, capacidad.
+     * @return array
+     */
+    public function consultarCampoMarcaAire($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM marca_aire WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Aire 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();

@@ -288,6 +288,10 @@ $map = array(
         'guardar_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_marca_aire'),
         'guardar_tecnologia_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_tecnologia_aire'),
         'guardar_mantenimiento_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_mantenimiento_aire'),
+        'verificar_capacidad_aire' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_capacidad_aire'),
+        'verificar_marca_aire' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_marca_aire'),
+        'verificar_tipo_aire' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_tipo_aire'),
+        'verificar_tecnologia_aire' => array('controlador' =>'controlador_creacion', 'action' =>'verificar_tecnologia_aire'),
         //Acciones de consulta
         'verificar_numero_inventario_aire' => array('controlador' =>'controlador_consultas', 'action' =>'verificar_numero_inventario_aire'),
         'consultar_aires_ubicacion' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aires_ubicacion'),
@@ -303,6 +307,8 @@ $map = array(
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación
         'modificar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_aire'),
+        'modificar_capacidad_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_capacidad_aire'),
+        'modificar_marca_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_marca_aire'),
         'eliminar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_aire'),
         'eliminar_mantenimiento_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_mantenimiento_aire'),
         'eliminar_foto_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_aire'),

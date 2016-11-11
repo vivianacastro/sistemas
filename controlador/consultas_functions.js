@@ -495,17 +495,18 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de un número de inventario.
+    * Función que realiza una verificación de si un elemento se encuentra registrado.
+    * @param {array} elemento, elemento a consultar.
     * @param {array} informacion, arreglo que contiene el número de inventario.
     * @returns {data} object json
     **/
-    function verificarNumeroInventario(informacion){
+    function verificarElemento(elemento,informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=verificar_numero_inventario_aire",
+                url: "index.php?action=verificar_"+elemento,
                 data: {jObject:jObject},
                 dataType: "json",
                 async: false,
@@ -4733,7 +4734,7 @@ $(document).ready(function() {
             console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
-                    $("#capacidad_aire_nueva").attr('name',record.id);
+                    $("#capacidad_aire_nueva").attr('name',record.capacidad);
                     $("#capacidad_aire_nueva").val(record.capacidad);
                 }
             });
@@ -4757,7 +4758,7 @@ $(document).ready(function() {
             console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
-                    $("#marca_aire_nueva").attr('name',record.id);
+                    $("#marca_aire_nueva").attr('name',record.nombre);
                     $("#marca_aire_nueva").val(record.nombre);
                 }
             });
@@ -4781,7 +4782,7 @@ $(document).ready(function() {
             console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
-                    $("#tipo_aire_nuevo").attr('name',record.id);
+                    $("#tipo_aire_nuevo").attr('name',record.tipo);
                     $("#tipo_aire_nuevo").val(record.tipo);
                 }
             });
@@ -4805,7 +4806,7 @@ $(document).ready(function() {
             console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
-                    $("#tecnologia_aire_nuevo").attr('name',record.id);
+                    $("#tecnologia_aire_nuevo").attr('name',record.tipo);
                     $("#tecnologia_aire_nuevo").val(record.tipo);
                 }
             });
@@ -10550,7 +10551,7 @@ $(document).ready(function() {
                     var conteo = 0;
                     if ((numeroInventario != "") && (numeroInventario != numeroInventarioAnterior)) {
                         informacion["numero_inventario"] = numeroInventario;
-                        numeroInventarioRepetido = verificarNumeroInventario(informacion);
+                        numeroInventarioRepetido = verificarElemento("numero_inventario_aire",informacion);
                         console.log(numeroInventarioRepetido);
                         $.each(numeroInventarioRepetido, function(index, record) {
                             if($.isNumeric(index)) {
@@ -10612,6 +10613,66 @@ $(document).ready(function() {
             }else{
                 alert("ERROR. El número máximo de fotos es 20");
                 fotos.focus();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_capacidad_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_capacidad_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la capacidad de aires acondicionados?");
+        if (confirmacion) {
+            var informacion = {};
+            var capacidadAire = $("#capacidad_aire_nueva").val();
+            var capacidadAireAnterior = $("#capacidad_aire_nueva").attr('name');
+            informacion["capacidad"] = capacidadAire;
+            informacion["capacidad_anterior"] = capacidadAireAnterior;
+            if (!validarCadena(capacidadAire)) {
+                alert("ERROR. Ingrese la nueva capacidad de aires acondicionados");
+                $("#capacidad_aire_nueva").focus();
+            }else if((capacidadAire != capacidadAireAnterior) && !(verificarElemento("capacidad_aire",informacion).verificar)){
+                alert("ERROR. La capacidad ya se encuentra registrada en el sistema");
+                $("#capacidad_aire_nueva").focus();
+            }else{
+                var data = modificarObjeto("capacidad_aire",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    actualizarSelectCapacidadAire("capacidad_aire_search");
+                    $("#capacidad_aire_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_marca_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_marca_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la marca de aires acondicionados?");
+        if (confirmacion) {
+            var informacion = {};
+            var marcaAire = limpiarCadena($("#marca_aire_nueva").val());
+            var marcaAireAnterior = limpiarCadena($("#marca_aire_nueva").attr('name'));
+            informacion["nombre"] = marcaAire;
+            informacion["nombre_anterior"] = marcaAireAnterior;
+            if (!validarCadena(marcaAire)) {
+                alert("ERROR. Ingrese el nuevo nombre de la marca de aires acondicionados");
+                $("#marca_aire_nueva").focus();
+            }else if((marcaAire != marcaAireAnterior) && !(verificarElemento("marca_aire",informacion).verificar)){
+                alert("ERROR. La marca ya se encuentra registrada en el sistema");
+                $("#marca_aire_nueva").focus();
+            }else{
+                var data = modificarObjeto("marca_aire",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    actualizarSelectMarcaAire("marca_aire_search");
+                    $("#marca_aire_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
+                }
             }
         }
     });
