@@ -5900,7 +5900,7 @@ class modelo_modificacion {
      * @param string $id_aire, id de la sede.
      * @return array
      */
-    public function eliminarFotosEspacio($id_aire){
+    public function eliminarFotosAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "DELETE FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."';";
         $l_stmt = $this->conexion->prepare($sql);

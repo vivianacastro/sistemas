@@ -277,63 +277,63 @@ $(document).ready(function() {
      * @param {array} informacion, información del tipo de objeto.
      * @returns {data} object json
     **/
-      function modificarObjeto(tipo_objeto,informacion){
-          var jObject = JSON.stringify(informacion);
-          var dataResult;
-          try {
-              $.ajax({
-                  type: "POST",
-                  url: "index.php?action=modificar_"+tipo_objeto,
-                  data: {jObject:jObject},
-                  dataType: "json",
-                  async: false,
-                  error: function (request, status, error) {
-                      console.log(error.toString());
-                      location.reload(true);
-                  },
-                  success: function(data){
-                      dataResult = data;
-                  }
-              });
-              return dataResult;
-          }
-          catch(ex) {
-              console.log(ex);
-              alert("Ocurrió un error, por favor inténtelo nuevamente");
-          }
-      }
-
-      /**
-       * Función que permite eliminar un objeto (sede, campus, espacio, etc.)
-       * @param {string} tipo_objeto, tipo de objeto a eliminar (sede, campus, edificio, etc.).
-       * @param {array} informacion, información del tipo de objeto.
-       * @returns {data} object json
-      **/
-      function eliminarObjeto(tipo_objeto,informacion){
-            var jObject = JSON.stringify(informacion);
-            var dataResult;
-            try {
-                $.ajax({
-                    type: "POST",
-                    url: "index.php?action=eliminar_"+tipo_objeto,
-                    data: {jObject:jObject},
-                    dataType: "json",
-                    async: false,
-                    error: function (request, status, error) {
-                        console.log(error.toString());
-                        location.reload(true);
-                    },
-                    success: function(data){
-                        dataResult = data;
-                    }
-                });
-                return dataResult;
-            }
-            catch(ex) {
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
+    function modificarObjeto(tipo_objeto,informacion){
+        var jObject = JSON.stringify(informacion);
+        var dataResult;
+        try {
+          $.ajax({
+              type: "POST",
+              url: "index.php?action=modificar_"+tipo_objeto,
+              data: {jObject:jObject},
+              dataType: "json",
+              async: false,
+              error: function (request, status, error) {
+                  console.log(error.toString());
+                  location.reload(true);
+              },
+              success: function(data){
+                  dataResult = data;
+              }
+          });
+          return dataResult;
         }
+        catch(ex) {
+          console.log(ex);
+          alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+    * Función que permite eliminar un objeto (sede, campus, espacio, etc.)
+    * @param {string} tipo_objeto, tipo de objeto a eliminar (sede, campus, edificio, etc.).
+    * @param {array} informacion, información del tipo de objeto.
+    * @returns {data} object json
+    **/
+    function eliminarObjeto(tipo_objeto,informacion){
+        var jObject = JSON.stringify(informacion);
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=eliminar_"+tipo_objeto,
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
 
     /**
@@ -4614,11 +4614,9 @@ $(document).ready(function() {
           if(URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0){
               informacion['id_aire'] = idAire;
               var data = consultarInformacionObjeto("aire_id",informacion);
-              var archivos = consultarArchivosObjeto("aire_id",informacion);
           }else{
               informacion['numero_inventario'] = numeroInventario;
               var data = consultarInformacionObjeto("aire_numero_inventario",informacion);
-              var archivos = consultarArchivosObjeto("aire_numero_inventario",informacion);
           }
           console.log(data);
           $.each(data, function(index, record) {
@@ -4657,6 +4655,8 @@ $(document).ready(function() {
                  registros++;
               }
           });
+          informacion['id_aire'] = idAire;
+          var archivos = consultarArchivosObjeto("aire_id",informacion);
           $("#myCarousel").hide();
           for (var i = 0; i < numeroFotos; i++) {
               eliminarComponente("slide_carrusel");
@@ -5009,6 +5009,7 @@ $(document).ready(function() {
         $("#guardar_modificaciones_espacio").hide();
         $("#guardar_modificaciones_tipo_material").hide();
         $("#guardar_modificaciones_tipo_objeto").hide();
+        $("#guardar_fotos").hide();
         $("#botones_anadir_iluminacion").hide();
         $("#botones_anadir_interruptor").hide();
         $("#botones_anadir_puerta").hide();
