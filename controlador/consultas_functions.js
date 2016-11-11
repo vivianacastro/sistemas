@@ -119,7 +119,7 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('consultar_tipo_aire') >= 0){
             actualizarSelectTipoAire("tipo_aire_search");
         }else if(URLactual['href'].indexOf('consultar_tecnologia_aire') >= 0){
-            actualizarSelectTipoAire("tecnologia_aire_search");
+            actualizarSelectTecnologiaAire("tecnologia_aire_search");
         }
     })();
 
@@ -747,7 +747,7 @@ $(document).ready(function() {
     **/
     function actualizarSelectTecnologiaAire(input){
         var informacion = {};
-        informacion['tipo_objeto'] = "tipo_aire";
+        informacion['tipo_objeto'] = "tipo_tecnologia_aire";
         var data = buscarTipoObjetos(informacion);
         $("#"+input).empty();
         var row = $("<option value=''/>");
@@ -4949,6 +4949,7 @@ $(document).ready(function() {
         $("#capacidad_aire_nueva").attr('disabled',true);
         $("#marca_aire_nueva").attr('disabled',true);
         $("#tipo_aire_nuevo").attr('disabled',true);
+        $("#tecnologia_aire_nuevo").attr('disabled',true);
         $("#tipo_tecnologia_aire").attr('disabled',true);
         $("#fecha_instalacion").attr('disabled',true);
         $("#instalador").attr('disabled',true);
@@ -10618,9 +10619,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_capacidad_aire y se
-     * realiza la operacion correspondiente.
-     */
+    * Se captura el evento cuando de dar click en el boton guardar_modificaciones_capacidad_aire y se
+    * realiza la operacion correspondiente.
+    */
     $("#guardar_modificaciones_capacidad_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la capacidad de aires acondicionados?");
         if (confirmacion) {
@@ -10630,10 +10631,10 @@ $(document).ready(function() {
             informacion["capacidad"] = capacidadAire;
             informacion["capacidad_anterior"] = capacidadAireAnterior;
             if (!validarCadena(capacidadAire)) {
-                alert("ERROR. Ingrese la nueva capacidad de aires acondicionados");
+                alert("ERROR. Ingrese el nuevo valor de la capacidad de aires acondicionados");
                 $("#capacidad_aire_nueva").focus();
             }else if((capacidadAire != capacidadAireAnterior) && !(verificarElemento("capacidad_aire",informacion).verificar)){
-                alert("ERROR. La capacidad ya se encuentra registrada en el sistema");
+                alert("ERROR. La capacidad de aires acondicionados ya se encuentra registrada en el sistema");
                 $("#capacidad_aire_nueva").focus();
             }else{
                 var data = modificarObjeto("capacidad_aire",informacion);
@@ -10648,9 +10649,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_marca_aire y se
-     * realiza la operacion correspondiente.
-     */
+    * Se captura el evento cuando de dar click en el boton guardar_modificaciones_marca_aire y se
+    * realiza la operacion correspondiente.
+    */
     $("#guardar_modificaciones_marca_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la marca de aires acondicionados?");
         if (confirmacion) {
@@ -10663,7 +10664,7 @@ $(document).ready(function() {
                 alert("ERROR. Ingrese el nuevo nombre de la marca de aires acondicionados");
                 $("#marca_aire_nueva").focus();
             }else if((marcaAire != marcaAireAnterior) && !(verificarElemento("marca_aire",informacion).verificar)){
-                alert("ERROR. La marca ya se encuentra registrada en el sistema");
+                alert("ERROR. La marca de aires acondicionados ya se encuentra registrada en el sistema");
                 $("#marca_aire_nueva").focus();
             }else{
                 var data = modificarObjeto("marca_aire",informacion);
@@ -10671,6 +10672,68 @@ $(document).ready(function() {
                 if (data.verificar) {
                     actualizarSelectMarcaAire("marca_aire_search");
                     $("#marca_aire_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+    * Se captura el evento cuando de dar click en el boton guardar_modificaciones_marca_aire y se
+    * realiza la operacion correspondiente.
+    */
+    $("#guardar_modificaciones_tipo_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del tipo de aires acondicionados?");
+        if (confirmacion) {
+            var informacion = {};
+            var tipoAire = limpiarCadena($("#tipo_aire_nuevo").val());
+            var tipoAireAnterior = limpiarCadena($("#tipo_aire_nuevo").attr('name'));
+            informacion["tipo_objeto"] = "tipo_aire";
+            informacion["nombre"] = tipoAire;
+            informacion["nombre_anterior"] = tipoAireAnterior;
+            if (!validarCadena(tipoAire)) {
+                alert("ERROR. Ingrese el nuevo nombre del tipo de aires acondicionados");
+                $("#tipo_aire_nuevo").focus();
+            }else if((tipoAire != tipoAireAnterior) && !(verificarElemento("tipo_aire",informacion).verificar)){
+                alert("ERROR. El nombre del tipo de aires acondicionados ya se encuentra registrado en el sistema");
+                $("#tipo_aire_nuevo").focus();
+            }else{
+                var data = modificarObjeto("tipo_objeto",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    actualizarSelectTipoAire("tipo_aire_search");
+                    $("#tipo_aire_search").val("").change();
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+    * Se captura el evento cuando de dar click en el boton guardar_modificaciones_marca_aire y se
+    * realiza la operacion correspondiente.
+    */
+    $("#guardar_modificaciones_tecnologia_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la tecnología de aires acondicionados?");
+        if (confirmacion) {
+            var informacion = {};
+            var tecnologiaAire = limpiarCadena($("#tecnologia_aire_nuevo").val());
+            var tecnologiaAireAnterior = limpiarCadena($("#tecnologia_aire_nuevo").attr('name'));
+            informacion["tipo_objeto"] = "tipo_tecnologia_aire";
+            informacion["nombre"] = tecnologiaAire;
+            informacion["nombre_anterior"] = tecnologiaAireAnterior;
+            if (!validarCadena(tecnologiaAire)) {
+                alert("ERROR. Ingrese el nuevo nombre de la tecnología de aires acondicionados");
+                $("#tecnologia_aire_nuevo").focus();
+            }else if((tecnologiaAire != tecnologiaAireAnterior) && !(verificarElemento("tecnologia_aire",informacion).verificar)){
+                alert("ERROR. El nombre de la tecnología de aires acondicionados ya se encuentra registrado en el sistema");
+                $("#tecnologia_aire_nuevo").focus();
+            }else{
+                var data = modificarObjeto("tipo_objeto",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    actualizarSelectTecnologiaAire("tecnologia_aire_search");
+                    $("#tecnologia_aire_search").val("").change();
                     $("#divDialogConsulta").modal('hide');
                 }
             }

@@ -5375,3 +5375,9 @@
 [11-Nov-2016 17:14:24 America/Bogota] PHP Notice:  Undefined index: nombre_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 353
 [11-Nov-2016 17:14:24 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2569
 [11-Nov-2016 17:16:47 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2569
+[11-Nov-2016 17:25:32 America/Bogota] PHP Notice:  Undefined index: tipo_objeto in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 393
+[11-Nov-2016 17:25:32 America/Bogota] PHP Notice:  Undefined index: nombre_anterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 393
+[11-Nov-2016 17:25:32 America/Bogota] PHP Notice:  Undefined index: nombre in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 393
+[11-Nov-2016 17:25:32 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2891
+[11-Nov-2016 17:25:32 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2420
+[11-Nov-2016 17:28:43 America/Bogota] PHP Notice:  Undefined index: tipo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1618
