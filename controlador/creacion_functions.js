@@ -8,10 +8,10 @@ $(document).ready(function() {
     var URLactual = window.location;
 
     /**
-     * Función que se ejecuta al momento que se accede a la página que lo tiene
-     * incluido.
-     * @returns {undefined}
-     */
+    * Función que se ejecuta al momento que se accede a la página que lo tiene
+    * incluido.
+    * @returns {undefined}
+    */
     (function (){
         if(URLactual['href'].indexOf('crear_campus') >= 0){
             actualizarSelectSede();
@@ -113,9 +113,9 @@ $(document).ready(function() {
     })();
 
     /**
-     * Función que obtiene las coordenadas donde se encuentra el usuario
-     * y actualiza el mapa.
-     * @returns {undefined}
+    * Función que obtiene las coordenadas donde se encuentra el usuario
+    * y actualiza el mapa.
+    * @returns {undefined}
     */
     function getCoordenadas(){
         var coords = {};
@@ -132,9 +132,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que carga el mapa y lo configura.
-     * @returns {undefined}
-     */
+    * Función que carga el mapa y lo configura.
+    * @returns {undefined}
+    */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
@@ -195,11 +195,11 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un tipo de objeto.
-     * @param {string} tipo_objeto, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de los espacios).
-     * @param {array} informacion, información del tipo de objeto.
-     * @returns {data}
-     */
+    * Función que permite crear un tipo de objeto.
+    * @param {string} tipo_objeto, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de los espacios).
+    * @param {array} informacion, información del tipo de objeto.
+    * @returns {data}
+    */
     function guardarObjeto(tipo_objeto,informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
@@ -228,10 +228,10 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un espacio.
-     * @param {array} informacion, información del espacio.
-     * @returns {data}
-     */
+    * Función que permite crear un espacio.
+    * @param {array} informacion, información del espacio.
+    * @returns {data}
+    */
     function guardarEspacio(){
         var jObject = JSON.stringify(dataEspacio);
         console.log(dataEspacio);
@@ -259,10 +259,10 @@ $(document).ready(function() {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
                             if (!resultadoPlanos.verificar[i]) {
                                 if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
                             }
                             if (i<resultadoPlanos.verificar.length-2) {
                                 mensaje += "\n";
@@ -273,10 +273,10 @@ $(document).ready(function() {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
                             if (!resultadoFotos.verificar[i]) {
                                 if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                }
                             }
                             if (i<resultadoFotos.verificar.length-1) {
                                 mensaje += "\n";
@@ -372,10 +372,10 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite consultar los espacios existentes en un piso de un edificio.
-     * @param {array} informacion, información del tipo de material.
-     * @returns {data}
-     */
+    * Función que permite consultar los espacios existentes en un piso de un edificio.
+    * @param {array} informacion, información del tipo de material.
+    * @returns {data}
+    */
     function buscarEspacios(informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
@@ -404,10 +404,10 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un tipo de material.
-     * @param {array} informacion, información del tipo de material.
-     * @returns {data}
-     */
+    * Función que permite crear un tipo de material.
+    * @param {array} informacion, información del tipo de material.
+    * @returns {data}
+    */
     function guardarTipoMaterial(informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
@@ -436,10 +436,10 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite crear un tipo de objeto
-     * @param {array} informacion, información del tipo de objeto
-     * @returns {data}
-     */
+    * Función que permite crear un tipo de objeto
+    * @param {array} informacion, información del tipo de objeto
+    * @returns {data}
+    */
     function guardarTipoObjeto(informacion){
         var dataResult;
         var jObject = JSON.stringify(informacion);
@@ -468,11 +468,11 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite guardar los planos que se suban al sistema.
-     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
+    * Función que permite guardar los planos que se suban al sistema.
+    * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
+    * @param {formData} informacion, formData con las imagenes.
+    * @returns {data}
+    */
     function guardarPlanos(tipo_objeto,informacion){
         var dataResult;
         try {
@@ -501,11 +501,11 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que permite guardar las fotos que se suban al sistema
-     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
-     * @param {formData} informacion, formData con las imagenes.
-     * @returns {data}
-     */
+    * Función que permite guardar las fotos que se suban al sistema
+    * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
+    * @param {formData} informacion, formData con las imagenes.
+    * @returns {data}
+    */
     function guardarFotos(tipo_objeto,informacion){
         var dataResult;
         try {
@@ -534,8 +534,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las sedes presentes en el sistema
-     * @returns {data} object json.
+    * Función que realiza una consulta de las sedes presentes en el sistema
+    * @returns {data} object json.
     **/
     function buscarSedes(){
         var dataResult;
@@ -563,9 +563,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los campus presentes en el sistema
-     * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
-     * @returns {data} object json.
+    * Función que realiza una consulta de los campus presentes en el sistema
+    * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
+    * @returns {data} object json.
     **/
     function buscarCampus(sede){
         var jObject = JSON.stringify(sede);
@@ -594,9 +594,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los campus presentes en el sistema
-     * @param {array} informacion, arreglo con la información del campus a buscar.
-     * @returns {data} object json.
+    * Función que realiza una consulta de los campus presentes en el sistema
+    * @param {array} informacion, arreglo con la información del campus a buscar.
+    * @returns {data} object json.
     **/
     function ubicacionCampus(informacion){
         var jObject = JSON.stringify(informacion);
@@ -625,10 +625,10 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los edificios del campus seleccionado
-     * presentes en el sistema.
-     * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
-     * @returns {data} object json.
+    * Función que realiza una consulta de los edificios del campus seleccionado
+    * presentes en el sistema.
+    * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
+    * @returns {data} object json.
     **/
     function buscarEdificios(campus){
         var jObject = JSON.stringify(campus);
@@ -657,9 +657,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta el número de pisos de un edificio
-     * @param {array} edificio, arreglo que contiene el edificio a buscar.
-     * @returns {data} object json.
+    * Función que realiza una consulta el número de pisos de un edificio
+    * @param {array} edificio, arreglo que contiene el edificio a buscar.
+    * @returns {data} object json.
     **/
     function buscarPisosEdificio(edificio){
         var jObject = JSON.stringify(edificio);
@@ -688,8 +688,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las sedes presentes en el sistema
-     * @returns {data} object json.
+    * Función que realiza una consulta de las sedes presentes en el sistema
+    * @returns {data} object json.
     **/
     function buscarUsosEspacios(){
         var dataResult;
@@ -717,9 +717,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los materiales presentes en el sistema
-     * @param {array} informacion, arreglo que contiene el tipo de material a buscar
-     * @returns {data} object json.
+    * Función que realiza una consulta de los materiales presentes en el sistema
+    * @param {array} informacion, arreglo que contiene el tipo de material a buscar
+    * @returns {data} object json.
     **/
     function buscarMateriales(informacion){
         var dataResult;
@@ -748,9 +748,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los objetos presentes en el sistema
-     * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
-     * @returns {data} object json.
+    * Función que realiza una consulta de los objetos presentes en el sistema
+    * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
+    * @returns {data} object json.
     **/
     function buscarTipoObjetos(informacion){
         var dataResult;
@@ -779,8 +779,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las capacidades de los aires acondicionados.
-     * @returns {data} object json.
+    * Función que realiza una consulta de las capacidades de los aires acondicionados.
+    * @returns {data} object json.
     **/
     function buscarCapacidadAire(){
         var dataResult;
@@ -807,8 +807,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las capacidades de los aires acondicionados.
-     * @returns {data} object json.
+    * Función que realiza una consulta de las capacidades de los aires acondicionados.
+    * @returns {data} object json.
     **/
     function buscarAiresEspacio(informacion){
         var dataResult;
@@ -837,8 +837,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las marcas de los aires acondicionados.
-     * @returns {data} object json.
+    * Función que realiza una consulta de las marcas de los aires acondicionados.
+    * @returns {data} object json.
     **/
     function buscarMarcaAire(){
         var dataResult;
@@ -865,9 +865,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los espacios presentes en el sistema.
-     * @param {string} informacion, arreglo que contiene el espacio a buscar.
-     * @returns {data} object json.
+    * Función que realiza una consulta de los espacios presentes en el sistema.
+    * @param {string} informacion, arreglo que contiene el espacio a buscar.
+    * @returns {data} object json.
     **/
     function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio){
         var espacio = {};
@@ -901,8 +901,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de sede..
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de sede..
+    * @returns {undefined}
     **/
     function actualizarSelectSede(){
         var data = buscarSedes();
@@ -921,8 +921,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+    * @returns {undefined}
     **/
     function actualizarSelectCapacidadAire(){
         var data = buscarCapacidadAire();
@@ -941,8 +941,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+    * @returns {undefined}
     **/
     function actualizarSelectMarcaAire(){
         var data = buscarMarcaAire();
@@ -961,8 +961,8 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de campus.
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de campus.
+    * @returns {undefined}
     **/
     function actualizarSelectUsosEspacios(){
         var data = buscarUsosEspacios();
@@ -981,9 +981,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de material que se ingresa.
-     * @param {string} material, nombre del selector a actualizar y tipo de material.
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de material que se ingresa.
+    * @param {string} material, nombre del selector a actualizar y tipo de material.
+    * @returns {undefined}
     **/
     function actualizarSelectMaterial(material,id){
         if (id == 0) {
@@ -1007,9 +1007,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que llena y actualiza el selector de tipo de objeto.
-     * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
-     * @returns {undefined}
+    * Función que llena y actualiza el selector de tipo de objeto.
+    * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
+    * @returns {undefined}
     **/
     function actualizarSelectTipoObjeto(tipo_objeto,id){
         if (id == 0) {
@@ -1033,9 +1033,9 @@ $(document).ready(function() {
     }
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector nombre_sede
-     * y se actualiza el selector de campus.
-     */
+    * Se captura el evento cuando se modifica el valor del selector nombre_sede
+    * y se actualiza el selector de campus.
+    */
     $("#nombre_sede").change(function (e) {
         $("#divTieneEspacioPadre").hide();
         $('input[name=tiene_espacio_padre]').attr('checked',false);
@@ -1064,9 +1064,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector nombre_campus
-     * y se actualiza el selector de edificios.
-     */
+    * Se captura el evento cuando se modifica el valor del selector nombre_campus
+    * y se actualiza el selector de edificios.
+    */
     $("#nombre_campus").change(function (e) {
         $("#divTieneEspacioPadre").hide();
         $('input[name=tiene_espacio_padre]').attr('checked',false);
@@ -1090,10 +1090,10 @@ $(document).ready(function() {
                 lat: latitud
             }
             if (map != undefined) {
-              map.panTo(coords);
-              map.setZoom(15);
-              map.setCenter(coords);
-              google.maps.event.trigger(map, 'resize');
+                map.panTo(coords);
+                map.setZoom(15);
+                map.setCenter(coords);
+                google.maps.event.trigger(map, 'resize');
             }
         }
         var data = buscarEdificios(campus);
@@ -1116,9 +1116,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector nombre_edificio
-     * y se actualiza el selector de pisos.
-     */
+    * Se captura el evento cuando se modifica el valor del selector nombre_edificio
+    * y se actualiza el selector de pisos.
+    */
     $("#nombre_edificio").change(function (e) {
         $("#divTieneEspacioPadre").hide();
         $('input[name=tiene_espacio_padre]').attr('checked',false);
@@ -1130,40 +1130,40 @@ $(document).ready(function() {
         edificio["nombre_sede"] = limpiarCadena($("#nombre_sede").val());
         var data = buscarPisosEdificio(edificio);
         if (URLactual['href'].indexOf('crear_gradas') >= 0) {
-          $("#pisos").empty();
-          var row = $("<option value=''/>");
-          row.text("--Seleccionar--");
-          row.appendTo("#pisos");
-          $.each(data, function(index, record) {
-              if($.isNumeric(index)) {
-                  numeroPisos = record.numero_pisos;
-                  terraza = record.terraza;
-                  sotano = record.sotano;
-              }
-          });
-          for (var i=0; i<numeroPisos;i++) {
-              if (i == 0 && sotano == 'true') {
-                  aux = "Sótano";
-                  row = $("<option value='sotano'/>");
-                  row.text(aux);
-                  row.appendTo("#pisos");
-              }
-              if (i == (numeroPisos-1) && terraza == 'true') {
-                  aux = i+1;
-                  row = $("<option value='" + aux + "'/>");
-                  row.text(aux);
-                  row.appendTo("#pisos");
-                  aux = "Terraza";
-                  /*row = $("<option value='terraza'/>");
-                  //row.text(aux);
-                  row.appendTo("#pisos");*/
-              }else if(i < (numeroPisos-1)){
-                  aux = i+1;
-                  row = $("<option value='" + aux + "'/>");
-                  row.text(aux);
-                  row.appendTo("#pisos");
-              }
-          }
+            $("#pisos").empty();
+            var row = $("<option value=''/>");
+            row.text("--Seleccionar--");
+            row.appendTo("#pisos");
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    numeroPisos = record.numero_pisos;
+                    terraza = record.terraza;
+                    sotano = record.sotano;
+                }
+            });
+            for (var i=0; i<numeroPisos;i++) {
+                if (i == 0 && sotano == 'true') {
+                    aux = "Sótano";
+                    row = $("<option value='sotano'/>");
+                    row.text(aux);
+                    row.appendTo("#pisos");
+                }
+                if (i == (numeroPisos-1) && terraza == 'true') {
+                    aux = i+1;
+                    row = $("<option value='" + aux + "'/>");
+                    row.text(aux);
+                    row.appendTo("#pisos");
+                    aux = "Terraza";
+                    /*row = $("<option value='terraza'/>");
+                    //row.text(aux);
+                    row.appendTo("#pisos");*/
+                }else if(i < (numeroPisos-1)){
+                    aux = i+1;
+                    row = $("<option value='" + aux + "'/>");
+                    row.text(aux);
+                    row.appendTo("#pisos");
+                }
+            }
         }else{
             $("#pisos").empty();
             var row = $("<option value=''/>");
@@ -1200,8 +1200,8 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector de pisos.
-     */
+    * Se captura el evento cuando se modifica el valor del selector de pisos.
+    */
     $("#pisos").change(function (e) {
         $("#divTieneEspacioPadre").hide();
         $('input[name=tiene_espacio_padre]').attr('checked',false);
@@ -1255,8 +1255,8 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector de espacio.
-     */
+    * Se captura el evento cuando se modifica el valor del selector de espacio.
+    */
     $("#id_espacio").change(function (e) {
         for (var i=0;i<numeroAires;i++) {
             eliminarComponente("tr_tabla_aires");
@@ -1295,9 +1295,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del radio button pasamanos
-     * y se actualiza el selector de pisos.
-     */
+    * Se captura el evento cuando se modifica el valor del radio button pasamanos
+    * y se actualiza el selector de pisos.
+    */
     $("#form_pasamanos").change(function (e) {
         var pasamanos = $('input[name="pasamanos"]:checked').val();
         if (pasamanos == "true") {
@@ -1308,9 +1308,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
-     * y se actualiza el selector de pisos.
-     */
+    * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
+    * y se actualiza el selector de pisos.
+    */
     $("#form_espacio_padre").change(function (e) {
         var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
         if (espacioPadre == "true") {
@@ -1321,9 +1321,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton guardar_sede y se
-     * realiza la operacion correspondiente.
-     */
+    * Se captura el evento cuando se da click en el boton guardar_sede y se
+    * realiza la operacion correspondiente.
+    */
     $("#guardar_sede").click(function (e){
         try{
             var confirmacion = window.confirm("¿Guardar la información de la sede?");
@@ -1351,9 +1351,9 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el boton guardar_campus y se
-     * realiza la operacion correspondiente.
-     */
+    * Se captura el evento cuando se da click en el boton guardar_campus y se
+    * realiza la operacion correspondiente.
+    */
     $("#guardar_campus").click(function (e){
         try{
             var confirmacion = window.confirm("¿Guardar la información del campus?");
@@ -1421,3224 +1421,3224 @@ $(document).ready(function() {
                                     }
                                 }
                                 /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            alert(mensaje);
-                        }
-                        $("#nombre_sede").val("");
-                        $("#nombre_campus").val("");
-                        planos.value = "";
-                        fotos.value = "";
-                        initMap();
-                        coordenadas = {};
-                        window.scrollTo(0,0);
-                        $('#divDialogCreacion').modal('hide');
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por campus es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por campus es 20");
-                            fotos.focus();
+                                mensaje += "\n";
+                            }*/
                         }
                     }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación del campus en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_edificio y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_edificio").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del edificio?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idEdificio = $("#id_edificio").val();
-                var nombreEdificio = $("#nombre_edificio").val();
-                var numeroPisos = $("#pisos_edificio").val();
-                var terraza = $('input[name="terraza"]:checked').val();
-                var sotano = $('input[name="sotano"]:checked').val();
-                var materialFachada = $("#material_fachada").val();
-                var altoFachada = $("#alto_fachada").val();
-                var anchoFachada = $("#ancho_fachada").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece el edificio");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece el edifiicio");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idEdificio)){
-                    alert("ERROR. Ingrese el código del edificio");
-                    $("#id_edificio").focus();
-                }else if(!validarCadena(nombreEdificio)){
-                    alert("ERROR. Ingrese el nombre del edificio");
-                    $("#nombre_edificio").focus();
-                }else if(!validarCadena(numeroPisos)){
-                    alert("ERROR. Ingrese el número de pisos del edificio");
-                    $("#pisos_edificio").focus();
-                }else if(!validarCadena(terraza)){
-                    alert("ERROR. Establesca si el edificio tiene terraza");
-                    $("#terraza").focus();
-                }else if(!validarCadena(sotano)){
-                    alert("ERROR. Establesca si el edificio tiene sotano");
-                    $("#sotano").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_edificio'] = limpiarCadena(idEdificio);
-                    informacion['nombre_edificio'] = limpiarCadena(nombreEdificio);
-                    informacion['numero_pisos'] = numeroPisos;
-                    informacion['terraza'] = terraza;
-                    informacion['sotano'] = sotano;
-                    informacion['material_fachada'] = materialFachada;
-                    informacion['alto_fachada'] = altoFachada;
-                    informacion['ancho_fachada'] = anchoFachada;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('edificio',JSON.stringify(informacion));
-                        arregloPlanos.append('edificio',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("edificio",informacion);
-                        var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
-                        var resultadoFotos = guardarFotos("edificio",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_edificio").val("");
-                            $("#nombre_edificio").val("");
-                            $("#pisos_edificio").val("");
-                            $('input[name=terraza]').attr('checked',false);
-                            $('input[name=sotano]').attr('checked',false);
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_edificio").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por edificio es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por edificio es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación del edificio en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_cancha y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_cancha").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información de la cancha?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idCancha = limpiarCadena($("#id_cancha").val());
-                var usoCancha = limpiarCadena($("#uso_cancha").val());
-                var materialPiso = $("#material_piso").val();
-                var tipoPintura = $("#tipo_pintura").val();
-                var longitudDemarcacion = $("#longitud_demarcacion").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece la cancha");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece la cancha");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idCancha)){
-                    alert("ERROR. Ingrese el código de la cancha");
-                    $("#id_cancha").focus();
-                }else if(!validarCadena(usoCancha)){
-                    alert("ERROR. Ingrese uso de la cancha");
-                    $("#uso_cancha").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_cancha'] = idCancha;
-                    informacion['uso_cancha'] = usoCancha;
-                    informacion['material_piso'] = materialPiso;
-                    informacion['tipo_pintura'] = tipoPintura;
-                    informacion['longitud_demarcacion'] = longitudDemarcacion;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('cancha',JSON.stringify(informacion));
-                        arregloPlanos.append('cancha',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("cancha",informacion);
-                        var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
-                        var resultadoFotos = guardarFotos("cancha",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_cancha").val("");
-                            $("#uso_cancha").val("");
-                            $("#material_piso").val("");
-                            $('#tipo_pintura').val("");
-                            $('#longitud_demarcacion').val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_cancha").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por cancha es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por cancha es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación de la cancha en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_corredor y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_corredor").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del corredor?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idCorredor = limpiarCadena($("#id_corredor").val());
-                var alturaPared = $("#altura_pared").val();
-                var anchoPared = $("#ancho_pared").val();
-                var materialPared = $("#material_pared").val();
-                var largoTecho = $("#largo_techo").val();
-                var anchoTecho = $("#ancho_techo").val();
-                var materialTecho = $("#material_techo").val();
-                var largoPiso = $("#largo_piso").val();
-                var anchoPiso = $("#ancho_piso").val();
-                var materialPiso = $("#material_piso").val();
-                var tipoIluminacion = [];
-                var cantidadIluminacion = [];
-                var tipoSuministroEnergia = [];
-                var tomacorriente = [];
-                var cantidadTomacorrientes = [];
-                var tipoInterruptor = [];
-                var cantidadInterruptores = [];
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece el corredor");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece el corredor");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idCorredor)){
-                    alert("ERROR. Ingrese el código del corredor");
-                    $("#id_corredor").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_corredor'] = idCorredor;
-                    informacion['alto_pared'] = alturaPared;
-                    informacion['ancho_pared'] = anchoPared;
-                    informacion['material_pared'] = materialPared;
-                    informacion['largo_techo'] = largoTecho;
-                    informacion['ancho_techo'] = anchoTecho;
-                    informacion['material_techo'] = materialTecho;
-                    informacion['largo_piso'] = largoPiso;
-                    informacion['ancho_piso'] = anchoPiso;
-                    informacion['material_piso'] = materialPiso;
-                    informacion['tipo_suministro_energia'] = $("#tipo_suministro_energia").val();
-                    informacion['tomacorriente'] = $("#tomacorriente").val();
-                    informacion['cantidad_tomacorrientes'] = $("#cantidad_tomacorrientes").val();
-                    for (var i=0;i<=iluminacionCont;i++) {
-                        if (i==0) {
-                            tipoIluminacion[i] = $("#tipo_iluminacion").val();
-                            cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
-                        }else{
-                            tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
-                            cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
-                        }
-                    }
-                    for (var i=0;i<=interruptoresCont;i++) {
-                        if (i==0) {
-                            tipoInterruptor[i] = $("#tipo_interruptor").val();
-                            cantidadInterruptores[i] = $("#cantidad_interruptores").val();
-                        }else{
-                            tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
-                            cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
-                        }
-                    }
-                    informacion['tipo_iluminacion'] = tipoIluminacion;
-                    informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                    informacion['tipo_interruptor'] = tipoInterruptor;
-                    informacion['cantidad_interruptores'] = cantidadInterruptores;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('corredor',JSON.stringify(informacion));
-                        arregloPlanos.append('corredor',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("corredor",informacion);
-                        var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
-                        var resultadoFotos = guardarFotos("corredor",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_corredor").val("");
-                            $("#altura_pared").val("");
-                            $("#ancho_pared").val("");
-                            $("#largo_techo").val("");
-                            $("#ancho_techo").val("");
-                            $("#material_techo").val("");
-                            $("#largo_piso").val("");
-                            $("#ancho_piso").val("");
-                            $("#material_piso").val("");
-                            $("#tipo_iluminacion").val("");
-                            $("#cantidad_iluminacion").val("");
-                            $("#tipo_suministro_energia").val("");
-                            $("#tomacorriente").val("");
-                            $("#cantidad_tomacorrientes").val("");
-                            $("#tipo_interruptor").val("");
-                            $("#cantidad_interruptores").val("");
-                            while (iluminacionCont > 0) {
-                                eliminarComponente("iluminacion"+iluminacionCont);
-                                iluminacionCont--;
-                            }
-                            while (tomacorrientesCont > 0) {
-                                eliminarComponente("suministro_energia"+tomacorrientesCont);
-                                tomacorrientesCont--;
-                            }
-                            while (interruptoresCont > 0) {
-                                eliminarComponente("interruptor"+tomacorrientesCont);
-                                interruptoresCont--;
-                            }
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_corredor").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por corredor es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por corredor es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación del corredor en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_cubierta y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_cubierta").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información de la cubierta?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var nombreEdificio = $("#nombre_edificio").val();
-                var piso = $("#pisos").val();
-                var tipoCubierta = $("#tipo_cubierta").val();
-                var materialCubierta = $("#material_cubierta").val();
-                var ancho = $("#ancho").val();
-                var largo = $("#largo").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece la cubierta");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece la cubierta");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el edificio al que pertenece la cubierta");
-                    $("#nombre_edificio").focus();
-                }else if(!validarCadena(piso)){
-                    alert("ERROR. Ingrese el piso donde se encuentra la cubierta");
-                    $("#piso").focus();
-                }else{
-                    if (piso == 'sotano') {
-                        piso = '0';
-                    }else if (piso == 'terraza') {
-                        piso = '-1';
-                    }
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['nombre_edificio'] = nombreEdificio;
-                    informacion['pisos'] = piso;
-                    informacion['tipo_cubierta'] = tipoCubierta;
-                    informacion['material_cubierta'] = materialCubierta;
-                    informacion['ancho'] = ancho;
-                    informacion['largo'] = largo;
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('cubierta',JSON.stringify(informacion));
-                        arregloPlanos.append('cubierta',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("cubierta",informacion);
-                        var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
-                        var resultadoFotos = guardarFotos("cubierta",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#nombre_edificio").empty();
-                            $("#nombre_edificio").val("");
-                            $("#pisos").empty();
-                            $("#pisos").val("");
-                            $("#tipo_cubierta").val("");
-                            $("#material_cubierta").val("");
-                            $("#ancho").val("");
-                            $("#largo").val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#nombre_edificio").focus();
-                            $("#pisos").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por cubierta es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por cubierta es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_gradas y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_gradas").click(function (e){
-      try{
-          var confirmacion = window.confirm("¿Guardar la información de las gradas?");
-          if (confirmacion) {
-              var nombreSede = $("#nombre_sede").val();
-              var nombreCampus = $("#nombre_campus").val();
-              var nombreEdificio = $("#nombre_edificio").val();
-              var pisoInicio = $("#pisos").val();
-              var pasamanos = $('input[name="pasamanos"]:checked').val();
-              var materialPasamanos = $("#material_pasamanos").val();
-              var ventanas = $('input[name="ventanas"]:checked').val();
-              var tipoVentana = {};
-              var cantidadVentanas = {};
-              var materialVentana = {};
-              var anchoVentana = {};
-              var altoVentana = {};
-              var planos = document.getElementById("planos[]");
-              var fotos = document.getElementById("fotos[]");
-              if(!validarCadena(nombreSede)){
-                  alert("ERROR. Seleccione la sede a la que pertenecen las gradas");
-                  $("#nombre_sede").focus();
-              }else if(!validarCadena(nombreCampus)){
-                  alert("ERROR. Ingrese el nombre del campus al que pertenecen las gradas");
-                  $("#nombre_campus").focus();
-              }else if(!validarCadena(nombreEdificio)){
-                  alert("ERROR. Seleccione el edificio al que pertenecen las gradas");
-                  $("#nombre_edificio").focus();
-              }else if(!validarCadena(pisoInicio)){
-                  alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
-                  $("#pisos").focus();
-              }else{
-                  if (pisoInicio == 'sotano') {
-                      pisoInicio = '0';
-                  }else if (pisoInicio == 'terraza') {
-                      pisoInicio = '-1';
-                  }
-                  var informacion = {};
-                  var arregloFotos = new FormData();
-                  var arregloPlanos = new FormData();
-                  informacion['nombre_sede'] = nombreSede;
-                  informacion['nombre_campus'] = nombreCampus;
-                  informacion['nombre_edificio'] = nombreEdificio;
-                  informacion['piso_inicio'] = pisoInicio;
-                  informacion['pasamanos'] = pasamanos;
-                  informacion['material_pasamanos'] = materialPasamanos;
-                  informacion['ventana'] = ventanas;
-                  for (var i=0;i<=ventanasCont;i++) {
-                      if (i==0) {
-                          tipoVentana[i] = $("#tipo_ventana").val();
-                          cantidadVentanas[i] = $("#cantidad_ventanas").val();
-                          materialVentana[i] = $("#material_ventana").val();
-                          anchoVentana[i] = $("#ancho_ventana").val();
-                          altoVentana[i] = $("#alto_ventana").val();
-                      }else{
-                          tipoVentana[i] = $("#tipo_ventana"+i).val();
-                          cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
-                          materialVentana[i] = $("#material_ventana"+i).val();
-                          anchoVentana[i] = $("#ancho_ventana"+i).val();
-                          altoVentana[i] = $("#alto_ventana"+i).val();
-                      }
-                  }
-                  informacion['tipo_ventana'] = tipoVentana;
-                  informacion['cantidad_ventanas'] = cantidadVentanas;
-                  informacion['material_ventana'] = materialVentana;
-                  informacion['ancho_ventana'] = anchoVentana;
-                  informacion['alto_ventana'] = altoVentana;
-                  if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                      for (var i=0;i<fotos.files.length;i++) {
-                          var foto = fotos.files[i];
-                          if (foto.size > 2000000) {
-                              alert('La foto: "'+foto.name+"' es muy grande");
-                          }else{
-                              var nombreArchivo = foto.name;
-                              if(nombreArchivo.length > 50){
-                                  nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                              }
-                              arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                          }
-                      }
-                      for (var i=0;i<planos.files.length;i++) {
-                          var plano = planos.files[i];
-                          if (plano.size > 2000000) {
-                              alert('El archivo: "'+plano.name+"' es muy grande");
-                          }else{
-                              var nombreArchivo = plano.name;
-                              if(nombreArchivo.length > 50){
-                                  nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                              }
-                              arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                          }
-                      }
-                      arregloFotos.append('gradas',JSON.stringify(informacion));
-                      arregloPlanos.append('gradas',JSON.stringify(informacion));
-                      console.log(informacion);
-                      var resultado = guardarObjeto("gradas",informacion);
-                      var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
-                      var resultadoFotos = guardarFotos("gradas",arregloFotos);
-                      mostrarMensaje(resultado.mensaje);
-                      console.log(resultado);
-                      console.log(resultadoPlanos);
-                      console.log(resultadoFotos);
-                      var mensaje = "";
-                      if (resultadoPlanos.length != 0) {
-                          for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                              if (!resultadoPlanos.verificar[i]) {
-                                  if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                              }
-                              if (i<resultadoPlanos.verificar.length-2) {
-                                  mensaje += "\n";
-                              }
-                          }
-                      }
-                      if (resultadoFotos.length != 0) {
-                          for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                              if (!resultadoFotos.verificar[i]) {
-                                  if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                              }
-                              if (i<resultadoFotos.verificar.length-1) {
-                                  mensaje += "\n";
-                              }
-                          }
-                      }
-                      if (mensaje.substring(0,1) != "") {
-                          console.log(mensaje.length);
-                          alert(mensaje);
-                      }
-                      if(resultado.verificar){
-                          $("#nombre_sede").val("");
-                          $("#nombre_campus").empty();
-                          $("#nombre_campus").val("");
-                          $("#nombre_edificio").empty();
-                          $("#nombre_edificio").val("");
-                          $("#pisos").empty();
-                          $("#pisos").val("");
-                          $('input[name=pasamanos]').attr('checked',false);
-                          $("#divPasamanos").hide();
-                          $("#tipo_ventana").val("");
-                          $("#cantidad_ventanas").val("");
-                          $("#material_ventana").val("");
-                          $("#ancho_ventana").val("");
-                          $("#alto_ventana").val("");
-                          while (ventanasCont > 0) {
-                              eliminarComponente("ventana"+ventanasCont);
-                              ventanasCont--;
-                          }
-                          planos.value = "";
-                          fotos.value = "";
-                          window.scrollTo(0,0);
-                      }else{
-                          $("#nombre_edificio").focus();
-                          $("#pisos").focus();
-                      }
-                  }else{
-                      if (planos.files.length <= 5) {
-                          alert("ERROR. El número máximo de planos por gradas es 5");
-                          planos.focus();
-                      }else{
-                          alert("ERROR. El número máximo de fotos por gradas es 20");
-                          fotos.focus();
-                      }
-                  }
-              }
-          }
-      }
-      catch(ex){
-          console.log(ex);
-          alert("Ocurrió un error, por favor inténtelo nuevamente");
-      }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_parqueadero y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_parqueadero").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del parqueadero?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idParqueadero = limpiarCadena($("#id_parqueadero").val());
-                var capacidad = $("#capacidad").val();
-                var ancho = $("#ancho").val();
-                var largo = $("#largo").val();
-                var material_piso = $("#material_piso").val();
-                var tipo_pintura = $("#tipo_pintura").val();
-                var longitud_demarcacion = $("#longitud_demarcacion").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece el parqueadero");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece el parqueadero");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idParqueadero)){
-                    alert("ERROR. Ingrese el código del parqueadero");
-                    $("#id_parqueadero").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_parqueadero'] = idParqueadero;
-                    informacion['capacidad'] = capacidad;
-                    informacion['ancho'] = ancho;
-                    informacion['largo'] = largo;
-                    informacion['material_piso'] = material_piso;
-                    informacion['tipo_pintura'] = tipo_pintura;
-                    informacion['longitud_demarcacion'] = longitud_demarcacion;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('parqueadero',JSON.stringify(informacion));
-                        arregloPlanos.append('parqueadero',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("parqueadero",informacion);
-                        var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
-                        var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_parqueadero").val("");
-                            $("#capacidad").val("");
-                            $("#ancho").val("");
-                            $("#largo").val("");
-                            $("#material_piso").val("");
-                            $("#tipo_pintura").val("");
-                            $("#longitud_demarcacion").val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_parqueadero").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por parqueadero es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por parqueadero es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación del parqueadero en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_piscina y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_piscina").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información de la piscina?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idPiscina = limpiarCadena($("#id_piscina").val());
-                var alto = $("#alto").val();
-                var ancho = $("#ancho").val();
-                var largo = $("#largo").val();
-                var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece la piscina");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece la piscina");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idPiscina)){
-                    alert("ERROR. Ingrese el código de la piscina");
-                    $("#id_piscina").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_piscina'] = idPiscina;
-                    informacion['alto'] = alto;
-                    informacion['ancho'] = ancho;
-                    informacion['largo'] = largo;
-                    informacion['cantidad_puntos_hidraulicos'] = cantidadPuntosHidraulicos;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('piscina',JSON.stringify(informacion));
-                        arregloPlanos.append('piscina',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("piscina",informacion);
-                        var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
-                        var resultadoFotos = guardarFotos("piscina",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_piscina").val("");
-                            $("#alto").val("");
-                            $("#ancho").val("");
-                            $("#largo").val("");
-                            $("#cantidad_puntos_hidraulicos").val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_piscina").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por piscina es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por piscina es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación de la piscina en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_plazoleta y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_plazoleta").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información de la plazoleta?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idPlazoleta = limpiarCadena($("#id_plazoleta").val());
-                var nombre = limpiarCadena($("#nombre").val());
-                var tipoIluminacion = $("#tipo_iluminacion").val();
-                var cantidadIluminacion = $("#cantidad_iluminacion").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece la plazoleta");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece la plazoleta");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idPlazoleta)){
-                    alert("ERROR. Ingrese el código de la plazoleta");
-                    $("#id_plazoleta").focus();
-                }else if(!validarCadena(nombre)){
-                    alert("ERROR. Ingrese el nombre de la plazoleta");
-                    $("#nombre").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_plazoleta'] = idPlazoleta;
-                    informacion['nombre'] = nombre;
-                    informacion['tipo_iluminacion'] = tipoIluminacion;
-                    informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('plazoleta',JSON.stringify(informacion));
-                        arregloPlanos.append('plazoleta',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("plazoleta",informacion);
-                        var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
-                        var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_plazoleta").val("");
-                            $("#nombre").val("");
-                            $("#tipo_iluminacion").val("");
-                            $("#cantidad_iluminacion").val("");
-                            while (iluminacionCont > 0) {
-                                eliminarComponente("iluminacion"+iluminacionCont);
-                                iluminacionCont--;
-                            }
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_plazoleta").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por plazoleta es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por plazoleta es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación de la plazoleta en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_sendero y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_sendero").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del sendero peatonal?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idSendero = limpiarCadena($("#id_sendero").val());
-                var longitud = $("#longitud").val();
-                var ancho = $("#ancho").val();
-                var materialPiso = $("#material_piso").val();
-                var tipoIluminacion = $("#tipo_iluminacion").val();
-                var cantidadIluminacion = $("#cantidad_iluminacion").val();
-                var codigoPoste = $("#codigo_poste").val();
-                var anchoCubierta = $("#ancho_cubierta").val();
-                var largoCubierta = $("#largo_cubierta").val();
-                var materialCubierta = $("#material_cubierta").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece el sendero peatonal");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece el sendero peatonal");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idSendero)){
-                    alert("ERROR. Ingrese el código del sendero peatonal");
-                    $("#id_sendero").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_sendero'] = idSendero;
-                    informacion['longitud'] = longitud;
-                    informacion['ancho'] = ancho;
-                    informacion['material_piso'] = materialPiso;
-                    informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                    informacion['tipo_iluminacion'] = tipoIluminacion;
-                    informacion['codigo_poste'] = codigoPoste;
-                    informacion['ancho_cubierta'] = anchoCubierta;
-                    informacion['largo_cubierta'] = largoCubierta;
-                    informacion['material_cubierta'] = materialCubierta;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('sendero',JSON.stringify(informacion));
-                        arregloPlanos.append('sendero',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("sendero",informacion);
-                        var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
-                        var resultadoFotos = guardarFotos("sendero",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_sendero").val("");
-                            $("#longitud").val("");
-                            $("#ancho").val("");
-                            $("#material_piso").val("");
-                            $("#cantidad_iluminacion").val("");
-                            $("#tipo_iluminacion").val("");
-                            $("#codigo_poste").val("");
-                            $("#ancho_cubierta").val("");
-                            $("#largo_cubierta").val("");
-                            $("#material_cubierta").val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_sendero").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por sendero peatonal es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por sendero peatonal es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación del sendero peatonal en el mapa");
-                $("#map").focus();
-
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_via y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_via").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información de la vía?");
-            if (confirmacion) {
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var idVia = limpiarCadena($("#id_via").val());
-                var tipoPintura = $("#tipo_pintura").val();
-                var longitudDemarcacion = $("#longitud_demarcacion").val();
-                var materialPiso = $("#material_piso").val();
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if(!validarCadena(nombreSede)){
-                    alert("ERROR. Seleccione la sede a la que pertenece la vía");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(nombreCampus)){
-                    alert("ERROR. Ingrese el nombre del campus al que pertenece la vía");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(idVia)){
-                    alert("ERROR. Ingrese el código de la vía");
-                    $("#id_via").focus();
-                }else{
-                    var informacion = {};
-                    var arregloFotos = new FormData();
-                    var arregloPlanos = new FormData();
-                    informacion['nombre_sede'] = nombreSede;
-                    informacion['nombre_campus'] = nombreCampus;
-                    informacion['id_via'] = idVia;
-                    informacion['tipo_pintura'] = tipoPintura;
-                    informacion['longitud_demarcacion'] = longitudDemarcacion;
-                    informacion['material_piso'] = materialPiso;
-                    informacion['lat'] = coordenadas.lat().toFixed(8);
-                    informacion['lng'] = coordenadas.lng().toFixed(8);
-                    if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                        for (var i=0;i<fotos.files.length;i++) {
-                            var foto = fotos.files[i];
-                            if (foto.size > 2000000) {
-                                alert('La foto: "'+foto.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = foto.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                }
-                                arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                            }
-                        }
-                        for (var i=0;i<planos.files.length;i++) {
-                            var plano = planos.files[i];
-                            if (plano.size > 2000000) {
-                                alert('El archivo: "'+plano.name+"' es muy grande");
-                            }else{
-                                var nombreArchivo = plano.name;
-                                if(nombreArchivo.length > 50){
-                                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                }
-                                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                            }
-                        }
-                        arregloFotos.append('via',JSON.stringify(informacion));
-                        arregloPlanos.append('via',JSON.stringify(informacion));
-                        console.log(informacion);
-                        var resultado = guardarObjeto("via",informacion);
-                        var resultadoPlanos = guardarPlanos("via",arregloPlanos);
-                        var resultadoFotos = guardarFotos("via",arregloFotos);
-                        mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        if (resultadoPlanos.length != 0) {
-                            for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                if (!resultadoPlanos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoPlanos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoPlanos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoPlanos.verificar.length-2) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (!resultadoFotos.verificar[i]) {
-                                    if (mensaje == "") {
-                                        mensaje += resultadoFotos.mensaje[i];
-                                    }else{
-                                        mensaje += "\n" + resultadoFotos.mensaje[i];
-                                    }
-                                }
-                                /*if (i<resultadoFotos.verificar.length-1) {
-                                    mensaje += "\n";
-                                }*/
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
-                            alert(mensaje);
-                        }
-                        if(resultado.verificar){
-                            $("#nombre_sede").val("");
-                            $("#nombre_campus").empty();
-                            $("#nombre_campus").val("");
-                            $("#id_via").val("");
-                            $("#tipo_pintura").val("");
-                            $("#longitud_demarcacion").val("");
-                            $("#material_piso").val("");
-                            planos.value = "";
-                            fotos.value = "";
-                            initMap();
-                            coordenadas = {};
-                            window.scrollTo(0,0);
-                        }else{
-                            $("#id_via").focus();
-                        }
-                    }else{
-                        if (planos.files.length <= 5) {
-                            alert("ERROR. El número máximo de planos por vía es 5");
-                            planos.focus();
-                        }else{
-                            alert("ERROR. El número máximo de fotos por vía es 20");
-                            fotos.focus();
-                        }
-                    }
-                }
-            }
-        }
-        catch(ex){
-            if (ex instanceof TypeError) {
-                alert("ERROR. Indique la ubicación de la vía en el mapa");
-                $("#map").focus();
-            }else{
-                console.log(ex);
-                alert("Ocurrió un error, por favor inténtelo nuevamente");
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_espacio y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_espacio").click(function (e){
-        try{
-            //var confirmacion = window.confirm("¿Guardar la información del espacio?");
-            var confirmacion = true;
-            if (confirmacion) {
-                var aux;
-                var actualizarComponente = false;
-                var tipoComponente,conteoTipo;
-                var nombreSede = $("#nombre_sede").val();
-                var nombreCampus = $("#nombre_campus").val();
-                var nombreEdificio = $("#nombre_edificio").val();
-                var piso = $("#pisos").val();
-                var numeroEspacio = [];
-                var usoEspacio = $("#uso_espacio").val();
-                var alturaPared = $("#altura_pared").val();
-                var anchoPared = $("#ancho_pared").val();
-                var materialPared = $("#material_pared").val();
-                var largoTecho = $("#largo_techo").val();
-                var anchoTecho = $("#ancho_techo").val();
-                var materialTecho = $("#material_techo").val();
-                var largoPiso = $("#largo_piso").val();
-                var anchoPiso = $("#ancho_piso").val();
-                var materialPiso = $("#material_piso").val();
-                var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
-                var numero_espacio_padre = $("#espacio_padre").val();
-                var tipoIluminacion = [];
-                var cantidadIluminacion = [];
-                var tipoSuministroEnergia = [];
-                var tomacorriente = [];
-                var cantidadTomacorrientes = [];
-                var tipoPuerta = [];
-                var cantidadPuertas = [];
-                var materialPuerta = [];
-                var tipoCerradura = [];
-                var gatoPuerta = [];
-                var materialMarco = [];
-                var anchoPuerta = [];
-                var altoPuerta = [];
-                var tipoVentana = [];
-                var cantidadVentanas = [];
-                var materialVentana = [];
-                var anchoVentana = [];
-                var altoVentana = [];
-                var tipoInterruptor = [];
-                var cantidadInterruptores = [];
-                var planos = document.getElementById("planos[]");
-                var fotos = document.getElementById("fotos[]");
-                if (piso == 'sotano') {
-                    piso = '0';
-                }
-                if (piso == 'terraza') {
-                    piso = '-1';
-                }
-                var espacioExistente = {};
-                espacioExistente['verificar'] = true;
-                espacioExistente['espacioRepetido'] = false;
-                for (var i=0;i<=espaciosCont;i++) {
-                    if(i==0){
-                        numeroEspacio[i] = $("#id_espacio").val();
-                    }else{
-                        var control = false;
-                        for (var a=0;a<i;a++) {
-                            var aux = $("#id_espacio"+i).val();
-                            if (aux == numeroEspacio[a]) {
-                                control = true;
-                            }
-                        }
-                        if (control) {
-                            espacioExistente['espacioRepetido'] = true;
-                            espacioExistente['input'] = i;
-                            break;
-                        }else{
-                            numeroEspacio[i] = $("#id_espacio"+i).val();
-                        }
-                    }
-                    var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio[i]);
-                    if (!comprobarEspacio.verificar){
-                        espacioExistente['verificar'] = false;
-                        if (i==0) {
-                            espacioExistente['input'] = "";
-                        }else{
-                            espacioExistente['input'] = i;
-                        }
-                        break;
-                    }
-                }
-                if(espacioExistente['espacioRepetido']){
-                    alert("ERROR. Hay dos o más espacios repetidos");
-                    $("#id_espacio"+espacioExistente['input']).focus();
-                }else if (!espacioExistente['verificar']) {
-                    alert("ERROR. El número de espacio ya esta registrado en el sistema");
-                    $("#id_espacio"+espacioExistente['input']).focus();
-                }else{
-                    for (var i=0;i<=iluminacionCont;i++) {
-                        if (i==0) {
-                            tipoIluminacion[i] = $("#tipo_iluminacion").val();
-                            cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
-                        }else{
-                            tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
-                            cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
-                        }
-                    }
-                    for (var i=0;i<=tomacorrientesCont;i++) {
-                        if (i==0) {
-                            tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
-                            tomacorriente[i] = $("#tomacorriente").val();
-                            cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
-                        }else{
-                            tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
-                            tomacorriente[i] = $("#tomacorriente"+i).val();
-                            cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
-                        }
-                    }
-                    for (var i=0;i<=puertasCont;i++) {
-                        if (i==0) {
-                            tipoPuerta[i] = $("#tipo_puerta").val();
-                            cantidadPuertas[i] = $("#cantidad_puertas").val();
-                            materialPuerta[i] = $("#material_puerta").val();
-                            tipoCerradura[i] = $("#tipo_cerradura").val();
-                            gatoPuerta[i] = $('input[name="gato_puerta"]:checked').val();
-                            materialMarco[i] = $("#material_marco_puerta").val();
-                            anchoPuerta[i] = $("#ancho_puerta").val();
-                            altoPuerta[i] = $("#alto_puerta").val();
-                        }else{
-                            tipoPuerta[i] = $("#tipo_puerta"+i).val();
-                            cantidadPuertas[i] = $("#cantidad_puertas"+i).val();
-                            materialPuerta[i] = $("#material_puerta"+i).val();
-                            tipoCerradura[i] = $("#tipo_cerradura"+i).val();
-                            gatoPuerta[i] = $('input[name="gato_puerta"'+i+']:checked').val();
-                            materialMarco[i] = $("#material_marco_puerta"+i).val();
-                            anchoPuerta[i] = $("#ancho_puerta"+i).val();
-                            altoPuerta[i] = $("#alto_puerta"+i).val();
-                        }
-                    }
-                    for (var i=0;i<=ventanasCont;i++) {
-                        if (i==0) {
-                            tipoVentana[i] = $("#tipo_ventana").val();
-                            cantidadVentanas[i] = $("#cantidad_ventanas").val();
-                            materialVentana[i] = $("#material_ventana").val();
-                            anchoVentana[i] = $("#ancho_ventana").val();
-                            altoVentana[i] = $("#alto_ventana").val();
-                        }else{
-                            tipoVentana[i] = $("#tipo_ventana"+i).val();
-                            cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
-                            materialVentana[i] = $("#material_ventana"+i).val();
-                            anchoVentana[i] = $("#ancho_ventana"+i).val();
-                            altoVentana[i] = $("#alto_ventana"+i).val();
-                        }
-                    }
-                    for (var i=0;i<=interruptoresCont;i++) {
-                        if (i==0) {
-                            tipoInterruptor[i] = $("#tipo_interruptor").val();
-                            cantidadInterruptores[i] = $("#cantidad_interruptores").val();
-                        }else{
-                            tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
-                            cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
-                        }
-                    }
-                    if (!validarCadena(nombreSede)) {
-                        alert('ERROR. Seleccione la sede a la que pertenece el espacio');
-                        $('#nombre_sede').focus();
-                    }else if(!validarCadena(nombreCampus)){
-                        alert('ERROR. Seleccione el campus al que pertenece el espacio');
-                        $('#nombre_campus').focus();
-                    }else if(!validarCadena(nombreEdificio)){
-                        alert('ERROR. Seleccione el edificio al que pertenece el espacio');
-                        $('#nombre_edificio').focus();
-                    }else if(!validarCadena(piso)){
-                        alert('ERROR. Seleccione el piso al que pertenece el espacio');
-                        $('#pisos').focus();
-                    }else if(!validarNumero(numeroEspacio)){
-                        alert('ERROR. Ingrese el número del espacio');
-                        $('#id_espacio').focus();
-                    }else if(!validarCadena(usoEspacio)){
-                        alert('ERROR. Seleccione el uso que tiene el espacio');
-                        $('#uso_espacio').focus();
-                    }/*else if(!validarNumero(alturaPared)){
-                        alert('ERROR. Ingrese la altura de las paredes del espacio');
-                        $('#altura_pared').focus();
-                    }else if(!validarNumero(anchoPared)){
-                        alert('ERROR. Ingrese la ancho de las paredes del espacio');
-                        $('#ancho_pared').focus();
-                    }else if(!validarCadena(materialPared)){
-                        alert('ERROR. Seleccione el material de las paredes del espacio');
-                        $('#material_pared').focus();
-                    }else if(!validarNumero(largoTecho)){
-                        alert('ERROR. Ingrese el largo del techo del espacio');
-                        $('#largo_techo').focus();
-                    }else if(!validarNumero(anchoTecho)){
-                        alert('ERROR. Ingrese el largo del techo del espacio');
-                        $('#ancho_techo').focus();
-                    }else if(!validarCadena(materialTecho)){
-                        alert('ERROR. Seleccione el material del techo del espacio');
-                        $('#material_techo').focus();
-                    }else if(!validarNumero(largoPiso)){
-                        alert('ERROR. Ingrese el largo del piso del espacio');
-                        $('#largo_piso').focus();
-                    }else if(!validarNumero(anchoPiso)){
-                        alert('ERROR. Ingrese el ancho del piso del espacio');
-                        $('#ancho_piso').focus();
-                    }else if(!validarNumero(materialPiso)){
-                        alert('ERROR. Seleccione el material del piso del espacio');
-                        $('#material_piso').focus();
-                    }else if ((aux = validarArregloCadenas(tipoIluminacion)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de lámpara que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de lámpara ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_iluminacion'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(cantidadIluminacion)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el número de lámparas que tiene el espacio');
-                        }else{
-                            alert('ERROR. Ingrese el número de lámparas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#cantidad_iluminacion'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tipoSuministroEnergia)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de suministro de energía que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de suministro de energía ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_suministro_energia'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tomacorriente)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el tipo de tomacorrientes que tiene el espacio');
-                        }else{
-                            alert('ERROR. Ingrese el tipo de tomacorrientes del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#tomacorriente'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(cantidadTomacorrientes)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el número de tomacorrientes que tiene el espacio');
-                        }else{
-                            alert('ERROR. Ingrese el número de tomacorrientes del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#cantidad_tomacorrientes'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tipoPuerta)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de puerta que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de puerta ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_puerta'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(cantidadPuertas)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el número de puertas que tiene el espacio');
-                        }else{
-                            alert('ERROR. Ingrese el número de puertas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#cantidad_puertas'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(materialPuerta)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el material de la puerta que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el material de la puerta del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#material_puerta'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tipoCerradura)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de cerradura de la puerta que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de cerradura de la puerta del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_cerradura'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(gatoPuerta)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Especifique si la puerta tiene gato');
-                        }else{
-                            alert('ERROR. Especifique si la puerta del tipo ('+aux+') tiene gato');
-                        }
-                        $('#gato_puerta'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(materialMarco)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el material del marco la puerta que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el material del marco la puerta del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#material_marco'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(anchoPuerta)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el ancho de las puertas del espacio');
-                        }else{
-                            alert('ERROR. Ingrese el ancho de las puertas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#ancho_puerta'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(altoPuerta)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el alto de las puertas del espacio');
-                        }else{
-                            alert('ERROR. Ingrese el alto de las puertas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#alto_puerta'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tipoVentana)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de ventana que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de ventana del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_ventana'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(cantidadVentanas)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el número de ventanas del espacio');
-                        }else{
-                            alert('ERROR. Ingrese el número de de ventanas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#cantidad_ventanas'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(materialVentana)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el material de la ventana que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el material de la ventana del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#material_ventana'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(anchoVentana)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el ancho de las ventanas del espacio');
-                        }else{
-                            alert('ERROR. Ingrese el ancho de las ventanas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#ancho_ventana'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(altoVentana)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el alto de las ventanas del espacio');
-                        }else{
-                            alert('ERROR. Ingrese el alto de las ventanas del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#alto_ventana'+aux+'').focus();
-                    }else if ((aux = validarArregloCadenas(tipoInterruptor)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Seleccione el tipo de interruptores que tiene el espacio');
-                        }else{
-                            alert('ERROR. Seleccione el tipo de interruptores del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#tipo_interruptor'+aux+'').focus();
-                    }else if ((aux = validarArregloNumeros(cantidadInterruptores)) != null) {
-                        if (aux == '') {
-                            alert('ERROR. Ingrese el número de interruptores que tiene el espacio');
-                        }else{
-                            alert('ERROR. Ingrese el número de interruptores del tipo ('+aux+') que tiene el espacio');
-                        }
-                        $('#cantidad_interruptores'+aux+'').focus();
-                    }*/else if(($('#divTieneEspacioPadre').is(':visible')) && !validarCadena(espacioPadre)){
-                        alert('ERROR. Especifique si el espacio está dentro de otro');
-                        $('#tiene_espacio_padre').focus();
-                    }else{
-                        var informacion = {};
-                        informacion['nombre_sede'] = nombreSede;
-                        informacion['nombre_campus'] = nombreCampus;
-                        informacion['nombre_edificio'] = nombreEdificio;
-                        informacion['piso'] = piso;
-                        informacion['numero_espacio'] = numeroEspacio;
-                        informacion['uso_espacio'] = usoEspacio;
-                        informacion['altura_pared'] = alturaPared;
-                        informacion['ancho_pared'] = anchoPared;
-                        informacion['material_pared'] = materialPared;
-                        informacion['largo_techo'] = largoTecho;
-                        informacion['ancho_techo'] = anchoTecho;
-                        informacion['material_techo'] = materialTecho;
-                        informacion['largo_piso'] = largoPiso;
-                        informacion['ancho_piso'] = anchoPiso;
-                        informacion['material_piso'] = materialPiso;
-                        informacion['tipo_iluminacion'] = tipoIluminacion;
-                        informacion['cantidad_iluminacion'] = cantidadIluminacion;
-                        informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
-                        informacion['tomacorriente'] = tomacorriente;
-                        informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
-                        informacion['tipo_puerta'] = tipoPuerta;
-                        informacion['cantidad_puertas'] = cantidadPuertas;
-                        informacion['material_puerta'] = materialPuerta;
-                        informacion['tipo_cerradura'] = tipoCerradura;
-                        informacion['gato_puerta'] = gatoPuerta;
-                        informacion['material_marco'] = materialMarco;
-                        informacion['ancho_puerta'] = anchoPuerta;
-                        informacion['alto_puerta'] = altoPuerta;
-                        informacion['tipo_ventana'] = tipoVentana;
-                        informacion['cantidad_ventanas'] = cantidadVentanas;
-                        informacion['material_ventana'] = materialVentana;
-                        informacion['ancho_ventana'] = anchoVentana;
-                        informacion['alto_ventana'] = altoVentana;
-                        informacion['tipo_interruptor'] = tipoInterruptor;
-                        informacion['cantidad_interruptores'] = cantidadInterruptores;
-                        informacion['numero_espacio_padre'] = numero_espacio_padre;
-                        var arregloFotos = new FormData();
-                        var arregloPlanos = new FormData();
-                        if (piso == 'sotano') {
-                            informacion['piso'] = '0';
-                        }
-                        if (piso == 'terraza') {
-                            informacion['piso'] = '-1';
-                        }
-                        if (fotos.files.length <= 20 || planos.files.length <= 5) {
-                            for (var i=0;i<fotos.files.length;i++) {
-                                var foto = fotos.files[i];
-                                if (foto.size > 2000000) {
-                                    alert('La foto: "'+foto.name+"' es muy grande");
+                    if (resultadoFotos.length != 0) {
+                        for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                            if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoFotos.mensaje[i];
                                 }else{
-                                    var nombreArchivo = foto.name;
-                                    if(nombreArchivo.length > 50){
-                                        nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                                    }
-                                    arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                                    mensaje += "\n" + resultadoFotos.mensaje[i];
                                 }
                             }
-                            for (var i=0;i<planos.files.length;i++) {
-                                var plano = planos.files[i];
-                                if (plano.size > 2000000) {
-                                    alert('El archivo: "'+plano.name+"' es muy grande");
-                                }else{
-                                    var nombreArchivo = plano.name;
-                                    if(nombreArchivo.length > 50){
-                                        nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
-                                    }
-                                    arregloPlanos.append('archivo'+i,plano,nombreArchivo);
-                                }
-                            }
-                            arregloFotos.append('espacio',JSON.stringify(informacion));
-                            arregloPlanos.append('espacio',JSON.stringify(informacion));
-                            dataEspacio['fotos'] = arregloFotos;
-                            dataEspacio['planos'] = arregloPlanos;
-                            dataEspacio = informacion;
-                            $('#botones_punto_sanitario').hide();
-                            $('#botones_lavamanos').hide();
-                            $('#botones_orinal').hide();
-                            if (usoEspacio == '1') { //Salón
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) salón(es)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>Capacidad del(os) salón(es)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) salón(es) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Salón');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '2'){ //Auditorio
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) auditorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>Capacidad del(os) auditorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) auditorio(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Auditorio');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '3'){ //Laboratorio
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>Capacidad del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) laboratorio(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-                                    +'<div id="punto_sanitario">'
-                                    +'<div class="div_izquierda"><b>Tipo de punto sanitario del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-                                    +'</div>'
-                                    +'</div>';
-                                $('#botones_punto_sanitario').show();
-                                añadirComponente("informacionEspacio",componente);
-                                actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
-                                $('#guardar_espacio_adicional').val('Crear Laboratorio');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '4'){ //Sala de Cómputo
-                                console.log("1");
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) sala(s) de cómputo<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿La(s) sala(s) de cómputo tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Sala');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '5'){ //Oficina
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) oficina(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿La(s) oficina(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Oficina');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '6'){ //Baño
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" required/><br>'
-                                    +'<div id="lavamanos">'
-                                    +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
-                                    +'</div>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                var componente = '<br><div id="informacion2">'
-                                    +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" required></select><br>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) baño(s) tiene ducha?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="ducha" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="ducha" value="false">No</label>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) baño(s) tiene lavatraperos?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false">No</label>'
-                                    +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
-                                    +'<div id="orinal">'
-                                    +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
-                                    +'</div>'
-                                    +'</div>';
-                                $('#botones_lavamanos').show();
-                                $('#botones_orinal').show();
-                                añadirComponente("informacionEspacio2",componente);
-                                actualizarSelectTipoObjeto("tipo_inodoro",0);
-                                actualizarSelectTipoObjeto("tipo_orinal",0);
-                                actualizarSelectTipoObjeto("tipo_lavamanos",0);
-                                actualizarSelectTipoObjeto("tipo_divisiones",0);
-                                actualizarSelectMaterial("material_divisiones",0);
-                                $('#guardar_espacio_adicional').val('Crear Baño');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '7'){ //Cuarto Técnico
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) técnico(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'<div class="div_izquierda"><b>¿El(Los) cuarto(s) técnico(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
-                                    +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Cuarto');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '8'){ //Bodega/Almacen
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) bodega(s) o almacén(es)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Bodega/Almacén');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '9'){ //Cuarto Eléctrico
-                                guardarEspacio();
-                            }else if(usoEspacio == '10'){ //Cuarto de Plantas
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) de Plantas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Cuarto');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) de Aires Acondicionados<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Cuarto');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área(s) deportiva cerrada<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Área');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '13'){ //Unidad de Almacenamiento de Residuos
-                                guardarEspacio();
-                            }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) centro(s) de datos/teléfono<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Centro de Datos');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '15'){ //Cafetería
-                                guardarEspacio();
-                            }else if(usoEspacio == '16'){ //Ascensor
-                                guardarEspacio();
-                            }else if(usoEspacio == '17'){ //Cuarto de Bombas
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-                                    +'<div id="punto_sanitario">'
-                                    +'<div class="div_izquierda"><b>Tipo de punto sanitario del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-                                    +'</div>'
-                                    +'</div>';
-                                $('#botones_punto_sanitario').show();
-                                añadirComponente("informacionEspacio",componente);
-                                actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
-                                $('#guardar_espacio_adicional').val('Crear Cuarto');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '18'){ //Buitrón
-                                guardarEspacio();
-                            }else if(usoEspacio == '19'){ //Cocineta
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
-                                    +'<div id="punto_sanitario">'
-                                    +'<div class="div_izquierda"><b>Tipo de punto sanitario de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
-                                    +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
-                                    +'</div>'
-                                    +'</div>';
-                                $('#botones_punto_sanitario').show();
-                                añadirComponente("informacionEspacio",componente);
-                                actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
-                                $('#guardar_espacio_adicional').val('Crear Cocineta');
-                                $('#divDialogCreacion').modal('show');
-                            }else if(usoEspacio == '20'){ //Sala de Estudio
-                                eliminarComponente("informacion");
-                                eliminarComponente("informacion2");
-                                var componente = '<div id="informacion">'
-                                    +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) sala(s) de estudio<font color="red">*</font>:</b></div>'
-                                    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
-                                    +'</div>';
-                                añadirComponente("informacionEspacio",componente);
-                                $('#guardar_espacio_adicional').val('Crear Sala');
-                                $('#divDialogCreacion').modal('show');
-                            }
-                        }else{
-                            if (planos.files.length <= 5) {
-                                alert("ERROR. El número máximo de planos por espacio es 5");
-                                planos.focus();
-                            }else{
-                                alert("ERROR. El número máximo de fotos por espacio es 20");
-                                fotos.focus();
-                            }
-                        }
+                            /*if (i<resultadoFotos.verificar.length-1) {
+                            mensaje += "\n";
+                        }*/
                     }
                 }
-            }
-        }
-        catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_espacio_adicional y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_espacio_adicional").click(function (e){
-        var informacion = {};
-        var usoEspacio = $("#uso_espacio").val();
-        if (usoEspacio == '1') { //Salón
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var capacidad = $("#capacidad").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["capacidad"] = capacidad;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-        }else if(usoEspacio == '2'){ //Auditorio
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var capacidad = $("#capacidad").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["capacidad"] = capacidad;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-        }else if(usoEspacio == '3'){ //Laboratorio
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var capacidad = $("#capacidad").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
-            var tipoPuntosSanitarios = [];
-            var cantidadPuntosSanitarios = [];
-            for (var i=0;i<=puntosSanitariosCont;i++) {
-                if (i==0) {
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
-                }else{
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+                if (mensaje.substring(0,1) != "") {
+                    alert(mensaje);
                 }
-            }
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["capacidad"] = capacidad;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-            informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
-            informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
-            informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
-        }else if(usoEspacio == '4'){ //Sala de Cómputo
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var capacidad = $("#capacidad").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["capacidad"] = capacidad;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-        }else if(usoEspacio == '5'){ //Oficina
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-        }else if(usoEspacio == '6'){ //Baño
-            var tipoInodoro = $("#tipo_inodoro").val();
-            var cantidadInodoros = $("#cantidad_inodoros").val();
-            var tipoLavamanos = $("#tipo_lavamanos").val();
-            var cantidadLavamanos = $("#cantidad_lavamanos").val();
-            var tipoDivisiones = $("#tipo_divisiones").val();
-            var materialDivisiones = $("#material_divisiones").val();
-            var ducha = $('input[name="ducha"]:checked').val();
-            var lavatraperos = $('input[name="lavatraperos"]:checked').val();
-            var cantidadSifones = $("#cantidad_sifones").val();
-            var tipoLavamanos = [];
-            var cantidadLavamanos = [];
-            for (var i=0;i<=lavamanosCont;i++) {
-                if (i==0) {
-                    tipoLavamanos[i] = $("#tipo_lavamanos").val();
-                    cantidadLavamanos[i] = $("#cantidad_lavamanos").val();
-                }else{
-                    tipoLavamanos[i] = $("#tipo_lavamanos"+i).val();
-                    cantidadLavamanos[i] = $("#cantidad_lavamanos"+i).val();
-                }
-            }
-            var tipoOrinal = [];
-            var cantidadOrinales = [];
-            for (var i=0;i<=orinalesCont;i++) {
-                if (i==0) {
-                    tipoOrinal[i] = $("#tipo_orinal").val();
-                    cantidadOrinales[i] = $("#cantidad_orinales").val();
-                }else{
-                    tipoOrinal[i] = $("#tipo_orinal"+i).val();
-                    cantidadOrinales[i] = $("#cantidad_orinales"+i).val();
-                }
-            }
-            informacion["tipo_inodoro"] = tipoInodoro;
-            informacion["cantidad_inodoro"] = cantidadInodoros;
-            informacion["tipo_orinal"] = tipoOrinal;
-            informacion["cantidad_orinal"] = cantidadOrinales;
-            informacion["tipo_lavamanos"] = tipoLavamanos;
-            informacion["cantidad_lavamanos"] = cantidadLavamanos;
-            informacion["tipo_divisiones"] = tipoDivisiones;
-            informacion["material_divisiones"] = materialDivisiones;
-            informacion["ducha"] = ducha;
-            informacion["lavatraperos"] = lavatraperos;
-            informacion["cantidad_sifones"] = cantidadSifones;
-        }else if(usoEspacio == '7'){ //Cuarto Técnico
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-            informacion["punto_videobeam"] = puntoVideoBeam;
-        }else if(usoEspacio == '8'){ //Bodega/Almacen
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }else if(usoEspacio == '10'){ //Cuarto de Plantas
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }else if(usoEspacio == '17'){ //Cuarto de Bombas
-            var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
-            var tipoPuntosSanitarios = [];
-            var cantidadPuntosSanitarios = [];
-            for (var i=0;i<=puntosSanitariosCont;i++) {
-                if (i==0) {
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
-                }else{
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
-                }
-            }
-            informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
-            informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
-            informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
-        }else if(usoEspacio == '19'){ //Cocineta
-            var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
-            var tipoPuntosSanitarios = [];
-            var cantidadPuntosSanitarios = [];
-            for (var i=0;i<=puntosSanitariosCont;i++) {
-                if (i==0) {
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
-                }else{
-                    tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
-                    cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
-                }
-            }
-            informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
-            informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
-            informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
-        }else if(usoEspacio == '20'){ //Sala de Estudio
-            var cantidadPuntosRed = $("#cantidad_puntos_red").val();
-            informacion["cantidad_puntos_red"] = cantidadPuntosRed;
-        }
-        dataEspacio = $.extend(dataEspacio,informacion);
-        guardarEspacio();
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_tipo_material y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_tipo_material").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del tipo de material?");
-            if (confirmacion) {
-                var tipoMaterial = $("#tipo_material").val();
-                var nombreTipoMaterial = $("#nombre_tipo_material").val();
-                if(!validarCadena(tipoMaterial)){
-                    alert("ERROR. Seleccione un tipo de material");
-                    $("#tipo_material").focus();
-                }else if(!validarCadena(nombreTipoMaterial)){
-                    alert("ERROR. Ingrese el nombre del tipo de material");
-                    $("#nombre_tipo_material").focus();
-                }else{
-                    var informacion = {};
-                    informacion['tipo_material'] = limpiarCadena(tipoMaterial);
-                    informacion['nombre_tipo_material'] = limpiarCadena(nombreTipoMaterial);
-                    var resultado = guardarTipoMaterial(informacion);
-                    mostrarMensaje(resultado.mensaje);
-                    console.log(resultado);
-                    if(resultado.verificar){
-                        $("#tipo_material").val("");
-                        $("#nombre_tipo_material").val("");
-                        window.scrollTo(0,0);
-                    }else{
-                        $("#nombre_tipo_material").focus();
-                    }
-                }
-            }
-        }
-        catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_tipo_objeto y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_tipo_objeto").click(function (e){
-        try{
-            var confirmacion = window.confirm("¿Guardar la información del tipo de objeto?");
-            if (confirmacion) {
-                var tipoObjeto = $("#tipo_objeto").val();
-                var nombreTipoObjeto = $("#nombre_tipo_objeto").val();
-                if(!validarCadena(tipoObjeto)){
-                    alert("ERROR. Seleccione un tipo de objeto");
-                    $("#tipo_objeto").focus();
-                }else if(!validarCadena(nombreTipoObjeto)){
-                    alert("ERROR. Ingrese el nombre del tipo de objeto");
-                    $("#nombre_tipo_objeto").focus();
-                }else{
-                    var informacion = {};
-                    informacion['tipo_objeto'] = limpiarCadena(tipoObjeto);
-                    informacion['nombre_tipo_objeto'] = limpiarCadena(nombreTipoObjeto);
-                    var resultado = guardarTipoObjeto(informacion);
-                    mostrarMensaje(resultado.mensaje);
-                    console.log(resultado);
-                    if(resultado.verificar){
-                        $("#tipo_objeto").val("");
-                        $("#nombre_tipo_objeto").val("");
-                        window.scrollTo(0,0);
-                    }else{
-                        $("#nombre_tipo_objeto").focus();
-                    }
-                }
-            }
-        }
-        catch(ex){
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_informacion_adicional y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_informacion_adicional").click(function (e){
-        $("#informacion-adicional").show();
-        $("#añadir_informacion_adicional").attr('disabled',true);
-        $('#eliminar_informacion_adicional').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_informacion_adicional y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_informacion_adicional").click(function (e){
-        $("#informacion-adicional").hide();
-        $("#eliminar_informacion_adicional").attr('disabled',true);
-        $('#añadir_informacion_adicional').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_iluminacion y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_iluminacion").click(function (e){
-        iluminacionCont++;
-        var componente = '<div id="iluminacion'+iluminacionCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("iluminacion",componente);
-        actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
-        $('#eliminar_iluminacion').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_iluminacion y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_iluminacion").click(function (e){
-        eliminarComponente("iluminacion"+iluminacionCont);
-        iluminacionCont--;
-        if(iluminacionCont == 0){
-            $("#eliminar_iluminacion").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_tomacorriente y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_tomacorriente").click(function (e){
-        tomacorrientesCont++;
-        var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
-        +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
-        +'<option value="regulado">Regulado</option>'
-        +'<option value="no regulado">No Regulado</option>'
-        +'</select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("suministro_energia",componente);
-        actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
-        $('#eliminar_tomacorriente').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_tomacorriente y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_tomacorriente").click(function (e){
-        eliminarComponente("suministro_energia"+tomacorrientesCont);
-        tomacorrientesCont--;
-        if(tomacorrientesCont == 0){
-            $("#eliminar_tomacorriente").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_puerta y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_puerta").click(function (e){
-        puertasCont++;
-        var componente = '<div id="puerta'+puertasCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
-        //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
-        //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
-        +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
-        +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
-        +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("puerta",componente);
-        actualizarSelectMaterial("material_marco_puerta",puertasCont);
-        actualizarSelectMaterial("material_puerta",puertasCont);
-        actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
-        $('#eliminar_puerta').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_puerta y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_puerta").click(function (e){
-        eliminarComponente("puerta"+puertasCont);
-        puertasCont--;
-        if(puertasCont == 0){
-            $("#eliminar_puerta").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_ventana y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_ventana").click(function (e){
-        ventanasCont++;
-        var componente = '<div id="ventana'+ventanasCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("ventana",componente);
-        actualizarSelectMaterial("material_ventana",ventanasCont);
-        actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
-        $('#eliminar_ventana').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_ventana y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_ventana").click(function (e){
-        eliminarComponente("ventana"+ventanasCont);
-        ventanasCont--;
-        if(ventanasCont == 0){
-            $("#eliminar_ventana").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_interruptor y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_interruptor").click(function (e){
-        interruptoresCont++;
-        var componente = '<div id="interruptor'+interruptoresCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("interruptor",componente);
-        actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
-        $('#eliminar_interruptor').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_interruptor y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_interruptor").click(function (e){
-        eliminarComponente("interruptor"+interruptoresCont);
-        interruptoresCont--;
-        if(interruptoresCont == 0){
-            $("#eliminar_interruptor").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_punto_sanitario").click(function (e){
-        puntosSanitariosCont++;
-        var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("punto_sanitario",componente);
-        actualizarSelectTipoObjeto("tipo_punto_sanitario",puntosSanitariosCont);
-        $('#eliminar_punto_sanitario').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_punto_sanitario").click(function (e){
-        eliminarComponente("punto_sanitario"+puntosSanitariosCont);
-        puntosSanitariosCont--;
-        if(puntosSanitariosCont == 0){
-            $("#eliminar_punto_sanitario").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_orinal").click(function (e){
-        orinalesCont++;
-        var componente = '<div id="orinal'+orinalesCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" required/><br>'
-        +'</div>';
-        añadirComponente("orinal",componente);
-        actualizarSelectTipoObjeto("tipo_orinal",orinalesCont);
-        $('#eliminar_orinal').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_orinal").click(function (e){
-        eliminarComponente("orinal"+orinalesCont);
-        orinalesCont--;
-        if(orinalesCont == 0){
-            $("#eliminar_orinal").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton añadir_lavamanos y se
-     * realiza la operacion correspondiente.
-     */
-    $("#añadir_lavamanos").click(function (e){
-        lavamanosCont++;
-        var componente = '<div id="lavamanos'+lavamanosCont+'">'
-        +'<div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
-        +'</div>'
-        +'</div>';
-        añadirComponente("lavamanos",componente);
-        actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
-        $('#eliminar_lavamanos').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_lavamanos y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_lavamanos").click(function (e){
-        eliminarComponente("lavamanos"+lavamanosCont);
-        lavamanosCont--;
-        if(lavamanosCont == 0){
-            $("#eliminar_lavamanos").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton agregar_espacio y se
-     * realiza la operacion correspondiente.
-     */
-    $("#agregar_espacio").click(function (e){
-        $("#divBotonesInformacionAdicional").hide();
-        $("#informacion-adicional").hide();
-        espaciosCont++;
-        var componente = '<div id="espacio'+espaciosCont+'">'
-        +'<br><div class="input-group">'
-        +'<input class="form-control formulario" type="number" min="1" name="id_espacio" id="id_espacio'+espaciosCont+'" value="" placeholder="Ej: 1001" required/>'
-        +'<span class="input-group-btn">'
-        +'</span>'
-        +'</div>'
-        +'</div>';
-        añadirComponente("espacio",componente);
-        $('#eliminar_espacio').removeAttr("disabled");
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton eliminar_espacio y se
-     * realiza la operacion correspondiente.
-     */
-    $("#eliminar_espacio").click(function (e){
-        eliminarComponente("espacio"+espaciosCont);
-        espaciosCont--;
-        if(espaciosCont == 0){
-            $("#divBotonesInformacionAdicional").show();
-            $("#eliminar_espacio").attr('disabled',true);
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se cierra el modal divDialogCreacion y se
-     * realiza la operacion correspondiente.
-     */
-    $('#divDialogCreacion').on('hidden.bs.modal', function () {
-        puntosSanitariosCont = 0;
-        lavamanosCont = 0;
-        orinalesCont = 0;
-        $("#eliminar_lavamanos").attr('disabled',true);
-        $("#eliminar_punto_sanitario").attr('disabled',true);
-        $("#eliminar_orinal").attr('disabled',true);
-    });
-
-    /**
-     * Se captura el evento cuando se modifica el selector tipo_iluminacion y se
-     * realiza la operacion correspondiente.
-     */
-    $("input[name=tipo_iluminacion]").change(function (e){
-        var tipoIluminacion = $("input[name=tipo_iluminacion]").val();
-        console.log(tipoIluminacion);
-        /*for (var i = 1; i < iluminacionCont i++) {
-            $("#tipo_iluminacion"+iluminacionCont).val();
-        }*/
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_capacidad_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_capacidad_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la capacidad de aires acondicionados?");
-        if (confirmacion) {
-            var capacidad = limpiarCadena($("#capacidad").val());
-            if (validarCadena(capacidad)) {
-                var informacion = {};
-                informacion["capacidad"] = capacidad;
-                var data = guardarObjeto("capacidad_aire",informacion);
-                alert(data.mensaje);
-                if (data.verificar) {
-                    $("#capacidad").val("");
-                }
-            }else{
-                alert("ERROR. Ingrese la capacidad de aires acondicionados");
-                $("#capacidad").focus();
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_marca_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_marca_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la marca de aires acondicionados?");
-        if (confirmacion) {
-            var capacidad = limpiarCadena($("#nombre_marca").val());
-            if (validarCadena(capacidad)) {
-                var informacion = {};
-                informacion["nombre"] = capacidad;
-                var data = guardarObjeto("marca_aire",informacion);
-                alert(data.mensaje);
-                console.log(data);
-                if (data.verificar) {
-                    $("#nombre_marca").val("");
-                }
-            }else{
-                alert("ERROR. Ingrese la marca de aires acondicionados");
-                $("#nombre_marca").focus();
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_tipo_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_tipo_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar el tipo de aires acondicionados?");
-        if (confirmacion) {
-            var tipo = limpiarCadena($("#nombre_tipo").val());
-            if (validarCadena(tipo)) {
-                var informacion = {};
-                informacion["tipo_objeto"] = "tipo_aire";
-                informacion["nombre_tipo_objeto"] = tipo;
-                var data = guardarTipoObjeto(informacion);
-                alert(data.mensaje);
-                console.log(data);
-                if (data.verificar) {
-                    $("#nombre_tipo").val("");
-                }
-            }else{
-                alert("ERROR. Ingrese el tipo de aires acondicionados");
-                $("#nombre_tipo").focus();
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_tecnologia_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_tecnologia_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la tecnología de aires acondicionados?");
-        if (confirmacion) {
-            var tecnologia = limpiarCadena($("#nombre_tecnologia").val());
-            if (validarCadena(tecnologia)) {
-                var informacion = {};
-                informacion["tipo_objeto"] = "tipo_tecnologia_aire";
-                informacion["nombre_tipo_objeto"] = tecnologia;
-                var data = guardarTipoObjeto(informacion);
-                alert(data.mensaje);
-                console.log(data);
-                if (data.verificar) {
-                    $("#nombre_tecnologia").val("");
-                }
-            }else{
-                alert("ERROR. Ingrese el nombre de la tecnología de aires acondicionados");
-                $("#nombre_tecnologia").focus();
-            }
-        }
-    });
-
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
-        if (confirmacion) {
-            var numeroInventario = limpiarCadena($("#numero_inventario").val());
-            var sede = $("#nombre_sede").val();
-            var campus = $("#nombre_campus").val();
-            var edificio = $("#nombre_edificio").val();
-            var espacio = $("#id_espacio").val();
-            var capacidad = $("#capacidad_aire").val();
-            var marca = $("#marca_aire").val();
-            var tipo = $("#tipo_aire").val();
-            var tecnologia = $("#tipo_tecnologia_aire").val();
-            var fechaInstalacion = $("#fecha_instalacion").val();
-            var instalador = limpiarCadena($("#instalador").val());
-            var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
-            var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
-            var fotos = document.getElementById("fotos[]");
-            if (fotos.files.length <= 20) {
-                var arregloFotos = new FormData();
-                for (var i=0;i<fotos.files.length;i++) {
-                    var foto = fotos.files[i];
-                    if (foto.size > 2000000) {
-                        alert('La foto: "'+foto.name+"' es muy grande");
-                    }else{
-                        var nombreArchivo = foto.name;
-                        if(nombreArchivo.length > 50){
-                            nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
-                        }
-                        arregloFotos.append('archivo'+i,foto,nombreArchivo);
-                    }
-                }
-                /*if (!validarCadena(numeroInventario)) {
-                    alert("ERROR. Ingrese el número de inventario del aire acondicionado");
-                    $("#numero_inventario").focus();
-                }else */if(!validarCadena(sede)){
-                    alert("ERROR. Seleccione la sede donde está el aire acondicionado");
-                    $("#nombre_sede").focus();
-                }else if(!validarCadena(campus)){
-                    alert("ERROR. Seleccione el campus donde está el aire acondicionado");
-                    $("#nombre_campus").focus();
-                }else if(!validarCadena(edificio)){
-                    alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
-                    $("#nombre_edificio").focus();
-                }else if(!validarCadena(espacio)){
-                    alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
-                    $("#id_espacio").focus();
-                }else if(!validarCadena(marca)){
-                    alert("ERROR. Seleccione la marca del aire acondicionado");
-                    $("#marca_aire").focus();
-                }else if(!validarCadena(tipo)){
-                    alert("ERROR. Seleccione el tipo del aire acondicionado");
-                    $("#tipo_aire").focus();
-                }else if(!validarCadena(tecnologia)){
-                    alert("ERROR. Seleccione la tecnolodía del aire acondicionado");
-                    $("#tipo_tecnologia_aire").focus();
-                }else if(!validarCadena(capacidad)){
-                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
-                    $("#capacidad_aire").focus();
-                }else{
-                    var informacion = {};
-                    informacion["numero_inventario"] = numeroInventario;
-                    informacion["sede"] = sede;
-                    informacion["campus"] = campus;
-                    informacion["edificio"] = edificio;
-                    informacion["espacio"] = espacio;
-                    informacion["capacidad"] = capacidad;
-                    informacion["marca"] = marca;
-                    informacion["tipo"] = tipo;
-                    informacion["tecnologia_aire"] = tecnologia;
-                    informacion["fecha_instalacion"] = fechaInstalacion;
-                    informacion["instalador"] = instalador;
-                    informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
-                    informacion["ubicacion_condensadora"] = ubicacionCondensadora;
-                    var data = guardarObjeto("aire_acondicionado",informacion);
-                    var id_aire = "";
-                    $.each(data.verificar, function(index, record) {
-                        if($.isNumeric(index)) {
-                            id_aire = record.id_aire;
-                        }
-                    });
-                    console.log(data);
-                    console.log(informacion);
-                    if (data.verificar != false) {
-                        informacion["id_aire"] = id_aire;
-                        arregloFotos.append('aire',JSON.stringify(informacion));
-                        var resultadoFotos = guardarFotos("aire",arregloFotos);
-                        console.log(resultadoFotos);
-                        var mensaje = "";
-                        mensaje += data.mensaje;
-                        if (resultadoFotos.length != 0) {
-                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
-                                if (resultadoFotos.mensaje[i].indexOf("Error: SQL") == -1) {
-                                    if (!resultadoFotos.verificar[i]) {
-                                        if (mensaje == "") {
-                                            mensaje += resultadoFotos.mensaje[i];
-                                        }else{
-                                            mensaje += "\n" + resultadoFotos.mensaje[i];
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (mensaje.substring(0,1) != "") {
-                            alert(mensaje);
-                        }
-                        $("#numero_inventario").val("");
-                        $("#nombre_sede").val("").change();
-                        $("#nombre_campus").empty();
-                        $("#nombre_campus").val("");
-                        $("#nombre_edificio").val("");
-                        $("#pisos").val("");
-                        $("#id_espacio").val("");
-                        $("#marca_aire").val("");
-                        $("#tipo_aire").val("");
-                        $("#capacidad_aire").val("");
-                        $("#tipo_tecnologia_aire").val("");
-                        $("#fecha_instalacion").val("");
-                        $("#instalador").val("");
-                        $("#tipo_periodicidad_mantenimiento").val("");
-                        $("#ubicacion_condensadora").val("");
-                        fotos.value = "";
-                        window.scrollTo(0,0);
-                    }else{
-                        alert(data.mensaje);
-                        $("#numero_inventario").focus();
-                    }
-                }
+                $("#nombre_sede").val("");
+                $("#nombre_campus").val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+                $('#divDialogCreacion').modal('hide');
             }else{
                 if (planos.files.length <= 5) {
-                    alert("ERROR. El número máximo de planos por cubierta es 5");
+                    alert("ERROR. El número máximo de planos por campus es 5");
                     planos.focus();
                 }else{
-                    alert("ERROR. El número máximo de fotos por cubierta es 20");
+                    alert("ERROR. El número máximo de fotos por campus es 20");
                     fotos.focus();
                 }
             }
         }
-    });
+    }
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación del campus en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
 
-    /**
-     * Se captura el evento cuando se da click en el boton guardar_mantenimiento_aire y se
-     * realiza la operacion correspondiente.
-     */
-    $("#guardar_mantenimiento_aire").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la información del mantenimiento al aire acondicionado?");
+/**
+* Se captura el evento cuando se da click en el boton guardar_edificio y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_edificio").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del edificio?");
         if (confirmacion) {
-            var numeroInventario = limpiarCadena($("#numero_inventario").val());
-            var numeroOrden = limpiarCadena($("#numero_orden").val());
-            var descripcionTrabajo = limpiarCadena($("#descripcion_trabajo").val());
-            if (!validarCadena(numeroInventario)) {
-                alert("ERROR. Ingrese el número de inventario del aire acondicionado");
-                $("#numero_inventario").focus();
-            }else if(!validarCadena(numeroOrden)){
-                alert("ERROR. Ingrese el número de la orden de mantenimiento");
-                $("#numero_orden").focus();
-            }else if(!validarCadena(descripcionTrabajo)){
-                alert("ERROR. Ingrese una descripción del trabajo realizado en el aire acondicionado");
-                $("#descripcion_trabajo").focus();
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idEdificio = $("#id_edificio").val();
+            var nombreEdificio = $("#nombre_edificio").val();
+            var numeroPisos = $("#pisos_edificio").val();
+            var terraza = $('input[name="terraza"]:checked').val();
+            var sotano = $('input[name="sotano"]:checked').val();
+            var materialFachada = $("#material_fachada").val();
+            var altoFachada = $("#alto_fachada").val();
+            var anchoFachada = $("#ancho_fachada").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece el edificio");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece el edifiicio");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idEdificio)){
+                alert("ERROR. Ingrese el código del edificio");
+                $("#id_edificio").focus();
+            }else if(!validarCadena(nombreEdificio)){
+                alert("ERROR. Ingrese el nombre del edificio");
+                $("#nombre_edificio").focus();
+            }else if(!validarCadena(numeroPisos)){
+                alert("ERROR. Ingrese el número de pisos del edificio");
+                $("#pisos_edificio").focus();
+            }else if(!validarCadena(terraza)){
+                alert("ERROR. Establesca si el edificio tiene terraza");
+                $("#terraza").focus();
+            }else if(!validarCadena(sotano)){
+                alert("ERROR. Establesca si el edificio tiene sotano");
+                $("#sotano").focus();
             }else{
                 var informacion = {};
-                informacion["numero_inventario"] = numeroInventario;
-                informacion["numero_orden"] = numeroOrden;
-                informacion["descripcion_trabajo"] = descripcionTrabajo;
-                var data = guardarObjeto("mantenimiento_aire",informacion);
-                alert(data.mensaje);
-                console.log(data);
-                if (data.verificar) {
-                    $("#numero_inventario").val("");
-                    $("#numero_orden").val("");
-                    $("#descripcion_trabajo").val("");
-                    window.scrollTo(0,0);
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_edificio'] = limpiarCadena(idEdificio);
+                informacion['nombre_edificio'] = limpiarCadena(nombreEdificio);
+                informacion['numero_pisos'] = numeroPisos;
+                informacion['terraza'] = terraza;
+                informacion['sotano'] = sotano;
+                informacion['material_fachada'] = materialFachada;
+                informacion['alto_fachada'] = altoFachada;
+                informacion['ancho_fachada'] = anchoFachada;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('edificio',JSON.stringify(informacion));
+                    arregloPlanos.append('edificio',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("edificio",informacion);
+                    var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
+                    var resultadoFotos = guardarFotos("edificio",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_edificio").val("");
+                $("#nombre_edificio").val("");
+                $("#pisos_edificio").val("");
+                $('input[name=terraza]').attr('checked',false);
+                $('input[name=sotano]').attr('checked',false);
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_edificio").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por edificio es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por edificio es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación del edificio en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_cancha y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_cancha").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de la cancha?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idCancha = limpiarCadena($("#id_cancha").val());
+            var usoCancha = limpiarCadena($("#uso_cancha").val());
+            var materialPiso = $("#material_piso").val();
+            var tipoPintura = $("#tipo_pintura").val();
+            var longitudDemarcacion = $("#longitud_demarcacion").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece la cancha");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece la cancha");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idCancha)){
+                alert("ERROR. Ingrese el código de la cancha");
+                $("#id_cancha").focus();
+            }else if(!validarCadena(usoCancha)){
+                alert("ERROR. Ingrese uso de la cancha");
+                $("#uso_cancha").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_cancha'] = idCancha;
+                informacion['uso_cancha'] = usoCancha;
+                informacion['material_piso'] = materialPiso;
+                informacion['tipo_pintura'] = tipoPintura;
+                informacion['longitud_demarcacion'] = longitudDemarcacion;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('cancha',JSON.stringify(informacion));
+                    arregloPlanos.append('cancha',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("cancha",informacion);
+                    var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
+                    var resultadoFotos = guardarFotos("cancha",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_cancha").val("");
+                $("#uso_cancha").val("");
+                $("#material_piso").val("");
+                $('#tipo_pintura').val("");
+                $('#longitud_demarcacion').val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_cancha").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por cancha es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por cancha es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación de la cancha en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_corredor y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_corredor").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del corredor?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idCorredor = limpiarCadena($("#id_corredor").val());
+            var alturaPared = $("#altura_pared").val();
+            var anchoPared = $("#ancho_pared").val();
+            var materialPared = $("#material_pared").val();
+            var largoTecho = $("#largo_techo").val();
+            var anchoTecho = $("#ancho_techo").val();
+            var materialTecho = $("#material_techo").val();
+            var largoPiso = $("#largo_piso").val();
+            var anchoPiso = $("#ancho_piso").val();
+            var materialPiso = $("#material_piso").val();
+            var tipoIluminacion = [];
+            var cantidadIluminacion = [];
+            var tipoSuministroEnergia = [];
+            var tomacorriente = [];
+            var cantidadTomacorrientes = [];
+            var tipoInterruptor = [];
+            var cantidadInterruptores = [];
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece el corredor");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece el corredor");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idCorredor)){
+                alert("ERROR. Ingrese el código del corredor");
+                $("#id_corredor").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_corredor'] = idCorredor;
+                informacion['alto_pared'] = alturaPared;
+                informacion['ancho_pared'] = anchoPared;
+                informacion['material_pared'] = materialPared;
+                informacion['largo_techo'] = largoTecho;
+                informacion['ancho_techo'] = anchoTecho;
+                informacion['material_techo'] = materialTecho;
+                informacion['largo_piso'] = largoPiso;
+                informacion['ancho_piso'] = anchoPiso;
+                informacion['material_piso'] = materialPiso;
+                informacion['tipo_suministro_energia'] = $("#tipo_suministro_energia").val();
+                informacion['tomacorriente'] = $("#tomacorriente").val();
+                informacion['cantidad_tomacorrientes'] = $("#cantidad_tomacorrientes").val();
+                for (var i=0;i<=iluminacionCont;i++) {
+                    if (i==0) {
+                        tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                    }else{
+                        tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                    }
+                }
+                for (var i=0;i<=interruptoresCont;i++) {
+                    if (i==0) {
+                        tipoInterruptor[i] = $("#tipo_interruptor").val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                    }else{
+                        tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                    }
+                }
+                informacion['tipo_iluminacion'] = tipoIluminacion;
+                informacion['cantidad_iluminacion'] = cantidadIluminacion;
+                informacion['tipo_interruptor'] = tipoInterruptor;
+                informacion['cantidad_interruptores'] = cantidadInterruptores;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('corredor',JSON.stringify(informacion));
+                    arregloPlanos.append('corredor',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("corredor",informacion);
+                    var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
+                    var resultadoFotos = guardarFotos("corredor",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_corredor").val("");
+                $("#altura_pared").val("");
+                $("#ancho_pared").val("");
+                $("#largo_techo").val("");
+                $("#ancho_techo").val("");
+                $("#material_techo").val("");
+                $("#largo_piso").val("");
+                $("#ancho_piso").val("");
+                $("#material_piso").val("");
+                $("#tipo_iluminacion").val("");
+                $("#cantidad_iluminacion").val("");
+                $("#tipo_suministro_energia").val("");
+                $("#tomacorriente").val("");
+                $("#cantidad_tomacorrientes").val("");
+                $("#tipo_interruptor").val("");
+                $("#cantidad_interruptores").val("");
+                while (iluminacionCont > 0) {
+                    eliminarComponente("iluminacion"+iluminacionCont);
+                    iluminacionCont--;
+                }
+                while (tomacorrientesCont > 0) {
+                    eliminarComponente("suministro_energia"+tomacorrientesCont);
+                    tomacorrientesCont--;
+                }
+                while (interruptoresCont > 0) {
+                    eliminarComponente("interruptor"+tomacorrientesCont);
+                    interruptoresCont--;
+                }
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_corredor").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por corredor es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por corredor es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación del corredor en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_cubierta y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_cubierta").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de la cubierta?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var nombreEdificio = $("#nombre_edificio").val();
+            var piso = $("#pisos").val();
+            var tipoCubierta = $("#tipo_cubierta").val();
+            var materialCubierta = $("#material_cubierta").val();
+            var ancho = $("#ancho").val();
+            var largo = $("#largo").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece la cubierta");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece la cubierta");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el edificio al que pertenece la cubierta");
+                $("#nombre_edificio").focus();
+            }else if(!validarCadena(piso)){
+                alert("ERROR. Ingrese el piso donde se encuentra la cubierta");
+                $("#piso").focus();
+            }else{
+                if (piso == 'sotano') {
+                    piso = '0';
+                }else if (piso == 'terraza') {
+                    piso = '-1';
+                }
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['nombre_edificio'] = nombreEdificio;
+                informacion['pisos'] = piso;
+                informacion['tipo_cubierta'] = tipoCubierta;
+                informacion['material_cubierta'] = materialCubierta;
+                informacion['ancho'] = ancho;
+                informacion['largo'] = largo;
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('cubierta',JSON.stringify(informacion));
+                    arregloPlanos.append('cubierta',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("cubierta",informacion);
+                    var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
+                    var resultadoFotos = guardarFotos("cubierta",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#nombre_edificio").empty();
+                $("#nombre_edificio").val("");
+                $("#pisos").empty();
+                $("#pisos").val("");
+                $("#tipo_cubierta").val("");
+                $("#material_cubierta").val("");
+                $("#ancho").val("");
+                $("#largo").val("");
+                planos.value = "";
+                fotos.value = "";
+                window.scrollTo(0,0);
+            }else{
+                $("#nombre_edificio").focus();
+                $("#pisos").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por cubierta es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por cubierta es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    console.log(ex);
+    alert("Ocurrió un error, por favor inténtelo nuevamente");
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_gradas y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_gradas").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de las gradas?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var nombreEdificio = $("#nombre_edificio").val();
+            var pisoInicio = $("#pisos").val();
+            var pasamanos = $('input[name="pasamanos"]:checked').val();
+            var materialPasamanos = $("#material_pasamanos").val();
+            var ventanas = $('input[name="ventanas"]:checked').val();
+            var tipoVentana = {};
+            var cantidadVentanas = {};
+            var materialVentana = {};
+            var anchoVentana = {};
+            var altoVentana = {};
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenecen las gradas");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenecen las gradas");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(nombreEdificio)){
+                alert("ERROR. Seleccione el edificio al que pertenecen las gradas");
+                $("#nombre_edificio").focus();
+            }else if(!validarCadena(pisoInicio)){
+                alert("ERROR. Ingrese el piso desde el que inician las gradas del edificio");
+                $("#pisos").focus();
+            }else{
+                if (pisoInicio == 'sotano') {
+                    pisoInicio = '0';
+                }else if (pisoInicio == 'terraza') {
+                    pisoInicio = '-1';
+                }
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['nombre_edificio'] = nombreEdificio;
+                informacion['piso_inicio'] = pisoInicio;
+                informacion['pasamanos'] = pasamanos;
+                informacion['material_pasamanos'] = materialPasamanos;
+                informacion['ventana'] = ventanas;
+                for (var i=0;i<=ventanasCont;i++) {
+                    if (i==0) {
+                        tipoVentana[i] = $("#tipo_ventana").val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                        materialVentana[i] = $("#material_ventana").val();
+                        anchoVentana[i] = $("#ancho_ventana").val();
+                        altoVentana[i] = $("#alto_ventana").val();
+                    }else{
+                        tipoVentana[i] = $("#tipo_ventana"+i).val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                        materialVentana[i] = $("#material_ventana"+i).val();
+                        anchoVentana[i] = $("#ancho_ventana"+i).val();
+                        altoVentana[i] = $("#alto_ventana"+i).val();
+                    }
+                }
+                informacion['tipo_ventana'] = tipoVentana;
+                informacion['cantidad_ventanas'] = cantidadVentanas;
+                informacion['material_ventana'] = materialVentana;
+                informacion['ancho_ventana'] = anchoVentana;
+                informacion['alto_ventana'] = altoVentana;
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('gradas',JSON.stringify(informacion));
+                    arregloPlanos.append('gradas',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("gradas",informacion);
+                    var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
+                    var resultadoFotos = guardarFotos("gradas",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            if (i<resultadoPlanos.verificar.length-2) {
+                                mensaje += "\n";
+                            }
+                        }
+                    }
+                    if (resultadoFotos.length != 0) {
+                        for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                            if (!resultadoFotos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoFotos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoFotos.mensaje[i];
+                                }
+                            }
+                            if (i<resultadoFotos.verificar.length-1) {
+                                mensaje += "\n";
+                            }
+                        }
+                    }
+                    if (mensaje.substring(0,1) != "") {
+                        console.log(mensaje.length);
+                        alert(mensaje);
+                    }
+                    if(resultado.verificar){
+                        $("#nombre_sede").val("");
+                        $("#nombre_campus").empty();
+                        $("#nombre_campus").val("");
+                        $("#nombre_edificio").empty();
+                        $("#nombre_edificio").val("");
+                        $("#pisos").empty();
+                        $("#pisos").val("");
+                        $('input[name=pasamanos]').attr('checked',false);
+                        $("#divPasamanos").hide();
+                        $("#tipo_ventana").val("");
+                        $("#cantidad_ventanas").val("");
+                        $("#material_ventana").val("");
+                        $("#ancho_ventana").val("");
+                        $("#alto_ventana").val("");
+                        while (ventanasCont > 0) {
+                            eliminarComponente("ventana"+ventanasCont);
+                            ventanasCont--;
+                        }
+                        planos.value = "";
+                        fotos.value = "";
+                        window.scrollTo(0,0);
+                    }else{
+                        $("#nombre_edificio").focus();
+                        $("#pisos").focus();
+                    }
+                }else{
+                    if (planos.files.length <= 5) {
+                        alert("ERROR. El número máximo de planos por gradas es 5");
+                        planos.focus();
+                    }else{
+                        alert("ERROR. El número máximo de fotos por gradas es 20");
+                        fotos.focus();
+                    }
                 }
             }
         }
-    });
+    }
+    catch(ex){
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_parqueadero y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_parqueadero").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del parqueadero?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idParqueadero = limpiarCadena($("#id_parqueadero").val());
+            var capacidad = $("#capacidad").val();
+            var ancho = $("#ancho").val();
+            var largo = $("#largo").val();
+            var material_piso = $("#material_piso").val();
+            var tipo_pintura = $("#tipo_pintura").val();
+            var longitud_demarcacion = $("#longitud_demarcacion").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece el parqueadero");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece el parqueadero");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idParqueadero)){
+                alert("ERROR. Ingrese el código del parqueadero");
+                $("#id_parqueadero").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_parqueadero'] = idParqueadero;
+                informacion['capacidad'] = capacidad;
+                informacion['ancho'] = ancho;
+                informacion['largo'] = largo;
+                informacion['material_piso'] = material_piso;
+                informacion['tipo_pintura'] = tipo_pintura;
+                informacion['longitud_demarcacion'] = longitud_demarcacion;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('parqueadero',JSON.stringify(informacion));
+                    arregloPlanos.append('parqueadero',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("parqueadero",informacion);
+                    var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
+                    var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_parqueadero").val("");
+                $("#capacidad").val("");
+                $("#ancho").val("");
+                $("#largo").val("");
+                $("#material_piso").val("");
+                $("#tipo_pintura").val("");
+                $("#longitud_demarcacion").val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_parqueadero").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por parqueadero es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por parqueadero es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación del parqueadero en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_piscina y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_piscina").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de la piscina?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idPiscina = limpiarCadena($("#id_piscina").val());
+            var alto = $("#alto").val();
+            var ancho = $("#ancho").val();
+            var largo = $("#largo").val();
+            var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece la piscina");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece la piscina");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idPiscina)){
+                alert("ERROR. Ingrese el código de la piscina");
+                $("#id_piscina").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_piscina'] = idPiscina;
+                informacion['alto'] = alto;
+                informacion['ancho'] = ancho;
+                informacion['largo'] = largo;
+                informacion['cantidad_puntos_hidraulicos'] = cantidadPuntosHidraulicos;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('piscina',JSON.stringify(informacion));
+                    arregloPlanos.append('piscina',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("piscina",informacion);
+                    var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
+                    var resultadoFotos = guardarFotos("piscina",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_piscina").val("");
+                $("#alto").val("");
+                $("#ancho").val("");
+                $("#largo").val("");
+                $("#cantidad_puntos_hidraulicos").val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_piscina").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por piscina es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por piscina es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación de la piscina en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_plazoleta y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_plazoleta").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de la plazoleta?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idPlazoleta = limpiarCadena($("#id_plazoleta").val());
+            var nombre = limpiarCadena($("#nombre").val());
+            var tipoIluminacion = $("#tipo_iluminacion").val();
+            var cantidadIluminacion = $("#cantidad_iluminacion").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece la plazoleta");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece la plazoleta");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idPlazoleta)){
+                alert("ERROR. Ingrese el código de la plazoleta");
+                $("#id_plazoleta").focus();
+            }else if(!validarCadena(nombre)){
+                alert("ERROR. Ingrese el nombre de la plazoleta");
+                $("#nombre").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_plazoleta'] = idPlazoleta;
+                informacion['nombre'] = nombre;
+                informacion['tipo_iluminacion'] = tipoIluminacion;
+                informacion['cantidad_iluminacion'] = cantidadIluminacion;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('plazoleta',JSON.stringify(informacion));
+                    arregloPlanos.append('plazoleta',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("plazoleta",informacion);
+                    var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
+                    var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_plazoleta").val("");
+                $("#nombre").val("");
+                $("#tipo_iluminacion").val("");
+                $("#cantidad_iluminacion").val("");
+                while (iluminacionCont > 0) {
+                    eliminarComponente("iluminacion"+iluminacionCont);
+                    iluminacionCont--;
+                }
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_plazoleta").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por plazoleta es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por plazoleta es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación de la plazoleta en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_sendero y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_sendero").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del sendero peatonal?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idSendero = limpiarCadena($("#id_sendero").val());
+            var longitud = $("#longitud").val();
+            var ancho = $("#ancho").val();
+            var materialPiso = $("#material_piso").val();
+            var tipoIluminacion = $("#tipo_iluminacion").val();
+            var cantidadIluminacion = $("#cantidad_iluminacion").val();
+            var codigoPoste = $("#codigo_poste").val();
+            var anchoCubierta = $("#ancho_cubierta").val();
+            var largoCubierta = $("#largo_cubierta").val();
+            var materialCubierta = $("#material_cubierta").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece el sendero peatonal");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece el sendero peatonal");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idSendero)){
+                alert("ERROR. Ingrese el código del sendero peatonal");
+                $("#id_sendero").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_sendero'] = idSendero;
+                informacion['longitud'] = longitud;
+                informacion['ancho'] = ancho;
+                informacion['material_piso'] = materialPiso;
+                informacion['cantidad_iluminacion'] = cantidadIluminacion;
+                informacion['tipo_iluminacion'] = tipoIluminacion;
+                informacion['codigo_poste'] = codigoPoste;
+                informacion['ancho_cubierta'] = anchoCubierta;
+                informacion['largo_cubierta'] = largoCubierta;
+                informacion['material_cubierta'] = materialCubierta;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('sendero',JSON.stringify(informacion));
+                    arregloPlanos.append('sendero',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("sendero",informacion);
+                    var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
+                    var resultadoFotos = guardarFotos("sendero",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_sendero").val("");
+                $("#longitud").val("");
+                $("#ancho").val("");
+                $("#material_piso").val("");
+                $("#cantidad_iluminacion").val("");
+                $("#tipo_iluminacion").val("");
+                $("#codigo_poste").val("");
+                $("#ancho_cubierta").val("");
+                $("#largo_cubierta").val("");
+                $("#material_cubierta").val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_sendero").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por sendero peatonal es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por sendero peatonal es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación del sendero peatonal en el mapa");
+        $("#map").focus();
+
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_via y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_via").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información de la vía?");
+        if (confirmacion) {
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var idVia = limpiarCadena($("#id_via").val());
+            var tipoPintura = $("#tipo_pintura").val();
+            var longitudDemarcacion = $("#longitud_demarcacion").val();
+            var materialPiso = $("#material_piso").val();
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if(!validarCadena(nombreSede)){
+                alert("ERROR. Seleccione la sede a la que pertenece la vía");
+                $("#nombre_sede").focus();
+            }else if(!validarCadena(nombreCampus)){
+                alert("ERROR. Ingrese el nombre del campus al que pertenece la vía");
+                $("#nombre_campus").focus();
+            }else if(!validarCadena(idVia)){
+                alert("ERROR. Ingrese el código de la vía");
+                $("#id_via").focus();
+            }else{
+                var informacion = {};
+                var arregloFotos = new FormData();
+                var arregloPlanos = new FormData();
+                informacion['nombre_sede'] = nombreSede;
+                informacion['nombre_campus'] = nombreCampus;
+                informacion['id_via'] = idVia;
+                informacion['tipo_pintura'] = tipoPintura;
+                informacion['longitud_demarcacion'] = longitudDemarcacion;
+                informacion['material_piso'] = materialPiso;
+                informacion['lat'] = coordenadas.lat().toFixed(8);
+                informacion['lng'] = coordenadas.lng().toFixed(8);
+                if (fotos.files.length <= 20 || planos.files.length <= 5) {
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    for (var i=0;i<planos.files.length;i++) {
+                        var plano = planos.files[i];
+                        if (plano.size > 2000000) {
+                            alert('El archivo: "'+plano.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = plano.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                            }
+                            arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                        }
+                    }
+                    arregloFotos.append('via',JSON.stringify(informacion));
+                    arregloPlanos.append('via',JSON.stringify(informacion));
+                    console.log(informacion);
+                    var resultado = guardarObjeto("via",informacion);
+                    var resultadoPlanos = guardarPlanos("via",arregloPlanos);
+                    var resultadoFotos = guardarFotos("via",arregloFotos);
+                    mostrarMensaje(resultado.mensaje);
+                    console.log(resultado);
+                    console.log(resultadoPlanos);
+                    console.log(resultadoFotos);
+                    var mensaje = "";
+                    if (resultadoPlanos.length != 0) {
+                        for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
+                            if (!resultadoPlanos.verificar[i]) {
+                                if (mensaje == "") {
+                                    mensaje += resultadoPlanos.mensaje[i];
+                                }else{
+                                    mensaje += "\n" + resultadoPlanos.mensaje[i];
+                                }
+                            }
+                            /*if (i<resultadoPlanos.verificar.length-2) {
+                            mensaje += "\n";
+                        }*/
+                    }
+                }
+                if (resultadoFotos.length != 0) {
+                    for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                        /*if (i<resultadoFotos.verificar.length-1) {
+                        mensaje += "\n";
+                    }*/
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                console.log(mensaje.length);
+                alert(mensaje);
+            }
+            if(resultado.verificar){
+                $("#nombre_sede").val("");
+                $("#nombre_campus").empty();
+                $("#nombre_campus").val("");
+                $("#id_via").val("");
+                $("#tipo_pintura").val("");
+                $("#longitud_demarcacion").val("");
+                $("#material_piso").val("");
+                planos.value = "";
+                fotos.value = "";
+                initMap();
+                coordenadas = {};
+                window.scrollTo(0,0);
+            }else{
+                $("#id_via").focus();
+            }
+        }else{
+            if (planos.files.length <= 5) {
+                alert("ERROR. El número máximo de planos por vía es 5");
+                planos.focus();
+            }else{
+                alert("ERROR. El número máximo de fotos por vía es 20");
+                fotos.focus();
+            }
+        }
+    }
+}
+}
+catch(ex){
+    if (ex instanceof TypeError) {
+        alert("ERROR. Indique la ubicación de la vía en el mapa");
+        $("#map").focus();
+    }else{
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_espacio y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_espacio").click(function (e){
+    try{
+        //var confirmacion = window.confirm("¿Guardar la información del espacio?");
+        var confirmacion = true;
+        if (confirmacion) {
+            var aux;
+            var actualizarComponente = false;
+            var tipoComponente,conteoTipo;
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var nombreEdificio = $("#nombre_edificio").val();
+            var piso = $("#pisos").val();
+            var numeroEspacio = [];
+            var usoEspacio = $("#uso_espacio").val();
+            var alturaPared = $("#altura_pared").val();
+            var anchoPared = $("#ancho_pared").val();
+            var materialPared = $("#material_pared").val();
+            var largoTecho = $("#largo_techo").val();
+            var anchoTecho = $("#ancho_techo").val();
+            var materialTecho = $("#material_techo").val();
+            var largoPiso = $("#largo_piso").val();
+            var anchoPiso = $("#ancho_piso").val();
+            var materialPiso = $("#material_piso").val();
+            var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
+            var numero_espacio_padre = $("#espacio_padre").val();
+            var tipoIluminacion = [];
+            var cantidadIluminacion = [];
+            var tipoSuministroEnergia = [];
+            var tomacorriente = [];
+            var cantidadTomacorrientes = [];
+            var tipoPuerta = [];
+            var cantidadPuertas = [];
+            var materialPuerta = [];
+            var tipoCerradura = [];
+            var gatoPuerta = [];
+            var materialMarco = [];
+            var anchoPuerta = [];
+            var altoPuerta = [];
+            var tipoVentana = [];
+            var cantidadVentanas = [];
+            var materialVentana = [];
+            var anchoVentana = [];
+            var altoVentana = [];
+            var tipoInterruptor = [];
+            var cantidadInterruptores = [];
+            var planos = document.getElementById("planos[]");
+            var fotos = document.getElementById("fotos[]");
+            if (piso == 'sotano') {
+                piso = '0';
+            }
+            if (piso == 'terraza') {
+                piso = '-1';
+            }
+            var espacioExistente = {};
+            espacioExistente['verificar'] = true;
+            espacioExistente['espacioRepetido'] = false;
+            for (var i=0;i<=espaciosCont;i++) {
+                if(i==0){
+                    numeroEspacio[i] = $("#id_espacio").val();
+                }else{
+                    var control = false;
+                    for (var a=0;a<i;a++) {
+                        var aux = $("#id_espacio"+i).val();
+                        if (aux == numeroEspacio[a]) {
+                            control = true;
+                        }
+                    }
+                    if (control) {
+                        espacioExistente['espacioRepetido'] = true;
+                        espacioExistente['input'] = i;
+                        break;
+                    }else{
+                        numeroEspacio[i] = $("#id_espacio"+i).val();
+                    }
+                }
+                var comprobarEspacio = verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio[i]);
+                if (!comprobarEspacio.verificar){
+                    espacioExistente['verificar'] = false;
+                    if (i==0) {
+                        espacioExistente['input'] = "";
+                    }else{
+                        espacioExistente['input'] = i;
+                    }
+                    break;
+                }
+            }
+            if(espacioExistente['espacioRepetido']){
+                alert("ERROR. Hay dos o más espacios repetidos");
+                $("#id_espacio"+espacioExistente['input']).focus();
+            }else if (!espacioExistente['verificar']) {
+                alert("ERROR. El número de espacio ya esta registrado en el sistema");
+                $("#id_espacio"+espacioExistente['input']).focus();
+            }else{
+                for (var i=0;i<=iluminacionCont;i++) {
+                    if (i==0) {
+                        tipoIluminacion[i] = $("#tipo_iluminacion").val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion").val();
+                    }else{
+                        tipoIluminacion[i] = $("#tipo_iluminacion"+i).val();
+                        cantidadIluminacion[i] = $("#cantidad_iluminacion"+i).val();
+                    }
+                }
+                for (var i=0;i<=tomacorrientesCont;i++) {
+                    if (i==0) {
+                        tipoSuministroEnergia[i] = $("#tipo_suministro_energia").val();
+                        tomacorriente[i] = $("#tomacorriente").val();
+                        cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes").val();
+                    }else{
+                        tipoSuministroEnergia[i] = $("#tipo_suministro_energia"+i).val();
+                        tomacorriente[i] = $("#tomacorriente"+i).val();
+                        cantidadTomacorrientes[i] = $("#cantidad_tomacorrientes"+i).val();
+                    }
+                }
+                for (var i=0;i<=puertasCont;i++) {
+                    if (i==0) {
+                        tipoPuerta[i] = $("#tipo_puerta").val();
+                        cantidadPuertas[i] = $("#cantidad_puertas").val();
+                        materialPuerta[i] = $("#material_puerta").val();
+                        tipoCerradura[i] = $("#tipo_cerradura").val();
+                        gatoPuerta[i] = $('input[name="gato_puerta"]:checked').val();
+                        materialMarco[i] = $("#material_marco_puerta").val();
+                        anchoPuerta[i] = $("#ancho_puerta").val();
+                        altoPuerta[i] = $("#alto_puerta").val();
+                    }else{
+                        tipoPuerta[i] = $("#tipo_puerta"+i).val();
+                        cantidadPuertas[i] = $("#cantidad_puertas"+i).val();
+                        materialPuerta[i] = $("#material_puerta"+i).val();
+                        tipoCerradura[i] = $("#tipo_cerradura"+i).val();
+                        gatoPuerta[i] = $('input[name="gato_puerta"'+i+']:checked').val();
+                        materialMarco[i] = $("#material_marco_puerta"+i).val();
+                        anchoPuerta[i] = $("#ancho_puerta"+i).val();
+                        altoPuerta[i] = $("#alto_puerta"+i).val();
+                    }
+                }
+                for (var i=0;i<=ventanasCont;i++) {
+                    if (i==0) {
+                        tipoVentana[i] = $("#tipo_ventana").val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas").val();
+                        materialVentana[i] = $("#material_ventana").val();
+                        anchoVentana[i] = $("#ancho_ventana").val();
+                        altoVentana[i] = $("#alto_ventana").val();
+                    }else{
+                        tipoVentana[i] = $("#tipo_ventana"+i).val();
+                        cantidadVentanas[i] = $("#cantidad_ventanas"+i).val();
+                        materialVentana[i] = $("#material_ventana"+i).val();
+                        anchoVentana[i] = $("#ancho_ventana"+i).val();
+                        altoVentana[i] = $("#alto_ventana"+i).val();
+                    }
+                }
+                for (var i=0;i<=interruptoresCont;i++) {
+                    if (i==0) {
+                        tipoInterruptor[i] = $("#tipo_interruptor").val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores").val();
+                    }else{
+                        tipoInterruptor[i] = $("#tipo_interruptor"+i).val();
+                        cantidadInterruptores[i] = $("#cantidad_interruptores"+i).val();
+                    }
+                }
+                if (!validarCadena(nombreSede)) {
+                    alert('ERROR. Seleccione la sede a la que pertenece el espacio');
+                    $('#nombre_sede').focus();
+                }else if(!validarCadena(nombreCampus)){
+                    alert('ERROR. Seleccione el campus al que pertenece el espacio');
+                    $('#nombre_campus').focus();
+                }else if(!validarCadena(nombreEdificio)){
+                    alert('ERROR. Seleccione el edificio al que pertenece el espacio');
+                    $('#nombre_edificio').focus();
+                }else if(!validarCadena(piso)){
+                    alert('ERROR. Seleccione el piso al que pertenece el espacio');
+                    $('#pisos').focus();
+                }else if(!validarNumero(numeroEspacio)){
+                    alert('ERROR. Ingrese el número del espacio');
+                    $('#id_espacio').focus();
+                }else if(!validarCadena(usoEspacio)){
+                    alert('ERROR. Seleccione el uso que tiene el espacio');
+                    $('#uso_espacio').focus();
+                }/*else if(!validarNumero(alturaPared)){
+                    alert('ERROR. Ingrese la altura de las paredes del espacio');
+                    $('#altura_pared').focus();
+                }else if(!validarNumero(anchoPared)){
+                alert('ERROR. Ingrese la ancho de las paredes del espacio');
+                $('#ancho_pared').focus();
+            }else if(!validarCadena(materialPared)){
+            alert('ERROR. Seleccione el material de las paredes del espacio');
+            $('#material_pared').focus();
+        }else if(!validarNumero(largoTecho)){
+        alert('ERROR. Ingrese el largo del techo del espacio');
+        $('#largo_techo').focus();
+    }else if(!validarNumero(anchoTecho)){
+    alert('ERROR. Ingrese el largo del techo del espacio');
+    $('#ancho_techo').focus();
+}else if(!validarCadena(materialTecho)){
+alert('ERROR. Seleccione el material del techo del espacio');
+$('#material_techo').focus();
+}else if(!validarNumero(largoPiso)){
+alert('ERROR. Ingrese el largo del piso del espacio');
+$('#largo_piso').focus();
+}else if(!validarNumero(anchoPiso)){
+alert('ERROR. Ingrese el ancho del piso del espacio');
+$('#ancho_piso').focus();
+}else if(!validarNumero(materialPiso)){
+alert('ERROR. Seleccione el material del piso del espacio');
+$('#material_piso').focus();
+}else if ((aux = validarArregloCadenas(tipoIluminacion)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de lámpara que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de lámpara ('+aux+') que tiene el espacio');
+}
+$('#tipo_iluminacion'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(cantidadIluminacion)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el número de lámparas que tiene el espacio');
+}else{
+alert('ERROR. Ingrese el número de lámparas del tipo ('+aux+') que tiene el espacio');
+}
+$('#cantidad_iluminacion'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tipoSuministroEnergia)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de suministro de energía que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de suministro de energía ('+aux+') que tiene el espacio');
+}
+$('#tipo_suministro_energia'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tomacorriente)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el tipo de tomacorrientes que tiene el espacio');
+}else{
+alert('ERROR. Ingrese el tipo de tomacorrientes del tipo ('+aux+') que tiene el espacio');
+}
+$('#tomacorriente'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(cantidadTomacorrientes)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el número de tomacorrientes que tiene el espacio');
+}else{
+alert('ERROR. Ingrese el número de tomacorrientes del tipo ('+aux+') que tiene el espacio');
+}
+$('#cantidad_tomacorrientes'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tipoPuerta)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de puerta que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de puerta ('+aux+') que tiene el espacio');
+}
+$('#tipo_puerta'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(cantidadPuertas)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el número de puertas que tiene el espacio');
+}else{
+alert('ERROR. Ingrese el número de puertas del tipo ('+aux+') que tiene el espacio');
+}
+$('#cantidad_puertas'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(materialPuerta)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el material de la puerta que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el material de la puerta del tipo ('+aux+') que tiene el espacio');
+}
+$('#material_puerta'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tipoCerradura)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de cerradura de la puerta que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de cerradura de la puerta del tipo ('+aux+') que tiene el espacio');
+}
+$('#tipo_cerradura'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(gatoPuerta)) != null) {
+if (aux == '') {
+alert('ERROR. Especifique si la puerta tiene gato');
+}else{
+alert('ERROR. Especifique si la puerta del tipo ('+aux+') tiene gato');
+}
+$('#gato_puerta'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(materialMarco)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el material del marco la puerta que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el material del marco la puerta del tipo ('+aux+') que tiene el espacio');
+}
+$('#material_marco'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(anchoPuerta)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el ancho de las puertas del espacio');
+}else{
+alert('ERROR. Ingrese el ancho de las puertas del tipo ('+aux+') que tiene el espacio');
+}
+$('#ancho_puerta'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(altoPuerta)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el alto de las puertas del espacio');
+}else{
+alert('ERROR. Ingrese el alto de las puertas del tipo ('+aux+') que tiene el espacio');
+}
+$('#alto_puerta'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tipoVentana)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de ventana que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de ventana del tipo ('+aux+') que tiene el espacio');
+}
+$('#tipo_ventana'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(cantidadVentanas)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el número de ventanas del espacio');
+}else{
+alert('ERROR. Ingrese el número de de ventanas del tipo ('+aux+') que tiene el espacio');
+}
+$('#cantidad_ventanas'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(materialVentana)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el material de la ventana que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el material de la ventana del tipo ('+aux+') que tiene el espacio');
+}
+$('#material_ventana'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(anchoVentana)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el ancho de las ventanas del espacio');
+}else{
+alert('ERROR. Ingrese el ancho de las ventanas del tipo ('+aux+') que tiene el espacio');
+}
+$('#ancho_ventana'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(altoVentana)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el alto de las ventanas del espacio');
+}else{
+alert('ERROR. Ingrese el alto de las ventanas del tipo ('+aux+') que tiene el espacio');
+}
+$('#alto_ventana'+aux+'').focus();
+}else if ((aux = validarArregloCadenas(tipoInterruptor)) != null) {
+if (aux == '') {
+alert('ERROR. Seleccione el tipo de interruptores que tiene el espacio');
+}else{
+alert('ERROR. Seleccione el tipo de interruptores del tipo ('+aux+') que tiene el espacio');
+}
+$('#tipo_interruptor'+aux+'').focus();
+}else if ((aux = validarArregloNumeros(cantidadInterruptores)) != null) {
+if (aux == '') {
+alert('ERROR. Ingrese el número de interruptores que tiene el espacio');
+}else{
+alert('ERROR. Ingrese el número de interruptores del tipo ('+aux+') que tiene el espacio');
+}
+$('#cantidad_interruptores'+aux+'').focus();
+}*/else if(($('#divTieneEspacioPadre').is(':visible')) && !validarCadena(espacioPadre)){
+alert('ERROR. Especifique si el espacio está dentro de otro');
+$('#tiene_espacio_padre').focus();
+}else{
+    var informacion = {};
+    informacion['nombre_sede'] = nombreSede;
+    informacion['nombre_campus'] = nombreCampus;
+    informacion['nombre_edificio'] = nombreEdificio;
+    informacion['piso'] = piso;
+    informacion['numero_espacio'] = numeroEspacio;
+    informacion['uso_espacio'] = usoEspacio;
+    informacion['altura_pared'] = alturaPared;
+    informacion['ancho_pared'] = anchoPared;
+    informacion['material_pared'] = materialPared;
+    informacion['largo_techo'] = largoTecho;
+    informacion['ancho_techo'] = anchoTecho;
+    informacion['material_techo'] = materialTecho;
+    informacion['largo_piso'] = largoPiso;
+    informacion['ancho_piso'] = anchoPiso;
+    informacion['material_piso'] = materialPiso;
+    informacion['tipo_iluminacion'] = tipoIluminacion;
+    informacion['cantidad_iluminacion'] = cantidadIluminacion;
+    informacion['tipo_suministro_energia'] = tipoSuministroEnergia;
+    informacion['tomacorriente'] = tomacorriente;
+    informacion['cantidad_tomacorrientes'] = cantidadTomacorrientes;
+    informacion['tipo_puerta'] = tipoPuerta;
+    informacion['cantidad_puertas'] = cantidadPuertas;
+    informacion['material_puerta'] = materialPuerta;
+    informacion['tipo_cerradura'] = tipoCerradura;
+    informacion['gato_puerta'] = gatoPuerta;
+    informacion['material_marco'] = materialMarco;
+    informacion['ancho_puerta'] = anchoPuerta;
+    informacion['alto_puerta'] = altoPuerta;
+    informacion['tipo_ventana'] = tipoVentana;
+    informacion['cantidad_ventanas'] = cantidadVentanas;
+    informacion['material_ventana'] = materialVentana;
+    informacion['ancho_ventana'] = anchoVentana;
+    informacion['alto_ventana'] = altoVentana;
+    informacion['tipo_interruptor'] = tipoInterruptor;
+    informacion['cantidad_interruptores'] = cantidadInterruptores;
+    informacion['numero_espacio_padre'] = numero_espacio_padre;
+    var arregloFotos = new FormData();
+    var arregloPlanos = new FormData();
+    if (piso == 'sotano') {
+        informacion['piso'] = '0';
+    }
+    if (piso == 'terraza') {
+        informacion['piso'] = '-1';
+    }
+    if (fotos.files.length <= 20 || planos.files.length <= 5) {
+        for (var i=0;i<fotos.files.length;i++) {
+            var foto = fotos.files[i];
+            if (foto.size > 2000000) {
+                alert('La foto: "'+foto.name+"' es muy grande");
+            }else{
+                var nombreArchivo = foto.name;
+                if(nombreArchivo.length > 50){
+                    nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                }
+                arregloFotos.append('archivo'+i,foto,nombreArchivo);
+            }
+        }
+        for (var i=0;i<planos.files.length;i++) {
+            var plano = planos.files[i];
+            if (plano.size > 2000000) {
+                alert('El archivo: "'+plano.name+"' es muy grande");
+            }else{
+                var nombreArchivo = plano.name;
+                if(nombreArchivo.length > 50){
+                    nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
+                }
+                arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+            }
+        }
+        arregloFotos.append('espacio',JSON.stringify(informacion));
+        arregloPlanos.append('espacio',JSON.stringify(informacion));
+        dataEspacio['fotos'] = arregloFotos;
+        dataEspacio['planos'] = arregloPlanos;
+        dataEspacio = informacion;
+        $('#botones_punto_sanitario').hide();
+        $('#botones_lavamanos').hide();
+        $('#botones_orinal').hide();
+        if (usoEspacio == '1') { //Salón
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) salón(es)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>Capacidad del(os) salón(es)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿El(Los) salón(es) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Salón');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '2'){ //Auditorio
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) auditorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>Capacidad del(os) auditorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿El(Los) auditorio(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Auditorio');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '3'){ //Laboratorio
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>Capacidad del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿El(Los) laboratorio(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+            +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+            +'<div id="punto_sanitario">'
+            +'<div class="div_izquierda"><b>Tipo de punto sanitario del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del(os) laboratorio(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+            +'</div>'
+            +'</div>';
+            $('#botones_punto_sanitario').show();
+            añadirComponente("informacionEspacio",componente);
+            actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+            $('#guardar_espacio_adicional').val('Crear Laboratorio');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '4'){ //Sala de Cómputo
+            console.log("1");
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) sala(s) de cómputo<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿La(s) sala(s) de cómputo tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Sala');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '5'){ //Oficina
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) oficina(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿La(s) oficina(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Oficina');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '6'){ //Baño
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" required/><br>'
+            +'<div id="lavamanos">'
+            +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos" value="" required/><br>'
+            +'</div>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            var componente = '<br><div id="informacion2">'
+            +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" required></select><br>'
+            +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" required></select><br>'
+            +'<div class="div_izquierda"><b>¿El(Los) baño(s) tiene ducha?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="ducha" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="ducha" value="false">No</label>'
+            +'<div class="div_izquierda"><b>¿El(Los) baño(s) tiene lavatraperos?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false">No</label>'
+            +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" required/><br>'
+            +'<div id="orinal">'
+            +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales" value="" required/><br>'
+            +'</div>'
+            +'</div>';
+            $('#botones_lavamanos').show();
+            $('#botones_orinal').show();
+            añadirComponente("informacionEspacio2",componente);
+            actualizarSelectTipoObjeto("tipo_inodoro",0);
+            actualizarSelectTipoObjeto("tipo_orinal",0);
+            actualizarSelectTipoObjeto("tipo_lavamanos",0);
+            actualizarSelectTipoObjeto("tipo_divisiones",0);
+            actualizarSelectMaterial("material_divisiones",0);
+            $('#guardar_espacio_adicional').val('Crear Baño');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '7'){ //Cuarto Técnico
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) técnico(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'<div class="div_izquierda"><b>¿El(Los) cuarto(s) técnico(s) tiene punto(s) de videobeam?<font color="red">*</font>:</b></div>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true">S&iacute;</label>'
+            +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false">No</label>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Cuarto');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '8'){ //Bodega/Almacen
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) bodega(s) o almacén(es)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Bodega/Almacén');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '9'){ //Cuarto Eléctrico
+            guardarEspacio();
+        }else if(usoEspacio == '10'){ //Cuarto de Plantas
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) de Plantas<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Cuarto');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) cuarto(s) de Aires Acondicionados<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Cuarto');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área(s) deportiva cerrada<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Área');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '13'){ //Unidad de Almacenamiento de Residuos
+            guardarEspacio();
+        }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red del(os) centro(s) de datos/teléfono<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Centro de Datos');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '15'){ //Cafetería
+            guardarEspacio();
+        }else if(usoEspacio == '16'){ //Ascensor
+            guardarEspacio();
+        }else if(usoEspacio == '17'){ //Cuarto de Bombas
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+            +'<div id="punto_sanitario">'
+            +'<div class="div_izquierda"><b>Tipo de punto sanitario del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del(os) cuarto(s) de bombas<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+            +'</div>'
+            +'</div>';
+            $('#botones_punto_sanitario').show();
+            añadirComponente("informacionEspacio",componente);
+            actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+            $('#guardar_espacio_adicional').val('Crear Cuarto');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '18'){ //Buitrón
+            guardarEspacio();
+        }else if(usoEspacio == '19'){ //Cocineta
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" required/><br>'
+            +'<div id="punto_sanitario">'
+            +'<div class="div_izquierda"><b>Tipo de punto sanitario de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
+            +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario" required></select><br>'
+            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la(s) cocineta(s)<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios" value="" required/><br>'
+            +'</div>'
+            +'</div>';
+            $('#botones_punto_sanitario').show();
+            añadirComponente("informacionEspacio",componente);
+            actualizarSelectTipoObjeto("tipo_punto_sanitario",0);
+            $('#guardar_espacio_adicional').val('Crear Cocineta');
+            $('#divDialogCreacion').modal('show');
+        }else if(usoEspacio == '20'){ //Sala de Estudio
+            eliminarComponente("informacion");
+            eliminarComponente("informacion2");
+            var componente = '<div id="informacion">'
+            +'<div class="div_izquierda"><b>Cantidad de puntos de red de la(s) sala(s) de estudio<font color="red">*</font>:</b></div>'
+            +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" required/><br>'
+            +'</div>';
+            añadirComponente("informacionEspacio",componente);
+            $('#guardar_espacio_adicional').val('Crear Sala');
+            $('#divDialogCreacion').modal('show');
+        }
+    }else{
+        if (planos.files.length <= 5) {
+            alert("ERROR. El número máximo de planos por espacio es 5");
+            planos.focus();
+        }else{
+            alert("ERROR. El número máximo de fotos por espacio es 20");
+            fotos.focus();
+        }
+    }
+}
+}
+}
+}
+catch(ex){
+    console.log(ex);
+    alert("Ocurrió un error, por favor inténtelo nuevamente");
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_espacio_adicional y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_espacio_adicional").click(function (e){
+    var informacion = {};
+    var usoEspacio = $("#uso_espacio").val();
+    if (usoEspacio == '1') { //Salón
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var capacidad = $("#capacidad").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["capacidad"] = capacidad;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+    }else if(usoEspacio == '2'){ //Auditorio
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var capacidad = $("#capacidad").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["capacidad"] = capacidad;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+    }else if(usoEspacio == '3'){ //Laboratorio
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var capacidad = $("#capacidad").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+        var tipoPuntosSanitarios = [];
+        var cantidadPuntosSanitarios = [];
+        for (var i=0;i<=puntosSanitariosCont;i++) {
+            if (i==0) {
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
+            }else{
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+            }
+        }
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["capacidad"] = capacidad;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+        informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
+        informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
+        informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
+    }else if(usoEspacio == '4'){ //Sala de Cómputo
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var capacidad = $("#capacidad").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["capacidad"] = capacidad;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+    }else if(usoEspacio == '5'){ //Oficina
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+    }else if(usoEspacio == '6'){ //Baño
+        var tipoInodoro = $("#tipo_inodoro").val();
+        var cantidadInodoros = $("#cantidad_inodoros").val();
+        var tipoLavamanos = $("#tipo_lavamanos").val();
+        var cantidadLavamanos = $("#cantidad_lavamanos").val();
+        var tipoDivisiones = $("#tipo_divisiones").val();
+        var materialDivisiones = $("#material_divisiones").val();
+        var ducha = $('input[name="ducha"]:checked').val();
+        var lavatraperos = $('input[name="lavatraperos"]:checked').val();
+        var cantidadSifones = $("#cantidad_sifones").val();
+        var tipoLavamanos = [];
+        var cantidadLavamanos = [];
+        for (var i=0;i<=lavamanosCont;i++) {
+            if (i==0) {
+                tipoLavamanos[i] = $("#tipo_lavamanos").val();
+                cantidadLavamanos[i] = $("#cantidad_lavamanos").val();
+            }else{
+                tipoLavamanos[i] = $("#tipo_lavamanos"+i).val();
+                cantidadLavamanos[i] = $("#cantidad_lavamanos"+i).val();
+            }
+        }
+        var tipoOrinal = [];
+        var cantidadOrinales = [];
+        for (var i=0;i<=orinalesCont;i++) {
+            if (i==0) {
+                tipoOrinal[i] = $("#tipo_orinal").val();
+                cantidadOrinales[i] = $("#cantidad_orinales").val();
+            }else{
+                tipoOrinal[i] = $("#tipo_orinal"+i).val();
+                cantidadOrinales[i] = $("#cantidad_orinales"+i).val();
+            }
+        }
+        informacion["tipo_inodoro"] = tipoInodoro;
+        informacion["cantidad_inodoro"] = cantidadInodoros;
+        informacion["tipo_orinal"] = tipoOrinal;
+        informacion["cantidad_orinal"] = cantidadOrinales;
+        informacion["tipo_lavamanos"] = tipoLavamanos;
+        informacion["cantidad_lavamanos"] = cantidadLavamanos;
+        informacion["tipo_divisiones"] = tipoDivisiones;
+        informacion["material_divisiones"] = materialDivisiones;
+        informacion["ducha"] = ducha;
+        informacion["lavatraperos"] = lavatraperos;
+        informacion["cantidad_sifones"] = cantidadSifones;
+    }else if(usoEspacio == '7'){ //Cuarto Técnico
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        var puntoVideoBeam = $('input[name="punto_videobeam"]:checked').val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+        informacion["punto_videobeam"] = puntoVideoBeam;
+    }else if(usoEspacio == '8'){ //Bodega/Almacen
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }else if(usoEspacio == '10'){ //Cuarto de Plantas
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }else if(usoEspacio == '11'){ //Cuarto de Aires Acondicionados
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }else if(usoEspacio == '12'){ //Área Deportiva Cerrada
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }else if(usoEspacio == '14'){ //Centro de Datos/Teléfono
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }else if(usoEspacio == '17'){ //Cuarto de Bombas
+        var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+        var tipoPuntosSanitarios = [];
+        var cantidadPuntosSanitarios = [];
+        for (var i=0;i<=puntosSanitariosCont;i++) {
+            if (i==0) {
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
+            }else{
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+            }
+        }
+        informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
+        informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
+        informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
+    }else if(usoEspacio == '19'){ //Cocineta
+        var cantidadPuntosHidraulicos = $("#cantidad_puntos_hidraulicos").val();
+        var tipoPuntosSanitarios = [];
+        var cantidadPuntosSanitarios = [];
+        for (var i=0;i<=puntosSanitariosCont;i++) {
+            if (i==0) {
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario").val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios").val();
+            }else{
+                tipoPuntosSanitarios[i] = $("#tipo_punto_sanitario"+i).val();
+                cantidadPuntosSanitarios[i] = $("#cantidad_puntos_sanitarios"+i).val();
+            }
+        }
+        informacion["cantidad_puntos_hidraulicos"] = cantidadPuntosHidraulicos;
+        informacion["tipo_punto_sanitario"] = tipoPuntosSanitarios;
+        informacion["cantidad_puntos_sanitarios"] = cantidadPuntosSanitarios;
+    }else if(usoEspacio == '20'){ //Sala de Estudio
+        var cantidadPuntosRed = $("#cantidad_puntos_red").val();
+        informacion["cantidad_puntos_red"] = cantidadPuntosRed;
+    }
+    dataEspacio = $.extend(dataEspacio,informacion);
+    guardarEspacio();
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_tipo_material y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_tipo_material").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del tipo de material?");
+        if (confirmacion) {
+            var tipoMaterial = $("#tipo_material").val();
+            var nombreTipoMaterial = $("#nombre_tipo_material").val();
+            if(!validarCadena(tipoMaterial)){
+                alert("ERROR. Seleccione un tipo de material");
+                $("#tipo_material").focus();
+            }else if(!validarCadena(nombreTipoMaterial)){
+                alert("ERROR. Ingrese el nombre del tipo de material");
+                $("#nombre_tipo_material").focus();
+            }else{
+                var informacion = {};
+                informacion['tipo_material'] = limpiarCadena(tipoMaterial);
+                informacion['nombre_tipo_material'] = limpiarCadena(nombreTipoMaterial);
+                var resultado = guardarTipoMaterial(informacion);
+                mostrarMensaje(resultado.mensaje);
+                console.log(resultado);
+                if(resultado.verificar){
+                    $("#tipo_material").val("");
+                    $("#nombre_tipo_material").val("");
+                    window.scrollTo(0,0);
+                }else{
+                    $("#nombre_tipo_material").focus();
+                }
+            }
+        }
+    }
+    catch(ex){
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_tipo_objeto y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_tipo_objeto").click(function (e){
+    try{
+        var confirmacion = window.confirm("¿Guardar la información del tipo de objeto?");
+        if (confirmacion) {
+            var tipoObjeto = $("#tipo_objeto").val();
+            var nombreTipoObjeto = $("#nombre_tipo_objeto").val();
+            if(!validarCadena(tipoObjeto)){
+                alert("ERROR. Seleccione un tipo de objeto");
+                $("#tipo_objeto").focus();
+            }else if(!validarCadena(nombreTipoObjeto)){
+                alert("ERROR. Ingrese el nombre del tipo de objeto");
+                $("#nombre_tipo_objeto").focus();
+            }else{
+                var informacion = {};
+                informacion['tipo_objeto'] = limpiarCadena(tipoObjeto);
+                informacion['nombre_tipo_objeto'] = limpiarCadena(nombreTipoObjeto);
+                var resultado = guardarTipoObjeto(informacion);
+                mostrarMensaje(resultado.mensaje);
+                console.log(resultado);
+                if(resultado.verificar){
+                    $("#tipo_objeto").val("");
+                    $("#nombre_tipo_objeto").val("");
+                    window.scrollTo(0,0);
+                }else{
+                    $("#nombre_tipo_objeto").focus();
+                }
+            }
+        }
+    }
+    catch(ex){
+        console.log(ex);
+        alert("Ocurrió un error, por favor inténtelo nuevamente");
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_informacion_adicional y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_informacion_adicional").click(function (e){
+    $("#informacion-adicional").show();
+    $("#añadir_informacion_adicional").attr('disabled',true);
+    $('#eliminar_informacion_adicional').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_informacion_adicional y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_informacion_adicional").click(function (e){
+    $("#informacion-adicional").hide();
+    $("#eliminar_informacion_adicional").attr('disabled',true);
+    $('#añadir_informacion_adicional').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_iluminacion y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_iluminacion").click(function (e){
+    iluminacionCont++;
+    var componente = '<div id="iluminacion'+iluminacionCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("iluminacion",componente);
+    actualizarSelectTipoObjeto("tipo_iluminacion",iluminacionCont);
+    $('#eliminar_iluminacion').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_iluminacion y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_iluminacion").click(function (e){
+    eliminarComponente("iluminacion"+iluminacionCont);
+    iluminacionCont--;
+    if(iluminacionCont == 0){
+        $("#eliminar_iluminacion").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_tomacorriente y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_tomacorriente").click(function (e){
+    tomacorrientesCont++;
+    var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
+    +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
+    +'<option value="regulado">Regulado</option>'
+    +'<option value="no regulado">No Regulado</option>'
+    +'</select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_tomacorrientes" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("suministro_energia",componente);
+    actualizarSelectTipoObjeto("tipo_suministro_energia",tomacorrientesCont);
+    $('#eliminar_tomacorriente').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_tomacorriente y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_tomacorriente").click(function (e){
+    eliminarComponente("suministro_energia"+tomacorrientesCont);
+    tomacorrientesCont--;
+    if(tomacorrientesCont == 0){
+        $("#eliminar_tomacorriente").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_puerta y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_puerta").click(function (e){
+    puertasCont++;
+    var componente = '<div id="puerta'+puertasCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_puerta" id="tipo_puerta'+puertasCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puertas" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
+    +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="material_puerta" id="material_puerta'+puertasCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_cerradura" id="tipo_cerradura'+puertasCont+'" required></select><br>'
+    //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
+    //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
+    +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
+    +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
+    +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="material_marco_puerta" id="material_marco_puerta'+puertasCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_puerta" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
+    +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_puerta" id="alto_puerta'+puertasCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("puerta",componente);
+    actualizarSelectMaterial("material_marco_puerta",puertasCont);
+    actualizarSelectMaterial("material_puerta",puertasCont);
+    actualizarSelectTipoObjeto("tipo_puerta",puertasCont);
+    $('#eliminar_puerta').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_puerta y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_puerta").click(function (e){
+    eliminarComponente("puerta"+puertasCont);
+    puertasCont--;
+    if(puertasCont == 0){
+        $("#eliminar_puerta").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_ventana y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_ventana").click(function (e){
+    ventanasCont++;
+    var componente = '<div id="ventana'+ventanasCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_ventana" id="tipo_ventana'+ventanasCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_ventanas" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
+    +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="material_ventana" id="material_ventana'+ventanasCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="ancho_ventana" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
+    +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="alto_ventana" id="alto_ventana'+ventanasCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("ventana",componente);
+    actualizarSelectMaterial("material_ventana",ventanasCont);
+    actualizarSelectTipoObjeto("tipo_ventana",ventanasCont);
+    $('#eliminar_ventana').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_ventana y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_ventana").click(function (e){
+    eliminarComponente("ventana"+ventanasCont);
+    ventanasCont--;
+    if(ventanasCont == 0){
+        $("#eliminar_ventana").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_interruptor y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_interruptor").click(function (e){
+    interruptoresCont++;
+    var componente = '<div id="interruptor'+interruptoresCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("interruptor",componente);
+    actualizarSelectTipoObjeto("tipo_interruptor",interruptoresCont);
+    $('#eliminar_interruptor').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_interruptor y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_interruptor").click(function (e){
+    eliminarComponente("interruptor"+interruptoresCont);
+    interruptoresCont--;
+    if(interruptoresCont == 0){
+        $("#eliminar_interruptor").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_punto_sanitario").click(function (e){
+    puntosSanitariosCont++;
+    var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_punto_sanitario" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_sanitarios" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("punto_sanitario",componente);
+    actualizarSelectTipoObjeto("tipo_punto_sanitario",puntosSanitariosCont);
+    $('#eliminar_punto_sanitario').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_punto_sanitario").click(function (e){
+    eliminarComponente("punto_sanitario"+puntosSanitariosCont);
+    puntosSanitariosCont--;
+    if(puntosSanitariosCont == 0){
+        $("#eliminar_punto_sanitario").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_punto_sanitario y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_orinal").click(function (e){
+    orinalesCont++;
+    var componente = '<div id="orinal'+orinalesCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" required/><br>'
+    +'</div>';
+    añadirComponente("orinal",componente);
+    actualizarSelectTipoObjeto("tipo_orinal",orinalesCont);
+    $('#eliminar_orinal').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_punto_sanitario y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_orinal").click(function (e){
+    eliminarComponente("orinal"+orinalesCont);
+    orinalesCont--;
+    if(orinalesCont == 0){
+        $("#eliminar_orinal").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton añadir_lavamanos y se
+* realiza la operacion correspondiente.
+*/
+$("#añadir_lavamanos").click(function (e){
+    lavamanosCont++;
+    var componente = '<div id="lavamanos'+lavamanosCont+'">'
+    +'<div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
+    +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+    +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
+    +'</div>'
+    +'</div>';
+    añadirComponente("lavamanos",componente);
+    actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
+    $('#eliminar_lavamanos').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_lavamanos y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_lavamanos").click(function (e){
+    eliminarComponente("lavamanos"+lavamanosCont);
+    lavamanosCont--;
+    if(lavamanosCont == 0){
+        $("#eliminar_lavamanos").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton agregar_espacio y se
+* realiza la operacion correspondiente.
+*/
+$("#agregar_espacio").click(function (e){
+    $("#divBotonesInformacionAdicional").hide();
+    $("#informacion-adicional").hide();
+    espaciosCont++;
+    var componente = '<div id="espacio'+espaciosCont+'">'
+    +'<br><div class="input-group">'
+    +'<input class="form-control formulario" type="number" min="1" name="id_espacio" id="id_espacio'+espaciosCont+'" value="" placeholder="Ej: 1001" required/>'
+    +'<span class="input-group-btn">'
+    +'</span>'
+    +'</div>'
+    +'</div>';
+    añadirComponente("espacio",componente);
+    $('#eliminar_espacio').removeAttr("disabled");
+});
+
+/**
+* Se captura el evento cuando se da click en el boton eliminar_espacio y se
+* realiza la operacion correspondiente.
+*/
+$("#eliminar_espacio").click(function (e){
+    eliminarComponente("espacio"+espaciosCont);
+    espaciosCont--;
+    if(espaciosCont == 0){
+        $("#divBotonesInformacionAdicional").show();
+        $("#eliminar_espacio").attr('disabled',true);
+    }
+});
+
+/**
+* Se captura el evento cuando se cierra el modal divDialogCreacion y se
+* realiza la operacion correspondiente.
+*/
+$('#divDialogCreacion').on('hidden.bs.modal', function () {
+    puntosSanitariosCont = 0;
+    lavamanosCont = 0;
+    orinalesCont = 0;
+    $("#eliminar_lavamanos").attr('disabled',true);
+    $("#eliminar_punto_sanitario").attr('disabled',true);
+    $("#eliminar_orinal").attr('disabled',true);
+});
+
+/**
+* Se captura el evento cuando se modifica el selector tipo_iluminacion y se
+* realiza la operacion correspondiente.
+*/
+$("input[name=tipo_iluminacion]").change(function (e){
+    var tipoIluminacion = $("input[name=tipo_iluminacion]").val();
+    console.log(tipoIluminacion);
+    /*for (var i = 1; i < iluminacionCont i++) {
+    $("#tipo_iluminacion"+iluminacionCont).val();
+}*/
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_capacidad_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_capacidad_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar la capacidad de aires acondicionados?");
+    if (confirmacion) {
+        var capacidad = limpiarCadena($("#capacidad").val());
+        if (validarCadena(capacidad)) {
+            var informacion = {};
+            informacion["capacidad"] = capacidad;
+            var data = guardarObjeto("capacidad_aire",informacion);
+            alert(data.mensaje);
+            if (data.verificar) {
+                $("#capacidad").val("");
+            }
+        }else{
+            alert("ERROR. Ingrese la capacidad de aires acondicionados");
+            $("#capacidad").focus();
+        }
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_marca_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_marca_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar la marca de aires acondicionados?");
+    if (confirmacion) {
+        var capacidad = limpiarCadena($("#nombre_marca").val());
+        if (validarCadena(capacidad)) {
+            var informacion = {};
+            informacion["nombre"] = capacidad;
+            var data = guardarObjeto("marca_aire",informacion);
+            alert(data.mensaje);
+            console.log(data);
+            if (data.verificar) {
+                $("#nombre_marca").val("");
+            }
+        }else{
+            alert("ERROR. Ingrese la marca de aires acondicionados");
+            $("#nombre_marca").focus();
+        }
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_tipo_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_tipo_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar el tipo de aires acondicionados?");
+    if (confirmacion) {
+        var tipo = limpiarCadena($("#nombre_tipo").val());
+        if (validarCadena(tipo)) {
+            var informacion = {};
+            informacion["tipo_objeto"] = "tipo_aire";
+            informacion["nombre_tipo_objeto"] = tipo;
+            var data = guardarTipoObjeto(informacion);
+            alert(data.mensaje);
+            console.log(data);
+            if (data.verificar) {
+                $("#nombre_tipo").val("");
+            }
+        }else{
+            alert("ERROR. Ingrese el tipo de aires acondicionados");
+            $("#nombre_tipo").focus();
+        }
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_tecnologia_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_tecnologia_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar la tecnología de aires acondicionados?");
+    if (confirmacion) {
+        var tecnologia = limpiarCadena($("#nombre_tecnologia").val());
+        if (validarCadena(tecnologia)) {
+            var informacion = {};
+            informacion["tipo_objeto"] = "tipo_tecnologia_aire";
+            informacion["nombre_tipo_objeto"] = tecnologia;
+            var data = guardarTipoObjeto(informacion);
+            alert(data.mensaje);
+            console.log(data);
+            if (data.verificar) {
+                $("#nombre_tecnologia").val("");
+            }
+        }else{
+            alert("ERROR. Ingrese el nombre de la tecnología de aires acondicionados");
+            $("#nombre_tecnologia").focus();
+        }
+    }
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
+    if (confirmacion) {
+        var numeroInventario = limpiarCadena($("#numero_inventario").val());
+        var sede = $("#nombre_sede").val();
+        var campus = $("#nombre_campus").val();
+        var edificio = $("#nombre_edificio").val();
+        var espacio = $("#id_espacio").val();
+        var capacidad = $("#capacidad_aire").val();
+        var marca = $("#marca_aire").val();
+        var tipo = $("#tipo_aire").val();
+        var tecnologia = $("#tipo_tecnologia_aire").val();
+        var fechaInstalacion = $("#fecha_instalacion").val();
+        var instalador = limpiarCadena($("#instalador").val());
+        var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
+        var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
+        var fotos = document.getElementById("fotos[]");
+        if (fotos.files.length <= 20) {
+            var arregloFotos = new FormData();
+            for (var i=0;i<fotos.files.length;i++) {
+                var foto = fotos.files[i];
+                if (foto.size > 2000000) {
+                    alert('La foto: "'+foto.name+"' es muy grande");
+                }else{
+                    var nombreArchivo = foto.name;
+                    if(nombreArchivo.length > 50){
+                        nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                    }
+                    arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                }
+            }
+            /*if (!validarCadena(numeroInventario)) {
+            alert("ERROR. Ingrese el número de inventario del aire acondicionado");
+            $("#numero_inventario").focus();
+        }else */if(!validarCadena(sede)){
+        alert("ERROR. Seleccione la sede donde está el aire acondicionado");
+        $("#nombre_sede").focus();
+    }else if(!validarCadena(campus)){
+        alert("ERROR. Seleccione el campus donde está el aire acondicionado");
+        $("#nombre_campus").focus();
+    }else if(!validarCadena(edificio)){
+        alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
+        $("#nombre_edificio").focus();
+    }else if(!validarCadena(espacio)){
+        alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
+        $("#id_espacio").focus();
+    }else if(!validarCadena(marca)){
+        alert("ERROR. Seleccione la marca del aire acondicionado");
+        $("#marca_aire").focus();
+    }else if(!validarCadena(tipo)){
+        alert("ERROR. Seleccione el tipo del aire acondicionado");
+        $("#tipo_aire").focus();
+    }else if(!validarCadena(tecnologia)){
+        alert("ERROR. Seleccione la tecnolodía del aire acondicionado");
+        $("#tipo_tecnologia_aire").focus();
+    }else if(!validarCadena(capacidad)){
+        alert("ERROR. Seleccione la capacidad del aire acondicionado");
+        $("#capacidad_aire").focus();
+    }else{
+        var informacion = {};
+        informacion["numero_inventario"] = numeroInventario;
+        informacion["sede"] = sede;
+        informacion["campus"] = campus;
+        informacion["edificio"] = edificio;
+        informacion["espacio"] = espacio;
+        informacion["capacidad"] = capacidad;
+        informacion["marca"] = marca;
+        informacion["tipo"] = tipo;
+        informacion["tecnologia_aire"] = tecnologia;
+        informacion["fecha_instalacion"] = fechaInstalacion;
+        informacion["instalador"] = instalador;
+        informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
+        informacion["ubicacion_condensadora"] = ubicacionCondensadora;
+        var data = guardarObjeto("aire_acondicionado",informacion);
+        var id_aire = "";
+        $.each(data.verificar, function(index, record) {
+            if($.isNumeric(index)) {
+                id_aire = record.id_aire;
+            }
+        });
+        console.log(data);
+        console.log(informacion);
+        if (data.verificar != false) {
+            informacion["id_aire"] = id_aire;
+            arregloFotos.append('aire',JSON.stringify(informacion));
+            var resultadoFotos = guardarFotos("aire",arregloFotos);
+            console.log(resultadoFotos);
+            var mensaje = "";
+            mensaje += data.mensaje;
+            if (resultadoFotos.length != 0) {
+                for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                    if (resultadoFotos.mensaje[i].indexOf("Error: SQL") == -1) {
+                        if (!resultadoFotos.verificar[i]) {
+                            if (mensaje == "") {
+                                mensaje += resultadoFotos.mensaje[i];
+                            }else{
+                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                            }
+                        }
+                    }
+                }
+            }
+            if (mensaje.substring(0,1) != "") {
+                alert(mensaje);
+            }
+            $("#numero_inventario").val("");
+            $("#nombre_sede").val("").change();
+            $("#nombre_campus").empty();
+            $("#nombre_campus").val("");
+            $("#nombre_edificio").val("");
+            $("#pisos").val("");
+            $("#id_espacio").val("");
+            $("#marca_aire").val("");
+            $("#tipo_aire").val("");
+            $("#capacidad_aire").val("");
+            $("#tipo_tecnologia_aire").val("");
+            $("#fecha_instalacion").val("");
+            $("#instalador").val("");
+            $("#tipo_periodicidad_mantenimiento").val("");
+            $("#ubicacion_condensadora").val("");
+            fotos.value = "";
+            window.scrollTo(0,0);
+        }else{
+            alert(data.mensaje);
+            $("#numero_inventario").focus();
+        }
+    }
+}else{
+    if (planos.files.length <= 5) {
+        alert("ERROR. El número máximo de planos por cubierta es 5");
+        planos.focus();
+    }else{
+        alert("ERROR. El número máximo de fotos por cubierta es 20");
+        fotos.focus();
+    }
+}
+}
+});
+
+/**
+* Se captura el evento cuando se da click en el boton guardar_mantenimiento_aire y se
+* realiza la operacion correspondiente.
+*/
+$("#guardar_mantenimiento_aire").click(function (e){
+    var confirmacion = window.confirm("¿Guardar la información del mantenimiento al aire acondicionado?");
+    if (confirmacion) {
+        var numeroInventario = limpiarCadena($("#numero_inventario").val());
+        var numeroOrden = limpiarCadena($("#numero_orden").val());
+        var descripcionTrabajo = limpiarCadena($("#descripcion_trabajo").val());
+        if (!validarCadena(numeroInventario)) {
+            alert("ERROR. Ingrese el número de inventario del aire acondicionado");
+            $("#numero_inventario").focus();
+        }else if(!validarCadena(numeroOrden)){
+            alert("ERROR. Ingrese el número de la orden de mantenimiento");
+            $("#numero_orden").focus();
+        }else if(!validarCadena(descripcionTrabajo)){
+            alert("ERROR. Ingrese una descripción del trabajo realizado en el aire acondicionado");
+            $("#descripcion_trabajo").focus();
+        }else{
+            var informacion = {};
+            informacion["numero_inventario"] = numeroInventario;
+            informacion["numero_orden"] = numeroOrden;
+            informacion["descripcion_trabajo"] = descripcionTrabajo;
+            var data = guardarObjeto("mantenimiento_aire",informacion);
+            alert(data.mensaje);
+            console.log(data);
+            if (data.verificar) {
+                $("#numero_inventario").val("");
+                $("#numero_orden").val("");
+                $("#descripcion_trabajo").val("");
+                window.scrollTo(0,0);
+            }
+        }
+    }
+});
 });
