@@ -495,6 +495,37 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de un número de inventario.
+     * @param {array} informacion, arreglo que contiene el número de inventario.
+     * @returns {data} object json
+    **/
+    function verificarNumeroInventario(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=verificar_numero_inventario_aire",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que realiza una consulta de las sedes presentes en el sistema
      * @returns {data} object json
     **/
@@ -4606,6 +4637,7 @@ $(document).ready(function() {
                  idAire = record.id_aire;
                  $("#id_espacio").val(record.id_espacio);
                  $("#numero_inventario").val(record.numero_inventario);
+                 $("#numero_inventario").attr('name',record.numero_inventario);
                  $("#capacidad_aire").val(record.capacidad);
                  $("#capacidad_aire").attr('name',record.capacidad);
                  $("#marca_aire").val(record.marca);
@@ -4614,10 +4646,8 @@ $(document).ready(function() {
                  $("#tipo_aire").attr('name',record.tipo);
                  $("#tipo_tecnologia_aire").val(record.tecnologia);
                  $("#tipo_tecnologia_aire").attr('name',record.tecnologia);
-                 fecha_instalacion = record.fecha_instalacion;
-                 fecha_instalacion = fecha_instalacion.substring(0,10);
-                 $("#fecha_instalacion").val(fecha_instalacion);
-                 $("#fecha_instalacion").attr('name',fecha_instalacion);
+                 $("#fecha_instalacion").val(record.fecha_instalacion);
+                 $("#fecha_instalacion").attr('name',record.fecha_instalacion);
                  $("#instalador").val(record.instalador);
                  $("#instalador").attr('name',record.instalador);
                  $("#tipo_periodicidad_mantenimiento").val(record.periodicidad_mantenimiento);
@@ -5571,6 +5601,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
      */
     $("#modificar_aire").click(function (e){
+        $("#numero_inventario").removeAttr("disabled");
         $("#marca_aire").removeAttr("disabled");
         $("#tipo_aire").removeAttr("disabled");
         $("#tipo_tecnologia_aire").removeAttr("disabled");
@@ -10528,6 +10559,123 @@ $(document).ready(function() {
                     $("#tipo_objeto_search").val("seleccionar").change();
                     $("#divDialogConsulta").modal('hide');
                 }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el boton guardar_modificaciones_aire y se
+     * realiza la operacion correspondiente.
+     */
+    $("#guardar_modificaciones_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
+        if (confirmacion) {
+            var informacion = {};
+            var idAire = limpiarCadena($("#id_aire").val());
+            var numeroInventario = limpiarCadena($("#numero_inventario").val());
+            var numeroInventarioAnterior = limpiarCadena($("#numero_inventario").attr('name'));
+            var marcaAire = limpiarCadena($("#marca_aire").val());
+            var tipoAire = $("#tipo_aire").val();
+            var tecnologiaAire = $("#tipo_tecnologia_aire").val();
+            var capacidadAire = $("#capacidad_aire").val();
+            var fechaInstalacion = $("#fecha_instalacion").val();
+            var instalador = limpiarCadena($("#instalador").val());
+            var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
+            var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
+            var fotos = document.getElementById("fotos[]");
+            var aux = (numeroFotos-1) + fotos.files.length;
+            if (aux <= 20) {
+                var arregloFotos = new FormData();
+                for (var i=0;i<fotos.files.length;i++) {
+                    var foto = fotos.files[i];
+                    if (foto.size > 2000000) {
+                        alert('La foto: "'+foto.name+"' es muy grande");
+                    }else{
+                        var nombreArchivo = foto.name;
+                        if(nombreArchivo.length > 50){
+                            nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                        }
+                        arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                    }
+                }
+                if (!validarCadena(marcaAire)) {
+                    alert("ERROR. Seleccione la marca del aire acondicionado");
+                    $("#marca_aire").focus();
+                }else if (!validarCadena(tipoAire)) {
+                    alert("ERROR. Seleccione el tipo del aire acondicionado");
+                    $("#tipo_aire").focus();
+                }else if (!validarCadena(tecnologiaAire)) {
+                    alert("ERROR. Seleccione la tecnología del aire acondicionado");
+                    $("#tipo_tecnologia_aire").focus();
+                }else if (!validarCadena(capacidadAire)) {
+                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
+                    $("#capacidad_aire").focus();
+                }else{
+                    var numeroInventarioRepetido = false;
+                    var conteo = 0;
+                    if ((numeroInventario != "") && (numeroInventario != numeroInventarioAnterior)) {
+                        informacion["numero_inventario"] = numeroInventario;
+                        numeroInventarioRepetido = verificarNumeroInventario(informacion);
+                        console.log(numeroInventarioRepetido);
+                        $.each(numeroInventarioRepetido, function(index, record) {
+                            if($.isNumeric(index)) {
+                               conteo = record.count;
+                            }
+                        });
+                    }
+                    if (conteo == 0) {
+                        informacion["id_aire"] = idAire;
+                        informacion["numero_inventario"] = numeroInventario;
+                        informacion["marca_aire"] = marcaAire;
+                        informacion["tipo_aire"] = tipoAire;
+                        informacion["tipo_tecnologia_aire"] = tecnologiaAire;
+                        informacion["capacidad_aire"] = capacidadAire;
+                        informacion['fecha_instalacion'] = fechaInstalacion;
+                        informacion['instalador'] = instalador;
+                        informacion['tipo_periodicidad_mantenimiento'] = periodicidadMantenimiento;
+                        informacion['ubicacion_condensadora'] = ubicacionCondensadora;
+                        var arregloFotosEliminar = {};
+                        arregloFotosEliminar["id_aire"] = idAire;
+                        arregloFotosEliminar["nombre"] = fotosEliminar;
+                        arregloFotosEliminar["tipo"] = "foto";
+                        arregloFotos.append("aire",JSON.stringify(informacion));
+                        var data = modificarObjeto("aire",informacion);
+                        var dataEliminarFotos = eliminarObjeto("archivo_aire",arregloFotosEliminar);
+                        var resultadoFotos = guardarFotos("aire",arregloFotos);
+                        console.log(informacion);
+                        console.log(data);
+                        console.log(dataEliminarFotos);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (resultadoFotos.length != 0) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,1) != "") {
+                            alert(mensaje);
+                        }else{
+                            if(data.verificar){
+                                alert(data.mensaje);
+                                $("#sede_search").val("").change();
+                                $("#divDialogConsulta").modal('hide');
+                                fotos.value = "";
+                            }
+                        }
+                    }else{
+                        alert("ERROR. El número de inventario ya se encuentra registrado en el sistema");
+                        $("#numero_inventario").focus();
+                    }
+                }
+            }else{
+                alert("ERROR. El número máximo de fotos es 20");
+                fotos.focus();
             }
         }
     });

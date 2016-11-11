@@ -988,7 +988,6 @@ class modelo_modificacion {
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"sotano",$sotano_anterior,$sotano);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"terraza",$terraza_anterior,$terraza);
                 if (strcasecmp($material_fachada,'') != 0)
-                    $campos = $campos.", id_material_fachada = '".$material_fachada."'";
                     $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"id_material_fachada",$material_fachada_anterior,$material_fachada);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"ancho_fachada",$ancho_fachada_anterior,$ancho_fachada);
                 $this->registrarModificacion("edificio",$id_sede."-".$id_campus."-".$id,"alto_fachada",$alto_fachada_anterior,$alto_fachada);
@@ -2440,6 +2439,74 @@ class modelo_modificacion {
         }
     }
 
+    /**
+     * Función que permite modificar un aire acondicionado.
+     * @param string $id_aire, id del aire.
+     * @param string $numero_inventario, numero de inventario del aire.
+     * @param string $marca_aire, marca del aire.
+     * @param string $tipo_aire, tipo de aire.
+     * @param string $tipo_tecnologia_aire, tipo de tecnología del aire.
+     * @param string $capacidad_aire, capacidad del aire.
+     * @param string $fecha_instalacion, fecha de instalación del aire.
+     * @param string $instalador, instalador del aire.
+     * @param string $tipo_periodicidad_mantenimiento, periodicidad de mantenimiento del aire.
+     * @param string $ubicacion_condensadora, ubicación de la unidad condensadora del aire.
+     * @return array
+     */
+    public function modificarAire($id_aire,$numero_inventario,$marca_aire,$tipo_aire,$tipo_tecnologia_aire,$capacidad_aire,$fecha_instalacion,$instalador,$tipo_periodicidad_mantenimiento,$ubicacion_condensadora){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $marca_aire = htmlspecialchars(trim($marca_aire));
+        $tipo_aire = htmlspecialchars(trim($tipo_aire));
+        $tipo_tecnologia_aire = htmlspecialchars(trim($tipo_tecnologia_aire));
+        $capacidad_aire = htmlspecialchars(trim($capacidad_aire));
+        $fecha_instalacion = htmlspecialchars(trim($fecha_instalacion));
+        $instalador = htmlspecialchars(trim($instalador));
+        $tipo_periodicidad_mantenimiento = htmlspecialchars(trim($tipo_periodicidad_mantenimiento));
+        $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
+        $campos = "numero_inventario = '".$numero_inventario."', marca = '".$marca_aire."', tipo = '".$tipo_aire."', tecnologia = '".$tipo_tecnologia_aire."', capacidad = '".$capacidad_aire."', fecha_instalacion = '".$fecha_instalacion."', instalador = '".$instalador."', ubicacion_condensadora = '".$ubicacion_condensadora."'";
+        if (strcasecmp($tipo_periodicidad_mantenimiento,'') != 0)
+            $campos = $campos.", periodicidad_mantenimiento = '".$tipo_periodicidad_mantenimiento."'";
+        $sql = "UPDATE aire_acondicionado SET $campos WHERE id_aire = '".$id_aire."';";
+        $data = $this->consultarCampoAire($id_aire,"aire");
+        foreach ($data as $clave => $valor) {
+            $numero_inventario_anterior = $valor['numero_inventario'];
+            $marca_aire_anterior = $valor['marca'];
+            $tipo_aire_anterior = $valor['tipo'];
+            $tipo_tecnologia_aire_anterior = $valor['tecnologia'];
+            $capacidad_aire_anterior = $valor['capacidad'];
+            $fecha_instalacion_anterior = substr($valor['fecha_instalacion'], 0, 10);
+            $instalador_anterior = $valor['instalador'];
+            $tipo_periodicidad_mantenimiento_anterior = $valor['periodicidad_mantenimiento'];
+            $ubicacion_condensadora_anterior = $valor['ubicacion_condensadora'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"numero_inventario",$numero_inventario_anterior,$numero_inventario);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"marca",$marca_aire_anterior,$marca_aire);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"tipo",$tipo_aire_anterior,$tipo_aire);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"tecnologia",$tipo_tecnologia_aire_anterior,$tipo_tecnologia_aire);
+                if (strcasecmp($tipo_periodicidad_mantenimiento,'') != 0)
+                    $this->registrarModificacion("aire_acondicionado",$id_aire,"periodicidad_mantenimiento",$tipo_periodicidad_mantenimiento_anterior,$tipo_periodicidad_mantenimiento);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"capacidad",$capacidad_aire_anterior,$capacidad_aire);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"fecha_instalacion",$fecha_instalacion_anterior,$fecha_instalacion);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"instalador",$instalador_anterior,$instalador);
+                $this->registrarModificacion("aire_acondicionado",$id_aire,"ubicacion_condensadora",$ubicacion_condensadora_anterior,$ubicacion_condensadora);
+                $GLOBALS['mensaje'] = "La información del aire acondicionado se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
 
     /**
      * Función que registra una modificación en una base de datos.
@@ -2475,6 +2542,29 @@ class modelo_modificacion {
                 }
             }
         }
+    }
+
+    /**
+     * Función que permite consultar el valor de un campo de la tabla aire_acondicionado.
+     * @param string $id_aire, id del aire acondicionado.
+     * @return array
+     */
+    public function consultarCampoAire($id_aire){
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
     }
 
     /**

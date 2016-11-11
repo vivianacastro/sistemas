@@ -1898,7 +1898,7 @@ class controlador_consultas
                     'marca' => $valor['marca'],
                     'tipo' => $valor['tipo'],
                     'tecnologia' => $valor['tecnologia'],
-                    'fecha_instalacion' => $valor['fecha_instalacion'],
+                    'fecha_instalacion' => substr($valor['fecha_instalacion'],0,10),
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
@@ -1939,7 +1939,7 @@ class controlador_consultas
                     'marca' => $valor['marca'],
                     'tipo' => $valor['tipo'],
                     'tecnologia' => $valor['tecnologia'],
-                    'fecha_instalacion' => $valor['fecha_instalacion'],
+                    'fecha_instalacion' => substr($valor['fecha_instalacion'],0,10),
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
@@ -3255,6 +3255,32 @@ class controlador_consultas
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre' => $valor['nombre'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite verificar si un numero de inventario ya
+     * está asignado a un aire acondicionado.
+    */
+    public function verificar_numero_inventario_aire() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->verificarNumeroInventarioAire($info["numero_inventario"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'count' => $valor['count'],
+                    'numero_inventario' => $valor['numero_inventario'],
                 );
                 array_push($result, $arrayAux);
             }

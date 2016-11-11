@@ -5329,3 +5329,16 @@
 [10-Nov-2016 09:57:41 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 2109
 [10-Nov-2016 09:57:41 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1926
 [10-Nov-2016 10:57:11 America/Bogota] PHP Notice:  Undefined index: aire_acondicionado in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1434
+[11-Nov-2016 09:05:20 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:06:07 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:07:30 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:08:34 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:09:12 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2553
+[11-Nov-2016 09:09:51 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2553
+[11-Nov-2016 09:11:07 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:12:34 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:13:41 America/Bogota] PHP Notice:  Undefined index: id_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3279
+[11-Nov-2016 09:14:22 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2553
+[11-Nov-2016 09:20:03 America/Bogota] PHP Parse error:  syntax error, unexpected ''instalador'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1902
+[11-Nov-2016 09:20:05 America/Bogota] PHP Parse error:  syntax error, unexpected ''instalador'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1902
+[11-Nov-2016 09:22:59 America/Bogota] PHP Notice:  Undefined variable: id in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2553

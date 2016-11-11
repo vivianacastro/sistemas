@@ -2299,6 +2299,32 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite verificar si un número de inventario ya está registrado.
+     * @param string $numero_inventario, número de inventario a consultar.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function verificarNumeroInventarioAire($numero_inventario){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $sql = "SELECT count(numero_inventario), numero_inventario FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."' GROUP BY numero_inventario;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Número Inventario Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Número Inventario Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un espacio en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
      * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.
