@@ -280,7 +280,8 @@ $map = array(
         'aires_consultar_marca_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marca_aire'),
         'aires_consultar_tipo_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_aire'),
         'aires_consultar_tecnologia_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tecnologia_aire'),
-        'aires_consultar_mantenimiento_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mantenimiento_aire'),
+        'aires_consultar_mantenimiento_aire_id_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mantenimiento_aire_id_aire'),
+        'aires_consultar_mantenimiento_aire_numero_orden' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mantenimiento_aire_numero_orden'),
         //Acciones de creación
         'guardar_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_aire'),
         'guardar_fotos_aire' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_aire'),
@@ -303,6 +304,8 @@ $map = array(
         'consultar_informacion_marca_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_marca_aires'),
         'consultar_informacion_tipo_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_tipo_aires'),
         'consultar_informacion_tecnologia_aires' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_tecnologia_aires'),
+        'consultar_informacion_mantenimiento_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_mantenimiento_aire'),
+        'consultar_mantenimientos_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mantenimientos_aire'),
         'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
         //Acciones de modificación

@@ -8,9 +8,9 @@ $(document).ready(function() {
     var URLactual = window.location;
 
     /**
-    * Función que se ejecuta al momento que se accede a la página que lo tiene
-    * incluido.
-    * @returns {undefined}
+     * Función que se ejecuta al momento que se accede a la página que lo tiene
+     * incluido.
+     * @returns {undefined}
     */
     (function (){
         if(URLactual['href'].indexOf('crear_campus') >= 0){
@@ -114,9 +114,9 @@ $(document).ready(function() {
     })();
 
     /**
-    * Función que obtiene las coordenadas donde se encuentra el usuario
-    * y actualiza el mapa.
-    * @returns {undefined}
+     * Función que obtiene las coordenadas donde se encuentra el usuario
+     * y actualiza el mapa.
+     * @returns {undefined}
     */
     function getCoordenadas(){
         var coords = {};
@@ -133,8 +133,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que carga el mapa y lo configura.
-    * @returns {undefined}
+     * Función que carga el mapa y lo configura.
+     * @returns {undefined}
     */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -196,10 +196,10 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite crear un tipo de objeto.
-    * @param {string} tipo_objeto, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de los espacios).
-    * @param {array} informacion, información del tipo de objeto.
-    * @returns {data}
+     * Función que permite crear un tipo de objeto.
+     * @param {string} tipo_objeto, tipo de objeto a guardar (sede, campus, edificio, etc., a excepción de los espacios).
+     * @param {array} informacion, información del tipo de objeto.
+     * @returns {data}
     */
     function guardarObjeto(tipo_objeto,informacion){
         var dataResult;
@@ -229,9 +229,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite crear un espacio.
-    * @param {array} informacion, información del espacio.
-    * @returns {data}
+     * Función que permite crear un espacio.
+     * @param {array} informacion, información del espacio.
+     * @returns {data}
     */
     function guardarEspacio(){
         var jObject = JSON.stringify(dataEspacio);
@@ -373,9 +373,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite consultar los espacios existentes en un piso de un edificio.
-    * @param {array} informacion, información del tipo de material.
-    * @returns {data}
+     * Función que permite consultar los espacios existentes en un piso de un edificio.
+     * @param {array} informacion, información del tipo de material.
+     * @returns {data}
     */
     function buscarEspacios(informacion){
         var dataResult;
@@ -405,9 +405,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite crear un tipo de material.
-    * @param {array} informacion, información del tipo de material.
-    * @returns {data}
+     * Función que permite crear un tipo de material.
+     * @param {array} informacion, información del tipo de material.
+     * @returns {data}
     */
     function guardarTipoMaterial(informacion){
         var dataResult;
@@ -437,9 +437,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite crear un tipo de objeto
-    * @param {array} informacion, información del tipo de objeto
-    * @returns {data}
+     * Función que permite crear un tipo de objeto
+     * @param {array} informacion, información del tipo de objeto
+     * @returns {data}
     */
     function guardarTipoObjeto(informacion){
         var dataResult;
@@ -469,10 +469,10 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite guardar los planos que se suban al sistema.
-    * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
-    * @param {formData} informacion, formData con las imagenes.
-    * @returns {data}
+     * Función que permite guardar los planos que se suban al sistema.
+     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
     */
     function guardarPlanos(tipo_objeto,informacion){
         var dataResult;
@@ -502,10 +502,10 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que permite guardar las fotos que se suban al sistema
-    * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
-    * @param {formData} informacion, formData con las imagenes.
-    * @returns {data}
+     * Función que permite guardar las fotos que se suban al sistema
+     * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
+     * @param {formData} informacion, formData con las imagenes.
+     * @returns {data}
     */
     function guardarFotos(tipo_objeto,informacion){
         var dataResult;
@@ -535,8 +535,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de las sedes presentes en el sistema
-    * @returns {data} object json.
+     * Función que realiza una consulta de las sedes presentes en el sistema
+     * @returns {data} object json.
     **/
     function buscarSedes(){
         var dataResult;
@@ -564,9 +564,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los campus presentes en el sistema
-    * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
-    * @returns {data} object json.
+     * Función que realiza una consulta de los campus presentes en el sistema
+     * @param {array} sede, arreglo con la información de la sede a la que pertenece el campus a buscar.
+     * @returns {data} object json.
     **/
     function buscarCampus(sede){
         var jObject = JSON.stringify(sede);
@@ -595,9 +595,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los campus presentes en el sistema
-    * @param {array} informacion, arreglo con la información del campus a buscar.
-    * @returns {data} object json.
+     * Función que realiza una consulta de los campus presentes en el sistema
+     * @param {array} informacion, arreglo con la información del campus a buscar.
+     * @returns {data} object json.
     **/
     function ubicacionCampus(informacion){
         var jObject = JSON.stringify(informacion);
@@ -626,10 +626,10 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los edificios del campus seleccionado
-    * presentes en el sistema.
-    * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
-    * @returns {data} object json.
+     * Función que realiza una consulta de los edificios del campus seleccionado
+     * presentes en el sistema.
+     * @param {array} campus, arreglo con la información del campus al que pertenece el edificio a buscar.
+     * @returns {data} object json.
     **/
     function buscarEdificios(campus){
         var jObject = JSON.stringify(campus);
@@ -658,9 +658,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta el número de pisos de un edificio
-    * @param {array} edificio, arreglo que contiene el edificio a buscar.
-    * @returns {data} object json.
+     * Función que realiza una consulta el número de pisos de un edificio
+     * @param {array} edificio, arreglo que contiene el edificio a buscar.
+     * @returns {data} object json.
     **/
     function buscarPisosEdificio(edificio){
         var jObject = JSON.stringify(edificio);
@@ -689,8 +689,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de las sedes presentes en el sistema
-    * @returns {data} object json.
+     * Función que realiza una consulta de las sedes presentes en el sistema
+     * @returns {data} object json.
     **/
     function buscarUsosEspacios(){
         var dataResult;
@@ -718,9 +718,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los materiales presentes en el sistema
-    * @param {array} informacion, arreglo que contiene el tipo de material a buscar
-    * @returns {data} object json.
+     * Función que realiza una consulta de los materiales presentes en el sistema
+     * @param {array} informacion, arreglo que contiene el tipo de material a buscar
+     * @returns {data} object json.
     **/
     function buscarMateriales(informacion){
         var dataResult;
@@ -749,9 +749,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los objetos presentes en el sistema
-    * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
-    * @returns {data} object json.
+     * Función que realiza una consulta de los objetos presentes en el sistema
+     * @param {array} informacion, arreglo que contiene el tipo de objeto a buscar
+     * @returns {data} object json.
     **/
     function buscarTipoObjetos(informacion){
         var dataResult;
@@ -780,8 +780,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de las capacidades de los aires acondicionados.
-    * @returns {data} object json.
+     * Función que realiza una consulta de las capacidades de los aires acondicionados.
+     * @returns {data} object json.
     **/
     function buscarCapacidadAire(){
         var dataResult;
@@ -808,8 +808,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de las capacidades de los aires acondicionados.
-    * @returns {data} object json.
+     * Función que realiza una consulta de las capacidades de los aires acondicionados.
+     * @returns {data} object json.
     **/
     function buscarAiresEspacio(informacion){
         var dataResult;
@@ -838,8 +838,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de las marcas de los aires acondicionados.
-    * @returns {data} object json.
+     * Función que realiza una consulta de las marcas de los aires acondicionados.
+     * @returns {data} object json.
     **/
     function buscarMarcaAire(){
         var dataResult;
@@ -866,9 +866,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que realiza una consulta de los espacios presentes en el sistema.
-    * @param {string} informacion, arreglo que contiene el espacio a buscar.
-    * @returns {data} object json.
+     * Función que realiza una consulta de los espacios presentes en el sistema.
+     * @param {string} informacion, arreglo que contiene el espacio a buscar.
+     * @returns {data} object json.
     **/
     function verificarEspacio(nombreSede,nombreCampus,nombreEdificio,numeroEspacio){
         var espacio = {};
@@ -902,8 +902,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de sede..
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de sede..
+     * @returns {undefined}
     **/
     function actualizarSelectSede(){
         var data = buscarSedes();
@@ -922,8 +922,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de capacida de un aire acondicionado.
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
     **/
     function actualizarSelectCapacidadAire(){
         var data = buscarCapacidadAire();
@@ -942,8 +942,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de capacida de un aire acondicionado.
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de capacida de un aire acondicionado.
+     * @returns {undefined}
     **/
     function actualizarSelectMarcaAire(){
         var data = buscarMarcaAire();
@@ -962,8 +962,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de campus.
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de campus.
+     * @returns {undefined}
     **/
     function actualizarSelectUsosEspacios(){
         var data = buscarUsosEspacios();
@@ -982,9 +982,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de material que se ingresa.
-    * @param {string} material, nombre del selector a actualizar y tipo de material.
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de material que se ingresa.
+     * @param {string} material, nombre del selector a actualizar y tipo de material.
+     * @returns {undefined}
     **/
     function actualizarSelectMaterial(material,id){
         if (id == 0) {
@@ -1008,9 +1008,9 @@ $(document).ready(function() {
     }
 
     /**
-    * Función que llena y actualiza el selector de tipo de objeto.
-    * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
-    * @returns {undefined}
+     * Función que llena y actualiza el selector de tipo de objeto.
+     * @param {string} tipo_objeto, nombre del selector a actualizar y tipo de objeto.
+     * @returns {undefined}
     **/
     function actualizarSelectTipoObjeto(tipo_objeto,id){
         if (id == 0) {
@@ -1034,8 +1034,8 @@ $(document).ready(function() {
     }
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector nombre_sede
-    * y se actualiza el selector de campus.
+     * Se captura el evento cuando se modifica el valor del selector nombre_sede
+     * y se actualiza el selector de campus.
     */
     $("#nombre_sede").change(function (e) {
         $("#divTieneEspacioPadre").hide();
@@ -1067,8 +1067,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector nombre_campus
-    * y se actualiza el selector de edificios.
+     * Se captura el evento cuando se modifica el valor del selector nombre_campus
+     * y se actualiza el selector de edificios.
     */
     $("#nombre_campus").change(function (e) {
         $("#divTieneEspacioPadre").hide();
@@ -1121,8 +1121,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector nombre_edificio
-    * y se actualiza el selector de pisos.
+     * Se captura el evento cuando se modifica el valor del selector nombre_edificio
+     * y se actualiza el selector de pisos.
     */
     $("#nombre_edificio").change(function (e) {
         $("#divTieneEspacioPadre").hide();
@@ -1207,7 +1207,7 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector de pisos.
+     * Se captura el evento cuando se modifica el valor del selector de pisos.
     */
     $("#pisos").change(function (e) {
         $("#divTieneEspacioPadre").hide();
@@ -1264,7 +1264,7 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector de espacio.
+     * Se captura el evento cuando se modifica el valor del selector de espacio.
     */
     $("#id_espacio").change(function (e) {
         for (var i=0;i<numeroAires;i++) {
@@ -1322,7 +1322,7 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del selector de aire acondicionado.
+     * Se captura el evento cuando se modifica el valor del selector de aire acondicionado.
     */
     $("#id_aire_search").change(function (e) {
         var idAIre = $("#id_aire_search").val();
@@ -1334,8 +1334,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del radio button pasamanos
-    * y se actualiza el selector de pisos.
+     * Se captura el evento cuando se modifica el valor del radio button pasamanos
+     * y se actualiza el selector de pisos.
     */
     $("#form_pasamanos").change(function (e) {
         var pasamanos = $('input[name="pasamanos"]:checked').val();
@@ -1347,8 +1347,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
-    * y se actualiza el selector de pisos.
+     * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
+     * y se actualiza el selector de pisos.
     */
     $("#form_espacio_padre").change(function (e) {
         var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
@@ -1360,8 +1360,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_sede y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_sede y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_sede").click(function (e){
         try{
@@ -1390,8 +1390,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_campus y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_campus y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_campus").click(function (e){
         try{
@@ -1507,8 +1507,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_edificio y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_edificio y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_edificio").click(function (e){
         try{
@@ -1666,8 +1666,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_cancha y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_cancha y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_cancha").click(function (e){
         try{
@@ -1809,8 +1809,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_corredor y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_corredor y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_corredor").click(function (e){
         try{
@@ -2015,8 +2015,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_cubierta y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_cubierta y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_cubierta").click(function (e){
         try{
@@ -2161,8 +2161,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_gradas y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_gradas y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_gradas").click(function (e){
         try{
@@ -2343,8 +2343,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_parqueadero y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_parqueadero y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_parqueadero").click(function (e){
         try{
@@ -2490,8 +2490,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_piscina y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_piscina y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_piscina").click(function (e){
         try{
@@ -2631,8 +2631,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_plazoleta y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_plazoleta y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_plazoleta").click(function (e){
         try{
@@ -2776,8 +2776,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_sendero y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_sendero y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_sendero").click(function (e){
         try{
@@ -2933,8 +2933,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_via y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_via y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_via").click(function (e){
         try{
@@ -3071,8 +3071,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_espacio y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_espacio y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_espacio").click(function (e){
         try{
@@ -3602,8 +3602,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_espacio_adicional y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_espacio_adicional y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_espacio_adicional").click(function (e){
         var informacion = {};
@@ -3760,8 +3760,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_tipo_material y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_tipo_material y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_tipo_material").click(function (e){
         try{
@@ -3799,8 +3799,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_tipo_objeto y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_tipo_objeto y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_tipo_objeto").click(function (e){
         try{
@@ -3838,8 +3838,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_informacion_adicional y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_informacion_adicional y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_informacion_adicional").click(function (e){
         $("#informacion-adicional").show();
@@ -3848,8 +3848,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_informacion_adicional y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_informacion_adicional y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_informacion_adicional").click(function (e){
         $("#informacion-adicional").hide();
@@ -3858,8 +3858,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_iluminacion y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_iluminacion y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_iluminacion").click(function (e){
         iluminacionCont++;
@@ -3875,8 +3875,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_iluminacion y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_iluminacion y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_iluminacion").click(function (e){
         eliminarComponente("iluminacion"+iluminacionCont);
@@ -3887,8 +3887,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_tomacorriente y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_tomacorriente y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_tomacorriente").click(function (e){
         tomacorrientesCont++;
@@ -3910,8 +3910,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_tomacorriente y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_tomacorriente y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_tomacorriente").click(function (e){
         eliminarComponente("suministro_energia"+tomacorrientesCont);
@@ -3922,8 +3922,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_puerta y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_puerta y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_puerta").click(function (e){
         puertasCont++;
@@ -3956,8 +3956,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_puerta y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_puerta y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_puerta").click(function (e){
         eliminarComponente("puerta"+puertasCont);
@@ -3968,8 +3968,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_ventana y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_ventana y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_ventana").click(function (e){
         ventanasCont++;
@@ -3992,8 +3992,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_ventana y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_ventana y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_ventana").click(function (e){
         eliminarComponente("ventana"+ventanasCont);
@@ -4004,8 +4004,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_interruptor y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_interruptor y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_interruptor").click(function (e){
         interruptoresCont++;
@@ -4021,8 +4021,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_interruptor y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_interruptor y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_interruptor").click(function (e){
         eliminarComponente("interruptor"+interruptoresCont);
@@ -4033,8 +4033,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_punto_sanitario").click(function (e){
         puntosSanitariosCont++;
@@ -4050,8 +4050,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_punto_sanitario").click(function (e){
         eliminarComponente("punto_sanitario"+puntosSanitariosCont);
@@ -4062,8 +4062,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_orinal").click(function (e){
         orinalesCont++;
@@ -4079,8 +4079,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_orinal").click(function (e){
         eliminarComponente("orinal"+orinalesCont);
@@ -4091,8 +4091,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón añadir_lavamanos y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón añadir_lavamanos y se
+     * realiza la operacion correspondiente.
     */
     $("#añadir_lavamanos").click(function (e){
         lavamanosCont++;
@@ -4109,8 +4109,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_lavamanos y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_lavamanos y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_lavamanos").click(function (e){
         eliminarComponente("lavamanos"+lavamanosCont);
@@ -4121,8 +4121,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón agregar_espacio y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón agregar_espacio y se
+     * realiza la operacion correspondiente.
     */
     $("#agregar_espacio").click(function (e){
         $("#divBotonesInformacionAdicional").hide();
@@ -4140,8 +4140,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón eliminar_espacio y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón eliminar_espacio y se
+     * realiza la operacion correspondiente.
     */
     $("#eliminar_espacio").click(function (e){
         eliminarComponente("espacio"+espaciosCont);
@@ -4153,8 +4153,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se cierra el modal divDialogCreacion y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se cierra el modal divDialogCreacion y se
+     * realiza la operacion correspondiente.
     */
     $('#divDialogCreacion').on('hidden.bs.modal', function () {
         puntosSanitariosCont = 0;
@@ -4166,8 +4166,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se modifica el selector tipo_iluminacion y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se modifica el selector tipo_iluminacion y se
+     * realiza la operacion correspondiente.
     */
     $("input[name=tipo_iluminacion]").change(function (e){
         var tipoIluminacion = $("input[name=tipo_iluminacion]").val();
@@ -4175,8 +4175,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_capacidad_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_capacidad_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_capacidad_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la capacidad de aires acondicionados?");
@@ -4198,8 +4198,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_marca_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_marca_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_marca_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la marca de aires acondicionados?");
@@ -4222,8 +4222,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_tipo_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_tipo_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_tipo_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar el tipo de aires acondicionados?");
@@ -4247,8 +4247,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_tecnologia_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_tecnologia_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_tecnologia_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la tecnología de aires acondicionados?");
@@ -4272,8 +4272,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
@@ -4411,8 +4411,8 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón guardar_mantenimiento_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón guardar_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#guardar_mantenimiento_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del mantenimiento al aire acondicionado?");
@@ -4466,16 +4466,16 @@ $(document).ready(function() {
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón buscar_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón buscar_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#buscar_aire").click(function (e){
         $("#divDialogAiresEspacio").modal('show');
     });
 
     /**
-    * Se captura el evento cuando se da click en el botón seleccionar_aire y se
-    * realiza la operacion correspondiente.
+     * Se captura el evento cuando se da click en el botón seleccionar_aire y se
+     * realiza la operacion correspondiente.
     */
     $("#seleccionar_aire").click(function (e){
         $("#id_aire").val($("#id_aire_search").val());

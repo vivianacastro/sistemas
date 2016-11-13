@@ -1445,6 +1445,31 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar los mantenimientos a un aire acondicionado.
+     * @param string $id_aire, número de la orden de mantenimiento.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function buscarMantenimientosAire($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Mantenimientos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Mantenimientos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la ubicación de un campus en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
@@ -2290,6 +2315,31 @@ class modelo_consultas
         else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Buscar Tecnlogia Aires 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar un mantenimiento a un aire acondicionado.
+     * @param string $numero_orden, número de la orden de mantenimiento.
+     * @return metadata con el resultado de la búsqueda.
+    */
+    public function buscarMantenimientoAire($numero_orden){
+        $numero_orden = htmlspecialchars(trim($numero_orden));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE numero_orden = '".$numero_orden."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Mantenimiento Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Mantenimiento Aire 2)";
                 $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() >= 0){

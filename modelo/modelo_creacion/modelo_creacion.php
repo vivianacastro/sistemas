@@ -15,7 +15,7 @@ class modelo_creacion {
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-     */
+    */
     public function __construct($dbname,$dbuser,$dbpass,$dbhost) {
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
         try{
@@ -30,7 +30,7 @@ class modelo_creacion {
      * Función que permite guardar una sede.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
-     */
+    */
     public function guardarSede($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $sql = "INSERT INTO sede (nombre,usuario_crea) VALUES ('".$nombre_sede."','".$_SESSION["login"]."');";
@@ -56,7 +56,7 @@ class modelo_creacion {
      * @param string $nombre_sede, id de la sede a la que pertenece el edificio.
      * @param string $nombre_campus, id del campus a la que pertenece el campus.
      * @return array
-     */
+    */
     public function guardarCampus($nombre_sede,$nombre_campus,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -95,7 +95,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra el edificio.
      * @param string $lng, longitud donde se encuentra el edificio.
      * @return array
-     */
+    */
     public function guardarEdificio($nombre_sede,$nombre_campus,$id_edificio,$nombre_edificio,$numero_pisos,$terraza,$sotano,$material_fachada,$alto_fachada,$ancho_fachada,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -144,7 +144,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra la cancha.
      * @param string $lng, longitud donde se encuentra la cancha.
      * @return array
-     */
+    */
     public function guardarCancha($nombre_sede,$nombre_campus,$id_cancha,$uso_cancha,$material_piso,$tipo_pintura,$longitud_demarcacion,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -194,7 +194,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra la cancha.
      * @param string $lng, longitud donde se encuentra la cancha.
      * @return array
-     */
+    */
     public function guardarCorredor($nombre_sede,$nombre_campus,$id_corredor,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad_tomacorrientes,$tipo_iluminacion,$cantidad_iluminacion,$tipo_interruptor,$cantidad_interruptores,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -263,7 +263,7 @@ class modelo_creacion {
      * @param string $ancho_cubierta, ancho de la cubierta.
      * @param string $largo_cubierta, largo de la cubierta.
      * @return array
-     */
+    */
     public function guardarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$tipo_cubierta,$material_cubierta,$ancho_cubierta,$largo_cubierta){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -315,7 +315,7 @@ class modelo_creacion {
      * @param string $anchoVentana, ancho de las ventanas de las gradas.
      * @param string $altoVentana, alto de las ventanas de las gradas.
      * @return array
-     */
+    */
     public function guardarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$pasamanos,$material_pasamanos,$ventana,$tipoVentana,$cantidadVentanas,$materialVentana,$anchoVentana,$altoVentana){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -366,7 +366,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra el parqueadero.
      * @param string $lng, longitud donde se encuentra el parqueadero.
      * @return array
-     */
+    */
     public function guardarParqueadero($nombre_sede,$nombre_campus,$codigo,$capacidad,$ancho,$largo,$material_piso,$tipo_pintura,$longitud_demarcacion,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -419,7 +419,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra la piscina.
      * @param string $lng, longitud donde se encuentra la piscina.
      * @return array
-     */
+    */
     public function guardarPiscina($nombre_sede,$nombre_campus,$id_piscina,$cantidad_punto_hidraulico,$ancho,$largo,$alto,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -461,7 +461,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra la plazoleta.
      * @param string $lng, longitud donde se encuentra la plazoleta.
      * @return array
-     */
+    */
     public function guardarPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta,$nombre,$tipo_iluminacion,$cantidad_iluminacion,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -503,7 +503,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra el parqueadero.
      * @param string $lng, longitud donde se encuentra el parqueadero.
      * @return array
-     */
+    */
     public function guardarSendero($nombre_sede,$nombre_campus,$id_sendero,$longitud,$ancho,$material_piso,$tipo_iluminacion,$cantidad_iluminacion,$codigo_poste,$ancho_cubierta,$largo_cubierta,$material_cubierta,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -560,7 +560,7 @@ class modelo_creacion {
      * @param string $lat, latitud donde se encuentra la vía.
      * @param string $lng, longitud donde se encuentra la vía.
      * @return array
-     */
+    */
     public function guardarVia($nombre_sede,$nombre_campus,$id_via,$tipo_pintura,$longitud_demarcacion,$material_piso,$lat,$lng){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -636,7 +636,7 @@ class modelo_creacion {
      * @param string $cantidad_interruptores, cantidad de interruptores en el espacio
      * @param string $numero_espacio_padre, número del espacio al que pertenece el nuevo espacio.
      * @return array
-     */
+    */
     public function guardarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$piso,$numero_espacio,$uso_espacio,$alto_pared,$ancho_pared,$material_pared,$largo_techo,$ancho_techo,$material_techo,$largo_piso,$ancho_piso,$material_piso,$tipo_iluminacion,$cantidad_iluminacion,$tipo_suministro_energia,$tomacorriente,$cantidad_tomacorrientes,$tipo_puerta,$cantidad_puertas,$material_puerta,$tipo_cerradura,$gato_puerta,$material_marco,$ancho_puerta,$alto_puerta,$tipo_ventana,$cantidad_ventanas,$material_ventana,$ancho_ventana,$alto_ventana,$tipo_interruptor,$cantidad_interruptores,$numero_espacio_padre){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -713,7 +713,7 @@ class modelo_creacion {
      * @param string $tipo_iluminacion, tipo de iluminación que tiene el corredor.
      * @param string $cantidad, cantidad de lámparas que tiene el corredor.
      * @return array
-     */
+    */
     public function guardarIluminacionCorredor($id_sede,$id_campus,$id_corredor,$tipo_iluminacion,$cantidad){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -753,7 +753,7 @@ class modelo_creacion {
      * @param string $tipo_iluminacion, tipo de iluminación que tiene la plazoleta
      * @param string $cantidad, cantidad de lámparas que tiene la plazoleta.
      * @return array
-     */
+    */
     public function guardarIluminacionPlazoleta($id_sede,$id_campus,$id_plazoleta,$tipo_iluminacion,$cantidad){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -794,7 +794,7 @@ class modelo_creacion {
      * @param string $tipo_iluminacion, tipo de iluminación que tiene el espacio.
      * @param string $cantidad, cantidad de lámparas que tiene el espacio.
      * @return array
-     */
+    */
     public function guardarIluminacionEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -835,7 +835,7 @@ class modelo_creacion {
      * @param string $tipo_interruptor, tipo de interruptor que tiene el corredor.
      * @param string $cantidad, cantidad de interruptores que tiene el corredor.
      * @return array
-     */
+    */
     public function guardarInterruptoresCorredor($id_sede,$id_campus,$id_corredor,$tipo_interruptor,$cantidad){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -876,7 +876,7 @@ class modelo_creacion {
      * @param string $tipo_interruptor, tipo de interruptor que tiene el espacio.
      * @param string $cantidad, cantidad de interruptores que tiene el espacio.
      * @return array
-     */
+    */
     public function guardarInterruptoresEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_interruptor,$cantidad){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -923,7 +923,7 @@ class modelo_creacion {
      * @param string $largo, largo de las puertas.
      * @param string $gato, si la puerta tiene gato o no.
      * @return array
-     */
+    */
     public function guardarPuertasEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_puerta,$material_puerta,$cantidad,$material_marco,$ancho,$largo,$gato){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -982,7 +982,7 @@ class modelo_creacion {
      * @param string $material_marco, material del marco de las puertas del espacio.
      * @param string $tipo_cerradura, tipo de cerradura de las puertas.
      * @return array
-     */
+    */
     public function guardarPuertaTipoCerradura($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1020,7 +1020,7 @@ class modelo_creacion {
      * @param string $cantidad, cantidad de tomacorrientes que tiene el espacio.
      * @param string $tomacorriente, si el tomacorriente es regulado o no.
      * @return array
-     */
+    */
     public function guardarSuministroEnergiaEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_suministro_energia,$cantidad,$tomacorriente){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1066,7 +1066,7 @@ class modelo_creacion {
      * @param string $ancho_ventana, ancho de las ventanas del espacio.
      * @param string $alto_ventana, alto de las ventanas del espacio.
      * @return array
-     */
+    */
     public function guardarVentanaEspacio($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1117,7 +1117,7 @@ class modelo_creacion {
      * @param string $ancho_ventana, ancho de las ventanas de las gradas.
      * @param string $alto_ventana, alto de las ventanas de las gradas.
      * @return array
-     */
+    */
     public function guardarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$cantidad,$material_ventana,$ancho_ventana,$alto_ventana){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1173,7 +1173,7 @@ class modelo_creacion {
      * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el baño.
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el espacio.
      * @return array
-     */
+    */
     public function guardarPuntoSanitario($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1208,7 +1208,7 @@ class modelo_creacion {
      * @param string $tipo_lavamanos, tipo de lavamanos que tiene el baño.
      * @param string $cantidad_lavamanos, cantidad de lavamanos que tiene el baño.
      * @return array
-     */
+    */
     public function guardarLavamanosBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_lavamanos,$cantidad_lavamanos){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1243,7 +1243,7 @@ class modelo_creacion {
      * @param string $tipo_orinal, tipo de orinal que tiene el baño.
      * @param string $cantidad_orinal, cantidad de orinales que tiene el baño.
      * @return array
-     */
+    */
     public function guardarOrinalBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_orinal,$cantidad_orinal){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1279,7 +1279,7 @@ class modelo_creacion {
      * @param string $capacidad, capacidad del salón.
      * @param string $punto_videobeam, si el salón tiene o no punto de proyector.
      * @return array
-     */
+    */
     public function guardarSalon($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1316,7 +1316,7 @@ class modelo_creacion {
      * @param string $capacidad, capacidad del auditorio.
      * @param string $punto_videobeam, si el auditorio tiene o no punto de proyector.
      * @return array
-     */
+    */
     public function guardarAuditorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1356,7 +1356,7 @@ class modelo_creacion {
      * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene el laboratorio.
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene el laboratorio.
      * @return array
-     */
+    */
     public function guardarLaboratorio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1398,7 +1398,7 @@ class modelo_creacion {
      * @param string $capacidad, capacidad de la sala de computo.
      * @param string $punto_videobeam, si la sala de computo tiene o no punto de proyector.
      * @return array
-     */
+    */
     public function guardarSalaComputo($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$capacidad,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1434,7 +1434,7 @@ class modelo_creacion {
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la oficina.
      * @param string $punto_videobeam, si la oficina tiene o no punto de proyector.
      * @return array
-     */
+    */
     public function guardarOficina($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red,$punto_videobeam){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1478,7 +1478,7 @@ class modelo_creacion {
      * @param string $tipo_divisiones, tipo de divisiones del baño.
      * @param string $material_divisiones, material de las divisiones del baño.
      * @return array
-     */
+    */
     public function guardarBano($id_espacio,$id_sede,$id_campus,$id_edificio,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$cantidad_orinal,$tipo_lavamanos,$cantidad_lavamanos,$ducha,$lavatraperos,$cantidad_sifon,$tipo_divisiones,$material_divisiones){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1526,7 +1526,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece la bodega.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la bodega.
      * @return array
-     */
+    */
     public function guardarBodega($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1559,7 +1559,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece la sala de estudio.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene la sala de estudio.
      * @return array
-     */
+    */
     public function guardarSalaEstudio($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1592,7 +1592,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de plantas.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de plantas.
      * @return array
-     */
+    */
     public function guardarCuartoPlantas($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1625,7 +1625,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de aires acondicionados.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de aires acondicionados.
      * @return array
-     */
+    */
     public function guardarCuartoAireAcondicionado($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1658,7 +1658,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el área deportiva cerrada.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el área deportiva cerrada.
      * @return array
-     */
+    */
     public function guardarAreaDeportivaCerrada($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1691,7 +1691,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el centro de datos.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el centro de datos.
      * @return array
-     */
+    */
     public function guardarCentroDatos($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_red){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1724,7 +1724,7 @@ class modelo_creacion {
      * @param string $id_edificio, id del edificio al que pertenece el cuarto de bombas.
      * @param string $cantidad_punto_red, cantidad de puntos de red que tiene el cuarto de bombas.
      * @return array
-     */
+    */
     public function guardarCuartoBombas($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1763,7 +1763,7 @@ class modelo_creacion {
      * @param string $tipo_punto_sanitario, tipo de punto sanitario que tiene la cocineta.
      * @param string $cantidad_punto_sanitario, cantidad de puntos sanitarios que tiene la cocineta
      * @return array
-     */
+    */
     public function guardarCocineta($id_espacio,$id_sede,$id_campus,$id_edificio,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$cantidad_punto_sanitario){
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1797,7 +1797,7 @@ class modelo_creacion {
      * @param string $tipo_material, tipo de material.
      * @param string $nombre_tipo_material, nombre del tipo de material.
      * @return array
-     */
+    */
     public function guardarTipoMaterial($tipo_material,$nombre_tipo_material){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $nombre_tipo_material = htmlspecialchars(trim($nombre_tipo_material));
@@ -1824,7 +1824,7 @@ class modelo_creacion {
      * @param string $tipo_objeto, tipo de objeto.
      * @param string $nombre_tipo_objeto, nombre del tipo de objeto.
      * @return array
-     */
+    */
     public function guardarTipoObjeto($tipo_objeto,$nombre_tipo_objeto){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         $nombre_tipo_objeto = htmlspecialchars(trim($nombre_tipo_objeto));
@@ -1852,7 +1852,7 @@ class modelo_creacion {
      * @param string $id_campus, variable con la información del campus.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoCampus($id_sede,$id_campus,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -1899,7 +1899,7 @@ class modelo_creacion {
      * @param string $id_campus, variable con la información del campus.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoCampus($id_sede,$id_campus,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -1947,7 +1947,7 @@ class modelo_creacion {
      * @param string $id_edificio, variable con la información del edificio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoEdificio($id_sede,$id_campus,$id_edificio,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -1996,7 +1996,7 @@ class modelo_creacion {
      * @param string $id_edificio, variable con la información del edificio.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoEdificio($id_sede,$id_campus,$id_edificio,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2045,7 +2045,7 @@ class modelo_creacion {
      * @param string $id_cancha, id de la cancha.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoCancha($id_sede,$id_campus,$id_cancha,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2094,7 +2094,7 @@ class modelo_creacion {
      * @param string $id_cancha, id de la cancha.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoCancha($id_sede,$id_campus,$id_cancha,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2143,7 +2143,7 @@ class modelo_creacion {
      * @param string $id_corredor, id del corredor.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoCorredor($id_sede,$id_campus,$id_corredor,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2192,7 +2192,7 @@ class modelo_creacion {
      * @param string $id_corredor, id del corredor.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoCorredor($id_sede,$id_campus,$id_corredor,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2242,7 +2242,7 @@ class modelo_creacion {
      * @param string $piso, piso del edificio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoCubierta($id_sede,$id_campus,$id_edificio,$piso,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2293,7 +2293,7 @@ class modelo_creacion {
      * @param string $piso, piso del edificio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarFotoCubierta($id_sede,$id_campus,$id_edificio,$piso,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2344,7 +2344,7 @@ class modelo_creacion {
      * @param string $id_edificio, variable con el piso del edificio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoGradas($id_sede,$id_campus,$id_edificio,$piso,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2394,7 +2394,7 @@ class modelo_creacion {
      * @param string $id_edificio, variable con la información del edificio.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoGradas($id_sede,$id_campus,$id_edificio,$piso,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2444,7 +2444,7 @@ class modelo_creacion {
      * @param string $id_parqueadero, id del parqueadero.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoParqueadero($id_sede,$id_campus,$id_parqueadero,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2493,7 +2493,7 @@ class modelo_creacion {
      * @param string $id_parqueadero, id del parqueadero.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoParqueadero($id_sede,$id_campus,$id_parqueadero,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2542,7 +2542,7 @@ class modelo_creacion {
      * @param string $id_piscina, id de la piscina.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoPiscina($id_sede,$id_campus,$id_piscina,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2591,7 +2591,7 @@ class modelo_creacion {
      * @param string $id_piscina, id de la piscina.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoPiscina($id_sede,$id_campus,$id_piscina,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2640,7 +2640,7 @@ class modelo_creacion {
      * @param string $id_plazoleta, id de la plazoleta.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoPlazoleta($id_sede,$id_campus,$id_plazoleta,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2689,7 +2689,7 @@ class modelo_creacion {
      * @param string $id_plazoleta, id de la plazoleta.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoPlazoleta($id_sede,$id_campus,$id_plazoleta,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2738,7 +2738,7 @@ class modelo_creacion {
      * @param string $id_sendero, id del sendero.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoSendero($id_sede,$id_campus,$id_sendero,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2787,7 +2787,7 @@ class modelo_creacion {
      * @param string $id_sendero, id del sendero.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoSendero($id_sede,$id_campus,$id_sendero,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2836,7 +2836,7 @@ class modelo_creacion {
      * @param string $id_via, id de la vía.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoVia($id_sede,$id_campus,$id_via,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2885,7 +2885,7 @@ class modelo_creacion {
      * @param string $id_via, id de la via.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoVia($id_sede,$id_campus,$id_via,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2935,7 +2935,7 @@ class modelo_creacion {
      * @param string $id_espacio, variable con la información del espacio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarPlanoEspacio($id_sede,$id_campus,$id_edificio,$id_espacio,$plano){
         if ($plano['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -2986,7 +2986,7 @@ class modelo_creacion {
      * @param string $id_espacio, variable con la información del espacio.
      * @param file $plano, variable con la información del plano a guardar.
      * @return array
-     */
+    */
     public function guardarFotoEspacio($id_sede,$id_campus,$id_edificio,$id_espacio,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_sede = htmlspecialchars(trim($id_sede));
@@ -3040,7 +3040,7 @@ class modelo_creacion {
      * @param string $marca, marca del aire acondicionado.
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
-     */
+    */
     public function guardarAire($numero_inventario,$sede,$campus,$edificio,$espacio,$capacidad,$marca,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sede = htmlspecialchars(trim($sede));
@@ -3087,7 +3087,7 @@ class modelo_creacion {
      * Función que permite guardar la información de una capacidad de aire acondicionado.
      * @param string $capacidad, capacidad.
      * @return array
-     */
+    */
     public function guardarCapacidadAire($capacidad){
         $capacidad = htmlspecialchars(trim($capacidad));
         $sql = "INSERT INTO capacidad_aire (capacidad) VALUES ('".$capacidad."');";
@@ -3112,7 +3112,7 @@ class modelo_creacion {
      * Función que permite guardar la información de una marca de aire acondicionado.
      * @param string $marca, marca de aire acondicionado.
      * @return array
-     */
+    */
     public function guardarMarcaAire($marca){
         $marca = htmlspecialchars(trim($marca));
         $sql = "INSERT INTO marca_aire (nombre) VALUES ('".$marca."');";
@@ -3137,7 +3137,7 @@ class modelo_creacion {
      * Función que permite guardar la información de un tipo de aire acondicionado.
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
-     */
+    */
     public function guardarTipoAire($tipo){
         $tipo = htmlspecialchars(trim($tipo));
         $sql = "INSERT INTO tipo_aire (tipo) VALUES ('".$tipo."');";
@@ -3162,7 +3162,7 @@ class modelo_creacion {
      * Función que permite guardar la información de un tipo de tecnología de aires acondicionados.
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
-     */
+    */
     public function guardarTipoTecnologiaAire($tipo){
         $tipo = htmlspecialchars(trim($tipo));
         $sql = "INSERT INTO tipo_tecnologia_aire (tipo) VALUES ('".$tipo."');";
@@ -3187,7 +3187,7 @@ class modelo_creacion {
      * Función que permite guardar la información de un mantenimiento de un aire acondiciondo.
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
-     */
+    */
     public function guardarMantenimientoAire($id_aire,$numero_orden,$fecha_realizacion,$realizado,$revisado,$descripcion){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numero_orden = htmlspecialchars(trim($numero_orden));
@@ -3217,7 +3217,7 @@ class modelo_creacion {
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
-     */
+    */
     public function verificarSede($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $sql = "SELECT * FROM sede WHERE nombre = '".$nombre_sede."'";
@@ -3247,7 +3247,7 @@ class modelo_creacion {
      * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
      * @param string $nombre_campus, nombre del campus.
      * @return array
-     */
+    */
     public function verificarCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3279,7 +3279,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
      * @param string $id_edificio, id del edificio.
      * @return array
-     */
+    */
     public function verificarEdificio($nombre_sede,$nombre_campus,$id_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3312,7 +3312,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece la cancha.
      * @param string $id_cancha, id de la cancha.
      * @return array
-     */
+    */
     public function verificarCancha($nombre_sede,$nombre_campus,$id_cancha){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3345,7 +3345,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece el corredor.
      * @param string $id_corredor, id del corredor.
      * @return array
-     */
+    */
     public function verificarCorredor($nombre_sede,$nombre_campus,$id_corredor){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3379,7 +3379,7 @@ class modelo_creacion {
      * @param string $nombre_edificio, id del edificio.
      * @param string $piso, piso donde está la cubierta.
      * @return array
-     */
+    */
     public function verificarCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3414,7 +3414,7 @@ class modelo_creacion {
      * @param string $nombre_edificio, id del edificio.
      * @param string $piso, piso donde inician las gradas.
      * @return array
-     */
+    */
     public function verificarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3448,7 +3448,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece el parqueadero.
      * @param string $codigo, código del parqueadero.
      * @return array
-     */
+    */
     public function verificarParqueadero($nombre_sede,$nombre_campus,$codigo){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3481,7 +3481,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece la piscina.
      * @param string $id_piscina, id de la piscina.
      * @return array
-     */
+    */
     public function verificarPiscina($nombre_sede,$nombre_campus,$id_piscina){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3514,7 +3514,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece la plazoleta.
      * @param string $id_plazoleta, id de la plazoleta.
      * @return array
-     */
+    */
     public function verificarPlazoleta($nombre_sede,$nombre_campus,$id_plazoleta){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3547,7 +3547,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece el sendero.
      * @param string $id_sendero, id del sendero.
      * @return array
-     */
+    */
     public function verificarSendero($nombre_sede,$nombre_campus,$id_sendero){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3580,7 +3580,7 @@ class modelo_creacion {
      * @param string $nombre_campus, nombre del campus al que pertenece la vía.
      * @param string $id_edificio, id de la vía.
      * @return array
-     */
+    */
     public function verificarVia($nombre_sede,$nombre_campus,$id_via){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3614,7 +3614,7 @@ class modelo_creacion {
      * @param string $nombre_edificio, nombre del edificio al que pertenece el espacio.
      * @param string $numero_espacio, número del espacio.
      * @return array
-     */
+    */
     public function verificarEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$numero_espacio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -3647,7 +3647,7 @@ class modelo_creacion {
      * @param string $tipo_material, tipo de material.
      * @param string $nombre_tipo_material, nombre del tipo de material.
      * @return array
-     */
+    */
     public function verificarTipoMaterial($tipo_material,$nombre_tipo_material){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $nombre_tipo_material = htmlspecialchars(trim($nombre_tipo_material));
@@ -3678,7 +3678,7 @@ class modelo_creacion {
      * @param string $tipo_material, tipo de objeto.
      * @param string $nombre_tipo_material, nombre del tipo de objeto.
      * @return array
-     */
+    */
     public function verificarTipoObjeto($tipo_objeto,$nombre_tipo_objeto){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         $nombre_tipo_objeto = htmlspecialchars(trim($nombre_tipo_objeto));
@@ -3712,7 +3712,7 @@ class modelo_creacion {
      * Función que permite consultar si un aire acondicionado ya esta registrada en el sistema.
      * @param string $numero_inventario, número de inventario del aire.
      * @return array
-     */
+    */
     public function verificarAire($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         if (strcmp($numero_inventario,"") == 0) {
@@ -3745,7 +3745,7 @@ class modelo_creacion {
      * Función que permite consultar si un aire acondicionado ya esta registrada en el sistema.
      * @param string $id_aire, id del aire.
      * @return array
-     */
+    */
     public function verificarIdAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
@@ -3775,7 +3775,7 @@ class modelo_creacion {
      * @param string $id_aire, id del aire.
      * @param file $foto, variable con la información de la foto a guardar.
      * @return array
-     */
+    */
     public function guardarFotoAire($id_aire,$foto){
         if ($foto['error'] == UPLOAD_ERR_OK) {
             $id_aire = htmlspecialchars(trim($id_aire));
@@ -3819,7 +3819,7 @@ class modelo_creacion {
      * Función que permite consultar si una orden de mantenimiento existe.
      * @param string $capacidad, capacidad.
      * @return array
-     */
+    */
     public function verificarOrdenMantenimiento($numero_orden){
         $numero_orden = htmlspecialchars(trim($numero_orden));
         $sql = "SELECT * FROM solicitudes_mantenimiento WHERE numero_solicitud = '".$numero_orden."';";
@@ -3849,7 +3849,7 @@ class modelo_creacion {
      * Función que permite consultar si una capacidad de aires acondicionados ya esta registrada en el sistema.
      * @param string $capacidad, capacidad.
      * @return array
-     */
+    */
     public function verificarCapacidadAire($capacidad){
         $capacidad = htmlspecialchars(trim($capacidad));
         $sql = "SELECT * FROM capacidad_aire WHERE capacidad = '".$capacidad."';";
@@ -3878,7 +3878,7 @@ class modelo_creacion {
      * Función que permite consultar si una marca de aires acondicionados ya esta registrada en el sistema.
      * @param string $marca, marca de aire acondicionado.
      * @return array
-     */
+    */
     public function verificarMarcaAire($marca){
         $marca = htmlspecialchars(trim($marca));
         $sql = "SELECT * FROM marca_aire WHERE nombre = '".$marca."';";
@@ -3908,10 +3908,11 @@ class modelo_creacion {
      * @param string $id_aire, id del aire.
      * @param string $numero_orden, número de orden de mantenimiento.
      * @return array
-     */
+    */
     public function verificarMantenimientoAire($id_aire,$numero_orden){
-        $marca = htmlspecialchars(trim($marca));
-        $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$numero_orden"';";
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $numero_orden = htmlspecialchars(trim($numero_orden));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$numero_orden."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Mantenimiento Aire 1)";
@@ -3937,7 +3938,7 @@ class modelo_creacion {
      * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
      * @param string $nombre_campus, nombre del campus.
      * @return array
-     */
+    */
     public function obtenerIdCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));

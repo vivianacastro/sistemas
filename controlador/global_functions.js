@@ -95,6 +95,10 @@ $(document).ready(function () {
 			$('#option_consultar_tipo_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_tecnologia_aire') >= 0)) {
 			$('#option_consultar_tecnologia_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_id_aire') >= 0)) {
+			$('#option_consultar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_numero_orden') >= 0)) {
+			$('#option_consultar_mantenimiento_aire_numero_orden').addClass("opcion_activa_seleccion");
 		}
 	}else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
 		$('#inventario').addClass("opcion_activa");

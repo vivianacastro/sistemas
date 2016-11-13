@@ -408,7 +408,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar una sede en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_sede(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -431,7 +431,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar un campus en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -454,7 +454,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar un edificio en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -477,7 +477,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar una cancha en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -500,7 +500,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar un corredor en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -523,7 +523,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar una cubierta en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -546,7 +546,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar unas gradas en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -569,7 +569,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar un parqueadero en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -592,7 +592,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar una piscina en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -615,7 +615,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar una plazoleta en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -638,7 +638,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar un sendero en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -661,7 +661,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar una vía en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -684,7 +684,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar un espacio en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -746,7 +746,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar un tipo de material en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_tipo_material(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -769,7 +769,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar un tipo de material en el sistema
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_tipo_objeto(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -792,7 +792,7 @@ class controlador_creacion
     /**
      * Funcion que permite verificar si un espacio se encuentra registrado en el sistema.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function verificar_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -812,7 +812,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -841,7 +841,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -870,7 +870,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -894,7 +894,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -918,7 +918,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -942,7 +942,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -966,7 +966,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -990,7 +990,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1014,7 +1014,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1038,7 +1038,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1062,7 +1062,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1086,7 +1086,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1110,7 +1110,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1134,7 +1134,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1158,7 +1158,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1182,7 +1182,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1206,7 +1206,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1231,7 +1231,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1255,7 +1255,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1279,7 +1279,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1303,7 +1303,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1327,7 +1327,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1351,7 +1351,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar los planos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_planos_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1375,7 +1375,7 @@ class controlador_creacion
     /**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1399,7 +1399,7 @@ class controlador_creacion
 	/**
      * Funcion que permite crear un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1422,7 +1422,7 @@ class controlador_creacion
 	/**
      * Funcion que permite guardar las fotos que el usuario seleccione.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_fotos_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1446,7 +1446,7 @@ class controlador_creacion
 	/**
      * Funcion que permite crear una capacidad de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_capacidad_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1469,7 +1469,7 @@ class controlador_creacion
 	/**
      * Funcion que permite crear una marca de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_marca_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1492,7 +1492,7 @@ class controlador_creacion
 	/**
      * Funcion que permite crear un tipo de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_tipo_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1515,7 +1515,7 @@ class controlador_creacion
 	/**
      * Funcion que permite crear una tecnología de un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_tecnologia_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1538,7 +1538,7 @@ class controlador_creacion
 	/**
      * Funcion que permite registrar un mantenimiento a un aire acondicionado.
      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-     */
+    */
     public function guardar_mantenimiento_aire(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
