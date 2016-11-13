@@ -47,7 +47,7 @@ html, body {
     color: white;
 }
 
-.btn-busqueda:hover{
+.btn-busqueda:hover, .btn-busqueda:focus{
     background-color: #e15661;
     color: white;
 }

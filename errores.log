@@ -5381,3 +5381,7 @@
 [11-Nov-2016 17:25:32 America/Bogota] PHP Notice:  Undefined variable: result in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2891
 [11-Nov-2016 17:25:32 America/Bogota] PHP Warning:  Invalid argument supplied for foreach() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2420
 [11-Nov-2016 17:28:43 America/Bogota] PHP Notice:  Undefined index: tipo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1618
+[12-Nov-2016 22:01:30 America/Bogota] PHP Notice:  Undefined index: numero_inventario in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1557
+[12-Nov-2016 22:05:49 America/Bogota] PHP Fatal error:  Call to undefined method modelo_creacion::verificarOrdenMantenimiento() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1553
+[12-Nov-2016 22:07:02 America/Bogota] PHP Notice:  Undefined index: descripcion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1555
+[12-Nov-2016 22:11:51 America/Bogota] PHP Notice:  Undefined index: descripcion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1555

@@ -4417,29 +4417,47 @@ $(document).ready(function() {
     $("#guardar_mantenimiento_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del mantenimiento al aire acondicionado?");
         if (confirmacion) {
-            var numeroInventario = limpiarCadena($("#numero_inventario").val());
+            var idAire = limpiarCadena($("#id_aire").val());
             var numeroOrden = limpiarCadena($("#numero_orden").val());
+            var fechaRealizacion = $("#fecha_realizacion").val();
+            var realizado = limpiarCadena($("#realizado").val());
+            var revisado = limpiarCadena($("#revisado").val());
             var descripcionTrabajo = limpiarCadena($("#descripcion_trabajo").val());
-            if (!validarCadena(numeroInventario)) {
-                alert("ERROR. Ingrese el número de inventario del aire acondicionado");
-                $("#numero_inventario").focus();
+            if (!validarCadena(idAire)) {
+                alert("ERROR. Ingrese el id del aire acondicionado");
+                $("#id_aire").focus();
             }else if(!validarCadena(numeroOrden)){
-                alert("ERROR. Ingrese el número de la orden de mantenimiento");
+                alert("ERROR. Ingrese el número de la solicitud de mantenimiento");
                 $("#numero_orden").focus();
+            }else if(!validarCadena(fechaRealizacion)){
+                alert("ERROR. Ingrese la fecha de realización de la solicitud de mantenimiento");
+                $("#fecha_realizacion").focus();
+            }else if(!validarCadena(realizado)){
+                alert("ERROR. Ingrese la persona que realizó la solicitud de mantenimiento");
+                $("#realizado").focus();
+            }else if(!validarCadena(revisado)){
+                alert("ERROR. Ingrese la persona que revisó la solicitud de mantenimiento");
+                $("#revisado").focus();
             }else if(!validarCadena(descripcionTrabajo)){
                 alert("ERROR. Ingrese una descripción del trabajo realizado en el aire acondicionado");
                 $("#descripcion_trabajo").focus();
             }else{
                 var informacion = {};
-                informacion["numero_inventario"] = numeroInventario;
+                informacion["id_aire"] = idAire;
                 informacion["numero_orden"] = numeroOrden;
-                informacion["descripcion_trabajo"] = descripcionTrabajo;
+                informacion["fecha_realizacion"] = fechaRealizacion;
+                informacion["realizado"] = realizado;
+                informacion["revisado"] = revisado;
+                informacion["descripcion"] = descripcionTrabajo;
                 var data = guardarObjeto("mantenimiento_aire",informacion);
                 alert(data.mensaje);
                 console.log(data);
                 if (data.verificar) {
-                    $("#numero_inventario").val("");
+                    $("#id_aire").val("");
                     $("#numero_orden").val("");
+                    $("#fecha_realizacion").val("");
+                    $("#realizado").val("");
+                    $("#revisado").val("");
                     $("#descripcion_trabajo").val("");
                     window.scrollTo(0,0);
                 }

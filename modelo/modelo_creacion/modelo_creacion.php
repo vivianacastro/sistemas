@@ -2286,12 +2286,12 @@ class modelo_creacion {
     }
 
     /**
-    * Función que permite guardar planos de una cubierta que el usuario selecionó.
-    * @param string $id_sede, variable con la información de la sede.
-    * @param string $id_campus, variable con la información del campus.
-    * @param string $id_edificio, id del edificio.
-    * @param string $piso, piso del edificio.
-    * @param file $plano, variable con la información del plano a guardar.
+     * Función que permite guardar planos de una cubierta que el usuario selecionó.
+     * @param string $id_sede, variable con la información de la sede.
+     * @param string $id_campus, variable con la información del campus.
+     * @param string $id_edificio, id del edificio.
+     * @param string $piso, piso del edificio.
+     * @param file $plano, variable con la información del plano a guardar.
      * @return array
      */
     public function guardarFotoCubierta($id_sede,$id_campus,$id_edificio,$piso,$foto){
@@ -3184,6 +3184,36 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de un mantenimiento de un aire acondiciondo.
+     * @param string $tipo, tipo de aire acondicionado.
+     * @return array
+     */
+    public function guardarMantenimientoAire($id_aire,$numero_orden,$fecha_realizacion,$realizado,$revisado,$descripcion){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $numero_orden = htmlspecialchars(trim($numero_orden));
+        $fecha_realizacion = htmlspecialchars(trim($fecha_realizacion));
+        $realizado = htmlspecialchars(trim($realizado));
+        $revisado = htmlspecialchars(trim($revisado));
+        $descripcion = htmlspecialchars(trim($descripcion));
+        $sql = "INSERT INTO mantenimiento_aire (id_aire,numero_orden,fecha,realizado,revisado,descripcion,usuario_crea) VALUES ('".$id_aire."','".$numero_orden."','".$fecha_realizacion."','".$realizado."','".$revisado."','".$descripcion."','".$_SESSION["login"]."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Mantenimiento Aire Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Mantenimiento Aire Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El mantenimiento del aire acondicionado se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
@@ -3680,7 +3710,7 @@ class modelo_creacion {
 
     /**
      * Función que permite consultar si un aire acondicionado ya esta registrada en el sistema.
-     * @param string $capacidad, capacidad.
+     * @param string $numero_inventario, número de inventario del aire.
      * @return array
      */
     public function verificarAire($numero_inventario){
@@ -3707,6 +3737,35 @@ class modelo_creacion {
                     $GLOBALS['sql'] = $sql;
                     return true;
                 }
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un aire acondicionado ya esta registrada en el sistema.
+     * @param string $id_aire, id del aire.
+     * @return array
+     */
+    public function verificarIdAire($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM aire_acondicionado WHERE id_aire = '".$id_aire."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado Id 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Aire Acondicionado Id 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return false;
             }
         }
     }
@@ -3763,7 +3822,7 @@ class modelo_creacion {
      */
     public function verificarOrdenMantenimiento($numero_orden){
         $numero_orden = htmlspecialchars(trim($numero_orden));
-        $sql = "SELECT * FROM ordenes_mantenimiento WHERE numero_solicitud = '".$numero_orden."';";
+        $sql = "SELECT * FROM solicitudes_mantenimiento WHERE numero_solicitud = '".$numero_orden."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Orden Mantenimiento 1)";
@@ -3835,6 +3894,35 @@ class modelo_creacion {
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "ERROR. La marca de aires acondicionados ya se encuentra regisrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un mantenimiento a un aire acondicionado ya esta registrado en el sistema.
+     * @param string $id_aire, id del aire.
+     * @param string $numero_orden, número de orden de mantenimiento.
+     * @return array
+     */
+    public function verificarMantenimientoAire($id_aire,$numero_orden){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$numero_orden"';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Mantenimiento Aire 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Mantenimiento Aire 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
                 return false;
             }
             else{
