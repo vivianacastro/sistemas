@@ -28,3 +28,34 @@
         <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_mantenimiento_aire' id='guardar_mantenimiento_aire' value='Registrar Mantenimiento' title='Guardar información del Mantenimineto al Aire Acondicionado'/>
     </div>
 </div>
+<div class='modal fade' role='dialog' id='divDialogAiresEspacio'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Buscar Aire Acondicionado</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionAire'>
+                        <div class='div_izquierda'><b>Sede<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='nombre_sede' id='nombre_sede' required></select><br>
+                        <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='nombre_campus' id='nombre_campus' required></select><br>
+                        <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='nombre_edificio' id='nombre_edificio' required></select><br>
+                        <div class='div_izquierda'><b>Piso<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='pisos' id='pisos' required></select><br>
+                        <div class='div_izquierda'><b>Espacio<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='id_espacio' id='id_espacio' required></select><br>
+                        <div class='div_izquierda'><b>Id Aire - N&uacute;mero Inventario<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='id_aire_search' id='id_aire_search' required></select>
+                    </div>
+                </div>
+                <div class='form_button modal-footer'>
+                    <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='seleccionar_aire' id='seleccionar_aire' value='Seleccionar Aire' title='Seleccionar el Aire Acondicionado'/ disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
