@@ -312,6 +312,7 @@ $map = array(
         'modificar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_aire'),
         'modificar_capacidad_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_capacidad_aire'),
         'modificar_marca_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_marca_aire'),
+        'modificar_mantenimiento_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_mantenimiento_aire'),
         'eliminar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_aire'),
         'eliminar_mantenimiento_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_mantenimiento_aire'),
         'eliminar_foto_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_aire'),

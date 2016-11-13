@@ -5396,3 +5396,4 @@
 [13-Nov-2016 15:58:12 America/Bogota] PHP Notice:  Undefined index: descripcion_trabajo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 2071
 [13-Nov-2016 16:08:22 America/Bogota] PHP Notice:  Undefined index: fecha_realizacion in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1116
 [13-Nov-2016 16:08:22 America/Bogota] PHP Notice:  Undefined index: descripcion_trabajo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1119
+[13-Nov-2016 16:34:39 America/Bogota] PHP Notice:  Undefined variable: usoEspacio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 5185

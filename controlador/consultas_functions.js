@@ -5020,6 +5020,10 @@ $(document).ready(function() {
         $("#instalador").attr('disabled',true);
         $("#tipo_periodicidad_mantenimiento").attr('disabled',true);
         $("#ubicacion_condensadora").attr('disabled',true);
+        $("#fecha_realizacion").attr('disabled',true);
+        $("#realizado").attr('disabled',true);
+        $("#revisado").attr('disabled',true);
+        $("#descripcion_trabajo").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -5708,6 +5712,20 @@ $(document).ready(function() {
         $("#tecnologia_aire_nuevo").removeAttr("disabled");
         $("#modificar_tecnologia_aire").hide();
         $("#guardar_modificaciones_tecnologia_aire").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
+    */
+    $("#modificar_mantenimiento_aire").click(function (e){
+        $("#fecha_realizacion").removeAttr("disabled");
+        $("#realizado").removeAttr("disabled");
+        $("#revisado").removeAttr("disabled");
+        $("#descripcion_trabajo").removeAttr("disabled");
+        $("#modificar_mantenimiento_aire").hide();
+        $("#guardar_modificaciones_mantenimiento_aire").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 
@@ -10806,6 +10824,50 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
+    */
+    $("#guardar_modificaciones_mantenimiento_aire").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del mantenimiento del aire acondicionado?");
+        if (confirmacion) {
+            var informacion = {};
+            var idAire = $("#id_aire").val();
+            var numeroOrden = $("#numero_orden").val();
+            var fecha = limpiarCadena($("#fecha_realizacion").val());
+            var realizado = limpiarCadena($("#realizado").val());
+            var revisado = limpiarCadena($("#revisado").val());
+            var descripcion = limpiarCadena($("#descripcion_trabajo").val());
+            informacion["id_aire"] = idAire;
+            informacion["numero_orden"] = numeroOrden;
+            informacion["fecha"] = fecha;
+            informacion["realizado"] = realizado;
+            informacion["revisado"] = revisado;
+            informacion["descripcion"] = descripcion;
+            if (!validarCadena(fecha)) {
+                alert("ERROR. Ingrese la fecha en que se realizó el mantenimiento");
+                $("#fecha_realizacion").focus();
+            }else if (!validarCadena(realizado)) {
+                alert("ERROR. Ingrese el nombre de la persona que realizó el mantenimiento");
+                $("#realizado").focus();
+            }else if (!validarCadena(revisado)) {
+                alert("ERROR. Ingrese el nombre de la persona que revisó el mantenimiento");
+                $("#revisado").focus();
+            }else if (!validarCadena(descripcion)) {
+                alert("ERROR. Ingrese la descripción del trabajo realizado en el mantenimiento del aire acondicionado");
+                $("#descripcion_trabajo").focus();
+            }else{
+                var data = modificarObjeto("mantenimiento_aire",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#id_aire_search").val("").change();
+                    $("#numero_orden_search").val("");
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
      * Se captura el evento cuando de dar click en el botón eliminar_sede y se
      * realiza la operacion correspondiente.
     */
@@ -11163,13 +11225,14 @@ $(document).ready(function() {
             var idAire = $("#id_aire").val();
             var idOrden = $("#numero_orden").val();
             informacion["id_aire"] = idAire;
-            informacion["id_orden"] = idOrden;
+            informacion["numero_orden"] = idOrden;
             var data = eliminarObjeto("mantenimiento_aire",informacion);
             console.log(informacion);
             console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
-                $("#sede_search").val("").change();
+                $("#id_aire_search").val("").change();
+                $("#numero_orden_search").val("");
                 $("#divDialogConsulta").modal('hide');
             }
         }
