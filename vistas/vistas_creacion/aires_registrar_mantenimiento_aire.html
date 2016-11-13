@@ -4,10 +4,23 @@
         <div><b><h2>Registrar Mantenimiento Aire Acondicionado</h2></b><br></div>
         <div><h4><b>Informaci&oacute;n del Trabajo Realizado</b></h4></div>
         <div>Campos obligatorios (<font color='red'>*</font>)</div>
-        <div class='div_izquierda'><b>N&uacute;mero inventario del Aire Acondicionado<font color='red'>*</font>:</b></div>
-        <input class='form-control formulario' type='text' maxlength="50" name='numero_inventario' id='numero_inventario' value='' placeholder='Ej: 10000' required/><br>
+        <div class='div_izquierda'><b>Id Aire Acondicionado<font color='red'>*</font>:</b></div>
+        <div>
+            <div class="input-group">
+              <input class='form-control formulario' type='text' maxlength="10" name='id_aire' id='id_aire' value='' placeholder='Ej: 2' required/>
+              <span class="input-group-btn">
+                <button class="btn btn-secondary btn-busqueda" type="button" name='buscar_aire' id='buscar_aire' title='Buscar Id Aire Acondicionado'>Buscar Id Aire</button>
+              </span>
+            </div>
+        </div><br>
         <div class='div_izquierda'><b>Número solicitud<font color='red'>*</font>:</b></div>
         <input class='form-control formulario' type='text' maxlength="10" name='numero_orden' id='numero_orden' value='' placeholder='Ej: 5760' required/><br>
+        <div class='div_izquierda'><b>Fecha Realizaci&oacute;n<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_realizacion' id='fecha_realizacion' value='' required/><br>
+        <div class='div_izquierda'><b>Realizado por<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' maxlength="100" name='realizado' id='realizado' value='' required/><br>
+        <div class='div_izquierda'><b>Revisado por<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' maxlength="100" name='revisado' id='revisado' value='' required/><br>
         <div class='div_izquierda'><b>Descripci&oacute;n del trabajo realizado<font color='red'>*</font>:</b></div>
         <textarea class='form-control formulario' name='descripcion_trabajo' id='descripcion_trabajo' rows="6" style="resize: none"></textarea>
     </div><br>

@@ -1564,9 +1564,9 @@ class controlador_creacion
     }
 
 	/**
-	* Funcion que permite verificar si una capacidad de aires acondicionados ya existe en el sistema.
-	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	*/
+	 * Funcion que permite verificar si una capacidad de aires acondicionados ya existe en el sistema.
+	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	 */
 	public function verificar_capacidad_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
@@ -1584,9 +1584,9 @@ class controlador_creacion
 	}
 
 	/**
-	* Funcion que permite verificar si una marca de aires acondicionados ya existe en el sistema.
-	* @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	*/
+	 * Funcion que permite verificar si una marca de aires acondicionados ya existe en el sistema.
+	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+	 */
 	public function verificar_marca_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
