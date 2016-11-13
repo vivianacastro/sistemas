@@ -1108,15 +1108,15 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarMantenimientoAire($info["id_aire"]);
+            $data = $m->buscarMantenimientosAire($info["id_aire"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_aire' => $valor['id_aire'],
                     'numero_orden' => $valor['numero_orden'],
-                    'fecha_realizacion' => substr($valor['fecha_realizacion'],0,10),
+                    'fecha_realizacion' => substr($valor['fecha'],0,10),
                     'realizado' => mb_convert_case($valor['realizado'],MB_CASE_TITLE,"UTF-8"),
                     'revisado' => mb_convert_case($valor['revisado'],MB_CASE_TITLE,"UTF-8"),
-                    'descripcion_trabajo' => ucfirst($valor['descripcion_trabajo']),
+                    'descripcion_trabajo' => ucfirst($valor['descripcion']),
                 );
                 array_push($result, $arrayAux);
             }

@@ -1783,8 +1783,8 @@ $(document).ready(function() {
                 var row = $("<option value=''/>");
                 informacion["id_aire"] = idAire;
                 var data = buscarObjetos("mantenimientos_aire",informacion);
+                console.log(data);
                 $("#numero_orden_search").empty();
-                $("#numero_orden_search").val("");
                 row.text("--Seleccionar--");
                 row.appendTo("#numero_orden_search");
                 $.each(data, function(index, record) {
