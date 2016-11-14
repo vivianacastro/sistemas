@@ -2520,18 +2520,19 @@ class modelo_consultas
         $fechaInicio = htmlspecialchars(trim($fechaInicio));
         $fechaFin = htmlspecialchars(trim($fechaFin));
         if (strcmp($id_sede,"todos") == 0) {
-            $where = "WHERE fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }elseif(strcmp($id_campus,"todos") == 0){
-            $where = "WHERE id_sede = '".$id_sede."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }elseif(strcmp($id_edificio,"todos") == 0){
-            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }else{
-            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }
-        $sql = "SELECT count(id_aire) AS conteo, id_aire
-                FROM mantenimiento_aire
+        $sql = "SELECT count(a.id_aire) AS conteo, a.id_aire, b.numero_inventario, c.nombre AS marca
+                FROM mantenimiento_aire a   JOIN aire_acondicionado b ON a.id_aire = b.id_aire
+                                            JOIN marca_aire c ON b.marca = c.id
                 ".$where."
-                GROUP BY id_aire LIMIT 10;";
+                GROUP BY a.id_aire, b.numero_inventario, c.nombre LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Aires Más Mantenimientos 1)";
@@ -2566,13 +2567,13 @@ class modelo_consultas
         $fechaInicio = htmlspecialchars(trim($fechaInicio));
         $fechaFin = htmlspecialchars(trim($fechaFin));
         if (strcmp($id_sede,"todos") == 0) {
-            $where = "WHERE fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE b.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }elseif(strcmp($id_campus,"todos") == 0){
-            $where = "WHERE id_sede = '".$id_sede."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND b.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }elseif(strcmp($id_edificio,"todos") == 0){
-            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND b.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }else{
-            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
+            $where = "WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND b.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'";
         }
         $sql = "SELECT count(a.marca) AS conteo, c.nombre AS marca
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire

@@ -1327,6 +1327,8 @@ class controlador_consultas{
                 $arrayAux = array(
                     'conteo' => $valor['conteo'],
                     'id_aire' => mb_convert_case($valor['id_aire'],MB_CASE_TITLE,"UTF-8"),
+                    'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }

@@ -5296,7 +5296,7 @@ $(document).ready(function() {
         informacion['id_edificio'] = idEdificio;
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  00:00:00";
-        var data = buscarObjetos("tipo_tecnologias_mas_instaladas",informacion);
+        var data = buscarObjetos("marcas_mas_mantenimientos",informacion);
         var total = 0;
         var tipo = "Marcas de Aires Acondicionados con Más Ordenes Mantenimiento";
         var tituloX = "Marca de Aires Acondicionados";
@@ -5314,11 +5314,77 @@ $(document).ready(function() {
                 }
             }
         }
-        subTipo += " Entre "+fechaInicio+" y "+fechaFin;
+        subTipo += " entre el "+fechaInicio+" y el "+fechaFin;
         label = [], informacion = [];
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 label.push(record.marca);
+                informacion.push(record.conteo);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total += aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
+            }
+            var titulo = tipo;
+            var subtitulo = subTipo;
+            var xTitulo = tituloX;
+            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divDialogConsulta").modal('show');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarAiresMasMantenimientos y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarAiresMasMantenimientos").click(function (e){
+        var informacion =  {};
+        var idSede = $("#sede_search").val();
+        var nombreSede = $("#sede_search option:selected").text();
+        var idCampus = $("#campus_search").val();
+        var nombreCampus = $("#campus_search option:selected").text();
+        var idEdificio = $("#edificio_search").val();
+        var nombreEdificio = $("#edificio_search option:selected").text();
+        var fechaInicio = $("#fecha_inicio").val();
+        var fechaFin = $("#fecha_fin").val();
+        informacion['id_sede'] = idSede;
+        informacion['id_campus'] = idCampus;
+        informacion['id_edificio'] = idEdificio;
+        informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
+        informacion['fecha_fin'] = fechaFin + "  00:00:00";
+        var data = buscarObjetos("aires_mas_mantenimientos",informacion);
+        console.log(data);
+        var total = 0;
+        var tipo = "Aires Acondicionados con Más Ordenes Mantenimiento";
+        var tituloX = "Aires Acondicionados";
+        var subTipo;
+        if (nombreSede == 'TODAS') {
+            subTipo = "Todas las Sedes";
+        }else{
+            if (nombreCampus == 'TODOS') {
+                subTipo = "Sede "+nombreSede;
+            }else{
+                if (nombreEdificio == 'TODOS') {
+                    subTipo = "Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }else{
+                    subTipo = "Edificio "+nombreEdificio+" del Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }
+            }
+        }
+        subTipo += " entre el "+fechaInicio+" y el "+fechaFin;
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.id_aire+" - "+record.numero_inventario+" - "+record.marca);
                 informacion.push(record.conteo);
             }
         });
