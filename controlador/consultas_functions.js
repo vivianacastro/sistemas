@@ -120,7 +120,7 @@ $(document).ready(function() {
             actualizarSelectTipoAire("tipo_aire_search");
         }else if(URLactual['href'].indexOf('consultar_tecnologia_aire') >= 0){
             actualizarSelectTecnologiaAire("tecnologia_aire_search");
-        }else if(URLactual['href'].indexOf('mas_marcas_aire') >= 0){
+        }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
             actualizarSelectSede();
         }
     })();
@@ -336,7 +336,6 @@ $(document).ready(function() {
             alert("Ocurrió un error, por favor inténtelo nuevamente");
         }
     }
-
 
     /**
      * Función que realiza una consulta de la informaci&oacute;n de un tipo de objeto en el sistema.
@@ -914,6 +913,74 @@ $(document).ready(function() {
     }
 
     /**
+     *funcion auxiliar que pinta un grafico dado los datos de entrada
+    **/
+    function generarGrafico(titulo,subtitulo,xCategorias,xTitulo,yTitulo,info){
+        $('#divGraficos').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: titulo,
+                style: {
+                     fontweight: 'bolder'
+                }
+            },
+            subtitle: {
+                text: subtitulo
+            },
+            xAxis: {
+                categories: xCategorias,
+                title: {
+                    text: xTitulo,
+                    style: {
+                         color: 'black',
+                         fontweight: 'bolder'
+                    }
+                },
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: yTitulo,
+                    style: {
+                         color: 'black',
+                         fontweight: 'bolder'
+                    },
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: 'Solicitudes: <b>{point.y:.0f}</b>'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: '',
+                data: info,
+                color: '#E60013'
+            }]
+        });
+    }
+
+    /**
      * Se captura el evento cuando se modifica el valor del selector sede_search
      * y se actualiza el selector de sedes.
     **/
@@ -1088,7 +1155,7 @@ $(document).ready(function() {
                     $("#edificio_search").val("");
                     row.text("--Seleccionar--");
                     row.appendTo("#edificio_search");
-                    if(URLactual['href'].indexOf('mas_marcas_aire') >= 0){
+                    if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
                         row = $("<option value='todos'/>");
                         row.text("TODOS");
                         row.appendTo("#edificio_search");
@@ -4916,6 +4983,92 @@ $(document).ready(function() {
         }else{
             alert("ERROR. Ingrese el numero de la orden de mantenimiento");
             $("#numero_orden_search").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarMarcasAiresMasInstaladas y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarMarcasAiresMasInstaladas").click(function (e){
+        var informacion =  {};
+        var idSede = $("#sede_search").val();
+        var idCampus = $("#campus_search").val();
+        var idEdificio = $("#edificio_search").val();
+        informacion['id_sede'] = idSede;
+        informacion['id_campus'] = idCampus;
+        informacion['id_edificio'] = idEdificio;
+        var data = buscarObjetos("marcas_mas_instaladas",informacion);
+        var total = 0;
+        var tipo = "Marcas";
+        console.log(data);
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.marca);
+                informacion.push(record.conteo);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            if (!isNaN(informacion[0])) {
+                aux = parseInt(informacion[0]);
+                total = aux;
+                categorias.push(label[0]);
+                info.push(parseInt(informacion[0]));
+            }if (!isNaN(informacion[1])) {
+                aux = parseInt(informacion[1]);
+                total += aux;
+                categorias.push(label[1]);
+                info.push(parseInt(informacion[1]));
+            }if (!isNaN(informacion[2])) {
+                aux = parseInt(informacion[2]);
+                total += aux;
+                categorias.push(label[2]);
+                info.push(parseInt(informacion[2]));
+            }if (!isNaN(informacion[3])) {
+                aux = parseInt(informacion[3]);
+                total += aux;
+                categorias.push(label[3]);
+                info.push(parseInt(informacion[3]));
+            }if (!isNaN(informacion[4])) {
+                aux = parseInt(informacion[4]);
+                total += aux;
+                categorias.push(label[4]);
+                info.push(parseInt(informacion[4]));
+            }if (!isNaN(informacion[5])) {
+                aux = parseInt(informacion[5]);
+                total += aux;
+                categorias.push(label[5]);
+                info.push(parseInt(informacion[5]));
+            }if (!isNaN(informacion[6])) {
+                aux = parseInt(informacion[6]);
+                total += aux;
+                categorias.push(label[6]);
+                info.push(parseInt(informacion[6]));
+            }if (!isNaN(informacion[7])) {
+                aux = parseInt(informacion[7]);
+                total += aux;
+                categorias.push(label[7]);
+                info.push(parseInt(informacion[7]));
+            }if (!isNaN(informacion[8])) {
+                aux = parseInt(informacion[8]);
+                total += aux;
+                categorias.push(label[8]);
+                info.push(parseInt(informacion[8]));
+            }if (!isNaN(informacion[9])) {
+                aux = parseInt(informacion[9]);
+                total += aux;
+                categorias.push(label[9]);
+                info.push(parseInt(informacion[9]));
+            }
+            var titulo = tipo + " más Instaladas";
+            var subtitulo = "";
+            var xTitulo = tipo;
+            var yTitulo = 'Número de Aires (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divGrafico").show();
         }
     });
 

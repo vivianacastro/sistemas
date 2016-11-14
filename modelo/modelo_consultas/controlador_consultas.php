@@ -1262,6 +1262,106 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar las estadísticas del módulo de aires.
+    **/
+    public function consultar_tipos_mas_instaladas() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarTiposMasInstalados($info["id_sede"],$info["id_campus"],$info["id_edificio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'conteo' => $valor['conteo'],
+                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las estadísticas del módulo de aires.
+    **/
+    public function consultar_tipo_tecnologias_mas_instaladas() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarTipoTecnologiasMasInstaladas($info["id_sede"],$info["id_campus"],$info["id_edificio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'conteo' => $valor['conteo'],
+                    'tecnologia' => mb_convert_case($valor['tecnologia'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las estadísticas del módulo de aires.
+    **/
+    public function consultar_aires_mas_mantenimientos() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarAiresMasMantenimientos($info["id_sede"],$info["id_campus"],$info["id_edificio"],$info["fecha_inicio"],$info["fecha_fin"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'conteo' => $valor['conteo'],
+                    'id_aire' => mb_convert_case($valor['id_aire'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las estadísticas del módulo de aires.
+    **/
+    public function consultar_marcas_mas_mantenimientos() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarMarcasMasMantenimientos($info["id_sede"],$info["id_campus"],$info["id_edificio"],$info["fecha_inicio"],$info["fecha_fin"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'conteo' => $valor['conteo'],
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar la ubicación de un campus.
     **/
     public function ubicacion_campus() {

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Buscar las Marcas de Aires Acondicionados M&aacute;s Instaladas</h2></b><br></div>
+        <div class='div_izquierda'><b>Sede<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
+        <div id="divCampus" style="display:none">
+            <div class='div_izquierda'><b>Campus<font color='red'>*</font>:</b></div>
+            <select class='form-control formulario' name='campus_search' id='campus_search' required></select><br>
+        </div>
+        <div id="divEdificio" style="display:none">
+            <div class='div_izquierda'><b>Edificio<font color='red'>*</font>:</b></div>
+            <select class='form-control formulario' name='edificio_search' id='edificio_search' required></select><br>
+        </div>
+        <div class='div_izquierda'><b>Fecha Inicio:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_inicio' id='fecha_inicio' value='' required/><br>
+        <div class='div_izquierda'><b>Fecha Fin:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_fin' id='fecha_fin' value='' required/><br>
+    <div><br>
+    <div class='form_button'>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarMarcasAiresMasInstaladas" id="visualizarMarcasAiresMasInstaladas" value="Ver Estadística" title="Ver la información de las Marcas de Aires Acondicionados Más Instaladas" disabled/>
+    </div>
+</div>
+<div id="divGrafico" class="container-fluid" style="display:none"><canvas id="myChart"></canvas></div>

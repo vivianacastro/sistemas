@@ -313,6 +313,11 @@ $map = array(
         'consultar_mantenimientos_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_mantenimientos_aire'),
         'consultar_capacidades_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_capacidades_aire'),
         'consultar_marcas_aire' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_aire'),
+        'consultar_marcas_mas_instaladas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_mas_instaladas'),
+        'consultar_tipos_mas_instaladas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipos_mas_instaladas'),
+        'consultar_tipo_tecnologias_mas_instaladas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_tipo_tecnologias_mas_instaladas'),
+        'consultar_aires_mas_mantenimientos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_aires_mas_mantenimientos'),
+        'consultar_marcas_mas_mantenimientos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas_mas_mantenimientos'),
         //Acciones de modificación
         'modificar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_aire'),
         'modificar_capacidad_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_capacidad_aire'),
