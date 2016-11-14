@@ -916,7 +916,7 @@ $(document).ready(function() {
      *funcion auxiliar que pinta un grafico dado los datos de entrada
     **/
     function generarGrafico(titulo,subtitulo,xCategorias,xTitulo,yTitulo,info){
-        $('#divGraficos').highcharts({
+        $('#divGrafico').highcharts({
             chart: {
                 type: 'column'
             },
@@ -5009,6 +5009,8 @@ $(document).ready(function() {
                 informacion.push(record.conteo);
             }
         });
+        console.log(label);
+        console.log(informacion);
         if(data != null){
             var aux;
             var categorias = [], info = [];

@@ -2397,7 +2397,7 @@ class modelo_consultas
         }
         $sql = "SELECT count(a.marca) AS conteo, c.nombre AS marca
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire
-                                            JOIN marca_aire c ON a.marca = c.nombre
+                                            JOIN marca_aire c ON a.marca = c.id
                 ".$where."
                 GROUP BY a.marca, c.nombre LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
