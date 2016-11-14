@@ -14,7 +14,21 @@
         </div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarMarcasAiresMasInstaladas" id="visualizarMarcasAiresMasInstaladas" value="Ver Estadística" title="Ver la información de las Marcas de Aires Acondicionados Más Instaladas" disabled/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarMarcasAiresMasInstaladas" id="visualizarMarcasAiresMasInstaladas" value="Ver Estadística" title="Ver la información de las marcas de aires acondicionados más instaladas" disabled/>
     </div>
 </div>
-<div id="divGrafico" class="container-fluid" style="display:none"><canvas id="myChart"></canvas></div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Marcas con M&aacute;s Mantenimientos</h4>
+            </div>
+            <div class='modal-body'>
+                <div id="divGrafico" class="container-fluid">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

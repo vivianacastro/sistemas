@@ -958,7 +958,7 @@ $(document).ready(function() {
                 enabled: false
             },
             tooltip: {
-                pointFormat: 'Solicitudes: <b>{point.y:.0f}</b>'
+                pointFormat: 'Aires: <b>{point.y:.0f}</b>'
             },
             plotOptions: {
                 column: {
@@ -975,7 +975,7 @@ $(document).ready(function() {
             series: [{
                 name: '',
                 data: info,
-                color: '#E60013'
+                color: '#D51B23'
             }]
         });
     }
@@ -5001,7 +5001,6 @@ $(document).ready(function() {
         var data = buscarObjetos("marcas_mas_instaladas",informacion);
         var total = 0;
         var tipo = "Marcas";
-        console.log(data);
         label = [], informacion = [];
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -5009,68 +5008,23 @@ $(document).ready(function() {
                 informacion.push(record.conteo);
             }
         });
-        console.log(label);
-        console.log(informacion);
         if(data != null){
             var aux;
             var categorias = [], info = [];
-            if (!isNaN(informacion[0])) {
-                aux = parseInt(informacion[0]);
-                total = aux;
-                categorias.push(label[0]);
-                info.push(parseInt(informacion[0]));
-            }if (!isNaN(informacion[1])) {
-                aux = parseInt(informacion[1]);
-                total += aux;
-                categorias.push(label[1]);
-                info.push(parseInt(informacion[1]));
-            }if (!isNaN(informacion[2])) {
-                aux = parseInt(informacion[2]);
-                total += aux;
-                categorias.push(label[2]);
-                info.push(parseInt(informacion[2]));
-            }if (!isNaN(informacion[3])) {
-                aux = parseInt(informacion[3]);
-                total += aux;
-                categorias.push(label[3]);
-                info.push(parseInt(informacion[3]));
-            }if (!isNaN(informacion[4])) {
-                aux = parseInt(informacion[4]);
-                total += aux;
-                categorias.push(label[4]);
-                info.push(parseInt(informacion[4]));
-            }if (!isNaN(informacion[5])) {
-                aux = parseInt(informacion[5]);
-                total += aux;
-                categorias.push(label[5]);
-                info.push(parseInt(informacion[5]));
-            }if (!isNaN(informacion[6])) {
-                aux = parseInt(informacion[6]);
-                total += aux;
-                categorias.push(label[6]);
-                info.push(parseInt(informacion[6]));
-            }if (!isNaN(informacion[7])) {
-                aux = parseInt(informacion[7]);
-                total += aux;
-                categorias.push(label[7]);
-                info.push(parseInt(informacion[7]));
-            }if (!isNaN(informacion[8])) {
-                aux = parseInt(informacion[8]);
-                total += aux;
-                categorias.push(label[8]);
-                info.push(parseInt(informacion[8]));
-            }if (!isNaN(informacion[9])) {
-                aux = parseInt(informacion[9]);
-                total += aux;
-                categorias.push(label[9]);
-                info.push(parseInt(informacion[9]));
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total = aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
             }
-            var titulo = tipo + " más Instaladas";
+            var titulo = tipo + " Más Instaladas";
             var subtitulo = "";
             var xTitulo = tipo;
             var yTitulo = 'Número de Aires (Total: '+total+')';
             generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
-            $("#divGrafico").show();
+            $("#divDialogConsulta").modal('show');
         }
     });
 
