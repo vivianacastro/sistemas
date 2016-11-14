@@ -5410,3 +5410,6 @@
 [14-Nov-2016 01:28:28 America/Bogota] PHP Notice:  Undefined index: id_sede in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1250
 [14-Nov-2016 01:28:28 America/Bogota] PHP Notice:  Undefined index: id_campus in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1250
 [14-Nov-2016 01:28:28 America/Bogota] PHP Notice:  Undefined index: id_edificio in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1250
+[14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304
+[14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304
+[14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304

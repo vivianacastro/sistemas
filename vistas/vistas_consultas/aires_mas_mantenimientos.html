@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div>
     <div class='form-group'>
-        <div><b><h2>Buscar las Marcas de Aires Acondicionados M&aacute;s Instaladas</h2></b><br></div>
+        <div><b><h2>Buscar los Aires Acondicionados con M&aacute;s Mantenimientos</h2></b><br></div>
         <div class='div_izquierda'><b>Sede<font color='red'>*</font>:</b></div>
         <select class='form-control formulario' name='sede_search' id='sede_search' required></select><br>
         <div id="divCampus" style="display:none">
@@ -18,7 +18,7 @@
         <input class='form-control formulario' type='date' name='fecha_fin' id='fecha_fin' value='' required/><br>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarMarcasAiresMasInstaladas" id="visualizarMarcasAiresMasInstaladas" value="Ver Estadística" title="Ver la información de las marcas de aires acondicionados más instaladas" disabled/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarAiresMasMantenimientos" id="visualizarAiresMasMantenimientos" value="Ver Estadística" title="Ver la información de los aires acondicionados con más mantenimientos" disabled/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -26,7 +26,7 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Marcas con M&aacute;s Aires Acondicionados Instalados</h4>
+              <h4 class='modal-title'>Aires Acondicionados con M&aacute;s Mantenimientos</h4>
             </div>
             <div class='modal-body'>
                 <div id="divGrafico" class="container-fluid">

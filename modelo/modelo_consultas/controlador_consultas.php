@@ -1264,7 +1264,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar las estadísticas del módulo de aires.
     **/
-    public function consultar_tipos_mas_instaladas() {
+    public function consultar_tipos_mas_instalados() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1301,7 +1301,7 @@ class controlador_consultas{
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'conteo' => $valor['conteo'],
-                    'tecnologia' => mb_convert_case($valor['tecnologia'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }

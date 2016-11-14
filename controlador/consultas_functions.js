@@ -958,7 +958,7 @@ $(document).ready(function() {
                 enabled: false
             },
             tooltip: {
-                pointFormat: 'Aires: <b>{point.y:.0f}</b>'
+                pointFormat: 'Aires Acondicionados: <b>{point.y:.0f}</b>'
             },
             plotOptions: {
                 column: {
@@ -1010,9 +1010,18 @@ $(document).ready(function() {
                         if ($("#sede_search").val() != 'todos') {
                             $("#divCampus").show();
                             $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
+                            $('#visualizarTiposAiresMasInstalados').attr('disabled',true);
+                            $('#visualizarTipoTecnologiasAiresMasInstaladas').attr('disabled',true);
+                            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
                         }else{
                             $("#divCampus").hide();
-                            $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+                            $("#divEdificio").hide();
+                            $('#visualizarMarcasAiresMasInstaladas').removeAttr("disabled");
+                            $('#visualizarTiposAiresMasInstalados').removeAttr("disabled");
+                            $('#visualizarTipoTecnologiasAiresMasInstaladas').removeAttr("disabled");
+                            $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                         }
                     }
                     $.each(data, function(index, record) {
@@ -1162,9 +1171,17 @@ $(document).ready(function() {
                         if ($("#campus_search").val() != 'todos') {
                             $("#divEdificio").show();
                             $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
+                            $('#visualizarTiposAiresMasInstalados').attr('disabled',true);
+                            $('#visualizarTipoTecnologiasAiresMasInstaladas').attr('disabled',true);
+                            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
                         }else{
                             $("#divEdificio").hide();
-                            $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+                            $('#visualizarMarcasAiresMasInstaladas').removeAttr("disabled");
+                            $('#visualizarTiposAiresMasInstalados').removeAttr("disabled");
+                            $('#visualizarTipoTecnologiasAiresMasInstaladas').removeAttr("disabled");
+                            $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                         }
                     }
                     $.each(data, function(index, record) {
@@ -1639,9 +1656,17 @@ $(document).ready(function() {
             }
         }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
             if (validarCadena($("#edificio_search").val())){
-                $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+                $('#visualizarMarcasAiresMasInstaladas').removeAttr("disabled");
+                $('#visualizarTiposAiresMasInstalados').removeAttr("disabled");
+                $('#visualizarTipoTecnologiasAiresMasInstaladas').removeAttr("disabled");
+                $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
             }else{
                 $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
+                $('#visualizarTiposAiresMasInstalados').attr('disabled',true);
+                $('#visualizarTipoTecnologiasAiresMasInstaladas').attr('disabled',true);
+                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
             }
         }else{
             var edificio = {};
@@ -4993,14 +5018,31 @@ $(document).ready(function() {
     $("#visualizarMarcasAiresMasInstaladas").click(function (e){
         var informacion =  {};
         var idSede = $("#sede_search").val();
+        var nombreSede = $("#sede_search option:selected").text();
         var idCampus = $("#campus_search").val();
+        var nombreCampus = $("#campus_search option:selected").text();
         var idEdificio = $("#edificio_search").val();
+        var nombreEdificio = $("#edificio_search option:selected").text();
         informacion['id_sede'] = idSede;
         informacion['id_campus'] = idCampus;
         informacion['id_edificio'] = idEdificio;
         var data = buscarObjetos("marcas_mas_instaladas",informacion);
         var total = 0;
-        var tipo = "Marcas";
+        var tipo = "Marcas de Aires Acondicionados Más Instaladas";
+        var tituloX = "Marca de Aires Acondicionados";
+        if (nombreSede == 'TODAS') {
+            subTipo = "Todas las Sedes";
+        }else{
+            if (nombreCampus == 'TODOS') {
+                subTipo = "Sede "+nombreSede;
+            }else{
+                if (nombreEdificio == 'TODOS') {
+                    subTipo = "Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }else{
+                    subTipo = "Edificio "+nombreEdificio+" del Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }
+            }
+        }
         label = [], informacion = [];
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -5019,10 +5061,127 @@ $(document).ready(function() {
                     info.push(parseInt(informacion[i]));
                 }
             }
-            var titulo = tipo + " Más Instaladas";
+            var titulo = tipo;
+            var subtitulo = subTipo;
+            var xTitulo = tituloX;
+            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divDialogConsulta").modal('show');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarTiposAiresMasInstalados y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarTiposAiresMasInstalados").click(function (e){
+        var informacion =  {};
+        var idSede = $("#sede_search").val();
+        var nombreSede = $("#sede_search option:selected").text();
+        var idCampus = $("#campus_search").val();
+        var nombreCampus = $("#campus_search option:selected").text();
+        var idEdificio = $("#edificio_search").val();
+        var nombreEdificio = $("#edificio_search option:selected").text();
+        informacion['id_sede'] = idSede;
+        informacion['id_campus'] = idCampus;
+        informacion['id_edificio'] = idEdificio;
+        var data = buscarObjetos("tipos_mas_instalados",informacion);
+        var total = 0;
+        var tipo = "Tipos de Aires Acondicionados Más Instalados";
+        var tituloX = "Tipo de Tecnología de Aires Acondicionados";
+        if (nombreSede == 'TODAS') {
+            subTipo = "Todas las Sedes";
+        }else{
+            if (nombreCampus == 'TODOS') {
+                subTipo = "Sede "+nombreSede;
+            }else{
+                if (nombreEdificio == 'TODOS') {
+                    subTipo = "Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }else{
+                    subTipo = "Edificio "+nombreEdificio+" del Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }
+            }
+        }
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.tipo);
+                informacion.push(record.conteo);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total += aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
+            }
+            var titulo = tipo + " Más Instalados";
             var subtitulo = "";
             var xTitulo = tipo;
-            var yTitulo = 'Número de Aires (Total: '+total+')';
+            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divDialogConsulta").modal('show');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarTipoTecnologiasAiresMasInstaladas y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarTipoTecnologiasAiresMasInstaladas").click(function (e){
+        var informacion =  {};
+        var idSede = $("#sede_search").val();
+        var nombreSede = $("#sede_search option:selected").text();
+        var idCampus = $("#campus_search").val();
+        var nombreCampus = $("#campus_search option:selected").text();
+        var idEdificio = $("#edificio_search").val();
+        var nombreEdificio = $("#edificio_search option:selected").text();
+        informacion['id_sede'] = idSede;
+        informacion['id_campus'] = idCampus;
+        informacion['id_edificio'] = idEdificio;
+        var data = buscarObjetos("tipo_tecnologias_mas_instaladas",informacion);
+        var total = 0;
+        var tipo = "Tipo de Tecnologías de Aires Acondicionados Más Instaladas";
+        if (nombreSede == 'TODAS') {
+            subTipo = "Todas las Sedes";
+        }else{
+            if (nombreCampus == 'TODOS') {
+                subTipo = "Sede "+nombreSede;
+            }else{
+                if (nombreEdificio == 'TODOS') {
+                    subTipo = "Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }else{
+                    subTipo = "Edificio "+nombreEdificio+" del Campus "+nombreCampus+" de la Sede "+nombreSede;
+                }
+            }
+        }
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.tipo);
+                informacion.push(record.conteo);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total += aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
+            }
+            var titulo = tipo;
+            var subtitulo = subTipo;
+            var xTitulo = tituloX;
+            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
             generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
             $("#divDialogConsulta").modal('show');
         }
