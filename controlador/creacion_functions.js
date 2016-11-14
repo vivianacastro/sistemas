@@ -4329,6 +4329,9 @@ $(document).ready(function() {
                 }else if(!validarCadena(capacidad)){
                     alert("ERROR. Seleccione la capacidad del aire acondicionado");
                     $("#capacidad_aire").focus();
+                }if(!validarFechaMenorActual(fechaRealizacion)){
+                    alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
+                    $("#fecha_instalacion").focus();
                 }else{
                     var informacion = {};
                     informacion["numero_inventario"] = numeroInventario;
@@ -4431,6 +4434,9 @@ $(document).ready(function() {
                 $("#numero_orden").focus();
             }else if(!validarCadena(fechaRealizacion)){
                 alert("ERROR. Ingrese la fecha de realización de la solicitud de mantenimiento");
+                $("#fecha_realizacion").focus();
+            }else if(!validarFechaMenorActual(fechaRealizacion)){
+                alert("ERROR. La fecha de realización ingresada es mayor a la fecha actual");
                 $("#fecha_realizacion").focus();
             }else if(!validarCadena(realizado)){
                 alert("ERROR. Ingrese la persona que realizó la solicitud de mantenimiento");

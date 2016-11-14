@@ -9,7 +9,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una sede en el sistema.
-     **/
+    **/
     public function consultar_sede() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -31,7 +31,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un campus en el sistema.
-     **/
+    **/
     public function consultar_campus() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -53,7 +53,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una cancha en el sistema.
-     **/
+    **/
     public function consultar_cancha() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -75,7 +75,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un corredor en el sistema.
-     **/
+    **/
     public function consultar_corredor() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -97,7 +97,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una cubierta en el sistema.
-     **/
+    **/
     public function consultar_cubierta() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -119,7 +119,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * las gradas en el sistema.
-     **/
+    **/
     public function consultar_gradas() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -141,7 +141,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un parqueadero en el sistema.
-     **/
+    **/
     public function consultar_parqueadero() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -163,7 +163,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una piscina en el sistema.
-     **/
+    **/
     public function consultar_piscina() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -185,7 +185,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una plazoleta en el sistema.
-     **/
+    **/
     public function consultar_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -207,7 +207,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un sendero en el sistema.
-     **/
+    **/
     public function consultar_sendero() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -229,7 +229,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una vias en el sistema.
-     **/
+    **/
     public function consultar_via() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -251,7 +251,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un edificio en el sistema.
-     **/
+    **/
     public function consultar_edificio() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -273,7 +273,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un espacio en el sistema.
-     **/
+    **/
     public function consultar_espacio() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -295,7 +295,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un tipo de material en el sistema.
-     **/
+    **/
     public function consultar_tipo_material() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -317,7 +317,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un tipo de material en el sistema.
-     **/
+    **/
     public function consultar_tipo_objeto() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -338,8 +338,30 @@ class controlador_consultas{
 
     /**
      * Función que despliega el panel que permite consultar
+     * el mapa con todos los campus, edificios, etc. creados en el sistema.
+    **/
+    public function consultar_mapa() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Mapa',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_CONSULTAR_MAPA, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
      * un aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_aire_ubicacion() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -361,7 +383,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_aire_numero_inventario() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -383,7 +405,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una capacidad de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_capacidad_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -405,7 +427,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una marca de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_marca_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -427,7 +449,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un tipo de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_tipo_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -449,7 +471,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * una tecnología de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_tecnologia_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -471,7 +493,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un mantenimmiento de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_mantenimiento_aire_id_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -493,7 +515,7 @@ class controlador_consultas{
     /**
      * Función que despliega el panel que permite consultar
      * un mantenimmiento de aire acondicionado en el sistema.
-     **/
+    **/
     public function consultar_mantenimiento_aire_numero_orden() {
         $GLOBALS['mensaje'] = "";
         $data = array(
@@ -514,19 +536,107 @@ class controlador_consultas{
 
     /**
      * Función que despliega el panel que permite consultar
-     * el mapa con todos los campus, edificios, etc. creados en el sistema.
-     **/
-    public function consultar_mapa() {
+     * las estadísticas del módulo de aires.
+    **/
+    public function mas_marcas_aire() {
         $GLOBALS['mensaje'] = "";
         $data = array(
-            'mensaje' => 'Consultar Mapa',
+            'mensaje' => 'Consultar Marcas de Aires Acondicionados Más Instaladas',
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
             if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
-                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_CONSULTAR_MAPA, $data);
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_MARCAS_AIRE, $data);
             }else{
-                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_MARCAS_AIRE, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de aires.
+    **/
+    public function mas_tipos_aire() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Tipos de Aires Acondicionados Más Instalados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_TIPOS_AIRE, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPOS_AIRE, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de aires.
+    **/
+    public function mas_tipo_tecnologias_aire() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Tipos de Tecnología de Aires Acondicionados Más Instalados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de aires.
+    **/
+    public function aires_mas_mantenimientos() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Aires Acondicionados con Más Mantenimientos',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_AIRES_MAS_MANTENIMIENTOS, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_AIRES_MAS_MANTENIMIENTOS, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de aires.
+    **/
+    public function marcas_mas_mantenimientos() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Marcas de Aires Acondicionados con Más Mantenimientos',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+                $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MARCAS_MAS_MANTENIMIENTOS, $data);
+            }else{
+                $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MARCAS_MAS_MANTENIMIENTOS, $data);
             }
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -536,7 +646,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las sedes almacenadas en el sistema.
-    */
+    **/
     public function consultar_sedes() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -560,7 +670,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los campus almacenados en el sistema.
-    */
+    **/
     public function consultar_todos_campus() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -589,7 +699,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las canchas almacenadas en el sistema.
-    */
+    **/
     public function consultar_canchas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -620,7 +730,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los corredores almacenados en el sistema.
-    */
+    **/
     public function consultar_corredores() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -650,7 +760,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las cubiertas almacenadas en el sistema.
-    */
+    **/
     public function consultar_cubiertas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -680,7 +790,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las gradas almacenadas en el sistema.
-    */
+    **/
     public function consultar_todas_gradas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -710,7 +820,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los parqueaderos almacenados en el sistema.
-    */
+    **/
     public function consultar_parqueaderos() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -740,7 +850,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las piscinas almacenadas en el sistema.
-    */
+    **/
     public function consultar_piscinas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -770,7 +880,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las plazoletas almacenadas en el sistema.
-    */
+    **/
     public function consultar_plazoletas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -801,7 +911,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los senderos almacenados en el sistema.
-    */
+    **/
     public function consultar_senderos() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -831,7 +941,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las vías almacenadas en el sistema.
-    */
+    **/
     public function consultar_vias() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -862,7 +972,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los edificios de un campus
      * almacenados en el sistema.
-    */
+    **/
     public function consultar_edificios() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -897,7 +1007,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los espacios de un edificio
      * almacenados en el sistema.
-    */
+    **/
     public function consultar_espacios() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -930,7 +1040,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar el número de pisos de un edificio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_pisos_edificio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -958,7 +1068,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los diferentes usos de un espacio
      * almacenados en el sistema.
-    */
+    **/
     public function consultar_usos_espacios() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -982,7 +1092,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las capacidades de los aires aconidcionados.
-    */
+    **/
     public function consultar_capacidades_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1007,7 +1117,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los diferentes materiales
      * almacenados en el sistema.
-    */
+    **/
     public function consultar_materiales() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1033,7 +1143,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los diferentes tipos de objetos
      * almacenados en el sistema.
-    */
+    **/
     public function consultar_tipo_objetos() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1058,7 +1168,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_aires_ubicacion() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1099,7 +1209,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de los mantenimientos realizados a un aire acondicionado.
-    */
+    **/
     public function consultar_mantenimientos_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1127,8 +1237,33 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar las estadísticas del módulo de aires.
+    **/
+    public function consultar_marcas_mas_instaladas() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarMarcasMasInstaladas($info["id_sede"],$info["id_campus"],$info["id_edificio"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'conteo' => $valor['conteo'],
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar la ubicación de un campus.
-    */
+    **/
     public function ubicacion_campus() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1155,7 +1290,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de una cancha.
-    */
+    **/
     public function ubicacion_cancha() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1182,7 +1317,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de un corredor.
-    */
+    **/
     public function ubicacion_corredor() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1208,7 +1343,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de un parqueadero.
-    */
+    **/
     public function ubicacion_parqueadero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1234,7 +1369,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de una piscina.
-    */
+    **/
     public function ubicacion_piscina() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1260,7 +1395,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de una plazoleta.
-    */
+    **/
     public function ubicacion_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1287,7 +1422,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de un sendero.
-    */
+    **/
     public function ubicacion_sendero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1313,7 +1448,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de una vía.
-    */
+    **/
     public function ubicacion_via() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1339,7 +1474,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la ubicación de un edificio.
-    */
+    **/
     public function ubicacion_edificio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1366,7 +1501,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un campus
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_sede() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1392,7 +1527,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un campus
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_campus() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1422,7 +1557,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una cancha
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_cancha() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1457,7 +1592,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un corredor
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_corredor() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1500,7 +1635,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de la iluminación de un corredor
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_iluminacion_corredor() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1529,7 +1664,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de los interruptores de un corredor
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_interruptor_corredor() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1558,7 +1693,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una cubierta
      * almacenadas en el sistema.
-    */
+    **/
     public function consultar_informacion_cubierta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1595,7 +1730,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de unas gradas
      * almacenadas en el sistema.
-    */
+    **/
     public function consultar_informacion_gradas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1630,7 +1765,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de las ventanas de unas gradas
      * almacenadas en el sistema.
-    */
+    **/
     public function consultar_informacion_ventana_gradas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1663,7 +1798,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un parqueadero
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_parqueadero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1700,7 +1835,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una piscina
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_piscina() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1735,7 +1870,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una plazoleta
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1767,7 +1902,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de la iluminación de una plazoleta
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_iluminacion_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1796,7 +1931,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un sendero
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_sendero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1836,7 +1971,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una vía
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_via() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1869,7 +2004,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de una capacidad de aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_capacidad_aires() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1894,7 +2029,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de una marca de aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_marca_aires() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1919,7 +2054,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de un tipo de aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_tipo_aires() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1944,7 +2079,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de un tipo de aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_tecnologia_aires() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1969,7 +2104,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_aire_numero_inventario() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2010,7 +2145,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar los aires acondicionados almacenados en el sistema.
-    */
+    **/
     public function consultar_informacion_aire_id() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2051,7 +2186,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar la información de un mantenimiento de un aire acondicionado.
-    */
+    **/
     public function consultar_informacion_mantenimiento_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2080,7 +2215,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las imagenes que hay en una carpeta.
-    */
+    **/
     public function consultar_fotos_index() {
         $GLOBALS['mensaje'] = "";
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -2103,7 +2238,7 @@ class controlador_consultas{
 
     /**
      * Función que consulta los archivos que hay dentro de una carpeta
-    */
+    **/
     public function listar_archivos_ruta($ruta,$arrayFotos=array()){
     $carpeta = scandir($ruta);
       foreach($carpeta as $key => $value){
@@ -2125,7 +2260,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un edificio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_edificio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2163,7 +2298,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2208,7 +2343,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un salón
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_salon() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2239,7 +2374,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un auditorio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_auditorio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2270,7 +2405,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un laboratorio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_laboratorio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2302,7 +2437,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un punto sanitario de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_punto_sanitario() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2332,7 +2467,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una sala de cómputo
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_sala_computo() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2363,7 +2498,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una oficina
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_oficina() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2393,7 +2528,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un baño
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_bano() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2428,7 +2563,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un lavamanos de un salón
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_lavamanos() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2458,7 +2593,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un orinal de un salón
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_orinal() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2488,7 +2623,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un cuarto técnico
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_cuarto_tecnico() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2518,7 +2653,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una bodega/almacén
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_bodega() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2547,7 +2682,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un cuarto de plantas
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_cuarto_plantas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2576,7 +2711,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un cuarto de aires acondicionados
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_cuarto_aires_acondicionados() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2605,7 +2740,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un área deportiva cerrada
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_area_deportiva_cerrada() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2634,7 +2769,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un centro de datos
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_centro_datos() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2663,7 +2798,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de un cuarto de bombas
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_cuarto_bombas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2692,7 +2827,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una cocineta
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_cocineta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2721,7 +2856,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de una sala de estudio
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_informacion_sala_estudio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2750,7 +2885,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de la iluminación de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_iluminacion_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2780,7 +2915,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de los interruptores de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_interruptor_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2810,7 +2945,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de las puertas de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_puerta_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2845,7 +2980,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de las cerraduras de una puerta de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_puerta_tipo_cerradura() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2877,7 +3012,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información del suminstro de energía de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_suministro_energia_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2908,7 +3043,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar la información de la iluminación de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_informacion_ventana_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2941,7 +3076,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un campus
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_campus() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2969,7 +3104,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de una cancha
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_archivos_cancha() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -2998,7 +3133,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un corredor
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_corredor() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3027,7 +3162,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de una cubierta
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_archivos_cubierta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3057,7 +3192,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de unas gradas
      * almacenadas en el sistema.
-    */
+    **/
     public function consultar_archivos_gradas() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3087,7 +3222,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un parqueadero
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_parqueadero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3116,7 +3251,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de una piscina
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_archivos_piscina() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3145,7 +3280,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de una plazoleta
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_archivos_plazoleta() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3174,7 +3309,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un sendero
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_sendero() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3203,7 +3338,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de una vía
      * almacenada en el sistema.
-    */
+    **/
     public function consultar_archivos_via() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3232,7 +3367,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un edificio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_edificio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3261,7 +3396,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un espacio
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_espacio() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3291,7 +3426,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un aire acondicionado
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_aire_id() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3318,7 +3453,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los archivos de un aire acondicionado
      * almacenado en el sistema.
-    */
+    **/
     public function consultar_archivos_aire_numero_inventario() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3344,7 +3479,7 @@ class controlador_consultas{
 
     /**
      * Función que permite consultar las marcas de los aires aconidcionados.
-    */
+    **/
     public function consultar_marcas_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -3369,7 +3504,7 @@ class controlador_consultas{
     /**
      * Función que permite verificar si un numero de inventario ya
      * está asignado a un aire acondicionado.
-    */
+    **/
     public function verificar_numero_inventario_aire() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";

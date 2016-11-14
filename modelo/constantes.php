@@ -86,4 +86,9 @@ const OPERATION_CONSULTAR_TIPO_AIRE = 'aires_consultar_tipo_aire';
 const OPERATION_CONSULTAR_TECNOLOGIA_AIRE = 'aires_consultar_tecnologia_aire';
 const OPERATION_CONSULTAR_MANTENIMIENTO_AIRE_ID_AIRE = 'aires_consultar_mantenimiento_aire_id_aire';
 const OPERATION_CONSULTAR_MANTENIMIENTO_AIRE_NUMERO_ORDEN = 'aires_consultar_mantenimiento_aire_numero_orden';
+const OPERATION_MAS_MARCAS_AIRE = 'aires_mas_marcas_aire';
+const OPERATION_MAS_TIPOS_AIRE = 'aires_mas_tipos_aire';
+const OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE = 'aires_mas_tipo_tecnologias_aire';
+const OPERATION_AIRES_MAS_MANTENIMIENTOS = 'aires_mas_mantenimientos';
+const OPERATION_MARCAS_MAS_MANTENIMIENTOS = 'aires_marcas_mas_mantenimientos';
 ?>

@@ -17,7 +17,7 @@ class modelo_usuario {
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-     */
+     **/
     public function __construct($dbname,$dbuser,$dbpass,$dbhost) {
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
         try {
@@ -33,7 +33,7 @@ class modelo_usuario {
      * Función que retorna la contraseña se un usuario por medio de su login.
      * @param string $l, Login del usuario a consultar.
      * @return boolean
-     */
+     **/
     function retornarContrasena($l) {
         $l = htmlspecialchars($l);
         $sql = "SELECT password FROM usuarios WHERE login = '".$l."';";
@@ -57,7 +57,7 @@ class modelo_usuario {
      * funcion que encripta la constraseña del usuario usando el metodo md5
      * @param  [type] $password [description]
      * @return [type]           [description]
-     */
+     **/
     public function encriptarPassword($password) {
         //return crypt($password, Config::$salt);
         return md5($password);
@@ -69,7 +69,7 @@ class modelo_usuario {
      * @param string $linput, login que digito el usuario.
      * @param string $cinput, password que digito el usuario.
      * @return boolean
-     */
+     **/
     public function verificarContrasena($linput, $cinput) {
         $passwdBd = $this->retornarContrasena($linput);
         if (md5($cinput) == $passwdBd) {
@@ -85,7 +85,7 @@ class modelo_usuario {
      * no al sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
      * @param string $password, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function comprobarAcceso($login, $password) {
         $login = htmlspecialchars($login);
         $login = strtolower($login);
@@ -112,7 +112,7 @@ class modelo_usuario {
     /**
      * Función que actualiza el último acceso de un usuario.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function actualizarUltimoAcceso($login){
         $fecha = date("Y-m-d H:i:s");
         $sql = "UPDATE usuarios SET ultimo_acceso = '".$fecha."' WHERE login = '".$login."';";
@@ -136,7 +136,7 @@ class modelo_usuario {
      * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function guardarUsuario($nombre,$login,$correo,$telefono,$extension,$contrasenia,$mod_planta,$mod_inventario,$mod_aires,$creacion_planta,$creacion_inventario,$creacion_aires,$perfil){
         $nombre = htmlspecialchars(trim($nombre));
         $login = htmlspecialchars(trim($login));
@@ -174,7 +174,7 @@ class modelo_usuario {
      * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function modificarUsuario($nombre_usuario,$login,$correo,$telefono,$extension){
         $nombre_usuario = htmlspecialchars(trim($nombre_usuario));
         $login = htmlspecialchars(trim($login));
@@ -204,7 +204,7 @@ class modelo_usuario {
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
      * @param string $contrasenia, Cadena que hace referencia a la nueva contraseña.
-    */
+    **/
     public function modificarContrasenia($login,$contrasenia){
         $login = htmlspecialchars(trim($login));
         $contrasenia = $this->encriptarPassword(htmlspecialchars(trim($contrasenia)));
@@ -230,7 +230,7 @@ class modelo_usuario {
      * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function reestablecerContrasenia($correo){
         $correo = htmlspecialchars(trim($correo));
         $source = 'abcdefghijklmnopqrstuvwxyz';
@@ -291,7 +291,7 @@ class modelo_usuario {
      * Función que permite comprobar si un login ya se
      * encuentra registrado en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function verificarUsuario($login){
         $login = htmlspecialchars(trim($login));
         $sql = "SELECT * FROM usuarios WHERE login = '".$login."';";
@@ -318,7 +318,7 @@ class modelo_usuario {
      * Función que permite comprobar si un correo ya se
      * encuentra registrado en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.
-    */
+    **/
     public function verificarCorreo($correo){
         $correo = htmlspecialchars(trim($correo));
         $sql = "SELECT * FROM usuarios WHERE correo = '".$correo."';";

@@ -15,7 +15,7 @@ class modelo_modificacion {
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-    */
+    **/
     public function __construct($dbname,$dbuser,$dbpass,$dbhost){
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
         try {
@@ -31,7 +31,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $nombre_sede, nuevo nombre de la sede.
      * @return array
-    */
+    **/
     public function modificarSede($id_sede,$nombre_sede){
         $id_sede = htmlspecialchars(trim($id_sede));
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
@@ -67,7 +67,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat del campus.
      * @param string $lng, nueva lng del campus.
      * @return array
-    */
+    **/
     public function modificarCampus($id_sede,$id_campus,$nombre_campus,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -114,7 +114,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat de la cancha.
      * @param string $lng, nueva lng de la cancha.
      * @return array
-    */
+    **/
     public function modificarCancha($id_sede,$id_campus,$id,$uso,$material_piso,$tipo_pintura,$longitud_demarcacion,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -186,7 +186,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat del corredor.
      * @param string $lng, nueva lng del corredor.
      * @return array
-    */
+    **/
     public function modificarCorredor($id_sede,$id_campus,$id,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tomacorriente,$tipo_suministro_energia,$cantidad,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -287,7 +287,7 @@ class modelo_modificacion {
      * @param string $cantidad_iluminacion, nueva cantidad de iluminación del corredor.
      * @param string $cantidad_iluminacion_anterior, cantidad anterior de iluminación del corredor.
      * @return array
-    */
+    **/
     public function modificarIluminacionCorredor($id_sede,$id_campus,$id,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -335,7 +335,7 @@ class modelo_modificacion {
      * @param string $cantidad_interruptor, nueva cantidad de interruptor del corredor.
      * @param string $cantidad_interruptor_anterior, cantidad anterior de interruptores del corredor.
      * @return array
-    */
+    **/
     public function modificarInterruptorCorredor($id_sede,$id_campus,$id,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -384,7 +384,7 @@ class modelo_modificacion {
      * @param string $largo_cubierta, nuevo largo de la cubierta.
      * @param string $ancho_cubierta, nuevo ancho de la cubierta.
      * @return array
-    */
+    **/
     public function modificarCubierta($id_sede,$id_campus,$id_edificio,$piso,$tipo_cubierta,$material_cubierta,$largo_cubierta,$ancho_cubierta){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -444,7 +444,7 @@ class modelo_modificacion {
      * @param string $alto_ventana, alto de las ventanas de las gradas.
      * @param string $ancho_ventana, ancho de las ventanas de las gradas.
      * @return array
-    */
+    **/
     public function modificarGradas($id_sede,$id_campus,$id_edificio,$piso,$pasamanos,$material_pasamanos,$tipo_ventana,$tipo_ventana_anterior,$material,$material_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -506,7 +506,7 @@ class modelo_modificacion {
      * @param string $alto_ventana, nuevo alto de las ventanas de las gradas.
      * @param string $alto_ventana_anterior, antiguo alto de las ventanas de las gradas.
      * @return array
-    */
+    **/
     public function modificarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material,$material_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -568,7 +568,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat del parqueadero.
      * @param string $lng, nueva lng del parqueadero.
      * @return array
-    */
+    **/
     public function modificarParqueadero($id_sede,$id_campus,$id,$material_piso,$tipo_pintura,$largo,$ancho,$capacidad,$longitud_demarcacion,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -638,7 +638,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat de la piscina.
      * @param string $lng, nueva lng de la piscina.
      * @return array
-    */
+    **/
     public function modificarPiscina($id_sede,$id_campus,$id,$cantidad_punto_hidraulico,$largo,$ancho,$alto,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -696,7 +696,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat de la plazoleta.
      * @param string $lng, nueva lng de la plazoleta.
      * @return array
-    */
+    **/
     public function modificarPlazoleta($id_sede,$id_campus,$id,$nombre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -746,7 +746,7 @@ class modelo_modificacion {
      * @param string $cantidad_iluminacion, nueva cantidad de iluminación de la plazoleta.
      * @param string $cantidad_iluminacion_anterior, anterior cantidad de lámparas de la plazoleta.
      * @return array
-    */
+    **/
     public function modificarIluminacionPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -801,7 +801,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat del sendero.
      * @param string $lng, nueva lng del sendero.
      * @return array
-    */
+    **/
     public function modificarSendero($id_sede,$id_campus,$id,$longitud,$ancho,$material_piso,$tipo_iluminacion,$cantidad,$codigo_poste,$material_cubierta,$ancho_cubierta,$largo_cubierta,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -879,7 +879,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat de la vía.
      * @param string $lng, nueva lng de la vía.
      * @return array
-    */
+    **/
     public function modificarVia($id_sede,$id_campus,$id,$tipo_material,$tipo_pintura_demarcacion,$longitud_demarcacion,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -942,7 +942,7 @@ class modelo_modificacion {
      * @param string $lat, nueva lat del edificio.
      * @param string $lng, nueva lng del edificio.
      * @return array
-    */
+    **/
     public function modificarEdificio($id_sede,$id_campus,$id,$nombre,$numero_pisos,$sotano,$terraza,$material_fachada,$ancho_fachada,$alto_fachada,$lat,$lng){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1062,7 +1062,7 @@ class modelo_modificacion {
      * @param string $cantidad_iluminacion, nueva cantidad de la iluminación del espacio.
      * @param string $cantidad_iluminacion_anterior, anterior cantidad de la iluminación del espacio.
      * @return array
-    */
+    **/
     public function modificarEspacio($id_sede,$id_campus,$id_edificio,$piso,$id,$uso_espacio,$ancho_pared,$alto_pared,$material_pared,$ancho_piso,$largo_piso,$material_piso,$ancho_techo,$largo_techo,$material_techo,$tiene_espacio_padre,$espacio_padre,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$tipo_cerradura,$tipo_cerradura_anterior,$material_marco,$material_marco_anterior,$gato_puerta,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1174,7 +1174,7 @@ class modelo_modificacion {
      * @param string $cantidad_iluminacion, nueva cantidad de iluminación del espacio.
      * @param string $cantidad_iluminacion_anterior, anterior cantidad de iluminación del espacio.
      * @return array
-    */
+    **/
     public function modificarIluminacionEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_iluminacion,$tipo_iluminacion_anterior,$cantidad_iluminacion,$cantidad_iluminacion_anterior){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1224,7 +1224,7 @@ class modelo_modificacion {
      * @param string $cantidad_interruptor, nueva cantidad de interruptor del espacio.
      * @param string $cantidad_interruptor_anterior, anterior cantidad de interruptor del espacio.
      * @return array
-    */
+    **/
     public function modificarInterruptorEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_interruptor,$tipo_interruptor_anterior,$cantidad_interruptor,$cantidad_interruptor_anterior){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1285,7 +1285,7 @@ class modelo_modificacion {
      * @param string $gato_puerta, nuevo valor del gato de las puertas del espacio.
      * @param string $gato_puerta_anterior, anterior valor del gato de las puertas del espacio.
      * @return array
-    */
+    **/
     public function modificarPuertaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_cerradura_anterior,$tipo_puerta,$tipo_puerta_anterior,$material_puerta,$material_puerta_anterior,$cantidad_puerta,$cantidad_puerta_anterior,$material_marco,$material_marco_anterior,$ancho_puerta,$ancho_puerta_anterior,$alto_puerta,$alto_puerta_anterior,$gato_puerta){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1363,7 +1363,7 @@ class modelo_modificacion {
      * @param string $material_puerta, nuevo tipo de material de la puerta del espacio.
      * @param string $material_marco, nuevo tipo de marco de las puertas del espacio.
      * @return array
-    */
+    **/
     public function modificarCerraduraPuerta($id,$id_sede,$id_campus,$id_edificio,$tipo_cerradura,$tipo_cerradura_anterior,$tipo_puerta,$material_puerta,$material_marco){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1415,7 +1415,7 @@ class modelo_modificacion {
      * @param string $tomacorriente, nuevo valor de tomacorrientes del espacio.
      * @param string $tomacorriente_anterior, anterior valor de tomacorrientes del espacio.
      * @return array
-    */
+    **/
     public function modificarSuministroEnergiaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_suministro_energia,$tipo_suministro_energia_anterior,$cantidad_suministro_energia,$cantidad_suministro_energia_anterior,$tomacorriente,$tomacorriente_anterior){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1474,7 +1474,7 @@ class modelo_modificacion {
      * @param string $alto_ventana, nueva alto de las ventanas del espacio.
      * @param string $alto_ventana_anterior, anterior alto de las ventanas del espacio.
      * @return array
-    */
+    **/
     public function modificarVentanaEspacio($id,$id_sede,$id_campus,$id_edificio,$tipo_ventana,$tipo_ventana_anterior,$cantidad_ventana,$cantidad_ventana_anterior,$material_ventana,$material_ventana_anterior,$ancho_ventana,$ancho_ventana_anterior,$alto_ventana,$alto_ventana_anterior){
         $id = htmlspecialchars(trim($id));
         $id_sede = htmlspecialchars(trim($id_sede));
@@ -1532,7 +1532,7 @@ class modelo_modificacion {
      * @param string $capacidad, nueva capacidad del salón.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarSalon($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1580,7 +1580,7 @@ class modelo_modificacion {
      * @param string $capacidad, nueva capacidad del auditorio.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarAuditorio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1628,7 +1628,7 @@ class modelo_modificacion {
      * @param string $capacidad, nueva capacidad del salón.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarLaboratorio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1682,7 +1682,7 @@ class modelo_modificacion {
      * @param string $capacidad, nueva capacidad de la sala de cómputo.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarSalaComputo($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$capacidad,$punto_video_beam){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1729,7 +1729,7 @@ class modelo_modificacion {
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la oficina.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarOficina($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$punto_video_beam){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1787,7 +1787,7 @@ class modelo_modificacion {
      * @param string $tipo_divisiones, nuevo tipo de divisiones del baño.
      * @param string $material_divisiones, nuevo tipo de material de diviones del baño.
      * @return array
-    */
+    **/
     public function modificarBano($id_sede,$id_campus,$id_edificio,$id,$tipo_inodoro,$cantidad_inodoro,$tipo_orinal,$tipo_orinal_anterior,$cantidad_orinal,$cantidad_orinal_anterior,$tipo_lavamanos,$tipo_lavamanos_anterior,$cantidad_lavamanos,$cantidad_lavamanos_anterior,$ducha,$lavatraperos,$cantidad_sifones,$tipo_divisiones,$material_divisiones){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1852,7 +1852,7 @@ class modelo_modificacion {
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto técnico.
      * @param string $punto_video_beam, nuevo valor de campus punto video beam.
      * @return array
-    */
+    **/
     public function modificarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red,$punto_video_beam){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1894,7 +1894,7 @@ class modelo_modificacion {
      * @param string $id, id de la bodega.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la bodega.
      * @return array
-    */
+    **/
     public function modificarBodega($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1934,7 +1934,7 @@ class modelo_modificacion {
      * @param string $id, id del cuarto de plantas.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de plantas.
      * @return array
-    */
+    **/
     public function modificarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -1974,7 +1974,7 @@ class modelo_modificacion {
      * @param string $id, id del cuarto de aires acondicionados.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del cuarto de aires acondicionados.
      * @return array
-    */
+    **/
     public function modificarCuartoAireAcondicionado($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2014,7 +2014,7 @@ class modelo_modificacion {
      * @param string $id, id del área deportiva cerrada.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del área deportiva cerrada.
      * @return array
-    */
+    **/
     public function modificarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2054,7 +2054,7 @@ class modelo_modificacion {
      * @param string $id, id del centro de datos.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red del centro de datos.
      * @return array
-    */
+    **/
     public function modificarCentroDatos($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2098,7 +2098,7 @@ class modelo_modificacion {
      * @param string $cantidad_puntos_sanitarios, nueva cantidad de puntos sanitarios del cuarto de bombas.
      * @param string $cantidad_puntos_sanitarios_anterior, anterior cantidad de puntos sanitarios del cuarto de bombas.
      * @return array
-    */
+    **/
     public function modificarCuartoBombas($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2145,7 +2145,7 @@ class modelo_modificacion {
      * @param string $cantidad_puntos_sanitarios, nueva cantidad de puntos sanitarios de la cocineta.
      * @param string $cantidad_puntos_sanitarios_anterior, anterior cantidad de puntos sanitarios de la cocineta.
      * @return array
-    */
+    **/
     public function modificarCocineta($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_hidraulico,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad_puntos_sanitarios,$cantidad_puntos_sanitarios_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2188,7 +2188,7 @@ class modelo_modificacion {
      * @param string $id, id de la sala de estudios.
      * @param string $cantidad_punto_red, nueva cantidad de puntos de red de la sala de estudios.
      * @return array
-    */
+    **/
     public function modificarSalaEstudio($id_sede,$id_campus,$id_edificio,$id,$cantidad_punto_red){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2231,7 +2231,7 @@ class modelo_modificacion {
      * @param string $cantidad, nueva cantidad de puntos sanitarios del espacio.
      * @param string $cantidad_anterior, anterior cantidad de puntos sanitarios del espacio.
      * @return array
-    */
+    **/
     public function modificarPuntoSanitario($id_sede,$id_campus,$id_edificio,$id,$tipo_punto_sanitario,$tipo_punto_sanitario_anterior,$cantidad,$cantidad_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2280,7 +2280,7 @@ class modelo_modificacion {
      * @param string $cantidad, nueva cantidad de orinales del espacio.
      * @param string $cantidad_anterior, anterior cantidad de orinales del espacio.
      * @return array
-    */
+    **/
     public function modificarOrinal($id_sede,$id_campus,$id_edificio,$id,$tipo_orinal,$tipo_orinal_anterior,$cantidad,$cantidad_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2329,7 +2329,7 @@ class modelo_modificacion {
      * @param string $cantidad, nueva cantidad de lavamanos del espacio.
      * @param string $cantidad_anterior, anterior cantidad de lavamanos del espacio.
      * @return array
-    */
+    **/
     public function modificarLavamanos($id_sede,$id_campus,$id_edificio,$id,$tipo_lavamanos,$tipo_lavamanos_anterior,$cantidad,$cantidad_anterior){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2373,7 +2373,7 @@ class modelo_modificacion {
      * @param string $nombre_anterior, nombre anterior del tipo de material.
      * @param string $nombre, nuevo nombre del tipo de material.
      * @return array
-    */
+    **/
     public function modificarTipoMaterial($tipo_material,$nombre_anterior,$nombre){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
@@ -2409,7 +2409,7 @@ class modelo_modificacion {
      * @param string $nombre_anterior, nombre anterior del tipo de objeto.
      * @param string $nombre, nuevo nombre del tipo de objeto.
      * @return array
-    */
+    **/
     public function modificarTipoObjeto($tipo_objeto,$nombre_anterior,$nombre){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
@@ -2452,7 +2452,7 @@ class modelo_modificacion {
      * @param string $tipo_periodicidad_mantenimiento, periodicidad de mantenimiento del aire.
      * @param string $ubicacion_condensadora, ubicación de la unidad condensadora del aire.
      * @return array
-    */
+    **/
     public function modificarAire($id_aire,$numero_inventario,$marca_aire,$tipo_aire,$tipo_tecnologia_aire,$capacidad_aire,$fecha_instalacion,$instalador,$tipo_periodicidad_mantenimiento,$ubicacion_condensadora){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
@@ -2513,7 +2513,7 @@ class modelo_modificacion {
      * @param string $capacidad, nuevo valor de la capacidad.
      * @param string $capacidad_anterior, anterior valor de la capacidad.
      * @return array
-    */
+    **/
     public function modificarCapacidadAire($capacidad,$capacidad_anterior){
         $capacidad = htmlspecialchars(trim($capacidad));
         $capacidad_anterior = htmlspecialchars(trim($capacidad_anterior));
@@ -2546,7 +2546,7 @@ class modelo_modificacion {
      * @param string $id, id de la marca.
      * @param string $nombre, nuevo nombre de la marca.
      * @return array
-    */
+    **/
     public function modificarMarcaAire($nombre,$nombre_anterior){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
@@ -2583,7 +2583,7 @@ class modelo_modificacion {
      * @param string $revisado, nombre de la persona que revisó el mantenimiento.
      * @param string $descripcion, descripción del trabajo realizado en el mantenimiento.
      * @return array
-    */
+    **/
     public function modificarMantenimientoAire($id_aire,$numero_orden,$fecha,$realizado,$revisado,$descripcion){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numero_orden = htmlspecialchars(trim($numero_orden));
@@ -2630,7 +2630,7 @@ class modelo_modificacion {
      * @param string $valor_nuevo, nuevo nombre de la sede.
      * @param string $usuario, nuevo nombre de la sede.
      * @return array
-    */
+    **/
     public function registrarModificacion($bd,$id_objeto,$columna,$valor_anterior,$valor_nuevo){
         $bd = htmlspecialchars(trim($bd));
         $id_objeto = htmlspecialchars(trim($id_objeto));
@@ -2661,7 +2661,7 @@ class modelo_modificacion {
      * Función que permite consultar el valor de un campo de la tabla sede.
      * @param string $id_sede, id de la sede.
      * @return array
-    */
+    **/
     public function consultarCampoSede($id_sede){
         $id_sede = htmlspecialchars(trim($id_sede));
         $sql = "SELECT * FROM sede WHERE id = '".$id_sede."';";
@@ -2685,7 +2685,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede del campus.
      * @param string $id_campus, id del campus.
      * @return array
-    */
+    **/
     public function consultarCampoCampus($id_sede,$id_campus){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2712,7 +2712,7 @@ class modelo_modificacion {
      * @param string $id, id del elemento.
      * @param string $elemento, elemento a consultar (cancha, edificio, parqueadero, etc.).
      * @return array
-    */
+    **/
     public function consultarCampoElementoCampus($id_sede,$id_campus,$id,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2742,7 +2742,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function consultarCampoCubierta($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2771,7 +2771,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function consultarCampoGradas($id_sede,$id_campus,$id_edificio,$piso,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2802,7 +2802,7 @@ class modelo_modificacion {
      * @param string $piso, piso del edificio.
      * @param string $elemento, elemento de las gradas.
      * @return array
-    */
+    **/
     public function consultarElementoGradas($id_sede,$id_campus,$id_edificio,$piso,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2833,7 +2833,7 @@ class modelo_modificacion {
      * @param string $id, id del elemento.
      * @param string $elemento, elemento a consultar (cancha, edificio, parqueadero, etc.).
      * @return array
-    */
+    **/
     public function consultarCampoElementoEdificio($id_sede,$id_campus,$id_edificio,$id,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2864,7 +2864,7 @@ class modelo_modificacion {
      * @param string $id, id del elemento.
      * @param string $elemento, elemento a consultar (cancha, edificio, parqueadero, etc.).
      * @return array
-    */
+    **/
     public function consultarCampoElementoEspacio($id_sede,$id_campus,$id_edificio,$id,$elemento){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2893,7 +2893,7 @@ class modelo_modificacion {
      * @param string $tipo_material, tipo de material a consultar.
      * @param string $id, id del tipo de mateial.
      * @return array
-    */
+    **/
     public function consultarCampoTipoMaterial($tipo_material,$id){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $id = htmlspecialchars(trim($id));
@@ -2918,7 +2918,7 @@ class modelo_modificacion {
      * @param string $tipo_objeto, tipo de objeto a consultar.
      * @param string $id, id del tipo de mateial.
      * @return array
-    */
+    **/
     public function consultarCampoTipoObjeto($tipo_objeto,$id){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         $id = htmlspecialchars(trim($id));
@@ -2942,7 +2942,7 @@ class modelo_modificacion {
      * Función que permite consultar el valor de una capacidad.
      * @param string $capacidad, capacidad.
      * @return array
-    */
+    **/
     public function consultarCampoCapacidadAire($capacidad){
         $capacidad = htmlspecialchars(trim($capacidad));
         $sql = "SELECT * FROM capacidad_aire WHERE capacidad = '".$capacidad."';";
@@ -2965,7 +2965,7 @@ class modelo_modificacion {
      * Función que permite consultar el nombre de una marca.
      * @param string $capacidad, capacidad.
      * @return array
-    */
+    **/
     public function consultarCampoMarcaAire($nombre){
         $nombre = htmlspecialchars(trim($nombre));
         $sql = "SELECT * FROM marca_aire WHERE nombre = '".$nombre."';";
@@ -2989,7 +2989,7 @@ class modelo_modificacion {
      * @param string $id_aire, id del aire acondicionado.
      * @param string $tabla, tabla a realizar la consulta.
      * @return array
-    */
+    **/
     public function consultarCampoAire($id_aire,$tabla){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM ".$tabla." WHERE id_aire = '".$id_aire."';";
@@ -3013,7 +3013,7 @@ class modelo_modificacion {
      * @param string $id_aire, id del aire acondicionado.
      * @param string $numero_orden, numero de la orden de mantenimiento.
      * @return array
-    */
+    **/
     public function consultarCampoMantenimientoAire($id_aire,$numero_orden){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."' AND numero_orden = '".$numero_orden."';";
@@ -3036,7 +3036,7 @@ class modelo_modificacion {
      * Función que permite eliminar una sede.
      * @param string $id, id de la sede.
      * @return array
-    */
+    **/
     public function eliminarSede($id){
         $id = htmlspecialchars(trim($id));
         $nombre = array();
@@ -3071,7 +3071,7 @@ class modelo_modificacion {
      * Función que permite eliminar los campus de una sede.
      * @param string $id, id de la sede.
      * @return array
-    */
+    **/
     public function eliminarCampusSede($id){
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM campus WHERE sede = '".$id."';";
@@ -3100,7 +3100,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3152,7 +3152,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarCanchasCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3183,7 +3183,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la cancha.
      * @return array
-    */
+    **/
     public function eliminarCancha($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3236,7 +3236,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarCorredoresCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3267,7 +3267,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del corredor.
      * @return array
-    */
+    **/
     public function eliminarCorredor($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3347,7 +3347,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id_edificio, id del edificio.
      * @return array
-    */
+    **/
     public function eliminarCubiertasEdificio($id_sede,$id_campus,$id_edificio){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3380,7 +3380,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function eliminarCubierta($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3430,7 +3430,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id_edificio, id del edificio.
      * @return array
-    */
+    **/
     public function eliminarGradasEdificio($id_sede,$id_campus,$id_edificio){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3463,7 +3463,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function eliminarGradas($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3507,7 +3507,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarParqueaderosCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3538,7 +3538,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del parqueadero.
      * @return array
-    */
+    **/
     public function eliminarParqueadero($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3597,7 +3597,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarPiscinasCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3628,7 +3628,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la piscina.
      * @return array
-    */
+    **/
     public function eliminarPiscina($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3681,7 +3681,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarPlazoletasCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3712,7 +3712,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la plazoleta.
      * @return array
-    */
+    **/
     public function eliminarPlazoleta($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3754,7 +3754,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarSenderosCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3785,7 +3785,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del sendero.
      * @return array
-    */
+    **/
     public function eliminarSendero($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3853,7 +3853,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarViasCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3884,7 +3884,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la vía.
      * @return array
-    */
+    **/
     public function eliminarVia($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -3934,7 +3934,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id, id del campus.
      * @return array
-    */
+    **/
     public function eliminarEdificiosCampus($id_sede,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -3965,7 +3965,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del edificio.
      * @return array
-    */
+    **/
     public function eliminarEdificio($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4029,7 +4029,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarEspaciosEdificio($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4062,7 +4062,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4175,7 +4175,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del salón.
      * @return array
-    */
+    **/
     public function eliminarSalon($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4221,7 +4221,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del auditorio.
      * @return array
-    */
+    **/
     public function eliminarAuditorio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4267,7 +4267,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del laboratorio.
      * @return array
-    */
+    **/
     public function eliminarLaboratorio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4317,7 +4317,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id de la sala de cómputo.
      * @return array
-    */
+    **/
     public function eliminarSalaComputo($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4363,7 +4363,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id de la oficina.
      * @return array
-    */
+    **/
     public function eliminarOficina($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4406,7 +4406,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del baño.
      * @return array
-    */
+    **/
     public function eliminarBano($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4466,7 +4466,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto técnico.
      * @return array
-    */
+    **/
     public function eliminarCuartoTecnico($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4509,7 +4509,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id de la bodega.
      * @return array
-    */
+    **/
     public function eliminarBodega($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4549,7 +4549,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de plantas.
      * @return array
-    */
+    **/
     public function eliminarCuartoPlantas($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4589,7 +4589,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de aires acondicionados.
      * @return array
-    */
+    **/
     public function eliminarCuartoAiresAcondicionados($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4629,7 +4629,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del área deportiva cerrada.
      * @return array
-    */
+    **/
     public function eliminarAreaDeportivaCerrada($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4669,7 +4669,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del centro de datos.
      * @return array
-    */
+    **/
     public function eliminarCentroDatos($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4709,7 +4709,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del cuarto de bombas.
      * @return array
-    */
+    **/
     public function eliminarCuartoBombas($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4750,7 +4750,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id de la cocineta.
      * @return array
-    */
+    **/
     public function eliminarCocineta($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4791,7 +4791,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id de la sala de estudio.
      * @return array
-    */
+    **/
     public function eliminarSalaEstudio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4831,7 +4831,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarPuntosSanitario($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4874,7 +4874,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarOrinales($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4917,7 +4917,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarOrinal($id_sede,$id_campus,$id_edificio,$id,$tipo_orinal){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -4958,7 +4958,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarTodosLavamanos($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5001,7 +5001,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarLavamanos($id_sede,$id_campus,$id_edificio,$id,$tipo_lavamanos){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5041,7 +5041,7 @@ class modelo_modificacion {
      * Función que permite eliminar un aire acondicionado.
      * @param string $id_aire, id del aire.
      * @return array
-    */
+    **/
     public function eliminarAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numeroInventario = array();
@@ -5110,7 +5110,7 @@ class modelo_modificacion {
      * Función que permite eliminar los mantenimientos de un aire acondicionado.
      * @param string $id_aire, id del aire.
      * @return array
-    */
+    **/
     public function eliminarMantenimientosAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $descripcion = array();
@@ -5154,7 +5154,7 @@ class modelo_modificacion {
      * @param string $id_aire, id del aire.
      * @param string $numero_orden, id de la orden de mantenimiento.
      * @return array
-    */
+    **/
     public function eliminarMantenimientoAire($id_aire,$numero_orden){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numero_orden = htmlspecialchars(trim($numero_orden));
@@ -5199,7 +5199,7 @@ class modelo_modificacion {
      * @param string $id_sede, id de la sede.
      * @param string $id_campus, id del campus.
      * @return array
-    */
+    **/
     public function eliminarArchivosCampus($id_sede,$id_campus){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5230,7 +5230,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoCampus($id_sede,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id = htmlspecialchars(trim($id));
@@ -5267,7 +5267,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la cancha.
      * @return array
-    */
+    **/
     public function eliminarArchivosCancha($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5301,7 +5301,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoCancha($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5338,7 +5338,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del corredor.
      * @return array
-    */
+    **/
     public function eliminarArchivosCorredor($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5372,7 +5372,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoCorredor($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5410,7 +5410,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function eliminarArchivosCubierta($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5446,7 +5446,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoCubierta($id_sede,$id_campus,$id_edificio,$piso,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5485,7 +5485,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $piso, piso del edificio.
      * @return array
-    */
+    **/
     public function eliminarArchivosGradas($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5521,7 +5521,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoGradas($id_sede,$id_campus,$id_edificio,$piso,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5559,7 +5559,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del parqueadero.
      * @return array
-    */
+    **/
     public function eliminarArchivosParqueadero($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5593,7 +5593,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoParqueadero($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5630,7 +5630,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la piscina.
      * @return array
-    */
+    **/
     public function eliminarArchivosPiscina($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5664,7 +5664,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoPiscina($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5701,7 +5701,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la plazoleta.
      * @return array
-    */
+    **/
     public function eliminarArchivosPlazoleta($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5735,7 +5735,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoPlazoleta($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5772,7 +5772,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del sendero.
      * @return array
-    */
+    **/
     public function eliminarArchivosSendero($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5806,7 +5806,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoSendero($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5843,7 +5843,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del vía.
      * @return array
-    */
+    **/
     public function eliminarArchivosVia($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5877,7 +5877,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoVia($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5914,7 +5914,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del edificio.
      * @return array
-    */
+    **/
     public function eliminarArchivosEdificio($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5948,7 +5948,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoEdificio($id_sede,$id_campus,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -5986,7 +5986,7 @@ class modelo_modificacion {
      * @param string $id_edificio, id del edificio.
      * @param string $id, id del esoacio.
      * @return array
-    */
+    **/
     public function eliminarArchivosEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6022,7 +6022,7 @@ class modelo_modificacion {
      * @param string $archivo, nombre del archivo.
      * @param string $tipo, tipo de archivo (foto o plano).
      * @return array
-    */
+    **/
     public function eliminarArchivoEspacio($id_sede,$id_campus,$id_edificio,$id,$archivo,$tipo){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6058,7 +6058,7 @@ class modelo_modificacion {
      * Función que permite eliminar las fotos de un aire acondicionado.
      * @param string $id_aire, id de la sede.
      * @return array
-    */
+    **/
     public function eliminarFotosAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "DELETE FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."';";
@@ -6086,7 +6086,7 @@ class modelo_modificacion {
      * @param string $id_aire, id del aire.
      * @param string $archivo, nombre de la foto.
      * @return array
-    */
+    **/
     public function eliminarFotoAire($id_aire,$archivo){
         $id_aire = htmlspecialchars(trim($id_aire));
         $archivo = htmlspecialchars(trim($archivo));
@@ -6115,7 +6115,7 @@ class modelo_modificacion {
      * Función que permite eliminar los una carpeta y sus archivos.
      * @param string $carpeta, nombre de la carpeta a eliminar.
      * @return array
-    */
+    **/
     function eliminarDir($carpeta){
         foreach(glob($carpeta."/*") as $archivos_carpeta){
             if (is_dir($archivos_carpeta)){
@@ -6136,7 +6136,7 @@ class modelo_modificacion {
      * @param string $id, id del corredor.
      * @param string $objeto, tipo de iluminación a eliminar.
      * @return array
-    */
+    **/
     public function eliminarIluminacionCorredor($id_sede,$id_campus,$id,$tipo_iluminacion){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6177,7 +6177,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del corredor.
      * @return array
-    */
+    **/
     public function eliminarIluminacionesCorredor($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6219,7 +6219,7 @@ class modelo_modificacion {
      * @param string $id, id del corredor.
      * @param string $objeto, tipo de interruptor a eliminar.
      * @return array
-    */
+    **/
     public function eliminarInterruptorCorredor($id_sede,$id_campus,$id,$tipo_interruptor){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6260,7 +6260,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del corredor.
      * @return array
-    */
+    **/
     public function eliminarInterruptoresCorredor($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6304,7 +6304,7 @@ class modelo_modificacion {
      * @param string $tipo_ventana, tipo de ventana a eliminar.
      * @param string $material_ventana, material de la ventana a eliminar.
      * @return array
-    */
+    **/
     public function eliminarVentanaGradas($id_sede,$id_campus,$id_edificio,$piso,$tipo_ventana,$material_ventana){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6355,7 +6355,7 @@ class modelo_modificacion {
      * @param string $tipo_ventana, tipo de ventana a eliminar.
      * @param string $material_ventana, material de la ventana a eliminar.
      * @return array
-    */
+    **/
     public function eliminarVentanasGradas($id_sede,$id_campus,$id_edificio,$piso){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6407,7 +6407,7 @@ class modelo_modificacion {
      * @param string $id, id de la plazoleta.
      * @param string $tipo_iluminacion, tipo de iluminación a eliminar.
      * @return array
-    */
+    **/
     public function eliminarIluminacionPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6448,7 +6448,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id de la plazoleta.
      * @return array
-    */
+    **/
     public function eliminarIluminacionesPlazoleta($id_sede,$id_campus,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6490,7 +6490,7 @@ class modelo_modificacion {
      * @param string $id, id del espacio.
      * @param string $tipo_iluminacion, tipo de iluminación a eliminar.
      * @return array
-    */
+    **/
     public function eliminarIluminacionEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_iluminacion){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6532,7 +6532,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarIluminacionesEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6575,7 +6575,7 @@ class modelo_modificacion {
      * @param string $id, id del espacio.
      * @param string $tipo_interruptor, tipo de interruptor a eliminar.
      * @return array
-    */
+    **/
     public function eliminarInterruptorEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_interruptor){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6617,7 +6617,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarInterruptoresEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6663,7 +6663,7 @@ class modelo_modificacion {
      * @param string $material_marco, material marco a eliminar.
      * @param string $tipo_cerradura, tipo de cerradura a eliminar.
      * @return array
-    */
+    **/
     public function eliminarPuertaEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6718,7 +6718,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarPuertasEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6780,7 +6780,7 @@ class modelo_modificacion {
      * @param string $material_marco, material marco a eliminar.
      * @param string $tipo_cerradura, tipo de cerradura a eliminar.
      * @return array
-    */
+    **/
     public function eliminarCerraduraPuerta($id_sede,$id_campus,$id_edificio,$id,$tipo_puerta,$material_puerta,$material_marco,$tipo_cerradura){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6818,7 +6818,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarCerradurasPuerta($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6859,7 +6859,7 @@ class modelo_modificacion {
      * @param string $tipo_suministro_energia, tipo de suministro de energía a eliminar.
      * @param string $tomacorriente, tipo de tomacorriente a eliminar.
      * @return array
-    */
+    **/
     public function eliminarSuministroEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_suministro_energia,$tomacorriente){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6903,7 +6903,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarSuministrosEnergiaEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6950,7 +6950,7 @@ class modelo_modificacion {
      * @param string $tipo_ventana, tipo de ventana eliminar.
      * @param string $material_ventana, material de la ventana a eliminar.
      * @return array
-    */
+    **/
     public function eliminarVentanaEspacio($id_sede,$id_campus,$id_edificio,$id,$tipo_ventana,$material_ventana){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -6998,7 +6998,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function eliminarVentanasEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -7049,7 +7049,7 @@ class modelo_modificacion {
      * @param string $id_campus, id del campus.
      * @param string $id, id del espacio.
      * @return array
-    */
+    **/
     public function consultarAireAcondicionadoEspacio($id_sede,$id_campus,$id_edificio,$id){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));

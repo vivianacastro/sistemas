@@ -10,7 +10,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una sede en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_sede(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -30,7 +30,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un campus en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -50,7 +50,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una cancha en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -70,7 +70,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un corredor en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -90,7 +90,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una cubierta en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -110,7 +110,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar unas gradas en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -130,7 +130,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un parqueadero en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -150,7 +150,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una piscina en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -170,7 +170,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una plazoleta en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -190,7 +190,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un sendero en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -210,7 +210,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una vía en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -230,7 +230,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un edificio en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -250,7 +250,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un espacio en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -301,7 +301,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un aire acondicionado en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -321,7 +321,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una capacidad de aires acondicionados en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_capacidad_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -341,7 +341,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar una marca de aires acondicionados en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_marca_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -361,7 +361,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar la información de un mantenimiento a un aire acondicionado.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_mantenimiento_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -381,7 +381,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un tipo de material en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_tipo_material(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -401,7 +401,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite modificar un tipo de objeto en el sistema.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function modificar_tipo_objeto(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -421,7 +421,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una sede.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_sede(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -441,7 +441,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un campus.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -461,7 +461,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una cancha.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -481,7 +481,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un corredor.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -501,7 +501,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una cubierta.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -521,7 +521,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar unas gradas.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -541,7 +541,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un parqueadero.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -561,7 +561,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una piscina.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -581,7 +581,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una plazoleta.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -601,7 +601,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un sendero.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -621,7 +621,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar una vía.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -641,7 +641,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un edificio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -661,7 +661,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -681,7 +681,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un aire acondicionado.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -701,7 +701,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un mantenimiento de un aire acondicionado.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_mantenimiento_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -721,7 +721,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un campus.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_campus(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -744,7 +744,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de una cancha.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_cancha(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -767,7 +767,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un corredor.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -790,7 +790,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de una cubierta.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_cubierta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -813,7 +813,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de unas gradas.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -836,7 +836,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un parqueadero.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_parqueadero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -859,7 +859,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de una piscina.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_piscina(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -882,7 +882,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de una plazoleta.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -905,7 +905,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un sendero.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_sendero(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -928,7 +928,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de una vía.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_via(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -951,7 +951,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un edificio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_edificio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -974,7 +974,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_archivo_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -997,7 +997,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un archivo de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_foto_aire(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1020,7 +1020,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de iluminación de un corredor.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_iluminacion_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1043,7 +1043,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de interruptor de un corredor.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_interruptor_corredor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1066,7 +1066,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de ventana de unas gradas.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_ventana_gradas(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1090,7 +1090,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de iluminación de una plazoleta.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_iluminacion_plazoleta(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1113,7 +1113,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de iluminación de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_iluminacion_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1136,7 +1136,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de interruptor de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_interruptor_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1159,7 +1159,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de puerta de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_puerta_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1184,7 +1184,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de suministro de energía de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_suministro_energia_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
@@ -1208,7 +1208,7 @@ class controlador_modificacion{
     /**
      * Funcion que permite eliminar un tipo de ventana de un espacio.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    */
+    **/
     public function eliminar_ventana_espacio(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";

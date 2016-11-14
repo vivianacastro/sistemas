@@ -16,7 +16,7 @@ class modelo_consultas
      * base de datos.
      * @param string $dbpass contraseña para poder acceder a la base de datos.
      * @param string $dbhost Host en donde se encuentra la base de datos.
-    */
+    **/
     public function __construct($dbname,$dbuser,$dbpass,$dbhost){
         $conn_string = 'pgsql:host='.$dbhost.';port=5432;dbname='.$dbname;
         try {
@@ -30,7 +30,7 @@ class modelo_consultas
     /**
      * Función que permite buscar las sedes que se han creado en el sistema.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarSedes(){
         $sql = "SELECT * FROM sede ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -55,7 +55,7 @@ class modelo_consultas
      * Función que permite buscar los campus que se han creado en el sistema.
      * @param string $nombre_sede, id de la sede en donde se buscarán los campus.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCampus($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         if (strcmp($nombre_sede,"") == 0) {
@@ -88,7 +88,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán las canchas.
      * @param string $nombre_campus, id del campus en donde se buscarán las canchas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCanchas($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -127,7 +127,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán los corredores.
      * @param string $nombre_campus, id del campus en donde se buscarán los corredores.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCorredores($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -168,7 +168,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio en donde se buscarán las cubiertas.
      * @param string $piso, piso del edificio en donde se buscarán las cubiertas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCubiertas($nombre_sede,$nombre_campus,$nombre_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -212,7 +212,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio en donde se buscarán las gradas.
      * @param string $piso, piso del edificio en donde se buscarán las gradas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarGradas($nombre_sede,$nombre_campus,$nombre_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -254,7 +254,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán los parqueaderos.
      * @param string $nombre_campus, id del campus en donde se buscarán los parqueaderos.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarParqueaderos($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -293,7 +293,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán las piscinas.
      * @param string $nombre_campus, id del campus en donde se buscarán las piscinas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarPiscinas($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -332,7 +332,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán las plazoletas.
      * @param string $nombre_campus, id del campus en donde se buscarán las plazoletas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarPlazoletas($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -371,7 +371,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán los senderos.
      * @param string $nombre_campus, id del campus en donde se buscarán los senderos.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarSenderos($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -410,7 +410,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede en donde se buscarán las vías.
      * @param string $nombre_campus, id del campus en donde se buscarán las vías.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarVias($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -449,7 +449,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede al que pertenece el edificio.
      * @param string $nombre_campus, id del campus donde está el edificio.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarEdificios($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -489,7 +489,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio donde están los espacios a buscar.
      * @param string $piso, piso del edificio donde están los espacios.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarEspacios($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -523,7 +523,7 @@ class modelo_consultas
      * Función que permite buscar la información de una sede en el sistema.
      * @param string $nombre_sede, id de la sede.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionSede($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $sql = "SELECT id, nombre FROM sede WHERE id = '".$nombre_sede."' ORDER BY nombre;";
@@ -550,7 +550,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede al que pertenece el campus a buscar.
      * @param string $nombre_campus, id del campus a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -581,7 +581,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la cancha a buscar.
      * @param string $id, id de la cancha a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionCancha($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -614,7 +614,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el corredor a buscar.
      * @param string $id, id del corredor a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -648,7 +648,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el corredor a buscar.
      * @param string $id, id del corredor a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionIluminacionCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -678,7 +678,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el corredor a buscar.
      * @param string $id, id del corredor a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionInterruptorCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -709,7 +709,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio al que pertenece la cubierta a buscar.
      * @param string $piso, piso donde se encuentra la cubierta.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -745,7 +745,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio al que pertenecen las gradas a buscar.
      * @param string $piso, piso donde inician las gradas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -781,7 +781,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio al que pertenecen las gradas a buscar.
      * @param string $piso, piso donde inician las gradas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -812,7 +812,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el parqueadero a buscar.
      * @param string $id, id del parqueadero a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionParqueadero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -845,7 +845,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la piscina a buscar.
      * @param string $id, id de la piscina a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionPiscina($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -878,7 +878,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la plazoleta a buscar.
      * @param string $id, id de la plazoleta a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionPlazoleta($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -911,7 +911,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la plazoleta a buscar.
      * @param string $id, id de la plazoleta a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionIluminacionPlazoleta($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -941,7 +941,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el sendero a buscar.
      * @param string $id, id del sendero a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionSendero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -974,7 +974,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la vía a buscar.
      * @param string $id, id de la vía a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionVia($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1007,7 +1007,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el edificio a buscar.
      * @param string $id, id del edificio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionEdificio($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1039,7 +1039,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1068,7 +1068,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está la cancha.
      * @param string $id, id de la cancha..
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosCancha($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1097,7 +1097,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está el corredor.
      * @param string $id, id del corredor.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1127,7 +1127,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio donde está la cubierta.
      * @param string $piso, piso del edificio donde está la cubierta.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosCubierta($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1157,7 +1157,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio donde están las gradas.
      * @param string $piso, piso del edificio donde están las gradas.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1186,7 +1186,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está el parqueadero.
      * @param string $id, id del parqueadero.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosParqueadero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1216,7 +1216,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está la piscina.
      * @param string $id, id de la piscina.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosPiscina($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1246,7 +1246,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está la plazoleta.
      * @param string $id, id de la plazoleta.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosPlazoleta($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1276,7 +1276,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está el sendero.
      * @param string $id, id del sendero.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosSendero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1306,7 +1306,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está la vía.
      * @param string $id, id de la vía.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosVia($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1336,7 +1336,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus donde está el edificio.
      * @param string $id_edificio, id del edificio.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosEdificio($nombre_sede,$nombre_campus,$id_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1367,7 +1367,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio donde está el espacio.
      * @param string $id_edificio, id del espacio.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1396,7 +1396,7 @@ class modelo_consultas
      * Función que permite buscar los archivos de un aire acondicionado en el sistema.
      * @param string $id_aire, id del aire.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosAireId($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."' ORDER BY tipo,nombre;";
@@ -1422,7 +1422,7 @@ class modelo_consultas
      * Función que permite buscar los archivos de un aire acondicionado en el sistema.
      * @param string $numero_inventario, numero de inventario del aire.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarArchivosAireNumeroInventario($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sql = "SELECT * FROM aire_acondicionado_archivos WHERE numero_inventario = '".$numero_inventario."' ORDER BY tipo,nombre;";
@@ -1448,7 +1448,7 @@ class modelo_consultas
      * Función que permite buscar los mantenimientos a un aire acondicionado.
      * @param string $id_aire, número de la orden de mantenimiento.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarMantenimientosAire($id_aire){
         $id_aire = htmlspecialchars(trim($id_aire));
         $sql = "SELECT * FROM mantenimiento_aire WHERE id_aire = '".$id_aire."';";
@@ -1474,7 +1474,7 @@ class modelo_consultas
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionCampus($nombre_sede,$nombre_campus){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1503,7 +1503,7 @@ class modelo_consultas
      * @param string $nombre_campus, id de la cancha al que pertenece la cancha.
      * @param string $id, id de la cancha.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionCancha($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1533,7 +1533,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece al corredor.
      * @param string $id, id del corredor.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionCorredor($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1563,7 +1563,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el parqueadero.
      * @param string $id, id del parqueadero.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionParqueadero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1593,7 +1593,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la piscina.
      * @param string $id, id de la piscina.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionPiscina($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1623,7 +1623,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la plazoleta.
      * @param string $id, id de la plazoleta.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionPlazoleta($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1653,7 +1653,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el sendero.
      * @param string $id, id del sendero.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionSendero($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1683,7 +1683,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece la vía.
      * @param string $id, id de la cancha.
       * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionVia($nombre_sede,$nombre_campus,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1713,7 +1713,7 @@ class modelo_consultas
      * @param string $nombre_campus, id del campus al que pertenece el edificio..
      * @param string $nombre_edificio, id del edificio.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function ubicacionEdificio($nombre_sede,$nombre_campus,$nombre_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1744,7 +1744,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del edificio donde están los espacios a buscar.
      * @param string $piso, piso del edificio donde están los espacios.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarPisosEdificio($nombre_sede,$nombre_campus,$nombre_edificio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1771,7 +1771,7 @@ class modelo_consultas
     /**
      * Función que permite buscar los diferentes usos de espacio creados en el sistema.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarUsosEspacios(){
         $sql = "SELECT id,uso FROM uso_espacio ORDER BY uso;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1796,7 +1796,7 @@ class modelo_consultas
      * Función que permite buscar los materiales que se han creado en el sistema.
      * @param string $tipo_material, tipo de material a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarMateriales($tipo_material){
         $tipo_material = htmlspecialchars(trim($tipo_material));
         $sql = "SELECT id,material FROM ".$tipo_material." ORDER BY material;";
@@ -1822,7 +1822,7 @@ class modelo_consultas
      * Función que permite buscar los tipo de objetos que se han creado en el sistema.
      * @param string $tipo_objeto, tipo de objeto a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarTipoObjetos($tipo_objeto){
         $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
         if (strcmp($tipo_objeto,"tipo_periodicidad_mantenimiento") == 0) {
@@ -1855,7 +1855,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionIluminacionEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1887,7 +1887,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionInterrutorEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1919,7 +1919,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionPuertaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1951,7 +1951,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionPuertaTipoCerradura($nombre_sede,$nombre_campus,$nombre_edificio,$id,$tipo_puerta,$material_puerta,$material_marco){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -1986,7 +1986,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionSuministroEnergiaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -2018,7 +2018,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionVentanaEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -2051,7 +2051,7 @@ class modelo_consultas
      * @param string $id, id del espacio a buscar.
      * @param string $uso_espacio, uso del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionUsoEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id,$uso_espacio){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
@@ -2081,7 +2081,7 @@ class modelo_consultas
     /**
      * Función que permite buscar las capacidades de los aires acondicionados en el sistema.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCapacidadesAire(){
         $sql = "SELECT * FROM capacidad_aire ORDER BY cast(capacidad as int);";
         $l_stmt = $this->conexion->prepare($sql);
@@ -2104,7 +2104,7 @@ class modelo_consultas
     /**
      * Función que permite buscar las marcas de los aires acondicionados en el sistema.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarMarcasAire(){
         $sql = "SELECT * FROM marca_aire ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -2128,7 +2128,7 @@ class modelo_consultas
      * Función que permite buscar un aire acondicionado por número de inventario.
      * @param string $numero_inventario, número de inventario del aire acondicionado.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarAireNumeroInventario($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $result = array();
@@ -2161,7 +2161,7 @@ class modelo_consultas
      * Función que permite buscar un aire acondicionado por número de inventario.
      * @param string $idAire, id del aire acondicionado.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarAireId($idAire){
         $numero_inventario = htmlspecialchars(trim($idAire));
         $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
@@ -2194,7 +2194,7 @@ class modelo_consultas
      * @param string $id_edificio, id del edificio donde está el aire.
      * @param string $id_espacio, id del espacio donde está el aire.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarAiresUbicacion($id_sede,$id_campus,$id_edificio,$id_espacio){
         $id_sede = htmlspecialchars(trim($id_sede));
         $id_campus = htmlspecialchars(trim($id_campus));
@@ -2228,7 +2228,7 @@ class modelo_consultas
      * Función que permite buscar una capacidad de aires acondicionados.
      * @param string $id, id de la capacidad.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarCapacidadAires($id){
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM capacidad_aire WHERE id = '".$id."';";
@@ -2253,7 +2253,7 @@ class modelo_consultas
      * Función que permite buscar una marca de aires acondicionados.
      * @param string $id, id de la marca.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarMarcaAires($id){
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM marca_aire WHERE id = '".$id."';";
@@ -2278,7 +2278,7 @@ class modelo_consultas
      * Función que permite buscar un tipo de aires acondicionados.
      * @param string $id, id del tipo.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarTipoAires($id){
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM tipo_aire WHERE id = '".$id."';";
@@ -2303,7 +2303,7 @@ class modelo_consultas
      * Función que permite buscar un tipo de aires acondicionados.
      * @param string $id, id del tipo.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarTecnologiaAires($id){
         $id = htmlspecialchars(trim($id));
         $sql = "SELECT * FROM tipo_tecnologia_aire WHERE id = '".$id."';";
@@ -2328,7 +2328,7 @@ class modelo_consultas
      * Función que permite buscar un mantenimiento a un aire acondicionado.
      * @param string $numero_orden, número de la orden de mantenimiento.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarMantenimientoAire($numero_orden){
         $numero_orden = htmlspecialchars(trim($numero_orden));
         $sql = "SELECT * FROM mantenimiento_aire WHERE numero_orden = '".$numero_orden."';";
@@ -2353,10 +2353,39 @@ class modelo_consultas
      * Función que permite verificar si un número de inventario ya está registrado.
      * @param string $numero_inventario, número de inventario a consultar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function verificarNumeroInventarioAire($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sql = "SELECT count(numero_inventario), numero_inventario FROM aire_acondicionado WHERE numero_inventario = '".$numero_inventario."' GROUP BY numero_inventario;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Número Inventario Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Número Inventario Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar los aires con más mantenimientos.
+     * @param string $numero_inventario, número de inventario a consultar.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarMarcasMasInstaladas($numero_inventario){
+        $numero_inventario = htmlspecialchars(trim($numero_inventario));
+        $sql = "SELECT count(numero_inventario), numero_inventario
+                FROM mantenimiento_aire a   JOIN aire_acondicionado b ON a.id_aire = b.id_aire
+                                            JOIN aire_acondicionado b ON a.id_aire = b.id_aire
+                WHERE numero_inventario = '".$numero_inventario."' GROUP BY numero_inventario;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Número Inventario Aire 1)";
@@ -2382,7 +2411,7 @@ class modelo_consultas
      * @param string $nombre_edificio, id del espacio al que pertenece el edificio a buscar.
      * @param string $id, id del espacio a buscar.
      * @return metadata con el resultado de la búsqueda.
-    */
+    **/
     public function buscarInformacionEspacio($nombre_sede,$nombre_campus,$nombre_edificio,$id){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));

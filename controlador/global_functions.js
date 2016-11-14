@@ -1,6 +1,6 @@
 /**
 *funciones globales de la aplicacion
-*/
+**/
 $(document).ready(function () {
 	//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
 	var URLactual = window.location;
@@ -99,6 +99,16 @@ $(document).ready(function () {
 			$('#option_consultar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_numero_orden') >= 0)) {
 			$('#option_consultar_mantenimiento_aire_numero_orden').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_mas_marcas_aire') >= 0)) {
+			$('#option_mas_marcas_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_mas_tipos_aire') >= 0)) {
+			$('#option_mas_tipos_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_mas_tipo_tecnologias_aire') >= 0)) {
+			$('#option_mas_tipo_tecnologias_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0)) {
+			$('#option_mas_mantenimientos').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_marcas_mas_mantenimientos') >= 0)) {
+			$('#option_marcas_mas_mantenimientos').addClass("opcion_activa_seleccion");
 		}
 	}else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
 		$('#inventario').addClass("opcion_activa");
@@ -116,8 +126,8 @@ $(document).ready(function () {
 });
 
 /**
-* Evento de cambio del selector de archivo del modal de consulta/modificación.
-*/
+ * Evento de cambio del selector de archivo del modal de consulta/modificación.
+**/
 $("#myCarousel").on("change", ".upload", function(){
 	var fotos = document.getElementById("fileInputOculto");
 	var texto = "";
@@ -131,10 +141,10 @@ $("#myCarousel").on("change", ".upload", function(){
 
 
 /**
-* Función que muestra el texto como mensaje en el panel superior.
-* @param {string} texto, Cadena que representa el mensaje a mostrar.
-* @returns {undefined}
-*/
+ * Función que muestra el texto como mensaje en el panel superior.
+ * @param {string} texto, Cadena que representa el mensaje a mostrar.
+ * @returns {undefined}
+**/
 function mostrarMensaje(texto) {
 	//$('#divMensaje').empty();
 	//$('#divMensaje').text(texto);
@@ -142,10 +152,10 @@ function mostrarMensaje(texto) {
 }
 
 /**
-* Función que valida si una cadena no esta vacía.
-* @param {string} cadena, Cadena a validar.
-* @returns {boolean} valido, booleano.
-*/
+ * Función que valida si una cadena no esta vacía.
+ * @param {string} cadena, Cadena a validar.
+ * @returns {boolean} valido, booleano.
+**/
 function validarCadena(cadena) {
 	var valido = true;
 	if (cadena == '' || cadena == null) {
@@ -157,10 +167,10 @@ function validarCadena(cadena) {
 }
 
 /**
-* Función que valida si las cadenas de un arreglo no están vacías.
-* @param {array} arreglo, Arreglo a validar.
-* @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró la cadena que no cumple.
-*/
+ * Función que valida si las cadenas de un arreglo no están vacías.
+ * @param {array} arreglo, Arreglo a validar.
+ * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró la cadena que no cumple.
+**/
 function validarArregloCadenas(arreglo) {
 	var posicion = null;
 	for (var i=0;i<arreglo.length;i++) {
@@ -179,10 +189,10 @@ function validarArregloCadenas(arreglo) {
 }
 
 /**
-* Función que valida si un número es mayor que cero.
-* @param {string} numero, Número a validar.
-* @returns {boolean} valido, booleano.
-*/
+ * Función que valida si un número es mayor que cero.
+ * @param {string} numero, Número a validar.
+ * @returns {boolean} valido, booleano.
+**/
 function validarNumero(numero) {
 	var numero = parseInt(numero);
 	var valido = true;
@@ -195,10 +205,10 @@ function validarNumero(numero) {
 }
 
 /**
-* Función que valida si los numeros de un arreglo son números mayores que cero.
-* @param {array} arreglo, Arreglo a validar.
-* @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró el número que no cumple.
-*/
+ * Función que valida si los numeros de un arreglo son números mayores que cero.
+ * @param {array} arreglo, Arreglo a validar.
+ * @returns {integer} posicion, numero que representa la posicion del arreglo donde se encontró el número que no cumple.
+**/
 function validarArregloNumeros(arreglo) {
 	var posicion = null;
 	for (var i=0;i<arreglo.length;i++) {
@@ -217,10 +227,10 @@ function validarArregloNumeros(arreglo) {
 }
 
 /**
-* Función que valida si un correo es válido o no.
-* @param {string} correo, cadena a validar.
-* @returns {boolean} valido, booleano.
-*/
+ * Función que valida si un correo es válido o no.
+ * @param {string} correo, cadena a validar.
+ * @returns {boolean} valido, booleano.
+**/
 function validarCorreo(correo) {
 	var valido = true;
 	expr = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -231,10 +241,10 @@ function validarCorreo(correo) {
 }
 
 /**
-* Función que devuelve la cadena de entrada en minúsculas, sin espacios dobles y sin espacios al comienzo y al final de ésta.
-* @param {string} cadena, Cadena a convertir a minúsculas.
-* @returns {string} cadenaMinus, Cadena convertida.
-*/
+ * Función que devuelve la cadena de entrada en minúsculas, sin espacios dobles y sin espacios al comienzo y al final de ésta.
+ * @param {string} cadena, Cadena a convertir a minúsculas.
+ * @returns {string} cadenaMinus, Cadena convertida.
+**/
 function limpiarCadena(cadena) {
 	var cadenaMinus = cadena.toLowerCase();
 	cadenaMinus = cadenaMinus.replace(/\s+/gi,' ');
@@ -243,49 +253,35 @@ function limpiarCadena(cadena) {
 }
 
 /**
-* Función que añade un componente a un div.
-* @param {string} divPadre, nombre del div al que se añadirá el componente.
-* @param {string} componente, cadena con el componente a añadir.
-*/
+ * Función que añade un componente a un div.
+ * @param {string} divPadre, nombre del div al que se añadirá el componente.
+ * @param {string} componente, cadena con el componente a añadir.
+**/
 function añadirComponente(divPadre,componente) {
 	$('#'+divPadre).append(componente);
 }
 
 /**
-* Función que elimina un componente a un div.
-* @param {string} idComponente, id del componente a eliminar.
-* @param {string} componente, cadena con el componente a eliminar.
-*/
+ * Función que elimina un componente a un div.
+ * @param {string} idComponente, id del componente a eliminar.
+ * @param {string} componente, cadena con el componente a eliminar.
+**/
 function eliminarComponente(idComponente) {
 	$('#'+idComponente).remove();
 }
 
 /**
-+ Función que valida el formato de una fecha.
-* @param {string} campo, fecha.
-* @param {string} componente, cadena con el componente a eliminar.
-*/
-function validarFormatoFecha(campo) {
-	var RegExPattern = /^\d{2,4}\/\d{1,2}\/\d{1,2}$/;
-	if ((campo.match(RegExPattern)) && (campo!='')) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
-+ Función que valida el si una fecha es menor que la fecha actual.
-* @param {string} date, fecha.
-* @param {string} componente, cadena con el componente a eliminar.
-*/
+ * Función que valida el si una fecha es menor que la fecha actual.
+ * @param {string} date, fecha.
+ * @param {string} componente, cadena con el componente a eliminar.
+**/
 function validarFechaMenorActual(date){
 	var x = new Date();
-	var fecha = date.split("/");
-	x.setFullYear(fecha[2],fecha[1]-1,fecha[0]);
+	var fecha = date.split("-");
+	x.setFullYear(fecha[0],fecha[1]-1,fecha[2]);
 	var today = new Date();
 	if (x >= today)
-	return false;
+		return false;
 	else
-	return true;
+		return true;
 }

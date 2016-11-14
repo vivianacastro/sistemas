@@ -7,8 +7,8 @@ ini_set('display_errors', '1');*/
 class controlador_usuario {
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+      * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function crear_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -20,8 +20,8 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+     * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function crear_usuario_admin() {
         $GLOBALS['mensaje'] = "";
@@ -38,7 +38,7 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite recuperar la contraseña de un usuario
+     * Función que despliega el panel que permite recuperar la contraseña de un usuario
     **/
     public function olvido_contrasenia() {
         $GLOBALS['mensaje'] = "";
@@ -50,8 +50,8 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+     * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function listar_usuarios_admin() {
         $GLOBALS['mensaje'] = "";
@@ -68,8 +68,8 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+     * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function informacion_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -81,8 +81,8 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+     * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function modificar_informacion_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -94,8 +94,8 @@ class controlador_usuario {
     }
 
     /**
-    * Función que despliega el panel que permite crear
-    * un usuario en el sistema.
+     * Función que despliega el panel que permite crear
+     * un usuario en el sistema.
     **/
     public function cambiar_contrasenia() {
         $GLOBALS['mensaje'] = "";
@@ -107,9 +107,9 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite iniciar una sesion por un usuario, ademas esta
-     * función se encarga de desplegar el panel de logeo o el mostrar la pagina
-     * de inicio de la aplicación web.
+      * Función que permite iniciar una sesion por un usuario, ademas esta
+      * función se encarga de desplegar el panel de logeo o el mostrar la pagina
+      * de inicio de la aplicación web.
      */
     public function iniciar_sesion() {
         //session_start();  //Comentado
@@ -164,7 +164,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite cerrar una sesion de un usuario.
+      * Función que permite cerrar una sesion de un usuario.
     */
     public function cerrar_sesion() {
         //session_start(); //Comentado
@@ -180,7 +180,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite crear un usuario en el sistema
+      * Función que permite crear un usuario en el sistema
     **/
     public function guardar_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -201,7 +201,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite modificar la información de un usuario
+      * Función que permite modificar la información de un usuario
     **/
     public function modificar_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -227,7 +227,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite modificar la contraseña de un usuario
+      * Función que permite modificar la contraseña de un usuario
     **/
     public function modificar_contrasenia() {
         $GLOBALS['mensaje'] = "";
@@ -249,7 +249,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite reestablecer la contraseña de un usuario
+      * Función que permite reestablecer la contraseña de un usuario
     **/
     public function reestablecer_contrasenia() {
         $GLOBALS['mensaje'] = "";
@@ -269,7 +269,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite verificar si un login ya esta asignado
+      * Función que permite verificar si un login ya esta asignado
     **/
     public function verificar_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -286,7 +286,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite verificar si un correo ya esta registrado
+      * Función que permite verificar si un correo ya esta registrado
     **/
     public function verificar_correo() {
         $GLOBALS['mensaje'] = "";
@@ -308,7 +308,7 @@ class controlador_usuario {
     }
 
     /**
-     * Función que permite verificar si un correo ya esta registrado
+      * Función que permite verificar si un correo ya esta registrado
     **/
     public function obtener_informacion_usuario() {
         $GLOBALS['mensaje'] = "";
@@ -335,7 +335,7 @@ class controlador_usuario {
 
 
     /**
-     * Función que permite chekear si hay una sesion iniciada.
+      * Función que permite chekear si hay una sesion iniciada.
     */
     public function check() {
         session_start();

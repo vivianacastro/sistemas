@@ -13,7 +13,7 @@ $(document).ready(function() {
      * Función que se ejecuta al momento que se accede a la página que lo tiene
      * incluido.
      * @returns {undefined}
-    */
+    **/
     (function (){
         if(URLactual['href'].indexOf('consultar_sede') >= 0){
             actualizarSelectSede();
@@ -120,13 +120,15 @@ $(document).ready(function() {
             actualizarSelectTipoAire("tipo_aire_search");
         }else if(URLactual['href'].indexOf('consultar_tecnologia_aire') >= 0){
             actualizarSelectTecnologiaAire("tecnologia_aire_search");
+        }else if(URLactual['href'].indexOf('mas_marcas_aire') >= 0){
+            actualizarSelectSede();
         }
     })();
 
     /**
      * Función que carga el mapa y lo configura.
      * @returns {undefined}
-    */
+    **/
     function initMap() {
         var options = {
             center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
@@ -140,7 +142,7 @@ $(document).ready(function() {
     /**
      * Función que carga el mapa y lo configura.
      * @returns {undefined}
-    */
+    **/
     function initMapConsulta() {
         var options = {
             center: {lat: 3.375119, lng: -76.5336927}, //Coordenadas Univalle - Meléndez
@@ -153,7 +155,7 @@ $(document).ready(function() {
      * Función que obtiene las coordenadas donde se encuentra el usuario
      * y actualiza el mapa.
      * @returns {undefined}
-    */
+    **/
     function getCoordenadas(mapa){
         var coords = {};
         navigator.geolocation.getCurrentPosition(function (position){
@@ -173,7 +175,7 @@ $(document).ready(function() {
      * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
      * @param {formData} informacion, formData con las imagenes.
      * @returns {data}
-    */
+    **/
     function guardarPlanos(tipo_objeto,informacion){
         var dataResult;
         try {
@@ -206,7 +208,7 @@ $(document).ready(function() {
      * @param {string} tipo_objeto, string cone el tipo de objeto (campus,edificio, etc.).
      * @param {formData} informacion, formData con las imagenes.
      * @returns {data}
-    */
+    **/
     function guardarFotos(tipo_objeto,informacion){
         var dataResult;
         try {
@@ -621,6 +623,11 @@ $(document).ready(function() {
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
         row.appendTo("#sede_search");
+        if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
+            row = $("<option value='todos'/>");
+            row.text("TODAS");
+            row.appendTo("#sede_search");
+        }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre_sede;
@@ -909,7 +916,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector sede_search
      * y se actualiza el selector de sedes.
-    */
+    **/
     $("#sede_search").change(function (e) {
         if (URLactual['href'].indexOf('consultar_sede') >= 0) {
             var sede = $("#sede_search").val();
@@ -920,7 +927,7 @@ $(document).ready(function() {
             }
         }else{
             if (validarCadena($("#sede_search").val())) {
-                if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+                if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0 || URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
                     var sede = {};
                     $("#campus_search").empty();
                     $("#campus_search").val("");
@@ -929,6 +936,18 @@ $(document).ready(function() {
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
                     row.appendTo("#campus_search");
+                    if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
+                        row = $("<option value='todos'/>");
+                        row.text("TODOS");
+                        row.appendTo("#campus_search");
+                        if ($("#sede_search").val() != 'todos') {
+                            $("#divCampus").show();
+                            $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
+                        }else{
+                            $("#divCampus").hide();
+                            $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+                        }
+                    }
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
                             aux = record.nombre_campus;
@@ -1041,7 +1060,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector campus_search
      * y se actualiza el selector de campus.
-    */
+    **/
     $("#campus_search").change(function (e) {
         if (URLactual['href'].indexOf('consultar_campus') >= 0) {
             for (var i = 0; i < marcadores.length; i++) {
@@ -1058,7 +1077,7 @@ $(document).ready(function() {
                 $('#visualizarCampus').attr('disabled',true);
             }
         }else{
-            if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+            if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0 || URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
                 var campus = {};
                 if (validarCadena($("#campus_search").val())) {
                     var row = $("<option value=''/>");
@@ -1069,6 +1088,18 @@ $(document).ready(function() {
                     $("#edificio_search").val("");
                     row.text("--Seleccionar--");
                     row.appendTo("#edificio_search");
+                    if(URLactual['href'].indexOf('mas_marcas_aire') >= 0){
+                        row = $("<option value='todos'/>");
+                        row.text("TODOS");
+                        row.appendTo("#edificio_search");
+                        if ($("#campus_search").val() != 'todos') {
+                            $("#divEdificio").show();
+                            $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
+                        }else{
+                            $("#divEdificio").hide();
+                            $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+                        }
+                    }
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
                             aux = record.id + " - " + record.nombre_edificio;
@@ -1469,7 +1500,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector codigo_search
      * y se actualiza el selector de códigos.
-    */
+    **/
     $("#codigo_search").change(function (e) {
         if (validarCadena($("#codigo_search").val())) {
             if(URLactual['href'].indexOf('consultar_cancha') >= 0){
@@ -1519,7 +1550,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector edificio_search
      * y se actualiza el selector de edificios.
-    */
+    **/
     $("#edificio_search").change(function (e) {
         if (URLactual['href'].indexOf('consultar_edificio') >= 0) {
             for (var i = 0; i < marcadores.length; i++) {
@@ -1538,6 +1569,12 @@ $(document).ready(function() {
                 $('#visualizarGradas').attr('disabled',true);
                 $('#visualizarEdificio').attr('disabled',true);
 
+            }
+        }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
+            if (validarCadena($("#edificio_search").val())){
+                $("#visualizarMarcasAiresMasInstaladas").removeAttr("disabled");
+            }else{
+                $('#visualizarMarcasAiresMasInstaladas').attr('disabled',true);
             }
         }else{
             var edificio = {};
@@ -1660,7 +1697,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector pisos_search
      * y se actualiza el selector de pisos.
-    */
+    **/
     $("#pisos_search").change(function (e) {
         if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
             for (var i = 0; i < marcadores.length; i++) {
@@ -1718,7 +1755,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector espacio_search
      * y se actualiza el selector de espacios.
-    */
+    **/
     $("#espacio_search").change(function (e) {
         if(URLactual['href'].indexOf('consultar_aire') >= 0){
             var sede = $("#sede_search");
@@ -1762,7 +1799,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector numero_inventario_search
      * y se actualiza el selector de espacios.
-    */
+    **/
     $("#numero_inventario_search").change(function (e) {
         if (validarCadena($("#numero_inventario_search").val())) {
             $('#visualizarAire').removeAttr("disabled");
@@ -1774,7 +1811,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector numero_inventario_search
      * y se actualiza el selector de espacios.
-    */
+    **/
     $("#id_aire_search").change(function (e) {
         if(URLactual['href'].indexOf('consultar_mantenimiento_aire_id_aire') >= 0){
             var idAire = $("#id_aire_search").val();
@@ -1811,7 +1848,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del input numero_orden_search
      * y se actualiza el selector de espacios.
-    */
+    **/
     $("#numero_orden_search").change(function (e) {
         if (validarCadena($("#numero_orden_search").val())) {
             $('#visualizarMantenimientoAire').removeAttr("disabled");
@@ -1823,7 +1860,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector pisos_search
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#tipo_material_search").change(function (e) {
         if (validarCadena($("#tipo_material_search").val())) {
             var tipoObjeto = {};
@@ -1849,7 +1886,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector nombre_tipo_material_search
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#nombre_tipo_material_search").change(function (e) {
         if (validarCadena($("#nombre_tipo_material_search").val())) {
             $('#visualizarTipoMaterial').removeAttr("disabled");
@@ -1861,7 +1898,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector pisos_search
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#tipo_objeto_search").change(function (e) {
         if (validarCadena($("#tipo_objeto_search").val())) {
             var tipoObjeto = {};
@@ -1887,7 +1924,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector nombre_tipo_objeto_search
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#nombre_tipo_objeto_search").change(function (e) {
         if (validarCadena($("#nombre_tipo_objeto_search").val())) {
             $('#visualizarTipoObjeto').removeAttr("disabled");
@@ -1899,7 +1936,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector capacidad_aire
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#capacidad_aire_search").change(function (e) {
         if (validarCadena($("#capacidad_aire_search").val())) {
             $('#visualizarCapacidadAires').removeAttr("disabled");
@@ -1911,7 +1948,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector marca_aire
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#marca_aire_search").change(function (e) {
         if (validarCadena($("#marca_aire_search").val())) {
             $('#visualizarMarcaAires').removeAttr("disabled");
@@ -1923,7 +1960,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector tipo_aire
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#tipo_aire_search").change(function (e) {
         if (validarCadena($("#tipo_aire_search").val())) {
             $('#visualizarTipoAires').removeAttr("disabled");
@@ -1935,7 +1972,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector tecnologia_aire_search
      * y se actualiza el selector de tipo de objeto.
-    */
+    **/
     $("#tecnologia_aire_search").change(function (e) {
         if (validarCadena($("#tecnologia_aire_search").val())) {
             $('#visualizarTecnologiaAires').removeAttr("disabled");
@@ -1947,7 +1984,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarSede y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarSede").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -1967,7 +2004,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarCampus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarCampus").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2102,7 +2139,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarCancha y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarCancha").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2247,7 +2284,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarCorredor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarCorredor").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2455,7 +2492,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarCubierta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarCubierta").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2592,7 +2629,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarGradas y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarGradas").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2779,7 +2816,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarParqueadero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarParqueadero").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -2925,7 +2962,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarPiscina y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarPiscina").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -3069,7 +3106,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarPlazoleta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarPlazoleta").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -3238,7 +3275,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarSendero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarSendero").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -3387,7 +3424,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarVia y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarVia").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -3530,7 +3567,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarEdificio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarEdificio").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -3676,7 +3713,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarEspacio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarEspacio").click(function (e){
         var informacion =  {};
         var sede = $("#sede_search").val();
@@ -4594,7 +4631,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarTipoMaterial y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarTipoMaterial").click(function (e){
         var informacion =  {};
         var tipoMaterial = $("#tipo_material_search").val();
@@ -4608,7 +4645,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarTipoObjeto y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarTipoObjeto").click(function (e){
         var informacion =  {};
         var tipoObjeto = $("#tipo_objeto_search").val();
@@ -4622,7 +4659,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarAire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarAire").click(function (e){
         var informacion =  {};
         var registros = 0;
@@ -4761,7 +4798,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarCapacidadAires y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarCapacidadAires").click(function (e){
         var informacion =  {};
         var capacidad = $("#capacidad_aire_search").val();
@@ -4785,7 +4822,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarMarcaAires y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarMarcaAires").click(function (e){
         var informacion =  {};
         var marca = $("#marca_aire_search").val();
@@ -4809,7 +4846,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarTipoAires y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarTipoAires").click(function (e){
         var informacion =  {};
         var tipoAire = $("#tipo_aire_search").val();
@@ -4833,7 +4870,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarTecnologiaAires y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarTecnologiaAires").click(function (e){
         var informacion =  {};
         var tecnologiaAire = $("#tecnologia_aire_search").val();
@@ -4857,7 +4894,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón visualizarMantenimientoAire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#visualizarMantenimientoAire").click(function (e){
         var informacion =  {};
         var numeroOrden = $("#numero_orden_search").val();
@@ -4884,7 +4921,7 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
-    */
+    **/
     $("#divDialogConsulta").on("shown.bs.modal", function () {
         if (URLactual['href'].indexOf('consultar_cubierta') == -1 && URLactual['href'].indexOf('consultar_gradas') == -1 && URLactual['href'].indexOf('consultar_espacio') == -1 && URLactual['href'].indexOf('consultar_sede') == -1) {
             if (URLactual['href'].indexOf('consultar_campus') >= 0) {
@@ -4903,7 +4940,7 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
-    */
+    **/
     $("#divDialogConsultaMapa").on("shown.bs.modal", function () {
         eliminarComponente("slide_carrusel_eliminar");
         eliminarComponente("item_carrusel_eliminar");
@@ -4911,7 +4948,7 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se cierra el modal divDialogConsulta.
-    */
+    **/
     $('#divDialogConsulta').on('hidden.bs.modal', function () {
         $("#nombre_sede").attr('disabled',true);
         $("#nombre_campus").attr('disabled',true);
@@ -5122,7 +5159,7 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se cierra el modal divDialogConsulta.
-    */
+    **/
     $('#divDialogConsultaMapa').on('hidden.bs.modal', function () {
         eliminarComponente("tituloObjeto");
         eliminarComponente("informacionObjeto");
@@ -5131,7 +5168,7 @@ $(document).ready(function() {
 
     /**
      * Evento de cambio del selector de archivo del modal de consulta/modificación.
-    */
+    **/
     $("#planos").on("change", ".agregar_archivos", function(){
         var planos = document.getElementById("planos[]");
         var aux = numeroPlanos + planos.files.length;
@@ -5154,7 +5191,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del radio button pasamanos
      * y se actualiza el selector de pisos.
-    */
+    **/
     $("#form_pasamanos").change(function (e) {
         var pasamanos = $('input[name="pasamanos"]:checked').val();
         if (pasamanos == "true") {
@@ -5166,7 +5203,7 @@ $(document).ready(function() {
 
     /**
      * Evento de cambio del selector de archivo del modal de consulta/modificación.
-    */
+    **/
     $("#myCarousel").on("change", ".upload", function(){
         var fotos = document.getElementById("fileInputOculto");
         var aux = numeroFotos + fotos.files.length;
@@ -5190,7 +5227,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_sede y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_sede").click(function (e){
         $("#nombre_sede").removeAttr("disabled");
         $("#modificar_sede").hide();
@@ -5200,7 +5237,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_campus").click(function (e){
         $("#nombre_campus").removeAttr("disabled");
         $("#enlace_fotos").show();
@@ -5221,7 +5258,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_cancha y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_cancha").click(function (e){
         $("#uso_cancha").removeAttr("disabled");
         $("#material_piso").removeAttr("disabled");
@@ -5245,7 +5282,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_corredor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_corredor").click(function (e){
         $("#altura_pared").removeAttr("disabled");
         $("#ancho_pared").removeAttr("disabled");
@@ -5297,7 +5334,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_cubierta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_cubierta").click(function (e){
         $("#tipo_cubierta").removeAttr("disabled");
         $("#material_cubierta").removeAttr("disabled");
@@ -5317,7 +5354,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_gradas y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_gradas").click(function (e){
         $("input[name=pasamanos]").attr('disabled', false);
         $("#material_pasamanos").removeAttr("disabled");
@@ -5352,7 +5389,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_parqueadero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_parqueadero").click(function (e){
         $("#capacidad").removeAttr("disabled");
         $("#ancho").removeAttr("disabled");
@@ -5378,7 +5415,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_piscina y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_piscina").click(function (e){
         $("#alto").removeAttr("disabled");
         $("#ancho").removeAttr("disabled");
@@ -5402,7 +5439,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_plazoleta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_plazoleta").click(function (e){
         $("#nombre").removeAttr("disabled");
         $("#tipo_iluminacion").removeAttr("disabled");
@@ -5432,7 +5469,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_sendero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_sendero").click(function (e){
         $("#longitud").removeAttr("disabled");
         $("#ancho").removeAttr("disabled");
@@ -5461,7 +5498,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_via y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_via").click(function (e){
         $("#tipo_pintura").removeAttr("disabled");
         $("#longitud_demarcacion").removeAttr("disabled");
@@ -5484,7 +5521,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_edificio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_edificio").click(function (e){
         $("#nombre_edificio").removeAttr("disabled");
         $("#terraza").removeAttr("disabled");
@@ -5510,7 +5547,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_espacio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_espacio").click(function (e){
         $("#altura_pared").removeAttr("disabled");
         $("#ancho_pared").removeAttr("disabled");
@@ -5630,7 +5667,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_tipo_material y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_tipo_material").click(function (e){
         $("#nombre_tipo_material").removeAttr("disabled");
         $("#modificar_tipo_material").hide();
@@ -5641,7 +5678,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_tipo_objeto y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_tipo_objeto").click(function (e){
         $("#nombre_tipo_objeto").removeAttr("disabled");
         $("#modificar_tipo_objeto").hide();
@@ -5652,7 +5689,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_aire").click(function (e){
         $("#numero_inventario").removeAttr("disabled");
         $("#marca_aire").removeAttr("disabled");
@@ -5674,7 +5711,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_capacidad_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_capacidad_aire").click(function (e){
         $("#capacidad_aire_nueva").removeAttr("disabled");
         $("#modificar_capacidad_aire").hide();
@@ -5685,7 +5722,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_marca_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_marca_aire").click(function (e){
         $("#marca_aire_nueva").removeAttr("disabled");
         $("#modificar_marca_aire").hide();
@@ -5696,7 +5733,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_tipo_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_tipo_aire").click(function (e){
         $("#tipo_aire_nuevo").removeAttr("disabled");
         $("#modificar_tipo_aire").hide();
@@ -5707,7 +5744,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_tecnologia_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_tecnologia_aire").click(function (e){
         $("#tecnologia_aire_nuevo").removeAttr("disabled");
         $("#modificar_tecnologia_aire").hide();
@@ -5718,7 +5755,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón modificar_mantenimiento_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#modificar_mantenimiento_aire").click(function (e){
         $("#fecha_realizacion").removeAttr("disabled");
         $("#realizado").removeAttr("disabled");
@@ -5732,7 +5769,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#enlace_fotos").on("click", "#eliminar_archivo", function(){
         var nombreId = $(this).attr('name');
         var nombreArchivo = $("#"+nombreId).attr('name');
@@ -5751,7 +5788,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#planos").on("click", "#eliminar_archivo", function(){
         var nombreId = $(this).attr('name');
         var nombreArchivo = $("#"+nombreId).attr('name');
@@ -5770,7 +5807,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#map").on("click", ".ver_campus", function(){
         rellenarMapaConsulta();
     });
@@ -5778,7 +5815,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_edificios y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#map").on("click", ".ver_edificios", function(){
         for (var i = 0; i < marcadores.length; i++) {
             marcadores[i].setMap(null);
@@ -6207,7 +6244,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_cancha y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_cancha", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -6347,7 +6384,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_corredor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_corredor", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -6612,7 +6649,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_parqueadero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_parqueadero", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -6770,7 +6807,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_piscina y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_piscina", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -6917,7 +6954,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_plazoleta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_plazoleta", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -7084,7 +7121,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_sendero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_sendero", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -7262,7 +7299,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_via y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_via", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -7402,7 +7439,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón ver_edificio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#contenido").on("click", ".ver_edificio", function(){
         var informacion =  {};
         var sede = sedeSeleccionada;
@@ -7559,7 +7596,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_informacion_adicional y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_informacion_adicional").click(function (e){
         $("#informacion-adicional").show();
         $("#añadir_informacion_adicional").attr('disabled',true);
@@ -7569,7 +7606,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_informacion_adicional y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_informacion_adicional").click(function (e){
         $("#informacion-adicional").hide();
         $("#eliminar_informacion_adicional").attr('disabled',true);
@@ -7579,7 +7616,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_iluminacion y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_iluminacion").click(function (e){
         if (iluminacionCont == 0) {
             iluminacionCont = 1;
@@ -7599,7 +7636,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_iluminacion y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_iluminacion").click(function (e){
         iluminacionCont--;
         tipoIluminacionEliminar.push($("#tipo_iluminacion"+iluminacionCont).val());
@@ -7612,7 +7649,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_tomacorriente y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_tomacorriente").click(function (e){
         if (tomacorrientesCont == 0) {
             tomacorrientesCont = 1;
@@ -7638,7 +7675,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_tomacorriente y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_tomacorriente").click(function (e){
         tomacorrientesCont--;
         tipoSuministroEnergiaEliminar.push($("#tipo_suministro_energia"+tomacorrientesCont).val());
@@ -7652,7 +7689,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_puerta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_puerta").click(function (e){
         if (puertasCont == 0) {
             puertasCont = 1;
@@ -7689,7 +7726,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_puerta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_puerta").click(function (e){
         puertasCont--;
         tipoPuertaEliminar.push($("#tipo_puerta"+puertasCont).val());
@@ -7705,7 +7742,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_ventana y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_ventana").click(function (e){
         if (ventanasCont == 0) {
             ventanasCont = 1;
@@ -7732,7 +7769,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_ventana y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_ventana").click(function (e){
         ventanasCont--;
         tipoVentanaEliminar.push($("#tipo_ventana"+ventanasCont).val());
@@ -7746,7 +7783,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_interruptor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_interruptor").click(function (e){
         if (interruptoresCont == 0) {
             interruptoresCont = 1;
@@ -7766,7 +7803,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_interruptor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_interruptor").click(function (e){
         interruptoresCont--;
         tipoInterruptorEliminar.push($("#tipo_interruptor"+interruptoresCont).val());
@@ -7779,7 +7816,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_punto_sanitario").click(function (e){
         if (puntosSanitariosCont == 0) {
             puntosSanitariosCont = 1;
@@ -7799,7 +7836,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_punto_sanitario").click(function (e){
         puntosSanitariosCont--;
         tipoPuntoSanitarioEliminar.push($("#tipo_punto_sanitario"+puntosSanitariosCont).val());
@@ -7812,7 +7849,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_punto_sanitario y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_orinal").click(function (e){
         if (orinalesCont == 0) {
             orinalesCont = 1;
@@ -7832,7 +7869,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_punto_sanitario y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_orinal").click(function (e){
         orinalesCont--;
         tipoOrinalEliminar.push($("#tipo_orinal"+orinalesCont).val());
@@ -7845,7 +7882,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón añadir_lavamanos y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#añadir_lavamanos").click(function (e){
         if (lavamanosCont == 0) {
             lavamanosCont = 1;
@@ -7866,7 +7903,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón eliminar_lavamanos y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_lavamanos").click(function (e){
         lavamanosCont--;
         tipoLavamanosEliminar.push($("#tipo_lavamanos"+lavamanosCont).val());
@@ -7879,7 +7916,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del radio button tiene_espacio_padre
      * y se actualiza el selector de pisos.
-    */
+    **/
     $("#form_espacio_padre").change(function (e) {
         var espacioPadre = $('input[name="tiene_espacio_padre"]:checked').val();
         if (espacioPadre == "true") {
@@ -7892,7 +7929,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón guardar_archivos y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_archivos").click(function (e){
         if (window.confirm("¿Guardar los archivos seleccionados?")) {
             var planos = document.getElementById("planos[]");
@@ -8080,7 +8117,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón guardar_fotos y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_fotos").click(function (e){
         if (window.confirm("¿Guardar las fotos seleccionados?")) {
             var fotos = document.getElementById("fileInputOculto");
@@ -8143,7 +8180,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_sede y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_sede").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la sede?");
         if (confirmacion) {
@@ -8171,7 +8208,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_campus").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del campus?");
         if (confirmacion) {
@@ -8309,7 +8346,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_cancha y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_cancha").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la cancha?");
         if (confirmacion) {
@@ -8458,7 +8495,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_corredor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_corredor").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del corredor?");
         if (confirmacion) {
@@ -8682,7 +8719,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_cubierta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_cubierta").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la cubierta?");
         if (confirmacion) {
@@ -8821,7 +8858,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_gradas y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_gradas").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de las gradas?");
         if (confirmacion) {
@@ -9024,7 +9061,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_parqueadero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_parqueadero").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del parqueadero?");
         if (confirmacion) {
@@ -9168,7 +9205,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_piscina y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_piscina").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la piscina?");
         if (confirmacion) {
@@ -9308,7 +9345,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_plazoleta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_plazoleta").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la plazoleta?");
         if (confirmacion) {
@@ -9474,7 +9511,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_sendero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_sendero").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del sendero?");
         if (confirmacion) {
@@ -9624,7 +9661,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_via y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_via").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la vía?");
         if (confirmacion) {
@@ -9762,7 +9799,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_edificio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_edificio").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del edificio?");
         if (confirmacion) {
@@ -9908,7 +9945,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_espacio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_espacio").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del espacio?");
         if (confirmacion) {
@@ -10520,7 +10557,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón guardar_modificaciones_tipo_material y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_tipo_material").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del tipo de material?");
         if (confirmacion) {
@@ -10553,7 +10590,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se da click en el botón guardar_modificaciones_tipo_objeto y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_tipo_objeto").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del tipo de objeto?");
         if (confirmacion) {
@@ -10586,7 +10623,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del aire acondicionado?");
         if (confirmacion) {
@@ -10630,6 +10667,9 @@ $(document).ready(function() {
                 }else if (!validarCadena(capacidadAire)) {
                     alert("ERROR. Seleccione la capacidad del aire acondicionado");
                     $("#capacidad_aire").focus();
+                }else if(!validarFechaMenorActual(fechaInstalacion)){
+                    alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
+                    $("#fecha_instalacion").focus();
                 }else{
                     var numeroInventarioRepetido = false;
                     var conteo = 0;
@@ -10704,7 +10744,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_capacidad_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_capacidad_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la capacidad de aires acondicionados?");
         if (confirmacion) {
@@ -10734,7 +10774,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_marca_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_marca_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la marca de aires acondicionados?");
         if (confirmacion) {
@@ -10764,7 +10804,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_marca_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_tipo_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del tipo de aires acondicionados?");
         if (confirmacion) {
@@ -10795,7 +10835,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_marca_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_tecnologia_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información de la tecnología de aires acondicionados?");
         if (confirmacion) {
@@ -10826,7 +10866,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_mantenimiento_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#guardar_modificaciones_mantenimiento_aire").click(function (e){
         var confirmacion = window.confirm("¿Guardar la información del mantenimiento del aire acondicionado?");
         if (confirmacion) {
@@ -10845,6 +10885,9 @@ $(document).ready(function() {
             informacion["descripcion"] = descripcion;
             if (!validarCadena(fecha)) {
                 alert("ERROR. Ingrese la fecha en que se realizó el mantenimiento");
+                $("#fecha_realizacion").focus();
+            }else if(!validarFechaMenorActual(fecha)){
+                alert("ERROR. La fecha en que se realizó la orden de mantenimiento del aire acondicionado es mayor a la fecha actual");
                 $("#fecha_realizacion").focus();
             }else if (!validarCadena(realizado)) {
                 alert("ERROR. Ingrese el nombre de la persona que realizó el mantenimiento");
@@ -10870,7 +10913,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_sede y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_sede").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la sede y todos los elementos (campus, canchas, corredores, edificios, espacios, fotos, planos, etc.) de ésta?");
         if (confirmacion) {
@@ -10891,7 +10934,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_campus y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_campus").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el campus y todos los elementos (canchas, corredores, edificios, espacios, fotos, planos, etc.) de éste?");
         if (confirmacion) {
@@ -10914,7 +10957,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_cancha y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_cancha").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la cancha y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -10939,7 +10982,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_corredor y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_corredor").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el corredor y todos los elementos (fotos y planos) de éste?");
         if (confirmacion) {
@@ -10964,7 +11007,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_cubierta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_cubierta").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la cubierta y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -10991,7 +11034,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_gradas y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_gradas").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar las gradas y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -11018,7 +11061,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_parqueadero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_parqueadero").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el parqueadero y todos los elementos (fotos y planos) de éste?");
         if (confirmacion) {
@@ -11043,7 +11086,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_piscina y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_piscina").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la piscina y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -11068,7 +11111,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_plazoleta y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_plazoleta").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la plazoleta y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -11093,7 +11136,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_sendero y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_sendero").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el sendero peatonal y todos los elementos (fotos y planos) de éste?");
         if (confirmacion) {
@@ -11118,7 +11161,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_via y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_via").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar la vía y todos los elementos (fotos y planos) de ésta?");
         if (confirmacion) {
@@ -11143,7 +11186,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_edificio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_edificio").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el edificio y todos los elementos (cubiertas, gradas, espacios, fotos y planos) de éste?");
         if (confirmacion) {
@@ -11168,7 +11211,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_espacio y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_espacio").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el espacio y todos los elementos (fotos y planos) de éste?");
         if (confirmacion) {
@@ -11195,7 +11238,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_aire").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el aire acondicionado y todos los elementos (fotos y mantenimientos) de éste?");
         if (confirmacion) {
@@ -11217,7 +11260,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando de dar click en el botón eliminar_mantenimiento_aire y se
      * realiza la operacion correspondiente.
-    */
+    **/
     $("#eliminar_mantenimiento_aire").click(function (e){
         var confirmacion = window.confirm("¿Desea eliminar el mantenimiento al aire acondicionado?");
         if (confirmacion) {
