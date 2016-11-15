@@ -26,8 +26,8 @@ $(document).ready(function () {
 			$('#option_crear_plazoleta').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_crear_sendero') >= 0)) {
 			$('#option_crear_sendero').addClass("opcion_activa_seleccion");
-		}else if ((URLactual['href'].indexOf('planta_crear_vias') >= 0)) {
-			$('#option_crear_vias').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('planta_crear_via') >= 0)) {
+			$('#option_crear_via').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_consultar_campus') >= 0)) {
 			$('#option_consultar_campus').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_consultar_cancha') >= 0)) {
