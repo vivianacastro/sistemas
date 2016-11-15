@@ -413,6 +413,14 @@ html, body {
 	color: red;
 }
 
+#barra_usuario:hover{
+    font-size: 16px;
+}
+
+#barra_usuario[aria-expanded="true"] {
+    font-size: 16px;
+}
+
 #carrusel_inicio_sesion{
 	margin-left: auto;
 	margin-right: auto;
