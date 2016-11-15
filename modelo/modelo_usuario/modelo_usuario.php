@@ -103,9 +103,11 @@ class modelo_usuario {
                 $GLOBALS['mensaje'] = "Error: SQL (Comprobar Acceso 2)";
             }if($l_stmt->rowCount() > 0){
                 $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Acceso autorizado";
+            }elseif($l_stmt->rowCount() == 0){
+                $GLOBALS['mensaje'] = "El usuario no se encuentra activo en el sistema";
             }
         }
-        $GLOBALS['mensaje'] = "Acceso autorizado";
         return $result[0];
     }
 
@@ -214,8 +216,8 @@ class modelo_usuario {
      * @param string $login, Cadena que hace referencia al login del usuario.
     **/
     public function guardarModificacionesUsuario($login,$nombre_usuario,$correo,$telefono,$extension,$crear_planta,$crear_aire,$crear_inventario,$perfil,$estado){
-        $nombre_usuario = htmlspecialchars(trim($nombre_usuario));
         $login = htmlspecialchars(trim($login));
+        $nombre_usuario = htmlspecialchars(trim($nombre_usuario));
         $correo = htmlspecialchars(trim($correo));
         $telefono = htmlspecialchars(trim($telefono));
         $extension = htmlspecialchars(trim($extension));
@@ -223,8 +225,20 @@ class modelo_usuario {
         $crear_aire = htmlspecialchars(trim($crear_aire));
         $crear_inventario = htmlspecialchars(trim($crear_inventario));
         $perfil = htmlspecialchars(trim($perfil));
-        $estado = htmlspecialchars(trim($estado));
-        $sql = "UPDATE usuarios SET nombre_usuario = '".$nombre_usuario."', correo = '".$correo."', telefono = '".$telefono."', extension = '".$extension."', creacion_planta = '".$crear_planta."', creacion_aires = '".$crear_aire."', creacion_inventario = '".$creacion_inventario."', perfil = '".$perfil."', estado = '".$estado."' WHERE login = '".$login."';";
+        $estado = mb_convert_case(htmlspecialchars(trim($estado)),MB_CASE_UPPER,"UTF-8");
+        $data = $this->listarUsuario($login);
+        $sql = "UPDATE usuarios SET nombre_usuario = '".$nombre_usuario."', correo = '".$correo."', telefono = '".$telefono."', extension = '".$extension."', creacion_planta = '".$crear_planta."', creacion_aires = '".$crear_aire."', creacion_inventario = '".$crear_inventario."', perfil = '".$perfil."', estado = '".$estado."' WHERE login = '".$login."';";
+        foreach ($data as $clave => $valor) {
+            $nombre_usuario_anterior = $valor['nombre_usuario'];
+            $correo_anterior = $valor['correo'];
+            $telefono_anterior = $valor['telefono'];
+            $extension_anterior = $valor['extension'];
+            $crear_planta_anterior = $valor['creacion_planta'];
+            $crear_aire_anterior = $valor['creacion_aires'];
+            $crear_inventario_anterior = $valor['creacion_inventario'];
+            $perfil_anterior = $valor['perfil'];
+            $estado_anterior = $valor['estado'];
+        }
         $l_stmt = $this->conexion->prepare($sql);
         $result = array();
         if(!$l_stmt){
@@ -234,10 +248,78 @@ class modelo_usuario {
                 $GLOBALS['mensaje'] = "Error: SQL (Modificar Usuario 2)";
             }else{
                 $GLOBALS['mensaje'] = "Los cambios se guardaron correctamente";
+                $this->registrarModificacion("usuario",$login,"nombre_usuario",$nombre_usuario_anterior,$nombre_usuario);
+                $this->registrarModificacion("usuario",$login,"correo",$correo_anterior,$correo);
+                $this->registrarModificacion("usuario",$login,"telefono",$telefono_anterior,$telefono);
+                $this->registrarModificacion("usuario",$login,"extension",$extension_anterior,$extension);
+                $this->registrarModificacion("usuario",$login,"creacion_planta",$crear_planta_anterior,$crear_planta);
+                $this->registrarModificacion("usuario",$login,"creacion_aires",$crear_aire_anterior,$crear_aire);
+                $this->registrarModificacion("usuario",$login,"creacion_inventario",$crear_inventario_anterior,$crear_inventario);
+                $this->registrarModificacion("usuario",$login,"perfil",$perfil_anterior,$perfil);
+                $this->registrarModificacion("usuario",$login,"estado",$estado_anterior,$estado);
                 return true;
             }
         }
         return $result;
+    }
+
+    /**
+     * Función que permite desactivar un usuario.
+     * @param string $login, Cadena que hace referencia al login del usuario.
+    **/
+    public function desactivarUsuario($login){
+        $login = htmlspecialchars(trim($login));
+        $sql = "UPDATE usuarios SET estado = 'NO ACTIVO' WHERE login = '".$login."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        $result = array();
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Desactivar Usuario 1)";
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Desactivar Usuario 2)";
+            }else{
+                $GLOBALS['mensaje'] = "El usuario se ha desactivado correctamente";
+                $this->registrarModificacion("usuario",$login,"estado","NO ACTIVO","ACTIVO");
+                return true;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que registra una modificación en una base de datos.
+     * @param string $bd, nombre de la base de datos donde se realizó la modificación.
+     * @param string $id_objeto, id del objeto modificado.
+     * @param string $columna, nombre de la columna que se modificó.
+     * @param string $valor_anterior, valor antigüo de la bd.
+     * @param string $valor_nuevo, nuevo nombre de la sede.
+     * @param string $usuario, nuevo nombre de la sede.
+     * @return array
+    **/
+    public function registrarModificacion($bd,$id_objeto,$columna,$valor_anterior,$valor_nuevo){
+        $bd = htmlspecialchars(trim($bd));
+        $id_objeto = htmlspecialchars(trim($id_objeto));
+        $columna = htmlspecialchars(trim($columna));
+        $valor_anterior = htmlspecialchars(trim($valor_anterior));
+        $valor_nuevo = htmlspecialchars(trim($valor_nuevo));
+        if (strcasecmp($valor_anterior,$valor_nuevo) != 0) {
+            $sql = "INSERT INTO modificaciones (tabla_modificacion,id_objeto,columna_modificada,valor_antiguo,valor_nuevo,usuario) VALUES ('".$bd."','".$id_objeto."','".$columna."','".$valor_anterior."','".$valor_nuevo."','".$_SESSION["login"]."');";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Registrar Modificación 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Registrar Modificación 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
     }
 
     /**

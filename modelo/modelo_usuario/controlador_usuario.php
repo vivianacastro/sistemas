@@ -110,10 +110,10 @@ class controlador_usuario {
       * Función que permite iniciar una sesion por un usuario, ademas esta
       * función se encarga de desplegar el panel de logeo o el mostrar la pagina
       * de inicio de la aplicación web.
-     */
+    **/
     public function iniciar_sesion() {
         //session_start();  //Comentado
-        //instaciar el objeto de la clase Modelo
+        //instanciar el objeto de la clase Modelo
         $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         $v = new Controlador_vista();
@@ -165,7 +165,7 @@ class controlador_usuario {
 
     /**
       * Función que permite cerrar una sesion de un usuario.
-    */
+    **/
     public function cerrar_sesion() {
         //session_start(); //Comentado
         //eliminar informacion almacenada de la sesion
@@ -218,6 +218,23 @@ class controlador_usuario {
     }
 
     /**
+      * Función que permite desactivar un usuario.
+    **/
+    public function desactivar_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->desactivarUsuario($info['login']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
       * Función que permite crear un usuario en el sistema
     **/
     public function listar_usuarios() {
@@ -227,7 +244,6 @@ class controlador_usuario {
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $info = json_decode($_POST['jObject'], true);
             $data = $m->listarUsuarios();
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
@@ -246,7 +262,6 @@ class controlador_usuario {
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['verificar'] = $verificar;
         echo json_encode($result);
     }
 
@@ -412,13 +427,12 @@ class controlador_usuario {
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['verificar'] = $verificar;
         echo json_encode($result);
     }
 
     /**
       * Función que permite chekear si hay una sesion iniciada.
-    */
+    **/
     public function check() {
         session_start();
         if(isset($_SESSION['userid'])) {

@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 	var URLactual = window.location;
+	var numeroUsuarios = 0;
+
 	if(URLactual['href'].indexOf('informacion_usuario') >= 0){
 		llenarInformacionUsuario("informacion");
 	}else if(URLactual['href'].indexOf('listar_usuarios_admin') >= 0){
@@ -215,6 +217,40 @@ $(document).ready(function() {
 	}
 
 	/**
+     * Función que permite consultar si un correo ya esta asignado
+     * @param {array} consulta, información del correo
+     * @returns {data}
+    **/
+    function verificarCorreo(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=verificar_correo",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //mostrarMensaje(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+	/**
 	 * Función que permite consultar los usuarios registrados en el sistema.
 	 * @returns {data}
 	**/
@@ -314,10 +350,47 @@ $(document).ready(function() {
 	}
 
 	/**
+	 * Función que permite desactivar un usuario del sistema.
+	 * @param {array} informacion, login del usuario.
+	 * @returns {data}
+	**/
+	function desactivarUsuario(informacion){
+		var dataResult;
+		var jObject = JSON.stringify(informacion);
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=desactivar_usuario",
+				data: {jObject:jObject},
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//mostrarMensaje(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+	/**
      * Función que llena la tabla usuarios.
      * @returns {undefined}
     **/
     function llenarTablaUsuarios(){
+		for (var i=0;i<numeroUsuarios;i++) {
+            eliminarComponente("tr_tabla_usuarios");
+        }
         var data = listarUsuarios();
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -347,6 +420,7 @@ $(document).ready(function() {
 					creacion_inventario = 'No';
 				}
                 $("#tabla_usuarios").append("<tr id='tr_tabla_usuarios'><td>"+login+"</td><td>"+nombre+"</td><td>"+correo+"</td><td>"+telefono+"</td><td>"+extension+"</td><td>"+perfil+"</td><td>"+creacion_planta+"</td><td>"+creacion_aire+"</td><td>"+creacion_inventario+"</td><td>"+estado+"</td></tr>");
+				numeroUsuarios++;
             }
         });
 		$("#tabla_usuarios").show();
@@ -355,7 +429,8 @@ $(document).ready(function() {
 	/**
 	 * Se captura el evento cuando de dar click en un fila de la tabla usuarios.
 	**/
-	$('#tabla_usuarios > tbody > tr').click(function() {
+	$('tbody').on('click', 'tr', function() {
+	//$('#tabla_usuarios > tbody > tr').click(function() {
 		if ($(this).hasClass("filaSeleccionada")) {
 			$(this).removeClass("filaSeleccionada");
 			$("#ver_informacion_usuario").attr("disabled",true);
@@ -384,6 +459,7 @@ $(document).ready(function() {
 				$("#nombre_usuario").val(record.nombre);
 				$("#login_usuario").val(record.login);
 				$("#correo_usuario").val(record.correo);
+				$("#correo_usuario").attr('name',record.correo);
 				$("#telefono_usuario").val(record.telefono);
 				$("#extension_usuario").val(record.extension);
 				$("input[name=crear_planta][value="+record.creacion_planta+"]").prop('checked', true);
@@ -423,8 +499,9 @@ $(document).ready(function() {
 		var confirmacion = window.confirm("¿Guardar la información del usuario?");
 		if (confirmacion) {
 			var login = $("#login_usuario").val();
-			var nombreUsuario = $("#nombre_usuario").val();
-			var correo = $("#correo_usuario").val();
+			var nombreUsuario = limpiarCadena($("#nombre_usuario").val());
+			var correo = limpiarCadena($("#correo_usuario").val());
+			var correoAnterior = $("#correo_usuario").attr('name');
 			var telefono = $("#telefono_usuario").val();
 			var extension = $("#extension_usuario").val();
 			var crearPlanta = $('input[name="crear_planta"]:checked').val();
@@ -432,15 +509,91 @@ $(document).ready(function() {
 			var crearInventario = $('input[name="crear_inventario"]:checked').val();
 			var tipoUsuario = $("#tipo_usuario").val();
 			var estado = $("#estado").val();
+			console.log(crearPlanta);
+			console.log(crearAire);
+			console.log(crearInventario);
 			if (!validarCadena(nombreUsuario)) {
 				alert("ERROR. Ingrese el nombre del usuario");
 				$("#nombre_usuario").focus();
 			}else if(!validarCorreo(correo)){
 				alert("ERROR. El correo ingresado no es un correo válido");
 				$("#correo_usuario").focus();
+			}else if(!validarCadena(crearPlanta)){
+				alert("ERROR. Especifique si el usuario tiene permisos de creación en el módulo de planta física");
+				$("#crear_planta").focus();
+			}else if(!validarCadena(crearAire)){
+				alert("ERROR. Especifique si el usuario tiene permisos de creación en el módulo de aires acondicionados");
+				$("#crear_aire").focus();
+			}else if(!validarCadena(crearInventario)){
+				alert("ERROR. Especifique si el usuario tiene permisos de creación en el módulo de inventario");
+				$("#crear_inventario").focus();
+			}else if(!validarCadena(tipoUsuario)){
+				alert("ERROR. Seleccione el tipo de usuario");
+				$("#tipo_usuario").focus();
+			}else if(!validarCadena(estado)){
+				alert("ERROR. Seleccione el estado del usuario");
+				$("#estado").focus();
+			}else{
+				var correoRepetido = false;
+				if (correo != correoAnterior) {
+					var correo = {};
+					correo["correo"] = limpiarCadena($("#correo_usuario").val());
+					var data = verificarCorreo(correo);
+					if(!data.verificar){
+						$("#error_correo").show();
+						$("#divCorreo").addClass("has-error");
+						$("#divCorreo").addClass("has-feedback");
+						$("#iconoErrorCorreo").show();
+						correoRepetido = true;
+					}else{
+						$("#error_correo").hide();
+						$("#divCorreo").removeClass("has-error");
+						$("#divCorreo").removeClass("has-feedback");
+						$("#iconoErrorCorreo").hide();
+					}
+				}
+				if (!correoRepetido) {
+					var informacion = {};
+					informacion["login"] = login;
+					informacion["nombre_usuario"] = nombreUsuario;
+					informacion["correo"] = correo;
+					informacion["telefono"] = telefono;
+					informacion["extension"] = extension;
+					informacion["crear_planta"] = crearPlanta;
+					informacion["crear_aire"] = crearAire;
+					informacion["crear_inventario"] = crearInventario;
+					informacion["perfil"] = tipoUsuario;
+					informacion["estado"] = estado;
+					var data = guardarModificacionesUsuario(informacion);
+					alert(data.mensaje);
+					if (data.verificar) {
+						llenarTablaUsuarios();
+						$("#divDialogConsulta").modal('hide');
+					}
+				}
 			}
 		}
 	});
+
+	/**
+	 * Se captura el evento cuando de dar click en el botón desactivar_usuario y se
+	 * realiza la operacion correspondiente.
+	**/
+	$("#desactivar_usuario").click(function (e){
+		var confirmacion = window.confirm("¿Esta seguro que desea desactivar el usuario seleccionado?");
+		if (confirmacion) {
+			var login = $("#login_usuario").val();
+			var informacion = {};
+			informacion["login"] = login;
+			var data = desactivarUsuario(informacion);
+			alert(data.mensaje);
+			if (data.verificar) {
+				llenarTablaUsuarios();
+				$("#divDialogConsulta").modal('hide');
+			}
+		}
+	});
+
 
 	/**
      * Se captura el evento cuando se cierra el modal divDialogConsulta.

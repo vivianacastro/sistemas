@@ -46,6 +46,7 @@ $map = array(
         'consultar_fotos_index' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_fotos_index'),
         //Acciones de modificación
         'guardar_modificaciones_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'guardar_modificaciones_usuario'),
+        'desactivar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'desactivar_usuario'),
         'reestablecer_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'reestablecer_contrasenia'),
         'modificar_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_informacion_usuario'),
         'cambiar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'cambiar_contrasenia'),
