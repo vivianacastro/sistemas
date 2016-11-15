@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-    <form class="form col-md-12" action="{FORM_INICIAR_SESION}" method="POST">
-        <div>
-            <div class="col-sm-7">
-                <div class="div_carousel">
-                    <div id="carrusel_inicio_sesion" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators" id="indicadores_carrusel">
-                        </ol>
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" id="fotos_carrusel" role="listbox">
-                        </div>
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
+<form class="form col-md-12" action="{FORM_INICIAR_SESION}" method="POST">
+    <div>
+        <div class="col-sm-7">
+            <div class="div_carousel">
+                <div id="carrusel_inicio_sesion" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators" id="indicadores_carrusel">
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" id="fotos_carrusel" role="listbox">
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-5 col-xs-12 text-center-sm div_input_inicio_sesion">
-                <div class="form-group">
-                    <input type="text" name="login" class="form-control input-lg" placeholder="Ingrese su usuario" required/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control input-lg" placeholder="Contraseña" required/>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
-                    <a class="pull-right texto-inicio-sesion" id="spanRegistrar" href="{OLVIDO_CONTRASENIA}"><span class="pull-left">¿Olvidó su Contraseña?</span></a>
-                    <a class="pull-left texto-inicio-sesion" id="spanRegistrar" href="{CREAR_USUARIO}"><span>¿No tienes una cuenta?</span></a>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carrusel_inicio_sesion" role="button" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </form>
+        <div class="col-sm-5 col-xs-12 text-center-sm div_input_inicio_sesion">
+            <div class="form-group">
+                <input type="text" name="login" class="form-control input-lg" placeholder="Ingrese su usuario" required/>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control input-lg" placeholder="Contraseña" required/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
+                <a class="pull-right texto-inicio-sesion" id="spanRegistrar" href="{OLVIDO_CONTRASENIA}"><span class="pull-left">¿Olvidó su Contraseña?</span></a>
+                <a class="pull-left texto-inicio-sesion" id="spanRegistrar" href="{CREAR_USUARIO}"><span>¿No tienes una cuenta?</span></a>
+            </div>
+        </div>
+    </div>
+</form>

@@ -2,10 +2,9 @@
 <div class="container-fluid">
     <input type="button" class="btn btn-primary btn-lg btn-4col" name="crearUsuarioAutorizado" id="crearUsuarioAutorizado" value="Crear usuario" title="Crear Usuario"/>
     <input type="button" class="btn btn-primary btn-lg btn-4col" name="modificarUsuarioAutorizado" id="modificarUsuarioAutorizado" value="Modificar usuario" title="Modificar usuario"/>
-    <input type="button" class="btn btn-primary btn-lg btn-4col" name="eliminarUsuarioAutorizado" id="eliminarUsuarioAutorizado" value="Eliminar usuario" title="Eliminar usuario"/>    
+    <input type="button" class="btn btn-primary btn-lg btn-4col" name="eliminarUsuarioAutorizado" id="eliminarUsuarioAutorizado" value="Eliminar usuario" title="Eliminar usuario"/>
 </div><br><br>
-
-<div class="modal fade" role="dialog" id="divCrearNuevoUsuario">    
+<div class="modal fade" role="dialog" id="divCrearNuevoUsuario">
     <div class="modal-dialog" id="divFormUsuarioNuevo">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,7 +76,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" role="dialog" id="divDialogModificacion">
     <div class="modal-dialog" id="divModificacion">
         <div class="modal-content">
@@ -87,17 +85,17 @@
             </div>
             <div class="modal-body">
                 <b>Informaci&oacute;n del Usuario</b>
-                
+
                 <div class="div_izquierda">Nombre del Usuario: </div>
                 <div class="form_requerid">
                     <input class="form-control formulario" type="text" name="campUsuario" id="campUsuario" value="" readonly/>
                 </div><br>
-                
+
                 <div class="div_izquierda">Login: </div>
                 <div class="form_requerid">
                     <input class="form-control formulario" type="text" name="campLogin" id="campLogin" value="" readonly />
                 </div><br>
-                
+
                 <div class="div_izquierda"><font color="red">*</font>Perfil &oacute; Privilegios: </div>
                 <div class="form_requerid">
                     <select class="form-control formulario" name="campPerfil" id="campPerfil">
@@ -128,10 +126,9 @@
         </div>
     </div>
 </div>
-
 <div id="divTablas" style="display:none">
     <div class="table-responsive" id="divTabla">
-        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaUsuarios"> 
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%" id="tablaUsuarios">
             <caption><b>Usuarios Registrados<b></caption>
             <thead>
                 <tr>
