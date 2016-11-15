@@ -314,32 +314,32 @@ html, body {
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-		background-color: #e15661;
-		border-color: transparent;
+	background-color: #e15661;
+	border-color: transparent;
 }
 
 .navbar-collapse collapse{
-		background-color: #D51B23;
+	background-color: #D51B23;
 }
 
 .opcion_activa{
-		background-color: #e15661 !important;
-		border-color: transparent !important;
+	background-color: #e15661 !important;
+	border-color: transparent !important;
 }
 
 .opcion_activa_seleccion{
-		font-weight: bold;
-		color: black !important;
+	font-weight: bold !important;
+	color: black !important;
 }
 
 .page-scroll{
-		color: white !important;
-		text-decoration: none !important;
+	color: white !important;
+	text-decoration: none !important;
 }
 
 .page-scroll:focus, .page-scroll:hover{
-		background-color: #e15661 !important;
-		border-color: #D51B23 !important;
+	background-color: #e15661 !important;
+	border-color: #D51B23 !important;
 }
 
 .pull-right{
@@ -352,7 +352,7 @@ html, body {
 }
 
 .social{
-		padding: 0% 0% 0%;
+	padding: 0% 0% 0%;
 }
 
 .text_archivos_seleccionados{
@@ -400,29 +400,29 @@ html, body {
 }
 
 #barra_usuario{
-		color: black !important;
-		float: right;
-		width: auto !important;
+	color: black !important;
+	float: right;
+	width: auto !important;
     padding: 1% 0% 0%;
     cursor: pointer;
 }
 
 #barra_usuario:focus, #barra_usuario:hover{
-		background-color: transparent !important;
-		font-weight: bold;
-		color: red;
+	background-color: transparent !important;
+	font-weight: bold;
+	color: red;
 }
 
 #carrusel_inicio_sesion{
-		margin-left: auto;
-		margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #copyright{
-		background-color: #D51B23;
-		color: white;
-		text-align: center;
-		padding: 2% 0 2%;
+	background-color: #D51B23;
+	color: white;
+	text-align: center;
+	padding: 2% 0 2%;
 }
 
 #divBotonesInformacionAdicional{
@@ -521,7 +521,7 @@ html, body {
 
 /* Smaller than standard 960 (devices and browsers) */
 @media screen and (max-width:1200px) {
-		.img_boton{
+	.img_boton{
     		width: 25%;
     }
 
@@ -548,7 +548,7 @@ html, body {
 }
 
 @media screen and (min-width:768px) {
-		.img_boton{
+	.img_boton{
        width: 35%;
     }
 }

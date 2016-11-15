@@ -119,6 +119,15 @@ $(document).ready(function () {
 		}else if ((URLactual['href'].indexOf('listar_usuarios_admin') >= 0)) {
 			$('#option_listar_usuarios').addClass("opcion_activa_seleccion");
 		}
+	}else if(URLactual['href'].indexOf('cambiar_contrasenia') >= 0){
+		$('#barra_usuario').addClass("opcion_activa_seleccion");
+		$('#option_cambiar_contrasenia').addClass("opcion_activa_seleccion");
+	}else if(URLactual['href'].indexOf('informacion_usuario') >= 0){
+		$('#barra_usuario').addClass("opcion_activa_seleccion");
+		$('#option_informacion_usuario').addClass("opcion_activa_seleccion");
+	}else if(URLactual['href'].indexOf('modificar_datos') >= 0){
+		$('#barra_usuario').addClass("opcion_activa_seleccion");
+		$('#option_modificar_datos').addClass("opcion_activa_seleccion");
 	}
 	setTimeout(function() {
 		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){
