@@ -164,6 +164,11 @@ html, body {
 		border-color: #D51B23 !important;
 }
 
+.filaSeleccionada {
+    color: white;
+    background-color: #D51B23;
+}
+
 .fileUpload {
     position: relative;
     overflow: hidden;
@@ -370,6 +375,10 @@ html, body {
     text-decoration:line-through;
 }
 
+.bodyTabla{
+    cursor: pointer;
+}
+
 #agregar_foto{
     height: 300px;
     width: 100%;
@@ -482,7 +491,14 @@ html, body {
     text-align: center;
 }
 
-#tabla_aires>thead>tr>th{
+#tabla_aires>thead>tr>th, #tabla_usuarios>thead>tr>th{
+    text-align: center;
+}
+
+#tabla_usuarios{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 

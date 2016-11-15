@@ -5413,3 +5413,120 @@
 [14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304
 [14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304
 [14-Nov-2016 12:29:09 America/Bogota] PHP Notice:  Undefined index: tecnologia in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1304
+[14-Nov-2016 20:32:17 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:32:18 America/Bogota] PHP Notice:  Constant OPERATION_MARCAS_MAS_MANTENIMIENTOS already defined in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/constantes.php on line 95
+[14-Nov-2016 20:52:44 America/Bogota] PHP Warning:  file_get_contents(/media/windows/Users/juanc_000/Downloads/sistemas/vistas/vistas_usuario/crear_usuario_admin.html): failed to open stream: No such file or directory in /media/windows/Users/juanc_000/Downloads/sistemas/controlador_vista.php on line 217
+[14-Nov-2016 21:01:35 America/Bogota] PHP Warning:  file_get_contents(/media/windows/Users/juanc_000/Downloads/sistemas/vistas/vistas_usuario/listar_usuarios_admin.html): failed to open stream: No such file or directory in /media/windows/Users/juanc_000/Downloads/sistemas/controlador_vista.php on line 217
+[14-Nov-2016 21:13:06 America/Bogota] PHP Warning:  file_get_contents(/media/windows/Users/juanc_000/Downloads/sistemas/vistas/vistas_usuario/listar_usuarios_admin.html): failed to open stream: No such file or directory in /media/windows/Users/juanc_000/Downloads/sistemas/controlador_vista.php on line 217
+[14-Nov-2016 21:33:15 America/Bogota] PHP Fatal error:  Cannot redeclare controlador_usuario::listar_usuarios_admin() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 206
+[14-Nov-2016 21:34:20 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:34:20 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 215
+[14-Nov-2016 21:34:20 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:34:43 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:34:43 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 215
+[14-Nov-2016 21:34:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:34:57 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:34:57 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 215
+[14-Nov-2016 21:34:57 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:35:15 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:35:15 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 215
+[14-Nov-2016 21:35:15 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined index: creacion_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 223
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined index: creacion_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 223
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined index: creacion_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 223
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined index: creacion_aire in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 223
+[14-Nov-2016 21:37:21 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:39:03 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:39:03 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:39:15 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:39:15 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:48:44 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:48:44 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:51:02 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:51:02 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:51:35 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:51:35 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:54:15 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:54:15 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:56:17 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:56:17 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:57:13 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:57:13 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 21:58:03 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 21:58:03 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:03:06 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:03:06 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:03:44 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:03:44 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:12:57 America/Bogota] PHP Fatal error:  Cannot redeclare controlador_usuario::obtener_informacion_usuario() in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 372
+[14-Nov-2016 22:13:30 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:13:30 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:20:41 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:20:41 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:21:02 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:21:02 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:22:43 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:22:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:23:14 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:23:14 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:24:14 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:24:14 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:25:07 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:25:07 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:26:43 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:26:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:27:12 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:27:12 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:27:27 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:27:27 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:28:05 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:28:05 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:28:30 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:28:30 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:29:10 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:29:10 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:29:43 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:29:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:30:11 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:30:11 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:40:17 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:40:17 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:40:19 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:40:27 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:40:39 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:40:39 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:40:41 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:41:10 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:41:10 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:41:12 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:44:46 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:44:46 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:44:48 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:53:57 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:53:57 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:53:59 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:54:25 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:54:25 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:54:27 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:58:40 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:58:40 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:58:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 22:59:01 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:59:01 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:59:26 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 22:59:26 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 22:59:28 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 23:01:19 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 23:01:19 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 23:01:20 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 23:01:43 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 23:02:04 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 213
+[14-Nov-2016 23:02:04 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 232
+[14-Nov-2016 23:02:05 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398
+[14-Nov-2016 23:02:10 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 398

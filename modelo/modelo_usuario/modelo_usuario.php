@@ -171,6 +171,76 @@ class modelo_usuario {
     }
 
     /**
+     * Función que lista los usuarios en el sistema.
+    **/
+    public function listarUsuarios(){
+        $sql = "SELECT * FROM usuarios ORDER BY login;";
+        $l_stmt = $this->conexion->prepare($sql);
+        $result = array();
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Listar Usuarios 1)";
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Listar Usuarios 2)";
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que consulta la información de un usuario en el sistema.
+    **/
+    public function listarUsuario($login){
+        $login = htmlspecialchars(trim($login));
+        $sql = "SELECT * FROM usuarios WHERE login = '".$login."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        $result = array();
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Listar Usuario 1)";
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Listar Usuario 2)";
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite modificar la información de un usuario en el sistema.
+     * @param string $login, Cadena que hace referencia al login del usuario.
+    **/
+    public function guardarModificacionesUsuario($login,$nombre_usuario,$correo,$telefono,$extension,$crear_planta,$crear_aire,$crear_inventario,$perfil,$estado){
+        $nombre_usuario = htmlspecialchars(trim($nombre_usuario));
+        $login = htmlspecialchars(trim($login));
+        $correo = htmlspecialchars(trim($correo));
+        $telefono = htmlspecialchars(trim($telefono));
+        $extension = htmlspecialchars(trim($extension));
+        $crear_planta = htmlspecialchars(trim($crear_planta));
+        $crear_aire = htmlspecialchars(trim($crear_aire));
+        $crear_inventario = htmlspecialchars(trim($crear_inventario));
+        $perfil = htmlspecialchars(trim($perfil));
+        $estado = htmlspecialchars(trim($estado));
+        $sql = "UPDATE usuarios SET nombre_usuario = '".$nombre_usuario."', correo = '".$correo."', telefono = '".$telefono."', extension = '".$extension."', creacion_planta = '".$crear_planta."', creacion_aires = '".$crear_aire."', creacion_inventario = '".$creacion_inventario."', perfil = '".$perfil."', estado = '".$estado."' WHERE login = '".$login."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        $result = array();
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Usuario 1)";
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Usuario 2)";
+            }else{
+                $GLOBALS['mensaje'] = "Los cambios se guardaron correctamente";
+                return true;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite crear un usuario
      * en el sistema.
      * @param string $login, Cadena que hace referencia al login del usuario.

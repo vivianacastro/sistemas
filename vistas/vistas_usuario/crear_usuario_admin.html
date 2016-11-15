@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Usuario</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n del Usuario</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Nombre<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='nombre_usuario' id='nombre_usuario' value='' placeholder='Ej: Pepito Pérez' required/><br>
+        <div class='div_izquierda'><b>Usuario<font color='red'>*</font>:</b></div>
+        <div id="divLogin" class="">
+          <input class='form-control formulario-minusculas' type='text' name='login_usuario' id='login_usuario' value='' placeholder='Ej: pepito.perez' required/>
+          <span id="iconoErrorLogin" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+        <div class='div_error' id="error_login" style="display:none"><b>El login ya se encuentra registrado</b></div><br>
+        <div class='div_izquierda'><b>Correo<font color='red'>*</font>:</b></div>
+        <div id="divCorreo" class="">
+            <input class='form-control formulario-minusculas' type='email' name='correo_usuario' id='correo_usuario' value='' placeholder='Ej: pepito.perez@correounivalle.edu.co' required/>
+            <span id="iconoErrorCorreo" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+        <div class='div_error' id="error_correo" style="display:none"><b>El correo ya se encuentra registrado</b></div><br>
+        <div class='div_izquierda'><b>Télefono:</b></div>
+        <input class='form-control formulario' type='number' name='telefono_usuario' id='telefono_usuario' value='' placeholder='Ej: 3212100' required/><br>
+        <div class='div_izquierda'><b>Extensión:</b></div>
+        <input class='form-control formulario' type='number' name='extension_usuario' id='extension_usuario' value='' placeholder='Ej: 1234' required/><br>
+        <div class='div_izquierda'><b>Contrase&ntilde;a<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='password' name='contrasenia' id='contrasenia' value='' required/><br>
+        <div class='div_izquierda'><b>Repita la Contrase&ntilde;a<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='password' name='repita_contrasenia' id='repita_contrasenia' value='' required/><br>
+        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Planta Física?<font color='red'>*</font></b></div>
+        <label class='radio-inline'><input type='radio' name='crear_planta' value='true'>S&iacute;</label>
+        <label class='radio-inline'><input type='radio' name='crear_planta' value='false'>No</label><br><br>
+        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Aires Acondicionados?<font color='red'>*</font></b></div>
+        <label class='radio-inline'><input type='radio' name='crear_aire' value='true'>S&iacute;</label>
+        <label class='radio-inline'><input type='radio' name='crear_aire' value='false'>No</label><br><br>
+        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Inventario?<font color='red'>*</font></b></div>
+        <label class='radio-inline'><input type='radio' name='crear_inventario' value='true'>S&iacute;</label>
+        <label class='radio-inline'><input type='radio' name='crear_inventario' value='false'>No</label><br><br>
+        <div class='div_izquierda'><b>Tipo de Usuario<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='tipo_usuario' id='tipo_usuario' required>
+            <option value='seleccionar'>--Seleccionar--</option>
+            <option value='admin'>Admin</option>
+            <option value='normal'>Normal</option>
+        </select><br>
+    <div><br>
+    <div class='form_button'>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='guardar_usuario_admin' id='guardar_usuario_admin' value='Crear Usuario' title='Crear el Usuario'/>
+    </div>
+</div>

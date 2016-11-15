@@ -31,18 +31,21 @@ $map = array(
         'informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'informacion_usuario'),
         'crear_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario'),
         'crear_usuario_admin' => array('controlador' =>'controlador_usuario', 'action' =>'crear_usuario_admin'),
-        'olvido_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'olvido_contrasenia'),
         'listar_usuarios_admin' => array('controlador' =>'controlador_usuario', 'action' =>'listar_usuarios_admin'),
+        'olvido_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'olvido_contrasenia'),
+        'listar_usuarios' => array('controlador' =>'controlador_usuario', 'action' =>'listar_usuarios'),
         'modificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_usuario'),
         'modificar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_contrasenia'),
         //Acciones de creación
         'guardar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'guardar_usuario'),
         //Acciones de consulta
         'obtener_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'obtener_informacion_usuario'),
+        'obtener_informacion_usuario_seleccionado' => array('controlador' =>'controlador_usuario', 'action' =>'obtener_informacion_usuario_seleccionado'),
         'verificar_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_usuario'),
         'verificar_correo' => array('controlador' =>'controlador_usuario', 'action' =>'verificar_correo'),
         'consultar_fotos_index' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_fotos_index'),
         //Acciones de modificación
+        'guardar_modificaciones_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'guardar_modificaciones_usuario'),
         'reestablecer_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'reestablecer_contrasenia'),
         'modificar_informacion_usuario' => array('controlador' =>'controlador_usuario', 'action' =>'modificar_informacion_usuario'),
         'cambiar_contrasenia' => array('controlador' =>'controlador_usuario', 'action' =>'cambiar_contrasenia'),

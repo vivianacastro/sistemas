@@ -112,8 +112,13 @@ $(document).ready(function () {
 		}
 	}else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
 		$('#inventario').addClass("opcion_activa");
-	}else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuarios') >= 0){
+	}else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuario') >= 0){
 		$('#usuarios').addClass("opcion_activa");
+		if ((URLactual['href'].indexOf('crear_usuario_admin') >= 0)) {
+			$('#option_crear_usuario').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('listar_usuarios_admin') >= 0)) {
+			$('#option_listar_usuarios').addClass("opcion_activa_seleccion");
+		}
 	}
 	setTimeout(function() {
 		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){

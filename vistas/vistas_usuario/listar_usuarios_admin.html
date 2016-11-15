@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Listar Usuarios</h2></b><br></div>
+        <div><h4><b>Usuarios Registrados</b></h4></div>
+        <div class="table-responsive">
+            <table id="tabla_usuarios" class="table table-bordered" style="display:none">
+            <thead align="center">
+              <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Extensión</th>
+                <th>Tipo</th>
+                <th>Creación Planta</th>
+                <th>Creación A.A.</th>
+                <th>Creacion Inventario</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tBody" class="bodyTabla">
+            </tbody>
+            </table>
+        </div>
+    <div><br>
+    <div class='form_button'>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='ver_informacion_usuario' id='ver_informacion_usuario' value='Ver Informaci&oacute;n Usuario' title='Ver información del usuario seleccionado' disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Informaci&oacute;n del Usuario Seleccionado</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionUsuario'>
+                        <div class='div_izquierda'><b>Nombre<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_usuario' id='nombre_usuario' value='' placeholder='Ej: Pepito Pérez' disabled required/><br>
+                        <div class='div_izquierda'><b>Usuario<font color='red'>*</font>:</b></div>
+                        <div id="divLogin" class="">
+                          <input class='form-control formulario-minusculas' type='text' name='login_usuario' id='login_usuario' value='' placeholder='Ej: pepito.perez' disabled required/>
+                          <span id="iconoErrorLogin" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        </div>
+                        <div class='div_error' id="error_login" style="display:none"><b>El login ya se encuentra registrado</b></div><br>
+                        <div class='div_izquierda'><b>Correo<font color='red'>*</font>:</b></div>
+                        <div id="divCorreo" class="">
+                            <input class='form-control formulario-minusculas' type='email' name='correo_usuario' id='correo_usuario' value='' placeholder='Ej: pepito.perez@correounivalle.edu.co' disabled required/>
+                            <span id="iconoErrorCorreo" style="display:none" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        </div>
+                        <div class='div_error' id="error_correo" style="display:none"><b>El correo ya se encuentra registrado</b></div><br>
+                        <div class='div_izquierda'><b>Télefono:</b></div>
+                        <input class='form-control formulario' type='number' name='telefono_usuario' id='telefono_usuario' value='' placeholder='Ej: 3212100' disabled required/><br>
+                        <div class='div_izquierda'><b>Extensión:</b></div>
+                        <input class='form-control formulario' type='number' name='extension_usuario' id='extension_usuario' value='' placeholder='Ej: 1234' disabled required/><br>
+                        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Planta Física?<font color='red'>*</font></b></div>
+                        <label class='radio-inline'><input type='radio' name='crear_planta' value='true' disabled>S&iacute;</label>
+                        <label class='radio-inline'><input type='radio' name='crear_planta' value='false' disabled>No</label><br><br>
+                        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Aires Acondicionados?<font color='red'>*</font></b></div>
+                        <label class='radio-inline'><input type='radio' name='crear_aire' value='true' disabled>S&iacute;</label>
+                        <label class='radio-inline'><input type='radio' name='crear_aire' value='false' disabled>No</label><br><br>
+                        <div class='div_izquierda'><b>¿El usuario podrá crear elementos en el módulo de Inventario?<font color='red'>*</font></b></div>
+                        <label class='radio-inline'><input type='radio' name='crear_inventario' value='true' disabled>S&iacute;</label>
+                        <label class='radio-inline'><input type='radio' name='crear_inventario' value='false' disabled>No</label><br><br>
+                        <div class='div_izquierda'><b>Tipo de Usuario<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='tipo_usuario' id='tipo_usuario' disabled required>
+                            <option value='seleccionar'>--Seleccionar--</option>
+                            <option value='admin'>Admin</option>
+                            <option value='normal'>Normal</option>
+                        </select><br>
+                        <div class='div_izquierda'><b>Estado<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='estado' id='estado' disabled required>
+                            <option value='seleccionar'>--Seleccionar--</option>
+                            <option value='activo'>Activo</option>
+                            <option value='no_activo'>No Activo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_usuario' id='modificar_usuario' value='Modificar Usuario' title='Modificar informaci&oacute;n del Usuario'/>
+                <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_usuario' id='guardar_modificaciones_usuario' value='Guardar Cambios' title='Guardar informaci&oacute;n del Usuario'/>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='eliminar_usuario' id='eliminar_usuario' value='Eliminar Usuario' title='Eliminar informaci&oacute;n del Usuario'/>
+            </div>
+        </div>
+    </div>
+</div>

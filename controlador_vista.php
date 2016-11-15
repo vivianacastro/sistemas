@@ -23,6 +23,8 @@ class controlador_vista
                 'INFORMACION_USUARIO'=>'index.php?action='.INFORMACION_USUARIO,
                 'CERRAR'=>'index.php?action='.CERRAR_SESION,
                 'CREAR_USUARIO'=>'index.php?action='.CREAR_USUARIO,
+                'CREAR_USUARIO_ADMIN'=>'index.php?action='.CREAR_USUARIO_ADMIN,
+                'LISTAR_USUARIOS_ADMIN'=>'index.php?action='.LISTAR_USUARIOS_ADMIN,
                 'OLVIDO_CONTRASENIA'=>'index.php?action='.OLVIDO_CONTRASENIA,
                 'CERRAR'=>'index.php?action='.CERRAR_SESION,
 

@@ -201,6 +201,56 @@ class controlador_usuario {
     }
 
     /**
+      * Función que permite guardar las modificaciones a la información de un usuario.
+    **/
+    public function guardar_modificaciones_usuario() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->guardarModificacionesUsuario($info['login'],$info['nombre_usuario'],$info['correo'],$info['telefono'],$info['extension'],$info['crear_planta'],$info['crear_aire'],$info['crear_inventario'],$info['perfil'],$info['estado']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+      * Función que permite crear un usuario en el sistema
+    **/
+    public function listar_usuarios() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->listarUsuarios();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'nombre' => mb_convert_case($valor['nombre_usuario'],MB_CASE_TITLE,"UTF-8"),
+                    'login' => $valor['login'],
+                    'telefono' => $valor['telefono'],
+                    'extension' => $valor['extension'],
+                    'correo' => $valor['correo'],
+                    'creacion_planta' => $valor['creacion_planta'],
+                    'creacion_aire' => $valor['creacion_aires'],
+                    'creacion_inventario' => $valor['creacion_inventario'],
+                    'perfil' => $valor['perfil'],
+                    'estado' => mb_convert_case($valor['estado'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
       * Función que permite modificar la información de un usuario
     **/
     public function modificar_usuario() {
@@ -333,6 +383,38 @@ class controlador_usuario {
         echo json_encode($result);
     }
 
+    /**
+      * Función que permite obtener la información del usuario seleccionado en la tabla usuarios.
+    **/
+    public function obtener_informacion_usuario_seleccionado() {
+        $GLOBALS['mensaje'] = "";
+        $result = array();
+        $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->listarUsuario($info["usuario"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'nombre' => mb_convert_case($valor['nombre_usuario'],MB_CASE_TITLE,"UTF-8"),
+                    'login' => $valor['login'],
+                    'telefono' => $valor['telefono'],
+                    'extension' => $valor['extension'],
+                    'correo' => $valor['correo'],
+                    'creacion_planta' => $valor['creacion_planta'],
+                    'creacion_aire' => $valor['creacion_aires'],
+                    'creacion_inventario' => $valor['creacion_inventario'],
+                    'perfil' => $valor['perfil'],
+                    'estado' => mb_convert_case($valor['estado'],MB_CASE_LOWER,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
 
     /**
       * Función que permite chekear si hay una sesion iniciada.
@@ -354,8 +436,5 @@ class controlador_usuario {
         }
         return false;
     }
-
-
 }
-
 ?>
