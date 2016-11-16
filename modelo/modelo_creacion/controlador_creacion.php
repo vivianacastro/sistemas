@@ -388,7 +388,7 @@ class controlador_creacion
 
 	/**
      * Función que despliega el panel que permite registrar un mantenimiento
-	* realizado a un aire acondicionado que esté registrado en el sistema.
+	 * realizado a un aire acondicionado que esté registrado en el sistema.
     **/
     public function registrar_mantenimiento_aire() {
         $GLOBALS['mensaje'] = "";
@@ -399,6 +399,60 @@ class controlador_creacion
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_REGISTRAR_MANTENIMIENTO_AIRE, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+     * Función que despliega el panel que permite crear un artículo en el sistema.
+    **/
+    public function crear_articulo() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Artículo',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+            $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_ARTICULO, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+     * Función que despliega el panel que permite crear una marca en el sistema.
+    **/
+    public function crear_marca() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Marca',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+            $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_MARCA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
+     * Función que despliega el panel que permite crear un proveedor en el sistema.
+    **/
+    public function crear_proveedor() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Proveedor',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+            $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_PROVEEDOR, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);

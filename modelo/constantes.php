@@ -5,17 +5,15 @@ ini_set('display_errors', '1');*/
  * Constantes del sistema
  */
 const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 6000000000000000;//600;
-
 const ESTILO     = 'estilo.css';
 const USUARIO = 'usuario';
 const CONSULTAS = 'consultas';
 const CREACION = 'creacion';
 const MODIFICACION = 'modificacion';
 const REGISTROS = 'registros';
-
 const EMAIL = 'mantenimiento.univalle@gmail.com';
 const PASS = 'ManteUnivalle';
-
+// Operaciones módulo Usuarios.
 const INICIAR_SESION = 'iniciar_sesion';
 const CERRAR_SESION = 'cerrar_sesion';
 const CREAR_USUARIO = 'crear_usuario';
@@ -26,20 +24,18 @@ const MENU_PRINCIPAL = 'menu_principal';
 const INFORMACION_USUARIO = 'informacion_usuario';
 const MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
 const CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
-
+const OPERATION_MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
+const OPERATION_CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
+// Operaciones carga módulos.
 const MOD_PLANTA = 'mod_planta';
 const MOD_INVENTARIO = 'mod_inventario';
 const MOD_AIRES = 'mod_aires';
 const MOD_USUARIOS = 'mod_usuarios';
-
 const OPERATION_MOD_PLANTA = 'modulo_planta';
 const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
 const OPERATION_MOD_AIRES = 'modulo_aires';
 const OPERATION_MOD_USUARIO = 'modulo_usuarios';
-
-const OPERATION_MODIFICAR_INFORMACION_USUARIO = 'modificar_informacion_usuario';
-const OPERATION_CAMBIAR_CONTRASENIA = 'cambiar_contrasenia';
-
+// Operaciones módulo Planta Física.
 const OPERATION_CREAR_SEDE = 'planta_crear_sede';
 const OPERATION_CREAR_CAMPUS = 'planta_crear_campus';
 const OPERATION_CREAR_CANCHA = 'planta_crear_cancha';
@@ -71,7 +67,7 @@ const OPERATION_CONSULTAR_EDIFICIO = 'planta_consultar_edificio';
 const OPERATION_CONSULTAR_ESPACIO = 'planta_consultar_espacio';
 const OPERATION_CONSULTAR_TIPO_MATERIAL = 'planta_consultar_tipo_material';
 const OPERATION_CONSULTAR_TIPO_OBJETO = 'planta_consultar_tipo_objeto';
-
+// Operaciones módulo Aires Acondicionados.
 const OPERATION_CREAR_AIRE = 'aires_crear_aire';
 const OPERATION_CREAR_CAPACIDAD_AIRE = 'aires_crear_capacidad_aire';
 const OPERATION_CREAR_MARCA_AIRE = 'aires_crear_marca_aire';
@@ -91,4 +87,15 @@ const OPERATION_MAS_TIPOS_AIRE = 'aires_mas_tipos_aire';
 const OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE = 'aires_mas_tipo_tecnologias_aire';
 const OPERATION_AIRES_MAS_MANTENIMIENTOS = 'aires_mas_mantenimientos';
 const OPERATION_MARCAS_MAS_MANTENIMIENTOS = 'aires_marcas_mas_mantenimientos';
+// Operaciones módulo Inventario.
+const OPERATION_CREAR_ARTICULO = 'inventario_crear_articulo';
+const OPERATION_CREAR_MARCA = 'inventario_crear_marca';
+const OPERATION_CREAR_PROVEEDOR = 'inventario_crear_proveedor';
+const OPERATION_ANADIR_ARTICULO = 'inventario_anadir_articulo';
+const OPERATION_CONSULTAR_ARTICULO = 'inventario_consultar_articulo';
+const OPERATION_CONSULTAR_MARCA = 'inventario_consultar_marca';
+const OPERATION_CONSULTAR_PROVEEDOR = 'inventario_consultar_proveedor';
+const OPERATION_CONSULTAR_INVENTARIO = 'inventario_consultar_inventario';
+const OPERATION_ARTICULOS_MAS_USADOS = 'inventario_articulos_mas_usados';
+const OPERATION_ARTICULOS_MENOS_USADOS = 'inventario_articulos_menos_usados';
 ?>

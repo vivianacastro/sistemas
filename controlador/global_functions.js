@@ -112,6 +112,27 @@ $(document).ready(function () {
 		}
 	}else if(URLactual['href'].indexOf('modulo_inventario') >= 0 || URLactual['href'].indexOf('inventario') >= 0){
 		$('#inventario').addClass("opcion_activa");
+		if ((URLactual['href'].indexOf('inventario_anadir_articulo') >= 0)) {
+			$('#option_anadir_articulo').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_crear_marca') >= 0)) {
+			$('#option_crear_marca').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_crear_proveedor') >= 0)) {
+			$('#option_crear_proveedor').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_crear_articulo') >= 0)) {
+			$('#option_crear_articulo').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario') >= 0)) {
+			$('#option_consultar_inventario').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_articulo') >= 0)) {
+			$('#option_consultar_articulo').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_marca') >= 0)) {
+			$('#option_consultar_marca').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_proveedor') >= 0)) {
+			$('#option_consultar_proveedor').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_articulos_mas_usados') >= 0)) {
+			$('#option_articulos_mas_usados').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_articulos_menos_usados') >= 0)) {
+			$('#option_articulos_menos_usados').addClass("opcion_activa_seleccion");
+		}
 	}else if(URLactual['href'].indexOf('modulo_usuarios') >= 0 || URLactual['href'].indexOf('usuario') >= 0){
 		$('#usuarios').addClass("opcion_activa");
 		if ((URLactual['href'].indexOf('crear_usuario_admin') >= 0)) {

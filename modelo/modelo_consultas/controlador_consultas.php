@@ -544,8 +544,8 @@ class controlador_consultas{
             'mensaje' => 'Consultar Marcas de Aires Acondicionados Más Instaladas',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
                 $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_MARCAS_AIRE, $data);
             }else{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_MARCAS_AIRE, $data);
@@ -566,8 +566,8 @@ class controlador_consultas{
             'mensaje' => 'Consultar Tipos de Aires Acondicionados Más Instalados',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
                 $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_TIPOS_AIRE, $data);
             }else{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPOS_AIRE, $data);
@@ -588,8 +588,8 @@ class controlador_consultas{
             'mensaje' => 'Consultar Tipos de Tecnología de Aires Acondicionados Más Instalados',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
                 $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE, $data);
             }else{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE, $data);
@@ -610,8 +610,8 @@ class controlador_consultas{
             'mensaje' => 'Consultar Aires Acondicionados con Más Mantenimientos',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
                 $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_AIRES_MAS_MANTENIMIENTOS, $data);
             }else{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_AIRES_MAS_MANTENIMIENTOS, $data);
@@ -632,11 +632,158 @@ class controlador_consultas{
             'mensaje' => 'Consultar Marcas de Aires Acondicionados con Más Mantenimientos',
         );
         $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_planta"],"true") == 0) {
-            if (strcmp($_SESSION["creacion_planta"],"true") == 0) {
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
                 $v->retornar_vista(MOD_PLANTA, MODIFICACION, OPERATION_MARCAS_MAS_MANTENIMIENTOS, $data);
             }else{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MARCAS_MAS_MANTENIMIENTOS, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite añadir uno o varios articulos al inventario.
+    **/
+    public function anadir_articulo() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Añadir Artículo',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_ANADIR_ARTICULO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ANADIR_ARTICULO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar un artículo.
+    **/
+    public function consultar_articulo() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Artículo',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_ARTICULO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_ARTICULO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar una marca.
+    **/
+    public function consultar_marca() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Marca',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_MARCA, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_MARCA, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar un proveedor.
+    **/
+    public function consultar_proveedor() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Proveedor',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_PROVEEDOR, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_PROVEEDOR, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar el inventario.
+    **/
+    public function consultar_inventario() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Inventario',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_INVENTARIO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar los artículos más usados.
+    **/
+    public function articulos_mas_usados() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Artículos Más Usados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_ARTICULOS_MAS_USADOS, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ARTICULOS_MAS_USADOS, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar los artículos menos usados.
+    **/
+    public function articulos_menos_usados() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Artículos Menos Usados',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_ARTICULOS_MENOS_USADOS, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ARTICULOS_MENOS_USADOS, $data);
             }
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
