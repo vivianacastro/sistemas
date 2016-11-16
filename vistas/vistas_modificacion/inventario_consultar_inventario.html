@@ -7,6 +7,7 @@
             <table id="tabla_inventario" class="table table-bordered" style="display:none">
             <thead align="center">
               <tr>
+                <th>Id Art&iacute;culo</th>
                 <th>Art&iacute;culo</th>
                 <th>Cantidad</th>
                 <th>Marca</th>
@@ -35,21 +36,21 @@
                 <div class='form-group'>
                     <div id='informacionInventario'>
                         <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' required/><br>
+                        <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' disabled required/><br>
                         <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
-                        <select class='form-control formulario' name='marca' id='marca' required></select><br>
+                        <select class='form-control formulario' name='marca' id='marca' disabled required></select><br>
                         <div class='div_izquierda'><b>Cantidad M&iacute;nima<font color='red'>*</font>:</b></div>
-                        <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' required/><br>
+                        <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' disabled required/><br>
                         <div>
                             <div id='proveedor'>
                                 <div class='div_izquierda'><b>Proveedor del Art&iacute;culo:</b></div>
-                                <select class='form-control formulario' name='proveedor_articulo' id='proveedor_articulo' required></select><br>
+                                <select class='form-control formulario' name='proveedor_articulo' id='proveedor_articulo' disabled required></select>
                             </div>
-                            <div id="botones_proveedor"
-                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_proveedor' id='añadir_proveedor' value='Añadir Proveedor' title='Añadir Proveedor'/>
+                            <div id="botones_proveedor" style="display:none">
+                                <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_proveedor' id='añadir_proveedor' value='Añadir Proveedor' title='Añadir Proveedor'/>
                                 <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_proveedor' id='eliminar_proveedor' value='Eliminar Proveedor' title='Eliminar Proveedor' disabled/>
                             </div>
-                        </div><br>
+                        </div>
                     </div>
                 </div>
             </div>

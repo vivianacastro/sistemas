@@ -1035,6 +1035,62 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar la información de un artículo.
+     * @param string $id_articulo, id del artículo a buscar.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionArticulo($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima
+                FROM articulo a JOIN marca_inventario b ON a.marca = b.id
+                WHERE a.id_articulo = '".$id_articulo."' ORDER BY a.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del artículo seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de un artículo y su proveedor.
+     * @param string $id_articulo, id del artículo a buscar.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarArticuloProveedor($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $sql = "SELECT a.id_articulo, a.id_proveedor, b.nombre AS nombre_proveedor
+                FROM articulo_proveedor a JOIN proveedor b ON a.id_proveedor = b.id_proveedor
+                WHERE a.id_articulo = '".$id_articulo."' ORDER BY b.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo-Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo-Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de los proveedores del artículo seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar los archivos de un campus en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.
@@ -1419,26 +1475,26 @@ class modelo_consultas
     }
 
     /**
-     * Función que permite buscar los archivos de un aire acondicionado en el sistema.
-     * @param string $id_aire, id del aire.
+     * Función que permite buscar los archivos de un artículo en el sistema.
+     * @param string $id_artículo, id del artículo.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarArchivosAireId($id_aire){
-        $id_aire = htmlspecialchars(trim($id_aire));
-        $sql = "SELECT * FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."' ORDER BY tipo,nombre;";
+    public function buscarArchivosArticulo($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $sql = "SELECT * FROM articulo_archivos WHERE id_articulo = '".$id_articulo."' ORDER BY tipo,nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 1)";
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Artículo 1)";
             $GLOBALS['sql'] = $sql;
         }
         else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 2)";
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Artículo 2)";
                 $GLOBALS['sql'] = $sql;
             }
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "Archivos del aire acondicionado seleccionado";
+                $GLOBALS['mensaje'] = "Archivos del artículo seleccionado";
             }
         }
         return $result;
@@ -1500,7 +1556,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarInventario(){
-        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, c.nombre AS nombre_marca
+        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca
                 FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
                                     JOIN marca_inventario c ON b.marca = c.id
                 ORDER BY b.nombre;";

@@ -3778,6 +3778,33 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar los archivos de un artículo
+     * almacenado en el sistema.
+    **/
+    public function consultar_archivos_articulo() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArchivosArticulo($info["id_articulo"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre' => $valor['nombre'],
+                    'tipo' => $valor['tipo'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar las marcas de los aires aconidcionados.
     **/
     public function consultar_marcas_aire() {
@@ -3844,7 +3871,63 @@ class controlador_consultas{
                     'cantidad' => $valor['cantidad'],
                     'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
                     'cantidad_minima' => $valor['cantidad_minima'],
+                    'id_marca' => $valor['marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los proveedores de un artículo.
+    **/
+    public function consultar_informacion_articulo_proveedor() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArticuloProveedor($info['id_articulo']);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'id_proveedor' => $valor['id_proveedor'],
+                    'nombre_proveedor' => mb_convert_case($valor['nombre_proveedor'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de un artículo
+     * almacenado en el sistema.
+    **/
+    public function consultar_informacion_articulo() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionArticulo($info["id_articulo"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'id_marca' => $valor['id_marca'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad_minima' => $valor['cantidad_minima'],
                 );
                 array_push($result, $arrayAux);
             }

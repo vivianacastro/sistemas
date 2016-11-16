@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0;
+    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0;
     var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
     var infoWindowActiva;
     var coordsMapaModificacion;
     var coordenadas = {};
-    var fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
+    var fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [], nombreProveedor = [];
 
     /**
      * Función que se ejecuta al momento que se accede a la página que lo tiene
@@ -124,6 +124,8 @@ $(document).ready(function() {
             actualizarSelectSede();
         }else if (URLactual['href'].indexOf('consultar_inventario')) {
             llenarTablaInventario();
+            actualizarSelectMarcas();
+            actualizarSelectProveedores(proveedoresCont);
         }
     })();
 
@@ -1021,19 +1023,120 @@ $(document).ready(function() {
 		for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
+        articulosCont = 0;
         var data = listarInventario();
         console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                var id_articulo = record.id_articulo;
 				var nombre = record.nombre_articulo;
 				var cantidad = record.cantidad;
 				var marca = record.nombre_marca;
 				var cantidad_minima = record.cantidad_minima;
-                $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
 				articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
+    }
+
+    /**
+     * Función que realiza una consulta de los proveedores.
+     * @returns {data} object json.
+    **/
+    function buscarProveedores(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_proveedores",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los proveedores.
+     * @returns {data} object json.
+    **/
+    function buscarMarcas(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_marcas",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que llena y actualiza el selector de proveedor.
+     * @returns {undefined}
+    **/
+    function actualizarSelectProveedores(id){
+        if (id == 0) {
+            id = "";
+        }
+        var data = buscarProveedores();
+        $("#proveedor_articulo"+id).empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#proveedor_articulo"+id);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id_proveedor + "'/>");
+                row.text(aux);
+                row.appendTo("#proveedor_articulo"+id);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de marcas.
+     * @returns {undefined}
+    **/
+    function actualizarSelectMarcas(){
+        var data = buscarMarcas();
+        $("#marca").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#marca");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#marca");
+            }
+        });
     }
 
     /**
@@ -5465,6 +5568,51 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el botón ver_informacion_articulo y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#ver_informacion_articulo").click(function (e){
+        var element = $("#tabla_inventario").find(".filaSeleccionada");
+		var articulo = element.html();
+		articulo = articulo.split("</td>");
+		articulo = articulo[0].substring(4);
+		var informacion = {};
+		informacion["id_articulo"] = articulo;
+        var data = consultarInformacionObjeto("articulo",informacion);
+        var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
+        proveedoresCont = 0;
+		console.log(data);
+        console.log(dataProveedor);
+		$.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				$("#nombre_articulo").val(record.nombre);
+				$("#marca").val(record.id_marca);
+                $("#marca").attr('name',record.id_marca);
+				$("#cantidad_minima").val(record.cantidad_minima);
+            }
+        });
+        $.each(dataProveedor, function(index, record) {
+            if($.isNumeric(index)) {
+                if (proveedoresCont == 0) {
+                    $("#proveedor_articulo").val(record.id_proveedor);
+                    $("#proveedor_articulo").attr('name',record.id_proveedor);
+                }else{
+                    var componente = '<div id="proveedor'+proveedoresCont+'">'
+                    +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+                    +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
+                    +'</div>';
+                    añadirComponente("proveedor",componente);
+                    actualizarSelectProveedores(proveedoresCont);
+                    $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
+                    $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
+                }
+                proveedoresCont++;
+            }
+        });
+		$("#divDialogConsulta").modal('show');
+    });
+
+    /**
      * Se captura el evento cuando se abre el modal divDialogConsulta.
     **/
     $("#divDialogConsulta").on("shown.bs.modal", function () {
@@ -5473,7 +5621,7 @@ $(document).ready(function() {
                 mapaModificacion.setZoom(15);
                 google.maps.event.trigger(mapaModificacion, "resize");
                 mapaModificacion.setCenter(coordsMapaModificacion);
-            }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1) && (URLactual['href'].indexOf('aires') == -1))){
+            }else if((URLactual['href'].indexOf('consultar_tipo_material') == -1 && (URLactual['href'].indexOf('consultar_tipo_objeto') == -1) && (URLactual['href'].indexOf('aires') == -1) && (URLactual['href'].indexOf('inventario') == -1))){
                 mapaModificacion.setZoom(18);
                 google.maps.event.trigger(mapaModificacion, "resize");
                 mapaModificacion.setCenter(coordsMapaModificacion);
@@ -5606,6 +5754,10 @@ $(document).ready(function() {
         $("#realizado").attr('disabled',true);
         $("#revisado").attr('disabled',true);
         $("#descripcion_trabajo").attr('disabled',true);
+        $("#nombre_articulo").attr('disabled',true);
+        $("#marca").attr('disabled',true);
+        $("#cantidad_minima").attr('disabled',true);
+        $("#proveedor_articulo").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -5627,6 +5779,7 @@ $(document).ready(function() {
         $("#modificar_marca_aire").show();
         $("#modificar_tipo_aire").show();
         $("#modificar_tecnologia_aire").show();
+        $("#modificar_articulo").show();
         $("#guardar_modificaciones_sede").hide();
         $("#guardar_modificaciones_campus").hide();
         $("#guardar_modificaciones_cancha").hide();
@@ -5658,6 +5811,7 @@ $(document).ready(function() {
         $("#guardar_modificaciones_marca_aire").hide();
         $("#guardar_modificaciones_tipo_aire").hide();
         $("#guardar_modificaciones_tecnologia_aire").hide();
+        $("#guardar_modificaciones_articulo").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
         eliminarComponente("informacion2");
@@ -5693,11 +5847,16 @@ $(document).ready(function() {
             eliminarComponente("interruptor"+interruptoresCont);
             interruptoresCont--;
         }
+        while (proveedoresCont > 0) {
+            eliminarComponente("proveedor"+proveedoresCont);
+            proveedoresCont--;
+        }
         $("#eliminar_iluminacion").attr('disabled', true);
         $("#eliminar_interruptor").attr('disabled', true);
         $("#eliminar_tomacorriente").attr('disabled', true);
         $("#eliminar_puerta").attr('disabled', true);
         $("#eliminar_ventana").attr('disabled', true);
+        $("#eliminar_proveedor").attr('disabled', true);
         fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [];
         window.scrollTo(0,0);
     });
@@ -6308,6 +6467,20 @@ $(document).ready(function() {
         $("#descripcion_trabajo").removeAttr("disabled");
         $("#modificar_mantenimiento_aire").hide();
         $("#guardar_modificaciones_mantenimiento_aire").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_mantenimiento_aire y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_articulo").click(function (e){
+        $("#nombre_articulo").removeAttr("disabled");
+        $("#marca").removeAttr("disabled");
+        $("#cantidad_minima").removeAttr("disabled");
+        $("#proveedor_articulo").removeAttr("disabled");
+        $("#modificar_articulo").hide();
+        $("#guardar_modificaciones_articulo").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 
@@ -8455,6 +8628,37 @@ $(document).ready(function() {
         eliminarComponente("lavamanos"+lavamanosCont);
         if(lavamanosCont == 1){
             $("#eliminar_lavamanos").attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón añadir_proveedor y se
+     * realiza la operacion correspondiente.
+    */
+    $("#añadir_proveedor").click(function (e){
+        if (proveedoresCont == 0) {
+            proveedoresCont = 1;
+        }
+        var componente = '<div id="proveedor'+proveedoresCont+'">'
+        +'<div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+        +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
+        +'</div>';
+        añadirComponente("proveedor",componente);
+        actualizarSelectProveedores(proveedoresCont);
+        $('#eliminar_proveedor').removeAttr("disabled");
+        proveedoresCont++;
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón eliminar_proveedor y se
+     * realiza la operacion correspondiente.
+    */
+    $("#eliminar_proveedor").click(function (e){
+        proveedoresCont--;
+        nombreProveedor.push($("#proveedor_articulo"+proveedoresCont).val());
+        eliminarComponente("proveedor"+proveedoresCont);
+        if(proveedoresCont == 1){
+            $("#eliminar_proveedor").attr('disabled',true);
         }
     });
 

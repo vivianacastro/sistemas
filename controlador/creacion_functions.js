@@ -112,7 +112,7 @@ $(document).ready(function() {
             actualizarSelectSede();
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
             actualizarSelectMarcas();
-            actualizarSelectProveedores();
+            actualizarSelectProveedores(proveedoresCont);
         }
     })();
 
@@ -1096,8 +1096,7 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
-    function actualizarSelectProveedores(){
-        var id = proveedoresCont;
+    function actualizarSelectProveedores(id){
         if (id == 0) {
             id = "";
         }
@@ -4265,7 +4264,7 @@ $(document).ready(function() {
         +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
-        actualizarSelectProveedores();
+        actualizarSelectProveedores(proveedoresCont);
         $('#eliminar_proveedor').removeAttr("disabled");
     });
 

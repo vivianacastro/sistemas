@@ -283,6 +283,10 @@ $map = array(
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
         'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),
+        'consultar_articulos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos'),
+        'consultar_informacion_articulo_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_proveedor'),
+        'consultar_informacion_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo'),
+        'consultar_archivos_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_articulo'),
         'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
         'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         //Acciones de modificación
