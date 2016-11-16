@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var numeroAires, espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
+    var numeroAires, espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, proveedoresCont = 0;
     var coordenadas = {};
     var dataEspacio = {};
     var map;
@@ -110,6 +110,9 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_aire",0);
         }else if(URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
             actualizarSelectSede();
+        }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
+            actualizarSelectMarcas();
+            actualizarSelectProveedores();
         }
     })();
 
@@ -866,6 +869,62 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de los proveedores.
+     * @returns {data} object json.
+    **/
+    function buscarProveedores(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_proveedores",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los proveedores.
+     * @returns {data} object json.
+    **/
+    function actualizarSelectMarcas(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_marcas",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que realiza una consulta de los espacios presentes en el sistema.
      * @param {string} informacion, arreglo que contiene el espacio a buscar.
      * @returns {data} object json.
@@ -1029,6 +1088,50 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#"+tipo_objeto+id);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de proveedor.
+     * @returns {undefined}
+    **/
+    function actualizarSelectProveedores(){
+        var id = proveedoresCont;
+        if (id == 0) {
+            id = "";
+        }
+        var data = buscarProveedores();
+        $("#proveedor_articulo"+id).empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#proveedor_articulo"+id);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id_proveedor + "'/>");
+                row.text(aux);
+                row.appendTo("#proveedor_articulo"+id);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de marcas.
+     * @returns {undefined}
+    **/
+    function actualizarSelectMarcas(){
+        var data = buscarMarcas();
+        $("#marca").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#marca");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#marca");
             }
         });
     }
@@ -4101,7 +4204,6 @@ $(document).ready(function() {
         +'<select class="form-control formulario" name="tipo_lavamanos" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_lavamanos" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/><br>'
-        +'</div>'
         +'</div>';
         añadirComponente("lavamanos",componente);
         actualizarSelectTipoObjeto("tipo_lavamanos",lavamanosCont);
@@ -4149,6 +4251,33 @@ $(document).ready(function() {
         if(espaciosCont == 0){
             $("#divBotonesInformacionAdicional").show();
             $("#eliminar_espacio").attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón añadir_proveedor y se
+     * realiza la operacion correspondiente.
+    */
+    $("#añadir_proveedor").click(function (e){
+        proveedoresCont++;
+        var componente = '<div id="proveedor'+proveedoresCont+'">'
+        +'<div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+        +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
+        +'</div>';
+        añadirComponente("proveedor",componente);
+        actualizarSelectProveedores();
+        $('#eliminar_proveedor').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón eliminar_proveedor y se
+     * realiza la operacion correspondiente.
+    */
+    $("#eliminar_proveedor").click(function (e){
+        eliminarComponente("proveedor"+proveedoresCont);
+        proveedoresCont--;
+        if(proveedoresCont == 0){
+            $("#eliminar_proveedor").attr('disabled',true);
         }
     });
 

@@ -1849,6 +1849,54 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar las marcas almacenadas en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarMarcas(){
+        $sql = "SELECT * FROM marca_inventario ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Marcas presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar los proveedores almacenados en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarProveedores(){
+        $sql = "SELECT * FROM proveedor ORDER BY id_proveedor;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Proveedores 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Proveedores 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Proveedores presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de la iluminación de un espacio en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el espacio a buscar.
      * @param string $nombre_campus, id del campus al que pertenece el espacio a buscar.

@@ -280,6 +280,8 @@ $map = array(
         'guardar_marca_inventario' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_marca_inventario'),
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
+        'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
+        'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         //Acciones de modificación
 
     //Acciones Módulo Aires Acondicionados
@@ -342,12 +344,6 @@ $map = array(
         'eliminar_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_aire'),
         'eliminar_mantenimiento_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_mantenimiento_aire'),
         'eliminar_foto_aire' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_aire'),
-
-        //Acciones Módulo Usuarios
-            //Acciones de carga de plantillas
-            //Acciones de creación
-            //Acciones de consulta
-            //Acciones de modificación
 );
 
 // Parseo de la ruta

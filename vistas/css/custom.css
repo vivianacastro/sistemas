@@ -287,8 +287,12 @@ html, body {
 }
 
 .menu_usuario{
-		color: black !important;
-		width: 100% !important;
+	color: black !important;
+	width: 100% !important;
+}
+
+.menu_usuarios{
+	cursor: pointer;
 }
 
 .modal-dialog{
