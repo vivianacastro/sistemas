@@ -900,7 +900,7 @@ $(document).ready(function() {
      * Función que realiza una consulta de los proveedores.
      * @returns {data} object json.
     **/
-    function actualizarSelectMarcas(){
+    function buscarMarcas(){
         var dataResult;
         try {
             $.ajax({
