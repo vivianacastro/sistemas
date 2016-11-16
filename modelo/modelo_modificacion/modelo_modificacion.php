@@ -2622,6 +2622,37 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite modificar la información del inventario.
+     * @param string $id_articulo, id del articulo.
+     * @param string $cantidad, nueva cantidad del artículo.
+     * @param string $cantidad_anterior, anterior cantidad del artículo.
+     * @return array
+    **/
+    public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
+        $sql = "UPDATE inventario SET cantidad = '".$cantidad."' WHERE id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidad_anterior,$cantidad);
+                $GLOBALS['mensaje'] = "La información del inventario se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que registra una modificación en una base de datos.
      * @param string $bd, nombre de la base de datos donde se realizó la modificación.
      * @param string $id_objeto, id del objeto modificado.

@@ -1025,7 +1025,6 @@ $(document).ready(function() {
         }
         articulosCont = 0;
         var data = listarInventario();
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
@@ -1128,12 +1127,14 @@ $(document).ready(function() {
      * Función que realiza una consulta de un articulo en el inventario.
      * @returns {data} object json.
     **/
-    function consultarArticuloInventario(){
+    function consultarArticuloInventario(informacion){
         var dataResult;
+        var jObject = JSON.stringify(informacion);
         try {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=consultar_articulo_inventario",
+                data: {jObject:jObject},
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1199,21 +1200,23 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de artículos.
      * @returns {undefined}
     **/
-    function actualizarSelectArticulo(id){
+    function actualizarSelectArticulo(id,selector){
         if (id == 0) {
             id = "";
+        }else{
+            id = id.toString();
         }
         var data = buscarArticulos();
-        $("#nombre_articulo"+id).empty();
+        $("#"+selector+id).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
-        row.appendTo("#nombre_articulo"+id);
+        row.appendTo("#"+selector+id);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre+" - "+record.nombre_marca;
                 row = $("<option value='" + record.id_articulo + "'/>");
                 row.text(aux);
-                row.appendTo("#nombre_articulo"+id);
+                row.appendTo("#"+selector+id);
             }
         });
     }
@@ -2401,18 +2404,24 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del selector nombre_articulo
      * y se actualiza el selector de tipo de objeto.
     **/
-    $("#nombre_articulo").change(function (e) {
-        var idArticulo = $("#nombre_articulo").val();
-        var informacion = {};
-        informacion["id_articulo"] = idArticulo;
-        var data = consultarArticuloInventario(informacion);
-        console.log(data);
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                $("#cantidad").attr('name',record.cantidad);
-                $("#cantidad").attr("placeholder","Disponibles: "+record.cantidad);
-            }
-        });
+    $('#informacionArticuloInventario').on('change', '.nombre_articulo_anadir', function() {
+        var idArticulo = $(this).val();
+        var conteoArticulos = $(this).attr("id");
+        conteoArticulos = conteoArticulos.substring(22);
+        if (!validarCadena(idArticulo)) {
+            $("#cantidad"+conteoArticulos).attr('name',"cantidad");
+            $("#cantidad"+conteoArticulos).attr("placeholder","Ej: 10");
+        }else{
+            var informacion = {};
+            informacion["id_articulo"] = idArticulo;
+            var data = consultarArticuloInventario(informacion);
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    $("#cantidad"+conteoArticulos).attr('name',record.cantidad);
+                    $("#cantidad"+conteoArticulos).attr("placeholder","Disponibles: "+record.cantidad);
+                }
+            });
+        }
     });
 
     /**
@@ -5968,6 +5977,17 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se cierra el modal divDialogModificarArticulo.
+    **/
+    $('#divDialogModificarArticulo').on('hidden.bs.modal', function () {
+        while(anadirArticulosCont > 0){
+            eliminarComponente("articulo"+anadirArticulosCont);
+        }
+        $("#cantidad").attr("placeholder","Ej: 10");
+        $("#eliminar_articulo").attr('disabled',true);
+    });
+
+    /**
      * Evento de cambio del selector de archivo del modal de consulta/modificación.
     **/
     $("#planos").on("change", ".agregar_archivos", function(){
@@ -6586,7 +6606,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#modificar_cantidad_articulos").click(function (e){
-        actualizarSelectArticulo(anadirArticulosCont);
+        actualizarSelectArticulo(anadirArticulosCont,"nombre_articulo_anadir");
         $("#divDialogModificarArticulo").modal('show');
     });
 
@@ -8776,12 +8796,12 @@ $(document).ready(function() {
         anadirArticulosCont++;
         var componente = '<div id="articulo'+anadirArticulosCont+'">'
         +'<br><div class="div_izquierda"><b>Nombre del Art&iacute;culo ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario" name="nombre_articulo" id="nombre_articulo'+anadirArticulosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Artículos a A&ntilde;adir o Eliminar ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario nombre_articulo_anadir" name="nombre_articulo_anadir" id="nombre_articulo_anadir'+anadirArticulosCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Art&iacute;culos a A&ntilde;adir o Eliminar ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
         +'<input class="form-control formulario" type="number" name="cantidad" id="cantidad'+anadirArticulosCont+'" value="" placeholder="Ej: 10" required/>'
         +'</div>';
         añadirComponente("articulo",componente);
-        actualizarSelectArticulo(anadirArticulosCont);
+        actualizarSelectArticulo(anadirArticulosCont,"nombre_articulo_anadir");
         $('#eliminar_articulo').removeAttr("disabled");
     });
 
@@ -11802,27 +11822,59 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Añadir ó eliminar la cantidad de artículos ingresada?");
         if (confirmacion) {
             var informacion = {};
-            var nombreArticulo = [];
+            var idArticulo = [];
             var cantidad = [];
-
+            var cantidadAnterior = [];
+            var cantidadValida = true;
             for (var i = 0; i <= anadirArticulosCont; i++) {
-                if (i==0) {
-                    nombreArticulo[i] = $("#nombre_articulo").val();
-                    cantidad[i] = $("#cantidad").val();
+                if (i == 0) {
+                    var cantidad = parseInt($("#cantidad").val());
+                    var cantidadAnterior = parseInt($("#cantidad").attr("name"));
+                    console.log(cantidadAnterior + cantidad);
+                    console.log(cantidadAnterior);
+                    if ((cantidad < 0) && ((cantidadAnterior + cantidad) < 0)) {
+                        alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
+                        cantidadValida = false;
+                        $("#cantidad").focus();
+                        break;
+                    }else{
+                        idArticulo[i] = $("#nombre_articulo_anadir").val();
+                        cantidad[i] = cantidadAnterior - cantidad;
+                        cantidadAnterior[i] = cantidadAnterior;
+                    }
                 }else{
-                    nombreArticulo[i] = $("#nombre_articulo"+i).val();
-                    cantidad[i] = $("#cantidad"+i).val();
+                    var cantidad = $("#nombre_articulo"+i).val();
+                    var cantidadAnterior = $("#cantidad"+i).val();
+                    if ((cantidad < 0) && ((cantidadAnterior - cantidad) < 0)) {
+                        alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
+                        cantidadValida = false;
+                        $("#cantidad"+i).focus();
+                        break;
+                    }else{
+                        idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
+                        cantidad[i] = cantidadAnterior - cantidad;
+                        cantidadAnterior[i] = cantidadAnterior;
+                    }
                 }
             }
-
-            informacion["nombre_articulo"] = nombreArticulo;
-            informacion["cantidad"] = cantidad;
-            var data = modificarObjeto("mantenimiento_aire",informacion);
-            alert(data.mensaje);
-            if (data.verificar) {
-                $("#id_aire_search").val("").change();
-                $("#numero_orden_search").val("");
-                $("#divDialogConsulta").modal('hide');
+            if (cantidadValida) {
+                informacion["id_articulo"] = id_articulo;
+                informacion["cantidad"] = cantidad;
+                informacion["cantidad_anterior"] = cantidadAnterior;
+                console.log(informacion);
+                var data = modificarObjeto("inventario",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    llenarTablaInventario();
+                    $("#nombre_articulo").val("");
+                    $("#cantidad").val("");
+                    while(anadirArticulosCont > 0){
+                        eliminarComponente("articulo"+anadirArticulosCont);
+                        anadirArticulosCont--;
+                    }
+                    $("#eliminar_articulo").attr('disabled',true);
+                    $("#informacionArticuloInventario").modal('hide');
+                }
             }
         }
     });

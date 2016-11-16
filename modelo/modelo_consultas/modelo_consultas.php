@@ -1584,7 +1584,7 @@ class modelo_consultas
     **/
     public function buscarArticuloInventario($id_articulo){
         $id_articulo = htmlspecialchars(trim($id_articulo));
-        $sql = "SELECT * FROM inventario WHERE id_articulo = '".$id_articulo."' ORDER BY b.nombre;";
+        $sql = "SELECT * FROM inventario WHERE id_articulo = '".$id_articulo."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículo Inventario 1)";

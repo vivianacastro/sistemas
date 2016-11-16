@@ -291,6 +291,7 @@ $map = array(
         'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
         'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         //Acciones de modificación
+        'modificar_inventario' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_inventario'),
 
     //Acciones Módulo Aires Acondicionados
         //Acciones de carga de plantillas
