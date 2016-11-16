@@ -1628,7 +1628,7 @@ class controlador_creacion
 	/**
 	 * Funcion que permite verificar si una capacidad de aires acondicionados ya existe en el sistema.
 	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	 */
+	**/
 	public function verificar_capacidad_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
@@ -1648,7 +1648,7 @@ class controlador_creacion
 	/**
 	 * Funcion que permite verificar si una marca de aires acondicionados ya existe en el sistema.
 	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	 */
+	**/
 	public function verificar_marca_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
@@ -1668,7 +1668,7 @@ class controlador_creacion
 	/**
 	 * Funcion que permite verificar si un tipo de aires acondicionados ya existe en el sistema.
 	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	 */
+	**/
 	public function verificar_tipo_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
@@ -1688,7 +1688,7 @@ class controlador_creacion
 	/**
 	 * Funcion que permite verificar si un tipo de tecnología de aires acondicionados ya existe en el sistema.
 	 * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-	 */
+	**/
 	public function verificar_tecnologia_aire(){
 		$GLOBALS['mensaje'] = "";
 		$GLOBALS['sql'] = "";
@@ -1704,5 +1704,51 @@ class controlador_creacion
 		$result['verificar'] = $verificar;
 		echo json_encode($result);
 	}
+
+	/**
+      * Funcion que permite crear una marca del módulo de inventario.
+      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+    **/
+    public function guardar_marca_inventario(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarMarcaInventario($info['nombre']);
+            if($verificar){
+                $m->guardarMarcaInventario($info['nombre']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+      * Funcion que permite crear un proveedor.
+      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+    **/
+    public function guardar_proveedor(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarProveedor($info['nombre']);
+            if($verificar){
+                $m->guardarProveedor($info['nombre'],$info['direccion'],$info['telefono'],$info['nit']);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
 }
 ?>

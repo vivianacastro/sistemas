@@ -4493,4 +4493,61 @@ $(document).ready(function() {
         $("#id_aire_search").empty();
         $("#seleccionar_aire").attr('disabled',true);
     });
+
+    /**
+     * Se captura el evento cuando se da click en el botón guardar_marca y se
+     * realiza la operacion correspondiente.
+    */
+    $("#guardar_marca").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la marca?");
+        if (confirmacion) {
+            var nombre = limpiarCadena($("#nombre_marca").val());
+            if(!validarCadena(nombre)){
+                alert("ERROR. Ingrese el nombre de la marca");
+                $("#nombre_marca").focus();
+            }else{
+                var informacion = {};
+                informacion["nombre"] = nombre;
+                var data = guardarObjeto("marca_inventario",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_marca").val("");
+                    window.scrollTo(0,0);
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón guardar_proveedor y se
+     * realiza la operacion correspondiente.
+    */
+    $("#guardar_proveedor").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del proveedor?");
+        if (confirmacion) {
+            var nombre = limpiarCadena($("#nombre_proveedor").val());
+            var direccion = limpiarCadena($("#direccion").val());
+            var telefono = limpiarCadena($("#telefono").val());
+            var nit = limpiarCadena($("#nit").val());
+            if(!validarCadena(nombre)){
+                alert("ERROR. Ingrese el nombre del proveedor");
+                $("#nombre_marca").focus();
+            }else{
+                var informacion = {};
+                informacion["nombre"] = nombre;
+                informacion["direccion"] = direccion;
+                informacion["telefono"] = telefono;
+                informacion["nit"] = nit;
+                var data = guardarObjeto("proveedor",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_proveedor").val("");
+                    $("#direccion").val("");
+                    $("#telefono").val("");
+                    $("#nit").val("");
+                    window.scrollTo(0,0);
+                }
+            }
+        }
+    });
 });

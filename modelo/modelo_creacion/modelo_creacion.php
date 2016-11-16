@@ -3214,6 +3214,62 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de una marca del módulo de inventario.
+     * @param string $marca, nombre de la marca.
+     * @return array
+    **/
+    public function guardarMarcaInventario($marca){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "INSERT INTO marca_inventario (nombre) VALUES ('".$marca."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La marca se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un proveedor.
+     * @param string $nombre, nombre del proveedor.
+     * @param string $direccion, dirección del proveedor.
+     * @param string $telefono, telefono del proveedor.
+     * @param string $nit, nit del proveedor.
+     * @return array
+    **/
+    public function guardarProveedor($nombre,$direccion,$telefono,$nit){
+        $nombre = htmlspecialchars(trim($nombre));
+        $direccion = htmlspecialchars(trim($direccion));
+        $telefono = htmlspecialchars(trim($telefono));
+        $nit = htmlspecialchars(trim($nit));
+        $sql = "INSERT INTO proveedor (nombre,nit,direccion,telefono) VALUES ('".$nombre."','".$nit."','".$direccion."','".$telefono."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "El proveedor se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
@@ -3893,7 +3949,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "ERROR. La marca de aires acondicionados ya se encuentra regisrada en el sistema.";
+                $GLOBALS['mensaje'] = "ERROR. La marca de aires acondicionados ya se encuentra registrada en el sistema.";
                 return false;
             }
             else{
@@ -3924,6 +3980,64 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }elseif($l_stmt->rowCount() > 0){
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una marca del módulo de inventario ya está registrada en el sistema.
+     * @param string $marca, nombre de la marca.
+     * @return array
+    **/
+    public function verificarMarcaInventario($marca){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$marca."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La marca ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un proveedor ya se encuentra registrado en el sistema.
+     * @param string $nombre, nombre del proveedor.
+     * @return array
+    **/
+    public function verificarProveedor($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El proveedor ya se encuentra registrado en el sistema.";
                 return false;
             }
             else{
