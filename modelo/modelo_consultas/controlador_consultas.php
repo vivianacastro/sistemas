@@ -3829,6 +3829,34 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar las marcas de los aires aconidcionados.
+    **/
+    public function consultar_articulos() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarArticulos();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'id_marca' => $valor['id_marca'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad_minima' => $valor['cantidad_minima'],
+                    'cantidad' => $valor['cantidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite verificar si un numero de inventario ya
      * está asignado a un aire acondicionado.
     **/

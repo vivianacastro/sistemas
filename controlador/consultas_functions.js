@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0;
+    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0, anadirArticulosCont = 0;
     var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
@@ -1097,6 +1097,34 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de los artículos.
+     * @returns {data} object json.
+    **/
+    function buscarArticulos(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_articulos",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
@@ -1135,6 +1163,31 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#marca");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de artículos.
+     * @returns {undefined}
+    **/
+    function actualizarSelectArticulo(id){
+        if (id == 0) {
+            id = "";
+        }
+        var data = buscarArticulos();
+        $("#nombre_articulo"+id).empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#nombre_articulo"+id);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre+" - "+record.nombre_marca;
+                row = $("<option value='" + record.id_articulo + "'/>");
+                row.text(aux);
+                row.appendTo("#nombre_articulo"+id);
+                $("#cantidad").attr('name',record.cantidad);
+                $("#cantidad").attr("placeholder","Disponibles: "+record.cantidad);
             }
         });
     }
@@ -6485,6 +6538,15 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el botón modificar_cantidad_articulos y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_cantidad_articulos").click(function (e){
+        actualizarSelectArticulo(anadirArticulosCont);
+        $("#divDialogModificarArticulo").modal('show');
+    });
+
+    /**
      * Se captura el evento cuando se da click en el botón ver_campus y se
      * realiza la operacion correspondiente.
     **/
@@ -8659,6 +8721,35 @@ $(document).ready(function() {
         eliminarComponente("proveedor"+proveedoresCont);
         if(proveedoresCont == 1){
             $("#eliminar_proveedor").attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón añadir_articulo y se
+     * realiza la operacion correspondiente.
+    */
+    $("#añadir_articulo").click(function (e){
+        anadirArticulosCont++;
+        var componente = '<div id="articulo'+anadirArticulosCont+'">'
+        +'<br><div class="div_izquierda"><b>Nombre del Art&iacute;culo ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario" name="nombre_articulo" id="nombre_articulo'+anadirArticulosCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Artículos a A&ntilde;adir o Eliminar ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" name="cantidad" id="cantidad'+anadirArticulosCont+'" value="" placeholder="Ej: 10" required/>'
+        +'</div>';
+        añadirComponente("articulo",componente);
+        actualizarSelectArticulo(anadirArticulosCont);
+        $('#eliminar_articulo').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón eliminar_articulo y se
+     * realiza la operacion correspondiente.
+    */
+    $("#eliminar_articulo").click(function (e){
+        eliminarComponente("articulo"+anadirArticulosCont);
+        anadirArticulosCont--;
+        if(anadirArticulosCont == 0){
+            $("#eliminar_articulo").attr('disabled',true);
         }
     });
 
@@ -11655,6 +11746,39 @@ $(document).ready(function() {
                     $("#numero_orden_search").val("");
                     $("#divDialogConsulta").modal('hide');
                 }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_articulos y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_articulos").click(function (e){
+        var confirmacion = window.confirm("¿Añadir ó eliminar la cantidad de artículos ingresada?");
+        if (confirmacion) {
+            var informacion = {};
+            var nombreArticulo = [];
+            var cantidad = [];
+
+            for (var i = 0; i <= anadirArticulosCont; i++) {
+                if (i==0) {
+                    nombreArticulo[i] = $("#nombre_articulo").val();
+                    cantidad[i] = $("#cantidad").val();
+                }else{
+                    nombreArticulo[i] = $("#nombre_articulo"+i).val();
+                    cantidad[i] = $("#cantidad"+i).val();
+                }
+            }
+
+            informacion["nombre_articulo"] = nombreArticulo;
+            informacion["cantidad"] = cantidad;
+            var data = modificarObjeto("mantenimiento_aire",informacion);
+            alert(data.mensaje);
+            if (data.verificar) {
+                $("#id_aire_search").val("").change();
+                $("#numero_orden_search").val("");
+                $("#divDialogConsulta").modal('hide');
             }
         }
     });
