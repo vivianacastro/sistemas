@@ -430,7 +430,6 @@ $(document).ready(function() {
 	 * Se captura el evento cuando de dar click en un fila de la tabla usuarios.
 	**/
 	$('tbody').on('click', 'tr', function() {
-	//$('#tabla_usuarios > tbody > tr').click(function() {
 		if ($(this).hasClass("filaSeleccionada")) {
 			$(this).removeClass("filaSeleccionada");
 			$("#ver_informacion_usuario").attr("disabled",true);

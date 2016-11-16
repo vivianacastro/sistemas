@@ -282,6 +282,7 @@ $map = array(
         'guardar_marca_inventario' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_marca_inventario'),
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
+        'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),
         'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
         'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         //Acciones de modificación

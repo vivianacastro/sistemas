@@ -1470,6 +1470,33 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite consultar el inventario.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInventario(){
+        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, c.nombre AS nombre_marca
+                FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
+                                    JOIN marca_inventario c ON b.marca = c.id
+                ORDER BY b.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la ubicación de un campus en el sistema.
      * @param string $nombre_sede, id de la sede al que pertenece el campus.
      * @param string $nombre_campus, id del campus.

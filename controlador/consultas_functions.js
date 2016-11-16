@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0;
+    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0;
     var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
@@ -122,6 +122,8 @@ $(document).ready(function() {
             actualizarSelectTecnologiaAire("tecnologia_aire_search");
         }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
             actualizarSelectSede();
+        }else if (URLactual['href'].indexOf('consultar_inventario')) {
+            llenarTablaInventario();
         }
     })();
 
@@ -978,6 +980,60 @@ $(document).ready(function() {
                 color: '#D51B23'
             }]
         });
+    }
+
+    /**
+	 * Función que permite consultar el inventario.
+	 * @returns {data}
+	**/
+	function listarInventario(){
+		var dataResult;
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=listar_inventario",
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//mostrarMensaje(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+    /**
+     * Función que llena la tabla inventario.
+     * @returns {undefined}
+    **/
+    function llenarTablaInventario(){
+		for (var i=0;i<articulosCont;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
+        var data = listarInventario();
+        console.log(data);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				var nombre = record.nombre_articulo;
+				var cantidad = record.cantidad;
+				var marca = record.nombre_marca;
+				var cantidad_minima = record.cantidad_minima;
+                $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+				articulosCont++;
+            }
+        });
+		$("#tabla_inventario").show();
     }
 
     /**
@@ -11769,4 +11825,18 @@ $(document).ready(function() {
             }
         }
     });
+
+    /**
+	 * Se captura el evento cuando de dar click en un fila de la tabla inventario.
+	**/
+	$('tbody').on('click', 'tr', function() {
+		if ($(this).hasClass("filaSeleccionada")) {
+			$(this).removeClass("filaSeleccionada");
+			$("#ver_informacion_articulo").attr("disabled",true);
+		}else{
+			$("#tBody tr").removeClass("filaSeleccionada");
+	    	$(this).addClass("filaSeleccionada");
+			$("#ver_informacion_articulo").removeAttr("disabled");
+		}
+	});
 });
