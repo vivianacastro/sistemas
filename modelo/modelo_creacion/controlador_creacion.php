@@ -1750,5 +1750,59 @@ class controlador_creacion
         $result['verificar'] = $verificar;
         echo json_encode($result);
     }
+
+	/**
+      * Funcion que permite crear un artículo.
+      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+    **/
+    public function guardar_articulo(){
+		$GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->verificarArticulo($info['nombre_articulo'],$info['marca']);
+            if($verificar){
+                $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['cantidad_minima']);
+				while (list($clave, $valor) = each($verificar)){
+	                $id_articulo = $valor['id_articulo'];
+	            }
+				$proveedor = $info['proveedor'];
+				for ($i=0;$i<count($proveedor);$i++) {
+                    $m->guardarArticuloProveedor($id_articulo,$proveedor[$i]);
+                }
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+	/**
+      * Funcion que permite guardar las fotos que el usuario seleccione.
+      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
+    **/
+    public function guardar_fotos_articulo(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = $_FILES;
+            $infoArticulo = json_decode($_POST['articulo'], true);
+            for ($i=0; $i < count($info); $i++) {
+                $file = $info['archivo'.$i];
+                $verificar = $m->guardarFotoArticulo($infoArticulo['id_articulo'],$file);
+                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+                $result['sql'] = $GLOBALS['sql'];
+                $result['verificar'][$i] = $verificar;
+            }
+        }
+        echo json_encode($result);
+    }
 }
 ?>

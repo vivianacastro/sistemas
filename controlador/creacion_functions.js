@@ -4679,4 +4679,121 @@ $(document).ready(function() {
             }
         }
     });
+
+    /**
+     * Se captura el evento cuando se da click en el botón guardar_articulo y se
+     * realiza la operacion correspondiente.
+    */
+    $("#guardar_articulo").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del artículo?");
+        if (confirmacion) {
+            var nombreArticulo = limpiarCadena($("#nombre_articulo").val());
+            var marca = $("#marca").val();
+            var cantidadMinima = $("#cantidad_minima").val();
+            var proveedores = [];
+            var proveedorRepetido = false;
+            for (var i = 0; i <= proveedoresCont; i++) {
+                if (i == 0) {
+                    proveedores[i] = $("#proveedor_articulo").val();
+                }else{
+                    var aux = $("#proveedor_articulo"+i).val();
+                    if (proveedores.indexOf(aux) == -1) {
+                        proveedores[i] = $("#proveedor_articulo"+i).val();
+                    }else{
+                        alert("ERROR. El artículo tiene proveedores repetidos");
+                        $("#proveedor_articulo"+i).focus();
+                        proveedorRepetido = true;
+                        break;
+                    }
+                }
+            }
+            if (!proveedorRepetido) {
+                var fotos = document.getElementById("fotos[]");
+                if (fotos.files.length <= 20) {
+                    var arregloFotos = new FormData();
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }if(!validarCadena(nombreArticulo)){
+                        alert("ERROR. Ingrese el nombre del artículo");
+                        $("#nombre_articulo").focus();
+                    }else if(!validarCadena(marca)){
+                        alert("ERROR. Seleccione la marca del artículo");
+                        $("#marca").focus();
+                    }else if(!validarNumero(cantidadMinima)){
+                        alert("ERROR. Ingrese la cantidad mínima del artículo ");
+                        $("#cantidad_minima").focus();
+                    }else{
+                        var informacion = {};
+                        informacion["nombre_articulo"] = nombreArticulo;
+                        informacion["marca"] = marca;
+                        informacion["cantidad_minima"] = cantidadMinima;
+                        informacion["proveedor"] = proveedores;
+                        var data = guardarObjeto("articulo",informacion);
+                        var id_articulo = "";
+                        $.each(data.verificar, function(index, record) {
+                            if($.isNumeric(index)) {
+                                id_articulo = record.id_articulo;
+                            }
+                        });
+                        console.log(data);
+                        console.log(informacion);
+                        if (data.verificar != false) {
+                            informacion["id_articulo"] = id_articulo;
+                            arregloFotos.append('articulo',JSON.stringify(informacion));
+                            var resultadoFotos = guardarFotos("articulo",arregloFotos);
+                            console.log(resultadoFotos);
+                            var mensaje = "";
+                            mensaje += data.mensaje;
+                            if (resultadoFotos.length != 0) {
+                                for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                    if (resultadoFotos.mensaje[i].indexOf("Error: SQL") == -1) {
+                                        if (!resultadoFotos.verificar[i]) {
+                                            if (mensaje == "") {
+                                                mensaje += resultadoFotos.mensaje[i];
+                                            }else{
+                                                mensaje += "\n" + resultadoFotos.mensaje[i];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (mensaje.substring(0,1) != "") {
+                                alert(mensaje);
+                            }
+                            $("#nombre_articulo").val("");
+                            $("#marca").val("");
+                            $("#cantidad_minima").val("");
+                            $("#proveedor_articulo").val("");
+                            while (proveedoresCont > 0) {
+                                eliminarComponente("proveedor"+proveedoresCont);
+                                proveedoresCont--;
+                            }
+                            fotos.value = "";
+                            window.scrollTo(0,0);
+                        }else{
+                            alert(data.mensaje);
+                            $("#nombre_articulo").focus();
+                        }
+                    }
+                }else{
+                    if (planos.files.length <= 5) {
+                        alert("ERROR. El número máximo de planos por cubierta es 5");
+                        planos.focus();
+                    }else{
+                        alert("ERROR. El número máximo de fotos por cubierta es 20");
+                        fotos.focus();
+                    }
+                }
+            }
+        }
+    });
 });

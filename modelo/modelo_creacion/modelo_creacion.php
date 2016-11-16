@@ -3270,6 +3270,67 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de un articulo.
+     * @param string $nombre, nombre del artículo.
+     * @param string $marca, marca del artículo.
+     * @param string $cantidad_minima, cantidad mínima del artículo.
+     * @return array
+    **/
+    public function guardarArticulo($nombre,$marca,$cantidad_minima){
+        $nombre = htmlspecialchars(trim($nombre));
+        $marca = htmlspecialchars(trim($marca));
+        $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
+        $campos = "nombre,marca,cantidad_minima,usuario_crea";
+        $valores = "'".$nombre."','".$marca."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        $sql = "INSERT INTO articulo (".$campos.") VALUES (".$valores.") RETURNING id_articulo;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "El artículo se ha guardado correctamente en el sistema.";
+                return $result;
+            }
+        }
+    }
+
+    /**
+     * Función que permite guardar la información de un articulo y su proveedor.
+     * @param string $id_articulo, id del articulo.
+     * @param string $proveedor, id del proveedor.
+     * @return array
+    **/
+    public function guardarArticuloProveedor($id_articulo,$proveedor){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $proveedor = htmlspecialchars(trim($proveedor));
+        $campos = "id_articulo,id_proveedor";
+        $valores = "'".$id_articulo."','".$proveedor."'";
+        $sql = "INSERT INTO articulo_proveedor (".$campos.") VALUES (".$valores.");";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                return true;
+                //$GLOBALS['mensaje'] = "El artículo y su proveedor se han guardado correctamente en el sistema.";
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una sede ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede.
      * @return array
@@ -3872,6 +3933,51 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar fotos de un artículo que el usuario selecionó.
+     * @param string $id_articulo, id del artículo.
+     * @param file $foto, variable con la información de la foto a guardar.
+     * @return array
+    **/
+    public function guardarFotoArticulo($id_articulo,$foto){
+        if ($foto['error'] == UPLOAD_ERR_OK) {
+            $id_articulo = htmlspecialchars(trim($id_articulo));
+            $foto['name'] = str_replace(" ", "",$foto['name']);
+            $ruta = __ROOT__."/archivos/images/articulo/".$id_articulo."/";
+            if (!file_exists($ruta.$foto['name'])) {
+                if (!file_exists($ruta)) {
+                    mkdir($ruta, 0777, true);
+                }
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO articulo_archivos (id_articulo,nombre,tipo) VALUES ('".$id_articulo."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Articulo 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Articulo 2)";
+                        unlink($ruta.$foto['name']);
+                        $GLOBALS['sql'] = $sql;
+                        return false;
+                    }else{
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        $GLOBALS['sql'] = $sql;
+                return true;
+                    }
+                }
+            }else{
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                return false;
+            }
+        }else{
+            $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" no se subió correctamente';
+            return false;
+        }
+    }
+
+    /**
      * Función que permite consultar si una orden de mantenimiento existe.
      * @param string $capacidad, capacidad.
      * @return array
@@ -4043,6 +4149,41 @@ class modelo_creacion {
             else{
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un artículo ya se encuentra registrado en el sistema.
+     * @param string $nombre, nombre del artículo.
+     * @param string $marca, marca del artículo.
+     * @return array
+    **/
+    public function verificarArticulo($nombre,$marca){
+        $nombre = htmlspecialchars(trim($nombre));
+        $marca = htmlspecialchars(trim($marca));
+        if (strcmp($nombre,"") == 0 && strcmp($marca,"") == 0) {
+            return true;
+        }else{
+            $sql = "SELECT * FROM articulo WHERE nombre = '".$nombre."' AND marca = '".$marca."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Artículo 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Verificar Artículo 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }elseif($l_stmt->rowCount() > 0){
+                    $GLOBALS['mensaje'] = 'ERROR. El artículo ya se encuentra registrado en el sistema.';
+                    return false;
+                }
+                else{
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }

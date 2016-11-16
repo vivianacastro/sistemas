@@ -1547,7 +1547,7 @@ class controlador_consultas{
             $data = $m->buscarProveedores();
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id' => $valor['id_proveedor'],
+                    'id_proveedor' => $valor['id_proveedor'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'nit' => $valor['nit'],
                     'direccion' => mb_convert_case($valor['direccion'],MB_CASE_TITLE,"UTF-8"),
