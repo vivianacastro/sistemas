@@ -1420,6 +1420,32 @@ class modelo_consultas
 
     /**
      * Función que permite buscar los archivos de un aire acondicionado en el sistema.
+     * @param string $id_aire, id del aire.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarArchivosAireId($id_aire){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $sql = "SELECT * FROM aire_acondicionado_archivos WHERE id_aire = '".$id_aire."' ORDER BY tipo,nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Archivos Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Archivos del aire acondicionado seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar los archivos de un aire acondicionado en el sistema.
      * @param string $numero_inventario, numero de inventario del aire.
      * @return metadata con el resultado de la búsqueda.
     **/
