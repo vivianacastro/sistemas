@@ -1125,6 +1125,34 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de un articulo en el inventario.
+     * @returns {data} object json.
+    **/
+    function consultarArticuloInventario(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_articulo_inventario",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
@@ -1186,8 +1214,6 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id_articulo + "'/>");
                 row.text(aux);
                 row.appendTo("#nombre_articulo"+id);
-                $("#cantidad").attr('name',record.cantidad);
-                $("#cantidad").attr("placeholder","Disponibles: "+record.cantidad);
             }
         });
     }
@@ -2369,6 +2395,24 @@ $(document).ready(function() {
         }else{
             $('#visualizarTecnologiaAires').attr('disabled',true);
         }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector nombre_articulo
+     * y se actualiza el selector de tipo de objeto.
+    **/
+    $("#nombre_articulo").change(function (e) {
+        var idArticulo = $("#nombre_articulo").val();
+        var informacion = {};
+        informacion["id_articulo"] = idArticulo;
+        var data = consultarArticuloInventario(informacion);
+        console.log(data);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                $("#cantidad").attr('name',record.cantidad);
+                $("#cantidad").attr("placeholder","Disponibles: "+record.cantidad);
+            }
+        });
     });
 
     /**

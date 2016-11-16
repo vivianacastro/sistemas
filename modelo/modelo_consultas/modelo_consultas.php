@@ -1579,6 +1579,31 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite consultar un artículo en el inventario.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarArticuloInventario($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $sql = "SELECT * FROM inventario WHERE id_articulo = '".$id_articulo."' ORDER BY b.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículo Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículo Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite consultar el inventario.
      * @return metadata con el resultado de la búsqueda.
     **/

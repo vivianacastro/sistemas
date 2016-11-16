@@ -5634,3 +5634,6 @@
 [16-Nov-2016 11:50:18 America/Bogota] PHP Notice:  Undefined index: id_marca in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3874
 [16-Nov-2016 11:51:44 America/Bogota] PHP Notice:  Undefined index: id_marca in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3874
 [16-Nov-2016 11:51:44 America/Bogota] PHP Notice:  Undefined index: id_marca in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3874
+[16-Nov-2016 14:27:15 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3869
+[16-Nov-2016 14:27:45 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3869
+[16-Nov-2016 14:28:11 America/Bogota] PHP Notice:  Undefined index: jObject in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 3869

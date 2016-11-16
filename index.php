@@ -284,6 +284,7 @@ $map = array(
         //Acciones de consulta
         'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),
         'consultar_articulos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos'),
+        'consultar_articulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo_inventario'),
         'consultar_informacion_articulo_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_proveedor'),
         'consultar_informacion_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo'),
         'consultar_archivos_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_articulo'),
