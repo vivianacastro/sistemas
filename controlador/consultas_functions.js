@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0, anadirArticulosCont = 0;
+    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, articulosPocasUnidades = 0, proveedoresCont = 0, anadirArticulosCont = 0;
     var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
@@ -1060,9 +1060,13 @@ $(document).ready(function() {
 		for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
+        for (var i=0;i<articulosPocasUnidades;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
         articulosCont = 0;
         articulosPocasUnidades = 0;
         var data = listarInventario();
+        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
@@ -12356,12 +12360,12 @@ $(document).ready(function() {
                         break;
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir").val();
-                        cantidad[i] = aux2 + aux;
+                        cantidad[i] = aux;
                         cantidadAnterior[i] = aux2;
                     }
                 }else{
-                    var cantidad = $("#nombre_articulo"+i).val();
-                    var cantidadAnterior = $("#cantidad"+i).val();
+                    var aux = parseInt($("#cantidad"+i).val());
+                    var aux2 = parseInt($("#cantidad"+i).attr("name"));
                     if ((aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
@@ -12369,7 +12373,7 @@ $(document).ready(function() {
                         break;
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
-                        cantidad[i] = aux2 + aux;
+                        cantidad[i] = aux;
                         cantidadAnterior[i] = aux2;
                     }
                 }
@@ -12381,6 +12385,7 @@ $(document).ready(function() {
                 console.log(informacion);
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
+                console.log(data);
                 if (data.verificar) {
                     llenarTablaInventario();
                     $("#nombre_articulo").val("");
@@ -12947,7 +12952,7 @@ $(document).ready(function() {
     /**
 	 * Se captura el evento cuando de dar click en un fila de la tabla inventario.
 	**/
-	$('#tabla_inventario').on('click', 'tr', function() {
+	$('#tabla_inventario').on('click', 'tbody>tr', function() {
 		if ($(this).hasClass("filaSeleccionada")) {
 			$(this).removeClass("filaSeleccionada");
 			$("#visualizarArticulo").attr("disabled",true);

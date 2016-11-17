@@ -2632,7 +2632,7 @@ class modelo_modificacion {
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $cantidad = htmlspecialchars(trim($cantidad));
         $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        $sql = "UPDATE inventario SET cantidad = '".$cantidad."' WHERE id_articulo = '".$id_articulo."';";
+        $sql = "UPDATE inventario SET cantidad = ".$cantidad." + cantidad WHERE id_articulo = '".$id_articulo."' RETURNING cantidad;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 1)";
@@ -2644,7 +2644,12 @@ class modelo_modificacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidad_anterior,$cantidad);
+                $result = $l_stmt->fetchAll();
+                foreach ($result as $clave => $valor) {
+                    $cantidadNueva = $valor['cantidad'];
+                    $cantidadAnterior = $cantidadNueva - $cantidad;
+                }
+                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidad);
                 $GLOBALS['mensaje'] = "La información del inventario se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
