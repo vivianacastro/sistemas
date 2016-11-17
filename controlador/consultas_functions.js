@@ -1074,7 +1074,7 @@ $(document).ready(function() {
 				var cantidad = parseInt(record.cantidad);
 				var marca = record.nombre_marca;
 				var cantidad_minima = parseInt(record.cantidad_minima);
-                if (cantidad < cantidad_minima) {
+                if (cantidad <= cantidad_minima) {
                     $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
                     $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
                     articulosPocasUnidades++;
