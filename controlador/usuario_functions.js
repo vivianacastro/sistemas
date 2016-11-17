@@ -419,6 +419,9 @@ $(document).ready(function() {
 				}else{
 					creacion_inventario = 'No';
 				}
+				if (perfil == 'normal') {
+					$("#permisos").show();
+				}
                 $("#tabla_usuarios").append("<tr id='tr_tabla_usuarios'><td>"+login+"</td><td>"+nombre+"</td><td>"+correo+"</td><td>"+telefono+"</td><td>"+extension+"</td><td>"+perfil+"</td><td>"+creacion_planta+"</td><td>"+creacion_aire+"</td><td>"+creacion_inventario+"</td><td>"+estado+"</td></tr>");
 				numeroUsuarios++;
             }
@@ -609,6 +612,7 @@ $(document).ready(function() {
 		$("#estado").attr('disabled', true);
         $("#modificar_usuario").show();
         $("#guardar_modificaciones_usuario").hide();
+		$("#permisos").hide();
         window.scrollTo(0,0);
     });
 
@@ -628,7 +632,7 @@ $(document).ready(function() {
 				var extension = $("#extension_usuario").val();
 				var contrasenia = $("#contrasenia").val();
 				var contrasenia2 = $("#repita_contrasenia").val();
-				var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
+				var pattern = /(?=.*\d)(?=.*[A-Za-z])/;
 				if (nombre.length == 0) {
 					alert('ERROR. Ingrese un nombre de usuario');
 					$("#nombre_usuario").focus();
@@ -646,7 +650,6 @@ $(document).ready(function() {
 					$("#contrasenia").focus();
 				}else if(!pattern.test(contrasenia)){
 					alert('ERROR. La contraseña debe contener por lo menos una letra y un número');
-					console.log(contrasenia);
 					$("#contrasenia").focus();
 				}else if(contrasenia != contrasenia2){
 					alert('ERROR. Las contraseñas no coinciden');
@@ -712,7 +715,7 @@ $(document).ready(function() {
 				var crearAire = $('input[name="crear_aire"]:checked').val();
 				var crearInventario = $('input[name="crear_inventario"]:checked').val();
 				var tipoUsuario = $("#tipo_usuario").val();
-				var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
+				var pattern = /(?=.*\d)(?=.*[A-Za-z])/;
 				if (nombre.length == 0) {
 					alert('ERROR. Ingrese un nombre de usuario');
 					$("#nombre_usuario").focus();
@@ -730,58 +733,71 @@ $(document).ready(function() {
 					$("#contrasenia").focus();
 				}else if(!pattern.test(contrasenia)){
 					alert('ERROR. La contraseña debe contener por lo menos una letra y un número');
-					console.log(contrasenia);
 					$("#contrasenia").focus();
 				}else if(contrasenia != contrasenia2){
 					alert('ERROR. Las contraseñas no coinciden');
 					//$("#contrasenia").focus();
 					$("#repita_contrasenia").focus();
-				}else if(!validarCadena(crearPlanta)){
-					alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de planta física');
-					$("#crear_planta").focus();
-				}else if(!validarCadena(crearAire)){
-					alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de aires acondicionados');
-					$("#crear_aire").focus();
-				}else if(!validarCadena(crearInventario)){
-					alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de inventario');
-					$("#crear_inventario").focus();
 				}else if(!validarCadena(tipoUsuario)){
 					alert('ERROR. Especifique el tipo de usuario a crear');
 					$("#tipo_usuario").focus();
 				}else{
-					var informacion = {};
-					informacion['nombre'] = limpiarCadena(nombre);
-					informacion['login'] = limpiarCadena(login);
-					informacion['correo'] = limpiarCadena(correo);
-					informacion['telefono'] = limpiarCadena(telefono);
-					informacion['extension'] = limpiarCadena(extension);
-					informacion['contrasenia'] = contrasenia;
-					informacion['mod_planta'] = "true";
-					informacion['mod_inventario'] = "true";
-					informacion['mod_aires'] = "true";
-					informacion['creacion_planta'] = crearPlanta;
-					informacion['creacion_inventario'] = crearAire;
-					informacion['creacion_aires'] = crearInventario;
-					informacion['perfil'] = tipoUsuario;
-					var respuesta = guardarUsuario(informacion);
-					if (respuesta.verificar) {
-						mostrarMensaje(respuesta.mensaje);
-						$("#nombre_usuario").val("");
-						$("#login_usuario").val("");
-						$("#correo_usuario").val("");
-						$("#telefono_usuario").val("");
-						$("#extension_usuario").val("");
-						$("#contrasenia").val("");
-						$("#repita_contrasenia").val("");
-						$('input[name=crear_planta]').attr('checked',false);
-						$('input[name=crear_aire]').attr('checked',false);
-						$('input[name=crear_inventario]').attr('checked',false);
-						$("#tipo_usuario").val("");
-						window.scrollTo(0,0);
+					var controlAccesoTipoUsuario = true;
+					console.log(tipoUsuario);
+					if (tipoUsuario == 'normal') {
+						if(!validarCadena(crearPlanta)){
+							alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de planta física');
+							$("#crear_planta").focus();
+							controlAccesoTipoUsuario = false;
+						}else if(!validarCadena(crearAire)){
+							alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de aires acondicionados');
+							$("#crear_aire").focus();
+							controlAccesoTipoUsuario = false;
+						}else if(!validarCadena(crearInventario)){
+							alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de inventario');
+							$("#crear_inventario").focus();
+							controlAccesoTipoUsuario = false;
+						}
 					}else{
-						alert("El login ya se ha registrado previamente");
-						$("#login_usuario").addClass("resaltarInput");
-						$("#guardar_usuario").attr('disabled','disabled');
+						crearPlanta = "true";
+						crearAire = "true";
+						crearInventario = "true";
+					}
+					if (controlAccesoTipoUsuario) {
+						var informacion = {};
+						informacion['nombre'] = limpiarCadena(nombre);
+						informacion['login'] = limpiarCadena(login);
+						informacion['correo'] = limpiarCadena(correo);
+						informacion['telefono'] = limpiarCadena(telefono);
+						informacion['extension'] = limpiarCadena(extension);
+						informacion['contrasenia'] = contrasenia;
+						informacion['mod_planta'] = "true";
+						informacion['mod_inventario'] = "true";
+						informacion['mod_aires'] = "true";
+						informacion['perfil'] = tipoUsuario;
+						informacion['creacion_planta'] = crearPlanta;
+						informacion['creacion_inventario'] = crearAire;
+						informacion['creacion_aires'] = crearInventario;
+						var respuesta = guardarUsuario(informacion);
+						if (respuesta.verificar) {
+							mostrarMensaje(respuesta.mensaje);
+							$("#nombre_usuario").val("");
+							$("#login_usuario").val("");
+							$("#correo_usuario").val("");
+							$("#telefono_usuario").val("");
+							$("#extension_usuario").val("");
+							$("#contrasenia").val("");
+							$("#repita_contrasenia").val("");
+							$('input[name=crear_planta]').attr('checked',false);
+							$('input[name=crear_aire]').attr('checked',false);
+							$('input[name=crear_inventario]').attr('checked',false);
+							$("#tipo_usuario").val("");
+							window.scrollTo(0,0);
+						}else{
+							alert("El login ya se ha registrado previamente");
+							$("#login_usuario").addClass("resaltarInput");
+							$("#guardar_usuario").attr('disabled','disabled');
+						}
 					}
 				}
 			}
@@ -928,6 +944,23 @@ $(document).ready(function() {
 		}catch(ex){
 			console.log(ex);
 			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	});
+
+	/**
+	 * Se captura el evento cuando de dar click en el botón tipo_usuario y se
+	 * realiza la operacion correspondiente.
+	**/
+	$("#tipo_usuario").click(function (e){
+		var tipoUsuario = $("#tipo_usuario").val();
+		if (validarCadena(tipoUsuario)) {
+			if (tipoUsuario == "normal") {
+				$("#permisos").show();
+			}else{
+				$("#permisos").hide();
+			}
+		}else{
+			$("#permisos").hide();
 		}
 	});
 

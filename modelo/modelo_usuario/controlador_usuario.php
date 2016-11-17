@@ -394,7 +394,7 @@ class controlador_usuario {
             array_push($result, $arrayAux);*/
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['verificar'] = $verificar;
+        $result['verificar'] = true;
         echo json_encode($result);
     }
 

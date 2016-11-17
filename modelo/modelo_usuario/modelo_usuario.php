@@ -176,7 +176,7 @@ class modelo_usuario {
      * Función que lista los usuarios en el sistema.
     **/
     public function listarUsuarios(){
-        $sql = "SELECT * FROM usuarios ORDER BY login;";
+        $sql = "SELECT * FROM usuarios WHERE login <> '".$_SESSION["login"]."' ORDER BY login;";
         $l_stmt = $this->conexion->prepare($sql);
         $result = array();
         if(!$l_stmt){
