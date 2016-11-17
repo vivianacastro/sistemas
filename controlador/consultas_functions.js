@@ -126,6 +126,10 @@ $(document).ready(function() {
             llenarTablaInventario();
             actualizarSelectMarcas();
             actualizarSelectProveedores(proveedoresCont);
+        }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
+            llenarTablaInventario();
+            actualizarSelectMarcas();
+            actualizarSelectProveedores(proveedoresCont);
         }
     })();
 
@@ -2467,8 +2471,10 @@ $(document).ready(function() {
     $("#nombre_articulo_search").change(function (e) {
         if (validarCadena($("#nombre_articulo_search").val())) {
             $('#visualizarArticulo').removeAttr("disabled");
+            $('#visualizarArticuloNombre').removeAttr("disabled");
         }else{
             $('#visualizarArticulo').attr('disabled',true);
+            $('#visualizarArticuloNombre').attr('disabled',true);
         }
     });
 
@@ -5776,23 +5782,25 @@ $(document).ready(function() {
 		var articulo = element.html();
 		articulo = articulo.split("</td>");
 		articulo = articulo[0].substring(4);
-		var informacion = {};
+        var informacion = {};
 		informacion["id_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo",informacion);
-        var archivos = consultarArchivosObjeto("articulo",informacion);
-        var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
-        var fotos =
-        proveedoresCont = 0;
-		console.log(data);
-        console.log(dataProveedor);
-		$.each(data, function(index, record) {
+        var idArticulo;
+        $.each(data, function(index, record) {
             if($.isNumeric(index)) {
+                idArticulo = record.id_articulo;
 				$("#nombre_articulo").val(record.nombre);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
 				$("#cantidad_minima").val(record.cantidad_minima);
             }
         });
+        var archivos = consultarArchivosObjeto("articulo",informacion);
+        var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
+        var fotos =
+        proveedoresCont = 0;
+		console.log(data);
+        console.log(dataProveedor);
         $.each(dataProveedor, function(index, record) {
             if($.isNumeric(index)) {
                 if (proveedoresCont == 0) {
@@ -5830,19 +5838,19 @@ $(document).ready(function() {
                     if (numeroFotos == 0) {
                         componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
                         componente2 = '<div id="item_carrusel" class="item active carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                     }else{
                         componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                         componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/articulo/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                     }
                     añadirComponente("indicadores_carrusel",componente);
                     añadirComponente("fotos_carrusel",componente2);
                     componente = '<div id="foto">'
                     +'<div class="col-sm-8 div_izquierda">'
-                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'">'
                     +'<span>'+record.nombre+'</span></a>'
                     +'</div><div class="col-sm-4">'
                     +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
@@ -5884,6 +5892,178 @@ $(document).ready(function() {
         añadirComponente("fotos_carrusel",componente2);
         $("#myCarousel").show();
 		$("#divDialogConsulta").modal('show');
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarArticuloNombre y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarArticuloNombre").click(function (e){
+        var articulo = $("#nombre_articulo_search").val();
+        var informacion = {};
+		informacion["nombre_articulo"] = articulo;
+        var data = consultarInformacionObjeto("articulo_nombre",informacion);
+        var idArticulo;
+        var numeroArticulos = 0;
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                idArticulo = record.id_articulo;
+				$("#nombre_articulo").val(record.nombre);
+				$("#marca").val(record.id_marca);
+                $("#marca").attr('name',record.id_marca);
+				$("#cantidad_minima").val(record.cantidad_minima);
+                numeroArticulos++;
+            }
+        });
+        informacion["id_articulo"] = idArticulo;
+        if (numeroArticulos > 0) {
+            var archivos = consultarArchivosObjeto("articulo",informacion);
+            var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
+            var fotos =
+            proveedoresCont = 0;
+    		console.log(data);
+            console.log(dataProveedor);
+            $.each(dataProveedor, function(index, record) {
+                if($.isNumeric(index)) {
+                    if (proveedoresCont == 0) {
+                        $("#proveedor_articulo").val(record.id_proveedor);
+                        $("#proveedor_articulo").attr('name',record.id_proveedor);
+                    }else{
+                        var componente = '<div id="proveedor'+proveedoresCont+'">'
+                        +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+                        +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
+                        +'</div>';
+                        añadirComponente("proveedor",componente);
+                        actualizarSelectProveedores(proveedoresCont);
+                        $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
+                        $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
+                    }
+                    proveedoresCont++;
+                }
+            });
+            $("#myCarousel").hide();
+            for (var i = 0; i < numeroFotos; i++) {
+                eliminarComponente("slide_carrusel");
+                eliminarComponente("item_carrusel");
+                eliminarComponente("foto");
+                eliminarComponente("inputFileFotos");
+            }
+            for (var i = 0; i < numeroPlanos; i++) {
+                eliminarComponente("plano");
+            }
+            numeroFotos = 0;
+            numeroPlanos = 0;
+            $.each(archivos, function(index, record) {
+                if($.isNumeric(index)) {
+                    if (record.tipo == 'foto') {
+                        var componente, componente2;
+                        if (numeroFotos == 0) {
+                            componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                            componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                            +'<img class="carouselImg" src="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                            +'</div>';
+                        }else{
+                            componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                            componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                            +'<img class="carouselImg" src="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                            +'</div>';
+                        }
+                        añadirComponente("indicadores_carrusel",componente);
+                        añadirComponente("fotos_carrusel",componente2);
+                        componente = '<div id="foto">'
+                        +'<div class="col-sm-8 div_izquierda">'
+                        +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'">'
+                        +'<span>'+record.nombre+'</span></a>'
+                        +'</div><div class="col-sm-4">'
+                        +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                        +'</div>'
+                        +'<br></div>';
+                        añadirComponente("enlace_fotos",componente);
+                        numeroFotos++;
+                        $("#myCarousel").show();
+                    }
+                }
+            });
+            var componente, componente2;
+            if (numeroFotos == 0) {
+                componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+                componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                +'<div class="fileUpload btn boton_agregar_foto">'
+                +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+                +'</div>'
+                +'</div>';
+            }else{
+                componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+                componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                +'<div class="fileUpload btn boton_agregar_foto">'
+                +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+                +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+                +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+                +'</div>'
+                +'</div>';
+            }
+            var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+            +'<span>Agregar una foto</span><br>'
+            +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+            +'<br></div>';
+            añadirComponente("enlace_fotos",componenteFotos);
+            numeroFotos++;
+            añadirComponente("indicadores_carrusel",componente);
+            añadirComponente("fotos_carrusel",componente2);
+            $("#myCarousel").show();
+    		$("#divDialogConsulta").modal('show');
+        }else{
+            alert("No se encontró ningún artículo con el nombre dado");
+            $("#nombre_articulo_search").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarMarcaInventario y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarMarcaInventario").click(function (e){
+        var element = $("#tabla_inventario").find(".filaSeleccionada");
+		var articulo = element.html();
+		articulo = articulo.split("</td>");
+		articulo = articulo[0].substring(4);
+		var informacion = {};
+		informacion["id_articulo"] = articulo;
+        var data = consultarInformacionObjeto("articulo",informacion);
+        var archivos = consultarArchivosObjeto("articulo",informacion);
+        var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
+        var fotos =
+        proveedoresCont = 0;
+		console.log(data);
+        console.log(dataProveedor);
+		$.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				$("#nombre_articulo").val(record.nombre);
+				$("#marca").val(record.id_marca);
+                $("#marca").attr('name',record.id_marca);
+				$("#cantidad_minima").val(record.cantidad_minima);
+            }
+        });
+        $.each(dataProveedor, function(index, record) {
+            if($.isNumeric(index)) {
+                if (proveedoresCont == 0) {
+                    $("#proveedor_articulo").val(record.id_proveedor);
+                    $("#proveedor_articulo").attr('name',record.id_proveedor);
+                }else{
+                    var componente = '<div id="proveedor'+proveedoresCont+'">'
+                    +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+                    +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
+                    +'</div>';
+                    añadirComponente("proveedor",componente);
+                    actualizarSelectProveedores(proveedoresCont);
+                    $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
+                    $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
+                }
+                proveedoresCont++;
+            }
+        });
     });
 
     /**

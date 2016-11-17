@@ -289,11 +289,19 @@ $map = array(
         'consultar_articulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo_inventario'),
         'consultar_informacion_articulo_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_proveedor'),
         'consultar_informacion_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo'),
+        'consultar_informacion_articulo_nombre' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_nombre'),
+        'consultar_informacion_marca' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_marca'),
+        'consultar_informacion_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_proveedor'),
         'consultar_archivos_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_articulo'),
         'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
         'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         //Acciones de modificación
+        'modificar_articulo' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_articulo'),
         'modificar_inventario' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_inventario'),
+        'modificar_marca_inventario' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_marca_inventario'),
+        'modificar_proveedor' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_proveedor'),
+        'eliminar_articulo_proveedor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_articulo_proveedor'),
+        'eliminar_foto_articulo' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_articulo'),
 
     //Acciones Módulo Aires Acondicionados
         //Acciones de carga de plantillas

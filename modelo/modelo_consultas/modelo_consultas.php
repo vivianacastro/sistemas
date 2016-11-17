@@ -1063,6 +1063,86 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar la información de un artículo.
+     * @param string $nombre_articulo, nombre del artículo a buscar.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionArticuloNombre($nombre_articulo){
+        $nombre_articulo = htmlspecialchars(trim($nombre_articulo));
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima
+                FROM articulo a JOIN marca_inventario b ON a.marca = b.id
+                WHERE a.nombre = '".$nombre_articulo."' ORDER BY a.nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo Nombre 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo Nombre 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del artículo";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de una marca.
+     * @param string $id_marca, id de la marca.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionMarca($id_marca){
+        $id_marca = htmlspecialchars(trim($id_marca));
+        $sql = "SELECT * FROM marca_inventario WHERE id = '".$id_marca."' ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Marca 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Marca 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la marca seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de un proveedor.
+     * @param string $id_proveedor, id del proveedor.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionProveedor($id_proveedor){
+        $id_proveedor = htmlspecialchars(trim($id_proveedor));
+        $sql = "SELECT * FROM marca_inventario WHERE id_proveedor = '".$id_proveedor."' ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información del proveedor seleccionado";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un artículo y su proveedor.
      * @param string $id_articulo, id del artículo a buscar.
      * @return metadata con el resultado de la búsqueda.
@@ -1085,6 +1165,7 @@ class modelo_consultas
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de los proveedores del artículo seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

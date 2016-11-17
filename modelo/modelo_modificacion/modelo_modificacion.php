@@ -2732,6 +2732,82 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite modificar una marca.
+     * @param string $nombre, nuevo nombre de la marca.
+     * @param string $nombre_anterior, anterior nombre de la marca.
+     * @return array
+    **/
+    public function modificarMarcaInventario($nombre,$nombre_anterior){
+        $nombre = htmlspecialchars(trim($nombre));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
+        $sql = "UPDATE marca_inventario SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $data = $this->consultarCampoMarcaInventario($nombre_anterior);
+        foreach ($data as $clave => $valor) {
+            $id = $valor['id'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("marca_inventario",$id,"nombre",$nombre_anterior,$nombre);
+                $GLOBALS['mensaje'] = "La información de la marca se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar un proveedor.
+     * @param string $nombre, nuevo nombre del proveedor.
+     * @param string $nombre_anterior, anterior nombre del proveedor.
+     * @param string $nombre_anterior, anterior nombre del proveedor.
+     * @param string $nit, nit del proveedor.
+     * @param string $direccion, dirección del proveedor.
+     * @param string $telefono, teléfono del proveedor.
+     * @return array
+    **/
+    public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono){
+        $nombre = htmlspecialchars(trim($nombre));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
+        $sql = "UPDATE proveedor SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $data = $this->consultarCampoProveedor($nombre_anterior);
+        foreach ($data as $clave => $valor) {
+            $id = $valor['id'];
+            $nit_anterior = $valor['nit'];
+            $direccion_anterior = $valor['direccion'];
+            $telefono_anterior = $valor['telefono'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("proveedor",$id,"nombre",$nombre_anterior,$nombre);
+                $this->registrarModificacion("proveedor",$id,"nit",$nit_anterior,$nit);
+                $this->registrarModificacion("proveedor",$id,"direccion",$direccion_anterior,$direccion);
+                $this->registrarModificacion("proveedor",$id,"telefono",$telefono_anterior,$telefono);
+                $GLOBALS['mensaje'] = "La información del proveedor se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que registra una modificación en una base de datos.
      * @param string $bd, nombre de la base de datos donde se realizó la modificación.
      * @param string $id_objeto, id del objeto modificado.
@@ -3073,7 +3149,7 @@ class modelo_modificacion {
 
     /**
      * Función que permite consultar el nombre de una marca.
-     * @param string $capacidad, capacidad.
+     * @param string $nombre, nombre de la marca.
      * @return array
     **/
     public function consultarCampoMarcaAire($nombre){
@@ -3086,6 +3162,52 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el nombre de una marca.
+     * @param string $nombre, nombre de la marca.
+     * @return array
+    **/
+    public function consultarCampoMarcaInventario($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el nombre de un proveedor.
+     * @param string $nombre, nombre del proveedor.
+     * @return array
+    **/
+    public function consultarCampoProveedor($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Proveedor 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
