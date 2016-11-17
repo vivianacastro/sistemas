@@ -2653,6 +2653,85 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite modificar la información del artículo.
+     * @param string $id_articulo, id del articulo.
+     * @param string $nombre, nombre del artículo.
+     * @param string $marca, marca del artículo.
+     * @param string $cantidad_minima, cantidad mínima del artículo.
+     * @param string $proveedor, arreglo con los proveedores del artículo.
+     * @param string $proveedor, arreglo con los anteriores proveedores del artículo.
+     * @return array
+    **/
+    public function modificarArticulo($id_articulo,$nombre,$marca,$cantidad_minima,$proveedor,$proveedor_anterior){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $nombre = htmlspecialchars(trim($nombre));
+        $marca = htmlspecialchars(trim($marca));
+        $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
+        $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
+        $data = $this->consultarCampoMarcaAire($nombre_anterior);
+        foreach ($data as $clave => $valor) {
+            $id_articulo_anterior = $valor['id_articulo'];
+            $nombre_anterior = $valor['nombre'];
+            $marca_anterior = $valor['marca'];
+            $cantidad_minima_anterior = $valor['cantidad_minima'];
+        }
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("articulo",$id_articulo,"id_articulo",$id_articulo_anterior,$id_articulo);
+                $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
+                $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
+                $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
+                for ($i=0;$i<count($proveedor);$i++) {
+                    $this->modificarProveedorArticulo($id_articulo,$proveedor[$i],$proveedor_anterior[$i]);
+                }
+                $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar la información del artículo.
+     * @param string $id_articulo, id del articulo.
+     * @param string $proveedor, nuevo proveedor.
+     * @param string $proveedor_anterior, anterior proveedor.
+     * @return array
+    **/
+    public function modificarProveedorArticulo($id_articulo,$proveedor,$proveedor_anterior){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $proveedor = htmlspecialchars(trim($proveedor));
+        $proveedor_anterior = htmlspecialchars(trim($proveedor_anterior));
+        $sql = "UPDATE articulo_proveedor SET id_proveedor = '".$proveedor."' WHERE id_articulo = '".$id_articulo."' AND id_proveedor = '".$proveedor_anterior."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $this->registrarModificacion("articulo_proveedor",$id_articulo."-".$proveedor,"id_proveedor",$proveedor_anterior,$proveedor);
+                $GLOBALS['mensaje'] = "La información de los proveedores del artículo se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que registra una modificación en una base de datos.
      * @param string $bd, nombre de la base de datos donde se realizó la modificación.
      * @param string $id_objeto, id del objeto modificado.
@@ -6143,6 +6222,36 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar una foto de un artículo.
+     * @param string $id_articulo, id del articulo.
+     * @param string $archivo, nombre de la foto.
+     * @return array
+    **/
+    public function eliminarFotoArticulo($id_articulo,$archivo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $archivo = htmlspecialchars(trim($archivo));
+        $sql = "DELETE FROM articulo_archivos WHERE nombre = '".$archivo."' AND tipo = 'foto' AND id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                unlink(__ROOT__."/archivos/images/articulo/".$id_articulo."/".$archivo);
+                $GLOBALS['mensaje'] = "Se ha eliminado la foto del artículo";
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar los una carpeta y sus archivos.
      * @param string $carpeta, nombre de la carpeta a eliminar.
      * @return array
@@ -7104,6 +7213,37 @@ class modelo_modificacion {
             else{
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un proveedor de un artículo.
+     * @param string $id_articulo, id del artículo.
+     * @param string $proveedor, id del proveedor.
+     * @return array
+    **/
+    public function eliminarArticuloProveedor($id_articulo,$proveedor){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $proveedor = htmlspecialchars(trim($proveedor));
+        if (strcasecmp($proveedor,'') != 0){
+            $sql = "DELETE FROM articulo_proveedor WHERE id_articulo = '".$id_articulo."' AND id_proveedor = '".$proveedor."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Proveedor Artículo 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Proveedor Artículo 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    $this->registrarModificacion("articulo_proveedor",$id_articulo."-".$proveedor,"id_articulo",$proveedor,"eliminado");
+                    $GLOBALS['mensaje'] = "El proveedor del artículo ha sido eliminado";
+                    return true;
+                }
             }
         }
     }

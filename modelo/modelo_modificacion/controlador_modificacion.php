@@ -419,7 +419,7 @@ class controlador_modificacion{
     }
 
     /**
-     * Funcion que permite modificar un tipo de objeto en el sistema.
+     * Funcion que permite modificar el inventario.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
     **/
     public function modificar_inventario(){
@@ -436,6 +436,26 @@ class controlador_modificacion{
                     break;
                 }
             }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite modificar la información de un artículo.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+    **/
+    public function modificar_articulo(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->modificarArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['cantidad_minima'],$info['proveedor'],$info['proveedor_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -716,6 +736,29 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->eliminarAire($info['id_aire']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un proveedor de un artículo.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+    **/
+    public function eliminar_articulo_proveedor(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $proveedor = $info['proveedor_eliminar'];
+            for ($i=0; $i<count($proveedor); $i++) {
+                $verificar = $m->eliminarArticuloProveedor($info['id_articulo'],$proveedor[$i]);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -1020,7 +1063,7 @@ class controlador_modificacion{
     }
 
     /**
-     * Funcion que permite eliminar un archivo de un espacio.
+     * Funcion que permite eliminar un archivo de un aire acondicionado.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
     **/
     public function eliminar_foto_aire(){
@@ -1034,6 +1077,29 @@ class controlador_modificacion{
             $archivo = $info['nombre'];
             for ($i=0;$i<count($archivo); $i++) {
                 $verificar = $m->eliminarFotoAire($info['id_aire'],$archivo[$i]);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un archivo de un artículo.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+    **/
+    public function eliminar_foto_articulo(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $archivo = $info['nombre'];
+            for ($i=0;$i<count($archivo); $i++) {
+                $verificar = $m->eliminarFotoArticulo($info['id_articulo'],$archivo[$i]);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
