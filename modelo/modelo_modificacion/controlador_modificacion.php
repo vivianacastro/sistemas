@@ -431,7 +431,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             for ($i=0;$i<count($info['id_articulo']); $i++) {
-                $verificar = $m->modificarTipoObjeto($info['id_articulo'][$i],$info['cantidad'][$i],$info['cantidad_anterior'][$i]);
+                $verificar = $m->modificarInventario($info['id_articulo'][$i],$info['cantidad'][$i],$info['cantidad_anterior'][$i]);
                 if (!$verificar) {
                     break;
                 }

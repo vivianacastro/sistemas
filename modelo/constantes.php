@@ -96,6 +96,7 @@ const OPERATION_CONSULTAR_ARTICULO = 'inventario_consultar_articulo';
 const OPERATION_CONSULTAR_MARCA = 'inventario_consultar_marca';
 const OPERATION_CONSULTAR_PROVEEDOR = 'inventario_consultar_proveedor';
 const OPERATION_CONSULTAR_INVENTARIO = 'inventario_consultar_inventario';
+const OPERATION_MOVIMIENTOS_INVENTARIO = 'inventario_movimientos_inventario';
 const OPERATION_ARTICULOS_MAS_USADOS = 'inventario_articulos_mas_usados';
 const OPERATION_ARTICULOS_MENOS_USADOS = 'inventario_articulos_menos_usados';
 ?>

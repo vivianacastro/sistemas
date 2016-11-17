@@ -750,6 +750,27 @@ class controlador_consultas{
     }
 
     /**
+     * Función que despliega el panel que permite consultar el inventario.
+    **/
+    public function movimientos_inventario() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Movimientos Inventario',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_MOVIMIENTOS_INVENTARIO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
      * Función que despliega el panel que permite consultar los artículos más usados.
     **/
     public function articulos_mas_usados() {
@@ -3926,6 +3947,36 @@ class controlador_consultas{
                     'cantidad_minima' => $valor['cantidad_minima'],
                     'id_marca' => $valor['marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar el inventario.
+    **/
+    public function listar_movimientos_inventario() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
+                    'valor_nuevo' => $valor['valor_nuevo'],
+                    'valor_antiguo' => $valor['valor_antiguo'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'fecha' => $valor['fecha'],
+                    'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }

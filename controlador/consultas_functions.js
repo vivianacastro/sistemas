@@ -122,7 +122,7 @@ $(document).ready(function() {
             actualizarSelectTecnologiaAire("tecnologia_aire_search");
         }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
             actualizarSelectSede();
-        }else if (URLactual['href'].indexOf('consultar_inventario')) {
+        }else if (URLactual['href'].indexOf('consultar_inventario') >= 0 ) {
             llenarTablaInventario();
             actualizarSelectMarcas();
             actualizarSelectProveedores(proveedoresCont);
@@ -994,6 +994,39 @@ $(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: "index.php?action=listar_inventario",
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//mostrarMensaje(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+    /**
+	 * Función que permite consultar el inventario.
+	 * @returns {data}
+	**/
+	function listarMovimientosInventario(informacion){
+		var dataResult;
+        var jObject = JSON.stringify(informacion);
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=listar_movimientos_inventario",
+                data: {jObject:jObject},
 				dataType: "json",
 				async: false,
 				error: function(xhr, status, error) {
@@ -2035,40 +2068,54 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del input fecha_inicio.
     **/
     $("#fecha_inicio").change(function (e) {
-        var sede = $("#sede_search").val();
-        var campus = $("#campus_search").val();
-        var edificio = $("#edificio_search").val();
-        var fechaInicio = $("#fecha_inicio").val();
-        var fechaFin = $("#fecha_fin").val();
-        if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
-            if (fechaInicio > fechaFin) {
-                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
-            }else{
-                if (sede == 'todos') {
-                    $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
-                    $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+        if(URLactual['href'].indexOf('movimientos_inventario') >= 0){
+            var fechaInicio = $("#fecha_inicio").val();
+            var fechaFin = $("#fecha_fin").val();
+            if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
+                if (fechaInicio > fechaFin) {
+                    $('#consultarMovimientosInventario').attr('disabled',true);
                 }else{
-                    if (campus == 'todos') {
+                    $('#consultarMovimientosInventario').removeAttr("disabled");
+                }
+            }else{
+                $('#consultarMovimientosInventario').attr('disabled',true);
+            }
+        }else{
+            var sede = $("#sede_search").val();
+            var campus = $("#campus_search").val();
+            var edificio = $("#edificio_search").val();
+            var fechaInicio = $("#fecha_inicio").val();
+            var fechaFin = $("#fecha_fin").val();
+            if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
+                if (fechaInicio > fechaFin) {
+                    $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                    $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                }else{
+                    if (sede == 'todos') {
                         $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                         $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
                     }else{
-                        if (edificio == 'todos') {
-                            $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
-                            $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
-                        }else if(validarCadena(edificio)){
+                        if (campus == 'todos') {
                             $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                             $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
                         }else{
-                            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-                            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            if (edificio == 'todos') {
+                                $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
+                                $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            }else if(validarCadena(edificio)){
+                                $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
+                                $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            }else{
+                                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            }
                         }
                     }
                 }
+            }else{
+                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
             }
-        }else{
-            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
         }
     });
 
@@ -2076,40 +2123,54 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del input fecha_fin.
     **/
     $("#fecha_fin").change(function (e) {
-        var sede = $("#sede_search").val();
-        var campus = $("#campus_search").val();
-        var edificio = $("#edificio_search").val();
-        var fechaInicio = $("#fecha_inicio").val();
-        var fechaFin = $("#fecha_fin").val();
-        if (validarCadena(fechaFin)) {
-            if (fechaInicio > fechaFin) {
-                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
-            }else{
-                if (sede == 'todos') {
-                    $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
-                    $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+        if(URLactual['href'].indexOf('movimientos_inventario') >= 0){
+            var fechaInicio = $("#fecha_inicio").val();
+            var fechaFin = $("#fecha_fin").val();
+            if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
+                if (fechaInicio > fechaFin) {
+                    $('#consultarMovimientosInventario').attr('disabled',true);
                 }else{
-                    if (campus == 'todos') {
+                    $('#consultarMovimientosInventario').removeAttr("disabled");
+                }
+            }else{
+                $('#consultarMovimientosInventario').attr('disabled',true);
+            }
+        }else{
+            var sede = $("#sede_search").val();
+            var campus = $("#campus_search").val();
+            var edificio = $("#edificio_search").val();
+            var fechaInicio = $("#fecha_inicio").val();
+            var fechaFin = $("#fecha_fin").val();
+            if (validarCadena(fechaFin)) {
+                if (fechaInicio > fechaFin) {
+                    $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                    $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                }else{
+                    if (sede == 'todos') {
                         $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                         $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
                     }else{
-                        if (edificio == 'todos') {
-                            $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
-                            $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
-                        }else if(validarCadena(edificio)){
+                        if (campus == 'todos') {
                             $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
                             $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
                         }else{
-                            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-                            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            if (edificio == 'todos') {
+                                $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
+                                $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            }else if(validarCadena(edificio)){
+                                $('#visualizarAiresMasMantenimientos').removeAttr("disabled");
+                                $('#visualizarMarcasMasMantenimientos').removeAttr("disabled");
+                            }else{
+                                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
+                            }
                         }
                     }
                 }
+            }else{
+                $('#visualizarAiresMasMantenimientos').attr('disabled',true);
+                $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
             }
-        }else{
-            $('#visualizarAiresMasMantenimientos').attr('disabled',true);
-            $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
         }
     });
 
@@ -11828,37 +11889,35 @@ $(document).ready(function() {
             var cantidadValida = true;
             for (var i = 0; i <= anadirArticulosCont; i++) {
                 if (i == 0) {
-                    var cantidad = parseInt($("#cantidad").val());
-                    var cantidadAnterior = parseInt($("#cantidad").attr("name"));
-                    console.log(cantidadAnterior + cantidad);
-                    console.log(cantidadAnterior);
-                    if ((cantidad < 0) && ((cantidadAnterior + cantidad) < 0)) {
+                    var aux = parseInt($("#cantidad").val());
+                    var aux2 = parseInt($("#cantidad").attr("name"));
+                    if ((aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad").focus();
                         break;
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir").val();
-                        cantidad[i] = cantidadAnterior - cantidad;
-                        cantidadAnterior[i] = cantidadAnterior;
+                        cantidad[i] = aux2 + aux;
+                        cantidadAnterior[i] = aux2;
                     }
                 }else{
                     var cantidad = $("#nombre_articulo"+i).val();
                     var cantidadAnterior = $("#cantidad"+i).val();
-                    if ((cantidad < 0) && ((cantidadAnterior - cantidad) < 0)) {
+                    if ((aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad"+i).focus();
                         break;
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
-                        cantidad[i] = cantidadAnterior - cantidad;
-                        cantidadAnterior[i] = cantidadAnterior;
+                        cantidad[i] = aux2 + aux;
+                        cantidadAnterior[i] = aux2;
                     }
                 }
             }
             if (cantidadValida) {
-                informacion["id_articulo"] = id_articulo;
+                informacion["id_articulo"] = idArticulo;
                 informacion["cantidad"] = cantidad;
                 informacion["cantidad_anterior"] = cantidadAnterior;
                 console.log(informacion);
@@ -11873,7 +11932,8 @@ $(document).ready(function() {
                         anadirArticulosCont--;
                     }
                     $("#eliminar_articulo").attr('disabled',true);
-                    $("#informacionArticuloInventario").modal('hide');
+                    $("#ver_informacion_articulo").attr('disabled',true);
+                    $("#divDialogModificarArticulo").modal('hide');
                 }
             }
         }
@@ -12253,7 +12313,7 @@ $(document).ready(function() {
     /**
 	 * Se captura el evento cuando de dar click en un fila de la tabla inventario.
 	**/
-	$('tbody').on('click', 'tr', function() {
+	$('#tabla_inventario').on('click', 'tr', function() {
 		if ($(this).hasClass("filaSeleccionada")) {
 			$(this).removeClass("filaSeleccionada");
 			$("#ver_informacion_articulo").attr("disabled",true);
@@ -12263,4 +12323,35 @@ $(document).ready(function() {
 			$("#ver_informacion_articulo").removeAttr("disabled");
 		}
 	});
+
+    /**
+     * Se captura el evento cuando de dar click en el botón consultarMovimientosInventario y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#consultarMovimientosInventario").click(function (e){
+		for (var i=0;i<articulosCont;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
+        articulosCont = 0;
+        var fechaInicio = $("#fecha_inicio").val();
+        var fechaFin = $("#fecha_fin").val();
+        var informacion = {};
+        informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
+        informacion["fecha_fin"] = fechaFin + " 23:59:59";
+        console.log(informacion);
+        var data = listarMovimientosInventario(informacion);
+        console.log(data);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				var nombre = record.nombre_articulo;
+				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
+				var marca = record.nombre_marca;
+				var fecha = record.fecha;
+                var usuario = record.usuario;
+                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
+				articulosCont++;
+            }
+        });
+		$("#divDialogConsulta").modal("show");
+    });
 });

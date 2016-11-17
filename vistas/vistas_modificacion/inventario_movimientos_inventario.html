@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Consultar Movimientos Inventario</h2></b><br></div>
+        <div class='div_izquierda'><b>Fecha Inicio:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_inicio' id='fecha_inicio' value='' required/><br>
+        <div class='div_izquierda'><b>Fecha Fin:</b></div>
+        <input class='form-control formulario' type='date' name='fecha_fin' id='fecha_fin' value='' required/><br>
+    <div><br>
+    <div class='form_button'>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="consultarMovimientosInventario" id="consultarMovimientosInventario" value="Ver Movimientos Inventario" title="Ver los movimientos del inventario entre las fechas seleccionadas" disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Movimientos del Inventario</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionAire'>
+                        <div class='form-group'>
+                            <div><h4><b>Artículos</b></h4></div>
+                            <div class="table-responsive">
+                                <table id="tabla_movimientos_inventario" class="table table-bordered">
+                                    <thead align="center">
+                                        <tr>
+                                            <th>Art&iacute;culo</th>
+                                            <th>Cantidad Añadida o Sustraída</th>
+                                            <th>Marca</th>
+                                            <th>Fecha</th>
+                                            <th>Usuario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tBody" class="bodyTablaMovimientosInventario">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

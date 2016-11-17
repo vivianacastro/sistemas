@@ -122,6 +122,8 @@ $(document).ready(function () {
 			$('#option_crear_articulo').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario') >= 0)) {
 			$('#option_consultar_inventario').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_movimientos_inventario') >= 0)) {
+			$('#option_movimientos_inventario').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_articulo') >= 0)) {
 			$('#option_consultar_articulo').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_marca') >= 0)) {

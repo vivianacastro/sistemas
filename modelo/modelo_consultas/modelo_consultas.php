@@ -1579,6 +1579,37 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite consultar el inventario.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarMovimientosInventario($fecha_inicio,$fecha_fin){
+        $fecha_inicio = htmlspecialchars(trim($fecha_inicio));
+        $fecha_fin = htmlspecialchars(trim($fecha_fin));
+        $sql = "SELECT a.id_objeto AS id_articulo, b.nombre AS nombre_articulo, a.valor_nuevo, a.valor_antiguo, c.nombre AS nombre_marca, a.fecha, d.nombre_usuario AS usuario
+                FROM modificaciones a   JOIN articulo b ON a.id_objeto = b.id_articulo
+                                        JOIN marca_inventario c ON b.marca = c.id
+                                        JOIN usuarios d ON a.usuario = d.login
+                WHERE a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+                ORDER BY a.fecha;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Movimientos Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Movimientos Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite consultar un artículo en el inventario.
      * @return metadata con el resultado de la búsqueda.
     **/

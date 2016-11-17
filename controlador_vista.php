@@ -89,6 +89,7 @@ class controlador_vista
                 'CONSULTAR_MARCA' =>'index.php?action='.OPERATION_CONSULTAR_MARCA,
                 'CONSULTAR_PROVEEDOR' =>'index.php?action='.OPERATION_CONSULTAR_PROVEEDOR,
                 'CONSULTAR_INVENTARIO' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO,
+                'MOVIMIENTOS_INVENTARIO' =>'index.php?action='.OPERATION_MOVIMIENTOS_INVENTARIO,
                 'ARTICULOS_MAS_USADOS' =>'index.php?action='.OPERATION_ARTICULOS_MAS_USADOS,
                 'ARTICULOS_MENOS_USADOS' =>'index.php?action='.OPERATION_ARTICULOS_MENOS_USADOS,
 

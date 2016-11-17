@@ -274,6 +274,7 @@ $map = array(
         'inventario_consultar_marca' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marca'),
         'inventario_consultar_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedor'),
         'inventario_consultar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_inventario'),
+        'inventario_movimientos_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'movimientos_inventario'),
         'inventario_articulos_mas_usados' => array('controlador' =>'controlador_consultas', 'action' =>'articulos_mas_usados'),
         'inventario_articulos_menos_usados' => array('controlador' =>'controlador_consultas', 'action' =>'articulos_menos_usados'),
         //Acciones de creación
@@ -283,6 +284,7 @@ $map = array(
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
         'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),
+        'listar_movimientos_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_movimientos_inventario'),
         'consultar_articulos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos'),
         'consultar_articulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo_inventario'),
         'consultar_informacion_articulo_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_proveedor'),

@@ -503,7 +503,7 @@ html, body {
     text-align: center;
 }
 
-#tabla_aires>thead>tr>th, #tabla_usuarios>thead>tr>th, #tabla_inventario>thead>tr>th{
+#tabla_aires>thead>tr>th, #tabla_usuarios>thead>tr>th, #tabla_inventario>thead>tr>th, #tabla_movimientos_inventario>thead>tr>th{
     text-align: center;
 }
 
