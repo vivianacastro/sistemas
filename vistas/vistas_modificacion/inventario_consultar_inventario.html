@@ -12,7 +12,6 @@
                         <th>Cantidad</th>
                         <th>Marca</th>
                         <th>Cantidad M&iacute;nima</th>
-                        <!--<th>Proveedores</th>-->
                     </tr>
                 </thead>
                 <tbody id="tBody" class="bodyTabla">
@@ -25,31 +24,31 @@
         <input type='button' class='btn btn-primary btn-lg btn-formulario' name='visualizarArticulo' id='visualizarArticulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
     </div>
 </div>
-<div class='modal fade' role='dialog' id='divDialogModificarArticulo'>
+<div class='modal fade' role='dialog' id='divDialogPocosArticulos'>
     <div class='modal-dialog' id='divConsulta'>
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Ingresar o Extraer Art&iacute;culos del Inventario</h4>
+              <h4 class='modal-title'>Artículos con Cantidades por Debajo de la Cantidad Mínima</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
-                    <div id='informacionArticuloInventario'>
-                        <div id="articulo">
-                            <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
-                            <select class='form-control formulario nombre_articulo_anadir' name='nombre_articulo_anadir' id='nombre_articulo_anadir' required></select><br>
-                            <div class='div_izquierda'><b>Cantidad de Art&iacute;culos a A&ntilde;adir ó Eliminar<font color='red'>*</font>:</b></div>
-                            <input class='form-control formulario' type='number' name='cantidad' id='cantidad' min="1" value='' placeholder='Ej: 10' required/>
-                        </div>
-                        <div>
-                            <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_articulo' id='añadir_articulo' value='Ingresar Art&iacute;culo' title='Ingresar Art&iacute;culo'/>
-                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_articulo' id='eliminar_articulo' value='Extraer Art&iacute;culo' title='Extraer Art&iacute;culo' disabled/>
-                        </div>
+                    <div class="table-responsive">
+                        <table id="tabla_pocos_articulos" class="table table-bordered">
+                            <thead align="center">
+                                <tr>
+                                    <th>Id Art&iacute;culo</th>
+                                    <th>Art&iacute;culo</th>
+                                    <th>Cantidad</th>
+                                    <th>Marca</th>
+                                    <th>Cantidad M&iacute;nima</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tBody" class="bodyTablaPocosArticulos">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <div class='form_button modal-footer'>
-                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_articulos' id='guardar_articulos' value='Guardar Cambios' title='Guardar inventario'/>
             </div>
         </div>
     </div>

@@ -1061,19 +1061,29 @@ $(document).ready(function() {
             eliminarComponente("tr_tabla_inventario");
         }
         articulosCont = 0;
+        articulosPocasUnidades = 0;
         var data = listarInventario();
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
 				var nombre = record.nombre_articulo;
-				var cantidad = record.cantidad;
+				var cantidad = parseInt(record.cantidad);
 				var marca = record.nombre_marca;
-				var cantidad_minima = record.cantidad_minima;
-                $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+				var cantidad_minima = parseInt(record.cantidad_minima);
+                if (cantidad < cantidad_minima) {
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                    articulosPocasUnidades++;
+                }else{
+                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                }
 				articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
+        if (articulosPocasUnidades > 0) {
+            $("#divDialogPocosArticulos").modal("show");
+        }
     }
 
     /**

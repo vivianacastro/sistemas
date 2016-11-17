@@ -164,8 +164,12 @@ html, body {
 		border-color: #D51B23 !important;
 }
 
+.filaPocosArticulos {
+    color: red;
+}
+
 .filaSeleccionada {
-    color: white;
+    color: white !important;
     background-color: #D51B23;
 }
 
@@ -503,7 +507,7 @@ html, body {
     text-align: center;
 }
 
-#tabla_aires>thead>tr>th, #tabla_usuarios>thead>tr>th, #tabla_inventario>thead>tr>th, #tabla_movimientos_inventario>thead>tr>th{
+#tabla_aires>thead>tr>th, #tabla_usuarios>thead>tr>th, #tabla_inventario>thead>tr>th, #tabla_movimientos_inventario>thead>tr>th, #tabla_pocos_articulos>thead>tr>th{
     text-align: center;
 }
 
