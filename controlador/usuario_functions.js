@@ -419,9 +419,6 @@ $(document).ready(function() {
 				}else{
 					creacion_inventario = 'No';
 				}
-				if (perfil == 'normal') {
-					$("#permisos").show();
-				}
                 $("#tabla_usuarios").append("<tr id='tr_tabla_usuarios'><td>"+login+"</td><td>"+nombre+"</td><td>"+correo+"</td><td>"+telefono+"</td><td>"+extension+"</td><td>"+perfil+"</td><td>"+creacion_planta+"</td><td>"+creacion_aire+"</td><td>"+creacion_inventario+"</td><td>"+estado+"</td></tr>");
 				numeroUsuarios++;
             }
@@ -455,7 +452,6 @@ $(document).ready(function() {
 		var informacion = {};
 		informacion["usuario"] = usuario;
 		var data = informacionUsuario(informacion);
-		console.log(data);
 		$.each(data, function(index, record) {
             if($.isNumeric(index)) {
 				$("#nombre_usuario").val(record.nombre);
@@ -464,10 +460,15 @@ $(document).ready(function() {
 				$("#correo_usuario").attr('name',record.correo);
 				$("#telefono_usuario").val(record.telefono);
 				$("#extension_usuario").val(record.extension);
+				var perfil = record.perfil;
+				if (perfil == 'normal') {
+					console.log(perfil);
+					$("#permisos").show();
+				}
+				$("#tipo_usuario").val(perfil);
 				$("input[name=crear_planta][value="+record.creacion_planta+"]").prop('checked', true);
 				$("input[name=crear_aire][value="+record.creacion_aire+"]").prop('checked', true);
 				$("input[name=crear_inventario][value="+record.creacion_inventario+"]").prop('checked', true);
-				$("#tipo_usuario").val(record.perfil);
 				$("#estado").val(record.estado);
             }
         });
