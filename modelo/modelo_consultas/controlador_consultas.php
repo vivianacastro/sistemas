@@ -4061,10 +4061,10 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionMarca($info["id_articulo"]);
+            $data = $m->buscarInformacionMarca($info["nombre"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
-                    'id_marca' => $valor['id_marca'],
+                    'id_marca' => $valor['id'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -4087,7 +4087,7 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionProveedor($info["id_proveedor"]);
+            $data = $m->buscarInformacionProveedor($info["nombre"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_proveedor' => $valor['id_proveedor'],

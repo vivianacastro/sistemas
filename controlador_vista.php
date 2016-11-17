@@ -81,7 +81,6 @@ class controlador_vista
                 'AIRES_MAS_MANTENIMIENTOS' =>'index.php?action='.OPERATION_AIRES_MAS_MANTENIMIENTOS,
                 'MARCAS_MAS_MANTENIMIENTOS' =>'index.php?action='.OPERATION_MARCAS_MAS_MANTENIMIENTOS,
 
-                'ANADIR_ARTICULO' =>'index.php?action='.OPERATION_ANADIR_ARTICULO,
                 'CREAR_ARTICULO' =>'index.php?action='.OPERATION_CREAR_ARTICULO,
                 'CREAR_MARCA' =>'index.php?action='.OPERATION_CREAR_MARCA,
                 'CREAR_PROVEEDOR' =>'index.php?action='.OPERATION_CREAR_PROVEEDOR,

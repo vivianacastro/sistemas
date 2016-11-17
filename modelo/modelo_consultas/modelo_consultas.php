@@ -1092,12 +1092,12 @@ class modelo_consultas
 
     /**
      * Función que permite buscar la información de una marca.
-     * @param string $id_marca, id de la marca.
+     * @param string $nombre, nombre de la marca.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarInformacionMarca($id_marca){
-        $id_marca = htmlspecialchars(trim($id_marca));
-        $sql = "SELECT * FROM marca_inventario WHERE id = '".$id_marca."' ORDER BY nombre;";
+    public function buscarInformacionMarca($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$nombre."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Marca 1)";
@@ -1111,6 +1111,7 @@ class modelo_consultas
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información de la marca seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;
@@ -1118,12 +1119,12 @@ class modelo_consultas
 
     /**
      * Función que permite buscar la información de un proveedor.
-     * @param string $id_proveedor, id del proveedor.
+     * @param string $nombre, nombre del proveedor.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarInformacionProveedor($id_proveedor){
-        $id_proveedor = htmlspecialchars(trim($id_proveedor));
-        $sql = "SELECT * FROM marca_inventario WHERE id_proveedor = '".$id_proveedor."' ORDER BY nombre;";
+    public function buscarInformacionProveedor($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Proveedor 1)";
@@ -1137,6 +1138,7 @@ class modelo_consultas
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Información del proveedor seleccionado";
+                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

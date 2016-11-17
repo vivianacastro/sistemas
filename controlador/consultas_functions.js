@@ -5790,6 +5790,7 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
 				$("#nombre_articulo").val(record.nombre);
+                $("#nombre_articulo").attr('name',record.nombre);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
 				$("#cantidad_minima").val(record.cantidad_minima);
@@ -5909,6 +5910,7 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
 				$("#nombre_articulo").val(record.nombre);
+                $("#nombre_articulo").attr('name',record.nombre);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
 				$("#cantidad_minima").val(record.cantidad_minima);
@@ -6025,45 +6027,54 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#visualizarMarcaInventario").click(function (e){
-        var element = $("#tabla_inventario").find(".filaSeleccionada");
-		var articulo = element.html();
-		articulo = articulo.split("</td>");
-		articulo = articulo[0].substring(4);
+        var nombreMarca = $("#nombre_marca_search").val();
 		var informacion = {};
-		informacion["id_articulo"] = articulo;
-        var data = consultarInformacionObjeto("articulo",informacion);
-        var archivos = consultarArchivosObjeto("articulo",informacion);
-        var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
-        var fotos =
-        proveedoresCont = 0;
+		informacion["nombre"] = nombreMarca;
+        var data = consultarInformacionObjeto("marca",informacion);
+        marcasCont = 0;
 		console.log(data);
-        console.log(dataProveedor);
 		$.each(data, function(index, record) {
             if($.isNumeric(index)) {
-				$("#nombre_articulo").val(record.nombre);
-				$("#marca").val(record.id_marca);
-                $("#marca").attr('name',record.id_marca);
-				$("#cantidad_minima").val(record.cantidad_minima);
+				$("#nombre_marca").val(record.nombre);
+                $("#nombre_marca").attr('name',record.nombre);
+                marcasCont++;
             }
         });
-        $.each(dataProveedor, function(index, record) {
+        if (marcasCont > 0) {
+            $("#divDialogConsulta").modal('show');
+        }else{
+            alert("No se encontró ninguna marca con el nombre ingresado");
+            $("#nombre_marca_search").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarProveedor y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarProveedor").click(function (e){
+        var nombreProveedor = $("#nombre_proveedor_search").val();
+		var informacion = {};
+		informacion["nombre"] = nombreProveedor;
+        var data = consultarInformacionObjeto("proveedor",informacion);
+        proveedorCont = 0;
+		console.log(data);
+		$.each(data, function(index, record) {
             if($.isNumeric(index)) {
-                if (proveedoresCont == 0) {
-                    $("#proveedor_articulo").val(record.id_proveedor);
-                    $("#proveedor_articulo").attr('name',record.id_proveedor);
-                }else{
-                    var componente = '<div id="proveedor'+proveedoresCont+'">'
-                    +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
-                    +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
-                    +'</div>';
-                    añadirComponente("proveedor",componente);
-                    actualizarSelectProveedores(proveedoresCont);
-                    $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
-                    $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
-                }
-                proveedoresCont++;
+				$("#nombre_proveedor").val(record.nombre);
+                $("#nombre_proveedor").attr('name',record.nombre);
+                $("#direccion").val(record.direccion);
+                $("#telefono").val(record.telefono);
+                $("#nit").val(record.nit);
+                proveedorCont++;
             }
         });
+        if (proveedorCont > 0) {
+            $("#divDialogConsulta").modal('show');
+        }else{
+            alert("No se encontró ningun proveedor con el nombre ingresado");
+            $("#nombre_proveedor_search").focus();
+        }
     });
 
     /**
@@ -6211,7 +6222,12 @@ $(document).ready(function() {
         $("#nombre_articulo").attr('disabled',true);
         $("#marca").attr('disabled',true);
         $("#cantidad_minima").attr('disabled',true);
+        $("#nombre_marca").attr('disabled',true);
         $("#proveedor_articulo").attr('disabled',true);
+        $("#nombre_proveedor").attr('disabled',true);
+        $("#direccion").attr('disabled',true);
+        $("#telefono").attr('disabled',true);
+        $("#nit").attr('disabled',true);
         $("#modificar_sede").show();
         $("#modificar_campus").show();
         $("#modificar_cancha").show();
@@ -6234,6 +6250,8 @@ $(document).ready(function() {
         $("#modificar_tipo_aire").show();
         $("#modificar_tecnologia_aire").show();
         $("#modificar_articulo").show();
+        $("#modificar_marca_inventario").show();
+        $("#modificar_proveedor").show();
         $("#guardar_modificaciones_sede").hide();
         $("#guardar_modificaciones_campus").hide();
         $("#guardar_modificaciones_cancha").hide();
@@ -6260,12 +6278,15 @@ $(document).ready(function() {
         $("#botones_lavamanos").hide();
         $("#guardar_archivos").hide();
         $("#botones_orinal").hide();
+        $("#botones_proveedor").hide();
         $("#guardar_modificaciones_aire").hide();
         $("#guardar_modificaciones_capacidad_aire").hide();
         $("#guardar_modificaciones_marca_aire").hide();
         $("#guardar_modificaciones_tipo_aire").hide();
         $("#guardar_modificaciones_tecnologia_aire").hide();
         $("#guardar_modificaciones_articulo").hide();
+        $("#guardar_modificaciones_marca_inventario").hide();
+        $("#guardar_modificaciones_proveedor").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
         eliminarComponente("informacion2");
@@ -6936,7 +6957,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón modificar_mantenimiento_aire y se
+     * Se captura el evento cuando se da click en el botón modificar_articulo y se
      * realiza la operacion correspondiente.
     **/
     $("#modificar_articulo").click(function (e){
@@ -6944,7 +6965,15 @@ $(document).ready(function() {
         $("#marca").removeAttr("disabled");
         $("#cantidad_minima").removeAttr("disabled");
         $("#proveedor_articulo").removeAttr("disabled");
+        for (var i = 1; i < proveedoresCont; i++) {
+            $("#proveedor_articulo"+i).removeAttr("disabled");
+        }
+        $("#enlace_fotos").show();
+        $("#inputFileFotos").show();
+        $("#botones_proveedor").show();
+        $("#fotos").hide();
         $("#modificar_articulo").hide();
+        $("#guardar_archivos").hide();
         $("#guardar_modificaciones_articulo").show();
         $('#divDialogConsulta').scrollTop(0);
     });
@@ -6956,6 +6985,31 @@ $(document).ready(function() {
     $("#modificar_cantidad_articulos").click(function (e){
         actualizarSelectArticulo(anadirArticulosCont,"nombre_articulo_anadir");
         $("#divDialogModificarArticulo").modal('show');
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_marca_inventario y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_marca_inventario").click(function (e){
+        $("#nombre_marca").removeAttr("disabled");
+        $("#modificar_marca_inventario").hide();
+        $("#guardar_modificaciones_marca_inventario").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_proveedor y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_proveedor").click(function (e){
+        $("#nombre_proveedor").removeAttr("disabled");
+        $("#direccion").removeAttr("disabled");
+        $("#telefono").removeAttr("disabled");
+        $("#nit").removeAttr("disabled");
+        $("#modificar_proveedor").hide();
+        $("#guardar_modificaciones_proveedor").show();
+        $('#divDialogConsulta').scrollTop(0);
     });
 
     /**
@@ -9114,7 +9168,7 @@ $(document).ready(function() {
             proveedoresCont = 1;
         }
         var componente = '<div id="proveedor'+proveedoresCont+'">'
-        +'<div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
+        +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
         +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
@@ -12222,6 +12276,32 @@ $(document).ready(function() {
                     $("#visualizarArticulo").attr('disabled',true);
                     $("#divDialogModificarArticulo").modal('hide');
                 }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_marca_inventario y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_modificaciones_marca_inventario").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la marca?");
+        if (confirmacion) {
+            var informacion = {};
+            var nombreMarca = limpiarCadena($("#nombre_marca").val());
+            var nombreAnterior = limpiarCadena($("#nombre_marca").attr("name"));
+            if (!validarCadena(nombreMarca)) {
+                alert("ERROR. Ingrese el nuevo nombre de la marca");
+                $("#nombre_marca").focus();
+            }
+            informacion["nombre"] = nombreMarca;
+            informacion["nombre_anterior"] = nombreAnterior;
+            console.log(informacion);
+            var data = modificarObjeto("marca_inventario",informacion);
+            alert(data.mensaje);
+            if (data.verificar) {
+                $("#nombre_marca_search").val("");
+                $("#divDialogConsulta").modal('hide');
             }
         }
     });
