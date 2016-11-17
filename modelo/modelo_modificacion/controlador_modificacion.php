@@ -796,6 +796,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $proveedor = $info['proveedor_eliminar'];
+            $verificar = true;
             for ($i=0; $i<count($proveedor); $i++) {
                 $verificar = $m->eliminarArticuloProveedor($info['id_articulo'],$proveedor[$i]);
             }
@@ -1138,6 +1139,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $archivo = $info['nombre'];
+            $verificar = true;
             for ($i=0;$i<count($archivo); $i++) {
                 $verificar = $m->eliminarFotoArticulo($info['id_articulo'],$archivo[$i]);
             }

@@ -5790,7 +5790,7 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
 				$("#nombre_articulo").val(record.nombre);
-                $("#nombre_articulo").attr('name',record.nombre);
+                $("#nombre_articulo").attr('name',idArticulo);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
 				$("#cantidad_minima").val(record.cantidad_minima);
@@ -5820,6 +5820,9 @@ $(document).ready(function() {
                 proveedoresCont++;
             }
         });
+        if (proveedoresCont > 1) {
+            $("#eliminar_proveedor").removeAttr('disabled');
+        }
         $("#myCarousel").hide();
         for (var i = 0; i < numeroFotos; i++) {
             eliminarComponente("slide_carrusel");
@@ -5900,7 +5903,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#visualizarArticuloNombre").click(function (e){
-        var articulo = $("#nombre_articulo_search").val();
+        var articulo = limpiarCadena($("#nombre_articulo_search").val());
         var informacion = {};
 		informacion["nombre_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo_nombre",informacion);
@@ -5910,7 +5913,7 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
 				$("#nombre_articulo").val(record.nombre);
-                $("#nombre_articulo").attr('name',record.nombre);
+                $("#nombre_articulo").attr('name',idArticulo);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
 				$("#cantidad_minima").val(record.cantidad_minima);
@@ -5943,6 +5946,9 @@ $(document).ready(function() {
                     proveedoresCont++;
                 }
             });
+            if (proveedoresCont > 1) {
+                $("#eliminar_proveedor").removeAttr('disabled');
+            }
             $("#myCarousel").hide();
             for (var i = 0; i < numeroFotos; i++) {
                 eliminarComponente("slide_carrusel");
@@ -6027,7 +6033,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#visualizarMarcaInventario").click(function (e){
-        var nombreMarca = $("#nombre_marca_search").val();
+        var nombreMarca = limpiarCadena($("#nombre_marca_search").val());
 		var informacion = {};
 		informacion["nombre"] = nombreMarca;
         var data = consultarInformacionObjeto("marca",informacion);
@@ -6053,7 +6059,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#visualizarProveedor").click(function (e){
-        var nombreProveedor = $("#nombre_proveedor_search").val();
+        var nombreProveedor = limpiarCadena($("#nombre_proveedor_search").val());
 		var informacion = {};
 		informacion["nombre"] = nombreProveedor;
         var data = consultarInformacionObjeto("proveedor",informacion);
@@ -9169,7 +9175,7 @@ $(document).ready(function() {
         }
         var componente = '<div id="proveedor'+proveedoresCont+'">'
         +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
-        +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
+        +'<select class="form-control formulario" name="" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
         actualizarSelectProveedores(proveedoresCont);
@@ -9447,6 +9453,9 @@ $(document).ready(function() {
                 if(URLactual['href'].indexOf('consultar_aire') >= 0){
                     tipoObjeto = "aire";
                     informacion["id_aire"] = $("#id_aire").val();
+                }else if(URLactual['href'].indexOf('consultar_inventario') >= 0 || URLactual['href'].indexOf('consultar_articulo') >= 0){
+                    tipoObjeto = "articulo";
+                    informacion["id_articulo"] = $("#nombre_articulo").attr("name");
                 }
                 arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
                 var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
@@ -9526,7 +9535,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (nombreCampus == "") {
                 alert("ERROR. Ingrese el nombre del campus");
                 $("#nombre_campus").focus();
@@ -9668,7 +9677,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (usoCancha == "") {
                 alert("ERROR. Ingrese el uso de la cancha");
                 $("#uso_cancha").focus();
@@ -9834,7 +9843,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10041,7 +10050,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10189,7 +10198,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (piso == 'sotano') {
                 piso = '0';
             }else if (piso == 'terraza') {
@@ -10385,7 +10394,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10527,7 +10536,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10669,7 +10678,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10838,7 +10847,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -10982,7 +10991,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -11124,7 +11133,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (aux <= 20 || aux2 <= 5) {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
@@ -11318,7 +11327,7 @@ $(document).ready(function() {
             var planos = document.getElementById("planos[]");
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
-            var aux2 = (numeroFotos-1) + planos.files.length;
+            var aux2 = (numeroPlanos-1) + planos.files.length;
             if (piso == 'sotano') {
                 piso = '0';
             }
@@ -12281,6 +12290,121 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_articulo y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_modificaciones_articulo").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del artículo?");
+        if (confirmacion) {
+            var informacion = {};
+            var idArticulo = $("#nombre_articulo").attr("name");
+            var nombre = limpiarCadena($("#nombre_articulo").val());
+            var marca = $("#marca").val();
+            var cantidadMinima = $("#cantidad_minima").val();
+            var proveedor = [];
+            var proveedorAnterior = [];
+            var fotos = document.getElementById("fotos[]");
+            var aux = (numeroFotos-1) + fotos.files.length;
+            var error = false;
+            if (aux <= 20) {
+                if (!validarCadena(nombre)) {
+                    alert("ERROR. Ingrese el nuevo nombre del artículo");
+                    $("#nombre_articulo").focus();
+                }else if (!validarCadena(marca)) {
+                    alert("ERROR. Seleccione la marca del artículo");
+                    $("#marca").focus();
+                }else if (!validarCadena(cantidadMinima)) {
+                    alert("ERROR. Seleccione la cantidad mínima del artículo");
+                    $("#cantidad_minima").focus();
+                }else{
+                    for (var i=0;i<proveedoresCont;i++) {
+                        if (i==0) {
+                            proveedor[i] = $("#proveedor_articulo").val();
+                            proveedorAnterior[i] = $("#proveedor_articulo").attr("name");
+                        }else{
+                            if (proveedor.indexOf($("#proveedor_articulo"+i).val()) == -1) {
+                                proveedor[i] = $("#proveedor_articulo"+i).val();
+                                proveedorAnterior[i] = $("#proveedor_articulo"+i).attr("name");
+                            }else{
+                                alert("ERROR. Hay uno o más proveedores repetidos");
+                                $("#proveedor_articulo"+i).focus();
+                                error = true;
+                                break;
+                            }
+                        }
+                    }
+                    var arregloFotos = new FormData();
+                    var info = {};
+                    console.log(fotos.files);
+                    for (var i=0;i<fotos.files.length;i++) {
+                        var foto = fotos.files[i];
+                        if (foto.size > 2000000) {
+                            alert('La foto: "'+foto.name+"' es muy grande");
+                        }else{
+                            var nombreArchivo = foto.name;
+                            if(nombreArchivo.length > 50){
+                                nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
+                            }
+                            console.log(nombreArchivo);
+                            arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                        }
+                    }
+                    if (!error) {
+                        var arregloFotosEliminar = {};
+                        informacion["id_articulo"] = idArticulo;
+                        informacion["nombre"] = nombre;
+                        informacion["marca"] = marca;
+                        informacion["cantidad_minima"] = cantidadMinima;
+                        informacion["proveedor"] = proveedor;
+                        informacion["proveedor_anterior"] = proveedorAnterior;
+                        info['id_articulo'] = idArticulo;
+                        info["proveedor_eliminar"] = nombreProveedor;
+                        arregloFotosEliminar["id_articulo"] = idArticulo;
+                        arregloFotosEliminar["nombre"] = fotosEliminar;
+                        arregloFotosEliminar["tipo"] = "foto";
+                        arregloFotos.append("articulo",JSON.stringify(info));
+                        var data = modificarObjeto("articulo",informacion);
+                        var dataEliminarFotos = eliminarObjeto("foto_articulo",arregloFotosEliminar);
+                        var dataEliminarProveedor = eliminarObjeto("articulo_proveedor",info);
+                        var resultadoFotos = guardarFotos("articulo",arregloFotos);
+                        console.log(informacion);
+                        console.log(info);
+                        console.log(data);
+                        console.log(dataEliminarFotos);
+                        console.log(dataEliminarProveedor);
+                        console.log(resultadoFotos);
+                        var mensaje = "";
+                        if (resultadoFotos.length != 0) {
+                            for (var i=0;i<resultadoFotos.mensaje.length;i++) {
+                                if (!resultadoFotos.verificar[i]) {
+                                    if (mensaje == "") {
+                                        mensaje += resultadoFotos.mensaje[i];
+                                    }else{
+                                        mensaje += "\n" + resultadoFotos.mensaje[i];
+                                    }
+                                }
+                            }
+                        }
+                        if (mensaje.substring(0,1) != "") {
+                            alert(mensaje);
+                        }else{
+                            alert(data.mensaje);
+                            if (data.verificar) {
+                                $("#nombre_articulo_search").val("");
+                                $("#divDialogConsulta").modal('hide');
+                                fotos.value = "";
+                            }
+                        }
+                    }
+                }
+            }else{
+                alert("ERROR. El número máximo de fotos es 20");
+                fotos.focus();
+            }
+        }
+    });
+
+    /**
      * Se captura el evento cuando de dar click en el botón guardar_modificaciones_marca_inventario y se
      * realiza la operacion correspondiente.
     **/
@@ -12288,20 +12412,55 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Guardar la información de la marca?");
         if (confirmacion) {
             var informacion = {};
-            var nombreMarca = limpiarCadena($("#nombre_marca").val());
+            var nombre = limpiarCadena($("#nombre_marca").val());
             var nombreAnterior = limpiarCadena($("#nombre_marca").attr("name"));
             if (!validarCadena(nombreMarca)) {
                 alert("ERROR. Ingrese el nuevo nombre de la marca");
                 $("#nombre_marca").focus();
+            }else{
+                informacion["nombre"] = nombre;
+                informacion["nombre_anterior"] = nombreAnterior;
+                console.log(informacion);
+                var data = modificarObjeto("marca_inventario",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_marca_search").val("");
+                    $("#divDialogConsulta").modal('hide');
+                }
             }
-            informacion["nombre"] = nombreMarca;
-            informacion["nombre_anterior"] = nombreAnterior;
-            console.log(informacion);
-            var data = modificarObjeto("marca_inventario",informacion);
-            alert(data.mensaje);
-            if (data.verificar) {
-                $("#nombre_marca_search").val("");
-                $("#divDialogConsulta").modal('hide');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_proveedor y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_modificaciones_proveedor").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información del proveedor?");
+        if (confirmacion) {
+            var informacion = {};
+            var nombre = limpiarCadena($("#nombre_proveedor").val());
+            var nombreAnterior = limpiarCadena($("#nombre_proveedor").attr("name"));
+            var direccion = limpiarCadena($("#direccion").val());
+            var telefono = $("#telefono").val();
+            var nit = limpiarCadena($("#nit").val());
+            if (!validarCadena(nombre)) {
+                alert("ERROR. Ingrese el nuevo nombre del proveedor");
+                $("#nombre_proveedor").focus();
+            }else{
+                informacion["nombre"] = nombre;
+                informacion["nombre_anterior"] = nombreAnterior;
+                informacion["direccion"] = direccion;
+                informacion["telefono"] = telefono;
+                informacion["nit"] = nit;
+                console.log(informacion);
+                var data = modificarObjeto("proveedor",informacion);
+                console.log(data);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_proveedor_search").val("");
+                    $("#divDialogConsulta").modal('hide');
+                }
             }
         }
     });

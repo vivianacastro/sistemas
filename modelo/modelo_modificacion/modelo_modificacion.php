@@ -2668,7 +2668,7 @@ class modelo_modificacion {
         $marca = htmlspecialchars(trim($marca));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
         $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
-        $data = $this->consultarCampoMarcaAire($nombre_anterior);
+        $data = $this->consultarCampoArticulo($id_articulo);
         foreach ($data as $clave => $valor) {
             $id_articulo_anterior = $valor['id_articulo'];
             $nombre_anterior = $valor['nombre'];
@@ -2690,11 +2690,11 @@ class modelo_modificacion {
                 $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
                 $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
                 $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
+                $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
+                $GLOBALS['sql'] = $sql;
                 for ($i=0;$i<count($proveedor);$i++) {
                     $this->modificarProveedorArticulo($id_articulo,$proveedor[$i],$proveedor_anterior[$i]);
                 }
-                $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
                 return true;
             }
         }
@@ -2711,7 +2711,11 @@ class modelo_modificacion {
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $proveedor = htmlspecialchars(trim($proveedor));
         $proveedor_anterior = htmlspecialchars(trim($proveedor_anterior));
-        $sql = "UPDATE articulo_proveedor SET id_proveedor = '".$proveedor."' WHERE id_articulo = '".$id_articulo."' AND id_proveedor = '".$proveedor_anterior."';";
+        if (strcasecmp($proveedor_anterior,"") != 0) {
+            $sql = "UPDATE articulo_proveedor SET id_proveedor = '".$proveedor."' WHERE id_articulo = '".$id_articulo."' AND id_proveedor = '".$proveedor_anterior."';";
+        }else{
+            $sql = "INSERT INTO articulo_proveedor (id_articulo,id_proveedor) VALUES ('".$id_articulo."','".$proveedor."');";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo Proveedor 1)";
@@ -2777,10 +2781,10 @@ class modelo_modificacion {
     public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE proveedor SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoProveedor($nombre_anterior);
         foreach ($data as $clave => $valor) {
-            $id = $valor['id'];
+            $id = $valor['id_proveedor'];
             $nit_anterior = $valor['nit'];
             $direccion_anterior = $valor['direccion'];
             $telefono_anterior = $valor['telefono'];
@@ -3162,6 +3166,29 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Aire 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar un campo de la tabla artículo.
+     * @param string $id, id del artículo.
+     * @return array
+    **/
+    public function consultarCampoArticulo($id){
+        $id = htmlspecialchars(trim($id));
+        $sql = "SELECT * FROM articulo WHERE id_articulo = '".$id."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Artículo 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();
