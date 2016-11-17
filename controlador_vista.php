@@ -162,6 +162,8 @@ class controlador_vista
             $texto = 'Inventario';
         }else if(strcmp($modulo,'mod_usuarios') == 0 ){
             $texto = 'Usuarios';
+        }else if(strcmp($modulo,'mod_usuario') == 0 ){
+            $texto = 'Usuario';
         }else{
             $texto = '';
         }

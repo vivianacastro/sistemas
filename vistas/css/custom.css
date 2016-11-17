@@ -72,10 +72,10 @@ html, body {
 
 .btn-lg{
     text-align: center;
-		border-radius: 10px 10px 10px 10px;
-		-moz-border-radius: 10px 10px 10px 10px;
-		-webkit-border-radius: 10px 10px 10px 10px;
-		border: 0px solid #000000;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
 }
 
 .btn-primary{
@@ -111,12 +111,12 @@ html, body {
 }
 
 .carousel-indicators .active{
-		background-color: #D51B23;
+	background-color: #D51B23;
     border-color: transparent;
 }
 
 .carousel-indicators li{
-		border: 1px solid #D51B23;
+	border: 1px solid #D51B23;
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
@@ -134,19 +134,19 @@ html, body {
 }
 
 .col-xs-5{
-		width: 40.66666667%;
+	width: 40.66666667%;
 }
 
 .col-xs-7{
-		width: 56.33333333%;
+	width: 56.33333333%;
 }
 
 .copyright{
-		padding: 2% 0% 0%;
+	padding: 2% 0% 0%;
 }
 
 .div_input_inicio_sesion{
-		padding-top: 4%;
+	padding-top: 4%;
 }
 
 .div_izquierda{
@@ -155,13 +155,13 @@ html, body {
 }
 
 .dropdown-toggle{
-		color: white !important;
-		text-decoration: none !important;
+	color: white !important;
+	text-decoration: none !important;
 }
 
 .dropdown-toggle:focus, .dropdown-toggle:hover, .dropdown-toggle:active{
-		background-color: #e15661 !important;
-		border-color: #D51B23 !important;
+	background-color: #e15661 !important;
+	border-color: #D51B23 !important;
 }
 
 .filaPocosArticulos {
@@ -206,9 +206,9 @@ html, body {
 }
 
 .form-control{
-		border-radius: 10px 10px 10px 10px;
-		-moz-border-radius: 10px 10px 10px 10px;
-		-webkit-border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
 }
 
 .form-group{
@@ -221,8 +221,8 @@ html, body {
 }
 
 .image-footer{
-		width: 100%;
-		margin-left: auto;
+	width: 100%;
+	margin-left: auto;
     margin-right: auto;
 }
 
@@ -280,7 +280,7 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-		height: 500px !important;
+	height: 500px !important;
 }
 
 .mapa_modal{
@@ -304,17 +304,17 @@ html, body {
 }
 
 .modal-footer{
-		text-align: center;
+	text-align: center;
 }
 
 .modulo_actual{
-		color: white;
-		padding: 15% 0% 0%;
+	color: white;
+	padding: 15% 0% 0%;
 }
 
 .navbar-toggle btn-template-main collapsed{
-		background-color: #D51B23;
-		border-color: white;
+	background-color: #D51B23;
+	border-color: white;
 }
 
 .navbar ul.nav > li.active > a, .navbar ul.nav > li.open > a{
@@ -538,7 +538,7 @@ html, body {
 /* Smaller than standard 960 (devices and browsers) */
 @media screen and (max-width:1200px) {
 	.img_boton{
-    		width: 25%;
+		width: 25%;
     }
 
     .modal-dialog{
@@ -589,6 +589,15 @@ html, body {
        width: 100%;
     }
 
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+        color: white;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus{
+        color: white;
+        font-weight: bold;
+    }
+
     .navbar .yamm-content h5{
      border-bottom: double 2px white;
      color: white;
@@ -600,6 +609,18 @@ html, body {
 
     .texto-inicio-sesion{
        font-size: x-small;
+    }
+
+    #barra_usuario{
+    	font-size: xx-small;
+    }
+
+    #barra_usuario[aria-expanded="true"] {
+        font-size: x-small;
+    }
+
+    #barra_usuario:hover{
+        font-size: x-small;
     }
 
     #divTimeOut{

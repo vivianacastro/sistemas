@@ -16,7 +16,7 @@ class controlador_usuario {
             'mensaje' => 'Crear Usuario',
         );
         $v = new controlador_vista();
-        $v->retornar_vista(USUARIO, USUARIO, CREAR_USUARIO, $data);
+        $v->retornar_vista(MOD_USUARIO, USUARIO, CREAR_USUARIO, $data);
     }
 
     /**
@@ -30,7 +30,7 @@ class controlador_usuario {
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["perfil"],"admin") == 0) {
-            $v->retornar_vista(USUARIO, USUARIO, CREAR_USUARIO_ADMIN, $data);
+            $v->retornar_vista(MOD_USUARIOS, USUARIO, CREAR_USUARIO_ADMIN, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -46,7 +46,7 @@ class controlador_usuario {
             'mensaje' => 'Reestablecer Contraseña',
         );
         $v = new controlador_vista();
-        $v->retornar_vista(USUARIO, USUARIO, OLVIDO_CONTRASENIA, $data);
+        $v->retornar_vista(MOD_USUARIO, USUARIO, OLVIDO_CONTRASENIA, $data);
     }
 
     /**
@@ -60,7 +60,7 @@ class controlador_usuario {
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["perfil"],"admin") == 0) {
-            $v->retornar_vista(USUARIO, USUARIO, LISTAR_USUARIOS_ADMIN, $data);
+            $v->retornar_vista(MOD_USUARIOS, USUARIO, LISTAR_USUARIOS_ADMIN, $data);
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
@@ -77,7 +77,7 @@ class controlador_usuario {
             'mensaje' => 'Información de Usuario',
         );
         $v = new controlador_vista();
-        $v->retornar_vista(USUARIO, USUARIO, INFORMACION_USUARIO, $data);
+        $v->retornar_vista(MOD_USUARIO, USUARIO, INFORMACION_USUARIO, $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class controlador_usuario {
             'mensaje' => 'Modificar Información de Usuario',
         );
         $v = new controlador_vista();
-        $v->retornar_vista(USUARIO, USUARIO, MODIFICAR_INFORMACION_USUARIO, $data);
+        $v->retornar_vista(MOD_USUARIO, USUARIO, MODIFICAR_INFORMACION_USUARIO, $data);
     }
 
     /**
@@ -103,7 +103,7 @@ class controlador_usuario {
             'mensaje' => 'Cambiar Contraseña',
         );
         $v = new controlador_vista();
-        $v->retornar_vista(USUARIO, USUARIO, CAMBIAR_CONTRASENIA, $data);
+        $v->retornar_vista(MOD_USUARIO, USUARIO, CAMBIAR_CONTRASENIA, $data);
     }
 
     /**

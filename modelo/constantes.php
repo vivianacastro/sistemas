@@ -31,6 +31,7 @@ const MOD_PLANTA = 'mod_planta';
 const MOD_INVENTARIO = 'mod_inventario';
 const MOD_AIRES = 'mod_aires';
 const MOD_USUARIOS = 'mod_usuarios';
+const MOD_USUARIO = 'mod_usuario';
 const OPERATION_MOD_PLANTA = 'modulo_planta';
 const OPERATION_MOD_INVENTARIO = 'modulo_inventario';
 const OPERATION_MOD_AIRES = 'modulo_aires';
