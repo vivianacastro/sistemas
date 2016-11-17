@@ -5685,7 +5685,7 @@ $(document).ready(function() {
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("marcas_mas_mantenimientos",informacion);
         var total = 0;
-        var tipo = "Marcas de Aires Acondicionados con Más Ordenes Mantenimiento";
+        var tipo = "Marcas de Aires Acondicionados con Más Órdenes Mantenimiento";
         var tituloX = "Marca de Aires Acondicionados";
         var subTipo;
         if (nombreSede == 'TODAS') {
@@ -5723,7 +5723,7 @@ $(document).ready(function() {
             var titulo = tipo;
             var subtitulo = subTipo;
             var xTitulo = tituloX;
-            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
+            var yTitulo = 'Número de Órdenes (Total: '+total+')';
             generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
             $("#divDialogConsulta").modal('show');
         }
@@ -5751,7 +5751,7 @@ $(document).ready(function() {
         var data = buscarObjetos("aires_mas_mantenimientos",informacion);
         console.log(data);
         var total = 0;
-        var tipo = "Aires Acondicionados con Más Ordenes Mantenimiento";
+        var tipo = "Aires Acondicionados con Más Órdenes Mantenimiento";
         var tituloX = "Aires Acondicionados";
         var subTipo;
         if (nombreSede == 'TODAS') {
@@ -5789,7 +5789,7 @@ $(document).ready(function() {
             var titulo = tipo;
             var subtitulo = subTipo;
             var xTitulo = tituloX;
-            var yTitulo = 'Número de Aires Acondicionados (Total: '+total+')';
+            var yTitulo = 'Número de Órdenes (Total: '+total+')';
             generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
             $("#divDialogConsulta").modal('show');
         }
