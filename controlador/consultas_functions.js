@@ -2082,17 +2082,23 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del input fecha_inicio.
     **/
     $("#fecha_inicio").change(function (e) {
-        if(URLactual['href'].indexOf('movimientos_inventario') >= 0){
+        if(URLactual['href'].indexOf('movimientos_inventario') >= 0 || URLactual['href'].indexOf('articulos_mas_usados') >= 0 || URLactual['href'].indexOf('articulos_menos_usados') >= 0){
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
                 if (fechaInicio > fechaFin) {
                     $('#consultarMovimientosInventario').attr('disabled',true);
+                    $('#visualizarArticulosMasUsados').attr('disabled',true);
+                    $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
                     $('#consultarMovimientosInventario').removeAttr("disabled");
+                    $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
+                    $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
             }else{
                 $('#consultarMovimientosInventario').attr('disabled',true);
+                $('#visualizarArticulosMasUsados').attr('disabled',true);
+                $('#visualizarArticulosMenosUsados').attr('disabled',true);
             }
         }else{
             var sede = $("#sede_search").val();
@@ -2137,17 +2143,23 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del input fecha_fin.
     **/
     $("#fecha_fin").change(function (e) {
-        if(URLactual['href'].indexOf('movimientos_inventario') >= 0){
+        if(URLactual['href'].indexOf('movimientos_inventario') >= 0 || URLactual['href'].indexOf('articulos_mas_usados') >= 0 || URLactual['href'].indexOf('articulos_menos_usados') >= 0){
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
                 if (fechaInicio > fechaFin) {
                     $('#consultarMovimientosInventario').attr('disabled',true);
+                    $('#visualizarArticulosMasUsados').attr('disabled',true);
+                    $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
                     $('#consultarMovimientosInventario').removeAttr("disabled");
+                    $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
+                    $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
             }else{
                 $('#consultarMovimientosInventario').attr('disabled',true);
+                $('#visualizarArticulosMasUsados').attr('disabled',true);
+                $('#visualizarArticulosMenosUsados').attr('disabled',true);
             }
         }else{
             var sede = $("#sede_search").val();
@@ -5670,7 +5682,7 @@ $(document).ready(function() {
         informacion['id_campus'] = idCampus;
         informacion['id_edificio'] = idEdificio;
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
-        informacion['fecha_fin'] = fechaFin + "  00:00:00";
+        informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("marcas_mas_mantenimientos",informacion);
         var total = 0;
         var tipo = "Marcas de Aires Acondicionados con Más Ordenes Mantenimiento";
@@ -5735,7 +5747,7 @@ $(document).ready(function() {
         informacion['id_campus'] = idCampus;
         informacion['id_edificio'] = idEdificio;
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
-        informacion['fecha_fin'] = fechaFin + "  00:00:00";
+        informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("aires_mas_mantenimientos",informacion);
         console.log(data);
         var total = 0;
@@ -6090,6 +6102,92 @@ $(document).ready(function() {
         }else{
             alert("No se encontró ningun proveedor con el nombre ingresado");
             $("#nombre_proveedor_search").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarArticulosMasUsados y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarArticulosMasUsados").click(function (e){
+        var informacion =  {};
+        var fechaInicio = $("#fecha_inicio").val();
+        var fechaFin = $("#fecha_fin").val();
+        informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
+        informacion['fecha_fin'] = fechaFin + "  23:59:59";
+        var data = buscarObjetos("articulos_mas_usados",informacion);
+        console.log(data);
+        var total = 0;
+        var tipo = "Artículos Más Usados";
+        var tituloX = "Artículos";
+        var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.nombre);
+                informacion.push(record.suma);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total += aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
+            }
+            var titulo = tipo;
+            var subtitulo = subTipo;
+            var xTitulo = tituloX;
+            var yTitulo = 'Número de Artículos (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divDialogConsulta").modal('show');
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarArticulosMenosUsados y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarArticulosMenosUsados").click(function (e){
+        var informacion =  {};
+        var fechaInicio = $("#fecha_inicio").val();
+        var fechaFin = $("#fecha_fin").val();
+        informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
+        informacion['fecha_fin'] = fechaFin + "  23:59:59";
+        var data = buscarObjetos("articulos_menos_usados",informacion);
+        console.log(data);
+        var total = 0;
+        var tipo = "Artículos Menos Usados";
+        var tituloX = "Artículos";
+        var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
+        label = [], informacion = [];
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                label.push(record.nombre);
+                informacion.push(record.suma);
+            }
+        });
+        if(data != null){
+            var aux;
+            var categorias = [], info = [];
+            for (var i = 0; i < informacion.length; i++) {
+                if (!isNaN(informacion[i])) {
+                    aux = parseInt(informacion[i]);
+                    total += aux;
+                    categorias.push(label[i]);
+                    info.push(parseInt(informacion[i]));
+                }
+            }
+            var titulo = tipo;
+            var subtitulo = subTipo;
+            var xTitulo = tituloX;
+            var yTitulo = 'Número de Artículos (Total: '+total+')';
+            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+            $("#divDialogConsulta").modal('show');
         }
     });
 

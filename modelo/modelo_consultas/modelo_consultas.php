@@ -2722,7 +2722,7 @@ class modelo_consultas
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire
                                             JOIN marca_aire c ON a.marca = c.id
                 ".$where."
-                GROUP BY a.marca, c.nombre LIMIT 10;";
+                GROUP BY a.marca, c.nombre ORDER BY conteo DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas Más Instaladas 1)";
@@ -2765,7 +2765,7 @@ class modelo_consultas
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire
                                             JOIN tipo_aire c ON a.tipo = c.id
                 ".$where."
-                GROUP BY a.tipo, c.tipo LIMIT 10;";
+                GROUP BY a.tipo, c.tipo ORDER BY conteo DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Tipos Más Instalados 1)";
@@ -2808,7 +2808,7 @@ class modelo_consultas
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire
                                             JOIN tipo_tecnologia_aire c ON a.tecnologia = c.id
                 ".$where."
-                GROUP BY a.tecnologia, c.tipo LIMIT 10;";
+                GROUP BY a.tecnologia, c.tipo ORDER BY conteo DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Tecnologías Más Instaladas 1)";
@@ -2855,7 +2855,7 @@ class modelo_consultas
                 FROM mantenimiento_aire a   JOIN aire_acondicionado b ON a.id_aire = b.id_aire
                                             JOIN marca_aire c ON b.marca = c.id
                 ".$where."
-                GROUP BY a.id_aire, b.numero_inventario, c.nombre LIMIT 10;";
+                GROUP BY a.id_aire, b.numero_inventario, c.nombre ORDER BY conteo DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Aires Más Mantenimientos 1)";
@@ -2902,7 +2902,7 @@ class modelo_consultas
                 FROM aire_acondicionado a   JOIN mantenimiento_aire b ON a.id_aire = b.id_aire
                                             JOIN marca_aire c ON a.marca = c.id
                 ".$where."
-                GROUP BY a.marca,c.nombre LIMIT 10;";
+                GROUP BY a.marca,c.nombre ORDER BY conteo DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas Más Mantenimientos 1)";
@@ -2919,6 +2919,68 @@ class modelo_consultas
             }
         }
         return $result;
+    }
+
+    /**
+     * Función que permite consultar las artículos con más usados entre dos fechas.
+     * @param string $fechaInicio, fecha inicio.
+     * @param string $fechaFin, fecha fin.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarArticulosMasUsados($fechaInicio,$fechaFin){
+        $fechaInicio = htmlspecialchars(trim($fechaInicio));
+        $fechaFin = htmlspecialchars(trim($fechaFin));
+        $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
+                FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
+                WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'
+                GROUP BY b.nombre ORDER BY suma DESC LIMIT 10;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Más Usados 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Más Usados 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar las artículos con menos usados entre dos fechas.
+     * @param string $fechaInicio, fecha inicio.
+     * @param string $fechaFin, fecha fin.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarArticulosMenosUsados($fechaInicio,$fechaFin){
+            $fechaInicio = htmlspecialchars(trim($fechaInicio));
+            $fechaFin = htmlspecialchars(trim($fechaFin));
+            $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
+                    FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
+                    WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'
+                    GROUP BY b.nombre ORDER BY suma ASC LIMIT 10;";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 1)";
+                $GLOBALS['sql'] = $sql;
+            }
+            else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 2)";
+                    $GLOBALS['sql'] = $sql;
+                }
+                if($l_stmt->rowCount() >= 0){
+                    $result = $l_stmt->fetchAll();
+                    $GLOBALS['sql'] = $sql;
+                }
+            }
+            return $result;
     }
 
     /**

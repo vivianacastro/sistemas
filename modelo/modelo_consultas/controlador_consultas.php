@@ -4103,5 +4103,57 @@ class controlador_consultas{
         $result['sql'] = $GLOBALS['sql'];
         echo json_encode($result);
     }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de inventario.
+    **/
+    public function consultar_articulos_mas_usados() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArticulosMasUsados($info["fecha_inicio"],$info["fecha_fin"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'suma' => $valor['suma'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
+     * las estadísticas del módulo de inventario.
+    **/
+    public function consultar_articulos_menos_usados() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarArticulosMenosUsados($info["fecha_inicio"],$info["fecha_fin"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'suma' => $valor['suma'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
 }
 ?>

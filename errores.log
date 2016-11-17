@@ -5706,3 +5706,5 @@
 [17-Nov-2016 00:29:22 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 1147
 [17-Nov-2016 00:34:22 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 805
 [17-Nov-2016 00:40:10 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1799
+[17-Nov-2016 09:53:23 America/Bogota] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 2960
+[17-Nov-2016 09:53:24 America/Bogota] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 2960

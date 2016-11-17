@@ -1,1 +1,0 @@
-select id_objeto, sum(CAST(valor_antiguo AS INT) - CAST(valor_nuevo AS INT)) as suma from modificaciones where CAST(valor_antiguo AS INT) > CAST(valor_nuevo AS INT) and tabla_modificacion = 'inventario' group by id_objeto order by suma;
