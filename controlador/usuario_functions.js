@@ -512,9 +512,6 @@ $(document).ready(function() {
 			var crearInventario = $('input[name="crear_inventario"]:checked').val();
 			var tipoUsuario = $("#tipo_usuario").val();
 			var estado = $("#estado").val();
-			console.log(crearPlanta);
-			console.log(crearAire);
-			console.log(crearInventario);
 			if (!validarCadena(nombreUsuario)) {
 				alert("ERROR. Ingrese el nombre del usuario");
 				$("#nombre_usuario").focus();
@@ -602,14 +599,14 @@ $(document).ready(function() {
      * Se captura el evento cuando se cierra el modal divDialogConsulta.
     **/
     $('#divDialogConsulta').on('hidden.bs.modal', function () {
-		$("#nombre_usuario").attr('disabled', true);
+		/*$("#nombre_usuario").attr('disabled', true);
 		$("#correo").attr('disabled', true);
 		$("#telefono_usuario").attr('disabled', true);
-		$("#extension_usuario").attr('disabled', true);
+		$("#extension_usuario").attr('disabled', true);*/
+		$("#tipo_usuario").attr('disabled', true);
 		$("input[name=crear_planta]").attr('disabled', true);
 		$("input[name=crear_aire]").attr('disabled', true);
 		$("input[name=crear_inventario]").attr('disabled', true);
-		$("#tipo_usuario").attr('disabled', true);
 		$("#estado").attr('disabled', true);
         $("#modificar_usuario").show();
         $("#guardar_modificaciones_usuario").hide();
