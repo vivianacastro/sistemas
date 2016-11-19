@@ -840,6 +840,7 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $archivo = $info['nombre'];
+            $verificar = false;
             for ($i=0;$i<count($archivo); $i++) {
                 $verificar = $m->eliminarArchivoCampus($info['id_sede'],$info['id'],$archivo[$i],$info['tipo']);
             }

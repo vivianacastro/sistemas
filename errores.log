@@ -5715,3 +5715,15 @@
 [17-Nov-2016 17:52:28 America/Bogota] PHP Notice:  Undefined variable: cantidadAnterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2652
 [17-Nov-2016 17:53:01 America/Bogota] PHP Notice:  Undefined variable: cantidadAnterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2652
 [17-Nov-2016 17:53:01 America/Bogota] PHP Notice:  Undefined variable: cantidadAnterior in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 2652
+[19-Nov-2016 01:42:36 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 855
+[19-Nov-2016 01:42:37 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 855
+[19-Nov-2016 01:44:23 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 859
+[19-Nov-2016 01:44:23 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 859
+[19-Nov-2016 01:52:26 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 861
+[19-Nov-2016 01:52:26 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 861
+[19-Nov-2016 01:58:30 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 858
+[19-Nov-2016 01:58:30 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 858
+[19-Nov-2016 02:03:49 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
+[19-Nov-2016 02:03:49 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
+[19-Nov-2016 02:04:06 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
+[19-Nov-2016 02:04:06 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849

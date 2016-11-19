@@ -1007,7 +1007,7 @@ $(document).ready(function() {
 					console.log(err.Message);
 				},
 				success: function(data) {
-					//mostrarMensaje(data.mensaje);
+					//alert(data.mensaje);
 					dataResult = data;
 				}
 			});
@@ -1040,7 +1040,7 @@ $(document).ready(function() {
 					console.log(err.Message);
 				},
 				success: function(data) {
-					//mostrarMensaje(data.mensaje);
+					//alert(data.mensaje);
 					dataResult = data;
 				}
 			});
@@ -9620,10 +9620,12 @@ $(document).ready(function() {
                 var data = modificarObjeto("sede",informacion);
                 console.log(informacion);
                 console.log(data);
+                alert(data.mensaje);
                 if(data.verificar){
-                    alert(data.mensaje);
                     $("#divDialogConsulta").modal('hide');
                     actualizarSelectSede();
+                }else{
+                    $("#nombre_sede").focus();
                 }
             }else{
                 alert("ERROR. Ingrese el nombre de la sede");
@@ -9748,13 +9750,15 @@ $(document).ready(function() {
                     if (mensaje.substring(0,1) != "") {
                         alert(mensaje);
                     }else{
+                        alert(data.mensaje);
                         if(data.verificar){
-                            alert(data.mensaje);
                             $("#sede_search").val("").change();
                             $("#divDialogConsulta").modal('hide');
                             planos.value = "";
                             fotos.value = "";
                             marcadores = [];
+                        }else{
+                            $("#nombre_campus").focus();
                         }
                     }
                 }else{
@@ -9897,8 +9901,8 @@ $(document).ready(function() {
                     if (mensaje.substring(0,1) != "") {
                         alert(mensaje);
                     }else{
+                        alert(data.mensaje);
                         if(data.verificar){
-                            alert(data.mensaje);
                             $("#sede_search").val("").change();
                             $("#divDialogConsulta").modal('hide');
                             planos.value = "";
@@ -10121,8 +10125,8 @@ $(document).ready(function() {
                     if (mensaje.substring(0,1) != "") {
                         alert(mensaje);
                     }else{
+                        alert(data.mensaje);
                         if(data.verificar){
-                            alert(data.mensaje);
                             $("#sede_search").val("").change();
                             $("#divDialogConsulta").modal('hide');
                             planos.value = "";
@@ -10261,8 +10265,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -10463,8 +10467,8 @@ $(document).ready(function() {
                     if (mensaje.substring(0,1) != "") {
                         alert(mensaje);
                     }else{
+                        alert(data.mensaje);
                         if(data.verificar){
-                            alert(data.mensaje);
                             $("#sede_search").val("").change();
                             $("#divDialogConsulta").modal('hide');
                             planos.value = "";
@@ -10608,8 +10612,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -10748,8 +10752,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -10914,8 +10918,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -11064,8 +11068,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -11202,8 +11206,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -11348,8 +11352,8 @@ $(document).ready(function() {
                 if (mensaje.substring(0,1) != "") {
                     alert(mensaje);
                 }else{
+                    alert(data.mensaje);
                     if(data.verificar){
-                        alert(data.mensaje);
                         $("#sede_search").val("").change();
                         $("#divDialogConsulta").modal('hide');
                         planos.value = "";
@@ -11958,8 +11962,8 @@ $(document).ready(function() {
                         if (mensaje.substring(0,1) != "") {
                             alert(mensaje);
                         }else{
+                            alert(data.mensaje);
                             if(data.verificar){
-                                alert(data.mensaje);
                                 $("#sede_search").val("").change();
                                 $("#divDialogConsulta").modal('hide');
                                 planos.value = "";
@@ -12005,10 +12009,12 @@ $(document).ready(function() {
                 var resultado = modificarObjeto("tipo_material",informacion);
                 console.log(informacion);
                 console.log(resultado);
-                mostrarMensaje(resultado.mensaje);
+                alert(resultado.mensaje);
                 if(resultado.verificar){
                     $("#tipo_material_search").val("seleccionar").change();
                     $("#divDialogConsulta").modal('hide');
+                }else{
+                    $("#nombre_tipo_material").focus();
                 }
             }
         }
@@ -12038,10 +12044,12 @@ $(document).ready(function() {
                 var resultado = modificarObjeto("tipo_objeto",informacion);
                 console.log(informacion);
                 console.log(resultado);
-                mostrarMensaje(resultado.mensaje);
+                alert(resultado.mensaje);
                 if(resultado.verificar){
                     $("#tipo_objeto_search").val("seleccionar").change();
                     $("#divDialogConsulta").modal('hide');
+                }else{
+                    $("#nombre_tipo_material").focus();
                 }
             }
         }
@@ -12149,8 +12157,8 @@ $(document).ready(function() {
                         if (mensaje.substring(0,1) != "") {
                             alert(mensaje);
                         }else{
+                            alert(data.mensaje);
                             if(data.verificar){
-                                alert(data.mensaje);
                                 $("#sede_search").val("").change();
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";

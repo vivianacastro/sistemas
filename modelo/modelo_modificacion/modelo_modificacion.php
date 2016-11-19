@@ -27,6 +27,165 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite consultar si una sede ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede.
+     * @return array
+    **/
+    public function verificarSede($nombre_sede){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $sql = "SELECT * FROM sede WHERE nombre = '".$nombre_sede."'";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Sede 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Sede 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La sede ya se encuentra registrada en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un campus ya está registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el campus.
+     * @param string $nombre_campus, nombre del campus.
+     * @return array
+    **/
+    public function verificarCampus($nombre_sede,$nombre_campus){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $sql = "SELECT * FROM campus WHERE sede = '".$nombre_sede."' AND nombre = '".$nombre_campus."'";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Campus 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Campus 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El campus ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya está registrado en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
+     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
+     * @param string $id_edificio, id del edificio.
+     * @return array
+    **/
+    public function verificarEdificio($nombre_sede,$nombre_campus,$id_edificio){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $id_edificio = htmlspecialchars(trim($id_edificio));
+        $sql = "SELECT * FROM edificio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_edificio."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El edificio ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya está registrada en el sistema.
+     * @param string $tipo_material, tipo de material.
+     * @param string $nombre_tipo_material, nombre del tipo de material.
+     * @return array
+    **/
+    public function verificarTipoMaterial($tipo_material,$nombre_tipo_material){
+        $tipo_material = htmlspecialchars(trim($tipo_material));
+        $nombre_tipo_material = htmlspecialchars(trim($nombre_tipo_material));
+        $sql = "SELECT * FROM ".$tipo_material." WHERE material = '".$nombre_tipo_material."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Material 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Material 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El tipo de material ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un edificio ya está registrada en el sistema.
+     * @param string $tipo_material, tipo de objeto.
+     * @param string $nombre_tipo_material, nombre del tipo de objeto.
+     * @return array
+    **/
+    public function verificarTipoObjeto($tipo_objeto,$nombre_tipo_objeto){
+        $tipo_objeto = htmlspecialchars(trim($tipo_objeto));
+        $nombre_tipo_objeto = htmlspecialchars(trim($nombre_tipo_objeto));
+        $sql = "SELECT * FROM ".$tipo_objeto." WHERE tipo = '".$nombre_tipo_objeto."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Objeto 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Tipo Objeto 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                if (strcmp($tipo_objeto,"tipo_aire") == 0) {
+                    $GLOBALS['mensaje'] = "ERROR. El tipo de aire acondicionado ya se encuentra registrado en el sistema";
+                }else{
+                    $GLOBALS['mensaje'] = "ERROR. El tipo de objeto ya se encuentra registrado en el sistema";
+                }
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite modificar una sede.
      * @param string $id_sede, id de la sede.
      * @param string $nombre_sede, nuevo nombre de la sede.
@@ -37,25 +196,33 @@ class modelo_modificacion {
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $sql = "UPDATE sede SET nombre = '".$nombre_sede."' WHERE id = '".$id_sede."';";
         $data = $this->consultarCampoSede($id_sede);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $nombre_sede_antiguo = $valor['nombre'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Sede 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Sede 2)";
+        if (strcasecmp($nombre_sede,$nombre_sede_antiguo) != 0) {
+            $verificar = $this->verificarSede($nombre_sede);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Sede 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("sede",$id_sede,"nombre",$nombre_sede_antiguo,$nombre_sede);
-                $GLOBALS['mensaje'] = "La sede se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Sede 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("sede",$id_sede,"nombre",$nombre_sede_antiguo,$nombre_sede);
+                    $GLOBALS['mensaje'] = "La sede se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
+        }else{
+            return false;
         }
     }
 
@@ -76,29 +243,37 @@ class modelo_modificacion {
         $lng = htmlspecialchars(trim($lng));
         $sql = "UPDATE campus SET nombre = '".$nombre_campus."', lat = '".$lat."', lng = '".$lng."' WHERE id = '".$id_campus."' AND sede = '".$id_sede."';";
         $data = $this->consultarCampoCampus($id_sede,$id_campus);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $nombre_campus_anterior = $valor['nombre'];
             $lat_anterior = $valor['lat'];
             $lng_anterior = $valor['lng'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Campus 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Campus 2)";
+        if (strcasecmp($nombre_campus,$nombre_campus_anterior) != 0) {
+            $verificar = $this->verificarCampus($id_sede,$nombre_campus);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Campus 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("campus",$id_sede."-".$id_campus,"nombre",$nombre_campus_anterior,$nombre_campus);
-                $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lat",$lat_anterior,$lat);
-                $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lng",$lng_anterior,$lng);
-                $GLOBALS['mensaje'] = "El campus se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Campus 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("campus",$id_sede."-".$id_campus,"nombre",$nombre_campus_anterior,$nombre_campus);
+                    $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lat",$lat_anterior,$lat);
+                    $this->registrarModificacion("campus",$id_sede."-".$id_campus,"lng",$lng_anterior,$lng);
+                    $GLOBALS['mensaje'] = "El campus se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
+        }else{
+            return false;
         }
     }
 
@@ -2381,25 +2556,33 @@ class modelo_modificacion {
         $campos = "material = '".$nombre."'";
         $sql = "UPDATE ".$tipo_material." SET $campos WHERE material = '".$nombre_anterior."';";
         $data = $this->consultarCampoTipoMaterial($tipo_material,$nombre_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 2)";
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarTipoMaterial($tipo_material,$nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion($tipo_material,$id,"material",$nombre_anterior,$nombre);
-                $GLOBALS['mensaje'] = "El tipo de material se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Material 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion($tipo_material,$id,"material",$nombre_anterior,$nombre);
+                    $GLOBALS['mensaje'] = "El tipo de material se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
+        }else{
+            return false;
         }
     }
 
@@ -2417,25 +2600,33 @@ class modelo_modificacion {
         $campos = "tipo = '".$nombre."'";
         $sql = "UPDATE ".$tipo_objeto." SET $campos WHERE tipo = '".$nombre_anterior."';";
         $data = $this->consultarCampoTipoObjeto($tipo_objeto,$nombre_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
         }
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarTipoObjeto($tipo_objeto,$nombre);
+        }
+        if ($verificar) {
         $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 2)";
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion($tipo_objeto,$id,"tipo",$nombre_anterior,$nombre);
-                $GLOBALS['mensaje'] = "El tipo de objeto se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Tipo Objeto 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion($tipo_objeto,$id,"tipo",$nombre_anterior,$nombre);
+                    $GLOBALS['mensaje'] = "El tipo de objeto se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
+        }else{
+            return false;
         }
     }
 
