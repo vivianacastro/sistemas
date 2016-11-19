@@ -5727,3 +5727,4 @@
 [19-Nov-2016 02:03:49 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
 [19-Nov-2016 02:04:06 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
 [19-Nov-2016 02:04:06 America/Bogota] PHP Notice:  Undefined variable: verificar in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_modificacion/controlador_modificacion.php on line 849
+[19-Nov-2016 03:17:15 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174

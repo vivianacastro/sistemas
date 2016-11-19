@@ -87,39 +87,6 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite consultar si un edificio ya está registrado en el sistema.
-     * @param string $nombre_sede, nombre de la sede a la que pertenece el edificio.
-     * @param string $nombre_campus, nombre del campus al que pertenece el edificio.
-     * @param string $id_edificio, id del edificio.
-     * @return array
-    **/
-    public function verificarEdificio($nombre_sede,$nombre_campus,$id_edificio){
-        $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $nombre_campus = htmlspecialchars(trim($nombre_campus));
-        $id_edificio = htmlspecialchars(trim($id_edificio));
-        $sql = "SELECT * FROM edificio WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id = '".$id_edificio."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Verificar Edificio 2)";
-                $GLOBALS['sql'] = $sql;
-                return false;
-            }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "ERROR. El edificio ya se encuentra registrado en el sistema";
-                return false;
-            }
-            else{
-                $GLOBALS['sql'] = $sql;
-                return true;
-            }
-        }
-    }
-
-    /**
      * Función que permite consultar si una plazoleta ya está registrada en el sistema.
      * @param string $nombre_sede, nombre de la sede a la que pertenece la plazoleta.
      * @param string $nombre_campus, nombre del campus al que pertenece la plazoleta.
@@ -214,6 +181,157 @@ class modelo_modificacion {
             else{
                 $GLOBALS['sql'] = $sql;
                 return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una marca de aires acondicionados ya esta registrada en el sistema.
+     * @param string $marca, marca de aire acondicionado.
+     * @return array
+    **/
+    public function verificarMarcaAire($marca){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "SELECT * FROM marca_aire WHERE nombre = '".$marca."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Aires Acondicionados 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Aires Acondicionados 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La marca de aires acondicionados ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una capacidad de aires acondicionados ya esta registrada en el sistema.
+     * @param string $capacidad, capacidad.
+     * @return array
+    **/
+    public function verificarCapacidadAire($capacidad){
+        $capacidad = htmlspecialchars(trim($capacidad));
+        $sql = "SELECT * FROM capacidad_aire WHERE capacidad = '".$capacidad."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Capacidad Aires Acondicionados 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Capacidad Aires Acondicionados 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La capacidad ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una marca del módulo de inventario ya está registrada en el sistema.
+     * @param string $marca, nombre de la marca.
+     * @return array
+    **/
+    public function verificarMarcaInventario($marca){
+        $marca = htmlspecialchars(trim($marca));
+        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$marca."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La marca ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un proveedor ya se encuentra registrado en el sistema.
+     * @param string $nombre, nombre del proveedor.
+     * @return array
+    **/
+    public function verificarProveedor($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Proveedor 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Proveedor 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El proveedor ya se encuentra registrado en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si un artículo ya se encuentra registrado en el sistema.
+     * @param string $nombre, nombre del artículo.
+     * @param string $marca, marca del artículo.
+     * @return array
+    **/
+    public function verificarArticulo($nombre,$marca){
+        $nombre = htmlspecialchars(trim($nombre));
+        $marca = htmlspecialchars(trim($marca));
+        if (strcmp($nombre,"") == 0 && strcmp($marca,"") == 0) {
+            return true;
+        }else{
+            $sql = "SELECT * FROM articulo WHERE nombre = '".$nombre."' AND marca = '".$marca."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Artículo 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Verificar Artículo 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }elseif($l_stmt->rowCount() > 0){
+                    $GLOBALS['mensaje'] = 'ERROR. El artículo ya se encuentra registrado en el sistema.';
+                    return false;
+                }
+                else{
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -2749,24 +2867,30 @@ class modelo_modificacion {
         $capacidad_anterior = htmlspecialchars(trim($capacidad_anterior));
         $sql = "UPDATE capacidad_aire SET capacidad = '".$capacidad."' WHERE capacidad = '".$capacidad_anterior."';";
         $data = $this->consultarCampoCapacidadAire($capacidad_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 2)";
+        if (strcasecmp($capacidad,$capacidad_anterior) != 0) {
+            $verificar = $this->verificarCapacidadAire($capacidad);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("capacidad_aire",$id,"capacidad",$capacidad_anterior,$capacidad);
-                $GLOBALS['mensaje'] = "La información de la capacidad de aires acondicionados se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Capacidad Aire 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("capacidad_aire",$id,"capacidad",$capacidad_anterior,$capacidad);
+                    $GLOBALS['mensaje'] = "La información de la capacidad de aires acondicionados se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -2782,24 +2906,30 @@ class modelo_modificacion {
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
         $sql = "UPDATE marca_aire SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoMarcaAire($nombre_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 2)";
+        if (strcasecmp($nombre_sede,$nombre_anterior) != 0) {
+            $verificar = $this->verificarMarcaAire($nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("marca_aire",$id,"nombre",$nombre_anterior,$nombre);
-                $GLOBALS['mensaje'] = "La información de la marca de aires acondicionados se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Aire 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("marca_aire",$id,"nombre",$nombre_anterior,$nombre);
+                    $GLOBALS['mensaje'] = "La información de la marca de aires acondicionados se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -2904,33 +3034,39 @@ class modelo_modificacion {
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
         $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
         $data = $this->consultarCampoArticulo($id_articulo);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id_articulo_anterior = $valor['id_articulo'];
             $nombre_anterior = $valor['nombre'];
             $marca_anterior = $valor['marca'];
             $cantidad_minima_anterior = $valor['cantidad_minima'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 2)";
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarArticulo($nombre,$marca);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("articulo",$id_articulo,"id_articulo",$id_articulo_anterior,$id_articulo);
-                $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
-                $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
-                $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
-                $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                for ($i=0;$i<count($proveedor);$i++) {
-                    $this->modificarProveedorArticulo($id_articulo,$proveedor[$i],$proveedor_anterior[$i]);
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Artículo 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("articulo",$id_articulo,"id_articulo",$id_articulo_anterior,$id_articulo);
+                    $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
+                    $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
+                    $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    for ($i=0;$i<count($proveedor);$i++) {
+                        $this->modificarProveedorArticulo($id_articulo,$proveedor[$i],$proveedor_anterior[$i]);
+                    }
+                    return true;
                 }
-                return true;
             }
         }
     }
@@ -2981,24 +3117,30 @@ class modelo_modificacion {
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
         $sql = "UPDATE marca_inventario SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoMarcaInventario($nombre_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 2)";
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarMarcaInventario($nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("marca_inventario",$id,"nombre",$nombre_anterior,$nombre);
-                $GLOBALS['mensaje'] = "La información de la marca se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Marca Inventario 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("marca_inventario",$id,"nombre",$nombre_anterior,$nombre);
+                    $GLOBALS['mensaje'] = "La información de la marca se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
@@ -3018,30 +3160,36 @@ class modelo_modificacion {
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
         $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoProveedor($nombre_anterior);
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id_proveedor'];
             $nit_anterior = $valor['nit'];
             $direccion_anterior = $valor['direccion'];
             $telefono_anterior = $valor['telefono'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 2)";
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarProveedor($nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("proveedor",$id,"nombre",$nombre_anterior,$nombre);
-                $this->registrarModificacion("proveedor",$id,"nit",$nit_anterior,$nit);
-                $this->registrarModificacion("proveedor",$id,"direccion",$direccion_anterior,$direccion);
-                $this->registrarModificacion("proveedor",$id,"telefono",$telefono_anterior,$telefono);
-                $GLOBALS['mensaje'] = "La información del proveedor se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Proveedor 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("proveedor",$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("proveedor",$id,"nit",$nit_anterior,$nit);
+                    $this->registrarModificacion("proveedor",$id,"direccion",$direccion_anterior,$direccion);
+                    $this->registrarModificacion("proveedor",$id,"telefono",$telefono_anterior,$telefono);
+                    $GLOBALS['mensaje'] = "La información del proveedor se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
             }
         }
     }
