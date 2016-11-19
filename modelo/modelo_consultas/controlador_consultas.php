@@ -4032,7 +4032,7 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarInformacionArticuloNombre($info["nombre_articulo"]);
+            $data = $m->buscarInformacionArticuloNombre($info["nombre_articulo"],$info["marca"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],

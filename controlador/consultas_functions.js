@@ -124,11 +124,12 @@ $(document).ready(function() {
             actualizarSelectSede();
         }else if (URLactual['href'].indexOf('consultar_inventario') >= 0 ) {
             llenarTablaInventario();
-            actualizarSelectMarcas();
+            actualizarSelectMarcas("marca");
             actualizarSelectProveedores(proveedoresCont);
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
             llenarTablaInventario();
-            actualizarSelectMarcas();
+            actualizarSelectMarcas("marca_search");
+            actualizarSelectMarcas("marca");
             actualizarSelectProveedores(proveedoresCont);
         }
     })();
@@ -1231,18 +1232,18 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de marcas.
      * @returns {undefined}
     **/
-    function actualizarSelectMarcas(){
+    function actualizarSelectMarcas(selector){
         var data = buscarMarcas();
-        $("#marca").empty();
+        $("#"+selector).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
-        row.appendTo("#marca");
+        row.appendTo("#"+selector);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre;
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
-                row.appendTo("#marca");
+                row.appendTo("#"+selector);
             }
         });
     }
@@ -2497,9 +2498,26 @@ $(document).ready(function() {
     $("#nombre_articulo_search").change(function (e) {
         if (validarCadena($("#nombre_articulo_search").val())) {
             $('#visualizarArticulo').removeAttr("disabled");
-            $('#visualizarArticuloNombre').removeAttr("disabled");
+            if(URLactual['href'].indexOf('consultar_articulo') >= 0){
+                if (validarCadena($("#marca_search").val())) {
+                    $('#visualizarArticuloNombre').removeAttr("disabled");
+                }else{
+                    $('#visualizarArticuloNombre').attr('disabled',true);
+                }
+            }
         }else{
             $('#visualizarArticulo').attr('disabled',true);
+            $('#visualizarArticuloNombre').attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del input marca_search.
+    **/
+    $("#marca_search").change(function (e) {
+        if (validarCadena($("#marca_search").val()) && validarCadena($("#nombre_articulo_search").val())) {
+            $('#visualizarArticuloNombre').removeAttr("disabled");
+        }else{
             $('#visualizarArticuloNombre').attr('disabled',true);
         }
     });
@@ -5930,8 +5948,10 @@ $(document).ready(function() {
     **/
     $("#visualizarArticuloNombre").click(function (e){
         var articulo = limpiarCadena($("#nombre_articulo_search").val());
+        var marca = $("#marca_search").val();
         var informacion = {};
 		informacion["nombre_articulo"] = articulo;
+        informacion["marca"] = marca;
         var data = consultarInformacionObjeto("articulo_nombre",informacion);
         var idArticulo;
         var numeroArticulos = 0;
@@ -12436,7 +12456,7 @@ $(document).ready(function() {
                 }else if (!validarCadena(marca)) {
                     alert("ERROR. Seleccione la marca del artículo");
                     $("#marca").focus();
-                }else if (!validarCadena(cantidadMinima)) {
+                }else if (!validarNumero(cantidadMinima)) {
                     alert("ERROR. Seleccione la cantidad mínima del artículo");
                     $("#cantidad_minima").focus();
                 }else{

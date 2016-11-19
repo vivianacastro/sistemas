@@ -1065,13 +1065,14 @@ class modelo_consultas
     /**
      * Función que permite buscar la información de un artículo.
      * @param string $nombre_articulo, nombre del artículo a buscar.
+     * @param string $marca, id de la marca.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarInformacionArticuloNombre($nombre_articulo){
+    public function buscarInformacionArticuloNombre($nombre_articulo,$marca){
         $nombre_articulo = htmlspecialchars(trim($nombre_articulo));
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
-                WHERE a.nombre = '".$nombre_articulo."' ORDER BY a.nombre;";
+                WHERE a.nombre = '".$nombre_articulo."' and a.marca = '".$marca."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Artículo Nombre 1)";
