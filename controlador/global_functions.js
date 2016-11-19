@@ -156,7 +156,7 @@ $(document).ready(function () {
 		if(URLactual['href'].indexOf('crear_usuario') == -1 && URLactual['href'].indexOf('olvido_contrasenia') == -1){
 			$("#divDialogTimeOut").modal('show');
 		}
-	},1200000);
+	},1000000);
 	$('#divDialogTimeOut').on('hidden.bs.modal', function () {
 		location.reload();
 	});
