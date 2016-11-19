@@ -120,6 +120,39 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite consultar si una plazoleta ya está registrada en el sistema.
+     * @param string $nombre_sede, nombre de la sede a la que pertenece la plazoleta.
+     * @param string $nombre_campus, nombre del campus al que pertenece la plazoleta.
+     * @param string $nombre_plazoleta, nombre de la plazoleta.
+     * @return array
+    **/
+    public function verificarPlazoleta($nombre_sede,$nombre_campus,$nombre_plazoleta){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_plazoleta = htmlspecialchars(trim($nombre_plazoleta));
+        $sql = "SELECT * FROM plazoleta WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND nombre = '".$nombre_plazoleta."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Plazoleta 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Plazoleta 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La plazoleta ya se encuentra registrada en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si un edificio ya está registrada en el sistema.
      * @param string $tipo_material, tipo de material.
      * @param string $nombre_tipo_material, nombre del tipo de material.
@@ -882,31 +915,37 @@ class modelo_modificacion {
         $campos = "nombre = '".$nombre."', lat = '".$lat."', lng = '".$lng."'";
         $sql = "UPDATE plazoleta SET $campos WHERE id = '".$id."' AND id_campus = '".$id_campus."' AND id_sede = '".$id_sede."';";
         $data = $this->consultarCampoElementoCampus($id_sede,$id_campus,$id,"plazoleta");
+        $verificar = true;
         foreach ($data as $clave => $valor) {
             $nombre_anterior = $valor['nombre'];
             $lat_anterior = $valor['lat'];
             $lng_anterior = $valor['lng'];
         }
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 2)";
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarPlazoleta($id_sede,$id_campus,$nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 1)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"nombre",$nombre_anterior,$nombre);
-                $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
-                $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
-                for ($i=0;$i<count($tipo_iluminacion);$i++) {
-                    $this->modificarIluminacionPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Plazoleta 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lat",$lat_anterior,$lat);
+                    $this->registrarModificacion("plazoleta",$id_sede."-".$id_campus."-".$id,"lng",$lng_anterior,$lng);
+                    for ($i=0;$i<count($tipo_iluminacion);$i++) {
+                        $this->modificarIluminacionPlazoleta($id_sede,$id_campus,$id,$tipo_iluminacion[$i],$tipo_iluminacion_anterior[$i],$cantidad_iluminacion[$i],$cantidad_iluminacion_anterior[$i]);
+                    }
+                    $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
                 }
-                $GLOBALS['mensaje'] = "La plazoleta se modificó correctamente";
-                $GLOBALS['sql'] = $sql;
-                return true;
             }
         }
     }

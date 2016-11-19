@@ -10925,6 +10925,8 @@ $(document).ready(function() {
                         planos.value = "";
                         fotos.value = "";
                         marcadores = [];
+                    }else{
+                        $("#nombre").focus();
                     }
                 }
             }else{
