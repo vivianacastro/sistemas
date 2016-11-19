@@ -906,14 +906,13 @@ $(document).ready(function() {
 				var antiguaContrasenia = $("#contrasenia_actual").val();
 				var nuevaContrasenia = $("#contrasenia_nueva").val();
 				var nuevaContraseniaRep = $("#contrasenia_nueva_rep").val();
-				var pattern = /(?=.*\d)(?=.*[a-z])(?=.+[A-Z])/;
-				if(contrasenia.length < 8){
+				var pattern = /(?=.*\d)(?=.*[A-Za-z])/;
+				if(nuevaContrasenia.length < 8){
 					alert('ERROR. La contraseña mínimo debe tener 8 caracteres');
-					$("#contrasenia").focus();
-				}else if(!pattern.test(contrasenia)){
+					$("#contrasenia_nueva").focus();
+				}else if(!pattern.test(nuevaContrasenia)){
 					alert('ERROR. La contraseña debe contener por lo menos una letra y un número');
-					console.log(contrasenia);
-					$("#contrasenia").focus();
+					$("#contrasenia_nueva").focus();
 				}else if(nuevaContrasenia != nuevaContraseniaRep){
 					alert('ERROR. Las contraseñas no coinciden');
 					$("#contrasenia_rep").focus();
@@ -925,16 +924,13 @@ $(document).ready(function() {
 					informacion['contrasenia_actual'] = antiguaContrasenia;
 					informacion['contrasenia_nueva'] = nuevaContrasenia;
 					var respuesta = modificarContrasenia(informacion);
+					alert(respuesta.mensaje);
 					if (respuesta.verificar) {
-						alert(respuesta.mensaje);
-						$("#login_usuario").val("");
-						$("#nombre_usuario").val("");
-						$("#correo_usuario").val("");
-						$("#telefono_usuario").val("");
-						$("#extension_usuario").val("");
+						$("#contrasenia_actual").val("");
+						$("#contrasenia_nueva").val("");
+						$("#contrasenia_nueva_rep").val("");
 						window.location = "http://192.168.46.53/sistemas/index.php?action=informacion_usuario";
 					}else{
-						alert(respuesta.mensaje);
 						$("#contrasenia_actual").focus();
 					}
 				}
