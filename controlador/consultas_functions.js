@@ -2917,9 +2917,9 @@ $(document).ready(function() {
                     $("#tipo_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
@@ -2943,9 +2943,9 @@ $(document).ready(function() {
                     $("#tipo_interruptor option[value='']").hide();
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
@@ -3260,15 +3260,15 @@ $(document).ready(function() {
                     $("#cantidad_ventanas option[value='']").hide();
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_ventana'+ventanasCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("ventana",componente);
@@ -3726,9 +3726,9 @@ $(document).ready(function() {
                     $("#cantidad_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
@@ -4371,9 +4371,9 @@ $(document).ready(function() {
                     $("#tipo_iluminacion option[value='']").hide();
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
@@ -4398,9 +4398,9 @@ $(document).ready(function() {
                 }else{
                     interruptoresCont++;
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
@@ -4434,24 +4434,24 @@ $(document).ready(function() {
                     $("#material_marco_puerta option[value='']").hide();
                 }else{
                     var componente = '<div id="puerta'+puertasCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_puerta'+puertasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puertas'+puertasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="material_puerta'+puertasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_cerradura'+puertasCont+'" disabled required></select><br>'
                     //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
                     //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
-                    +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>¿La puerta tiene gato? ('+(puertasCont+1)+'):</b></div>'
                     +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
                     +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
-                    +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="material_marco_puerta'+puertasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_puerta'+puertasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_puerta'+puertasCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("puerta",componente);
@@ -4502,7 +4502,7 @@ $(document).ready(function() {
                             }
                         }else{
                             var componente = '<div id="cerradura'+cerraduraCont+'">'
-                            +'<div class="div_izquierda"><b>Tipo de cerradura ('+(cerraduraCont+1)+') de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Tipo de cerradura ('+(cerraduraCont+1)+') de la puerta ('+(puertasCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="" id="tipo_cerradura'+puertasCont+cerraduraCont+'" disabled required></select>'
                             +'</div>';
                             añadirComponente("cerradura",componente);
@@ -4530,15 +4530,15 @@ $(document).ready(function() {
                     $("#tomacorriente option[value='']").hide();
                 }else{
                     var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_suministro_energia'+tomacorrientesCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tomacorriente'+tomacorrientesCont+'" disabled required>'
                     +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
                     +'<option value="regulado">Regulado</option>'
                     +'<option value="no regulado">No Regulado</option>'
                     +'</select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("suministro_energia",componente);
@@ -4572,15 +4572,15 @@ $(document).ready(function() {
                     $("#material_ventana option[value='']").hide();
                 }else{
                     var componente = '<div id="ventana'+ventanasCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="tipo_ventana'+ventanasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_ventanas'+ventanasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="" id="material_ventana'+ventanasCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_ventana'+ventanasCont+'" value="" disabled required/><br>'
-                    +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_ventana'+ventanasCont+'" value="" disabled required/>'
                     +'</div>';
                     añadirComponente("ventana",componente);
@@ -4644,11 +4644,11 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Salón</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del salón:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>Capacidad del salón<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Capacidad del salón:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿El salón tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El salón tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
                 +'</div>';
@@ -4666,11 +4666,11 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Auditorio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del auditorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>Capacidad del auditorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Capacidad del auditorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿El auditorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El auditorio tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
                 +'</div>';
@@ -4690,19 +4690,19 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Laboratorio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del laboratorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>Capacidad del laboratorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Capacidad del laboratorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿El laboratorio tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El laboratorio tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
-                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del laboratorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
                 +'<div id="punto_sanitario">'
-                +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de punto sanitario del laboratorio:</b></div>'
                 +'<select class="form-control formulario" name="" id="tipo_punto_sanitario" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del laboratorio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
                 +'</div>'
                 +'</div>';
@@ -4725,9 +4725,9 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario option[value='']").hide();
                         }else{
                             var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
-                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="" id="tipo_punto_sanitario'+puntosSanitariosCont+'" disabled required></select><br>'
-                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" disabled required/><br>'
                             +'</div>';
                             añadirComponente("punto_sanitario",componente);
@@ -4747,11 +4747,11 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Cómputo</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de cómputo:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Capacidad de la sala de cómputo:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="capacidad" id="capacidad" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿La sala de cómputo tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
                 +'</div>';
@@ -4769,9 +4769,9 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Oficina</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la oficina:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿La oficina tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿La oficina tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label><br>'
                 +'</div>';
@@ -4792,35 +4792,35 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Baño</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Tipo de inodoro<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de inodoro:</b></div>'
                 +'<select class="form-control formulario" name="tipo_inodoro" id="tipo_inodoro" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de inodoros<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de inodoros:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_inodoros" id="cantidad_inodoros" value="" disabled required/><br>'
                 +'<div id="lavamanos">'
-                +'<div class="div_izquierda"><b>Tipo de lavamanos<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de lavamanos:</b></div>'
                 +'<select class="form-control formulario" name="" id="tipo_lavamanos" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de lavamanos<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de lavamanos:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_lavamanos" value="" disabled required/>'
                 +'</div>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
                 componente = '<div id="informacion2">'
-                +'<div class="div_izquierda"><b>Tipo de divisiones<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de divisiones:</b></div>'
                 +'<select class="form-control formulario" name="tipo_divisiones" id="tipo_divisiones" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Material de las divisiones<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Material de las divisiones:</b></div>'
                 +'<select class="form-control formulario" name="material_divisiones" id="material_divisiones" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>¿El baño tiene ducha?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El baño tiene ducha?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="ducha" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="ducha" value="false" disabled>No</label>'
-                +'<div class="div_izquierda"><b>¿El baño tiene lavatraperos?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El baño tiene lavatraperos?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="lavatraperos" value="false" disabled>No</label>'
-                +'<div class="div_izquierda"><b>Cantidad de sifones<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de sifones:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_sifones" id="cantidad_sifones" value="" disabled required/><br>'
                 +'<div id="orinal">'
-                +'<div class="div_izquierda"><b>Tipo de orinal<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de orinal:</b></div>'
                 +'<select class="form-control formulario" name="" id="tipo_orinal" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de orinales<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de orinales:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_orinales" value="" disabled required/>'
                 +'</div>'
                 +'</div>';
@@ -4851,9 +4851,9 @@ $(document).ready(function() {
                             $("#tipo_lavamanos option[value='']").hide();
                         }else{
                             var componente = '<div id="lavamanos'+lavamanosCont+'">'
-                            +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="" id="tipo_lavamanos'+lavamanosCont+'" disabled required></select><br>'
-                            +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+'):</b></div>'
                             +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_lavamanos'+lavamanosCont+'" value="" disabled required/><br>'
                             +'</div>'
                             +'</div>';
@@ -4878,9 +4878,9 @@ $(document).ready(function() {
                             $("#tipo_orinal option[value='']").hide();
                         }else{
                             var componente = '<div id="orinal'+orinalesCont+'">'
-                            +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="tipo_orinal" id="tipo_orinal'+orinalesCont+'" disabled required></select><br>'
-                            +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+'):</b></div>'
                             +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_orinales" id="cantidad_orinales'+orinalesCont+'" value="" disabled required/><br>'
                             +'</div>';
                             añadirComponente("orinal",componente);
@@ -4900,9 +4900,9 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto Técnico</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto técnico:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
-                +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto de videobeam?<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>¿El cuarto técnico tiene punto de videobeam?:</b></div>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="true" disabled>S&iacute;</label>'
                 +'<label class="radio-inline"><input type="radio" name="punto_videobeam" value="false" disabled>No</label>'
                 +'</div>';
@@ -4919,7 +4919,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Bodega/Almacén</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 var componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la bodega o almacén:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -4934,7 +4934,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Plantas</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Plantas:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -4949,7 +4949,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Aires Acondicionados</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del cuarto de Aires Acondicionados:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -4964,7 +4964,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Área Deportiva Cerrada</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área deportiva cerrada<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del(as) área deportiva cerrada:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -4979,7 +4979,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Centro de Datos</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red del centro de datos/teléfono:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -4996,12 +4996,12 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Bombas</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos del cuarto de bombas:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
                 +'<div id="punto_sanitario">'
-                +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de punto sanitario del cuarto de bombas:</b></div>'
                 +'<select class="form-control formulario" name="" id="tipo_punto_sanitario" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del cuarto de bombas:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
                 +'</div>'
                 +'</div>';
@@ -5022,9 +5022,9 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario option[value='']").hide();
                         }else{
                             var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
-                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="" id="tipo_punto_sanitario'+puntosSanitariosCont+'" disabled required></select><br>'
-                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" disabled required/><br>'
                             +'</div>';
                             añadirComponente("punto_sanitario",componente);
@@ -5046,12 +5046,12 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Cocineta</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos hidráulicos de la cocineta:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_hidraulicos" id="cantidad_puntos_hidraulicos" value="" disabled required/><br>'
                 +'<div id="punto_sanitario">'
-                +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Tipo de punto sanitario de la cocineta:</b></div>'
                 +'<select class="form-control formulario" name="" id="tipo_punto_sanitario" disabled required></select><br>'
-                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios de la cocineta:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios" value="" disabled required/><br>'
                 +'</div>'
                 +'</div>';
@@ -5072,9 +5072,9 @@ $(document).ready(function() {
                             $("#tipo_punto_sanitario option[value='']").hide();
                         }else{
                             var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
-                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<select class="form-control formulario" name="" id="tipo_punto_sanitario'+puntosSanitariosCont+'" disabled required></select><br>'
-                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+                            +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+'):</b></div>'
                             +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" disabled required/><br>'
                             +'</div>';
                             añadirComponente("punto_sanitario",componente);
@@ -5094,7 +5094,7 @@ $(document).ready(function() {
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Estudio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
-                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio<font color="red">*</font>:</b></div>'
+                +'<div class="div_izquierda"><b>Cantidad de puntos de red de la sala de estudio:</b></div>'
                 +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_puntos_red" id="cantidad_puntos_red" value="" disabled required/><br>'
                 +'</div>';
                 añadirComponente("informacionUsoEspacio",componente);
@@ -7897,9 +7897,9 @@ $(document).ready(function() {
                     $("#cantidad_iluminacion").val(record.cantidad);
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
@@ -7918,9 +7918,9 @@ $(document).ready(function() {
                     $("#cantidad_interruptores").val(record.cantidad);
                 }else{
                     var componente = '<div id="interruptor'+interruptoresCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="tipo_interruptor" id="tipo_interruptor'+interruptoresCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="cantidad_interruptores" id="cantidad_interruptores'+interruptoresCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("interruptor",componente);
@@ -8390,9 +8390,9 @@ $(document).ready(function() {
                     $("#cantidad_iluminacion").val(record.cantidad);
                 }else{
                     var componente = '<div id="iluminacion'+iluminacionCont+'">'
-                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
                     +'<select class="form-control formulario" name="tipo_iluminacion" id="tipo_iluminacion'+iluminacionCont+'" disabled required></select><br>'
-                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+                    +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
                     +'<input class="form-control formulario" type="number" min="1" name="cantidad_iluminacion" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" disabled required/><br>'
                     +'</div>';
                     añadirComponente("iluminacion",componente);
@@ -8986,9 +8986,9 @@ $(document).ready(function() {
             iluminacionCont = 1;
         }
         var componente = '<div id="iluminacion'+iluminacionCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de lámpara ('+(iluminacionCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_iluminacion'+iluminacionCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de lámparas del tipo ('+(iluminacionCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" name="" maxlength="10" id="cantidad_iluminacion'+iluminacionCont+'" value="" required/>'
         +'</div>';
         añadirComponente("iluminacion",componente);
@@ -9019,15 +9019,15 @@ $(document).ready(function() {
             tomacorrientesCont = 1;
         }
         var componente = '<div id="suministro_energia'+tomacorrientesCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de suministro de energía ('+(tomacorrientesCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tomacorriente'+tomacorrientesCont+'" required>'
         +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
         +'<option value="regulado">Regulado</option>'
         +'<option value="no regulado">No Regulado</option>'
         +'</select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de tomacorrientes del tipo ('+(tomacorrientesCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_tomacorrientes'+tomacorrientesCont+'" value="" required/>'
         +'</div>';
         añadirComponente("suministro_energia",componente);
@@ -9059,24 +9059,24 @@ $(document).ready(function() {
             puertasCont = 1;
         }
         var componente = '<div id="puerta'+puertasCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de puerta ('+(puertasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de puertas del tipo ('+(puertasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puertas'+puertasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Material de la puerta ('+(puertasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="material_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Tipo de cerradura ('+(puertasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_cerradura'+puertasCont+'" required></select><br>'
         //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="añadir_tipo_cerradura" id="añadir_tipo_cerradura'+puertasCont+'" value="Añadir Tipo" title="Añadir Tipo Cerradura"/>'
         //+'<input type="submit" class="btn btn-primary btn-lg btn-agregar" name="eliminar_tipo_cerradura" id="eliminar_tipo_cerradura'+puertasCont+'" value="Eliminar Tipo" title="Eliminar Tipo Cerradura" disabled/>'
-        +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>¿La Puerta tiene gato? ('+(puertasCont+1)+'):</b></div>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="true">S&iacute;</label>'
         +'<label class="radio-inline"><input type="radio" name="gato_puerta'+puertasCont+'" value="false">No</label><br>'
-        +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Material del marco ('+(puertasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="material_marco_puerta'+puertasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Ancho puerta ('+(puertasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_puerta'+puertasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Alto puerta ('+(puertasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_puerta'+puertasCont+'" value="" required/>'
         +'</div>';
         añadirComponente("puerta",componente);
@@ -9112,15 +9112,15 @@ $(document).ready(function() {
             ventanasCont = 1;
         }
         var componente = '<div id="ventana'+ventanasCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de ventana ('+(ventanasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_ventana'+ventanasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de ventanas del tipo ('+(ventanasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_ventanas'+ventanasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Material de la ventana ('+(ventanasCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="material_ventana'+ventanasCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Ancho ventana ('+(ventanasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="ancho_ventana'+ventanasCont+'" value="" required/><br>'
-        +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Alto ventana ('+(ventanasCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="alto_ventana'+ventanasCont+'" value="" required/>'
         +'</div>';
         añadirComponente("ventana",componente);
@@ -9153,9 +9153,9 @@ $(document).ready(function() {
             interruptoresCont = 1;
         }
         var componente = '<div id="interruptor'+interruptoresCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de interruptor ('+(interruptoresCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_interruptor'+interruptoresCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de interruptores ('+(interruptoresCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_interruptores'+interruptoresCont+'" value="" required/>'
         +'</div>';
         añadirComponente("interruptor",componente);
@@ -9186,9 +9186,9 @@ $(document).ready(function() {
             puntosSanitariosCont = 1;
         }
         var componente = '<div id="punto_sanitario'+puntosSanitariosCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de punto sanitario ('+(puntosSanitariosCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_punto_sanitario'+puntosSanitariosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de puntos sanitarios del tipo ('+(puntosSanitariosCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_puntos_sanitarios'+puntosSanitariosCont+'" value="" required/>'
         +'</div>';
         añadirComponente("punto_sanitario",componente);
@@ -9219,9 +9219,9 @@ $(document).ready(function() {
             orinalesCont = 1;
         }
         var componente = '<div id="orinal'+orinalesCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de orinal ('+(orinalesCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_orinal'+orinalesCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de orinales del tipo ('+(orinalesCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_orinales'+orinalesCont+'" value="" required/>'
         +'</div>';
         añadirComponente("orinal",componente);
@@ -9252,9 +9252,9 @@ $(document).ready(function() {
             lavamanosCont = 1;
         }
         var componente = '<div id="lavamanos'+lavamanosCont+'">'
-        +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<br><div class="div_izquierda"><b>Tipo de lavamanos ('+(lavamanosCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="" id="tipo_lavamanos'+lavamanosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<div class="div_izquierda"><b>Cantidad de lavamanos ('+(lavamanosCont+1)+'):</b></div>'
         +'<input class="form-control formulario" type="number" min="1" maxlength="10" name="" id="cantidad_lavamanos'+lavamanosCont+'" value="" required/>'
         +'</div>'
         +'</div>';
