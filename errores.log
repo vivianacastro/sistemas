@@ -5755,3 +5755,11 @@
 [20-Nov-2016 22:53:30 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 394
 [20-Nov-2016 22:53:30 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
 [20-Nov-2016 22:53:30 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 386
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 388
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 390
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 392
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 394
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
+[20-Nov-2016 23:10:35 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
+[20-Nov-2016 23:23:52 America/Bogota] PHP Catchable fatal error:  Object of class PHPMailer could not be converted to string in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/modelo_usuario.php on line 431

@@ -428,13 +428,13 @@ class modelo_usuario {
             }else{
                 try{
                     $mail->Send();
+                    $GLOBALS['mensaje'] = "Se ha enviado un correo a ".$correo." con la información para reestablecer la contraseña";
+                    return true;
                 }catch(phpmailerException $e){
-                    //return $e->errorMessage();
+                    return $email->ErrorInfo;
                 }catch(Exception $e){
-                    //return $e->getMessage();
+                    return $email->ErrorInfo;
                 }
-                $GLOBALS['mensaje'] = "Se ha enviado un correo a ".$correo." con la información para reestablecer la contraseña";
-                return true;
             }
         }
     }
