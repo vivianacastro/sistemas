@@ -4457,7 +4457,7 @@ $(document).ready(function() {
                 }else if(!validarCadena(capacidad)){
                     alert("ERROR. Seleccione la capacidad del aire acondicionado");
                     $("#capacidad_aire").focus();
-                }if(!validarFechaMenorActual(fechaRealizacion)){
+                }if(!validarFechaMenorActual(fechaInstalacion)){
                     alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
                     $("#fecha_instalacion").focus();
                 }else{
