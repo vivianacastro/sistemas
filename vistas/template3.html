@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang='es'>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <meta name='description' content='Sistemas de la Sección de Sostenibilidad y Mantenimiento de la Universidad del Valle'/>
+    <meta name='author' content='Juan Camilo López Espitia'/>
+    <link href='vistas/images/univalle.png' rel='shortcut icon' type='image/png'/>
+
+    <!--<link rel='stylesheet' href='vistas/css/jquery.dataTables.css'/>
+    <link rel='stylesheet' href='vistas/css/responsive.dataTables.min.css'/>
+    <link rel='stylesheet' href='vistas/css/bootstrap-datepicker3.min.css'/>
+    <link rel='stylesheet' href='vistas/css/buttons.dataTables.min.css'/>
+    <link href='vistas/css/jquery-ui.css' rel='stylesheet'/>
+    <link href='vistas/css/ui.jqgrid.css' rel='stylesheet'/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href='vistas/css/bootstrap.min.css' rel='stylesheet'/>
+
+    <!-- Custom CSS -->
+    <link href='vistas/css/estilosApp.css?v=1.84' rel='stylesheet'/>
+
+    <title>Sistema de Informaci&oacute;n del Mantenimiento Institucional</title>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+        <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class='navbar navbar-default' id='navMenu' role='navigation'>
+        <div class='container'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class='navbar-brand' ><img src='vistas/images/idx-logouv.gif' alt='Matenimiento de la Universidad del Valle' title='Mantenimiento de la Universidad del Valle' width='200' height='28,571428571' /></a>
+                <div class='navbar-brand' id='mensaje'>Sistema de Información del Mantenimiento Institucional</div>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id='menu' class='brand'>
+                <img src='vistas/images/idx-logouv.gif' alt='Matenimiento de la Universidad del Valle' title='Mantenimiento de la Universidad del Valle'/>
+            </div>
+            <div class='address-bar'>Sección de Sostenibilidad y Mantenimiento</div><br>
+            <div id='divMensaje' class='nav navbar-nav'>
+                {mensaje}
+            </div><br>
+            <div class='collapse navbar-collapse' id='divMenu'>
+                <ul class='nav navbar-nav' id='operaciones'>
+                    {operaciones}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class='modal fade' role='dialog' id='divDialogTimeOut'> <!-- Para evitar que se cierre añadir: data-backdrop='static' data-keyboard='false'-->
+        <div class='modal-dialog' id='divTimeOut'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                   <h3><center>Timeout<br>Recargue la página por favor.</center></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- /.container -->
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-12 text-center' id='contenido'>
+                {contenido}
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <footer>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-lg-12 text-center'>
+                    <p id='copyrigth'>Universidad del Valle<br>2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--<script type='text/javascript' src='vistas/plugins/grid.locale-es.js'></script>
+    <script type='text/javascript' src='vistas/plugins/jquery.jqGrid.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/jquery.dataTables.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/dataTables.bootstrap.js'></script>
+    <script type='text/javascript' src='vistas/plugins/dataTables.select.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/dataTables.buttons.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/buttons.flash.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/jszip.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/pdfmake.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/vfs_fonts.js'></script>
+    <script type='text/javascript' src='vistas/plugins/buttons.html5.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/buttons.print.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/bootstrap-datepicker.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/bootstrap-datepicker.es.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/dataTables.responsive.min.js'></script>
+    <script type='text/javascript' src='vistas/plugins/BytescoutPDF.js'></script>
+    <script type='text/javascript' src='vistas/plugins/highcharts.js'></script>
+    <script type='text/javascript' src='vistas/plugins/exporting.js'></script>-->
+
+        <!-- jQuery -->
+    <script src='controlador/plugins/jquery.js'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src='controlador/plugins/bootstrap.min.js'></script>
+
+    <!-- Librerias Adicionales -->
+    <script src='controlador/global_functions.js'></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8xHemccOoUuS7rj641PFNikSJw9kkthY&libraries=drawing" defer></script>
+    
+    {librerias_adicionales}
+
+</body>
+
+</html>

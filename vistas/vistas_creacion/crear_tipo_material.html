@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Crear Tipo Material</h2></b><br></div>
+        <div><h4><b>Informaci&oacute;n del Tipo de Material</b></h4></div>
+        <div>Campos obligatorios (<font color='red'>*</font>)</div>
+        <div class='div_izquierda'><b>Tipo de Material<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='tipo_material' id='tipo_material' required>
+            <option value='seleccionar'>--Seleccionar--</option>
+            <option value='material_cubiertas'>Material de Cubiertas</option>
+            <option value='material_divisiones'>Material de Divisiones de Baño</option>
+            <option value='material_fachada'>Material de Fachada de Edificio</option>
+            <option value='material_marco_puerta'>Material de Marco Puerta</option>
+            <option value='material_pared'>Material de Pared</option>
+            <option value='material_pasamanos'>Material de Pasamanos de Gradas</option>
+            <option value='material_piso'>Material de Piso</option>
+            <option value='material_puerta'>Material de Puerta</option>
+            <option value='material_techo'>Material de Techo</option>
+            <option value='material_ventana'>Material de Ventana</option>
+        </select><br>
+        <div class='div_izquierda'><b>Nombre del Material<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' name='nombre_tipo_material' id='nombre_tipo_material' value='' placeholder='Ej: Madera' required/><br>
+    </div>
+    <div class='form_button'>
+        <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_tipo_material' id='guardar_tipo_material' value='Crear Tipo Material' title='Guardar información del Tipo de Material'/>
+    </div>
+</div>
