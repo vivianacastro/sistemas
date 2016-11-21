@@ -42,8 +42,8 @@ $(document).ready(function () {
 			$('#option_consultar_plazoleta').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_consultar_sendero') >= 0)) {
 			$('#option_consultar_sendero').addClass("opcion_activa_seleccion");
-		}else if ((URLactual['href'].indexOf('planta_consultar_vias') >= 0)) {
-			$('#option_consultar_vias').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('planta_consultar_via') >= 0)) {
+			$('#option_consultar_via').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_crear_edificio') >= 0)) {
 			$('#option_crear_edificio').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('planta_consultar_edificio') >= 0)) {
@@ -95,8 +95,8 @@ $(document).ready(function () {
 			$('#option_consultar_tipo_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_tecnologia_aire') >= 0)) {
 			$('#option_consultar_tecnologia_aire').addClass("opcion_activa_seleccion");
-		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_id_aire') >= 0)) {
-			$('#option_consultar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_registrar_mantenimiento_aire_id_aire') >= 0)) {
+			$('#option_registrar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_numero_orden') >= 0)) {
 			$('#option_consultar_mantenimiento_aire_numero_orden').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_mas_marcas_aire') >= 0)) {
