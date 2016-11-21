@@ -1454,7 +1454,7 @@ class controlador_creacion
       * Funcion que permite crear un aire acondicionado.
       * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
     **/
-    public function guardar_aire(){
+    public function guardar_aire_acondicionado(){
 		$GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $result = array();
