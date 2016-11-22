@@ -588,7 +588,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['pisos']);
             if($verificar){
-                $m->guardarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['pisos'],$info['tipo_cubierta'],$info['material_cubierta'],$info['ancho'],$info['largo'],$info['lat'],$info['lng']);
+                $m->guardarCubierta($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['pisos'],$info['tipo_cubierta'],$info['material_cubierta'],$info['ancho'],$info['largo']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];

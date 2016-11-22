@@ -5771,3 +5771,29 @@
 [21-Nov-2016 13:52:09 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
 [21-Nov-2016 13:52:09 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
 [21-Nov-2016 14:13:43 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 386
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 388
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 390
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 392
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 394
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
+[21-Nov-2016 20:23:12 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 386
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 388
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 390
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 392
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 394
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
+[21-Nov-2016 21:17:15 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
+[21-Nov-2016 21:20:26 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[21-Nov-2016 21:59:09 America/Bogota] PHP Notice:  Undefined index: lat in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 591
+[21-Nov-2016 21:59:09 America/Bogota] PHP Notice:  Undefined index: lng in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 591
+[21-Nov-2016 21:59:22 America/Bogota] PHP Notice:  Undefined index: ventana in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 614
+[21-Nov-2016 22:21:58 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 386
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 388
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 390
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 392
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 394
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
+[21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
