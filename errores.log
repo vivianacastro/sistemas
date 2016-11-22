@@ -5798,3 +5798,4 @@
 [21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 396
 [21-Nov-2016 23:17:01 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Downloads/sistemas/index.php on line 398
 [22-Nov-2016 00:51:05 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[22-Nov-2016 08:49:19 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/Users/juanc_000/Downloads/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
