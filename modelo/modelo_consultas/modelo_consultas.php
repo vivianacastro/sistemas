@@ -2933,7 +2933,7 @@ class modelo_consultas
         $fechaFin = htmlspecialchars(trim($fechaFin));
         $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
                 FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
-                WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'
+                WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
                 GROUP BY b.nombre ORDER BY suma DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -2964,7 +2964,7 @@ class modelo_consultas
             $fechaFin = htmlspecialchars(trim($fechaFin));
             $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
                     FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
-                    WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'
+                    WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
                     GROUP BY b.nombre ORDER BY suma ASC LIMIT 10;";
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
