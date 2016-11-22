@@ -1605,8 +1605,9 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarIdAire($info['id_aire']);
 			$verificarOrden = $n->verificarOrdenMantenimiento($info['numero_orden']);
+			$verificarSolicitud = $m->verificarSolicitudMantenimiento($info['numero_orden']);
 			$verificarAireOrden = $m->verificarMantenimientoAire($info['id_aire'],$info['numero_orden']);
-            if($verificar && $verificarOrden && $verificarAireOrden){
+            if($verificar && $verificarOrden && $verificarAireOrden && $verificarSolicitud){
                 $verificar = $m->guardarMantenimientoAire($info['id_aire'],$info['numero_orden'],$info['fecha_realizacion'],$info['realizado'],$info['revisado'],$info['descripcion']);
             }elseif(!$verificar){
 				$GLOBALS['mensaje'] = "ERROR. El aire con id ".$info['id_aire']." no se encuentra registrado en el sistema";
@@ -1616,6 +1617,9 @@ class controlador_creacion
 				$verificar = false;
 			}elseif(!$verificarAireOrden){
 				$GLOBALS['mensaje'] = "ERROR. La solicitud de mantenimiento con número ".$info['numero_orden']." del aire con id ".$info['id_aire']." ya se encuentra registrada en el sistema";
+				$verificar = false;
+			}elseif(!$verificarSolicitud){
+				$GLOBALS['mensaje'] = "ERROR. La solicitud de mantenimiento con número ".$info['numero_orden']." ya se encuentra registrada en el sistema";
 				$verificar = false;
 			}
         }

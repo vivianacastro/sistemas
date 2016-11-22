@@ -4096,6 +4096,35 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite consultar si un mantenimiento a un aire acondicionado ya esta registrado en el sistema.
+     * @param string $numero_orden, número de orden de mantenimiento.
+     * @return array
+    **/
+    public function verificarSolicitudMantenimiento($numero_orden){
+        $id_aire = htmlspecialchars(trim($id_aire));
+        $numero_orden = htmlspecialchars(trim($numero_orden));
+        $sql = "SELECT * FROM mantenimiento_aire WHERE numero_orden = '".$numero_orden."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Solicitud Mantenimiento 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Solicitud Mantenimiento 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si una marca del módulo de inventario ya está registrada en el sistema.
      * @param string $marca, nombre de la marca.
      * @return array
