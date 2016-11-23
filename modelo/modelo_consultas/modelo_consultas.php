@@ -1725,7 +1725,7 @@ class modelo_consultas
     public function buscarArticulos(){
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima, c.cantidad
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
-                                JOIN inventario c ON a.id_articulo = c.id_articulo
+                                LEFT JOIN inventario c ON a.id_articulo = c.id_articulo
                 ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

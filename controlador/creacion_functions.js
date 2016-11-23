@@ -4693,7 +4693,13 @@ $(document).ready(function() {
             var proveedorRepetido = false;
             for (var i = 0; i <= proveedoresCont; i++) {
                 if (i == 0) {
-                    proveedores[i] = $("#proveedor_articulo").val();
+                    if ($("#proveedor_articulo").val() != "") {
+                        proveedores[i] = $("#proveedor_articulo").val();
+                    }else{
+                        alert("ERROR. Seleccione por lo menos un proveedor");
+                        proveedorRepetido = true;
+                        break;
+                    }
                 }else{
                     var aux = $("#proveedor_articulo"+i).val();
                     if (proveedores.indexOf(aux) == -1) {

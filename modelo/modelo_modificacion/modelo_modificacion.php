@@ -2992,7 +2992,11 @@ class modelo_modificacion {
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $cantidad = htmlspecialchars(trim($cantidad));
         $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        $sql = "UPDATE inventario SET cantidad = ".$cantidad." + cantidad WHERE id_articulo = '".$id_articulo."' RETURNING cantidad;";
+        if (strcasecmp($cantidad_anterior,"nuevo") == 0) {
+            $sql = "INSERT INTO inventario (id_articulo,cantidad) VALUES ('".$id_articulo."',".$cantidad.") RETURNING cantidad;";
+        }else{
+            $sql = "UPDATE inventario SET cantidad = ".$cantidad." + cantidad WHERE id_articulo = '".$id_articulo."' RETURNING cantidad;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 1)";

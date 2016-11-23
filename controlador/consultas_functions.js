@@ -12383,7 +12383,7 @@ $(document).ready(function() {
                 if (i == 0) {
                     var aux = parseInt($("#cantidad").val());
                     var aux2 = parseInt($("#cantidad").attr("name"));
-                    if ((aux < 0) && ((aux2 + aux) < 0)) {
+                    if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad").focus();
@@ -12391,12 +12391,16 @@ $(document).ready(function() {
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir").val();
                         cantidad[i] = aux;
-                        cantidadAnterior[i] = aux2;
+                        if (isNaN(aux2)) {
+                            cantidadAnterior[i] = "nuevo";
+                        }else{
+                            cantidadAnterior[i] = aux2;
+                        }
                     }
                 }else{
                     var aux = parseInt($("#cantidad"+i).val());
                     var aux2 = parseInt($("#cantidad"+i).attr("name"));
-                    if ((aux < 0) && ((aux2 + aux) < 0)) {
+                    if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad"+i).focus();
@@ -12404,7 +12408,11 @@ $(document).ready(function() {
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
                         cantidad[i] = aux;
-                        cantidadAnterior[i] = aux2;
+                        if (isNaN(aux2)) {
+                            cantidadAnterior[i] = "nuevo";
+                        }else{
+                            cantidadAnterior[i] = aux2;
+                        }
                     }
                 }
             }
