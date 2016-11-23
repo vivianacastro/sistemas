@@ -1643,7 +1643,7 @@ class modelo_consultas
         $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca
                 FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
                                     JOIN marca_inventario c ON b.marca = c.id
-                ORDER BY b.nombre;";
+                ORDER BY b.nombre; ORDER BY a.id_articulo";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Inventario 1)";

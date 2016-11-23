@@ -6491,6 +6491,7 @@ $(document).ready(function() {
             eliminarComponente("articulo"+anadirArticulosCont);
         }
         $("#cantidad").attr("placeholder","Ej: 10");
+        $("#cantidad").attr("name","cantidad");
         $("#eliminar_articulo").attr('disabled',true);
     });
 
