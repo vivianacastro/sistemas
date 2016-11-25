@@ -13,6 +13,12 @@ $(document).ready(function() {
      * @returns {undefined}
     */
     (function (){
+        $('.form-group input').datepicker({
+            todayBtn: true,
+            language: "es",
+            autoclose: true,
+            orientation: "auto"
+        });
         if(URLactual['href'].indexOf('crear_campus') >= 0){
             actualizarSelectSede();
             initMap();

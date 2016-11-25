@@ -15,6 +15,13 @@ $(document).ready(function() {
      * @returns {undefined}
     **/
     (function (){
+        $('.form-group .input-daterange').datepicker({
+            endDate: "today",
+            todayBtn: "linked",
+            language: "es",
+            autoclose: true,
+            orientation: "auto"
+        });
         if(URLactual['href'].indexOf('consultar_sede') >= 0){
             actualizarSelectSede();
         }else if(URLactual['href'].indexOf('consultar_campus') >= 0){

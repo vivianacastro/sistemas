@@ -465,6 +465,13 @@ html, body {
     color: #D51B23;
 }
 
+#fecha_inicio{
+    border-radius: 10px 0px 0px 10px;
+}
+
+#fecha_fin{
+    border-radius: 0px 10px 10px 0px;
+}
 
 #fileInputOculto{
     width: 100%;
