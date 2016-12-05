@@ -13,7 +13,7 @@ $(document).ready(function() {
      * @returns {undefined}
     */
     (function (){
-        $('.form-group input').datepicker({
+        $('.form-group #fecha_instalacion').datepicker({
             todayBtn: true,
             language: "es",
             autoclose: true,
