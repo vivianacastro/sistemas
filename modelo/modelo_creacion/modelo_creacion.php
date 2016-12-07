@@ -308,7 +308,6 @@ class modelo_creacion {
      * @param string $piso_inicio, piso de inicio de las gradas.
      * @param string $pasamanos, si las gradas tienen pasamanos.
      * @param string $material_pasamanos, id del material del pasamanos.
-     * @param string $ventana, indica si las gradas tienen o no ventanas.
      * @param string $tipoVentana, tipo de ventana de las gradas.
      * @param string $cantidadVentanas, cantidad de ventanas del tipo de las gradas.
      * @param string $materialVentana, material de las ventanas de las gradas.
@@ -316,14 +315,13 @@ class modelo_creacion {
      * @param string $altoVentana, alto de las ventanas de las gradas.
      * @return array
     **/
-    public function guardarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$pasamanos,$material_pasamanos,$ventana,$tipoVentana,$cantidadVentanas,$materialVentana,$anchoVentana,$altoVentana){
+    public function guardarGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$pasamanos,$material_pasamanos,$tipoVentana,$cantidadVentanas,$materialVentana,$anchoVentana,$altoVentana){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
         $piso_inicio = htmlspecialchars(trim($piso_inicio));
         $pasamanos = htmlspecialchars(trim($pasamanos));
         $material_pasamanos = htmlspecialchars(trim($material_pasamanos));
-        $ventana = htmlspecialchars(trim($ventana));
         $campos = "id_sede,id_campus,id_edificio,piso_inicio,pasamanos,usuario_crea";
         $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso_inicio."','".$pasamanos."','".$_SESSION['login']."'";
         if (strcasecmp($material_pasamanos,'') != 0) {
@@ -342,10 +340,8 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                if (strcasecmp($ventana,'true') == 0) {
-                    for ($i=0;$i<count($tipoVentana);$i++) {
-                        $this->guardarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$tipoVentana[$i],$cantidadVentanas[$i],$materialVentana[$i],$anchoVentana[$i],$altoVentana[$i]);
-                    }
+                for ($i=0;$i<count($tipoVentana);$i++) {
+                    $this->guardarVentanaGradas($nombre_sede,$nombre_campus,$nombre_edificio,$piso_inicio,$tipoVentana[$i],$cantidadVentanas[$i],$materialVentana[$i],$anchoVentana[$i],$altoVentana[$i]);
                 }
                 $GLOBALS['mensaje'] = "Las gradas se guardaron correctamente";
             }

@@ -5848,3 +5848,7 @@
 [07-Dec-2016 15:08:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/index.php on line 394
 [07-Dec-2016 15:08:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/index.php on line 396
 [07-Dec-2016 15:08:56 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/index.php on line 398
+[07-Dec-2016 15:10:10 America/Bogota] PHP Notice:  Undefined index: ventana in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 614
+[07-Dec-2016 15:13:06 America/Bogota] PHP Notice:  Undefined index: punto_videobeam in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 761
+[07-Dec-2016 15:13:06 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1417
+[07-Dec-2016 15:13:06 America/Bogota] PHP Notice:  Undefined index: espacio in /media/windows/Users/juanc_000/Google Drive/Universidad/Trabajo de Grado/CódigoFuente/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1441

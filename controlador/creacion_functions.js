@@ -257,7 +257,6 @@ $(document).ready(function() {
                     console.log(err.Message);
                 },
                 success: function(data) {
-                    dataEspacio = {};
                     var resultadoPlanos = guardarPlanos("espacio",dataEspacio['planos']);
                     var resultadoFotos = guardarFotos("espacio",dataEspacio['fotos']);
                     alert(data.mensaje);
@@ -2282,7 +2281,6 @@ $(document).ready(function() {
                 var pisoInicio = $("#pisos").val();
                 var pasamanos = $('input[name="pasamanos"]:checked').val();
                 var materialPasamanos = $("#material_pasamanos").val();
-                var ventanas = $('input[name="ventanas"]:checked').val();
                 var tipoVentana = {};
                 var cantidadVentanas = {};
                 var materialVentana = {};
@@ -2317,7 +2315,6 @@ $(document).ready(function() {
                     informacion['piso_inicio'] = pisoInicio;
                     informacion['pasamanos'] = pasamanos;
                     informacion['material_pasamanos'] = materialPasamanos;
-                    informacion['ventana'] = ventanas;
                     for (var i=0;i<=ventanasCont;i++) {
                         if (i==0) {
                             tipoVentana[i] = $("#tipo_ventana").val();

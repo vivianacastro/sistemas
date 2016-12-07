@@ -611,7 +611,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio']);
             if($verificar){
-                $m->guardarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio'],$info['pasamanos'],$info['material_pasamanos'],$info['ventana'],$info['tipo_ventana'],$info['cantidad_ventanas'],$info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana']);
+                $m->guardarGradas($info['nombre_sede'],$info['nombre_campus'],$info['nombre_edificio'],$info['piso_inicio'],$info['pasamanos'],$info['material_pasamanos'],$info['tipo_ventana'],$info['cantidad_ventanas'],$info['material_ventana'],$info['ancho_ventana'],$info['alto_ventana']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
