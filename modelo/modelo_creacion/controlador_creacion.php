@@ -1417,10 +1417,13 @@ class controlador_creacion
             $infoEspacio = json_decode($_POST['espacio'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarPlanoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$infoEspacio['id_espacio'],$file);
-                $result['mensaje'][$i] = $GLOBALS['mensaje'];
-                $result['sql'] = $GLOBALS['sql'];
-                $result['verificar'][$i] = $verificar;
+				$espacios = $infoEspacio['numero_espacio'];
+				for ($a=0; $a<count($espacios); $a++) {
+					$verificar = $m->guardarPlanoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$espacios[$a],$file);
+	                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+	                $result['sql'] = $GLOBALS['sql'];
+	                $result['verificar'][$i] = $verificar;
+				}
             }
         }
         echo json_encode($result);
@@ -1441,10 +1444,13 @@ class controlador_creacion
             $infoEspacio = json_decode($_POST['espacio'], true);
             for ($i=0; $i < count($info); $i++) {
                 $file = $info['archivo'.$i];
-                $verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$infoEspacio['id_espacio'],$file);
-                $result['mensaje'][$i] = $GLOBALS['mensaje'];
-                $result['sql'] = $GLOBALS['sql'];
-                $result['verificar'][$i] = $verificar;
+				$espacios = $infoEspacio['numero_espacio'];
+				for ($a=0; $a<count($espacios); $a++) {
+					$verificar = $m->guardarFotoEspacio($infoEspacio['nombre_sede'],$infoEspacio['nombre_campus'],$infoEspacio['nombre_edificio'],$espacios[$a],$file);
+	                $result['mensaje'][$i] = $GLOBALS['mensaje'];
+	                $result['sql'] = $GLOBALS['sql'];
+	                $result['verificar'][$i] = $verificar;
+				}
             }
         }
         echo json_encode($result);

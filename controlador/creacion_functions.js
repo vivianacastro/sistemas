@@ -3,6 +3,8 @@ $(document).ready(function() {
     var numeroAires, espaciosCont = 0, iluminacionCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, proveedoresCont = 0;
     var coordenadas = {};
     var dataEspacio = {};
+    var arregloFotosEspacio = new FormData();
+    var arregloPlanosEspacio = new FormData();
     var map;
     var icono = "";
     var URLactual = window.location;
@@ -257,8 +259,8 @@ $(document).ready(function() {
                     console.log(err.Message);
                 },
                 success: function(data) {
-                    var resultadoPlanos = guardarPlanos("espacio",dataEspacio['planos']);
-                    var resultadoFotos = guardarFotos("espacio",dataEspacio['fotos']);
+                    var resultadoPlanos = guardarPlanos("espacio",arregloPlanosEspacio);
+                    var resultadoFotos = guardarFotos("espacio",arregloFotosEspacio);
                     alert(data.mensaje);
                     console.log(data);
                     console.log(resultadoPlanos);
@@ -3396,8 +3398,6 @@ $(document).ready(function() {
                         informacion['tipo_interruptor'] = tipoInterruptor;
                         informacion['cantidad_interruptores'] = cantidadInterruptores;
                         informacion['numero_espacio_padre'] = numero_espacio_padre;
-                        var arregloFotos = new FormData();
-                        var arregloPlanos = new FormData();
                         if (piso == 'sotano') {
                             informacion['piso'] = '0';
                         }
@@ -3414,7 +3414,7 @@ $(document).ready(function() {
                                     if(nombreArchivo.length > 50){
                                         nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                                     }
-                                    arregloFotos.append('archivo'+i,foto,nombreArchivo);
+                                    arregloFotosEspacio.append('archivo'+i,foto,nombreArchivo);
                                 }
                             }
                             for (var i=0;i<planos.files.length;i++) {
@@ -3426,13 +3426,11 @@ $(document).ready(function() {
                                     if(nombreArchivo.length > 50){
                                         nombreArchivo = plano.name = plano.name.substring(plano.name.length-50, plano.name.length);
                                     }
-                                    arregloPlanos.append('archivo'+i,plano,nombreArchivo);
+                                    arregloPlanosEspacio.append('archivo'+i,plano,nombreArchivo);
                                 }
                             }
-                            arregloFotos.append('espacio',JSON.stringify(informacion));
-                            arregloPlanos.append('espacio',JSON.stringify(informacion));
-                            dataEspacio['fotos'] = arregloFotos;
-                            dataEspacio['planos'] = arregloPlanos;
+                            arregloFotosEspacio.append('espacio',JSON.stringify(informacion));
+                            arregloPlanosEspacio.append('espacio',JSON.stringify(informacion));
                             dataEspacio = informacion;
                             $('#botones_punto_sanitario').hide();
                             $('#botones_lavamanos').hide();
