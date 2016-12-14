@@ -3923,7 +3923,7 @@ class modelo_creacion {
                         }
                     }
                 }else{
-                    $GLOBALS['mensaje'] = $ruta;
+                    $GLOBALS['mensaje'] = $a;
                     return false;
                 }
             }else{
