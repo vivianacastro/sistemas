@@ -3896,7 +3896,9 @@ class modelo_creacion {
             $ruta = __ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/";
             if (!file_exists($ruta.$foto['name'])) {
                 if (!file_exists($ruta)) {
+                    $oldmask = umask(0);
                     mkdir($ruta, 0777, true);
+                    umask($oldmask);
                 }
                 $value = move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
                 if ($value) {
@@ -3920,7 +3922,7 @@ class modelo_creacion {
                         }
                     }
                 }else{
-                    $GLOBALS['mensaje'] = $value;
+                    $GLOBALS['mensaje'] = $ruta;
                     return false;
                 }
             }else{
