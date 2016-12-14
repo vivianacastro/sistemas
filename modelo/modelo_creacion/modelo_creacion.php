@@ -3895,7 +3895,8 @@ class modelo_creacion {
             $foto['name'] = str_replace(" ", "",$foto['name']);
             $ruta = __ROOT__."/archivos/images/aire_acondicionado/".$id_aire."/";
             if (!file_exists($ruta.$foto['name'])) {
-                if (!file_exists($ruta)) {
+                var $a = file_exists($ruta)
+                if (!$a) {
                     $oldmask = umask(0);
                     mkdir($ruta, 0777, true);
                     umask($oldmask);
