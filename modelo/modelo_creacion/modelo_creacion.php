@@ -3920,7 +3920,7 @@ class modelo_creacion {
                         }
                     }
                 }else{
-                    $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                    $GLOBALS['mensaje'] = $value;
                     return false;
                 }
             }else{
