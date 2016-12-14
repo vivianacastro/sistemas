@@ -3898,29 +3898,25 @@ class modelo_creacion {
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
                 }
-                $value = move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
-                if ($value) {
-                    $sql = "INSERT INTO aire_acondicionado_archivos (id_aire,nombre,tipo) VALUES ('".$id_aire."','".$foto['name']."','foto');";
-                    $l_stmt = $this->conexion->prepare($sql);
-                    if(!$l_stmt){
-                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 1)";
+                move_uploaded_file($foto["tmp_name"], $ruta.$foto['name']);
+                $sql = "INSERT INTO aire_acondicionado_archivos (id_aire,nombre,tipo) VALUES ('".$id_aire."','".$foto['name']."','foto');";
+                $l_stmt = $this->conexion->prepare($sql);
+                if(!$l_stmt){
+                    $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 1)";
+                    unlink($ruta.$foto['name']);
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    if(!$l_stmt->execute()){
+                        $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 2)";
                         unlink($ruta.$foto['name']);
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        if(!$l_stmt->execute()){
-                            $GLOBALS['mensaje'] = "Error: SQL (Guardar Foto-Aire 2)";
-                            unlink($ruta.$foto['name']);
-                            $GLOBALS['sql'] = $sql;
-                            return false;
-                        }else{
-                            $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
-                            $GLOBALS['sql'] = $sql;
-                            return true;
-                        }
+                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        $GLOBALS['sql'] = $sql;
+                        return true;
                     }
-                }else{
-                    return false;
                 }
             }else{
                 $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
