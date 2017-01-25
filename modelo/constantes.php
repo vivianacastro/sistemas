@@ -5,7 +5,7 @@ ini_set('display_errors', '1');*/
  * Constantes del sistema
  */
 const T_SEGUNDOS_INACTIVIDAD_PERMITIDO = 1000;//600;
-const ESTILO     = 'estilo.css';
+const ESTILO = 'estilo.css';
 const USUARIO = 'usuario';
 const CONSULTAS = 'consultas';
 const CREACION = 'creacion';
