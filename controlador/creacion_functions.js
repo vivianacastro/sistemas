@@ -4528,6 +4528,7 @@ $(document).ready(function() {
                         $("#capacidad_aire").val("");
                         $("#tipo_tecnologia_aire").val("");
                         $("#fecha_instalacion").val("");
+                        $("#.form-group #fecha_instalacion").clearDates();
                         $("#instalador").val("");
                         $("#tipo_periodicidad_mantenimiento").val("");
                         $("#ubicacion_condensadora").val("");
@@ -4599,6 +4600,7 @@ $(document).ready(function() {
                     $("#id_aire").val("");
                     $("#numero_orden").val("");
                     $("#fecha_realizacion").val("");
+                    $('.form-group #fecha_realizacion').clearDates();
                     $("#realizado").val("");
                     $("#revisado").val("");
                     $("#descripcion_trabajo").val("");
