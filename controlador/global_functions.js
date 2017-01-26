@@ -1,5 +1,5 @@
 /**
-*funciones globales de la aplicacion
+funciones globales de la aplicacion
 **/
 $(document).ready(function () {
 	//$('#divDialogTimeOut').modal({backdrop: 'static', keyboard: false});
