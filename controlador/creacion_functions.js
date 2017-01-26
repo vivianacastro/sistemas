@@ -15,12 +15,6 @@ $(document).ready(function() {
      * @returns {undefined}
     */
     (function (){
-        $('.form-group #fecha_instalacion').datepicker({
-            todayBtn: true,
-            language: "es",
-            autoclose: true,
-            orientation: "auto"
-        });
         if(URLactual['href'].indexOf('crear_campus') >= 0){
             actualizarSelectSede();
             initMap();
@@ -116,8 +110,22 @@ $(document).ready(function() {
             actualizarSelectTipoObjeto("tipo_tecnologia_aire",0);
             actualizarSelectTipoObjeto("tipo_periodicidad_mantenimiento",0);
             actualizarSelectTipoObjeto("tipo_aire",0);
+            $('.form-group #fecha_instalacion').datepicker({
+                endDate: "today",
+                todayBtn: "linked",
+                language: "es",
+                autoclose: true,
+                orientation: "auto"
+            });
         }else if(URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
             actualizarSelectSede();
+            $('.form-group #fecha_realizacion').datepicker({
+                endDate: "today",
+                todayBtn: "linked",
+                language: "es",
+                autoclose: true,
+                orientation: "auto"
+            });
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
             actualizarSelectMarcas();
             actualizarSelectProveedores(proveedoresCont);

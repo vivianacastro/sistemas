@@ -95,10 +95,12 @@ $(document).ready(function () {
 			$('#option_consultar_tipo_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_tecnologia_aire') >= 0)) {
 			$('#option_consultar_tecnologia_aire').addClass("opcion_activa_seleccion");
-		}else if ((URLactual['href'].indexOf('aires_registrar_mantenimiento_aire_id_aire') >= 0)) {
-			$('#option_registrar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_registrar_mantenimiento_aire') >= 0)) {
+			$('#option_registrar_mantenimiento_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_numero_orden') >= 0)) {
 			$('#option_consultar_mantenimiento_aire_numero_orden').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_consultar_mantenimiento_aire_id_aire') >= 0)) {
+			$('#option_consultar_mantenimiento_aire_id_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_mas_marcas_aire') >= 0)) {
 			$('#option_mas_marcas_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_mas_tipos_aire') >= 0)) {
