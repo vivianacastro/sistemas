@@ -5492,6 +5492,7 @@ $(document).ready(function() {
     $("#visualizarMantenimientoAire").click(function (e){
         var informacion =  {};
         var numeroOrden = $("#numero_orden_search").val();
+        var conteo = 0;
         if (validarCadena(numeroOrden)) {
             informacion['numero_orden'] = numeroOrden;
             var data = consultarInformacionObjeto("mantenimiento_aire",informacion);
@@ -5504,9 +5505,14 @@ $(document).ready(function() {
                     $("#realizado").val(record.realizado);
                     $("#revisado").val(record.revisado);
                     $("#descripcion_trabajo").val(record.descripcion);
+                    conteo++;
                 }
             });
-            $("#divDialogConsulta").modal('show');
+            if (conteo > 0) {
+                $("#divDialogConsulta").modal('show');
+            }else{
+                alert("ERROR. No se encuentra registrado un mantenimiento con el número de solicitud dado");
+            }
         }else{
             alert("ERROR. Ingrese el numero de la orden de mantenimiento");
             $("#numero_orden_search").focus();
