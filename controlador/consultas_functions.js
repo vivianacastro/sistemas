@@ -5512,6 +5512,7 @@ $(document).ready(function() {
                 $("#divDialogConsulta").modal('show');
             }else{
                 alert("ERROR. No se encuentra registrado un mantenimiento con el número de solicitud dado");
+                $("#numero_orden_search").focus();
             }
         }else{
             alert("ERROR. Ingrese el numero de la orden de mantenimiento");
