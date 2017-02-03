@@ -2574,7 +2574,7 @@ $(document).ready(function() {
                     conteo++;
                 }
             });
-            if (conteo > 0) {
+            if (conteo < 1) {
                 $("#cantidad"+conteoArticulos).attr('name',"cantidad");
                 $("#cantidad"+conteoArticulos).attr("placeholder","Ej: 10");
             }
