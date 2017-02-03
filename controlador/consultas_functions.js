@@ -974,7 +974,7 @@ $(document).ready(function() {
                 enabled: false
             },
             tooltip: {
-                pointFormat: 'Aires Acondicionados: <b>{point.y:.0f}</b>'
+                pointFormat: '<b>{point.y:.0f}</b>'
             },
             plotOptions: {
                 column: {
@@ -2103,7 +2103,7 @@ $(document).ready(function() {
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
                     $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
-                    $('#consultarMovimientosInventario').removeAttr("disabled");
+                    $('#consultarMovimientosInventario').removeAttr("disabled",true);
                     $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
                     $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
@@ -2164,7 +2164,7 @@ $(document).ready(function() {
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
                     $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
-                    $('#consultarMovimientosInventario').removeAttr("disabled");
+                    $('#consultarMovimientosInventario').removeAttr("disabled",true);
                     $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
                     $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
