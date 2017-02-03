@@ -2153,7 +2153,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarProveedores(){
-        $sql = "SELECT * FROM proveedor ORDER BY id_proveedor;";
+        $sql = "SELECT * FROM proveedor ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Proveedores 1)";

@@ -2566,12 +2566,18 @@ $(document).ready(function() {
             var informacion = {};
             informacion["id_articulo"] = idArticulo;
             var data = consultarArticuloInventario(informacion);
+            var conteo = 0;
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#cantidad"+conteoArticulos).attr('name',record.cantidad);
                     $("#cantidad"+conteoArticulos).attr("placeholder","Disponibles: "+record.cantidad);
+                    conteo++;
                 }
             });
+            if (conteo > 0) {
+                $("#cantidad"+conteoArticulos).attr('name',"cantidad");
+                $("#cantidad"+conteoArticulos).attr("placeholder","Ej: 10");
+            }
         }
     });
 
@@ -12557,6 +12563,7 @@ $(document).ready(function() {
                             alert(data.mensaje);
                             if (data.verificar) {
                                 $("#nombre_articulo_search").val("");
+                                $("#marca_search").val("");
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";
                             }
@@ -12580,7 +12587,7 @@ $(document).ready(function() {
             var informacion = {};
             var nombre = limpiarCadena($("#nombre_marca").val());
             var nombreAnterior = limpiarCadena($("#nombre_marca").attr("name"));
-            if (!validarCadena(nombreMarca)) {
+            if (!validarCadena(nombre)) {
                 alert("ERROR. Ingrese el nuevo nombre de la marca");
                 $("#nombre_marca").focus();
             }else{
