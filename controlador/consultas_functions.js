@@ -13041,7 +13041,7 @@ $(document).ready(function() {
         var data = listarMovimientosInventario(informacion);
         console.log(data);
         $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
+            if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
 				var nombre = record.nombre_articulo;
 				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
 				var marca = record.nombre_marca;
