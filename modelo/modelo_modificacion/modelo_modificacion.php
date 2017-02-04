@@ -3011,9 +3011,9 @@ class modelo_modificacion {
                 $result = $l_stmt->fetchAll();
                 foreach ($result as $clave => $valor) {
                     $cantidadNueva = $valor['cantidad'];
-                    $cantidadAnterior = $cantidadNueva + $cantidad;
+                    $cantidadAnterior = $cantidadNueva - $cantidad;
                 }
-                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidad);
+                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidadNueva);
                 $GLOBALS['mensaje'] = "La información del inventario se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
