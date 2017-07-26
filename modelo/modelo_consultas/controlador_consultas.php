@@ -2545,7 +2545,7 @@ class controlador_consultas{
             $dirint = dir($directory);
             while (($archivo = $dirint->read()) !== false){
               //if($archivo != '.' && $archivo != '..' && $archivo != '.htaccess'){
-              if (preg_match("gif", $archivo) || preg_match("jpg", $archivo) || preg_match("png", $archivo)){
+              if (preg_match("/gif/", $archivo) || preg_match("/jpg/", $archivo) || preg_match("/png/", $archivo)){
                     $arrayAux = array(
                         'nombre' => $archivo,
                     );
