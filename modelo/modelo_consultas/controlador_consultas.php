@@ -687,6 +687,27 @@ class controlador_consultas{
     }
 
     /**
+     * Función que despliega el panel que permite consultar una categoría de artículos.
+    **/
+    public function consultar_categoria() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Categoría Artículos',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_CATEGORIA, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_CATEGORIA, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
      * Función que despliega el panel que permite consultar una marca.
     **/
     public function consultar_marca() {
@@ -729,19 +750,19 @@ class controlador_consultas{
     }
 
     /**
-     * Función que despliega el panel que permite consultar el inventario.
+     * Función que despliega el panel que permite consultar el inventario de la bodega eléctrica.
     **/
-    public function consultar_inventario() {
+    public function consultar_inventario_electrico() {
         $GLOBALS['mensaje'] = "";
         $data = array(
-            'mensaje' => 'Consultar Inventario',
+            'mensaje' => 'Consultar Inventario Eléctrico',
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
             if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
-                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_INVENTARIO, $data);
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_INVENTARIO_ELECTRICO, $data);
             }else{
-                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO, $data);
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO_ELECTRICO, $data);
             }
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
@@ -750,19 +771,61 @@ class controlador_consultas{
     }
 
     /**
-     * Función que despliega el panel que permite consultar el inventario.
+     * Función que despliega el panel que permite consultar el inventario de la bodega hidraulica.
     **/
-    public function movimientos_inventario() {
+    public function consultar_inventario_hidraulico() {
         $GLOBALS['mensaje'] = "";
         $data = array(
-            'mensaje' => 'Movimientos Inventario',
+            'mensaje' => 'Consultar Inventario Hidráulico',
         );
         $v = new controlador_vista();
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
             if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
-                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_MOVIMIENTOS_INVENTARIO, $data);
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO, $data);
             }else{
-                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO, $data);
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar el inventario de la bodega eléctrica.
+    **/
+    public function movimientos_inventario_electrico() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Movimientos Inventario Eléctrico',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar el inventario de la bodega hidraulica.
+    **/
+    public function movimientos_inventario_hidraulico() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Movimientos Inventario Hidráulico',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO, $data);
             }
         }else{
             $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];

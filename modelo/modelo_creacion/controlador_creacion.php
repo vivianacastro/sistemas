@@ -424,6 +424,24 @@ class controlador_creacion
     }
 
 	/**
+     * Función que despliega el panel que permite crear una categoría de artículos en el sistema.
+    **/
+    public function crear_categoria() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $data = array(
+            'mensaje' => 'Crear Categoría',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+            $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_CATEGORIA, $data);
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+	/**
      * Función que despliega el panel que permite crear una marca en el sistema.
     **/
     public function crear_marca() {

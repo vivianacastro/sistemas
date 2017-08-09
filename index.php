@@ -267,13 +267,17 @@ $map = array(
     //Acciones Módulo Inventario
         //Acciones de carga de plantillas
         'inventario_crear_articulo' => array('controlador' =>'controlador_creacion', 'action' =>'crear_articulo'),
+        'inventario_crear_categoria' => array('controlador' =>'controlador_creacion', 'action' =>'crear_categoria'),
         'inventario_crear_marca' => array('controlador' =>'controlador_creacion', 'action' =>'crear_marca'),
         'inventario_crear_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'crear_proveedor'),
         'inventario_consultar_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo'),
+        'inventario_consultar_categoria' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_categoria'),
         'inventario_consultar_marca' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marca'),
         'inventario_consultar_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedor'),
-        'inventario_consultar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_inventario'),
-        'inventario_movimientos_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'movimientos_inventario'),
+        'inventario_consultar_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_inventario_electrico'),
+        'inventario_consultar_inventario_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_inventario_hidraulico'),
+        'inventario_movimientos_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'movimientos_inventario_electrico'),
+        'inventario_movimientos_inventario_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'movimientos_inventario_hidraulico'),
         'inventario_articulos_mas_usados' => array('controlador' =>'controlador_consultas', 'action' =>'articulos_mas_usados'),
         'inventario_articulos_menos_usados' => array('controlador' =>'controlador_consultas', 'action' =>'articulos_menos_usados'),
         //Acciones de creación

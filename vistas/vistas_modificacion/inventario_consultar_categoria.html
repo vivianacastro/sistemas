@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--Consulta Rango Fechas-->
+<div>
+    <div class='form-group'>
+        <div><b><h2>Buscar Art&iacute;culo</h2></b><br></div>
+        <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+        <input class='form-control formulario' type='text' maxlength="100" name='nombre_articulo_search' id='nombre_articulo_search' value='' placeholder='Ej: Tubo PVC' required/><br>
+        <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='marca_search' id='marca_search' required></select><br>
+    <div><br>
+    <div class='form_button'>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="visualizarArticuloNombre" id="visualizarArticuloNombre" value="Ver Información" title="Ver la información del aet&iacute;culo seleccionado" disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Informaci&oacute;n del Art&iacute;culo</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionInventario'>
+                        <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' disabled required/><br>
+                        <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='marca' id='marca' disabled required></select><br>
+                        <div class='div_izquierda'><b>Cantidad M&iacute;nima<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' disabled required/><br>
+                        <div>
+                            <div id='proveedor'>
+                                <div class='div_izquierda'><b>Proveedor del Art&iacute;culo:</b></div>
+                                <select class='form-control formulario' name='proveedor_articulo' id='proveedor_articulo' disabled required></select>
+                            </div>
+                            <div id="botones_proveedor" style="display:none">
+                                <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_proveedor' id='añadir_proveedor' value='Añadir Proveedor' title='Añadir Proveedor'/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_proveedor' id='eliminar_proveedor' value='Eliminar Proveedor' title='Eliminar Proveedor' disabled/>
+                            </div>
+                        </div><br>
+                        <div class='div_izquierda'><b>Fotos del Art&iacute;culo:</b></div>
+                        <div id='fotos'>
+                          <div class="div_carousel">
+                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators" id="indicadores_carrusel">
+                                    <li id="slide_carrusel_eliminar" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                    <div id="item_carrusel_eliminar" class="item active carouselImg">
+                                        <img class="carouselImg" src="archivos/images/index/admin.jpg"/>
+                                    </div>
+                                </div>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                          </div>
+                        </div>
+                        <div id='enlace_fotos' style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_fotos' id='guardar_fotos' value='Guardar Fotos Seleccionadas' title='Guardar las fotos seleccionados'/>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_articulo' id='modificar_articulo' value='Modificar Art&iacute;culo' title='Modificar informaci&oacute;n del Art&iacute;culo'/>
+                <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_articulo' id='guardar_modificaciones_articulo' value='Guardar Cambios' title='Guardar informaci&oacute;n del Art&iacute;culo'/>
+            </div>
+        </div>
+    </div>
+</div>

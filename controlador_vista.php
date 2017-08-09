@@ -82,13 +82,17 @@ class controlador_vista
                 'MARCAS_MAS_MANTENIMIENTOS' =>'index.php?action='.OPERATION_MARCAS_MAS_MANTENIMIENTOS,
 
                 'CREAR_ARTICULO' =>'index.php?action='.OPERATION_CREAR_ARTICULO,
+                'CREAR_CATEGORIA' =>'index.php?action='.OPERATION_CREAR_CATEGORIA,
                 'CREAR_MARCA' =>'index.php?action='.OPERATION_CREAR_MARCA,
                 'CREAR_PROVEEDOR' =>'index.php?action='.OPERATION_CREAR_PROVEEDOR,
                 'CONSULTAR_ARTICULO' =>'index.php?action='.OPERATION_CONSULTAR_ARTICULO,
+                'CONSULTAR_CATEGORIA' =>'index.php?action='.OPERATION_CONSULTAR_CATEGORIA,
                 'CONSULTAR_MARCA' =>'index.php?action='.OPERATION_CONSULTAR_MARCA,
                 'CONSULTAR_PROVEEDOR' =>'index.php?action='.OPERATION_CONSULTAR_PROVEEDOR,
-                'CONSULTAR_INVENTARIO' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO,
-                'MOVIMIENTOS_INVENTARIO' =>'index.php?action='.OPERATION_MOVIMIENTOS_INVENTARIO,
+                'CONSULTAR_INVENTARIO_ELECTRICO' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO_ELECTRICO,
+                'CONSULTAR_INVENTARIO_HIDRAULICO' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO,
+                'MOVIMIENTOS_INVENTARIO_ELECTRICO' =>'index.php?action='.OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO,
+                'MOVIMIENTOS_INVENTARIO_HIDRAULICO' =>'index.php?action='.OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO,
                 'ARTICULOS_MAS_USADOS' =>'index.php?action='.OPERATION_ARTICULOS_MAS_USADOS,
                 'ARTICULOS_MENOS_USADOS' =>'index.php?action='.OPERATION_ARTICULOS_MENOS_USADOS,
 
@@ -225,7 +229,7 @@ class controlador_vista
         else{
             $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'.html';
         }
-
+        print $file;
         $template = file_get_contents($file);
         //$template = $template." ".$file;
 

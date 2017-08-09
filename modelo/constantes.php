@@ -90,13 +90,17 @@ const OPERATION_AIRES_MAS_MANTENIMIENTOS = 'aires_mas_mantenimientos';
 const OPERATION_MARCAS_MAS_MANTENIMIENTOS = 'aires_marcas_mas_mantenimientos';
 // Operaciones módulo Inventario.
 const OPERATION_CREAR_ARTICULO = 'inventario_crear_articulo';
+const OPERATION_CREAR_CATEGORIA = 'inventario_crear_categoria';
 const OPERATION_CREAR_MARCA = 'inventario_crear_marca';
 const OPERATION_CREAR_PROVEEDOR = 'inventario_crear_proveedor';
 const OPERATION_CONSULTAR_ARTICULO = 'inventario_consultar_articulo';
+const OPERATION_CONSULTAR_CATEGORIA = 'inventario_consultar_categoria';
 const OPERATION_CONSULTAR_MARCA = 'inventario_consultar_marca';
 const OPERATION_CONSULTAR_PROVEEDOR = 'inventario_consultar_proveedor';
-const OPERATION_CONSULTAR_INVENTARIO = 'inventario_consultar_inventario';
-const OPERATION_MOVIMIENTOS_INVENTARIO = 'inventario_movimientos_inventario';
+const OPERATION_CONSULTAR_INVENTARIO_ELECTRICO = 'inventario_consultar_inventario_electrico';
+const OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO = 'inventario_consultar_inventario_hidraulico';
+const OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO = 'inventario_movimientos_inventario_electrico';
+const OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO = 'inventario_movimientos_inventario_hidraulico';
 const OPERATION_ARTICULOS_MAS_USADOS = 'inventario_articulos_mas_usados';
 const OPERATION_ARTICULOS_MENOS_USADOS = 'inventario_articulos_menos_usados';
 ?>
