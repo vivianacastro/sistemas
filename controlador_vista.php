@@ -229,6 +229,7 @@ class controlador_vista
         else{
             $file = dirname(__FILE__).'/vistas/vistas_'.$operacion.'/'.$accion.'.html';
         }
+        print $file;
         $template = file_get_contents($file);
         //$template = $template." ".$file;
 
