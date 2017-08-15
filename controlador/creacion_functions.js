@@ -4691,6 +4691,30 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el botón guardar_categoria y se
+     * realiza la operacion correspondiente.
+    */
+    $("#guardar_categoria").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la categoría?");
+        if (confirmacion) {
+            var nombre = limpiarCadena($("#nombre_categoria").val());
+            if(!validarCadena(nombre)){
+                alert("ERROR. Ingrese el nombre de la categoría");
+                $("#nombre_categoria").focus();
+            }else{
+                var informacion = {};
+                informacion["nombre"] = nombre;
+                var data = guardarObjeto("categoria",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_categoria").val("");
+                    window.scrollTo(0,0);
+                }
+            }
+        }
+    });
+
+    /**
      * Se captura el evento cuando se da click en el botón guardar_articulo y se
      * realiza la operacion correspondiente.
     */

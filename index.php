@@ -284,6 +284,7 @@ $map = array(
         'guardar_articulo' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_articulo'),
         'guardar_fotos_articulo' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_fotos_articulo'),
         'guardar_marca_inventario' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_marca_inventario'),
+        'guardar_categoria' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_categoria'),
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
         'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),

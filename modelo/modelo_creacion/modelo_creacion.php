@@ -3235,6 +3235,31 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de una categoría del módulo de inventario.
+     * @param string $categoria, nombre de la categoría.
+     * @return array
+    **/
+    public function guardarCategoria($categoria){
+        $categoria = htmlspecialchars(trim($categoria));
+        $sql = "INSERT INTO categoria_articulo (nombre) VALUES ('".$categoria."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Categoría 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $GLOBALS['mensaje'] = "La categoría se ha guardado correctamente";
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite guardar la información de un proveedor.
      * @param string $nombre, nombre del proveedor.
      * @param string $direccion, dirección del proveedor.
@@ -4140,6 +4165,35 @@ class modelo_creacion {
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "ERROR. La marca ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite consultar si una categoría del módulo de inventario ya está registrada en el sistema.
+     * @param string $categoria, nombre de la categoría.
+     * @return array
+    **/
+    public function verificarCategoria($categoria){
+        $categoria = htmlspecialchars(trim($categoria));
+        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$categoria."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Categoría 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La categoría ya se encuentra registrada en el sistema.";
                 return false;
             }
             else{
