@@ -4139,6 +4139,32 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar la información de una categoría
+     * almacenada en el sistema.
+    **/
+    public function consultar_informacion_categoria() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionCategoria($info["nombre"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_marca' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar la información de un proveedor
      * almacenada en el sistema.
     **/

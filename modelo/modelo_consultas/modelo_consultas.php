@@ -1119,6 +1119,33 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar la información de una categoría.
+     * @param string $nombre, nombre de la categoría.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionCategoria($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$nombre."' ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Categoría 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la categoría seleccionado";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de un proveedor.
      * @param string $nombre, nombre del proveedor.
      * @return metadata con el resultado de la búsqueda.

@@ -5,3 +5,4 @@
 [15-Aug-2017 12:01:27 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 399
 [15-Aug-2017 12:01:27 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 401
 [15-Aug-2017 12:01:27 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 403
+[15-Aug-2017 16:55:17 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174

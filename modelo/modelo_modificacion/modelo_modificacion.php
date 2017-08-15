@@ -273,6 +273,35 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite consultar si una categoría del módulo de inventario ya está registrada en el sistema.
+     * @param string $marca, nombre de la marca.
+     * @return array
+    **/
+    public function verificarCategoria($categoria){
+        $categoria = htmlspecialchars(trim($categoria));
+        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$categoria."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Categoría 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. La categoría ya se encuentra registrada en el sistema.";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite consultar si un proveedor ya se encuentra registrado en el sistema.
      * @param string $nombre, nombre del proveedor.
      * @return array
@@ -3150,6 +3179,45 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite modificar una categoría.
+     * @param string $nombre, nuevo nombre de la categoría.
+     * @param string $nombre_anterior, anterior nombre de la categoría.
+     * @return array
+    **/
+    public function modificarCategoria($nombre,$nombre_anterior){
+        $nombre = htmlspecialchars(trim($nombre));
+        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
+        $sql = "UPDATE categoria_articulo SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $data = $this->consultarCampoCategoria($nombre_anterior);
+        $verificar = true;
+        foreach ($data as $clave => $valor) {
+            $id = $valor['id'];
+        }
+        if (strcasecmp($nombre,$nombre_anterior) != 0) {
+            $verificar = $this->verificarCategoria($nombre);
+        }
+        if ($verificar) {
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Categoría 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Categoría 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $this->registrarModificacion("categoria",$id,"nombre",$nombre_anterior,$nombre);
+                    $GLOBALS['mensaje'] = "La información de la categoría se modificó correctamente";
+                    $GLOBALS['sql'] = $sql;
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
      * Función que permite modificar un proveedor.
      * @param string $nombre, nuevo nombre del proveedor.
      * @param string $nombre_anterior, anterior nombre del proveedor.
@@ -3599,6 +3667,29 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar el nombre de una categoría.
+     * @param string $nombre, nombre de la marca.
+     * @return array
+    **/
+    public function consultarCampoCategoria($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$nombre."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Categoría 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();

@@ -2539,6 +2539,17 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se modifica el valor del input nombre_categoria_search.
+    **/
+    $("#nombre_categoria_search").change(function (e) {
+        if (validarCadena($("#nombre_categoria_search").val())) {
+            $('#visualizarCategoria').removeAttr("disabled");
+        }else{
+            $('#visualizarCategoria').attr('disabled',true);
+        }
+    });
+
+    /**
      * Se captura el evento cuando se modifica el valor del input nombre_proveedor_search.
     **/
     $("#nombre_proveedor_search").change(function (e) {
@@ -6052,6 +6063,31 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el botón visualizarCategoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarCategoria").click(function (e){
+        var nombreCategoria = limpiarCadena($("#nombre_categoria_search").val());
+		var informacion = {};
+		informacion["nombre"] = nombreCategoria;
+        var data = consultarInformacionObjeto("categoria",informacion);
+        categoriasCont = 0;
+		$.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				$("#nombre_categoria").val(record.nombre);
+                $("#nombre_categoria").attr('name',record.nombre);
+                categoriasCont++;
+            }
+        });
+        if (categoriasCont > 0) {
+            $("#divDialogConsulta").modal('show');
+        }else{
+            alert("No se encontró ninguna categoría con el nombre ingresado");
+            $("#nombre_categoria_search").focus();
+        }
+    });
+
+    /**
      * Se captura el evento cuando se da click en el botón visualizarProveedor y se
      * realiza la operacion correspondiente.
     **/
@@ -6309,6 +6345,7 @@ $(document).ready(function() {
         $("#marca").attr('disabled',true);
         $("#cantidad_minima").attr('disabled',true);
         $("#nombre_marca").attr('disabled',true);
+        $("#nombre_categoria").attr('disabled',true);
         $("#proveedor_articulo").attr('disabled',true);
         $("#nombre_proveedor").attr('disabled',true);
         $("#direccion").attr('disabled',true);
@@ -6337,6 +6374,7 @@ $(document).ready(function() {
         $("#modificar_tecnologia_aire").show();
         $("#modificar_articulo").show();
         $("#modificar_marca_inventario").show();
+        $("#modificar_categoria").show();
         $("#modificar_proveedor").show();
         $("#guardar_modificaciones_sede").hide();
         $("#guardar_modificaciones_campus").hide();
@@ -6372,6 +6410,7 @@ $(document).ready(function() {
         $("#guardar_modificaciones_tecnologia_aire").hide();
         $("#guardar_modificaciones_articulo").hide();
         $("#guardar_modificaciones_marca_inventario").hide();
+        $("#guardar_modificaciones_categoria").hide();
         $("#guardar_modificaciones_proveedor").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
@@ -7082,6 +7121,17 @@ $(document).ready(function() {
         $("#nombre_marca").removeAttr("disabled");
         $("#modificar_marca_inventario").hide();
         $("#guardar_modificaciones_marca_inventario").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_categoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_categoria").click(function (e){
+        $("#nombre_categoria").removeAttr("disabled");
+        $("#modificar_categoria").hide();
+        $("#guardar_modificaciones_categoria").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 
@@ -12338,6 +12388,32 @@ $(document).ready(function() {
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_marca_search").val("");
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_categoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_modificaciones_categoria").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la categoría?");
+        if (confirmacion) {
+            var informacion = {};
+            var nombre = limpiarCadena($("#nombre_categoria").val());
+            var nombreAnterior = limpiarCadena($("#nombre_categoria").attr("name"));
+            if (!validarCadena(nombre)) {
+                alert("ERROR. Ingrese el nuevo nombre de la categoría");
+                $("#nombre_categoria").focus();
+            }else{
+                informacion["nombre"] = nombre;
+                informacion["nombre_anterior"] = nombreAnterior;
+                var data = modificarObjeto("categoria",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_categoria_search").val("");
                     $("#divDialogConsulta").modal('hide');
                 }
             }
