@@ -3294,15 +3294,19 @@ class modelo_creacion {
      * Función que permite guardar la información de un articulo.
      * @param string $nombre, nombre del artículo.
      * @param string $marca, marca del artículo.
+     * @param string $categoria, categoría del artículo.
+     * @param string $bodega, bodega en la que está el artículo.
      * @param string $cantidad_minima, cantidad mínima del artículo.
      * @return array
     **/
-    public function guardarArticulo($nombre,$marca,$cantidad_minima){
+    public function guardarArticulo($nombre,$marca,$categoria,$bodega,$cantidad_minima){
         $nombre = htmlspecialchars(trim($nombre));
         $marca = htmlspecialchars(trim($marca));
+        $categoria = htmlspecialchars(trim($categoria));
+        $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
-        $campos = "nombre,marca,cantidad_minima,usuario_crea";
-        $valores = "'".$nombre."','".$marca."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        $campos = "nombre,marca,id_categoria_articulo,bodega,cantidad_minima,usuario_crea";
+        $valores = "'".$nombre."','".$marca."','".$categoria."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
         $sql = "INSERT INTO articulo (".$campos.") VALUES (".$valores.") RETURNING id_articulo;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

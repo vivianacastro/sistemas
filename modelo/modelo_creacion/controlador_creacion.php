@@ -1816,7 +1816,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarArticulo($info['nombre_articulo'],$info['marca']);
             if($verificar){
-                $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['cantidad_minima']);
+                $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima']);
 				while (list($clave, $valor) = each($verificar)){
 	                $id_articulo = $valor['id_articulo'];
 	            }

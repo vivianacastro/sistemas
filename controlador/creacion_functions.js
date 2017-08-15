@@ -4703,6 +4703,8 @@ $(document).ready(function() {
         if (confirmacion) {
             var nombreArticulo = limpiarCadena($("#nombre_articulo").val());
             var marca = $("#marca").val();
+            var categoria = $("#categoria").val();
+            var bodega = $("#bodega").val();
             var cantidadMinima = $("#cantidad_minima").val();
             var proveedores = [];
             var proveedorRepetido = false;
@@ -4748,6 +4750,12 @@ $(document).ready(function() {
                     }else if(!validarCadena(marca)){
                         alert("ERROR. Seleccione la marca del artículo");
                         $("#marca").focus();
+                    }else if(!validarCadena(categoria)){
+                        alert("ERROR. Seleccione la categoria a la que pertenece el artículo");
+                        $("#categoria").focus();
+                    }else if(!validarCadena(bodega)){
+                        alert("ERROR. Seleccione la bodega a la que pertenece el artículo");
+                        $("#bodega").focus();
                     }else if(!validarNumero(cantidadMinima)){
                         alert("ERROR. Ingrese la cantidad mínima del artículo ");
                         $("#cantidad_minima").focus();
@@ -4755,9 +4763,12 @@ $(document).ready(function() {
                         var informacion = {};
                         informacion["nombre_articulo"] = nombreArticulo;
                         informacion["marca"] = marca;
+                        informacion["categoria"] = categoria;
+                        informacion["bodega"] = bodega;
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
                         var data = guardarObjeto("articulo",informacion);
+                        console.log(data);
                         var id_articulo = "";
                         $.each(data.verificar, function(index, record) {
                             if($.isNumeric(index)) {
@@ -4788,6 +4799,8 @@ $(document).ready(function() {
                             }
                             $("#nombre_articulo").val("");
                             $("#marca").val("");
+                            $("#categoria").val("");
+                            $("#bodega").val("");
                             $("#cantidad_minima").val("");
                             $("#proveedor_articulo").val("");
                             while (proveedoresCont > 0) {
