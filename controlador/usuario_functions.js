@@ -462,7 +462,6 @@ $(document).ready(function() {
 				$("#extension_usuario").val(record.extension);
 				var perfil = record.perfil;
 				if (perfil == 'normal') {
-					console.log(perfil);
 					$("#permisos").show();
 				}
 				$("#tipo_usuario").val(perfil);
@@ -741,7 +740,6 @@ $(document).ready(function() {
 					$("#tipo_usuario").focus();
 				}else{
 					var controlAccesoTipoUsuario = true;
-					console.log(tipoUsuario);
 					if (tipoUsuario == 'normal') {
 						if(!validarCadena(crearPlanta)){
 							alert('ERROR. Especifique si el usuario tiene permisos de creación en el módulo de planta física');

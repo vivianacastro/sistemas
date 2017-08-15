@@ -254,7 +254,6 @@ $(document).ready(function() {
     */
     function guardarEspacio(){
         var jObject = JSON.stringify(dataEspacio);
-        console.log(dataEspacio);
         try {
             $.ajax({
                 type: "POST",
@@ -270,9 +269,6 @@ $(document).ready(function() {
                     var resultadoPlanos = guardarPlanos("espacio",arregloPlanosEspacio);
                     var resultadoFotos = guardarFotos("espacio",arregloFotosEspacio);
                     alert(data.mensaje);
-                    console.log(data);
-                    console.log(resultadoPlanos);
-                    console.log(resultadoFotos);
                     var mensaje = "";
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -303,7 +299,6 @@ $(document).ready(function() {
                         }
                     }
                     if (mensaje.substring(0,1) != "") {
-                        console.log(mensaje.length);
                         alert(mensaje);
                     }
                     if(data.verificar){
@@ -1341,7 +1336,6 @@ $(document).ready(function() {
             informacion["nombre_edificio"] = nombreEdificio;
             informacion["piso"] = piso;
             var data = buscarEspacios(informacion);
-            //console.log(data);
             if(URLactual['href'].indexOf('crear_aire') >= 0 || URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
                 $("#id_espacio").empty();
                 var row = $("<option value=''/>");
@@ -1563,9 +1557,6 @@ $(document).ready(function() {
                         var resultadoPlanos = guardarPlanos("campus",arregloPlanos);
                         var resultadoFotos = guardarFotos("campus",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -1707,14 +1698,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('edificio',JSON.stringify(informacion));
                         arregloPlanos.append('edificio',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("edificio",informacion);
                         var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
                         var resultadoFotos = guardarFotos("edificio",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -1739,7 +1726,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -1851,14 +1837,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('cancha',JSON.stringify(informacion));
                         arregloPlanos.append('cancha',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("cancha",informacion);
                         var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
                         var resultadoFotos = guardarFotos("cancha",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2033,14 +2015,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('corredor',JSON.stringify(informacion));
                         arregloPlanos.append('corredor',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("corredor",informacion);
                         var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
                         var resultadoFotos = guardarFotos("corredor",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2065,7 +2043,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2205,14 +2182,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('cubierta',JSON.stringify(informacion));
                         arregloPlanos.append('cubierta',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("cubierta",informacion);
                         var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
                         var resultadoFotos = guardarFotos("cubierta",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2237,7 +2210,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2372,14 +2344,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('gradas',JSON.stringify(informacion));
                         arregloPlanos.append('gradas',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("gradas",informacion);
                         var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
                         var resultadoFotos = guardarFotos("gradas",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2410,7 +2378,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2527,14 +2494,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('parqueadero',JSON.stringify(informacion));
                         arregloPlanos.append('parqueadero',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("parqueadero",informacion);
                         var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
                         var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2559,7 +2522,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2670,14 +2632,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('piscina',JSON.stringify(informacion));
                         arregloPlanos.append('piscina',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("piscina",informacion);
                         var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
                         var resultadoFotos = guardarFotos("piscina",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2702,7 +2660,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2812,14 +2769,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('plazoleta',JSON.stringify(informacion));
                         arregloPlanos.append('plazoleta',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("plazoleta",informacion);
                         var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
                         var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2844,7 +2797,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -2966,14 +2918,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('sendero',JSON.stringify(informacion));
                         arregloPlanos.append('sendero',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("sendero",informacion);
                         var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
                         var resultadoFotos = guardarFotos("sendero",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -2998,7 +2946,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -3111,14 +3058,10 @@ $(document).ready(function() {
                         }
                         arregloFotos.append('via',JSON.stringify(informacion));
                         arregloPlanos.append('via',JSON.stringify(informacion));
-                        console.log(informacion);
                         var resultado = guardarObjeto("via",informacion);
                         var resultadoPlanos = guardarPlanos("via",arregloPlanos);
                         var resultadoFotos = guardarFotos("via",arregloFotos);
                         mostrarMensaje(resultado.mensaje);
-                        console.log(resultado);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
@@ -3143,7 +3086,6 @@ $(document).ready(function() {
                             }
                         }
                         if (mensaje.substring(0,1) != "") {
-                            console.log(mensaje.length);
                             alert(mensaje);
                         }
                         if(resultado.verificar){
@@ -3499,7 +3441,6 @@ $(document).ready(function() {
                                 $('#guardar_espacio_adicional').val('Crear Laboratorio');
                                 $('#divDialogCreacion').modal('show');
                             }else if(usoEspacio == '4'){ //Sala de Cómputo
-                                console.log("1");
                                 eliminarComponente("informacion");
                                 eliminarComponente("informacion2");
                                 var componente = '<div id="informacion">'
@@ -3892,7 +3833,6 @@ $(document).ready(function() {
                     informacion['nombre_tipo_material'] = limpiarCadena(nombreTipoMaterial);
                     var resultado = guardarTipoMaterial(informacion);
                     mostrarMensaje(resultado.mensaje);
-                    console.log(resultado);
                     if(resultado.verificar){
                         $("#tipo_material").val("");
                         $("#nombre_tipo_material").val("");
@@ -3931,7 +3871,6 @@ $(document).ready(function() {
                     informacion['nombre_tipo_objeto'] = limpiarCadena(nombreTipoObjeto);
                     var resultado = guardarTipoObjeto(informacion);
                     mostrarMensaje(resultado.mensaje);
-                    console.log(resultado);
                     if(resultado.verificar){
                         $("#tipo_objeto").val("");
                         $("#nombre_tipo_objeto").val("");
@@ -4308,7 +4247,6 @@ $(document).ready(function() {
     */
     $("input[name=tipo_iluminacion]").change(function (e){
         var tipoIluminacion = $("input[name=tipo_iluminacion]").val();
-        console.log(tipoIluminacion);
     });
 
     /**
@@ -4347,7 +4285,6 @@ $(document).ready(function() {
                 informacion["nombre"] = capacidad;
                 var data = guardarObjeto("marca_aire",informacion);
                 alert(data.mensaje);
-                console.log(data);
                 if (data.verificar) {
                     $("#nombre_marca").val("");
                 }
@@ -4372,7 +4309,6 @@ $(document).ready(function() {
                 informacion["nombre_tipo_objeto"] = tipo;
                 var data = guardarTipoObjeto(informacion);
                 alert(data.mensaje);
-                console.log(data);
                 if (data.verificar) {
                     $("#nombre_tipo").val("");
                 }
@@ -4397,7 +4333,6 @@ $(document).ready(function() {
                 informacion["nombre_tipo_objeto"] = tecnologia;
                 var data = guardarTipoObjeto(informacion);
                 alert(data.mensaje);
-                console.log(data);
                 if (data.verificar) {
                     $("#nombre_tecnologia").val("");
                 }
@@ -4491,13 +4426,10 @@ $(document).ready(function() {
                             id_aire = record.id_aire;
                         }
                     });
-                    console.log(data);
-                    console.log(informacion);
                     if (data.verificar != false) {
                         informacion["id_aire"] = id_aire;
                         arregloFotos.append('aire',JSON.stringify(informacion));
                         var resultadoFotos = guardarFotos("aire",arregloFotos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         mensaje += data.mensaje;
                         if (resultadoFotos.length != 0) {
@@ -4595,7 +4527,6 @@ $(document).ready(function() {
                 informacion["descripcion"] = descripcionTrabajo;
                 var data = guardarObjeto("mantenimiento_aire",informacion);
                 alert(data.mensaje);
-                console.log(data);
                 if (data.verificar) {
                     $("#id_aire").val("");
                     $("#numero_orden").val("");
@@ -4784,13 +4715,10 @@ $(document).ready(function() {
                                 id_articulo = record.id_articulo;
                             }
                         });
-                        console.log(data);
-                        console.log(informacion);
                         if (data.verificar != false) {
                             informacion["id_articulo"] = id_articulo;
                             arregloFotos.append('articulo',JSON.stringify(informacion));
                             var resultadoFotos = guardarFotos("articulo",arregloFotos);
-                            console.log(resultadoFotos);
                             var mensaje = "";
                             mensaje += data.mensaje;
                             if (resultadoFotos.length != 0) {

@@ -1074,7 +1074,6 @@ $(document).ready(function() {
         articulosCont = 0;
         articulosPocasUnidades = 0;
         var data = listarInventario();
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
@@ -2338,7 +2337,6 @@ $(document).ready(function() {
                 var row = $("<option value=''/>");
                 informacion["id_aire"] = idAire;
                 var data = buscarObjetos("mantenimientos_aire",informacion);
-                console.log(data);
                 $("#numero_orden_search").empty();
                 row.text("--Seleccionar--");
                 row.appendTo("#numero_orden_search");
@@ -2591,7 +2589,6 @@ $(document).ready(function() {
         informacion['nombre_sede'] = sede;
         informacion['nombre_campus'] = "";
         var data = consultarInformacionObjeto("sede",informacion);
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 $("#nombre_sede").attr('name',record.id_sede);
@@ -2613,8 +2610,6 @@ $(document).ready(function() {
         informacion['nombre_campus'] = campus;
         var data = consultarInformacionObjeto("campus",informacion);
         var archivos = consultarArchivosObjeto("campus",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -2750,8 +2745,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("cancha",informacion);
         var archivos = consultarArchivosObjeto("cancha",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -2897,10 +2890,6 @@ $(document).ready(function() {
         var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",informacion);
         var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",informacion);
         var archivos = consultarArchivosObjeto("corredor",informacion);
-        console.log(data);
-        console.log(dataIluminacion);
-        console.log(dataInterruptor);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -3111,8 +3100,6 @@ $(document).ready(function() {
         informacion['piso'] = piso;
         var data = consultarInformacionObjeto("cubierta",informacion);
         var archivos = consultarArchivosObjeto("cubierta",informacion);
-        console.log(data);
-        console.log(archivos);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 $("#nombre_sede").attr('name',record.id_sede);
@@ -3249,9 +3236,6 @@ $(document).ready(function() {
         var data = consultarInformacionObjeto("gradas",informacion);
         var dataVentana = consultarInformacionObjeto("ventana_gradas",informacion);
         var archivos = consultarArchivosObjeto("gradas",informacion);
-        console.log(data);
-        console.log(dataVentana);
-        console.log(archivos);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 $("#nombre_sede").attr('name',record.id_sede);
@@ -3427,8 +3411,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("parqueadero",informacion);
         var archivos = consultarArchivosObjeto("parqueadero",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -3573,8 +3555,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("piscina",informacion);
         var archivos = consultarArchivosObjeto("piscina",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -3718,9 +3698,6 @@ $(document).ready(function() {
         var data = consultarInformacionObjeto("plazoleta",informacion);
         var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",informacion);
         var archivos = consultarArchivosObjeto("plazoleta",informacion);
-        console.log(data);
-        console.log(dataIluminacion);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -3886,8 +3863,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("sendero",informacion);
         var archivos = consultarArchivosObjeto("sendero",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -4035,8 +4010,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("via",informacion);
         var archivos = consultarArchivosObjeto("via",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -4178,8 +4151,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("edificio",informacion);
         var archivos = consultarArchivosObjeto("edificio",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -4350,13 +4321,6 @@ $(document).ready(function() {
             }
         });
         $("#espacio_padre option[value='"+limpiarCadena(id)+"']").remove();
-        console.log(data);
-        console.log(archivos);
-        console.log(dataIluminacion);
-        console.log(dataInterruptor);
-        console.log(dataPuerta);
-        console.log(dataSuministro);
-        console.log(dataVentana);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 $("#nombre_sede").attr('name',record.id_sede);
@@ -4518,7 +4482,6 @@ $(document).ready(function() {
                 infoPuerta['material_puerta'] = materialPuerta;
                 infoPuerta['material_marco'] = materialMarco;
                 var dataTipoCerradura = consultarInformacionObjeto("puerta_tipo_cerradura",infoPuerta);
-                console.log(dataTipoCerradura);
                 $.each(dataTipoCerradura, function(indice, valor) {
                     if($.isNumeric(indice)) {
                         if (cerraduraCont == 0) {
@@ -4671,7 +4634,6 @@ $(document).ready(function() {
             informacion['uso_espacio'] = nombreUsoEspacio;
             if (usoEspacioSelect == '1') { //Salón
                 data = consultarInformacionObjeto("salon",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Salón</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4693,7 +4655,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '2'){ //Auditorio
                 data = consultarInformacionObjeto("auditorio",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Auditorio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4716,8 +4677,6 @@ $(document).ready(function() {
             }else if(usoEspacioSelect == '3'){ //Laboratorio
                 data = consultarInformacionObjeto("laboratorio",informacion);
                 dataSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
-                console.log(data);
-                console.log(dataSanitario);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Laboratorio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4774,7 +4733,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '4'){ //Sala de Cómputo
                 data = consultarInformacionObjeto("sala_computo",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Cómputo</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4796,7 +4754,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '5'){ //Oficina
                 data = consultarInformacionObjeto("oficina",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Oficina</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4817,9 +4774,6 @@ $(document).ready(function() {
                 data = consultarInformacionObjeto("bano",informacion);
                 dataLavamanos = consultarInformacionObjeto("lavamanos",informacion);
                 dataOrinal = consultarInformacionObjeto("orinal",informacion);
-                console.log(data);
-                console.log(dataLavamanos);
-                console.log(dataOrinal);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Baño</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4927,7 +4881,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '7'){ //Cuarto Técnico
                 data = consultarInformacionObjeto("cuarto_tecnico",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto Técnico</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4946,7 +4899,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '8'){ //Bodega/Almacen
                 data = consultarInformacionObjeto("bodega",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Bodega/Almacén</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 var componente = '<div id="informacion">'
@@ -4961,7 +4913,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '10'){ //Cuarto de Plantas
                 data = consultarInformacionObjeto("cuarto_plantas",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Plantas</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4976,7 +4927,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '11'){ //Cuarto de Aires Acondicionados
                 data = consultarInformacionObjeto("cuarto_aire_acondicionado",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Aires Acondicionados</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -4991,7 +4941,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '12'){ //Área Deportiva Cerrada
                 data = consultarInformacionObjeto("area_deportiva_cerrada",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Área Deportiva Cerrada</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -5006,7 +4955,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '14'){ //Centro de Datos/Teléfono
                 data = consultarInformacionObjeto("centro_datos",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Centro de Datos</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -5022,8 +4970,6 @@ $(document).ready(function() {
             }else if(usoEspacioSelect == '17'){ //Cuarto de Bombas
                 data = consultarInformacionObjeto("cuarto_bombas",informacion);
                 dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
-                console.log(data);
-                console.log(dataPuntoSanitario);
                 var componente = '<div id="tituloInfo"><b><h5>Información del Cuarto de Bombas</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -5072,8 +5018,6 @@ $(document).ready(function() {
             }else if(usoEspacioSelect == '19'){ //Cocineta
                 data = consultarInformacionObjeto("cocineta",informacion);
                 dataPuntoSanitario = consultarInformacionObjeto("punto_sanitario",informacion);
-                console.log(data);
-                console.log(dataPuntoSanitario);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Cocineta</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -5121,7 +5065,6 @@ $(document).ready(function() {
                 });
             }else if(usoEspacioSelect == '20'){ //Sala de Estudio
                 data = consultarInformacionObjeto("sala_estudio",informacion);
-                console.log(data);
                 var componente = '<div id="tituloInfo"><b><h5>Información de la Sala de Estudio</h5></b></div>';
                 añadirComponente("tituloUsoEspacio",componente);
                 componente = '<div id="informacion">'
@@ -5273,7 +5216,6 @@ $(document).ready(function() {
                 informacion['numero_inventario'] = numeroInventario;
                 var data = consultarInformacionObjeto("aire_numero_inventario",informacion);
             }
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#nombre_sede").val(record.nombre_sede);
@@ -5405,7 +5347,6 @@ $(document).ready(function() {
         if (validarCadena(capacidad)) {
             informacion['capacidad'] = capacidad;
             var data = consultarInformacionObjeto("capacidad_aires",informacion);
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#capacidad_aire_nueva").attr('name',record.capacidad);
@@ -5429,7 +5370,6 @@ $(document).ready(function() {
         if (validarCadena(marca)) {
             informacion['marca'] = marca;
             var data = consultarInformacionObjeto("marca_aires",informacion);
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#marca_aire_nueva").attr('name',record.nombre);
@@ -5453,7 +5393,6 @@ $(document).ready(function() {
         if (validarCadena(tipoAire)) {
             informacion['tipo'] = tipoAire;
             var data = consultarInformacionObjeto("tipo_aires",informacion);
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#tipo_aire_nuevo").attr('name',record.tipo);
@@ -5477,7 +5416,6 @@ $(document).ready(function() {
         if (validarCadena(tecnologiaAire)) {
             informacion['tipo'] = tecnologiaAire;
             var data = consultarInformacionObjeto("tecnologia_aires",informacion);
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#tecnologia_aire_nuevo").attr('name',record.tipo);
@@ -5502,7 +5440,6 @@ $(document).ready(function() {
         if (validarCadena(numeroOrden)) {
             informacion['numero_orden'] = numeroOrden;
             var data = consultarInformacionObjeto("mantenimiento_aire",informacion);
-            console.log(data);
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
                     $("#id_aire").val(record.id_aire);
@@ -5791,7 +5728,6 @@ $(document).ready(function() {
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("aires_mas_mantenimientos",informacion);
-        console.log(data);
         var total = 0;
         var tipo = "Aires Acondicionados con Más Solicitudes Mantenimiento";
         var tituloX = "Aires Acondicionados";
@@ -5864,8 +5800,6 @@ $(document).ready(function() {
         var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
         var fotos =
         proveedoresCont = 0;
-		console.log(data);
-        console.log(dataProveedor);
         $.each(dataProveedor, function(index, record) {
             if($.isNumeric(index)) {
                 if (proveedoresCont == 0) {
@@ -5992,8 +5926,6 @@ $(document).ready(function() {
             var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
             var fotos =
             proveedoresCont = 0;
-    		console.log(data);
-            console.log(dataProveedor);
             $.each(dataProveedor, function(index, record) {
                 if($.isNumeric(index)) {
                     if (proveedoresCont == 0) {
@@ -6104,7 +6036,6 @@ $(document).ready(function() {
 		informacion["nombre"] = nombreMarca;
         var data = consultarInformacionObjeto("marca",informacion);
         marcasCont = 0;
-		console.log(data);
 		$.each(data, function(index, record) {
             if($.isNumeric(index)) {
 				$("#nombre_marca").val(record.nombre);
@@ -6130,7 +6061,6 @@ $(document).ready(function() {
 		informacion["nombre"] = nombreProveedor;
         var data = consultarInformacionObjeto("proveedor",informacion);
         proveedorCont = 0;
-		console.log(data);
 		$.each(data, function(index, record) {
             if($.isNumeric(index)) {
 				$("#nombre_proveedor").val(record.nombre);
@@ -6160,7 +6090,6 @@ $(document).ready(function() {
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("articulos_mas_usados",informacion);
-        console.log(data);
         var total = 0;
         var tipo = "Artículos Más Usados";
         var tituloX = "Artículos";
@@ -6203,7 +6132,6 @@ $(document).ready(function() {
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
         var data = buscarObjetos("articulos_menos_usados",informacion);
-        console.log(data);
         var total = 0;
         var tipo = "Artículos Menos Usados";
         var tituloX = "Artículos";
@@ -7236,14 +7164,6 @@ $(document).ready(function() {
         var plazoletas = buscarObjetos("plazoletas",informacion);
         var senderos = buscarObjetos("senderos",informacion);
         var vias = buscarObjetos("vias",informacion);
-        console.log(edificios);
-        console.log(canchas);
-        console.log(corredores);
-        console.log(parqueaderos);
-        console.log(piscinas);
-        console.log(plazoletas);
-        console.log(senderos);
-        console.log(vias);
         var bounds  = new google.maps.LatLngBounds();
         if (edificios.mensaje == null && canchas.mensaje == null && corredores.mensaje == null && parqueaderos.mensaje == null && piscinas.mensaje == null && plazoletas.mensaje == null && senderos.mensaje == null && vias.mensaje == null) {
             alert("El campus seleccionado no tiene edificios creados en el sistema");
@@ -7660,8 +7580,6 @@ $(document).ready(function() {
         informacion['id'] = id;
         var data = consultarInformacionObjeto("cancha",informacion);
         var archivos = consultarArchivosObjeto("cancha",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -7802,10 +7720,6 @@ $(document).ready(function() {
         var dataIluminacion = consultarInformacionObjeto("iluminacion_corredor",informacion);
         var dataInterruptor = consultarInformacionObjeto("interruptor_corredor",informacion);
         var archivos = consultarArchivosObjeto("corredor",informacion);
-        console.log(data);
-        console.log(dataIluminacion);
-        console.log(dataInterruptor);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8065,8 +7979,6 @@ $(document).ready(function() {
         informacion['id'] = id;
         var data = consultarInformacionObjeto("parqueadero",informacion);
         var archivos = consultarArchivosObjeto("parqueadero",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8223,8 +8135,6 @@ $(document).ready(function() {
         informacion['id'] = id;
         var data = consultarInformacionObjeto("piscina",informacion);
         var archivos = consultarArchivosObjeto("piscina",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8371,9 +8281,6 @@ $(document).ready(function() {
         var data = consultarInformacionObjeto("plazoleta",informacion);
         var dataIluminacion = consultarInformacionObjeto("iluminacion_plazoleta",informacion);
         var archivos = consultarArchivosObjeto("plazoleta",informacion);
-        console.log(data);
-        console.log(dataIluminacion);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8537,8 +8444,6 @@ $(document).ready(function() {
         informacion['id'] = id;
         var data = consultarInformacionObjeto("sendero",informacion);
         var archivos = consultarArchivosObjeto("sendero",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8715,8 +8620,6 @@ $(document).ready(function() {
         informacion['id'] = id;
         var data = consultarInformacionObjeto("via",informacion);
         var archivos = consultarArchivosObjeto("via",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -8855,8 +8758,6 @@ $(document).ready(function() {
         informacion['id'] = limpiarCadena(id);
         var data = consultarInformacionObjeto("edificio",informacion);
         var archivos = consultarArchivosObjeto("edificio",informacion);
-        console.log(data);
-        console.log(archivos);
         for (var i = 0; i < marcadoresModificacion.length; i++) {
             marcadoresModificacion[i].setMap(null);
         }
@@ -9494,7 +9395,6 @@ $(document).ready(function() {
                     informacion["id_espacio"] = $("#espacio_search").val();
                 }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
                     tipoObjeto = objetoSeleccionado;
-                    console.log(tipoObjeto);
                     informacion["nombre_sede"] = sedeSeleccionada;
                     informacion["nombre_campus"] = campusSeleccionado;
                     if (tipoObjeto != "campus") {
@@ -9527,9 +9427,6 @@ $(document).ready(function() {
                 arregloPlanos.append(tipoObjeto,JSON.stringify(informacion));
                 var resultadoPlanos = guardarPlanos(tipoObjeto,arregloPlanos);
                 var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
-                console.log(informacion);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -9612,8 +9509,6 @@ $(document).ready(function() {
                 }
                 arregloFotos.append(tipoObjeto,JSON.stringify(informacion));
                 var resultadoFotos = guardarFotos(tipoObjeto,arregloFotos);
-                console.log(informacion);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -9659,8 +9554,6 @@ $(document).ready(function() {
                 informacion["id_sede"] = idSede;
                 informacion["nombre_sede"] = nombreSede;
                 var data = modificarObjeto("sede",informacion);
-                console.log(informacion);
-                console.log(data);
                 alert(data.mensaje);
                 if(data.verificar){
                     $("#divDialogConsulta").modal('hide');
@@ -9708,7 +9601,6 @@ $(document).ready(function() {
                             if(nombreArchivo.length > 50){
                                 nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                             }
-                            console.log(nombreArchivo);
                             arregloFotos.append('archivo'+i,foto,nombreArchivo);
                         }
                     }
@@ -9751,13 +9643,6 @@ $(document).ready(function() {
                     var dataEliminarPlanos = eliminarObjeto("archivo_campus",arregloPlanosEliminar);
                     var resultadoPlanos = guardarPlanos("campus",arregloPlanos);
                     var resultadoFotos = guardarFotos("campus",arregloFotos);
-                    console.log(info);
-                    console.log(informacion);
-                    console.log(data);
-                    console.log(dataEliminarFotos);
-                    console.log(dataEliminarPlanos);
-                    console.log(resultadoPlanos);
-                    console.log(resultadoFotos);
                     var mensaje = "";
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -9775,7 +9660,6 @@ $(document).ready(function() {
                     }
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                            console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
                                 if (mensaje == "") {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -9852,7 +9736,6 @@ $(document).ready(function() {
                             if(nombreArchivo.length > 50){
                                 nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                             }
-                            console.log(nombreArchivo);
                             arregloFotos.append('archivo'+i,foto,nombreArchivo);
                         }
                     }
@@ -9902,13 +9785,6 @@ $(document).ready(function() {
                     var dataEliminarPlanos = eliminarObjeto("archivo_cancha",arregloPlanosEliminar);
                     var resultadoPlanos = guardarPlanos("cancha",arregloPlanos);
                     var resultadoFotos = guardarFotos("cancha",arregloFotos);
-                    console.log(info);
-                    console.log(informacion);
-                    console.log(data);
-                    console.log(dataEliminarFotos);
-                    console.log(dataEliminarPlanos);
-                    console.log(resultadoPlanos);
-                    console.log(resultadoFotos);
                     var mensaje = "";
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -9926,7 +9802,6 @@ $(document).ready(function() {
                     }
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                            console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
                                 if (mensaje == "") {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -10124,15 +9999,6 @@ $(document).ready(function() {
                     var dataEliminarInterruptor = eliminarObjeto("interruptor_corredor",info);
                     var resultadoPlanos = guardarPlanos("corredor",arregloPlanos);
                     var resultadoFotos = guardarFotos("corredor",arregloFotos);
-                    console.log(informacion);
-                    console.log(data);
-                    console.log(info);
-                    console.log(dataEliminarFotos);
-                    console.log(dataEliminarPlanos);
-                    console.log(dataEliminarIluminacion);
-                    console.log(dataEliminarInterruptor);
-                    console.log(resultadoPlanos);
-                    console.log(resultadoFotos);
                     var mensaje = "";
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10150,7 +10016,6 @@ $(document).ready(function() {
                     }
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                            console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
                                 if (mensaje == "") {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -10212,8 +10077,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -10223,7 +10086,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -10272,13 +10134,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_cubierta",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("cubierta",arregloPlanos);
                 var resultadoFotos = guardarFotos("cubierta",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10293,7 +10148,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -10374,7 +10228,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -10467,14 +10320,6 @@ $(document).ready(function() {
                     var dataEliminarVentana = eliminarObjeto("ventana_gradas",info);
                     var resultadoPlanos = guardarPlanos("gradas",arregloPlanos);
                     var resultadoFotos = guardarFotos("gradas",arregloFotos);
-                    console.log(informacion);
-                    console.log(info);
-                    console.log(data);
-                    console.log(dataEliminarFotos);
-                    console.log(dataEliminarPlanos);
-                    console.log(dataEliminarVentana);
-                    console.log(resultadoPlanos);
-                    console.log(resultadoFotos);
                     var mensaje = "";
                     if (resultadoFotos.length != 0) {
                         for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10492,7 +10337,6 @@ $(document).ready(function() {
                     }
                     if (resultadoPlanos.length != 0) {
                         for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                            console.log(resultadoPlanos.verificar[i]);
                             if (!resultadoPlanos.verificar[i]) {
                                 if (mensaje == "") {
                                     mensaje += resultadoPlanos.mensaje[i];
@@ -10556,8 +10400,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -10567,7 +10409,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -10619,13 +10460,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_parqueadero",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("parqueadero",arregloPlanos);
                 var resultadoFotos = guardarFotos("parqueadero",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10640,7 +10474,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -10698,8 +10531,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -10709,7 +10540,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -10759,13 +10589,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_piscina",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("piscina",arregloPlanos);
                 var resultadoFotos = guardarFotos("piscina",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10780,7 +10603,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -10840,8 +10662,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -10851,7 +10671,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -10924,14 +10743,6 @@ $(document).ready(function() {
                 var dataEliminarIluminacion = eliminarObjeto("iluminacion_plazoleta",info)
                 var resultadoPlanos = guardarPlanos("plazoleta",arregloPlanos);
                 var resultadoFotos = guardarFotos("plazoleta",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(dataEliminarIluminacion);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -10946,7 +10757,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -11011,8 +10821,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -11022,7 +10830,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -11077,13 +10884,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_sendero",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("sendero",arregloPlanos);
                 var resultadoFotos = guardarFotos("sendero",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -11098,7 +10898,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -11155,8 +10954,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -11166,7 +10963,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -11215,13 +11011,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_via",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("via",arregloPlanos);
                 var resultadoFotos = guardarFotos("via",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -11236,7 +11025,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -11297,8 +11085,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -11308,7 +11094,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -11361,13 +11146,6 @@ $(document).ready(function() {
                 var dataEliminarPlanos = eliminarObjeto("archivo_edificio",arregloPlanosEliminar);
                 var resultadoPlanos = guardarPlanos("edificio",arregloPlanos);
                 var resultadoFotos = guardarFotos("edificio",arregloFotos);
-                console.log(informacion);
-                console.log(info);
-                console.log(data);
-                console.log(dataEliminarFotos);
-                console.log(dataEliminarPlanos);
-                console.log(resultadoPlanos);
-                console.log(resultadoFotos);
                 var mensaje = "";
                 if (resultadoFotos.length != 0) {
                     for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -11382,7 +11160,6 @@ $(document).ready(function() {
                 }
                 if (resultadoPlanos.length != 0) {
                     for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                        console.log(resultadoPlanos.verificar[i]);
                         if (!resultadoPlanos.verificar[i]) {
                             if (mensaje == "") {
                                 mensaje += resultadoPlanos.mensaje[i];
@@ -11497,8 +11274,6 @@ $(document).ready(function() {
                 var arregloFotos = new FormData();
                 var arregloPlanos = new FormData();
                 var info = {};
-                console.log(fotos.files);
-                console.log(planos.files);
                 for (var i=0;i<fotos.files.length;i++) {
                     var foto = fotos.files[i];
                     if (foto.size > 2000000) {
@@ -11508,7 +11283,6 @@ $(document).ready(function() {
                         if(nombreArchivo.length > 50){
                             nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                         }
-                        console.log(nombreArchivo);
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
@@ -11960,18 +11734,6 @@ $(document).ready(function() {
                         var dataEliminarVentana = eliminarObjeto("ventana_espacio",info);
                         var resultadoPlanos = guardarPlanos("espacio",arregloPlanos);
                         var resultadoFotos = guardarFotos("espacio",arregloFotos);
-                        console.log(informacion);
-                        console.log(info);
-                        console.log(data);
-                        console.log(dataEliminarFotos);
-                        console.log(dataEliminarPlanos);
-                        console.log(dataEliminarIluminacion);
-                        console.log(dataEliminarInterruptor);
-                        console.log(dataEliminarPuerta);
-                        console.log(dataEliminarSuministroEnergia);
-                        console.log(dataEliminarVentana);
-                        console.log(resultadoPlanos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -11989,7 +11751,6 @@ $(document).ready(function() {
                         }
                         if (resultadoPlanos.length != 0) {
                             for (var i=0;i<resultadoPlanos.mensaje.length;i++) {
-                                console.log(resultadoPlanos.verificar[i]);
                                 if (!resultadoPlanos.verificar[i]) {
                                     if (mensaje == "") {
                                         mensaje += resultadoPlanos.mensaje[i];
@@ -12050,8 +11811,6 @@ $(document).ready(function() {
                 informacion['nombre'] = limpiarCadena(nombreTipoMaterial);
                 informacion['nombre_anterior'] = limpiarCadena(nombreTipoMaterialAnterior);
                 var resultado = modificarObjeto("tipo_material",informacion);
-                console.log(informacion);
-                console.log(resultado);
                 alert(resultado.mensaje);
                 if(resultado.verificar){
                     $("#tipo_material_search").val("seleccionar").change();
@@ -12085,8 +11844,6 @@ $(document).ready(function() {
                 informacion['nombre'] = limpiarCadena(nombreTipoMaterial);
                 informacion['nombre_anterior'] = limpiarCadena(nombreTipoMaterialAnterior);
                 var resultado = modificarObjeto("tipo_objeto",informacion);
-                console.log(informacion);
-                console.log(resultado);
                 alert(resultado.mensaje);
                 if(resultado.verificar){
                     $("#tipo_objeto_search").val("seleccionar").change();
@@ -12154,7 +11911,6 @@ $(document).ready(function() {
                     if ((numeroInventario != "") && (numeroInventario != numeroInventarioAnterior)) {
                         informacion["numero_inventario"] = numeroInventario;
                         numeroInventarioRepetido = verificarElemento("numero_inventario_aire",informacion);
-                        console.log(numeroInventarioRepetido);
                         $.each(numeroInventarioRepetido, function(index, record) {
                             if($.isNumeric(index)) {
                                 conteo = record.count;
@@ -12175,16 +11931,11 @@ $(document).ready(function() {
                         var arregloFotosEliminar = {};
                         arregloFotosEliminar["id_aire"] = idAire;
                         arregloFotosEliminar["nombre"] = fotosEliminar;
-                        console.log(fotosEliminar);
                         arregloFotosEliminar["tipo"] = "foto";
                         arregloFotos.append("aire",JSON.stringify(informacion));
                         var data = modificarObjeto("aire",informacion);
                         var dataEliminarFotos = eliminarObjeto("foto_aire",arregloFotosEliminar);
                         var resultadoFotos = guardarFotos("aire",arregloFotos);
-                        console.log(informacion);
-                        console.log(data);
-                        console.log(dataEliminarFotos);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -12441,10 +12192,8 @@ $(document).ready(function() {
                 informacion["id_articulo"] = idArticulo;
                 informacion["cantidad"] = cantidad;
                 informacion["cantidad_anterior"] = cantidadAnterior;
-                console.log(informacion);
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
-                console.log(data);
                 if (data.verificar) {
                     llenarTablaInventario();
                     $("#nombre_articulo").val("");
@@ -12507,7 +12256,6 @@ $(document).ready(function() {
                     }
                     var arregloFotos = new FormData();
                     var info = {};
-                    console.log(fotos.files);
                     for (var i=0;i<fotos.files.length;i++) {
                         var foto = fotos.files[i];
                         if (foto.size > 2000000) {
@@ -12517,7 +12265,6 @@ $(document).ready(function() {
                             if(nombreArchivo.length > 50){
                                 nombreArchivo = foto.name.substring(foto.name.length-50, foto.name.length);
                             }
-                            console.log(nombreArchivo);
                             arregloFotos.append('archivo'+i,foto,nombreArchivo);
                         }
                     }
@@ -12539,12 +12286,6 @@ $(document).ready(function() {
                         var dataEliminarFotos = eliminarObjeto("foto_articulo",arregloFotosEliminar);
                         var dataEliminarProveedor = eliminarObjeto("articulo_proveedor",info);
                         var resultadoFotos = guardarFotos("articulo",arregloFotos);
-                        console.log(informacion);
-                        console.log(info);
-                        console.log(data);
-                        console.log(dataEliminarFotos);
-                        console.log(dataEliminarProveedor);
-                        console.log(resultadoFotos);
                         var mensaje = "";
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {
@@ -12593,7 +12334,6 @@ $(document).ready(function() {
             }else{
                 informacion["nombre"] = nombre;
                 informacion["nombre_anterior"] = nombreAnterior;
-                console.log(informacion);
                 var data = modificarObjeto("marca_inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
@@ -12626,9 +12366,7 @@ $(document).ready(function() {
                 informacion["direccion"] = direccion;
                 informacion["telefono"] = telefono;
                 informacion["nit"] = nit;
-                console.log(informacion);
                 var data = modificarObjeto("proveedor",informacion);
-                console.log(data);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_proveedor_search").val("");
@@ -12649,8 +12387,6 @@ $(document).ready(function() {
             var idSede = $("#nombre_sede").attr('name');
             informacion["id"] = idSede;
             var data = eliminarObjeto("sede",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 actualizarSelectSede();
@@ -12672,8 +12408,6 @@ $(document).ready(function() {
             informacion["id_sede"] = idSede;
             informacion["id"] = idCampus;
             var data = eliminarObjeto("campus",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12697,8 +12431,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("cancha",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12722,8 +12454,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("corredor",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12749,8 +12479,6 @@ $(document).ready(function() {
             informacion["id_edificio"] = idEdificio;
             informacion["piso"] = piso;
             var data = eliminarObjeto("cubierta",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12776,8 +12504,6 @@ $(document).ready(function() {
             informacion["id_edificio"] = idEdificio;
             informacion["piso"] = piso;
             var data = eliminarObjeto("gradas",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12801,8 +12527,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("parqueadero",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12826,8 +12550,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("piscina",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12851,8 +12573,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("plazoleta",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12876,8 +12596,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("sendero",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12901,8 +12619,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("via",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12926,8 +12642,6 @@ $(document).ready(function() {
             informacion["id_campus"] = idCampus;
             informacion["id"] = id;
             var data = eliminarObjeto("edificio",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12953,8 +12667,6 @@ $(document).ready(function() {
             informacion["id_edificio"] = idEdificio;
             informacion["id"] = id;
             var data = eliminarObjeto("espacio",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12974,8 +12686,6 @@ $(document).ready(function() {
             var idAire = $("#id_aire").val();
             informacion["id_aire"] = idAire;
             var data = eliminarObjeto("aire",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#sede_search").val("").change();
@@ -12998,8 +12708,6 @@ $(document).ready(function() {
             informacion["id_aire"] = idAire;
             informacion["numero_orden"] = idOrden;
             var data = eliminarObjeto("mantenimiento_aire",informacion);
-            console.log(informacion);
-            console.log(data);
             alert(data.mensaje);
             if (data.verificar) {
                 $("#id_aire_search").val("").change();
@@ -13037,9 +12745,7 @@ $(document).ready(function() {
         var informacion = {};
         informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
         informacion["fecha_fin"] = fechaFin + " 23:59:59";
-        console.log(informacion);
         var data = listarMovimientosInventario(informacion);
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
 				var nombre = record.nombre_articulo;
