@@ -299,6 +299,7 @@ $map = array(
         'consultar_informacion_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_proveedor'),
         'consultar_archivos_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_archivos_articulo'),
         'consultar_marcas' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marcas'),
+        'consultar_categorias' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_categorias'),
         'consultar_proveedores' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedores'),
         'consultar_articulos_mas_usados' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos_mas_usados'),
         'consultar_articulos_menos_usados' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos_menos_usados'),

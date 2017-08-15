@@ -128,6 +128,7 @@ $(document).ready(function() {
             });
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
             actualizarSelectMarcas();
+            actualizarSelectCategorias();
             actualizarSelectProveedores(proveedoresCont);
         }
     })();
@@ -907,7 +908,7 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los proveedores.
+     * Función que realiza una consulta de las marcas del inventario.
      * @returns {data} object json.
     **/
     function buscarMarcas(){
@@ -916,6 +917,34 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=consultar_marcas",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de las categorías del inventario.
+     * @returns {data} object json.
+    **/
+    function buscarCategorias(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_categorias",
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1141,6 +1170,26 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#marca");
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de categorias.
+     * @returns {undefined}
+    **/
+    function actualizarSelectCategorias(){
+        var data = buscarCategorias();
+        $("#categoria").empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#categoria");
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#categoria");
             }
         });
     }

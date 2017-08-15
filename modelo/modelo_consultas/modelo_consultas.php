@@ -2176,6 +2176,30 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar las categorías almacenadas en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarCategorias(){
+        $sql = "SELECT * FROM categoria_articulo ORDER BY id;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Categorías 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Categorías 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Categorías presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar los proveedores almacenados en el sistema.
      * @return metadata con el resultado de la búsqueda.
     **/
