@@ -216,6 +216,4 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 errores.log
-errores.log
-*.log
 *.log
