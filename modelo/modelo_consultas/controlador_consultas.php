@@ -4126,6 +4126,9 @@ class controlador_consultas{
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'id_marca' => $valor['id_marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'id_categoria_articulo' => $valor['id_categoria_articulo'],
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                     'cantidad_minima' => $valor['cantidad_minima'],
                 );
                 array_push($result, $arrayAux);

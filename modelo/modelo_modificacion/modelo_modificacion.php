@@ -3055,23 +3055,29 @@ class modelo_modificacion {
      * @param string $id_articulo, id del articulo.
      * @param string $nombre, nombre del artículo.
      * @param string $marca, marca del artículo.
+     * @param string $categoria, $categoria del artículo.
+     * @param string $bodega, $bodega donde está el artículo.
      * @param string $cantidad_minima, cantidad mínima del artículo.
      * @param string $proveedor, arreglo con los proveedores del artículo.
      * @param string $proveedor, arreglo con los anteriores proveedores del artículo.
      * @return array
     **/
-    public function modificarArticulo($id_articulo,$nombre,$marca,$cantidad_minima,$proveedor,$proveedor_anterior){
+    public function modificarArticulo($id_articulo,$nombre,$marca,$categoria,$bodega,$cantidad_minima,$proveedor,$proveedor_anterior){
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $nombre = htmlspecialchars(trim($nombre));
         $marca = htmlspecialchars(trim($marca));
+        $categoria = htmlspecialchars(trim($categoria));
+        $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
-        $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
+        $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', id_categoria_articulo = '".$categoria."', bodega = '".$bodega."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
         $data = $this->consultarCampoArticulo($id_articulo);
         $verificar = true;
         foreach ($data as $clave => $valor) {
             $id_articulo_anterior = $valor['id_articulo'];
             $nombre_anterior = $valor['nombre'];
             $marca_anterior = $valor['marca'];
+            $categoria_anterior = $valor['id_categoria_articulo'];
+            $bodega_anterior = $valor['bodega'];
             $cantidad_minima_anterior = $valor['cantidad_minima'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
@@ -3092,6 +3098,8 @@ class modelo_modificacion {
                     $this->registrarModificacion("articulo",$id_articulo,"id_articulo",$id_articulo_anterior,$id_articulo);
                     $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
                     $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
+                    $this->registrarModificacion("articulo",$id_articulo,"categoria",$categoria_anterior,$categoria);
+                    $this->registrarModificacion("articulo",$id_articulo,"bodega",$bodega_anterior,$bodega);
                     $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
                     $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
@@ -3132,7 +3140,7 @@ class modelo_modificacion {
                 return false;
             }else{
                 $this->registrarModificacion("articulo_proveedor",$id_articulo."-".$proveedor,"id_proveedor",$proveedor_anterior,$proveedor);
-                $GLOBALS['mensaje'] = "La información de los proveedores del artículo se modificó correctamente";
+                //$GLOBALS['mensaje'] = "La información de los proveedores del artículo se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
             }

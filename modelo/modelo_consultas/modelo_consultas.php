@@ -1070,8 +1070,9 @@ class modelo_consultas
     **/
     public function buscarInformacionArticuloNombre($nombre_articulo,$marca){
         $nombre_articulo = htmlspecialchars(trim($nombre_articulo));
-        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
+                                JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
                 WHERE a.nombre = '".$nombre_articulo."' and a.marca = '".$marca."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
