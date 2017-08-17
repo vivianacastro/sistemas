@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div>
     <div class='form-group'>
-        <div><b><h2>Gestionar Inventario</h2></b><br></div>
+        <div><b><h2>Gestionar Inventario - Bodega Hidr&aacute;ulica</h2></b><br></div>
         <div><h4><b>Artículos</b></h4></div>
         <div class="table-responsive">
             <table id="tabla_inventario" class="table table-bordered" style="display:none">
@@ -11,6 +11,7 @@
                         <th>Art&iacute;culo</th>
                         <th>Cantidad</th>
                         <th>Marca</th>
+                        <th>Categor&iacute;a</th>
                         <th>Cantidad M&iacute;nima</th>
                     </tr>
                 </thead>
@@ -21,6 +22,7 @@
     </div><br>
     <div class='form_button'>
         <input type='button' class='btn btn-primary btn-lg btn-formulario' name='modificar_cantidad_articulos' id='modificar_cantidad_articulos' value='Ingresar o Extraer Artículos' title='Ingresar o extraer articulos del inventario'/>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='filtrar_articulos' id='filtrar_articulos' value='Filtrar Artículos' title='Filtrar Artículos'/>
         <input type='button' class='btn btn-primary btn-lg btn-formulario' name='visualizarArticulo' id='visualizarArticulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
     </div>
 </div>
@@ -70,6 +72,8 @@
                                     <th>Art&iacute;culo</th>
                                     <th>Cantidad</th>
                                     <th>Marca</th>
+                                    <th>Categor&iacute;a</th>
+                                    <th>Bodega</th>
                                     <th>Cantidad M&iacute;nima</th>
                                 </tr>
                             </thead>
@@ -96,6 +100,14 @@
                         <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' disabled required/><br>
                         <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='marca' id='marca' disabled required></select><br>
+                        <div class='div_izquierda'><b>Categor&iacute;a del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='categoria' id='categoria' disabled required></select><br>
+                        <div class='div_izquierda'><b>Bodega<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='bodega' id='bodega' disabled required>
+                            <option value="">--Seleccionar--</option>
+                            <option value="electrica">El&eacute;ctrica</option>
+                            <option value="hidraulica">Hidr&aacute;ulica</option>
+                        </select><br>
                         <div class='div_izquierda'><b>Cantidad M&iacute;nima<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' disabled required/><br>
                         <div>

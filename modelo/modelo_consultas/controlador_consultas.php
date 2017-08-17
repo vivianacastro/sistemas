@@ -3995,16 +3995,16 @@ class controlador_consultas{
     }
 
     /**
-     * Función que permite consultar el inventario.
+     * Función que permite consultar el inventario eléctrico.
     **/
-    public function listar_inventario() {
+    public function listar_inventario_electrico() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $data = $m->buscarInventario();
+            $data = $m->buscarInventario("electrica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
@@ -4013,6 +4013,40 @@ class controlador_consultas{
                     'cantidad_minima' => $valor['cantidad_minima'],
                     'id_marca' => $valor['marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'id_categoria' => $valor['id_categoria_articulo'],
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => mb_convert_case($valor['bodega'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar el inventario hidráulico.
+    **/
+    public function listar_inventario_hidraulico() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarInventario("hidraulica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'cantidad' => $valor['cantidad'],
+                    'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad_minima' => $valor['cantidad_minima'],
+                    'id_marca' => $valor['marca'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'id_categoria' => $valor['id_categoria_articulo'],
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => mb_convert_case($valor['bodega'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
             }
@@ -4097,6 +4131,9 @@ class controlador_consultas{
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'id_marca' => $valor['id_marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'id_categoria' => $valor['id_categoria_articulo'],
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                     'cantidad_minima' => $valor['cantidad_minima'],
                 );
                 array_push($result, $arrayAux);

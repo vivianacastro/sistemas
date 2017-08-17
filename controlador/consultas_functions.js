@@ -129,9 +129,15 @@ $(document).ready(function() {
             actualizarSelectTecnologiaAire("tecnologia_aire_search");
         }else if (URLactual['href'].indexOf('mas_marcas_aire') >= 0 || URLactual['href'].indexOf('mas_tipos_aire') >= 0 || URLactual['href'].indexOf('mas_tipo_tecnologias_aire') >= 0 || URLactual['href'].indexOf('aires_mas_mantenimientos') >= 0 || URLactual['href'].indexOf('marcas_mas_mantenimientos') >= 0) {
             actualizarSelectSede();
-        }else if (URLactual['href'].indexOf('consultar_inventario') >= 0 ) {
-            llenarTablaInventario();
+        }else if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
+            llenarTablaInventarioElectrico();
             actualizarSelectMarcas("marca");
+            actualizarSelectCategorias("categoria");
+            actualizarSelectProveedores(proveedoresCont);
+        }else if (URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0 ) {
+            llenarTablaInventarioHidraulico();
+            actualizarSelectMarcas("marca");
+            actualizarSelectCategorias("categoria");
             actualizarSelectProveedores(proveedoresCont);
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
             llenarTablaInventario();
@@ -998,15 +1004,46 @@ $(document).ready(function() {
     }
 
     /**
-	 * Función que permite consultar el inventario.
+	 * Función que permite consultar el inventario eléctrico.
 	 * @returns {data}
 	**/
-	function listarInventario(){
+	function listarInventarioElectrico(){
 		var dataResult;
 		try {
 			$.ajax({
 				type: "POST",
-				url: "index.php?action=listar_inventario",
+				url: "index.php?action=listar_inventario_electrico",
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//alert(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+    /**
+	 * Función que permite consultar el inventario hidráulico.
+	 * @returns {data}
+	**/
+	function listarInventarioHidraulico(){
+		var dataResult;
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=listar_inventario_hidraulico",
 				dataType: "json",
 				async: false,
 				error: function(xhr, status, error) {
@@ -1062,10 +1099,10 @@ $(document).ready(function() {
 	}
 
     /**
-     * Función que llena la tabla inventario.
+     * Función que llena la tabla inventario eléctrico.
      * @returns {undefined}
     **/
-    function llenarTablaInventario(){
+    function llenarTablaInventarioElectrico(){
 		for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
@@ -1074,20 +1111,61 @@ $(document).ready(function() {
         }
         articulosCont = 0;
         articulosPocasUnidades = 0;
-        var data = listarInventario();
+        var data = listarInventarioElectrico();
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
 				var nombre = record.nombre_articulo;
 				var cantidad = parseInt(record.cantidad);
 				var marca = record.nombre_marca;
+                var categoria = record.nombre_categoria;
+                var bodega = "Eléctrica";
 				var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
-                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
-                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
                     articulosPocasUnidades++;
                 }else{
-                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                }
+				articulosCont++;
+            }
+        });
+		$("#tabla_inventario").show();
+        if (articulosPocasUnidades > 0) {
+            $("#divDialogPocosArticulos").modal("show");
+        }
+    }
+
+    /**
+     * Función que llena la tabla inventario hidráulico.
+     * @returns {undefined}
+    **/
+    function llenarTablaInventarioHidraulico(){
+		for (var i=0;i<articulosCont;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
+        for (var i=0;i<articulosPocasUnidades;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
+        articulosCont = 0;
+        articulosPocasUnidades = 0;
+        var data = listarInventarioHidraulico();
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                var id_articulo = record.id_articulo;
+				var nombre = record.nombre_articulo;
+				var cantidad = parseInt(record.cantidad);
+				var marca = record.nombre_marca;
+                var categoria = record.nombre_categoria;
+                var bodega = "Hidráulica";
+				var cantidad_minima = parseInt(record.cantidad_minima);
+                if (cantidad <= cantidad_minima) {
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
+                    articulosPocasUnidades++;
+                }else{
+                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
 				articulosCont++;
             }
@@ -5845,6 +5923,7 @@ $(document).ready(function() {
         var informacion = {};
 		informacion["id_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo",informacion);
+        console.log(data);
         var idArticulo;
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -5853,6 +5932,9 @@ $(document).ready(function() {
                 $("#nombre_articulo").attr('name',idArticulo);
 				$("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
+                $("#categoria").val(record.id_categoria);
+                $("#categoria").attr('name',record.id_categoria);
+                $("#bodega").val(record.bodega);
 				$("#cantidad_minima").val(record.cantidad_minima);
             }
         });
@@ -12302,7 +12384,11 @@ $(document).ready(function() {
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
-                    llenarTablaInventario();
+                    if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
+                        llenarTablaInventarioElectrico();
+                    }else{
+                        llenarTablaInventarioHidraulico();
+                    }
                     $("#nombre_articulo").val("");
                     $("#cantidad").val("");
                     while(anadirArticulosCont > 0){

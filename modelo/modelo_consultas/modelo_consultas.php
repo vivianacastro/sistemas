@@ -1041,8 +1041,9 @@ class modelo_consultas
     **/
     public function buscarInformacionArticulo($id_articulo){
         $id_articulo = htmlspecialchars(trim($id_articulo));
-        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
+                                JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
                 WHERE a.id_articulo = '".$id_articulo."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1665,12 +1666,15 @@ class modelo_consultas
 
     /**
      * Función que permite consultar el inventario.
+     * @param string $bodega, bodega a la que se va a consultar.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarInventario(){
-        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca
+    public function buscarInventario($bodega){
+        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca, b.id_categoria_articulo, d.nombre AS nombre_categoria, b.bodega
                 FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
                                     JOIN marca_inventario c ON b.marca = c.id
+                                    JOIN categoria_articulo d ON b.id_categoria_articulo = d.id
+                WHERE b.bodega = '".$bodega."'
                 ORDER BY b.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

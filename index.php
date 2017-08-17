@@ -287,7 +287,8 @@ $map = array(
         'guardar_categoria' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_categoria'),
         'guardar_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'guardar_proveedor'),
         //Acciones de consulta
-        'listar_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario'),
+        'listar_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario_electrico'),
+        'listar_inventario_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario_hidraulico'),
         'listar_movimientos_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_movimientos_inventario'),
         'consultar_articulos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos'),
         'consultar_articulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo_inventario'),
