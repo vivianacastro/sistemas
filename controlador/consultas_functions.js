@@ -5923,7 +5923,6 @@ $(document).ready(function() {
         var informacion = {};
 		informacion["id_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo",informacion);
-        console.log(data);
         var idArticulo;
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
@@ -12510,6 +12509,40 @@ $(document).ready(function() {
                                 $("#marca_search").val("");
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";
+                                var element = $("#tabla_inventario").find(".filaSeleccionada");
+                        		var articulo = element.html();
+                        		articulo = articulo.split("</td>");
+                        		articulo = articulo[0].substring(4);
+                                var informacion = {};
+                        		informacion["id_articulo"] = articulo;
+                                var data = consultarInformacionObjeto("articulo",informacion);
+                                var dataArticuloInventario = consultarArticuloInventario(informacion);
+                                var id_articulo, nombre, marca, categoria, bodega, cantidad_minima, cantidad;
+                                console.log(data);
+                                console.log(dataArticuloInventario);
+                                $.each(data, function(index, record) {
+                                    if($.isNumeric(index)) {
+                                        id_articulo = record.id_articulo;
+                        				nombre = record.nombre
+                                        marca = record.nombre_marca;
+                                        categoria = record.nombre_categoria;
+                                        bodega = record.bodega;
+                                        cantidad_minima = record.cantidad_minima;
+                                    }
+                                });
+                                $.each(dataArticuloInventario, function(index, record) {
+                                    if($.isNumeric(index)) {
+                                        cantidad = record.cantidad;
+                                    }
+                                });
+                                if(((URLactual['href'].indexOf('consultar_inventario_electrico') >= 0) && (bodega == "electrica")) || ((URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0) && (bodega == "hidraulica"))){
+                                    if (cantidad <= cantidad_minima) {
+                                        $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                    }else{
+                                        $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                    }
+                                }
+                                element.remove();
                             }
                         }
                     }
