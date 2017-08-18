@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div>
     <div class='form-group'>
-        <div><b><h2>Consultar Movimientos Inventario</h2></b><br></div>
+        <div><b><h2>Consultar Movimientos Inventario - El&eacute;ctrico</h2></b><br></div>
         <div class='div_izquierda'><b>Rango Fechas:</b></div>
         <div class="input-daterange input-group" id="datepicker">
             <input type="text" class="input-sm form-control formulario" name="start" id="fecha_inicio" placeholder="Fecha Inicio"/>
@@ -10,7 +10,7 @@
         </div>
     <div><br>
     <div class='form_button'>
-        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="consultarMovimientosInventario" id="consultarMovimientosInventario" value="Ver Movimientos Inventario" title="Ver los movimientos del inventario entre las fechas seleccionadas" disabled/>
+        <input type="button" class="btn btn-primary btn-lg btn-formulario" name="consultarMovimientosInventarioElectrico" id="consultarMovimientosInventarioElectrico" value="Ver Movimientos Inventario" title="Ver los movimientos del inventario de la bodega el&eacute;ctrica entre las fechas seleccionadas" disabled/>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogConsulta'>
@@ -18,7 +18,7 @@
         <div class='modal-content'>
             <div class='modal-header'>
               <button type='button' class='close' data-dismiss='modal'>&times;</button>
-              <h4 class='modal-title'>Movimientos del Inventario</h4>
+              <h4 class='modal-title'>Movimientos del Inventario - El&eacute;ctrico</h4>
             </div>
             <div class='modal-body'>
                 <div class='form-group'>
@@ -32,6 +32,7 @@
                                             <th>Art&iacute;culo</th>
                                             <th>Cantidad Añadida o Sustraída</th>
                                             <th>Marca</th>
+                                            <th>Categor&iacute;a</th>
                                             <th>Fecha</th>
                                             <th>Usuario</th>
                                         </tr>
