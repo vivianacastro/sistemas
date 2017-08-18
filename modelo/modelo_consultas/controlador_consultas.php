@@ -3916,16 +3916,44 @@ class controlador_consultas{
     }
 
     /**
-     * Función que permite consultar las marcas de los aires aconidcionados.
+     * Función que permite consultar los artículos de la bodega eléctrica.
     **/
-    public function consultar_articulos() {
+    public function consultar_articulos_electrico() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $data = $m->buscarArticulos();
+            $data = $m->buscarArticulos("electrica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'id_marca' => $valor['id_marca'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad_minima' => $valor['cantidad_minima'],
+                    'cantidad' => $valor['cantidad'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los artículos de la bodega hidráulica.
+    **/
+    public function consultar_articulos_hidraulico() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarArticulos("hidraulica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
@@ -4057,9 +4085,9 @@ class controlador_consultas{
     }
 
     /**
-     * Función que permite consultar el inventario.
+     * Función que permite consultar el inventario de la bodega eléctrica.
     **/
-    public function listar_movimientos_inventario() {
+    public function listar_movimientos_inventario_electrico() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -4067,7 +4095,7 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"]);
+            $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"electrica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
@@ -4075,7 +4103,39 @@ class controlador_consultas{
                     'valor_nuevo' => $valor['valor_nuevo'],
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
-                    'fecha' => $valor['fecha'],
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'fecha' => substr($valor['fecha'],0,16),
+                    'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar el inventario de la bodega hidráulica.
+    **/
+    public function listar_movimientos_inventario_hidraulico() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"hidraulica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_articulo' => $valor['id_articulo'],
+                    'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
+                    'valor_nuevo' => $valor['valor_nuevo'],
+                    'valor_antiguo' => $valor['valor_antiguo'],
+                    'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'fecha' => substr($valor['fecha'],0,16),
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);

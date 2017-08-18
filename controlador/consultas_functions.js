@@ -1066,16 +1066,49 @@ $(document).ready(function() {
 	}
 
     /**
-	 * Función que permite consultar el inventario.
+	 * Función que permite consultar el inventario de la bodega eléctrica.
 	 * @returns {data}
 	**/
-	function listarMovimientosInventario(informacion){
+	function listarMovimientosInventarioElectrico(informacion){
 		var dataResult;
         var jObject = JSON.stringify(informacion);
 		try {
 			$.ajax({
 				type: "POST",
-				url: "index.php?action=listar_movimientos_inventario",
+				url: "index.php?action=listar_movimientos_inventario_electrico",
+                data: {jObject:jObject},
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//alert(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+    /**
+	 * Función que permite consultar el inventario de la bodega hidráulica.
+	 * @returns {data}
+	**/
+	function listarMovimientosInventarioHidraulico(informacion){
+		var dataResult;
+        var jObject = JSON.stringify(informacion);
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=listar_movimientos_inventario_hidraulico",
                 data: {jObject:jObject},
 				dataType: "json",
 				async: false,
@@ -1261,15 +1294,43 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de los artículos.
+     * Función que realiza una consulta de los artículos de la bodega eléctrica.
      * @returns {data} object json.
     **/
-    function buscarArticulos(){
+    function buscarArticulosElectrico(){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_articulos",
+                url: "index.php?action=consultar_articulos_electrico",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de los artículos de la bodega hidráulica.
+     * @returns {data} object json.
+    **/
+    function buscarArticulosHidraulico(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_articulos_hidraulico",
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1391,7 +1452,11 @@ $(document).ready(function() {
         }else{
             id = id.toString();
         }
-        var data = buscarArticulos();
+        if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
+            var data = buscarArticulosElectrico();
+        }else{
+            var data = buscarArticulosHidraulico();
+        }
         $("#"+selector+id).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -2225,16 +2290,19 @@ $(document).ready(function() {
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
                 if (fechaInicio > fechaFin) {
-                    $('#consultarMovimientosInventario').attr('disabled',true);
+                    $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
+                    $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
                     $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
-                    $('#consultarMovimientosInventario').removeAttr("disabled",true);
+                    $('#consultarMovimientosInventarioElectrico').removeAttr('disabled',true);
+                    $('#consultarMovimientosInventarioHidraulico').removeAttr('disabled',true);
                     $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
                     $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
             }else{
-                $('#consultarMovimientosInventario').attr('disabled',true);
+                $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
+                $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                 $('#visualizarArticulosMasUsados').attr('disabled',true);
                 $('#visualizarArticulosMenosUsados').attr('disabled',true);
             }
@@ -2286,16 +2354,19 @@ $(document).ready(function() {
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
                 if (fechaInicio > fechaFin) {
-                    $('#consultarMovimientosInventario').attr('disabled',true);
+                    $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
+                    $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
                     $('#visualizarArticulosMenosUsados').attr('disabled',true);
                 }else{
-                    $('#consultarMovimientosInventario').removeAttr("disabled",true);
+                    $('#consultarMovimientosInventarioElectrico').removeAttr('disabled',true);
+                    $('#consultarMovimientosInventarioHidraulico').removeAttr('disabled',true);
                     $('#visualizarArticulosMasUsados').removeAttr('disabled',true);
                     $('#visualizarArticulosMenosUsados').removeAttr('disabled',true);
                 }
             }else{
-                $('#consultarMovimientosInventario').attr('disabled',true);
+                $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
+                $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                 $('#visualizarArticulosMasUsados').attr('disabled',true);
                 $('#visualizarArticulosMenosUsados').attr('disabled',true);
             }
@@ -12994,10 +13065,10 @@ $(document).ready(function() {
 	});
 
     /**
-     * Se captura el evento cuando de dar click en el botón consultarMovimientosInventario y se
+     * Se captura el evento cuando de dar click en el botón consultarMovimientosInventarioElectrico y se
      * realiza la operacion correspondiente.
     **/
-    $("#consultarMovimientosInventario").click(function (e){
+    $("#consultarMovimientosInventarioElectrico").click(function (e){
 		for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
@@ -13007,15 +13078,46 @@ $(document).ready(function() {
         var informacion = {};
         informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
         informacion["fecha_fin"] = fechaFin + " 23:59:59";
-        var data = listarMovimientosInventario(informacion);
+        var data = listarMovimientosInventarioElectrico(informacion);
         $.each(data, function(index, record) {
             if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
 				var nombre = record.nombre_articulo;
 				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
 				var marca = record.nombre_marca;
+                var categoria = record.nombre_categoria;
 				var fecha = record.fecha;
                 var usuario = record.usuario;
-                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
+                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
+				articulosCont++;
+            }
+        });
+		$("#divDialogConsulta").modal("show");
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón consultarMovimientosInventarioHidraulico y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#consultarMovimientosInventarioHidraulico").click(function (e){
+		for (var i=0;i<articulosCont;i++) {
+            eliminarComponente("tr_tabla_inventario");
+        }
+        articulosCont = 0;
+        var fechaInicio = $("#fecha_inicio").val();
+        var fechaFin = $("#fecha_fin").val();
+        var informacion = {};
+        informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
+        informacion["fecha_fin"] = fechaFin + " 23:59:59";
+        var data = listarMovimientosInventarioHidraulico(informacion);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
+				var nombre = record.nombre_articulo;
+				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
+				var marca = record.nombre_marca;
+                var categoria = record.nombre_categoria;
+				var fecha = record.fecha;
+                var usuario = record.usuario;
+                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
 				articulosCont++;
             }
         });

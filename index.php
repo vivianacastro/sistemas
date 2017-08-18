@@ -289,8 +289,10 @@ $map = array(
         //Acciones de consulta
         'listar_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario_electrico'),
         'listar_inventario_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_inventario_hidraulico'),
-        'listar_movimientos_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'listar_movimientos_inventario'),
-        'consultar_articulos' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos'),
+        'listar_movimientos_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_movimientos_inventario_electrico'),
+        'listar_movimientos_inventario_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'listar_movimientos_inventario_hidraulico'),
+        'consultar_articulos_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos_electrico'),
+        'consultar_articulos_hidraulico' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulos_hidraulico'),
         'consultar_articulo_inventario' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo_inventario'),
         'consultar_informacion_articulo_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo_proveedor'),
         'consultar_informacion_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_informacion_articulo'),

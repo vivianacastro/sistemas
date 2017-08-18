@@ -1696,16 +1696,20 @@ class modelo_consultas
 
     /**
      * Función que permite consultar el inventario.
+     * @param string $fecha_inicio, fecha desde la cual se va a buscar.
+     * @param string $fecha_fin, fecha hasta la cual se va a buscar.
+     * @param string $bodega, bodega a la que se va a consultar.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarMovimientosInventario($fecha_inicio,$fecha_fin){
+    public function buscarMovimientosInventario($fecha_inicio,$fecha_fin,$bodega){
         $fecha_inicio = htmlspecialchars(trim($fecha_inicio));
         $fecha_fin = htmlspecialchars(trim($fecha_fin));
-        $sql = "SELECT a.id_objeto AS id_articulo, b.nombre AS nombre_articulo, a.valor_nuevo, a.valor_antiguo, c.nombre AS nombre_marca, a.fecha, d.nombre_usuario AS usuario
+        $sql = "SELECT a.id_objeto AS id_articulo, b.nombre AS nombre_articulo, a.valor_nuevo, a.valor_antiguo, c.nombre AS nombre_marca, a.fecha, d.nombre_usuario AS usuario, e.nombre AS nombre_categoria
                 FROM modificaciones a   JOIN articulo b ON a.id_objeto = b.id_articulo
                                         JOIN marca_inventario c ON b.marca = c.id
                                         JOIN usuarios d ON a.usuario = d.login
-                WHERE a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."'
+                                        JOIN categoria_articulo e ON b.id_categoria_articulo = e.id
+                WHERE a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."' AND b.bodega = '".$bodega."'
                 ORDER BY a.fecha;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1727,6 +1731,7 @@ class modelo_consultas
 
     /**
      * Función que permite consultar un artículo en el inventario.
+     * @param string $id_articulo, id del artículo a buscar.
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarArticuloInventario($id_articulo){
@@ -1751,13 +1756,15 @@ class modelo_consultas
     }
 
     /**
-     * Función que permite consultar el inventario.
+     * Función que permite consultar los artículos.
+     * @param string $bodega, bodega a la que se va a consultar.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarArticulos(){
+    public function buscarArticulos($bodega){
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima, c.cantidad
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
                                 LEFT JOIN inventario c ON a.id_articulo = c.id_articulo
+                WHERE a.bodega = '".$bodega."'
                 ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
