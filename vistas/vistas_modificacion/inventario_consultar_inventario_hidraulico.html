@@ -3,6 +3,9 @@
     <div class='form-group'>
         <div><b><h2>Gestionar Inventario - Bodega Hidr&aacute;ulica</h2></b><br></div>
         <div><h4><b>Artículos</b></h4></div>
+        <div align="left" class="divBusqueda">
+            <input class="inputBusqueda" oninput="w3.filterHTML('#tabla_inventario', '#tr_tabla_inventario', this.value)" placeholder="Buscar por art&iacute;culo o categor&iacute;a..."><br>
+        </div>
         <div class="table-responsive">
             <table id="tabla_inventario" class="table table-bordered" style="display:none">
                 <thead align="center">
@@ -22,7 +25,6 @@
     </div><br>
     <div class='form_button'>
         <input type='button' class='btn btn-primary btn-lg btn-formulario' name='modificar_cantidad_articulos' id='modificar_cantidad_articulos' value='Ingresar o Extraer Artículos' title='Ingresar o extraer articulos del inventario'/>
-        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='filtrar_articulos' id='filtrar_articulos' value='Filtrar Artículos' title='Filtrar Artículos'/>
         <input type='button' class='btn btn-primary btn-lg btn-formulario' name='visualizarArticulo' id='visualizarArticulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
     </div>
 </div>

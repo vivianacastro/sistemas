@@ -145,6 +145,10 @@ html, body {
 	padding: 2% 0% 0%;
 }
 
+.divBusqueda{
+    padding: 0% 0% 0% 10%;
+}
+
 .div_input_inicio_sesion{
 	padding-top: 4%;
 }
@@ -240,6 +244,19 @@ html, body {
 .img_boton_barra:hover{
     opacity: 0.7;
     filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+.inputBusqueda {
+    background-image: url('/sistemas/vistas/images/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 5px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 30%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    padding: 5px 20px 5px 40px; /* Add some padding */
+    margin-bottom: 12px; /* Add some space below the input */
+    border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
 }
 
 .input-group{
@@ -565,6 +582,10 @@ html, body {
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media screen and (min-width: 768px) and (max-width:991px) {
+    .inputBusqueda{
+        width: 40%;
+    }
+
     .texto-inicio-sesion{
        font-size: smaller;
     }
@@ -584,12 +605,20 @@ html, body {
        font-size: smalller;
     }
 
+    .divBusqueda{
+        padding: 0% 0% 0% 0%;
+    }
+
     .div_carousel{
        display: none;
     }
 
     .img_boton{
        width: 20%;
+    }
+
+    .inputBusqueda{
+        width: 40%;
     }
 
     .modal-dialog{
