@@ -1,2 +1,5 @@
 [18-Aug-2017 12:29:52 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
 [18-Aug-2017 12:45:35 America/New_York] PHP Parse error:  syntax error, unexpected '"'' (T_CONSTANT_ENCAPSED_STRING) in /media/windows/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1768
+[23-Aug-2017 11:54:42 America/New_York] PHP Notice:  Undefined index: login in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 121
+[23-Aug-2017 11:54:42 America/New_York] PHP Notice:  Undefined index: password in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 121
+[23-Aug-2017 11:54:42 America/New_York] PHP Notice:  Undefined offset: 0 in /media/windows/sistemas/modelo/modelo_usuario/modelo_usuario.php on line 53
