@@ -140,7 +140,7 @@ $(document).ready(function() {
             actualizarSelectCategorias("categoria");
             actualizarSelectProveedores(proveedoresCont);
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
-            llenarTablaInventario();
+            //llenarTablaInventario();
             actualizarSelectMarcas("marca_search");
             actualizarSelectMarcas("marca");
             actualizarSelectCategorias("categoria");
