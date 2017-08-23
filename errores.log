@@ -1,2 +1,0 @@
-[18-Aug-2017 12:29:52 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
-[18-Aug-2017 12:45:35 America/New_York] PHP Parse error:  syntax error, unexpected '"'' (T_CONSTANT_ENCAPSED_STRING) in /media/windows/sistemas/modelo/modelo_consultas/modelo_consultas.php on line 1768
