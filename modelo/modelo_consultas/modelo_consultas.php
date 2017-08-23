@@ -2168,7 +2168,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarMarcas(){
-        $sql = "SELECT * FROM marca_inventario ORDER BY nombre;";
+        $sql = "SELECT * FROM marca_inventario ORDER BY marcas;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas 1)";
