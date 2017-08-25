@@ -1664,6 +1664,30 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar las subcategorias almacenadas en el sistema.
+    **/
+    public function consultar_subcategorias() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarSubcategorias();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar los proveedores almacenados en el sistema.
     **/
     public function consultar_proveedores() {
@@ -4064,6 +4088,8 @@ class controlador_consultas{
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'id_categoria' => $valor['id_categoria_articulo'],
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'id_subcategoria' => $valor['id_subcategoria_articulo'],
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'bodega' => mb_convert_case($valor['bodega'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -4095,6 +4121,8 @@ class controlador_consultas{
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'id_categoria' => $valor['id_categoria_articulo'],
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'id_subcategoria' => $valor['id_subcategoria_articulo'],
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'bodega' => mb_convert_case($valor['bodega'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -4125,6 +4153,7 @@ class controlador_consultas{
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
@@ -4156,6 +4185,7 @@ class controlador_consultas{
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
@@ -4214,6 +4244,8 @@ class controlador_consultas{
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'id_categoria' => $valor['id_categoria_articulo'],
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'id_subcategoria' => $valor['id_subcategoria_articulo'],
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'bodega' => $valor['bodega'],
                     'cantidad_minima' => $valor['cantidad_minima'],
                 );
@@ -4246,6 +4278,8 @@ class controlador_consultas{
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'id_categoria_articulo' => $valor['id_categoria_articulo'],
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
+                    'id_subcategoria_articulo' => $valor['id_subcategoria_articulo'],
+                    'nombre_subcategoria' => mb_convert_case($valor['nombre_subcategoria'],MB_CASE_TITLE,"UTF-8"),
                     'bodega' => $valor['bodega'],
                     'cantidad_minima' => $valor['cantidad_minima'],
                 );
@@ -4296,6 +4330,32 @@ class controlador_consultas{
             $result = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarInformacionCategoria($info["nombre"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_marca' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar la información de una categoría
+     * almacenada en el sistema.
+    **/
+    public function consultar_informacion_subcategoria() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarInformacionSubcategoria($info["nombre"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_marca' => $valor['id'],

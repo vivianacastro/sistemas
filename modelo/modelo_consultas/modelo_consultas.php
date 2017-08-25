@@ -1041,9 +1041,10 @@ class modelo_consultas
     **/
     public function buscarInformacionArticulo($id_articulo){
         $id_articulo = htmlspecialchars(trim($id_articulo));
-        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.bodega, a.cantidad_minima
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.id_subcategoria_articulo, d.nombre AS nombre_subcategoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
                                 JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
+                                JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = d.id
                 WHERE a.id_articulo = '".$id_articulo."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1071,9 +1072,10 @@ class modelo_consultas
     **/
     public function buscarInformacionArticuloNombre($nombre_articulo,$marca){
         $nombre_articulo = htmlspecialchars(trim($nombre_articulo));
-        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.bodega, a.cantidad_minima
+        $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.id_subcategoria_articulo, d.nombre AS nombre_subcategoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
                                 JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
+                                JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = c.id
                 WHERE a.nombre = '".$nombre_articulo."' and a.marca = '".$marca."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1128,6 +1130,33 @@ class modelo_consultas
     public function buscarInformacionCategoria($nombre){
         $nombre = htmlspecialchars(trim($nombre));
         $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$nombre."' ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Categoría 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Categoría 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Información de la categoría seleccionado";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar la información de una subcategoría.
+     * @param string $nombre, nombre de la subcategoría.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarInformacionSubcategoria($nombre){
+        $nombre = htmlspecialchars(trim($nombre));
+        $sql = "SELECT * FROM subcategoria_articulo WHERE nombre = '".$nombre."' ORDER BY nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Información Categoría 1)";
@@ -1670,10 +1699,11 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarInventario($bodega){
-        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca, b.id_categoria_articulo, d.nombre AS nombre_categoria, b.bodega
+        $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca, b.id_categoria_articulo, d.nombre AS nombre_categoria, b.id_subcategoria_articulo, e.nombre AS nombre_subcategoria, b.bodega
                 FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
                                     JOIN marca_inventario c ON b.marca = c.id
                                     JOIN categoria_articulo d ON b.id_categoria_articulo = d.id
+                                    JOIN subcategoria_articulo e ON b.id_subcategoria_articulo = d.id
                 WHERE b.bodega = '".$bodega."'
                 ORDER BY b.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1704,11 +1734,12 @@ class modelo_consultas
     public function buscarMovimientosInventario($fecha_inicio,$fecha_fin,$bodega){
         $fecha_inicio = htmlspecialchars(trim($fecha_inicio));
         $fecha_fin = htmlspecialchars(trim($fecha_fin));
-        $sql = "SELECT a.id_objeto AS id_articulo, b.nombre AS nombre_articulo, a.valor_nuevo, a.valor_antiguo, c.nombre AS nombre_marca, a.fecha, d.nombre_usuario AS usuario, e.nombre AS nombre_categoria
+        $sql = "SELECT a.id_objeto AS id_articulo, b.nombre AS nombre_articulo, a.valor_nuevo, a.valor_antiguo, c.nombre AS nombre_marca, a.fecha, d.nombre_usuario AS usuario, e.nombre AS nombre_categoria, f.nombre AS nombre_subcategoria
                 FROM modificaciones a   JOIN articulo b ON a.id_objeto = b.id_articulo
                                         JOIN marca_inventario c ON b.marca = c.id
                                         JOIN usuarios d ON a.usuario = d.login
                                         JOIN categoria_articulo e ON b.id_categoria_articulo = e.id
+                                        JOIN subcategoria_articulo f ON b.id_subcategoria_articulo = e.id
                 WHERE a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."' AND b.bodega = '".$bodega."'
                 ORDER BY a.fecha;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -2206,6 +2237,30 @@ class modelo_consultas
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
                 $GLOBALS['mensaje'] = "Categorías presentes en el sistema";
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite buscar las subcategorías almacenadas en el sistema.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarSubcategorias(){
+        $sql = "SELECT * FROM subcategoria_articulo ORDER BY nombre;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Subcategorías 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Subcategorías 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Subcategorías presentes en el sistema";
             }
         }
         return $result;
