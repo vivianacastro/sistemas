@@ -133,17 +133,20 @@ $(document).ready(function() {
             llenarTablaInventarioElectrico();
             actualizarSelectMarcas("marca");
             actualizarSelectCategorias("categoria");
+            actualizarSelectSubcategorias("subcategoria");
             actualizarSelectProveedores(proveedoresCont);
         }else if (URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0 ) {
             llenarTablaInventarioHidraulico();
             actualizarSelectMarcas("marca");
             actualizarSelectCategorias("categoria");
+            actualizarSelectSubcategorias("subcategoria");
             actualizarSelectProveedores(proveedoresCont);
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
             //llenarTablaInventario();
             actualizarSelectMarcas("marca_search");
             actualizarSelectMarcas("marca");
             actualizarSelectCategorias("categoria");
+            actualizarSelectSubcategorias("subcategoria");
             actualizarSelectProveedores(proveedoresCont);
         }
     })();
@@ -1152,14 +1155,15 @@ $(document).ready(function() {
 				var cantidad = parseInt(record.cantidad);
 				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
+                var subcategoria = record.nombre_subcategoria;
                 var bodega = "Eléctrica";
 				var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
-                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
-                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
                     articulosPocasUnidades++;
                 }else{
-                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
 				articulosCont++;
             }
@@ -1191,14 +1195,15 @@ $(document).ready(function() {
 				var cantidad = parseInt(record.cantidad);
 				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
+                var subcategoria = record.nombre_subcategoria;
                 var bodega = "Hidráulica";
 				var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
-                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
-                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
                     articulosPocasUnidades++;
                 }else{
-                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
 				articulosCont++;
             }
@@ -1275,6 +1280,34 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 url: "index.php?action=consultar_categorias",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
+     * Función que realiza una consulta de las subcategorías del inventario.
+     * @returns {data} object json.
+    **/
+    function buscarSubcategorias(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_subcategorias",
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1428,6 +1461,26 @@ $(document).ready(function() {
     **/
     function actualizarSelectCategorias(selector){
         var data = buscarCategorias();
+        $("#"+selector).empty();
+        var row = $("<option value=''/>");
+        row.text("--Seleccionar--");
+        row.appendTo("#"+selector);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                aux = record.nombre;
+                row = $("<option value='" + record.id + "'/>");
+                row.text(aux);
+                row.appendTo("#"+selector);
+            }
+        });
+    }
+
+    /**
+     * Función que llena y actualiza el selector de subcategorias.
+     * @returns {undefined}
+    **/
+    function actualizarSelectSubcategorias(selector){
+        var data = buscarSubcategorias();
         $("#"+selector).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -2741,6 +2794,17 @@ $(document).ready(function() {
     **/
     $("#nombre_categoria_search").change(function (e) {
         if (validarCadena($("#nombre_categoria_search").val())) {
+            $('#visualizarCategoria').removeAttr("disabled");
+        }else{
+            $('#visualizarCategoria').attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del input nombre_subcategoria_search.
+    **/
+    $("#nombre_subcategoria_search").change(function (e) {
+        if (validarCadena($("#nombre_subcategoria_search").val())) {
             $('#visualizarCategoria').removeAttr("disabled");
         }else{
             $('#visualizarCategoria').attr('disabled',true);
@@ -6004,6 +6068,8 @@ $(document).ready(function() {
                 $("#marca").attr('name',record.id_marca);
                 $("#categoria").val(record.id_categoria);
                 $("#categoria").attr('name',record.id_categoria);
+                $("#subcategoria").val(record.id_subcategoria);
+                $("#subcategoria").attr('name',record.id_subcategoria);
                 $("#bodega").val(record.bodega);
 				$("#cantidad_minima").val(record.cantidad_minima);
             }
@@ -6130,6 +6196,8 @@ $(document).ready(function() {
                 $("#marca").attr('name',record.id_marca);
                 $("#categoria").val(record.id_categoria_articulo);
                 $("#categoria").attr('name',record.id_categoria_articulo);
+                $("#subcategoria").val(record.id_subcategoria_articulo);
+                $("#subcategoria").attr('name',record.id_subcategoria_articulo);
                 $("#bodega").val(record.bodega);
                 $("#bodega").attr('name',record.bodega);
 				$("#cantidad_minima").val(record.cantidad_minima);
@@ -6289,6 +6357,31 @@ $(document).ready(function() {
         }else{
             alert("No se encontró ninguna categoría con el nombre ingresado");
             $("#nombre_categoria_search").focus();
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón visualizarCategoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarSubcategoria").click(function (e){
+        var nombreCategoria = limpiarCadena($("#nombre_subcategoria_search").val());
+		var informacion = {};
+		informacion["nombre"] = nombreCategoria;
+        var data = consultarInformacionObjeto("subcategoria",informacion);
+        subcategoriasCont = 0;
+		$.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+				$("#nombre_subcategoria").val(record.nombre);
+                $("#nombre_subcategoria").attr('name',record.nombre);
+                subcategoriasCont++;
+            }
+        });
+        if (subcategoriasCont > 0) {
+            $("#divDialogConsulta").modal('show');
+        }else{
+            alert("No se encontró ninguna categoría con el nombre ingresado");
+            $("#nombre_subcategoria_search").focus();
         }
     });
 
@@ -6549,10 +6642,12 @@ $(document).ready(function() {
         $("#nombre_articulo").attr('disabled',true);
         $("#marca").attr('disabled',true);
         $("#categoria").attr('disabled',true);
+        $("#subcategoria").attr('disabled',true);
         $("#bodega").attr('disabled',true);
         $("#cantidad_minima").attr('disabled',true);
         $("#nombre_marca").attr('disabled',true);
         $("#nombre_categoria").attr('disabled',true);
+        $("#nombre_subcategoria").attr('disabled',true);
         $("#proveedor_articulo").attr('disabled',true);
         $("#nombre_proveedor").attr('disabled',true);
         $("#direccion").attr('disabled',true);
@@ -6582,6 +6677,7 @@ $(document).ready(function() {
         $("#modificar_articulo").show();
         $("#modificar_marca_inventario").show();
         $("#modificar_categoria").show();
+        $("#modificar_subcategoria").show();
         $("#modificar_proveedor").show();
         $("#guardar_modificaciones_sede").hide();
         $("#guardar_modificaciones_campus").hide();
@@ -6618,6 +6714,7 @@ $(document).ready(function() {
         $("#guardar_modificaciones_articulo").hide();
         $("#guardar_modificaciones_marca_inventario").hide();
         $("#guardar_modificaciones_categoria").hide();
+        $("#guardar_modificaciones_subcategoria").hide();
         $("#guardar_modificaciones_proveedor").hide();
         eliminarComponente("tituloInfo");
         eliminarComponente("informacion");
@@ -7297,6 +7394,7 @@ $(document).ready(function() {
         $("#nombre_articulo").removeAttr("disabled");
         $("#marca").removeAttr("disabled");
         $("#categoria").removeAttr("disabled");
+        $("#subcategoria").removeAttr("disabled");
         $("#bodega").removeAttr("disabled");
         $("#cantidad_minima").removeAttr("disabled");
         $("#proveedor_articulo").removeAttr("disabled");
@@ -7341,6 +7439,17 @@ $(document).ready(function() {
         $("#nombre_categoria").removeAttr("disabled");
         $("#modificar_categoria").hide();
         $("#guardar_modificaciones_categoria").show();
+        $('#divDialogConsulta').scrollTop(0);
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón modificar_subcategoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#modificar_subcategoria").click(function (e){
+        $("#nombre_subcategoria").removeAttr("disabled");
+        $("#modificar_subcategoria").hide();
+        $("#guardar_modificaciones_subcategoria").show();
         $('#divDialogConsulta').scrollTop(0);
     });
 
@@ -12485,6 +12594,7 @@ $(document).ready(function() {
             var nombre = limpiarCadena($("#nombre_articulo").val());
             var marca = $("#marca").val();
             var categoria = $("#categoria").val();
+            var subcategoria = $("#subcategoria").val();
             var bodega = $("#bodega").val();
             var cantidadMinima = $("#cantidad_minima").val();
             var proveedor = [];
@@ -12499,9 +12609,6 @@ $(document).ready(function() {
                 }else if (!validarCadena(marca)) {
                     alert("ERROR. Seleccione la marca del artículo");
                     $("#marca").focus();
-                }else if(!validarCadena(categoria)){
-                    alert("ERROR. Seleccione la categoria a la que pertenece el artículo");
-                    $("#categoria").focus();
                 }else if(!validarCadena(bodega)){
                     alert("ERROR. Seleccione la bodega a la que pertenece el artículo");
                     $("#bodega").focus();
@@ -12545,6 +12652,7 @@ $(document).ready(function() {
                         informacion["nombre"] = nombre;
                         informacion["marca"] = marca;
                         informacion["categoria"] = categoria;
+                        informacion["subcategoria"] = subcategoria;
                         informacion["bodega"] = bodega;
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedor;
@@ -12588,7 +12696,7 @@ $(document).ready(function() {
                         		informacion["id_articulo"] = articulo;
                                 var data = consultarInformacionObjeto("articulo",informacion);
                                 var dataArticuloInventario = consultarArticuloInventario(informacion);
-                                var id_articulo, nombre, marca, categoria, bodega, cantidad_minima, cantidad;
+                                var id_articulo, nombre, marca, categoria, subcategoria, bodega, cantidad_minima, cantidad;
                                 console.log(data);
                                 console.log(dataArticuloInventario);
                                 $.each(data, function(index, record) {
@@ -12597,6 +12705,7 @@ $(document).ready(function() {
                         				nombre = record.nombre
                                         marca = record.nombre_marca;
                                         categoria = record.nombre_categoria;
+                                        subcategoria = record.nombre_subcategoria;
                                         bodega = record.bodega;
                                         cantidad_minima = record.cantidad_minima;
                                     }
@@ -12608,9 +12717,9 @@ $(document).ready(function() {
                                 });
                                 if(((URLactual['href'].indexOf('consultar_inventario_electrico') >= 0) && (bodega == "electrica")) || ((URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0) && (bodega == "hidraulica"))){
                                     if (cantidad <= cantidad_minima) {
-                                        $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                        $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                                     }else{
-                                        $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                        $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                                     }
                                 }
                                 element.remove();
@@ -12671,6 +12780,32 @@ $(document).ready(function() {
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_categoria_search").val("");
+                    $("#divDialogConsulta").modal('hide');
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_modificaciones_subcategoria y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_modificaciones_subcategoria").click(function (e){
+        var confirmacion = window.confirm("¿Guardar la información de la categoría?");
+        if (confirmacion) {
+            var informacion = {};
+            var nombre = limpiarCadena($("#nombre_subcategoria").val());
+            var nombreAnterior = limpiarCadena($("#nombre_subcategoria").attr("name"));
+            if (!validarCadena(nombre)) {
+                alert("ERROR. Ingrese el nuevo nombre de la categoría");
+                $("#nombre_subcategoria").focus();
+            }else{
+                informacion["nombre"] = nombre;
+                informacion["nombre_anterior"] = nombreAnterior;
+                var data = modificarObjeto("subcategoria",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    $("#nombre_subcategoria_search").val("");
                     $("#divDialogConsulta").modal('hide');
                 }
             }
@@ -13085,9 +13220,10 @@ $(document).ready(function() {
 				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
 				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
+                var subcategoria = record.nombre_subcategoria;
 				var fecha = record.fecha;
                 var usuario = record.usuario;
-                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
+                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
 				articulosCont++;
             }
         });
@@ -13115,9 +13251,10 @@ $(document).ready(function() {
 				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
 				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
+                var subcategoria = record.nombre_subcategoria;
 				var fecha = record.fecha;
                 var usuario = record.usuario;
-                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
+                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
 				articulosCont++;
             }
         });
