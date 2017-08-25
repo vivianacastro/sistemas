@@ -268,10 +268,12 @@ $map = array(
         //Acciones de carga de plantillas
         'inventario_crear_articulo' => array('controlador' =>'controlador_creacion', 'action' =>'crear_articulo'),
         'inventario_crear_categoria' => array('controlador' =>'controlador_creacion', 'action' =>'crear_categoria'),
+        'inventario_crear_subcategoria' => array('controlador' =>'controlador_creacion', 'action' =>'crear_subcategoria'),
         'inventario_crear_marca' => array('controlador' =>'controlador_creacion', 'action' =>'crear_marca'),
         'inventario_crear_proveedor' => array('controlador' =>'controlador_creacion', 'action' =>'crear_proveedor'),
         'inventario_consultar_articulo' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_articulo'),
         'inventario_consultar_categoria' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_categoria'),
+        'inventario_consultar_subcategoria' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_subcategoria'),
         'inventario_consultar_marca' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_marca'),
         'inventario_consultar_proveedor' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_proveedor'),
         'inventario_consultar_inventario_electrico' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_inventario_electrico'),

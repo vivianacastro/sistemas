@@ -708,6 +708,27 @@ class controlador_consultas{
     }
 
     /**
+     * Función que despliega el panel que permite consultar una subcategoría de artículos.
+    **/
+    public function consultar_subcategoria() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Subcategoría Artículos',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_inventario"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_inventario"],"true") == 0) {
+                $v->retornar_vista(MOD_INVENTARIO, MODIFICACION, OPERATION_CONSULTAR_SUBCATEGORIA, $data);
+            }else{
+                $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_SUBCATEGORIA, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
      * Función que despliega el panel que permite consultar una marca.
     **/
     public function consultar_marca() {

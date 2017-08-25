@@ -1,0 +1,13 @@
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 399
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 401
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 403
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
+[25-Aug-2017 11:00:48 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:48 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
