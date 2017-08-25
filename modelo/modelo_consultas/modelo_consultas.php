@@ -1043,8 +1043,8 @@ class modelo_consultas
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.id_subcategoria_articulo, d.nombre AS nombre_subcategoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
-                                JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
-                                JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = d.id
+                                LEFT JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
+                                LEFT JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = d.id
                 WHERE a.id_articulo = '".$id_articulo."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1074,8 +1074,8 @@ class modelo_consultas
         $nombre_articulo = htmlspecialchars(trim($nombre_articulo));
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.id_categoria_articulo, c.nombre AS nombre_categoria, a.id_subcategoria_articulo, d.nombre AS nombre_subcategoria, a.bodega, a.cantidad_minima
                 FROM articulo a JOIN marca_inventario b ON a.marca = b.id
-                                JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
-                                JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = c.id
+                                LEFT JOIN categoria_articulo c ON a.id_categoria_articulo = c.id
+                                LEFT JOIN subcategoria_articulo d ON a.id_subcategoria_articulo = d.id
                 WHERE a.nombre = '".$nombre_articulo."' and a.marca = '".$marca."' ORDER BY a.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -1702,8 +1702,8 @@ class modelo_consultas
         $sql = "SELECT a.id_articulo, a.cantidad, b.nombre AS nombre_articulo, b.cantidad_minima, b.marca, c.nombre AS nombre_marca, b.id_categoria_articulo, d.nombre AS nombre_categoria, b.id_subcategoria_articulo, e.nombre AS nombre_subcategoria, b.bodega
                 FROM inventario a   JOIN articulo b ON a.id_articulo = b.id_articulo
                                     JOIN marca_inventario c ON b.marca = c.id
-                                    JOIN categoria_articulo d ON b.id_categoria_articulo = d.id
-                                    JOIN subcategoria_articulo e ON b.id_subcategoria_articulo = d.id
+                                    LEFT JOIN categoria_articulo d ON b.id_categoria_articulo = d.id
+                                    LEFT JOIN subcategoria_articulo e ON b.id_subcategoria_articulo = e.id
                 WHERE b.bodega = '".$bodega."'
                 ORDER BY b.nombre;";
         $l_stmt = $this->conexion->prepare($sql);
@@ -1738,8 +1738,8 @@ class modelo_consultas
                 FROM modificaciones a   JOIN articulo b ON a.id_objeto = b.id_articulo
                                         JOIN marca_inventario c ON b.marca = c.id
                                         JOIN usuarios d ON a.usuario = d.login
-                                        JOIN categoria_articulo e ON b.id_categoria_articulo = e.id
-                                        JOIN subcategoria_articulo f ON b.id_subcategoria_articulo = e.id
+                                        LEFT JOIN categoria_articulo e ON b.id_categoria_articulo = e.id
+                                        LEFT JOIN subcategoria_articulo f ON b.id_subcategoria_articulo = f.id
                 WHERE a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."' AND b.bodega = '".$bodega."'
                 ORDER BY a.fecha;";
         $l_stmt = $this->conexion->prepare($sql);

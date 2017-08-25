@@ -1148,6 +1148,7 @@ $(document).ready(function() {
         articulosCont = 0;
         articulosPocasUnidades = 0;
         var data = listarInventarioElectrico();
+        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
@@ -12667,6 +12668,7 @@ $(document).ready(function() {
                         var dataEliminarFotos = eliminarObjeto("foto_articulo",arregloFotosEliminar);
                         var dataEliminarProveedor = eliminarObjeto("articulo_proveedor",info);
                         var resultadoFotos = guardarFotos("articulo",arregloFotos);
+                        console.log(data);
                         var mensaje = "";
                         if (resultadoFotos.length != 0) {
                             for (var i=0;i<resultadoFotos.mensaje.length;i++) {

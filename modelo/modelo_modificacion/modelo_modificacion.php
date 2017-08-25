@@ -3100,7 +3100,18 @@ class modelo_modificacion {
         $subcategoria = htmlspecialchars(trim($subcategoria));
         $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
-        $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', id_categoria_articulo = '".$categoria."', id_subcategoria_articulo = '".$subcategoria."', bodega = '".$bodega."', cantidad_minima = '".$cantidad_minima."' WHERE id_articulo = '".$id_articulo."';";
+        $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', bodega = '".$bodega."', cantidad_minima = '".$cantidad_minima."'";
+        if (strcasecmp($categoria,"") == 0) {
+            $sql .= ", id_categoria_articulo = null";
+        }else{
+            $sql .= ", id_categoria_articulo = '".$categoria."'";
+        }
+        if (strcasecmp($subcategoria,"") == 0) {
+            $sql .= ", id_subcategoria_articulo = null";
+        }else{
+            $sql .= ", id_subcategoria_articulo = '".$subcategoria."'";
+        }
+        $sql .= "  WHERE id_articulo = '".$id_articulo."';";
         $data = $this->consultarCampoArticulo($id_articulo);
         $verificar = true;
         foreach ($data as $clave => $valor) {
