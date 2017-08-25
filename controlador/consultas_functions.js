@@ -1199,8 +1199,8 @@ $(document).ready(function() {
                 var bodega = "Hidráulica";
 				var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
-                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
-                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                    $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
                     articulosPocasUnidades++;
                 }else{
                     $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
@@ -2805,9 +2805,9 @@ $(document).ready(function() {
     **/
     $("#nombre_subcategoria_search").change(function (e) {
         if (validarCadena($("#nombre_subcategoria_search").val())) {
-            $('#visualizarCategoria').removeAttr("disabled");
+            $('#visualizarSubcategoria').removeAttr("disabled");
         }else{
-            $('#visualizarCategoria').attr('disabled',true);
+            $('#visualizarSubcategoria').attr('disabled',true);
         }
     });
 

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <div>
     <div class='form-group'>
-        <div><b><h2>Inventario</h2></b><br></div>
+        <div><b><h2>Gestionar Inventario - Bodega El&eacute;ctrica</h2></b><br></div>
         <div><h4><b>Artículos</b></h4></div>
+        <div class="divBusqueda">
+            <input class="inputBusqueda" oninput="w3.filterHTML('#tabla_inventario', '#tr_tabla_inventario', this.value)" placeholder="Buscar..."><br>
+        </div>
         <div class="table-responsive">
             <table id="tabla_inventario" class="table table-bordered" style="display:none">
                 <thead align="center">
@@ -11,16 +14,48 @@
                         <th>Art&iacute;culo</th>
                         <th>Cantidad</th>
                         <th>Marca</th>
+                        <th>Categor&iacute;a</th>
+                        <th>Subcategor&iacute;a</th>
                         <th>Cantidad M&iacute;nima</th>
                     </tr>
                 </thead>
-                <tbody id="tBodyTabla" class="bodyTabla">
+                <tbody id="tBody" class="bodyTabla">
                 </tbody>
             </table>
         </div>
     </div><br>
     <div class='form_button'>
-        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='ver_informacion_articulo' id='ver_informacion_articulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='modificar_cantidad_articulos' id='modificar_cantidad_articulos' value='Ingresar o Extraer Artículos' title='Ingresar o extraer articulos del inventario'/>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='visualizarArticulo' id='visualizarArticulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogModificarArticulo'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Ingresar o Extraer Art&iacute;culos del Inventario</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionArticuloInventario'>
+                        <div id="articulo">
+                            <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                            <select class='form-control formulario nombre_articulo_anadir' name='nombre_articulo_anadir' id='nombre_articulo_anadir' required></select><br>
+                            <div class='div_izquierda'><b>Cantidad de Art&iacute;culos a A&ntilde;adir ó Eliminar<font color='red'>*</font>:</b></div>
+                            <input class='form-control formulario' type='number' name='cantidad' id='cantidad' min="1" value='' placeholder='Ej: 10' required/>
+                        </div>
+                        <div>
+                            <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_articulo' id='añadir_articulo' value='Añadir Art&iacute;culo' title='Añadir Art&iacute;culo'/>
+                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_articulo' id='eliminar_articulo' value='Eliminar Art&iacute;culo' title='Eliminar Art&iacute;culo' disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_articulos' id='guardar_articulos' value='Guardar Cambios' title='Guardar inventario'/>
+            </div>
+        </div>
     </div>
 </div>
 <div class='modal fade' role='dialog' id='divDialogPocosArticulos'>
@@ -40,6 +75,9 @@
                                     <th>Art&iacute;culo</th>
                                     <th>Cantidad</th>
                                     <th>Marca</th>
+                                    <th>Categor&iacute;a</th>
+                                    <th>Subcategor&iacute;a</th>
+                                    <th>Bodega</th>
                                     <th>Cantidad M&iacute;nima</th>
                                 </tr>
                             </thead>
@@ -66,12 +104,26 @@
                         <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' disabled required/><br>
                         <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
                         <select class='form-control formulario' name='marca' id='marca' disabled required></select><br>
+                        <div class='div_izquierda'><b>Categor&iacute;a del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='categoria' id='categoria' disabled required></select><br>
+                        <div class='div_izquierda'><b>Subcategor&iacute;a del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='subcategoria' id='subcategoria' disabled required></select><br>
+                        <div class='div_izquierda'><b>Bodega<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='bodega' id='bodega' disabled required>
+                            <option value="">--Seleccionar--</option>
+                            <option value="electrica">El&eacute;ctrica</option>
+                            <option value="hidraulica">Hidr&aacute;ulica</option>
+                        </select><br>
                         <div class='div_izquierda'><b>Cantidad M&iacute;nima<font color='red'>*</font>:</b></div>
                         <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' disabled required/><br>
                         <div>
                             <div id='proveedor'>
                                 <div class='div_izquierda'><b>Proveedor del Art&iacute;culo:</b></div>
                                 <select class='form-control formulario' name='proveedor_articulo' id='proveedor_articulo' disabled required></select>
+                            </div>
+                            <div id="botones_proveedor" style="display:none">
+                                <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_proveedor' id='añadir_proveedor' value='Añadir Proveedor' title='Añadir Proveedor'/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_proveedor' id='eliminar_proveedor' value='Eliminar Proveedor' title='Eliminar Proveedor' disabled/>
                             </div>
                         </div><br>
                         <div class='div_izquierda'><b>Fotos del Art&iacute;culo:</b></div>
