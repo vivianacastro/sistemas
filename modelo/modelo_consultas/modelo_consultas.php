@@ -2223,7 +2223,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarCategorias(){
-        $sql = "SELECT * FROM categoria_articulo ORDER BY nombre;";
+        $sql = "SELECT * FROM categoria_articulo ORDER BY id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Categorías 1)";
