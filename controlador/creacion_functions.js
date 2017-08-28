@@ -129,6 +129,7 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
             actualizarSelectMarcas();
             actualizarSelectCategorias();
+            actualizarSelectSubcategorias();
             actualizarSelectProveedores(proveedoresCont);
         }
     })();
