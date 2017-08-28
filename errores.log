@@ -19,3 +19,10 @@
 [25-Aug-2017 16:58:44 America/New_York] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3115
 [25-Aug-2017 16:58:46 America/New_York] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3115
 [25-Aug-2017 17:28:05 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 403
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 413
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
