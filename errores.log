@@ -1,0 +1,28 @@
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 399
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 401
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 403
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:43 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
+[25-Aug-2017 11:00:48 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CREAR_SUBCATEGORIA - assumed 'OPERATION_CREAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 86
+[25-Aug-2017 11:00:48 America/New_York] PHP Notice:  Use of undefined constant OPERATION_CONSULTAR_SUBCATEGORIA - assumed 'OPERATION_CONSULTAR_SUBCATEGORIA' in /media/windows/sistemas/controlador_vista.php on line 91
+[25-Aug-2017 14:49:00 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[25-Aug-2017 16:58:04 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3106
+[25-Aug-2017 16:58:04 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3106
+[25-Aug-2017 16:58:04 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3106
+[25-Aug-2017 16:58:04 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3106
+[25-Aug-2017 16:58:44 America/New_York] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3115
+[25-Aug-2017 16:58:46 America/New_York] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3115
+[25-Aug-2017 17:28:05 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 403
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 413
+[28-Aug-2017 12:56:28 America/New_York] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
