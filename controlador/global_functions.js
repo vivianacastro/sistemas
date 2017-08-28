@@ -124,6 +124,8 @@ $(document).ready(function () {
 			$('#option_crear_articulo').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_crear_categoria') >= 0)) {
 			$('#option_crear_categoria').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_crear_subcategoria') >= 0)) {
+			$('#option_crear_subcategoria').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario_electrico') >= 0)) {
 			$('#option_consultar_inventario_electrico').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario_hidraulico') >= 0)) {
@@ -136,6 +138,8 @@ $(document).ready(function () {
 			$('#option_consultar_articulo').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_categoria') >= 0)) {
 			$('#option_consultar_categoria').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_subcategoria') >= 0)) {
+			$('#option_consultar_subcategoria').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_marca') >= 0)) {
 			$('#option_consultar_marca').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_proveedor') >= 0)) {
