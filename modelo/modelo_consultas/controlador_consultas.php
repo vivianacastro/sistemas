@@ -1697,7 +1697,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los proveedores almacenados en el sistema.
     **/
-    public function consultar_proveedores_hidraulica() {
+    public function consultar_proveedores_electrica() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
@@ -1725,7 +1725,7 @@ class controlador_consultas{
     /**
      * Función que permite consultar los proveedores almacenados en el sistema.
     **/
-    public function consultar_proveedores_electrica() {
+    public function consultar_proveedores_hidraulica() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,

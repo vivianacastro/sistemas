@@ -131,20 +131,20 @@ $(document).ready(function() {
             actualizarSelectSede();
         }else if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
             llenarTablaInventarioElectrico();
-            actualizarSelectMarcas("marca");
-            actualizarSelectCategorias("categoria");
-            actualizarSelectProveedores(proveedoresCont);
+            actualizarSelectMarcas("marca","electrica");
+            actualizarSelectCategorias("categoria","electrica");
+            actualizarSelectProveedores(proveedoresCont,"electrica");
         }else if (URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0 ) {
             llenarTablaInventarioHidraulico();
-            actualizarSelectMarcas("marca");
-            actualizarSelectCategorias("categoria");
-            actualizarSelectProveedores(proveedoresCont);
+            actualizarSelectMarcas("marca","hidraulica");
+            actualizarSelectCategorias("categoria","hidraulica");
+            actualizarSelectProveedores(proveedoresCont,"hidraulica");
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
             //llenarTablaInventario();
-            actualizarSelectMarcas("marca_search");
+            /*actualizarSelectMarcas("marca_search");
             actualizarSelectMarcas("marca");
             actualizarSelectCategorias("categoria");
-            actualizarSelectProveedores(proveedoresCont);
+            actualizarSelectProveedores(proveedoresCont);*/
         }
     })();
 
@@ -7196,6 +7196,19 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se modifica el valor del selector bodega
+     * y se actualiza el selector de campus.
+    */
+    $("#bodega").change(function (e) {
+        var bodega = $("#bodega").val();
+        actualizarSelectMarcas("marca",bodega);
+        actualizarSelectCategorias("categoria",bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
+        }
+    });
+
+    /**
      * Se captura el evento cuando se da click en el botón modificar_tipo_material y se
      * realiza la operacion correspondiente.
     **/
@@ -7302,10 +7315,10 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#modificar_articulo").click(function (e){
-        $("#nombre_articulo").removeAttr("disabled");
+        //$("#nombre_articulo").removeAttr("disabled");
         $("#marca").removeAttr("disabled");
         $("#categoria").removeAttr("disabled");
-        $("#bodega").removeAttr("disabled");
+        //$("#bodega").removeAttr("disabled");
         $("#cantidad_minima").removeAttr("disabled");
         $("#proveedor_articulo").removeAttr("disabled");
         for (var i = 1; i < proveedoresCont; i++) {
