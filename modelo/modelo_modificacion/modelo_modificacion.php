@@ -302,35 +302,6 @@ class modelo_modificacion {
     }
 
     /**
-     * Función que permite consultar si una subcategoría del módulo de inventario ya está registrada en el sistema.
-     * @param string $subcategoria, nombre de la subcategoria.
-     * @return array
-    **/
-    public function verificarSubcategoria($subcategoria){
-        $subcategoria = htmlspecialchars(trim($subcategoria));
-        $sql = "SELECT * FROM subcategoria_articulo WHERE nombre = '".$subcategoria."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Verificar Subcategoría 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Verificar Subcategoría 2)";
-                $GLOBALS['sql'] = $sql;
-                return false;
-            }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "ERROR. La subcategoría ya se encuentra registrada en el sistema.";
-                return false;
-            }
-            else{
-                $GLOBALS['sql'] = $sql;
-                return true;
-            }
-        }
-    }
-
-    /**
      * Función que permite consultar si un proveedor ya se encuentra registrado en el sistema.
      * @param string $nombre, nombre del proveedor.
      * @return array
@@ -3085,19 +3056,17 @@ class modelo_modificacion {
      * @param string $nombre, nombre del artículo.
      * @param string $marca, marca del artículo.
      * @param string $categoria, $categoria del artículo.
-     * @param string $subcategoria, $subcategoria del artículo.
      * @param string $bodega, $bodega donde está el artículo.
      * @param string $cantidad_minima, cantidad mínima del artículo.
      * @param string $proveedor, arreglo con los proveedores del artículo.
      * @param string $proveedor, arreglo con los anteriores proveedores del artículo.
      * @return array
     **/
-    public function modificarArticulo($id_articulo,$nombre,$marca,$categoria,$subcategoria,$bodega,$cantidad_minima,$proveedor,$proveedor_anterior){
+    public function modificarArticulo($id_articulo,$nombre,$marca,$categoria,$bodega,$cantidad_minima,$proveedor,$proveedor_anterior){
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $nombre = htmlspecialchars(trim($nombre));
         $marca = htmlspecialchars(trim($marca));
         $categoria = htmlspecialchars(trim($categoria));
-        $subcategoria = htmlspecialchars(trim($subcategoria));
         $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
         $sql = "UPDATE articulo SET nombre = '".$nombre."', marca = '".$marca."', bodega = '".$bodega."', cantidad_minima = '".$cantidad_minima."'";
@@ -3105,11 +3074,6 @@ class modelo_modificacion {
             $sql .= ", id_categoria_articulo = null";
         }else{
             $sql .= ", id_categoria_articulo = '".$categoria."'";
-        }
-        if (strcasecmp($subcategoria,"") == 0) {
-            $sql .= ", id_subcategoria_articulo = null";
-        }else{
-            $sql .= ", id_subcategoria_articulo = '".$subcategoria."'";
         }
         $sql .= "  WHERE id_articulo = '".$id_articulo."';";
         $data = $this->consultarCampoArticulo($id_articulo);
@@ -3119,7 +3083,6 @@ class modelo_modificacion {
             $nombre_anterior = $valor['nombre'];
             $marca_anterior = $valor['marca'];
             $categoria_anterior = $valor['id_categoria_articulo'];
-            $subcategoria_anterior = $valor['id_subcategoria_articulo'];
             $bodega_anterior = $valor['bodega'];
             $cantidad_minima_anterior = $valor['cantidad_minima'];
         }
@@ -3142,7 +3105,6 @@ class modelo_modificacion {
                     $this->registrarModificacion("articulo",$id_articulo,"nombre",$nombre_anterior,$nombre);
                     $this->registrarModificacion("articulo",$id_articulo,"marca",$marca_anterior,$marca);
                     $this->registrarModificacion("articulo",$id_articulo,"categoria",$categoria_anterior,$categoria);
-                    $this->registrarModificacion("articulo",$id_articulo,"subcategoria",$subcategoria_anterior,$subcategoria);
                     $this->registrarModificacion("articulo",$id_articulo,"bodega",$bodega_anterior,$bodega);
                     $this->registrarModificacion("articulo",$id_articulo,"cantidad_minima",$cantidad_minima_anterior,$cantidad_minima);
                     $GLOBALS['mensaje'] = "La información del artículo se modificó correctamente";
@@ -3197,14 +3159,17 @@ class modelo_modificacion {
      * @param string $nombre_anterior, anterior nombre de la marca.
      * @return array
     **/
-    public function modificarMarcaInventario($nombre,$nombre_anterior){
+    public function modificarMarcaInventario($nombre,$nombre_anterior,$bodega,$bodega_anterior){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE marca_inventario SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE marca_inventario SET nombre = '".$nombre."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoMarcaInventario($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarMarcaInventario($nombre);
@@ -3222,6 +3187,7 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $this->registrarModificacion("marca_inventario",$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("marca_inventario",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información de la marca se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
@@ -3236,14 +3202,17 @@ class modelo_modificacion {
      * @param string $nombre_anterior, anterior nombre de la categoría.
      * @return array
     **/
-    public function modificarCategoria($nombre,$nombre_anterior){
+    public function modificarCategoria($nombre,$nombre_anterior,$bodega,$bodega_anterior){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE categoria_articulo SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE categoria_articulo SET nombre = '".$nombre."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoCategoria($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarCategoria($nombre);
@@ -3261,46 +3230,8 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $this->registrarModificacion("categoria",$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("categoria",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información de la categoría se modificó correctamente";
-                    $GLOBALS['sql'] = $sql;
-                    return true;
-                }
-            }
-        }
-    }
-
-    /**
-     * Función que permite modificar una subcategoría.
-     * @param string $nombre, nuevo nombre de la subcategoría.
-     * @param string $nombre_anterior, anterior nombre de la subcategoría.
-     * @return array
-    **/
-    public function modificarSubcategoria($nombre,$nombre_anterior){
-        $nombre = htmlspecialchars(trim($nombre));
-        $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE subcategoria_articulo SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
-        $data = $this->consultarCampoSubcategoria($nombre_anterior);
-        $verificar = true;
-        foreach ($data as $clave => $valor) {
-            $id = $valor['id'];
-        }
-        if (strcasecmp($nombre,$nombre_anterior) != 0) {
-            $verificar = $this->verificarSubcategoria($nombre);
-        }
-        if ($verificar) {
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Subcategoría 1)";
-                $GLOBALS['sql'] = $sql;
-                return false;
-            }else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Modificar Categoría 2)";
-                    $GLOBALS['sql'] = $sql;
-                    return false;
-                }else{
-                    $this->registrarModificacion("subcategoria",$id,"nombre",$nombre_anterior,$nombre);
-                    $GLOBALS['mensaje'] = "La información de la subcategoría se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
                 }
@@ -3318,10 +3249,12 @@ class modelo_modificacion {
      * @param string $telefono, teléfono del proveedor.
      * @return array
     **/
-    public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono){
+    public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoProveedor($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
@@ -3329,6 +3262,7 @@ class modelo_modificacion {
             $nit_anterior = $valor['nit'];
             $direccion_anterior = $valor['direccion'];
             $telefono_anterior = $valor['telefono'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarProveedor($nombre);
@@ -3349,6 +3283,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("proveedor",$id,"nit",$nit_anterior,$nit);
                     $this->registrarModificacion("proveedor",$id,"direccion",$direccion_anterior,$direccion);
                     $this->registrarModificacion("proveedor",$id,"telefono",$telefono_anterior,$telefono);
+                    $this->registrarModificacion("proveedor",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información del proveedor se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
@@ -3781,29 +3716,6 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Categoría 2)";
-                $GLOBALS['sql'] = $sql;
-            }else{
-                $result = $l_stmt->fetchAll();
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Función que permite consultar el nombre de una subcategoría.
-     * @param string $nombre, nombre de la marca.
-     * @return array
-    **/
-    public function consultarCampoSubcategoria($nombre){
-        $nombre = htmlspecialchars(trim($nombre));
-        $sql = "SELECT * FROM subcategoria_articulo WHERE nombre = '".$nombre."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Subcategoría 1)";
-            $GLOBALS['sql'] = $sql;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Subcategoría 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();

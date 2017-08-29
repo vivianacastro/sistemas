@@ -6,6 +6,12 @@
         <div>Campos obligatorios (<font color='red'>*</font>)</div>
         <div class='div_izquierda'><b>Nombre de la Categor&iacute;a<font color='red'>*</font>:</b></div>
         <input class='form-control formulario' type='text' name='nombre_categoria' id='nombre_categoria' maxlength="100" value='' placeholder='Ej: Sanitario' required/><br>
+        <div class='div_izquierda'><b>Bodega<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='bodega' id='bodega' required>
+            <option value="">--Seleccionar--</option>
+            <option value="electrica">El&eacute;ctrica</option>
+            <option value="hidraulica">Hidr&aacute;ulica</option>
+        </select><br>
     </div>
     <div class='form_button'>
         <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_categoria' id='guardar_categoria' value='Crear Categor&iacute;a' title='Guardar información de la Categor&iacute;a'/>

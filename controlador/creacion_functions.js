@@ -127,10 +127,9 @@ $(document).ready(function() {
                 orientation: "auto"
             });
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
-            actualizarSelectMarcas();
+            /*actualizarSelectMarcas();
             actualizarSelectCategorias();
-            actualizarSelectSubcategorias();
-            actualizarSelectProveedores(proveedoresCont);
+            actualizarSelectProveedores(proveedoresCont);*/
         }
     })();
 
@@ -884,12 +883,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de los proveedores.
      * @returns {data} object json.
     **/
-    function buscarProveedores(){
+    function buscarProveedores(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_proveedores",
+                url: "index.php?action=consultar_proveedores_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -912,12 +911,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de las marcas del inventario.
      * @returns {data} object json.
     **/
-    function buscarMarcas(){
+    function buscarMarcas(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_marcas",
+                url: "index.php?action=consultar_marcas_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -940,40 +939,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de las categorías del inventario.
      * @returns {data} object json.
     **/
-    function buscarCategorias(){
+    function buscarCategorias(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_categorias",
-                dataType: "json",
-                async: false,
-                error: function (request, status, error) {
-                    console.log(error.toString());
-                    location.reload(true);
-                },
-                success: function(data){
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
-     * Función que realiza una consulta de las subcategorías del inventario.
-     * @returns {data} object json.
-    **/
-    function buscarSubcategorias(){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=consultar_subcategorias",
+                url: "index.php?action=consultar_categorias_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1164,11 +1135,11 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
-    function actualizarSelectProveedores(id){
+    function actualizarSelectProveedores(id,bodega){
         if (id == 0) {
             id = "";
         }
-        var data = buscarProveedores();
+        var data = buscarProveedores(bodega);
         $("#proveedor_articulo"+id).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1187,8 +1158,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de marcas.
      * @returns {undefined}
     **/
-    function actualizarSelectMarcas(){
-        var data = buscarMarcas();
+    function actualizarSelectMarcas(bodega){
+        var data = buscarMarcas(bodega);
         $("#marca").empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1207,8 +1178,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de categorias.
      * @returns {undefined}
     **/
-    function actualizarSelectCategorias(){
-        var data = buscarCategorias();
+    function actualizarSelectCategorias(bodega){
+        var data = buscarCategorias(bodega);
         $("#categoria").empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1219,26 +1190,6 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#categoria");
-            }
-        });
-    }
-
-    /**
-     * Función que llena y actualiza el selector de subcategorias.
-     * @returns {undefined}
-    **/
-    function actualizarSelectSubcategorias(){
-        var data = buscarSubcategorias();
-        $("#subcategoria").empty();
-        var row = $("<option value=''/>");
-        row.text("--Seleccionar--");
-        row.appendTo("#subcategoria");
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                aux = record.nombre;
-                row = $("<option value='" + record.id + "'/>");
-                row.text(aux);
-                row.appendTo("#subcategoria");
             }
         });
     }
@@ -4305,12 +4256,13 @@ $(document).ready(function() {
     */
     $("#añadir_proveedor").click(function (e){
         proveedoresCont++;
+        var bodega = $("#bodega").val();
         var componente = '<div id="proveedor'+proveedoresCont+'">'
         +'<div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
         +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
-        actualizarSelectProveedores(proveedoresCont);
+        actualizarSelectProveedores(proveedoresCont,bodega);
         $('#eliminar_proveedor').removeAttr("disabled");
     });
 
@@ -4727,16 +4679,22 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Guardar la información de la categoría?");
         if (confirmacion) {
             var nombre = limpiarCadena($("#nombre_categoria").val());
+            var bodega = limpiarCadena($("#bodega").val());
             if(!validarCadena(nombre)){
                 alert("ERROR. Ingrese el nombre de la categoría");
                 $("#nombre_categoria").focus();
+            }else if(!validarCadena(bodega)){
+                alert("ERROR. Seleccione la bodega a la que pertenece la categoría");
+                $("#categoria").focus();
             }else{
                 var informacion = {};
                 informacion["nombre"] = nombre;
+                informacion["categoria"] = categoria;
                 var data = guardarObjeto("categoria",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_categoria").val("");
+                    $("#categoria").val("");
                     window.scrollTo(0,0);
                 }
             }
@@ -4744,26 +4702,15 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón guardar_subcategoria y se
-     * realiza la operacion correspondiente.
+     * Se captura el evento cuando se modifica el valor del selector bodega
+     * y se actualiza el selector de campus.
     */
-    $("#guardar_subcategoria").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la información de la subcategoría?");
-        if (confirmacion) {
-            var nombre = limpiarCadena($("#nombre_subcategoria").val());
-            if(!validarCadena(nombre)){
-                alert("ERROR. Ingrese el nombre de la subcategoría");
-                $("#nombre_subcategoria").focus();
-            }else{
-                var informacion = {};
-                informacion["nombre"] = nombre;
-                var data = guardarObjeto("subcategoria",informacion);
-                alert(data.mensaje);
-                if (data.verificar) {
-                    $("#nombre_subcategoria").val("");
-                    window.scrollTo(0,0);
-                }
-            }
+    $("#bodega").change(function (e) {
+        var bodega = $("#bodega").val();
+        actualizarSelectMarcas(bodega);
+        actualizarSelectCategorias(bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
         }
     });
 
@@ -4777,13 +4724,12 @@ $(document).ready(function() {
             var nombreArticulo = limpiarCadena($("#nombre_articulo").val());
             var marca = $("#marca").val();
             var categoria = $("#categoria").val();
-            var subcategoria = $("#subcategoria").val();
             var bodega = $("#bodega").val();
             var cantidadMinima = $("#cantidad_minima").val();
             var proveedores = [];
             var proveedorRepetido = false;
             for (var i = 0; i <= proveedoresCont; i++) {
-                if (i == 0) {
+                /*if (i == 0) {
                     if ($("#proveedor_articulo").val() != "") {
                         proveedores[i] = $("#proveedor_articulo").val();
                     }else{
@@ -4791,7 +4737,7 @@ $(document).ready(function() {
                         proveedorRepetido = true;
                         break;
                     }
-                }else{
+                }else{*/
                     var aux = $("#proveedor_articulo"+i).val();
                     if (proveedores.indexOf(aux) == -1) {
                         proveedores[i] = $("#proveedor_articulo"+i).val();
@@ -4801,7 +4747,7 @@ $(document).ready(function() {
                         proveedorRepetido = true;
                         break;
                     }
-                }
+                //}
             }
             if (!proveedorRepetido) {
                 var fotos = document.getElementById("fotos[]");
@@ -4835,7 +4781,6 @@ $(document).ready(function() {
                         informacion["nombre_articulo"] = nombreArticulo;
                         informacion["marca"] = marca;
                         informacion["categoria"] = categoria;
-                        informacion["subcategoria"] = subcategoria;
                         informacion["bodega"] = bodega;
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
@@ -4872,7 +4817,6 @@ $(document).ready(function() {
                             $("#nombre_articulo").val("");
                             $("#marca").val("");
                             $("#categoria").val("");
-                            $("#subcategoria").val("");
                             $("#bodega").val("");
                             $("#cantidad_minima").val("");
                             $("#proveedor_articulo").val("");

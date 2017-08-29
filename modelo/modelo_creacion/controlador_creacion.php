@@ -441,24 +441,6 @@ class controlador_creacion
         }
     }
 
-    /**
-     * Función que despliega el panel que permite crear una subcategoría de artículos en el sistema.
-    **/
-    public function crear_subcategoria() {
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $data = array(
-            'mensaje' => 'Crear Subcategoría',
-        );
-        $v = new controlador_vista();
-        if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
-            $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_SUBCATEGORIA, $data);
-        }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
-            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
-        }
-    }
-
 	/**
      * Función que despliega el panel que permite crear una marca en el sistema.
     **/
@@ -1763,7 +1745,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarMarcaInventario($info['nombre']);
+            $verificar = $m->verificarMarcaInventario($info['nombre'],$info['bodega']);
             if($verificar){
                 $m->guardarMarcaInventario($info['nombre']);
             }
@@ -1788,30 +1770,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarCategoria($info['nombre']);
             if($verificar){
-                $m->guardarCategoria($info['nombre']);
-            }
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        $result['verificar'] = $verificar;
-        echo json_encode($result);
-    }
-
-    /**
-      * Funcion que permite crear una subcategoría del módulo de inventario.
-      * @return array $result. Un array que contiene el mensaje a desplegar en la barra de estado
-    **/
-    public function guardar_subcategoria(){
-		$GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $result = array();
-        $m = new modelo_creacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarSubcategoria($info['nombre']);
-            if($verificar){
-                $m->guardarSubcategoria($info['nombre']);
+                $m->guardarCategoria($info['nombre'],$info['bodega']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -1834,7 +1793,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarProveedor($info['nombre']);
             if($verificar){
-                $m->guardarProveedor($info['nombre'],$info['direccion'],$info['telefono'],$info['nit']);
+                $m->guardarProveedor($info['nombre'],$info['direccion'],$info['telefono'],$info['nit'],$info['bodega']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -1857,7 +1816,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarArticulo($info['nombre_articulo'],$info['marca']);
             if($verificar){
-                $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria'],$info['subcategoria'],$info['bodega'],$info['cantidad_minima']);
+                $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima']);
 				while (list($clave, $valor) = each($verificar)){
 	                $id_articulo = $valor['id_articulo'];
 	            }

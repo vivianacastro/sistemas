@@ -12,6 +12,12 @@
         <input class='form-control formulario' type='number' name='telefono' id='telefono' maxlength="10" value='' placeholder='Ej: 3353535' required/><br>
         <div class='div_izquierda'><b>NIT del Proveedor:</b></div>
         <input class='form-control formulario' type='text' name='nit' id='nit' maxlength="50" value='' placeholder='' required/><br>
+        <div class='div_izquierda'><b>Bodega<font color='red'>*</font>:</b></div>
+        <select class='form-control formulario' name='bodega' id='bodega' required>
+            <option value="">--Seleccionar--</option>
+            <option value="electrica">El&eacute;ctrica</option>
+            <option value="hidraulica">Hidr&aacute;ulica</option>
+        </select><br>
     </div>
     <div class='form_button'>
         <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_proveedor' id='guardar_proveedor' value='Crear Proveedor' title='Guardar información del Proveedor'/>

@@ -3212,11 +3212,13 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una marca del módulo de inventario.
      * @param string $marca, nombre de la marca.
+     * @param string $bodega, bodega de la marca.
      * @return array
     **/
-    public function guardarMarcaInventario($marca){
+    public function guardarMarcaInventario($marca,$bodega){
         $marca = htmlspecialchars(trim($marca));
-        $sql = "INSERT INTO marca_inventario (nombre) VALUES ('".$marca."');";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "INSERT INTO marca_inventario (nombre,bodega) VALUES ('".$marca."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Inventario 1)";
@@ -3237,11 +3239,12 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una categoría del módulo de inventario.
      * @param string $categoria, nombre de la categoría.
+     * @param string $bodega, bodega de la categoría.
      * @return array
     **/
-    public function guardarCategoria($categoria){
+    public function guardarCategoria($categoria,$bodega){
         $categoria = htmlspecialchars(trim($categoria));
-        $sql = "INSERT INTO categoria_articulo (nombre) VALUES ('".$categoria."');";
+        $sql = "INSERT INTO categoria_articulo (nombre,bodega) VALUES ('".$categoria."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Categoría 1)";
@@ -3260,44 +3263,21 @@ class modelo_creacion {
     }
 
     /**
-     * Función que permite guardar la información de una subcategoría del módulo de inventario.
-     * @param string $subcategoria, nombre de la subcategoría.
-     * @return array
-    **/
-    public function guardarSubcategoria($subcategoria){
-        $subcategoria = htmlspecialchars(trim($subcategoria));
-        $sql = "INSERT INTO subcategoria_articulo (nombre) VALUES ('".$subcategoria."');";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Guardar Subcategoría 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Guardar Subcategoría 2)";
-                $GLOBALS['sql'] = $sql;
-                return false;
-            }else{
-                $GLOBALS['mensaje'] = "La subcategoría se ha guardado correctamente";
-                return true;
-            }
-        }
-    }
-
-    /**
      * Función que permite guardar la información de un proveedor.
      * @param string $nombre, nombre del proveedor.
      * @param string $direccion, dirección del proveedor.
      * @param string $telefono, telefono del proveedor.
      * @param string $nit, nit del proveedor.
+     * @param string $bodega, bodega del proveedor.
      * @return array
     **/
-    public function guardarProveedor($nombre,$direccion,$telefono,$nit){
+    public function guardarProveedor($nombre,$direccion,$telefono,$nit,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
         $direccion = htmlspecialchars(trim($direccion));
         $telefono = htmlspecialchars(trim($telefono));
         $nit = htmlspecialchars(trim($nit));
-        $sql = "INSERT INTO proveedor (nombre,nit,direccion,telefono) VALUES ('".$nombre."','".$nit."','".$direccion."','".$telefono."');";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "INSERT INTO proveedor (nombre,nit,direccion,telefono,bodega) VALUES ('".$nombre."','".$nit."','".$direccion."','".$telefono."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Proveedor 1)";
@@ -3320,20 +3300,18 @@ class modelo_creacion {
      * @param string $nombre, nombre del artículo.
      * @param string $marca, marca del artículo.
      * @param string $categoria, categoría del artículo.
-     * @param string $subcategoria, categoría del artículo.
      * @param string $bodega, bodega en la que está el artículo.
      * @param string $cantidad_minima, cantidad mínima del artículo.
      * @return array
     **/
-    public function guardarArticulo($nombre,$marca,$categoria,$subcategoria,$bodega,$cantidad_minima){
+    public function guardarArticulo($nombre,$marca,$categoria,$bodega,$cantidad_minima){
         $nombre = htmlspecialchars(trim($nombre));
         $marca = htmlspecialchars(trim($marca));
         $categoria = htmlspecialchars(trim($categoria));
-        $subcategoria = htmlspecialchars(trim($subcategoria));
         $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
-        $campos = "nombre,marca,id_categoria_articulo,id_subcategoria_articulo,bodega,cantidad_minima,usuario_crea";
-        $valores = "'".$nombre."','".$marca."','".$categoria."','".$subcategoria."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        $campos = "nombre,marca,id_categoria_articulo,bodega,cantidad_minima,usuario_crea";
+        $valores = "'".$nombre."','".$marca."','".$categoria."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
         $sql = "INSERT INTO articulo (".$campos.") VALUES (".$valores.") RETURNING id_articulo;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -4225,35 +4203,6 @@ class modelo_creacion {
                 return false;
             }elseif($l_stmt->rowCount() > 0){
                 $GLOBALS['mensaje'] = "ERROR. La categoría ya se encuentra registrada en el sistema.";
-                return false;
-            }
-            else{
-                $GLOBALS['sql'] = $sql;
-                return true;
-            }
-        }
-    }
-
-    /**
-     * Función que permite consultar si una categoría del módulo de inventario ya está registrada en el sistema.
-     * @param string $subcategoria, nombre de la categoría.
-     * @return array
-    **/
-    public function verificarSubcategoria($subcategoria){
-        $subcategoria = htmlspecialchars(trim($subcategoria));
-        $sql = "SELECT * FROM subcategoria_articulo WHERE nombre = '".$subcategoria."';";
-        $l_stmt = $this->conexion->prepare($sql);
-        if(!$l_stmt){
-            $GLOBALS['mensaje'] = "Error: SQL (Verificar Subcategoría 1)";
-            $GLOBALS['sql'] = $sql;
-            return false;
-        }else{
-            if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Verificar Subcategoría 2)";
-                $GLOBALS['sql'] = $sql;
-                return false;
-            }elseif($l_stmt->rowCount() > 0){
-                $GLOBALS['mensaje'] = "ERROR. La subcategoría ya se encuentra registrada en el sistema.";
                 return false;
             }
             else{
