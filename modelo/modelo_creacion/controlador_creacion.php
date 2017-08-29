@@ -1747,7 +1747,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarMarcaInventario($info['nombre'],$info['bodega']);
             if($verificar){
-                $m->guardarMarcaInventario($info['nombre']);
+                $m->guardarMarcaInventario($info['nombre'],$info['bodega']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
@@ -1768,7 +1768,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarCategoria($info['nombre']);
+            $verificar = $m->verificarCategoria($info['nombre'],$info['bodega']);
             if($verificar){
                 $m->guardarCategoria($info['nombre'],$info['bodega']);
             }
@@ -1791,7 +1791,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarProveedor($info['nombre']);
+            $verificar = $m->verificarProveedor($info['nombre'],$info['bodega']);
             if($verificar){
                 $m->guardarProveedor($info['nombre'],$info['direccion'],$info['telefono'],$info['nit'],$info['bodega']);
             }

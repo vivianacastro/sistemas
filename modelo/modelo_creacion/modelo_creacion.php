@@ -3244,6 +3244,7 @@ class modelo_creacion {
     **/
     public function guardarCategoria($categoria,$bodega){
         $categoria = htmlspecialchars(trim($categoria));
+        $bodega = htmlspecialchars(trim($bodega));
         $sql = "INSERT INTO categoria_articulo (nombre,bodega) VALUES ('".$categoria."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -4157,11 +4158,13 @@ class modelo_creacion {
     /**
      * Función que permite consultar si una marca del módulo de inventario ya está registrada en el sistema.
      * @param string $marca, nombre de la marca.
+     * @param string $bodega, bodega de la marca.
      * @return array
     **/
-    public function verificarMarcaInventario($marca){
+    public function verificarMarcaInventario($marca,$bodega){
         $marca = htmlspecialchars(trim($marca));
-        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$marca."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "SELECT * FROM marca_inventario WHERE nombre = '".$marca."' AND bodega = '".$bodega."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Marca Inventario 1)";
@@ -4186,11 +4189,13 @@ class modelo_creacion {
     /**
      * Función que permite consultar si una categoría del módulo de inventario ya está registrada en el sistema.
      * @param string $categoria, nombre de la categoría.
+     * @param string $bodega, bodega de la categoría.
      * @return array
     **/
-    public function verificarCategoria($categoria){
+    public function verificarCategoria($categoria,$bodega){
         $categoria = htmlspecialchars(trim($categoria));
-        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$categoria."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "SELECT * FROM categoria_articulo WHERE nombre = '".$categoria."' AND bodega = '".$bodega."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Categoría 1)";
@@ -4215,11 +4220,13 @@ class modelo_creacion {
     /**
      * Función que permite consultar si un proveedor ya se encuentra registrado en el sistema.
      * @param string $nombre, nombre del proveedor.
+     * @param string $bodega, bodega del proveedor.
      * @return array
     **/
-    public function verificarProveedor($nombre){
+    public function verificarProveedor($nombre,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
-        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "SELECT * FROM proveedor WHERE nombre = '".$nombre."' AND bodega = '".$bodega."';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Verificar Proveedor 1)";

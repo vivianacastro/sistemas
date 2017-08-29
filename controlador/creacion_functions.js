@@ -4622,16 +4622,22 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Guardar la información de la marca?");
         if (confirmacion) {
             var nombre = limpiarCadena($("#nombre_marca").val());
+            var bodega = $("#bodega").val();
             if(!validarCadena(nombre)){
                 alert("ERROR. Ingrese el nombre de la marca");
                 $("#nombre_marca").focus();
+            }else if(!validarCadena(bodega)){
+                alert("ERROR. Seleccione la bodega de la marca");
+                $("#bodega").focus();
             }else{
                 var informacion = {};
                 informacion["nombre"] = nombre;
+                informacion["bodega"] = bodega;
                 var data = guardarObjeto("marca_inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_marca").val("");
+                    $("#bodega").val("");
                     window.scrollTo(0,0);
                 }
             }
@@ -4649,15 +4655,20 @@ $(document).ready(function() {
             var direccion = limpiarCadena($("#direccion").val());
             var telefono = limpiarCadena($("#telefono").val());
             var nit = limpiarCadena($("#nit").val());
+            var bodega = $("#bodega").val();
             if(!validarCadena(nombre)){
                 alert("ERROR. Ingrese el nombre del proveedor");
                 $("#nombre_marca").focus();
+            }else if(!validarCadena(bodega)){
+                alert("ERROR. Seleccione la bodega del proveedor");
+                $("#bodega").focus();
             }else{
                 var informacion = {};
                 informacion["nombre"] = nombre;
                 informacion["direccion"] = direccion;
                 informacion["telefono"] = telefono;
                 informacion["nit"] = nit;
+                informacion["bodega"] = bodega;
                 var data = guardarObjeto("proveedor",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
@@ -4665,6 +4676,7 @@ $(document).ready(function() {
                     $("#direccion").val("");
                     $("#telefono").val("");
                     $("#nit").val("");
+                    $("#bodega").val("");
                     window.scrollTo(0,0);
                 }
             }
@@ -4689,12 +4701,12 @@ $(document).ready(function() {
             }else{
                 var informacion = {};
                 informacion["nombre"] = nombre;
-                informacion["categoria"] = categoria;
+                informacion["bodega"] = bodega;
                 var data = guardarObjeto("categoria",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_categoria").val("");
-                    $("#categoria").val("");
+                    $("#bodega").val("");
                     window.scrollTo(0,0);
                 }
             }
