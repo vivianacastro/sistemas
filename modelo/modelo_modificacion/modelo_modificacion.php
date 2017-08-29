@@ -3159,14 +3159,17 @@ class modelo_modificacion {
      * @param string $nombre_anterior, anterior nombre de la marca.
      * @return array
     **/
-    public function modificarMarcaInventario($nombre,$nombre_anterior){
+    public function modificarMarcaInventario($nombre,$nombre_anterior,$bodega,$bodega_anterior){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE marca_inventario SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE marca_inventario SET nombre = '".$nombre."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoMarcaInventario($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarMarcaInventario($nombre);
@@ -3184,6 +3187,7 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $this->registrarModificacion("marca_inventario",$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("marca_inventario",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información de la marca se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
@@ -3198,14 +3202,17 @@ class modelo_modificacion {
      * @param string $nombre_anterior, anterior nombre de la categoría.
      * @return array
     **/
-    public function modificarCategoria($nombre,$nombre_anterior){
+    public function modificarCategoria($nombre,$nombre_anterior,$bodega,$bodega_anterior){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE categoria_articulo SET nombre = '".$nombre."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE categoria_articulo SET nombre = '".$nombre."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoCategoria($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
             $id = $valor['id'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarCategoria($nombre);
@@ -3223,6 +3230,7 @@ class modelo_modificacion {
                     return false;
                 }else{
                     $this->registrarModificacion("categoria",$id,"nombre",$nombre_anterior,$nombre);
+                    $this->registrarModificacion("categoria",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información de la categoría se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;
@@ -3241,10 +3249,12 @@ class modelo_modificacion {
      * @param string $telefono, teléfono del proveedor.
      * @return array
     **/
-    public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono){
+    public function modificarProveedor($nombre,$nombre_anterior,$nit,$direccion,$telefono,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
         $nombre_anterior = htmlspecialchars(trim($nombre_anterior));
-        $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."' WHERE nombre = '".$nombre_anterior."';";
+        $bodega = htmlspecialchars(trim($bodega));
+        $bodega_anterior = htmlspecialchars(trim($bodega_anterior));
+        $sql = "UPDATE proveedor SET nombre = '".$nombre."', direccion = '".$direccion."', telefono = '".$telefono."', nit = '".$nit."', bodega = '".$bodega."' WHERE nombre = '".$nombre_anterior."';";
         $data = $this->consultarCampoProveedor($nombre_anterior);
         $verificar = true;
         foreach ($data as $clave => $valor) {
@@ -3252,6 +3262,7 @@ class modelo_modificacion {
             $nit_anterior = $valor['nit'];
             $direccion_anterior = $valor['direccion'];
             $telefono_anterior = $valor['telefono'];
+            $bodega_anterior = $valor['bodega'];
         }
         if (strcasecmp($nombre,$nombre_anterior) != 0) {
             $verificar = $this->verificarProveedor($nombre);
@@ -3272,6 +3283,7 @@ class modelo_modificacion {
                     $this->registrarModificacion("proveedor",$id,"nit",$nit_anterior,$nit);
                     $this->registrarModificacion("proveedor",$id,"direccion",$direccion_anterior,$direccion);
                     $this->registrarModificacion("proveedor",$id,"telefono",$telefono_anterior,$telefono);
+                    $this->registrarModificacion("proveedor",$id,"bodega",$bodega_anterior,$bodega);
                     $GLOBALS['mensaje'] = "La información del proveedor se modificó correctamente";
                     $GLOBALS['sql'] = $sql;
                     return true;

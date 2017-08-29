@@ -127,9 +127,9 @@ $(document).ready(function() {
                 orientation: "auto"
             });
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
-            actualizarSelectMarcas();
+            /*actualizarSelectMarcas();
             actualizarSelectCategorias();
-            actualizarSelectProveedores(proveedoresCont);
+            actualizarSelectProveedores(proveedoresCont);*/
         }
     })();
 
@@ -883,12 +883,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de los proveedores.
      * @returns {data} object json.
     **/
-    function buscarProveedores(){
+    function buscarProveedores(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_proveedores",
+                url: "index.php?action=consultar_proveedores_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -911,12 +911,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de las marcas del inventario.
      * @returns {data} object json.
     **/
-    function buscarMarcas(){
+    function buscarMarcas(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_marcas",
+                url: "index.php?action=consultar_marcas_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -939,12 +939,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de las categorías del inventario.
      * @returns {data} object json.
     **/
-    function buscarCategorias(){
+    function buscarCategorias(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_categorias",
+                url: "index.php?action=consultar_categorias_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1135,11 +1135,11 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
-    function actualizarSelectProveedores(id){
+    function actualizarSelectProveedores(id,bodega){
         if (id == 0) {
             id = "";
         }
-        var data = buscarProveedores();
+        var data = buscarProveedores(bodega);
         $("#proveedor_articulo"+id).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1158,8 +1158,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de marcas.
      * @returns {undefined}
     **/
-    function actualizarSelectMarcas(){
-        var data = buscarMarcas();
+    function actualizarSelectMarcas(bodega){
+        var data = buscarMarcas(bodega);
         $("#marca").empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1178,8 +1178,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de categorias.
      * @returns {undefined}
     **/
-    function actualizarSelectCategorias(){
-        var data = buscarCategorias();
+    function actualizarSelectCategorias(bodega){
+        var data = buscarCategorias(bodega);
         $("#categoria").empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -4256,12 +4256,13 @@ $(document).ready(function() {
     */
     $("#añadir_proveedor").click(function (e){
         proveedoresCont++;
+        var bodega = $("#bodega").val();
         var componente = '<div id="proveedor'+proveedoresCont+'">'
         +'<div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
         +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
-        actualizarSelectProveedores(proveedoresCont);
+        actualizarSelectProveedores(proveedoresCont,bodega);
         $('#eliminar_proveedor').removeAttr("disabled");
     });
 
@@ -4678,19 +4679,38 @@ $(document).ready(function() {
         var confirmacion = window.confirm("¿Guardar la información de la categoría?");
         if (confirmacion) {
             var nombre = limpiarCadena($("#nombre_categoria").val());
+            var bodega = limpiarCadena($("#bodega").val());
             if(!validarCadena(nombre)){
                 alert("ERROR. Ingrese el nombre de la categoría");
                 $("#nombre_categoria").focus();
+            }else if(!validarCadena(bodega)){
+                alert("ERROR. Seleccione la bodega a la que pertenece la categoría");
+                $("#categoria").focus();
             }else{
                 var informacion = {};
                 informacion["nombre"] = nombre;
+                informacion["categoria"] = categoria;
                 var data = guardarObjeto("categoria",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_categoria").val("");
+                    $("#categoria").val("");
                     window.scrollTo(0,0);
                 }
             }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector bodega
+     * y se actualiza el selector de campus.
+    */
+    $("#bodega").change(function (e) {
+        var bodega = $("#bodega").val();
+        actualizarSelectMarcas(bodega);
+        actualizarSelectCategorias(bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
         }
     });
 

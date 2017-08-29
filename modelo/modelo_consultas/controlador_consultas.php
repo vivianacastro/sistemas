@@ -1597,18 +1597,44 @@ class controlador_consultas{
     /**
      * Función que permite consultar las marcas almacenadas en el sistema.
     **/
-    public function consultar_marcas() {
+    public function consultar_marcas_electrica() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $data = $m->buscarMarcas();
+            $data = $m->buscarMarcas("electrica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las marcas almacenadas en el sistema.
+    **/
+    public function consultar_marcas_hidraulica() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarMarcas("hidraulica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1621,18 +1647,44 @@ class controlador_consultas{
     /**
      * Función que permite consultar las categorias almacenadas en el sistema.
     **/
-    public function consultar_categorias() {
+    public function consultar_categorias_electrica() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $data = $m->buscarCategorias();
+            $data = $m->buscarCategorias("electrica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id' => $valor['id'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar las categorias almacenadas en el sistema.
+    **/
+    public function consultar_categorias_hidraulica() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarCategorias("hidraulica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => $valor['id'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -1645,14 +1697,14 @@ class controlador_consultas{
     /**
      * Función que permite consultar los proveedores almacenados en el sistema.
     **/
-    public function consultar_proveedores() {
+    public function consultar_proveedores_hidraulica() {
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";
         $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
-            $data = $m->buscarProveedores();
+            $data = $m->buscarProveedores("electrica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_proveedor' => $valor['id_proveedor'],
@@ -1660,6 +1712,35 @@ class controlador_consultas{
                     'nit' => $valor['nit'],
                     'direccion' => mb_convert_case($valor['direccion'],MB_CASE_TITLE,"UTF-8"),
                     'telefono' => $valor['telefono'],
+                    'bodega' => $valor['bodega'],
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los proveedores almacenados en el sistema.
+    **/
+    public function consultar_proveedores_electrica() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $data = $m->buscarProveedores("hidraulica");
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id_proveedor' => $valor['id_proveedor'],
+                    'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'nit' => $valor['nit'],
+                    'direccion' => mb_convert_case($valor['direccion'],MB_CASE_TITLE,"UTF-8"),
+                    'telefono' => $valor['telefono'],
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -4253,6 +4334,7 @@ class controlador_consultas{
                 $arrayAux = array(
                     'id_marca' => $valor['id'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -4279,6 +4361,7 @@ class controlador_consultas{
                 $arrayAux = array(
                     'id_marca' => $valor['id'],
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -4308,6 +4391,7 @@ class controlador_consultas{
                     'nit' => $valor['nit'],
                     'direccion' => mb_convert_case($valor['direccion'],MB_CASE_TITLE,"UTF-8"),
                     'telefono' => $valor['telefono'],
+                    'bodega' => $valor['bodega'],
                 );
                 array_push($result, $arrayAux);
             }

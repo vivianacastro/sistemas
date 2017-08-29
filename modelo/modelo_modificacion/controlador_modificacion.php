@@ -475,7 +475,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarMarcaInventario($info['nombre'],$info['nombre_anterior']);
+            $verificar = $m->modificarMarcaInventario($info['nombre'],$info['nombre_anterior'],$info['bodega'],$info['bodega_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -495,7 +495,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarCategoria($info['nombre'],$info['nombre_anterior']);
+            $verificar = $m->modificarCategoria($info['nombre'],$info['nombre_anterior'],$info['bodega'],$info['bodega_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -515,7 +515,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarProveedor($info['nombre'],$info['nombre_anterior'],$info['nit'],$info['direccion'],$info['telefono']);
+            $verificar = $m->modificarProveedor($info['nombre'],$info['nombre_anterior'],$info['nit'],$info['direccion'],$info['telefono'],$info['bodega'],$info['bodega_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

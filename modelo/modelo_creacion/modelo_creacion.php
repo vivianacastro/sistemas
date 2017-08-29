@@ -3212,11 +3212,13 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una marca del módulo de inventario.
      * @param string $marca, nombre de la marca.
+     * @param string $bodega, bodega de la marca.
      * @return array
     **/
-    public function guardarMarcaInventario($marca){
+    public function guardarMarcaInventario($marca,$bodega){
         $marca = htmlspecialchars(trim($marca));
-        $sql = "INSERT INTO marca_inventario (nombre) VALUES ('".$marca."');";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "INSERT INTO marca_inventario (nombre,bodega) VALUES ('".$marca."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Marca Inventario 1)";
@@ -3237,11 +3239,12 @@ class modelo_creacion {
     /**
      * Función que permite guardar la información de una categoría del módulo de inventario.
      * @param string $categoria, nombre de la categoría.
+     * @param string $bodega, bodega de la categoría.
      * @return array
     **/
-    public function guardarCategoria($categoria){
+    public function guardarCategoria($categoria,$bodega){
         $categoria = htmlspecialchars(trim($categoria));
-        $sql = "INSERT INTO categoria_articulo (nombre) VALUES ('".$categoria."');";
+        $sql = "INSERT INTO categoria_articulo (nombre,bodega) VALUES ('".$categoria."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Categoría 1)";
@@ -3265,14 +3268,16 @@ class modelo_creacion {
      * @param string $direccion, dirección del proveedor.
      * @param string $telefono, telefono del proveedor.
      * @param string $nit, nit del proveedor.
+     * @param string $bodega, bodega del proveedor.
      * @return array
     **/
-    public function guardarProveedor($nombre,$direccion,$telefono,$nit){
+    public function guardarProveedor($nombre,$direccion,$telefono,$nit,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
         $direccion = htmlspecialchars(trim($direccion));
         $telefono = htmlspecialchars(trim($telefono));
         $nit = htmlspecialchars(trim($nit));
-        $sql = "INSERT INTO proveedor (nombre,nit,direccion,telefono) VALUES ('".$nombre."','".$nit."','".$direccion."','".$telefono."');";
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "INSERT INTO proveedor (nombre,nit,direccion,telefono,bodega) VALUES ('".$nombre."','".$nit."','".$direccion."','".$telefono."','".$bodega."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Proveedor 1)";

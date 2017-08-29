@@ -1214,12 +1214,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de los proveedores.
      * @returns {data} object json.
     **/
-    function buscarProveedores(){
+    function buscarProveedores(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_proveedores",
+                url: "index.php?action=consultar_proveedores_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1242,12 +1242,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de los proveedores.
      * @returns {data} object json.
     **/
-    function buscarMarcas(){
+    function buscarMarcas(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_marcas",
+                url: "index.php?action=consultar_marcas_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1270,12 +1270,12 @@ $(document).ready(function() {
      * Función que realiza una consulta de las categorías del inventario.
      * @returns {data} object json.
     **/
-    function buscarCategorias(){
+    function buscarCategorias(bodega){
         var dataResult;
         try {
             $.ajax({
                 type: "POST",
-                url: "index.php?action=consultar_categorias",
+                url: "index.php?action=consultar_categorias_"+bodega,
                 dataType: "json",
                 async: false,
                 error: function (request, status, error) {
@@ -1384,11 +1384,11 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de proveedor.
      * @returns {undefined}
     **/
-    function actualizarSelectProveedores(id){
+    function actualizarSelectProveedores(id,bodega){
         if (id == 0) {
             id = "";
         }
-        var data = buscarProveedores();
+        var data = buscarProveedores(bodega);
         $("#proveedor_articulo"+id).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1407,8 +1407,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de marcas.
      * @returns {undefined}
     **/
-    function actualizarSelectMarcas(selector){
-        var data = buscarMarcas();
+    function actualizarSelectMarcas(selector,bodega){
+        var data = buscarMarcas(bodega);
         $("#"+selector).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -1427,8 +1427,8 @@ $(document).ready(function() {
      * Función que llena y actualiza el selector de categorias.
      * @returns {undefined}
     **/
-    function actualizarSelectCategorias(selector){
-        var data = buscarCategorias();
+    function actualizarSelectCategorias(selector,bodega){
+        var data = buscarCategorias(bodega);
         $("#"+selector).empty();
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
@@ -6257,6 +6257,8 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
 				$("#nombre_marca").val(record.nombre);
                 $("#nombre_marca").attr('name',record.nombre);
+                $("#bodega").val(record.bodega);
+                $("#bodega").attr('name',record.bodega);
                 marcasCont++;
             }
         });
@@ -6282,6 +6284,8 @@ $(document).ready(function() {
             if($.isNumeric(index)) {
 				$("#nombre_categoria").val(record.nombre);
                 $("#nombre_categoria").attr('name',record.nombre);
+                $("#bodega").val(record.bodega);
+                $("#bodega").attr('name',record.bodega);
                 categoriasCont++;
             }
         });
@@ -6310,6 +6314,8 @@ $(document).ready(function() {
                 $("#direccion").val(record.direccion);
                 $("#telefono").val(record.telefono);
                 $("#nit").val(record.nit);
+                $("#bodega").val(record.bodega);
+                $("#bodega").attr('name',record.bodega);
                 proveedorCont++;
             }
         });
@@ -6553,6 +6559,7 @@ $(document).ready(function() {
         $("#bodega").attr('disabled',true);
         $("#cantidad_minima").attr('disabled',true);
         $("#nombre_marca").attr('disabled',true);
+        $("#bodega").attr('disabled',true);
         $("#nombre_categoria").attr('disabled',true);
         $("#proveedor_articulo").attr('disabled',true);
         $("#nombre_proveedor").attr('disabled',true);
@@ -7329,6 +7336,7 @@ $(document).ready(function() {
     **/
     $("#modificar_marca_inventario").click(function (e){
         $("#nombre_marca").removeAttr("disabled");
+        $("#bodega").removeAttr("disabled");
         $("#modificar_marca_inventario").hide();
         $("#guardar_modificaciones_marca_inventario").show();
         $('#divDialogConsulta').scrollTop(0);
@@ -7340,6 +7348,7 @@ $(document).ready(function() {
     **/
     $("#modificar_categoria").click(function (e){
         $("#nombre_categoria").removeAttr("disabled");
+        $("#bodega").removeAttr("disabled");
         $("#modificar_categoria").hide();
         $("#guardar_modificaciones_categoria").show();
         $('#divDialogConsulta').scrollTop(0);
@@ -7354,6 +7363,7 @@ $(document).ready(function() {
         $("#direccion").removeAttr("disabled");
         $("#telefono").removeAttr("disabled");
         $("#nit").removeAttr("disabled");
+        $("#bodega").removeAttr("disabled");
         $("#modificar_proveedor").hide();
         $("#guardar_modificaciones_proveedor").show();
         $('#divDialogConsulta').scrollTop(0);
@@ -12631,16 +12641,21 @@ $(document).ready(function() {
             var informacion = {};
             var nombre = limpiarCadena($("#nombre_marca").val());
             var nombreAnterior = limpiarCadena($("#nombre_marca").attr("name"));
+            var bodega = $("#bodega").val();
+            var bodegaAnterior = $("#bodega").attr("name");
             if (!validarCadena(nombre)) {
                 alert("ERROR. Ingrese el nuevo nombre de la marca");
                 $("#nombre_marca").focus();
             }else{
                 informacion["nombre"] = nombre;
                 informacion["nombre_anterior"] = nombreAnterior;
+                informacion["bodega"] = bodega;
+                informacion["bodega_anterior"] = bodegaAnterior;
                 var data = modificarObjeto("marca_inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_marca_search").val("");
+                    $("#visualizarMarcaInventario").attr('disabled',true);
                     $("#divDialogConsulta").modal('hide');
                 }
             }
@@ -12657,16 +12672,21 @@ $(document).ready(function() {
             var informacion = {};
             var nombre = limpiarCadena($("#nombre_categoria").val());
             var nombreAnterior = limpiarCadena($("#nombre_categoria").attr("name"));
+            var bodega = $("#bodega").val();
+            var bodegaAnterior = $("#bodega").attr("name");
             if (!validarCadena(nombre)) {
                 alert("ERROR. Ingrese el nuevo nombre de la categoría");
                 $("#nombre_categoria").focus();
             }else{
                 informacion["nombre"] = nombre;
                 informacion["nombre_anterior"] = nombreAnterior;
+                informacion["bodega"] = bodega;
+                informacion["bodega_anterior"] = bodegaAnterior;
                 var data = modificarObjeto("categoria",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_categoria_search").val("");
+                    $('#visualizarCategoria').attr('disabled',true);
                     $("#divDialogConsulta").modal('hide');
                 }
             }
@@ -12686,6 +12706,10 @@ $(document).ready(function() {
             var direccion = limpiarCadena($("#direccion").val());
             var telefono = $("#telefono").val();
             var nit = limpiarCadena($("#nit").val());
+            var bodega = $("#bodega").val();
+            var bodegaAnterior = $("#bodega").attr("name");
+            informacion["bodega"] = bodega;
+            informacion["bodega_anterior"] = bodegaAnterior;
             if (!validarCadena(nombre)) {
                 alert("ERROR. Ingrese el nuevo nombre del proveedor");
                 $("#nombre_proveedor").focus();
@@ -12699,6 +12723,7 @@ $(document).ready(function() {
                 alert(data.mensaje);
                 if (data.verificar) {
                     $("#nombre_proveedor_search").val("");
+                    $('#visualizarProveedor').attr('disabled',true);
                     $("#divDialogConsulta").modal('hide');
                 }
             }
