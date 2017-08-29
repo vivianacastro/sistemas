@@ -1822,7 +1822,9 @@ class controlador_creacion
 	            }
 				$proveedor = $info['proveedor'];
 				for ($i=0;$i<count($proveedor);$i++) {
-                    $m->guardarArticuloProveedor($id_articulo,$proveedor[$i]);
+                    if ($proveedor[$i] != "") {
+                        $m->guardarArticuloProveedor($id_articulo,$proveedor[$i]);
+                    }
                 }
             }
         }
