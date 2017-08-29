@@ -44,3 +44,6 @@
 [29-Aug-2017 11:51:53 America/New_York] PHP Fatal error:  Cannot redeclare controlador_consultas::consultar_proveedores() in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 1728
 [29-Aug-2017 12:27:31 America/New_York] PHP Notice:  Undefined variable: bodega_anterior in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3256
 [29-Aug-2017 12:27:48 America/New_York] PHP Notice:  Undefined variable: bodega_anterior in /media/windows/sistemas/modelo/modelo_modificacion/modelo_modificacion.php on line 3256
+[29-Aug-2017 16:23:50 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
+[29-Aug-2017 16:24:40 America/New_York] PHP Notice:  Undefined index: bodega in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1748
+[29-Aug-2017 16:24:40 America/New_York] PHP Notice:  Undefined index: bodega in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1750
