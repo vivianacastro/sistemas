@@ -1148,6 +1148,7 @@ $(document).ready(function() {
         articulosCont = 0;
         articulosPocasUnidades = 0;
         var data = listarInventarioElectrico();
+        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
