@@ -1151,13 +1151,13 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.cantidad);
-				var marca = record.nombre_marca;
+        				var nombre = record.nombre_articulo;
+        				var cantidad = parseInt(record.cantidad);
+        				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
                 var subcategoria = record.nombre_subcategoria;
                 var bodega = "Eléctrica";
-				var cantidad_minima = parseInt(record.cantidad_minima);
+		            var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
                     $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                     $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
@@ -1165,7 +1165,7 @@ $(document).ready(function() {
                 }else{
                     $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
-				articulosCont++;
+		            articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
@@ -1191,13 +1191,13 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.cantidad);
-				var marca = record.nombre_marca;
+		            var nombre = record.nombre_articulo;
+                var cantidad = parseInt(record.cantidad);
+                var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
                 var subcategoria = record.nombre_subcategoria;
                 var bodega = "Hidráulica";
-				var cantidad_minima = parseInt(record.cantidad_minima);
+		            var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
                     $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                     $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
@@ -1205,7 +1205,7 @@ $(document).ready(function() {
                 }else{
                     $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+subcategoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
-				articulosCont++;
+	             articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
