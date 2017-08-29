@@ -129,7 +129,6 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('crear_articulo') >= 0){
             actualizarSelectMarcas();
             actualizarSelectCategorias();
-            actualizarSelectSubcategorias();
             actualizarSelectProveedores(proveedoresCont);
         }
     })();
@@ -965,34 +964,6 @@ $(document).ready(function() {
     }
 
     /**
-     * Función que realiza una consulta de las subcategorías del inventario.
-     * @returns {data} object json.
-    **/
-    function buscarSubcategorias(){
-        var dataResult;
-        try {
-            $.ajax({
-                type: "POST",
-                url: "index.php?action=consultar_subcategorias",
-                dataType: "json",
-                async: false,
-                error: function (request, status, error) {
-                    console.log(error.toString());
-                    location.reload(true);
-                },
-                success: function(data){
-                    dataResult = data;
-                }
-            });
-            return dataResult;
-        }
-        catch(ex) {
-            console.log(ex);
-            alert("Ocurrió un error, por favor inténtelo nuevamente");
-        }
-    }
-
-    /**
      * Función que realiza una consulta de los espacios presentes en el sistema.
      * @param {string} informacion, arreglo que contiene el espacio a buscar.
      * @returns {data} object json.
@@ -1219,26 +1190,6 @@ $(document).ready(function() {
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#categoria");
-            }
-        });
-    }
-
-    /**
-     * Función que llena y actualiza el selector de subcategorias.
-     * @returns {undefined}
-    **/
-    function actualizarSelectSubcategorias(){
-        var data = buscarSubcategorias();
-        $("#subcategoria").empty();
-        var row = $("<option value=''/>");
-        row.text("--Seleccionar--");
-        row.appendTo("#subcategoria");
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                aux = record.nombre;
-                row = $("<option value='" + record.id + "'/>");
-                row.text(aux);
-                row.appendTo("#subcategoria");
             }
         });
     }
@@ -4744,30 +4695,6 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón guardar_subcategoria y se
-     * realiza la operacion correspondiente.
-    */
-    $("#guardar_subcategoria").click(function (e){
-        var confirmacion = window.confirm("¿Guardar la información de la subcategoría?");
-        if (confirmacion) {
-            var nombre = limpiarCadena($("#nombre_subcategoria").val());
-            if(!validarCadena(nombre)){
-                alert("ERROR. Ingrese el nombre de la subcategoría");
-                $("#nombre_subcategoria").focus();
-            }else{
-                var informacion = {};
-                informacion["nombre"] = nombre;
-                var data = guardarObjeto("subcategoria",informacion);
-                alert(data.mensaje);
-                if (data.verificar) {
-                    $("#nombre_subcategoria").val("");
-                    window.scrollTo(0,0);
-                }
-            }
-        }
-    });
-
-    /**
      * Se captura el evento cuando se da click en el botón guardar_articulo y se
      * realiza la operacion correspondiente.
     */
@@ -4777,13 +4704,12 @@ $(document).ready(function() {
             var nombreArticulo = limpiarCadena($("#nombre_articulo").val());
             var marca = $("#marca").val();
             var categoria = $("#categoria").val();
-            var subcategoria = $("#subcategoria").val();
             var bodega = $("#bodega").val();
             var cantidadMinima = $("#cantidad_minima").val();
             var proveedores = [];
             var proveedorRepetido = false;
             for (var i = 0; i <= proveedoresCont; i++) {
-                if (i == 0) {
+                /*if (i == 0) {
                     if ($("#proveedor_articulo").val() != "") {
                         proveedores[i] = $("#proveedor_articulo").val();
                     }else{
@@ -4791,7 +4717,7 @@ $(document).ready(function() {
                         proveedorRepetido = true;
                         break;
                     }
-                }else{
+                }else{*/
                     var aux = $("#proveedor_articulo"+i).val();
                     if (proveedores.indexOf(aux) == -1) {
                         proveedores[i] = $("#proveedor_articulo"+i).val();
@@ -4801,7 +4727,7 @@ $(document).ready(function() {
                         proveedorRepetido = true;
                         break;
                     }
-                }
+                //}
             }
             if (!proveedorRepetido) {
                 var fotos = document.getElementById("fotos[]");
@@ -4835,7 +4761,6 @@ $(document).ready(function() {
                         informacion["nombre_articulo"] = nombreArticulo;
                         informacion["marca"] = marca;
                         informacion["categoria"] = categoria;
-                        informacion["subcategoria"] = subcategoria;
                         informacion["bodega"] = bodega;
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
@@ -4872,7 +4797,6 @@ $(document).ready(function() {
                             $("#nombre_articulo").val("");
                             $("#marca").val("");
                             $("#categoria").val("");
-                            $("#subcategoria").val("");
                             $("#bodega").val("");
                             $("#cantidad_minima").val("");
                             $("#proveedor_articulo").val("");

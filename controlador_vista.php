@@ -83,12 +83,10 @@ class controlador_vista
 
                 'CREAR_ARTICULO' =>'index.php?action='.OPERATION_CREAR_ARTICULO,
                 'CREAR_CATEGORIA' =>'index.php?action='.OPERATION_CREAR_CATEGORIA,
-                'CREAR_SUBCATEGORIA' =>'index.php?action='.OPERATION_CREAR_SUBCATEGORIA,
                 'CREAR_MARCA' =>'index.php?action='.OPERATION_CREAR_MARCA,
                 'CREAR_PROVEEDOR' =>'index.php?action='.OPERATION_CREAR_PROVEEDOR,
                 'CONSULTAR_ARTICULO' =>'index.php?action='.OPERATION_CONSULTAR_ARTICULO,
                 'CONSULTAR_CATEGORIA' =>'index.php?action='.OPERATION_CONSULTAR_CATEGORIA,
-                'CONSULTAR_SUBCATEGORIA' =>'index.php?action='.OPERATION_CONSULTAR_SUBCATEGORIA,
                 'CONSULTAR_MARCA' =>'index.php?action='.OPERATION_CONSULTAR_MARCA,
                 'CONSULTAR_PROVEEDOR' =>'index.php?action='.OPERATION_CONSULTAR_PROVEEDOR,
                 'CONSULTAR_INVENTARIO_ELECTRICO' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO_ELECTRICO,

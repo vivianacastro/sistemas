@@ -455,7 +455,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['categoria'],$info['subcategoria'],$info['bodega'],$info['cantidad_minima'],$info['proveedor'],$info['proveedor_anterior']);
+            $verificar = $m->modificarArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima'],$info['proveedor'],$info['proveedor_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
@@ -496,26 +496,6 @@ class controlador_modificacion{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->modificarCategoria($info['nombre'],$info['nombre_anterior']);
-        }
-        $result['mensaje'] = $GLOBALS['mensaje'];
-        $result['sql'] = $GLOBALS['sql'];
-        $result['verificar'] = $verificar;
-        echo json_encode($result);
-    }
-
-    /**
-     * Funcion que permite modificar una subcategoría.
-     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
-    **/
-    public function modificar_subcategoria(){
-        $GLOBALS['mensaje'] = "";
-        $GLOBALS['sql'] = "";
-        $result = array();
-        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
-                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarSubcategoria($info['nombre'],$info['nombre_anterior']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
