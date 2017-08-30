@@ -47,3 +47,4 @@
 [29-Aug-2017 16:23:50 America/New_York] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /media/windows/sistemas/modelo/modelo_usuario/controlador_usuario.php on line 174
 [29-Aug-2017 16:24:40 America/New_York] PHP Notice:  Undefined index: bodega in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1748
 [29-Aug-2017 16:24:40 America/New_York] PHP Notice:  Undefined index: bodega in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1750
+[29-Aug-2017 17:58:23 America/New_York] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1820
