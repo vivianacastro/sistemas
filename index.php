@@ -1,10 +1,10 @@
 <?php
 //definicion de la ruta de la aplicacion
 define('__ROOT__', dirname(__FILE__));
-
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 ini_set('error_log',  __ROOT__.'/errores.log');
+date_default_timezone_set('America/Bogota');
 
 //dependencias de la aplicacion
 require_once __ROOT__.'/modelo/config.php';
