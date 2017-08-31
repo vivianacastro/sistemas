@@ -152,7 +152,7 @@ class controlador_usuario {
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
             }
         }else{
-            if(isset($_SESSION['userid']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil'])) {
+            if(isset($_SESSION['userid']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil']) && isset($_SESSION["modulo_planta"])) {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
