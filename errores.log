@@ -128,3 +128,11 @@
 [31-Aug-2017 11:01:37 America/New_York] PHP Notice:  Undefined index: creacion_planta in /media/windows/sistemas/controlador_vista.php on line 141
 [31-Aug-2017 11:01:37 America/New_York] PHP Notice:  Undefined index: creacion_planta in /media/windows/sistemas/controlador_vista.php on line 143
 [31-Aug-2017 11:01:37 America/New_York] PHP Notice:  Undefined index: creacion_planta in /media/windows/sistemas/controlador_vista.php on line 145
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 413
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
+[05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 417
+[05-Sep-2017 09:36:44 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1820

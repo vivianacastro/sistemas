@@ -6117,7 +6117,7 @@ $(document).ready(function() {
         var articulo = limpiarCadena($("#nombre_articulo_search").val());
         var marca = $("#marca_search").val();
         var informacion = {};
-		informacion["nombre_articulo"] = articulo;
+        informacion["nombre_articulo"] = articulo.replace("'", "");
         informacion["marca"] = marca;
         var data = consultarInformacionObjeto("articulo_nombre",informacion);
         var idArticulo;
@@ -7197,11 +7197,24 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se modifica el valor del selector bodega
-     * y se actualiza el selector de campus.
+     * y se actualiza el selector de marcas.
     */
     $("#bodega").change(function (e) {
         var bodega = $("#bodega").val();
         actualizarSelectMarcas("marca",bodega);
+        actualizarSelectCategorias("categoria",bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector bodega_search
+     * y se actualiza el selector de marcas.
+    */
+    $("#bodega_search").change(function (e) {
+        var bodega = $("#bodega_search").val();
+        actualizarSelectMarcas("marca_search",bodega);
         actualizarSelectCategorias("categoria",bodega);
         for (var i = 0; i <= proveedoresCont; i++) {
             actualizarSelectProveedores(i,bodega);

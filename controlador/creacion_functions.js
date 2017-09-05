@@ -4790,7 +4790,8 @@ $(document).ready(function() {
                         $("#cantidad_minima").focus();
                     }else{
                         var informacion = {};
-                        informacion["nombre_articulo"] = nombreArticulo;
+                        informacion["nombre_articulo"] = nombreArticulo.replace("''", "");
+                        informacion["nombre_articulo"] = nombreArticulo.replace("'", "");
                         informacion["marca"] = marca;
                         informacion["categoria"] = categoria;
                         informacion["bodega"] = bodega;
