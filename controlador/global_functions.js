@@ -332,3 +332,16 @@ function validarFechaMenorActual(date){
 	else
 		return true;
 }
+
+function validaCaractaer(e){
+	var key = e.keyCode || e.which;
+	var caracteres_invalidos = ["34","39","44","96"];
+	var valido = true;
+	for(var i in caracteres_invalidos){
+	    if(key == caracteres_invalidos[i]){
+	        valido = false;
+	        break;
+	    }
+	}
+	return valido;
+}

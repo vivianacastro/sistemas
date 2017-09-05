@@ -1149,12 +1149,12 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.cantidad);
-				var marca = record.nombre_marca;
+        				var nombre = record.nombre_articulo;
+        				var cantidad = parseInt(record.cantidad);
+        				var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
                 var bodega = "Eléctrica";
-				var cantidad_minima = parseInt(record.cantidad_minima);
+		            var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
                     $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                     $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
@@ -1162,7 +1162,7 @@ $(document).ready(function() {
                 }else{
                     $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
-				articulosCont++;
+		            articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
@@ -1188,12 +1188,12 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.cantidad);
-				var marca = record.nombre_marca;
+		            var nombre = record.nombre_articulo;
+                var cantidad = parseInt(record.cantidad);
+                var marca = record.nombre_marca;
                 var categoria = record.nombre_categoria;
                 var bodega = "Hidráulica";
-				var cantidad_minima = parseInt(record.cantidad_minima);
+		            var cantidad_minima = parseInt(record.cantidad_minima);
                 if (cantidad <= cantidad_minima) {
                     $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                     $("#tabla_pocos_articulos").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+bodega+"</td><td>"+cantidad_minima+"</td></tr>");
@@ -1201,7 +1201,7 @@ $(document).ready(function() {
                 }else{
                     $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                 }
-				articulosCont++;
+	             articulosCont++;
             }
         });
 		$("#tabla_inventario").show();
@@ -6117,7 +6117,7 @@ $(document).ready(function() {
         var articulo = limpiarCadena($("#nombre_articulo_search").val());
         var marca = $("#marca_search").val();
         var informacion = {};
-		informacion["nombre_articulo"] = articulo;
+        informacion["nombre_articulo"] = articulo.replace("'", "");
         informacion["marca"] = marca;
         var data = consultarInformacionObjeto("articulo_nombre",informacion);
         var idArticulo;
@@ -7197,11 +7197,24 @@ $(document).ready(function() {
 
     /**
      * Se captura el evento cuando se modifica el valor del selector bodega
-     * y se actualiza el selector de campus.
+     * y se actualiza el selector de marcas.
     */
     $("#bodega").change(function (e) {
         var bodega = $("#bodega").val();
         actualizarSelectMarcas("marca",bodega);
+        actualizarSelectCategorias("categoria",bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se modifica el valor del selector bodega_search
+     * y se actualiza el selector de marcas.
+    */
+    $("#bodega_search").change(function (e) {
+        var bodega = $("#bodega_search").val();
+        actualizarSelectMarcas("marca_search",bodega);
         actualizarSelectCategorias("categoria",bodega);
         for (var i = 0; i <= proveedoresCont; i++) {
             actualizarSelectProveedores(i,bodega);
