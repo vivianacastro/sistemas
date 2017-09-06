@@ -6125,9 +6125,7 @@ $(document).ready(function() {
         var numeroArticulos = 0;
         actualizarSelectMarcas("marca",bodega);
         actualizarSelectCategorias("categoria",bodega);
-        for (var i = 0; i <= proveedoresCont; i++) {
-            actualizarSelectProveedores(i,bodega);
-        }
+        actualizarSelectProveedores(0,bodega);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
@@ -6153,6 +6151,7 @@ $(document).ready(function() {
                     if (proveedoresCont == 0) {
                         $("#proveedor_articulo").val(record.id_proveedor);
                         $("#proveedor_articulo").attr('name',record.id_proveedor);
+                        $("#proveedor_articulo option[value='']").hide();
                     }else{
                         var componente = '<div id="proveedor'+proveedoresCont+'">'
                         +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
@@ -6162,6 +6161,7 @@ $(document).ready(function() {
                         actualizarSelectProveedores(proveedoresCont,bodega);
                         $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
                         $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
+                        $("#proveedor_articulo"+proveedoresCont+" option[value='']").hide();
                     }
                     proveedoresCont++;
                 }
@@ -12550,7 +12550,7 @@ $(document).ready(function() {
                     alert("ERROR. Seleccione la cantidad mínima del artículo");
                     $("#cantidad_minima").focus();
                 }else{
-                    for (var i=0;i<proveedoresCont;i++) {
+                    for (var i=0;i<=proveedoresCont;i++) {
                         if (i==0) {
                             proveedor[i] = $("#proveedor_articulo").val();
                             proveedorAnterior[i] = $("#proveedor_articulo").attr("name");
@@ -12596,6 +12596,7 @@ $(document).ready(function() {
                         arregloFotosEliminar["nombre"] = fotosEliminar;
                         arregloFotosEliminar["tipo"] = "foto";
                         arregloFotos.append("articulo",JSON.stringify(info));
+                        console.log(informacion);
                         var data = modificarObjeto("articulo",informacion);
                         var dataEliminarFotos = eliminarObjeto("foto_articulo",arregloFotosEliminar);
                         var dataEliminarProveedor = eliminarObjeto("articulo_proveedor",info);
@@ -12622,10 +12623,12 @@ $(document).ready(function() {
                                 $("#bodega_search").val("");
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";
-                                var element = $("#tabla_inventario").find(".filaSeleccionada");
-                        		var articulo = element.html();
-                        		articulo = articulo.split("</td>");
-                        		articulo = articulo[0].substring(4);
+                                if(URLactual['href'].indexOf('consultar_inventario') >= 0){
+                                    var element = $("#tabla_inventario").find(".filaSeleccionada");
+                                    var articulo = element.html();
+                                    articulo = articulo.split("</td>");
+                                    articulo = articulo[0].substring(4);
+                                }
                                 var informacion = {};
                         		informacion["id_articulo"] = articulo;
                                 var data = consultarInformacionObjeto("articulo",informacion);
@@ -12652,8 +12655,8 @@ $(document).ready(function() {
                                     }else{
                                         $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
                                     }
+                                    element.remove();
                                 }
-                                element.remove();
                             }
                         }
                     }

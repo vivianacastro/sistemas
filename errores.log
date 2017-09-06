@@ -143,3 +143,15 @@
 [06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 413
 [06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
 [06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 417
+[06-Sep-2017 11:53:50 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 11:53:50 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
+[06-Sep-2017 11:54:52 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 11:54:52 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
+[06-Sep-2017 11:55:39 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 11:55:40 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
+[06-Sep-2017 11:56:11 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 11:56:11 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
+[06-Sep-2017 11:57:03 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 11:57:04 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
+[06-Sep-2017 12:00:50 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4268
+[06-Sep-2017 12:00:50 America/Bogota] PHP Notice:  Undefined index: id_articulo in /media/windows/sistemas/modelo/modelo_consultas/controlador_consultas.php on line 4066
