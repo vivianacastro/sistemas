@@ -136,3 +136,10 @@
 [05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
 [05-Sep-2017 09:31:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 417
 [05-Sep-2017 09:36:44 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in /media/windows/sistemas/modelo/modelo_creacion/controlador_creacion.php on line 1820
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 405
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 407
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 409
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 411
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 413
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 415
+[06-Sep-2017 09:54:08 America/Bogota] PHP Notice:  Undefined index: action in /media/windows/sistemas/index.php on line 417

@@ -3355,8 +3355,9 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                return true;
+                $GLOBALS['mensaje'] = $sql;
                 //$GLOBALS['mensaje'] = "El artículo y su proveedor se han guardado correctamente en el sistema.";
+                return true;
             }
         }
     }

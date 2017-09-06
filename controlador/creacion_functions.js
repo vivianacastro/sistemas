@@ -4741,15 +4741,15 @@ $(document).ready(function() {
             var proveedores = [];
             var proveedorRepetido = false;
             for (var i = 0; i <= proveedoresCont; i++) {
-                /*if (i == 0) {
+                if (i == 0) {
                     if ($("#proveedor_articulo").val() != "") {
                         proveedores[i] = $("#proveedor_articulo").val();
-                    }else{
+                    }/*else{
                         alert("ERROR. Seleccione por lo menos un proveedor");
                         proveedorRepetido = true;
                         break;
-                    }
-                }else{*/
+                    }*/
+                }else{
                     var aux = $("#proveedor_articulo"+i).val();
                     if (proveedores.indexOf(aux) == -1) {
                         proveedores[i] = $("#proveedor_articulo"+i).val();
@@ -4759,7 +4759,7 @@ $(document).ready(function() {
                         proveedorRepetido = true;
                         break;
                     }
-                //}
+                }
             }
             if (!proveedorRepetido) {
                 var fotos = document.getElementById("fotos[]");
@@ -4798,7 +4798,6 @@ $(document).ready(function() {
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
                         var data = guardarObjeto("articulo",informacion);
-                        console.log(data);
                         var id_articulo = "";
                         $.each(data.verificar, function(index, record) {
                             if($.isNumeric(index)) {

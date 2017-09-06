@@ -1145,7 +1145,6 @@ $(document).ready(function() {
         articulosCont = 0;
         articulosPocasUnidades = 0;
         var data = listarInventarioElectrico();
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 var id_articulo = record.id_articulo;
@@ -5993,6 +5992,7 @@ $(document).ready(function() {
 		articulo = articulo.split("</td>");
 		articulo = articulo[0].substring(4);
         var informacion = {};
+        var bodega;
 		informacion["id_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo",informacion);
         var idArticulo;
@@ -6005,13 +6005,13 @@ $(document).ready(function() {
                 $("#marca").attr('name',record.id_marca);
                 $("#categoria").val(record.id_categoria);
                 $("#categoria").attr('name',record.id_categoria);
+                bodega = record.bodega;
                 $("#bodega").val(record.bodega);
 				$("#cantidad_minima").val(record.cantidad_minima);
             }
         });
         var archivos = consultarArchivosObjeto("articulo",informacion);
         var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
-        var fotos =
         proveedoresCont = 0;
         $.each(dataProveedor, function(index, record) {
             if($.isNumeric(index)) {
@@ -6024,7 +6024,7 @@ $(document).ready(function() {
                     +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
                     +'</div>';
                     añadirComponente("proveedor",componente);
-                    actualizarSelectProveedores(proveedoresCont);
+                    actualizarSelectProveedores(proveedoresCont,bodega);
                     $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
                     $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
                 }
@@ -6116,12 +6116,18 @@ $(document).ready(function() {
     $("#visualizarArticuloNombre").click(function (e){
         var articulo = limpiarCadena($("#nombre_articulo_search").val());
         var marca = $("#marca_search").val();
+        var bodega = $("#bodega_search").val();
         var informacion = {};
         informacion["nombre_articulo"] = articulo.replace("'", "");
         informacion["marca"] = marca;
         var data = consultarInformacionObjeto("articulo_nombre",informacion);
         var idArticulo;
         var numeroArticulos = 0;
+        actualizarSelectMarcas("marca",bodega);
+        actualizarSelectCategorias("categoria",bodega);
+        for (var i = 0; i <= proveedoresCont; i++) {
+            actualizarSelectProveedores(i,bodega);
+        }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
@@ -6141,7 +6147,6 @@ $(document).ready(function() {
         if (numeroArticulos > 0) {
             var archivos = consultarArchivosObjeto("articulo",informacion);
             var dataProveedor = consultarInformacionObjeto("articulo_proveedor",informacion);
-            var fotos =
             proveedoresCont = 0;
             $.each(dataProveedor, function(index, record) {
                 if($.isNumeric(index)) {
@@ -6154,7 +6159,7 @@ $(document).ready(function() {
                         +'<select class="form-control formulario" name="proveedor_articulo" id="proveedor_articulo'+proveedoresCont+'" disabled required></select>'
                         +'</div>';
                         añadirComponente("proveedor",componente);
-                        actualizarSelectProveedores(proveedoresCont);
+                        actualizarSelectProveedores(proveedoresCont,bodega);
                         $("#proveedor_articulo"+proveedoresCont).val(record.id_proveedor);
                         $("#proveedor_articulo"+proveedoresCont).attr('name',record.id_proveedor);
                     }
@@ -7215,6 +7220,7 @@ $(document).ready(function() {
     $("#bodega_search").change(function (e) {
         var bodega = $("#bodega_search").val();
         actualizarSelectMarcas("marca_search",bodega);
+        actualizarSelectMarcas("marca",bodega);
         actualizarSelectCategorias("categoria",bodega);
         for (var i = 0; i <= proveedoresCont; i++) {
             actualizarSelectProveedores(i,bodega);
@@ -9523,12 +9529,13 @@ $(document).ready(function() {
         if (proveedoresCont == 0) {
             proveedoresCont = 1;
         }
+        var bodega = $("#bodega");
         var componente = '<div id="proveedor'+proveedoresCont+'">'
         +'<br><div class="div_izquierda"><b>Proveedor ('+(proveedoresCont+1)+') del Art&iacute;culo:</b></div>'
         +'<select class="form-control formulario" name="" id="proveedor_articulo'+proveedoresCont+'" required></select><br>'
         +'</div>';
         añadirComponente("proveedor",componente);
-        actualizarSelectProveedores(proveedoresCont);
+        actualizarSelectProveedores(proveedoresCont,bodega);
         $('#eliminar_proveedor').removeAttr("disabled");
         proveedoresCont++;
     });
