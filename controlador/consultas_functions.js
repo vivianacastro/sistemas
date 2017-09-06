@@ -12551,10 +12551,10 @@ $(document).ready(function() {
                     $("#cantidad_minima").focus();
                 }else{
                     for (var i=0;i<proveedoresCont;i++) {
-                        /*if (i==0) {
+                        if (i==0) {
                             proveedor[i] = $("#proveedor_articulo").val();
                             proveedorAnterior[i] = $("#proveedor_articulo").attr("name");
-                        }else{*/
+                        }else{
                             if (proveedor.indexOf($("#proveedor_articulo"+i).val()) == -1) {
                                 proveedor[i] = $("#proveedor_articulo"+i).val();
                                 proveedorAnterior[i] = $("#proveedor_articulo"+i).attr("name");
@@ -12564,7 +12564,7 @@ $(document).ready(function() {
                                 error = true;
                                 break;
                             }
-                        //}
+                        }
                     }
                     var arregloFotos = new FormData();
                     var info = {};
@@ -12619,6 +12619,7 @@ $(document).ready(function() {
                             if (data.verificar) {
                                 $("#nombre_articulo_search").val("");
                                 $("#marca_search").val("");
+                                $("#bodega_search").val("");
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";
                                 var element = $("#tabla_inventario").find(".filaSeleccionada");
