@@ -1820,6 +1820,7 @@ class controlador_creacion
 				while (list($clave, $valor) = each($verificar)){
 	                $id_articulo = $valor['id_articulo'];
 	            }
+                $m->guardarArticuloInventario($id_articulo,$info['cantidad']);
 				$proveedor = $info['proveedor'];
 				for ($i=0;$i<count($proveedor);$i++) {
                     if ($proveedor[$i] != "") {

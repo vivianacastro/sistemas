@@ -4737,6 +4737,7 @@ $(document).ready(function() {
             var marca = $("#marca").val();
             var categoria = $("#categoria").val();
             var bodega = $("#bodega").val();
+            var cantidad = $("#cantidad").val();
             var cantidadMinima = $("#cantidad_minima").val();
             var proveedores = [];
             var proveedorRepetido = false;
@@ -4785,6 +4786,9 @@ $(document).ready(function() {
                     }else if(!validarCadena(bodega)){
                         alert("ERROR. Seleccione la bodega a la que pertenece el artículo");
                         $("#bodega").focus();
+                    }else if(!validarNumero(cantidad)){
+                        alert("ERROR. Ingrese la cantidad del artículo ");
+                        $("#cantidad").focus();
                     }else if(!validarNumero(cantidadMinima)){
                         alert("ERROR. Ingrese la cantidad mínima del artículo ");
                         $("#cantidad_minima").focus();
@@ -4795,9 +4799,11 @@ $(document).ready(function() {
                         informacion["marca"] = marca;
                         informacion["categoria"] = categoria;
                         informacion["bodega"] = bodega;
+                        informacion["cantidad"] = cantidad;
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
                         var data = guardarObjeto("articulo",informacion);
+                        console.log(data);
                         var id_articulo = "";
                         $.each(data.verificar, function(index, record) {
                             if($.isNumeric(index)) {
@@ -4830,6 +4836,7 @@ $(document).ready(function() {
                             $("#marca").val("");
                             $("#categoria").val("");
                             $("#bodega").val("");
+                            $("#cantidad").val("");
                             $("#cantidad_minima").val("");
                             $("#proveedor_articulo").val("");
                             while (proveedoresCont > 0) {

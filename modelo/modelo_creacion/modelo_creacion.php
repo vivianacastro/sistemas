@@ -3333,6 +3333,34 @@ class modelo_creacion {
     }
 
     /**
+     * Función que permite guardar la información de un articulo en el inventario.
+     * @param string $id, id del artículo.
+     * @param string $cantidad, cantidad del artículo.
+     * @return array
+    **/
+    public function guardarArticuloInventario($id,$cantidad){
+        $id = htmlspecialchars(trim($id));
+        $cantidad = htmlspecialchars(trim($cantidad));
+        $sql = "INSERT INTO inventario (id_articulo,cantidad) VALUES ('".$id."','".$cantidad."');";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Guardar Artículo Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                //$GLOBALS['mensaje'] = "El artículo se ha guardado correctamente en el sistema.";
+                return $result;
+            }
+        }
+    }
+
+    /**
      * Función que permite guardar la información de un articulo y su proveedor.
      * @param string $id_articulo, id del articulo.
      * @param string $proveedor, id del proveedor.
@@ -3355,8 +3383,7 @@ class modelo_creacion {
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
-                $GLOBALS['mensaje'] = $sql;
-                //$GLOBALS['mensaje'] = "El artículo y su proveedor se han guardado correctamente en el sistema.";
+                $GLOBALS['mensaje'] = "El artículo y su proveedor se han guardado correctamente en el sistema.";
                 return true;
             }
         }
