@@ -23,7 +23,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_SEDE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -45,7 +45,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CAMPUS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -67,7 +67,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CANCHA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -89,7 +89,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CORREDOR, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -111,7 +111,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_CUBIERTA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -133,7 +133,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_GRADAS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -155,7 +155,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PARQUEADERO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -177,7 +177,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PISCINA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -199,7 +199,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_PLAZOLETA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -221,7 +221,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_SENDERO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -243,7 +243,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_VIA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -265,7 +265,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_EDIFICIO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -287,7 +287,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_ESPACIO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -309,7 +309,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TIPO_MATERIAL, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -331,7 +331,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TIPO_OBJETO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -353,7 +353,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MAPA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -375,7 +375,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_AIRE_UBICACION, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -397,7 +397,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_AIRE_NUMERO_INVENTARIO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -419,7 +419,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_CAPACIDAD_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -441,7 +441,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_MARCA_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -463,7 +463,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TIPO_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -485,7 +485,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_TECNOLOGIA_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -507,7 +507,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MANTENIMIENTO_AIRE_ID_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -529,7 +529,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_CONSULTAR_MANTENIMIENTO_AIRE_NUMERO_ORDEN, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -551,7 +551,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_MARCAS_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -573,7 +573,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPOS_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -595,7 +595,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MAS_TIPO_TECNOLOGIAS_AIRE, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -617,7 +617,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_AIRES_MAS_MANTENIMIENTOS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -639,7 +639,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_PLANTA, CONSULTAS, OPERATION_MARCAS_MAS_MANTENIMIENTOS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -660,7 +660,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ANADIR_ARTICULO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -681,7 +681,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_ARTICULO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -702,7 +702,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_CATEGORIA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -723,7 +723,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_MARCA, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -744,7 +744,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_PROVEEDOR, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -765,7 +765,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO_ELECTRICO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -786,7 +786,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -807,7 +807,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -828,7 +828,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -849,7 +849,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ARTICULOS_MAS_USADOS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -870,7 +870,7 @@ class controlador_consultas{
                 $v->retornar_vista(MOD_INVENTARIO, CONSULTAS, OPERATION_ARTICULOS_MENOS_USADOS, $data);
             }
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }

@@ -20,7 +20,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SEDE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -39,7 +39,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CAMPUS, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -58,7 +58,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CANCHA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -77,7 +77,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CORREDOR, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -96,7 +96,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_CUBIERTA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -115,7 +115,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_GRADAS, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -134,7 +134,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PARQUEADERO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -153,7 +153,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PISCINA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -172,7 +172,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_PLAZOLETA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -191,7 +191,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_SENDERO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -210,7 +210,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_VIA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -229,7 +229,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_EDIFICIO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -248,7 +248,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_ESPACIO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -267,7 +267,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_TIPO_MATERIAL, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -286,7 +286,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_planta"],"true") == 0 || strcmp($_SESSION["creacion_planta"],"true") == 0) {
             $v->retornar_vista(MOD_PLANTA, CREACION, OPERATION_CREAR_TIPO_OBJETO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -305,7 +305,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -324,7 +324,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_CAPACIDAD_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -343,7 +343,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_MARCA_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -362,7 +362,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_TECNOLOGIA_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -381,7 +381,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_CREAR_TIPO_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -400,7 +400,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_aires"],"true") == 0 || strcmp($_SESSION["creacion_aires"],"true") == 0) {
             $v->retornar_vista(MOD_AIRES, CREACION, OPERATION_REGISTRAR_MANTENIMIENTO_AIRE, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -418,7 +418,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
             $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_ARTICULO, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -436,7 +436,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
             $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_CATEGORIA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -454,7 +454,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
             $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_MARCA, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }
@@ -472,7 +472,7 @@ class controlador_creacion
         if (strcmp($_SESSION["modulo_inventario"],"true") == 0 || strcmp($_SESSION["creacion_inventario"],"true") == 0) {
             $v->retornar_vista(MOD_INVENTARIO, CREACION, OPERATION_CREAR_PROVEEDOR, $data);
         }else{
-            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario"];
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
             $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
         }
     }

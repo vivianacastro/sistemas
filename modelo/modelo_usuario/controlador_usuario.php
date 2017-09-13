@@ -127,10 +127,10 @@ class controlador_usuario {
                 $_SESSION["userid"] = session_id();
                 $_SESSION["login"] = $infoResult["login"];
                 $_SESSION["perfil_sistemas"] = $infoResult["perfil"];
-                $_SESSION["correo"] = $infoResult["correo"];
-                $_SESSION["telefono"] = $infoResult["telefono"];
-                $_SESSION["extension"] = $infoResult["extension"];
-                $_SESSION["nombre_usuario"] = ucwords($infoResult["nombre_usuario"]);
+                $_SESSION["correo_sistemas"] = $infoResult["correo"];
+                $_SESSION["telefono_sistemas"] = $infoResult["telefono"];
+                $_SESSION["extension_sistemas"] = $infoResult["extension"];
+                $_SESSION["nombre_usuario_sistemas"] = ucwords($infoResult["nombre_usuario"]);
                 $_SESSION["modulo_planta"] = $infoResult["modulo_planta"];
                 $_SESSION["modulo_inventario"] = $infoResult["modulo_inventario"];
                 $_SESSION["modulo_aires"] = $infoResult["modulo_aires"];
