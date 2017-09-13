@@ -126,7 +126,7 @@ class controlador_usuario {
                 session_regenerate_id();
                 $_SESSION["userid"] = session_id();
                 $_SESSION["login"] = $infoResult["login"];
-                $_SESSION["perfil"] = $infoResult["perfil"];
+                $_SESSION["perfil_sistemas"] = $infoResult["perfil"];
                 $_SESSION["correo"] = $infoResult["correo"];
                 $_SESSION["telefono"] = $infoResult["telefono"];
                 $_SESSION["extension"] = $infoResult["extension"];
