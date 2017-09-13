@@ -4803,7 +4803,6 @@ $(document).ready(function() {
                         informacion["cantidad_minima"] = cantidadMinima;
                         informacion["proveedor"] = proveedores;
                         var data = guardarObjeto("articulo",informacion);
-                        console.log(data);
                         var id_articulo = "";
                         $.each(data.verificar, function(index, record) {
                             if($.isNumeric(index)) {
