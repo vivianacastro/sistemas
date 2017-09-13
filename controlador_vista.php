@@ -179,7 +179,7 @@ class controlador_vista
      * @return string
     **/
     function conseguir_usuario(){
-        $usuario = $_SESSION['nombre_usuario'];
+        $usuario = $_SESSION["nombre_usuario_sistemas"];
         return $usuario;
     }
 
