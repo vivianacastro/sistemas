@@ -1762,7 +1762,7 @@ class modelo_consultas
     **/
     public function buscarArticulos($bodega){
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima, c.cantidad
-                FROM articulo a JOIN marca_inventario b ON a.marca = b.id
+                FROM articulo a RIGHT JOIN marca_inventario b ON a.marca = b.id
                                 LEFT JOIN inventario c ON a.id_articulo = c.id_articulo
                 WHERE a.bodega = '".$bodega."'
                 ORDER BY a.nombre;";
