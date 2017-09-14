@@ -172,3 +172,10 @@
 [13-Sep-2017 14:55:43 America/Bogota] PHP Warning:  Variable passed to each() is not an array or object in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_creacion\controlador_creacion.php on line 1820
 [13-Sep-2017 14:55:43 America/Bogota] PHP Notice:  Undefined variable: id_articulo in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_creacion\controlador_creacion.php on line 1823
 [13-Sep-2017 14:55:43 America/Bogota] PHP Notice:  Undefined variable: id_articulo in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_creacion\controlador_creacion.php on line 1827
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 405
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 407
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 409
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 411
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
+[14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
