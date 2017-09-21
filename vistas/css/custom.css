@@ -83,9 +83,14 @@ html, body {
     border-color: transparent;
 }
 
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary{
+    margin-top: 1em;
+}
+
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:disabled{
     background-color: #e15661 !important;
     border-color: transparent !important;
+    margin-top: 1em;
 }
 
 .carousel-control.left{
