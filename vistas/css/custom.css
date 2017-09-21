@@ -358,6 +358,12 @@ html, body {
 	color: black !important;
 }
 
+.pager{
+    border-top: none;
+    margin: 0px 0px 0px;
+    padding: 0px 0px 0px;
+}
+
 .page-scroll{
 	color: white !important;
 	text-decoration: none !important;
@@ -366,6 +372,22 @@ html, body {
 .page-scroll:focus, .page-scroll:hover{
 	background-color: #e15661 !important;
 	border-color: #D51B23 !important;
+}
+
+.pagination > li > a{
+    color: #D51B23;
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus{
+    background-color: #e15661;
+    border-color: #e15661;
+    color: white;
+}
+
+.pagination .active a{
+    background-color: #D51B23 !important;
+    border-color: transparent !important;
+    color: white !important;
 }
 
 .pull-right{
