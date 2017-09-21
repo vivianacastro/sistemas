@@ -179,3 +179,5 @@
 [14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
 [14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
 [14-Sep-2017 16:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
+[21-Sep-2017 15:51:51 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[21-Sep-2017 15:51:54 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
