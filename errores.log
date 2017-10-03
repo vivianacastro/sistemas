@@ -241,3 +241,17 @@
 [21-Sep-2017 15:47:47 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
 [21-Sep-2017 15:47:54 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
 [21-Sep-2017 15:50:51 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 405
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 407
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 409
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 411
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
+[03-Oct-2017 09:45:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
+[03-Oct-2017 09:46:53 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
+[03-Oct-2017 09:46:53 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:46:58 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:48:13 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:48:16 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:50:33 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131
+[03-Oct-2017 09:53:57 America/Bogota] PHP Notice:  Undefined index: perfil in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\controlador_vista.php on line 131

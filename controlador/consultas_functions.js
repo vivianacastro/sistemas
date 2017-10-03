@@ -237,7 +237,7 @@ $(document).ready(function() {
             actualizarSelectMarcas("marca","electrica");
             actualizarSelectCategorias("categoria","electrica");
             actualizarSelectProveedores(proveedoresCont,"electrica");
-            $('#tabla_inventario').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:2});
+            $('#tabla_inventario').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:10});
         }else if (URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0 ) {
             llenarTablaInventarioHidraulico();
             actualizarSelectMarcas("marca","hidraulica");
@@ -12617,6 +12617,7 @@ $(document).ready(function() {
                     $("#eliminar_articulo").attr('disabled',true);
                     $("#visualizarArticulo").attr('disabled',true);
                     $("#divDialogModificarArticulo").modal('hide');
+                    $('#tabla_inventario').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:10});
                 }
             }
         }
