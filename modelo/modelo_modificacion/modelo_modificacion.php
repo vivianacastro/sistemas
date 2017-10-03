@@ -3020,8 +3020,12 @@ class modelo_modificacion {
     public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior){
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $cantidad = htmlspecialchars(trim($cantidad));
-        $cantidad_anterior = htmlspecialchars(trim($cantidad_anterior));
-        if (strcasecmp($cantidad_anterior,"nuevo") == 0) {
+        $cantidad_anterior = "";
+        $data = $this->consultarCampoInventario($id_articulo);
+        foreach ($data as $clave => $valor) {
+            $cantidad_anterior = $valor['cantidad'];
+        }
+        if (strcasecmp($cantidad_anterior,"") == 0) {
             $sql = "INSERT INTO inventario (id_articulo,cantidad) VALUES ('".$id_articulo."',".$cantidad.") RETURNING cantidad;";
         }else{
             $sql = "UPDATE inventario SET cantidad = ".$cantidad." + cantidad WHERE id_articulo = '".$id_articulo."' RETURNING cantidad;";
@@ -3033,7 +3037,7 @@ class modelo_modificacion {
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 2)";
+                $GLOBALS['mensaje'] = $sql;
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{
@@ -3693,6 +3697,29 @@ class modelo_modificacion {
         }else{
             if(!$l_stmt->execute()){
                 $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Marca Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+            }else{
+                $result = $l_stmt->fetchAll();
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Función que permite consultar la cantidad de un artículo en el inventario.
+     * @param string $id_articulo, id del artículo.
+     * @return array
+    **/
+    public function consultarCampoInventario($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $sql = "SELECT * FROM inventario WHERE id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Consultar Campo Inventario 2)";
                 $GLOBALS['sql'] = $sql;
             }else{
                 $result = $l_stmt->fetchAll();

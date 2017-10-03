@@ -97,7 +97,6 @@ $.fn.pageMe = function(opts){
         pager.data("curr",page);
       	pager.children().removeClass("active");
         pager.children().eq(page+1).addClass("active");
-
     }
 };
 
@@ -12617,7 +12616,6 @@ $(document).ready(function() {
                     $("#eliminar_articulo").attr('disabled',true);
                     $("#visualizarArticulo").attr('disabled',true);
                     $("#divDialogModificarArticulo").modal('hide');
-                    $('#tabla_inventario').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:10});
                 }
             }
         }
