@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <div>
     <div class='form-group'>
-        <div><b><h2>Gestionar Inventario - Bodega El&eacute;ctrica</h2></b><br></div>
+        <div><b><h2>Gestionar Inventario - Bodega Hidr&aacute;ulica</h2></b><br></div>
         <div><h4><b>Artículos</b></h4></div>
-        <div class="divBusqueda">
-            <input class="inputBusqueda" oninput="w3.filterHTML('#tabla_inventario', '#tr_tabla_inventario', this.value)" placeholder="Buscar..."><br>
-        </div>
         <div class="table-responsive">
-            <table id="tabla_inventario" class="table table-bordered" style="display:none">
+            <table id="tabla_inventario" class="display table table-bordered" width="100%">
                 <thead align="center">
                     <tr>
                         <th>Id Art&iacute;culo</th>
@@ -21,7 +18,6 @@
                 <tbody id="tBody" class="bodyTabla">
                 </tbody>
             </table>
-            <ul class="pagination pagination-lg pager" id="myPager"></ul>
         </div>
     </div>
     <div class='form_button'>

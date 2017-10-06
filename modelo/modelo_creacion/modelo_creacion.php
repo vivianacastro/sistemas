@@ -3311,8 +3311,16 @@ class modelo_creacion {
         $categoria = htmlspecialchars(trim($categoria));
         $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
-        $campos = "nombre,marca,id_categoria_articulo,bodega,cantidad_minima,usuario_crea";
-        $valores = "'".$nombre."','".$marca."','".$categoria."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        $campos = "nombre,bodega,cantidad_minima,usuario_crea";
+        $valores = "'".$nombre."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        if (strcmp($categoria,"")!=0) {
+            $campos .= ",id_categoria_articulo";
+            $valores .= ",'".$categoria."'";
+        }
+        if (strcmp($marca,"")!=0) {
+            $campos .= ",marca";
+            $valores .= ",'".$marca."'";
+        }
         $sql = "INSERT INTO articulo (".$campos.") VALUES (".$valores.") RETURNING id_articulo;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -3354,7 +3362,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                //$GLOBALS['mensaje'] = "El artículo se ha guardado correctamente en el sistema.";
+                $GLOBALS['mensaje'] = "El artículo se ha guardado correctamente en el sistema.";
                 return $result;
             }
         }

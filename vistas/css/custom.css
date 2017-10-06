@@ -14,6 +14,11 @@ html, body {
     width: 82% !important;
 }
 
+.bodyTabla{
+    cursor: pointer;
+}
+
+
 .boton_agregar_foto{
     background-color: transparent;
     width: 100%;
@@ -428,10 +433,6 @@ html, body {
     text-decoration:line-through;
 }
 
-.bodyTabla{
-    cursor: pointer;
-}
-
 #agregar_foto{
     height: 300px;
     width: 100%;
@@ -568,6 +569,10 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+#tabla_inventario_length, #tabla_inventario_info{
+    text-align: left;
 }
 
 #top{
