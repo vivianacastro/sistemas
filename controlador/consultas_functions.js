@@ -1142,6 +1142,7 @@ $(document).ready(function() {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
+            responsive: true,
             data: dataTabla,
             columns: [
                 { data: "id_articulo" },
@@ -1170,6 +1171,7 @@ $(document).ready(function() {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
+            responsive: true,
             data: dataTabla,
             columns: [
                 { data: "id_articulo" },
