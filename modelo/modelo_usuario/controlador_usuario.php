@@ -380,10 +380,10 @@ class controlador_usuario {
         $result = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result['login'] = $_SESSION["login"];
-            $result['nombre_usuario'] = $_SESSION["nombre_usuario"];
-            $result['telefono'] = $_SESSION["telefono"];
-            $result['extension'] = $_SESSION["extension"];
-            $result['correo'] = $_SESSION["correo"];
+            $result['nombre_usuario'] = $_SESSION["nombre_usuario_sistemas"];
+            $result['telefono'] = $_SESSION["telefono_sistemas"];
+            $result['extension'] = $_SESSION["extension_sistemas"];
+            $result['correo'] = $_SESSION["correo_sistemas"];
             /*$arrayAux = array(
                 'login' => $_SESSION["login"],
                 'nombre_usuario' => $_SESSION["nombre_usuario"],

@@ -67,6 +67,7 @@ class controlador_vista
                 'CREAR_TIPO_AIRE' =>'index.php?action='.OPERATION_CREAR_TIPO_AIRE,
                 'CREAR_TECNOLOGIA_AIRE' =>'index.php?action='.OPERATION_CREAR_TECNOLOGIA_AIRE,
                 'REGISTRAR_MANTENIMIENTO_AIRE' =>'index.php?action='.OPERATION_REGISTRAR_MANTENIMIENTO_AIRE,
+                'CONSULTAR_INVENTARIO_AIRES' =>'index.php?action='.OPERATION_CONSULTAR_INVENTARIO_AIRES,
                 'CONSULTAR_AIRE_UBICACION' =>'index.php?action='.OPERATION_CONSULTAR_AIRE_UBICACION,
                 'CONSULTAR_AIRE_NUMERO_INVENTARIO' =>'index.php?action='.OPERATION_CONSULTAR_AIRE_NUMERO_INVENTARIO,
                 'CONSULTAR_CAPACIDAD_AIRE' =>'index.php?action='.OPERATION_CONSULTAR_CAPACIDAD_AIRE,
@@ -128,7 +129,7 @@ class controlador_vista
      * @return string
     **/
     function conseguir_operaciones_add($modulo){
-        if(strcmp($_SESSION['perfil'],'admin') == 0 ){
+        if(strcmp($_SESSION['perfil_sistemas'],'admin') == 0 ){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_admin.html';
         }else if(strcmp($_SESSION['creacion_planta'],'true') == 0 && strcmp($_SESSION['creacion_inventario'],'true') == 0 && strcmp($_SESSION['creacion_aires'],'true') == 0){
             $file = dirname(__FILE__).'/vistas/vistas_menu/menu_creacion_todos.html';

@@ -112,6 +112,14 @@ $(document).ready(function() {
         }else if(URLactual['href'].indexOf('consultar_mapa') >= 0){
             initMapConsulta();
             rellenarMapaConsulta();
+        }else if (URLactual['href'].indexOf('consultar_inventario_aires') >= 0 ) {
+            llenarTablaInventarioAiresAcondicionados();
+            actualizarSelectSede();
+            actualizarSelectCapacidadAire("capacidad_aire");
+            actualizarSelectMarcaAire("marca_aire");
+            actualizarSelectTipoObjeto("tipo_aire",0);
+            actualizarSelectTipoObjeto("tipo_tecnologia_aire",0);
+            actualizarSelectTipoObjeto("tipo_periodicidad_mantenimiento",0);
         }else if(URLactual['href'].indexOf('consultar_aire') >= 0){
             actualizarSelectSede();
             actualizarSelectCapacidadAire("capacidad_aire");
@@ -1066,6 +1074,37 @@ $(document).ready(function() {
 	}
 
     /**
+	 * Función que permite consultar el inventario de aires acondicionados.
+	 * @returns {data}
+	**/
+	function listarInventarioAiresAcondicionados(){
+		var dataResult;
+		try {
+			$.ajax({
+				type: "POST",
+				url: "index.php?action=listar_inventario_aires_acondicionados",
+				dataType: "json",
+				async: false,
+				error: function(xhr, status, error) {
+					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+					//location.reload(true);
+					var err = eval("(" + xhr.responseText + ")");
+					console.log(err.Message);
+				},
+				success: function(data) {
+					//alert(data.mensaje);
+					dataResult = data;
+				}
+			});
+			return dataResult;
+		}
+		catch(ex) {
+			console.log(ex);
+			alert("Ocurrió un error, por favor inténtelo nuevamente");
+		}
+	}
+
+    /**
 	 * Función que permite consultar el inventario de la bodega eléctrica.
 	 * @returns {data}
 	**/
@@ -1186,6 +1225,33 @@ $(document).ready(function() {
                     $(row).addClass('filaPocosArticulos');
                 }
             }
+        } );
+    }
+
+    /**
+     * Función que llena la tabla del inventario de aires acondicionados.
+     * @returns {undefined}
+    **/
+    function llenarTablaInventarioAiresAcondicionados(){
+        var data = listarInventarioAiresAcondicionados();
+        console.log(data);
+        var dataTabla = data.data;
+        $('#tabla_inventario').DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            responsive: true,
+            data: dataTabla,
+            columns: [
+                { data: "id_aire" },
+                { data: "numero_inventario" },
+                { data: "ubicacion" },
+                { data: "marca" },
+                { data: "tipo" },
+                { data: "tecnologia" },
+                { data: "capacidad" },
+                { data: "fecha_instalacion" }
+            ]
         } );
     }
 

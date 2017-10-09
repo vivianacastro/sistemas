@@ -360,6 +360,28 @@ class controlador_consultas{
 
     /**
      * Función que despliega el panel que permite consultar
+     * el inventario de aires acondicionados
+    **/
+    public function consultar_inventario_aires() {
+        $GLOBALS['mensaje'] = "";
+        $data = array(
+            'mensaje' => 'Consultar Aire Acondicionado por su Ubicación',
+        );
+        $v = new controlador_vista();
+        if (strcmp($_SESSION["modulo_aires"],"true") == 0) {
+            if (strcmp($_SESSION["creacion_aires"],"true") == 0) {
+                $v->retornar_vista(MOD_AIRES, MODIFICACION, OPERATION_CONSULTAR_INVENTARIO_AIRES, $data);
+            }else{
+                $v->retornar_vista(MOD_AIRES, CONSULTAS, OPERATION_CONSULTAR_INVENTARIO_AIRES, $data);
+            }
+        }else{
+            $data['mensaje'] = 'Bienvenido/a al sistema '.$_SESSION["nombre_usuario_sistemas"];
+            $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
+        }
+    }
+
+    /**
+     * Función que despliega el panel que permite consultar
      * un aire acondicionado en el sistema.
     **/
     public function consultar_aire_ubicacion() {
@@ -2586,6 +2608,51 @@ class controlador_consultas{
                 array_push($result, $arrayAux);
             }
         }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
+     * Función que permite consultar los aires acondicionados almacenados en el sistema.
+    **/
+    public function listar_inventario_aires() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $dataAires = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->listarInventarioAiresAcondicionados();
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'numero_inventario' => mb_convert_case($valor['numero_inventario'],MB_CASE_TITLE,"UTF-8"),
+                    'id_aire' => $valor['id_aire'],
+                    'id_sede' => $valor['id_sede'],
+                    'ubicacion' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8")." - ".mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8")." - ".mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8")." - ".mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8")." - ".mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_sede' => mb_convert_case($valor['nombre_sede'],MB_CASE_TITLE,"UTF-8"),
+                    'id_campus' => $valor['id_campus'],
+                    'nombre_campus' => mb_convert_case($valor['nombre_campus'],MB_CASE_TITLE,"UTF-8"),
+                    'id_edificio' => mb_convert_case($valor['id_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'nombre_edificio' => mb_convert_case($valor['nombre_edificio'],MB_CASE_TITLE,"UTF-8"),
+                    'piso' => $valor['piso'],
+                    'id_espacio' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
+                    'capacidad' => $valor['capacidad'],
+                    'marca' => mb_convert_case($valor['marca'],MB_CASE_TITLE,"UTF-8"),
+                    'tipo' => mb_convert_case($valor['tipo'],MB_CASE_TITLE,"UTF-8"),
+                    'tecnologia' => mb_convert_case($valor['tecnologia'],MB_CASE_TITLE,"UTF-8"),
+                    'fecha_instalacion' => substr($valor['fecha_instalacion'],0,10),
+                    'instalador' => $valor['instalador'],
+                    'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
+                    'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
+                );
+                array_push($result, $arrayAux);
+                array_push($dataAires, $arrayAux);
+            }
+        }
+        $result['data'] = $dataAires;
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
         echo json_encode($result);
