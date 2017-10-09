@@ -83,6 +83,8 @@ $(document).ready(function () {
 			$('#option_crear_tipo_aire').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_crear_tecnologia_aire') >= 0)) {
 			$('#option_crear_tecnologia_aire').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('aires_consultar_inventario_aires') >= 0)) {
+			$('#option_consultar_inventario_aires').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_aire_ubicacion') >= 0)) {
 			$('#option_consultar_aire_ubicacion').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('aires_consultar_aire_numero_inventario') >= 0)) {
