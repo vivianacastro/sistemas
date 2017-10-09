@@ -6158,6 +6158,132 @@ $(document).ready(function() {
     });
 
     /**
+     * Se captura el evento cuando se da click en el botón visualizarAireAcondicionado y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#visualizarAireAcondicionado").click(function (e){
+        var element = $("#tabla_inventario").find(".filaSeleccionada");
+		var articulo = element.html();
+		articulo = articulo.split("</td>");
+        articulo = articulo[0];
+        var n = articulo.indexOf(">");
+		articulo = articulo.substring(n+1);
+        var informacion = {};
+        informacion['id_aire'] = articulo;
+        var data = consultarInformacionObjeto("aire_id",informacion);
+        $.each(data, function(index, record) {
+            if($.isNumeric(index)) {
+                $("#nombre_sede").val(record.nombre_sede);
+                $("#nombre_campus").val(record.nombre_campus);
+                $("#nombre_edificio").val(record.id_edificio+"-"+record.nombre_edificio);
+                var piso = record.piso;
+                if (piso == '0') {
+                    piso = 'Sótano';
+                }else if(piso == '-1'){
+                    piso = 'Terraza';
+                }
+                $("#pisos").val(piso);
+                $("#id_aire").val(record.id_aire);
+                idAire = record.id_aire;
+                $("#id_espacio").val(record.id_espacio);
+                $("#numero_inventario").val(record.numero_inventario);
+                $("#numero_inventario").attr('name',record.numero_inventario);
+                $("#capacidad_aire").val(record.capacidad);
+                $("#capacidad_aire").attr('name',record.capacidad);
+                $("#marca_aire").val(record.marca);
+                $("#marca_aire").attr('name',record.marca);
+                $("#tipo_aire").val(record.tipo);
+                $("#tipo_aire").attr('name',record.tipo);
+                $("#tipo_tecnologia_aire").val(record.tecnologia);
+                $("#tipo_tecnologia_aire").attr('name',record.tecnologia);
+                $("#fecha_instalacion").val(record.fecha_instalacion);
+                $("#fecha_instalacion").attr('name',record.fecha_instalacion);
+                $("#instalador").val(record.instalador);
+                $("#instalador").attr('name',record.instalador);
+                $("#tipo_periodicidad_mantenimiento").val(record.periodicidad_mantenimiento);
+                $("#tipo_periodicidad_mantenimiento").attr('name',record.periodicidad_mantenimiento);
+                $("#ubicacion_condensadora").val(record.ubicacion_condensadora);
+                $("#ubicacion_condensadora").attr('name',record.ubicacion_condensadora);
+            }
+        });
+        informacion['id_aire'] = idAire;
+        var archivos = consultarArchivosObjeto("aire_id",informacion);
+        $("#myCarousel").hide();
+        for (var i = 0; i < numeroFotos; i++) {
+            eliminarComponente("slide_carrusel");
+            eliminarComponente("item_carrusel");
+            eliminarComponente("foto");
+            eliminarComponente("inputFileFotos");
+        }
+        for (var i = 0; i < numeroPlanos; i++) {
+            eliminarComponente("plano");
+        }
+        numeroFotos = 0;
+        numeroPlanos = 0;
+        $.each(archivos, function(index, record) {
+            if($.isNumeric(index)) {
+                if (record.tipo == 'foto') {
+                    var componente, componente2;
+                    if (numeroFotos == 0) {
+                        componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="0" class="active"></li>';
+                        componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                    }else{
+                        componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
+                        componente2 = '<div id="item_carrusel" class="item carouselImg">'
+                        +'<img class="carouselImg" src="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'</div>';
+                    }
+                    añadirComponente("indicadores_carrusel",componente);
+                    añadirComponente("fotos_carrusel",componente2);
+                    componente = '<div id="foto">'
+                    +'<div class="col-sm-8 div_izquierda">'
+                    +'<a target="_blank" name="'+record.nombre+'" id="foto'+numeroFotos+'" href="archivos/images/aire_acondicionado/'+idAire+'/'+record.nombre+'">'
+                    +'<span>'+record.nombre+'</span></a>'
+                    +'</div><div class="col-sm-4">'
+                    +'<input type="submit" class="btn btn-primary btn-lg btn-formulario btn-eliminar-archivos" name="foto'+numeroFotos+'" id="eliminar_archivo" value="X" title="Eliminar la foto seleccionada"/>'
+                    +'</div>'
+                    +'<br></div>';
+                    añadirComponente("enlace_fotos",componente);
+                    numeroFotos++;
+                    $("#myCarousel").show();
+                }
+            }
+        });
+        var componente, componente2;
+        if (numeroFotos == 0) {
+            componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'" class="active"></li>';
+            componente2 = '<div id="item_carrusel" class="item active carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+            +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+            +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+            +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+            +'</div>'
+            +'</div>';
+        }else{
+            componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>';
+            componente2 = '<div id="item_carrusel" class="item carouselImg">'
+            +'<div class="fileUpload btn boton_agregar_foto">'
+            +'<img id="icono_foto" src="vistas/images/icono_foto.png" title="A&ntilde;adir fotos" />'
+            +'<input id="fileInputVisible" placeholder="Agregar fotos" multiple disabled="disabled" accept="image/*" multiple/>'
+            +'<input id="fileInputOculto" type="file" class="upload" accept="image/*" multiple/>'
+            +'</div>'
+            +'</div>';
+        }
+        var componenteFotos = '<div id="inputFileFotos" style="display:none" class="div_izquierda">'
+        +'<span>Agregar una foto</span><br>'
+        +'<input class="form-control formulario agregar_archivos" type="file" id="fotos[]" name="fotos[]" multiple accept="image/*">'
+        +'<br></div>';
+        añadirComponente("enlace_fotos",componenteFotos);
+        numeroFotos++;
+        añadirComponente("indicadores_carrusel",componente);
+        añadirComponente("fotos_carrusel",componente2);
+        $("#myCarousel").show();
+        $("#divDialogConsulta").modal('show');
+    });
+
+    /**
      * Se captura el evento cuando se da click en el botón visualizarArticuloNombre y se
      * realiza la operacion correspondiente.
     **/
@@ -13129,6 +13255,9 @@ $(document).ready(function() {
                 $("#sede_search").val("").change();
                 $("#numero_inventario_search").val("").change();
                 $("#divDialogConsulta").modal('hide');
+                if (URLactual['href'].indexOf('consultar_inventario_aires') >= 0 ) {
+                    $("#tabla_inventario").find(".filaSeleccionada").remove();
+                }
             }
         }
     });
@@ -13162,10 +13291,12 @@ $(document).ready(function() {
 		if ($(this).hasClass("filaSeleccionada")) {
 			$(this).removeClass("filaSeleccionada");
 			$("#visualizarArticulo").attr("disabled",true);
+            $("#visualizarAireAcondicionado").attr("disabled",true);
 		}else{
 			$("#tBody tr").removeClass("filaSeleccionada");
 	    	$(this).addClass("filaSeleccionada");
 			$("#visualizarArticulo").removeAttr("disabled");
+            $("#visualizarAireAcondicionado").removeAttr("disabled");
 		}
 	});
 

@@ -2518,14 +2518,15 @@ class modelo_consultas
     **/
     public function listarInventarioAiresAcondicionados(){
         $result = array();
-        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, f.nombre AS marca, g.tipo AS tipo, h.tipo AS tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, i.capacidad AS capacidad, f.nombre AS marca, g.tipo AS tipo, h.tipo AS tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora
                 FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
                                             JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
                                             JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
                                             JOIN sede e ON a.id_sede = e.id
                                             JOIN marca_aire f ON a.marca = f.id
                                             JOIN tipo_aire g ON a.tipo = g.id
-                                            JOIN tipo_tecnologia_aire h ON a.tecnologia = h.id;";
+                                            JOIN tipo_tecnologia_aire h ON a.tecnologia = h.id
+                                            JOIN capacidad_aire i ON a.capacidad = i.id;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Listar Inventario Aires Acondicionados 1)";

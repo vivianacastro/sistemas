@@ -309,3 +309,21 @@
 [09-Oct-2017 12:08:46 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
 [09-Oct-2017 12:11:27 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
 [09-Oct-2017 12:12:18 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:13:20 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:13:52 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:13:56 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:16:15 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:16:22 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:17:27 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:18:25 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:18:34 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 12:18:38 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:13:12 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 174
+[09-Oct-2017 15:13:14 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
+[09-Oct-2017 15:13:26 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:14:01 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:14:20 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:21:02 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:21:24 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:23:24 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[09-Oct-2017 15:30:25 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
