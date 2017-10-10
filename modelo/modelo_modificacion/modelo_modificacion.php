@@ -2841,7 +2841,18 @@ class modelo_modificacion {
         $instalador = htmlspecialchars(trim($instalador));
         $tipo_periodicidad_mantenimiento = htmlspecialchars(trim($tipo_periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
-        $campos = "numero_inventario = '".$numero_inventario."', marca = '".$marca_aire."', tipo = '".$tipo_aire."', tecnologia = '".$tipo_tecnologia_aire."', capacidad = '".$capacidad_aire."', fecha_instalacion = '".$fecha_instalacion."', instalador = '".$instalador."', ubicacion_condensadora = '".$ubicacion_condensadora."'";
+        $campos = "numero_inventario = '".$numero_inventario."', instalador = '".$instalador."', ubicacion_condensadora = '".$ubicacion_condensadora."'";
+        if (strcasecmp($capacidad_aire,'') != 0) {
+            $campos = $campos.",capacidad = '".$capacidad_aire."'";
+        }if (strcasecmp($marca_aire,'') != 0) {
+            $campos = $campos.",marca = '".$marca_aire."'";
+        }if (strcasecmp($tipo_aire,'') != 0) {
+            $campos = $campos.",tipo = '".$tipo_aire."'";
+        }if (strcasecmp($tipo_tecnologia_aire,'') != 0) {
+            $campos = $campos.",tecnologia = '".$tipo_tecnologia_aire."'";
+        }if (strcasecmp($fecha_instalacion,'') != 0) {
+            $campos = $campos.",fecha_instalacion = '".$fecha_instalacion."'";
+        }
         if (strcasecmp($tipo_periodicidad_mantenimiento,'') != 0)
             $campos = $campos.", periodicidad_mantenimiento = '".$tipo_periodicidad_mantenimiento."'";
         $sql = "UPDATE aire_acondicionado SET $campos WHERE id_aire = '".$id_aire."';";
@@ -3037,7 +3048,7 @@ class modelo_modificacion {
             return false;
         }else{
             if(!$l_stmt->execute()){
-                $GLOBALS['mensaje'] = $sql;
+                $GLOBALS['mensaje'] = "Error: SQL (Modificar Inventario 2)";
                 $GLOBALS['sql'] = $sql;
                 return false;
             }else{

@@ -1426,7 +1426,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector de espacio.
     */
-    $("#id_espacio").change(function (e) {
+    /*$("#id_espacio").change(function (e) {
         for (var i=0;i<numeroAires;i++) {
             eliminarComponente("tr_tabla_aires");
         }
@@ -1479,7 +1479,7 @@ $(document).ready(function() {
                 $("#id_aire_search").val("").change();
             }
         }
-    });
+    });*/
 
     /**
      * Se captura el evento cuando se modifica el valor del selector de aire acondicionado.
@@ -4439,18 +4439,6 @@ $(document).ready(function() {
                 }else if(!validarCadena(espacio)){
                     alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
                     $("#id_espacio").focus();
-                }else if(!validarCadena(marca)){
-                    alert("ERROR. Seleccione la marca del aire acondicionado");
-                    $("#marca_aire").focus();
-                }else if(!validarCadena(tipo)){
-                    alert("ERROR. Seleccione el tipo del aire acondicionado");
-                    $("#tipo_aire").focus();
-                }else if(!validarCadena(tecnologia)){
-                    alert("ERROR. Seleccione la tecnolodía del aire acondicionado");
-                    $("#tipo_tecnologia_aire").focus();
-                }else if(!validarCadena(capacidad)){
-                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
-                    $("#capacidad_aire").focus();
                 }if(!validarFechaMenorActual(fechaInstalacion)){
                     alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
                     $("#fecha_instalacion").focus();

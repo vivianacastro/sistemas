@@ -7,6 +7,7 @@ $(document).ready(function() {
     var infoWindowActiva;
     var coordsMapaModificacion;
     var coordenadas = {};
+    var tabla;
     var fotosEliminar = [], planosEliminar = [], tipoIluminacionEliminar = [], tipoSuministroEnergiaEliminar = [], tomacorrienteEliminar = [], tipoPuertaEliminar = [], materialPuertaEliminar = [], tipoCerraduraEliminar = [], materialMarcoPuertaEliminar = [], tipoVentanaEliminar = [], materialVentanaEliminar = [], tipoInterruptorEliminar = [], tipoPuntoSanitarioEliminar = [], tipoOrinalEliminar = [], tipoLavamanosEliminar = [], nombreProveedor = [];
 
     /**
@@ -1177,7 +1178,7 @@ $(document).ready(function() {
     function llenarTablaInventarioElectrico(){
         var data = listarInventarioElectrico();
         var dataTabla = data.data;
-        $('#tabla_inventario').DataTable( {
+        var tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -1206,7 +1207,7 @@ $(document).ready(function() {
     function llenarTablaInventarioHidraulico(){
         var data = listarInventarioHidraulico();
         var dataTabla = data.data;
-        $('#tabla_inventario').DataTable( {
+        var tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -1234,9 +1235,8 @@ $(document).ready(function() {
     **/
     function llenarTablaInventarioAiresAcondicionados(){
         var data = listarInventarioAiresAcondicionados();
-        console.log(data);
         var dataTabla = data.data;
-        $('#tabla_inventario').DataTable( {
+        var tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -12367,19 +12367,7 @@ $(document).ready(function() {
                         arregloFotos.append('archivo'+i,foto,nombreArchivo);
                     }
                 }
-                if (!validarCadena(marcaAire)) {
-                    alert("ERROR. Seleccione la marca del aire acondicionado");
-                    $("#marca_aire").focus();
-                }else if (!validarCadena(tipoAire)) {
-                    alert("ERROR. Seleccione el tipo del aire acondicionado");
-                    $("#tipo_aire").focus();
-                }else if (!validarCadena(tecnologiaAire)) {
-                    alert("ERROR. Seleccione la tecnología del aire acondicionado");
-                    $("#tipo_tecnologia_aire").focus();
-                }else if (!validarCadena(capacidadAire)) {
-                    alert("ERROR. Seleccione la capacidad del aire acondicionado");
-                    $("#capacidad_aire").focus();
-                }else if(!validarFechaMenorActual(fechaInstalacion)){
+                if(!validarFechaMenorActual(fechaInstalacion)){
                     alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
                     $("#fecha_instalacion").focus();
                 }else{
@@ -12429,10 +12417,14 @@ $(document).ready(function() {
                             alert(mensaje);
                         }else{
                             alert(data.mensaje);
-                            if(data.verificar){
-                                $("#sede_search").val("").change();
-                                $("#divDialogConsulta").modal('hide');
-                                fotos.value = "";
+                            if(data.verificar){                                
+                                if(URLactual['href'].indexOf('consultar_inventario_aires') >= 0){
+                                    location.reload();
+                                }else{
+                                    $("#sede_search").val("").change();
+                                    $("#divDialogConsulta").modal('hide');
+                                    fotos.value = "";
+                                }
                             }
                         }
                     }else{
@@ -12672,12 +12664,7 @@ $(document).ready(function() {
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
-                    if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
-                        llenarTablaInventarioElectrico();
-                    }else{
-                        llenarTablaInventarioHidraulico();
-                    }
-                    $("#nombre_articulo").val("");
+                    /*$("#nombre_articulo").val("");
                     $("#cantidad").val("");
                     while(anadirArticulosCont > 0){
                         eliminarComponente("articulo"+anadirArticulosCont);
@@ -12685,7 +12672,8 @@ $(document).ready(function() {
                     }
                     $("#eliminar_articulo").attr('disabled',true);
                     $("#visualizarArticulo").attr('disabled',true);
-                    $("#divDialogModificarArticulo").modal('hide');
+                    $("#divDialogModificarArticulo").modal('hide');*/
+                    location.reload();
                 }
             }
         }
@@ -12797,38 +12785,39 @@ $(document).ready(function() {
                                 $("#divDialogConsulta").modal('hide');
                                 fotos.value = "";
                                 if(URLactual['href'].indexOf('consultar_inventario') >= 0){
-                                    var element = $("#tabla_inventario").find(".filaSeleccionada");
+                                    /*var element = $("#tabla_inventario").find(".filaSeleccionada");
                                     var articulo = element.html();
                                     articulo = articulo.split("</td>");
                                     articulo = articulo[0].substring(4);
-                                }
-                                var informacion = {};
-                        		informacion["id_articulo"] = articulo;
-                                var data = consultarInformacionObjeto("articulo",informacion);
-                                var dataArticuloInventario = consultarArticuloInventario(informacion);
-                                var id_articulo, nombre, marca, categoria, bodega, cantidad_minima, cantidad;
-                                $.each(data, function(index, record) {
-                                    if($.isNumeric(index)) {
-                                        id_articulo = record.id_articulo;
-                        				nombre = record.nombre
-                                        marca = record.nombre_marca;
-                                        categoria = record.nombre_categoria;
-                                        bodega = record.bodega;
-                                        cantidad_minima = record.cantidad_minima;
-                                    }
-                                });
-                                $.each(dataArticuloInventario, function(index, record) {
-                                    if($.isNumeric(index)) {
-                                        cantidad = record.cantidad;
-                                    }
-                                });
-                                if(((URLactual['href'].indexOf('consultar_inventario_electrico') >= 0) && (bodega == "electrica")) || ((URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0) && (bodega == "hidraulica"))){
-                                    if (cantidad <= cantidad_minima) {
-                                        $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
-                                    }else{
-                                        $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
-                                    }
-                                    element.remove();
+                                    var informacion = {};
+                            		informacion["id_articulo"] = articulo;
+                                    var data = consultarInformacionObjeto("articulo",informacion);
+                                    var dataArticuloInventario = consultarArticuloInventario(informacion);
+                                    var id_articulo, nombre, marca, categoria, bodega, cantidad_minima, cantidad;
+                                    $.each(data, function(index, record) {
+                                        if($.isNumeric(index)) {
+                                            id_articulo = record.id_articulo;
+                            				nombre = record.nombre
+                                            marca = record.nombre_marca;
+                                            categoria = record.nombre_categoria;
+                                            bodega = record.bodega;
+                                            cantidad_minima = record.cantidad_minima;
+                                        }
+                                    });
+                                    $.each(dataArticuloInventario, function(index, record) {
+                                        if($.isNumeric(index)) {
+                                            cantidad = record.cantidad;
+                                        }
+                                    });
+                                    if(((URLactual['href'].indexOf('consultar_inventario_electrico') >= 0) && (bodega == "electrica")) || ((URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0) && (bodega == "hidraulica"))){
+                                        if (cantidad <= cantidad_minima) {
+                                            $("#tabla_inventario").append("<tr class='filaPocosArticulos' id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                        }else{
+                                            $("#tabla_inventario").append("<tr id='tr_tabla_inventario'><td>"+id_articulo+"</td><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+cantidad_minima+"</td></tr>");
+                                        }
+                                        element.remove();
+                                    }*/
+                                    location.reload();
                                 }
                             }
                         }
@@ -13252,12 +13241,14 @@ $(document).ready(function() {
             var data = eliminarObjeto("aire",informacion);
             alert(data.mensaje);
             if (data.verificar) {
-                $("#sede_search").val("").change();
+                /*$("#sede_search").val("").change();
                 $("#numero_inventario_search").val("").change();
                 $("#divDialogConsulta").modal('hide');
                 if (URLactual['href'].indexOf('consultar_inventario_aires') >= 0 ) {
                     $("#tabla_inventario").find(".filaSeleccionada").remove();
-                }
+                    tabla.draw();
+                }*/
+                location.reload();
             }
         }
     });
