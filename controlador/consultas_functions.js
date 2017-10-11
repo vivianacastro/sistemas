@@ -1647,6 +1647,9 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
+                if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+                    $("#espacio_search").attr('disabled',true);
+                }
                 $("#id_aire_search").empty();
                 $("#id_aire_search").val("");
                 $('#visualizarCampus').attr('disabled',true);
@@ -1738,6 +1741,9 @@ $(document).ready(function() {
                     $("#pisos_search").val("");
                     $("#espacio_search").empty();
                     $("#espacio_search").val("");
+                    if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+                        $("#espacio_search").attr('disabled',true);
+                    }
                     $("#id_aire_search").empty();
                     $("#id_aire_search").val("");
                     $('#visualizarAire').attr('disabled',true);
@@ -2316,6 +2322,9 @@ $(document).ready(function() {
                 $("#pisos_search").val("");
                 $("#espacio_search").empty();
                 $("#espacio_search").val("");
+                if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+                    $("#espacio_search").attr('disabled',true);
+                }
                 $("#id_aire_search").val("");
                 $("#id_aire_search").empty();
                 var campus = $("#campus_search").val();
@@ -2460,7 +2469,13 @@ $(document).ready(function() {
      * y se actualiza el selector de pisos.
     **/
     $("#pisos_search").change(function (e) {
-        if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
+        if (URLactual['href'].indexOf('consultar_aire_ubicacion') >= 0) {
+            if (validarCadena($("#pisos_search").val())) {
+                $("#espacio_search").removeAttr("disabled");
+            }else{
+                $("#espacio_search").attr('disabled',true);
+            }
+        }else if (URLactual['href'].indexOf('consultar_cubierta') >= 0 || URLactual['href'].indexOf('consultar_gradas') >= 0) {
             for (var i = 0; i < marcadores.length; i++) {
                 if (marcadores[i].id == $("#edificio_search").val()) {
                     mapaConsulta.setCenter(marcadores[i].getPosition());
@@ -12417,7 +12432,7 @@ $(document).ready(function() {
                             alert(mensaje);
                         }else{
                             alert(data.mensaje);
-                            if(data.verificar){                                
+                            if(data.verificar){
                                 if(URLactual['href'].indexOf('consultar_inventario_aires') >= 0){
                                     location.reload();
                                 }else{

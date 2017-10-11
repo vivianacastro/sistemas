@@ -1204,11 +1204,16 @@ $(document).ready(function() {
         $("#div_espacio_padre").hide();
         var sede = {};
         sede["nombre_sede"] = limpiarCadena($("#nombre_sede").val());
-        var data = buscarCampus(sede);
         $("#nombre_campus").empty();
-        var row = $("<option value=''/>");
-        row.text("--Seleccionar--");
-        row.appendTo("#nombre_campus");
+        $("#nombre_campus").val("");
+        if ($("#nombre_sede").val()) {
+            var data = buscarCampus(sede);
+            var row = $("<option value=''/>");
+            row.text("--Seleccionar--");
+            row.appendTo("#nombre_campus");
+        }else{
+            var data = {};
+        }
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre_campus;
@@ -1223,6 +1228,9 @@ $(document).ready(function() {
         $("#pisos").val("");
         $("#id_espacio").empty();
         $("#id_espacio").val("");
+        if (URLactual['href'].indexOf('crear_aire') >= 0) {
+            $("#id_espacio").attr('disabled',true);
+        }
         $("#id_aire_search").empty();
         $("#id_aire_search").val("").change();
     });
@@ -1277,6 +1285,9 @@ $(document).ready(function() {
         $("#pisos").val("");
         $("#id_espacio").empty();
         $("#id_espacio").val("");
+        if (URLactual['href'].indexOf('crear_aire') >= 0) {
+            $("#id_espacio").attr('disabled',true);
+        }
         $("#id_aire_search").empty();
         $("#id_aire_search").val("").change();
     });
@@ -1363,6 +1374,9 @@ $(document).ready(function() {
         }
         $("#id_espacio").empty();
         $("#id_espacio").val("");
+        if (URLactual['href'].indexOf('crear_aire') >= 0) {
+            $("#id_espacio").attr('disabled',true);
+        }
         $("#id_aire_search").empty();
         $("#id_aire_search").val("").change();
     });
@@ -1371,56 +1385,64 @@ $(document).ready(function() {
      * Se captura el evento cuando se modifica el valor del selector de pisos.
     */
     $("#pisos").change(function (e) {
-        $("#divTieneEspacioPadre").hide();
-        $('input[name=tiene_espacio_padre]').attr('checked',false);
-        $("#div_espacio_padre").hide();
-        var nombreSede = $("#nombre_sede").val();
-        var nombreCampus = $("#nombre_campus").val();
-        var nombreEdificio = $("#nombre_edificio").val();
-        var piso = $("#pisos").val();
-        if (validarCadena(nombreSede) && validarCadena(nombreCampus) && validarCadena(nombreEdificio) && validarCadena(piso)) {
-            var informacion = {};
-            informacion["nombre_sede"] = nombreSede;
-            informacion["nombre_campus"] = nombreCampus;
-            informacion["nombre_edificio"] = nombreEdificio;
-            informacion["piso"] = piso;
-            var data = buscarEspacios(informacion);
-            if(URLactual['href'].indexOf('crear_aire') >= 0 || URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
-                $("#id_espacio").empty();
-                var row = $("<option value=''/>");
-                row.text("--Seleccionar--");
-                row.appendTo("#id_espacio");
-                $.each(data, function(index, record) {
-                    if($.isNumeric(index)) {
-                        aux = record.id;
-                        row = $("<option value='" + record.id + "'/>");
-                        row.text(aux);
-                        row.appendTo("#id_espacio");
-                    }
-                });
+        if(URLactual['href'].indexOf('crear_aire') >= 0){
+            if (validarCadena($("#pisos").val())) {
+                $("#id_espacio").removeAttr("disabled");
             }else{
-                if (data.mensaje != null) {
-                    $("#espacio_padre").empty();
+                $("#id_espacio").attr('disabled',true);
+            }
+        }else{
+            $("#divTieneEspacioPadre").hide();
+            $('input[name=tiene_espacio_padre]').attr('checked',false);
+            $("#div_espacio_padre").hide();
+            var nombreSede = $("#nombre_sede").val();
+            var nombreCampus = $("#nombre_campus").val();
+            var nombreEdificio = $("#nombre_edificio").val();
+            var piso = $("#pisos").val();
+            if (validarCadena(nombreSede) && validarCadena(nombreCampus) && validarCadena(nombreEdificio) && validarCadena(piso)) {
+                var informacion = {};
+                informacion["nombre_sede"] = nombreSede;
+                informacion["nombre_campus"] = nombreCampus;
+                informacion["nombre_edificio"] = nombreEdificio;
+                informacion["piso"] = piso;
+                var data = buscarEspacios(informacion);
+                if(URLactual['href'].indexOf('crear_aire') >= 0 || URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
+                    $("#id_espacio").empty();
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
-                    row.appendTo("#espacio_padre");
+                    row.appendTo("#id_espacio");
                     $.each(data, function(index, record) {
                         if($.isNumeric(index)) {
                             aux = record.id;
                             row = $("<option value='" + record.id + "'/>");
                             row.text(aux);
-                            row.appendTo("#espacio_padre");
+                            row.appendTo("#id_espacio");
                         }
                     });
-                    $("#divTieneEspacioPadre").show();
                 }else{
-                    $("#divTieneEspacioPadre").hide();
+                    if (data.mensaje != null) {
+                        $("#espacio_padre").empty();
+                        var row = $("<option value=''/>");
+                        row.text("--Seleccionar--");
+                        row.appendTo("#espacio_padre");
+                        $.each(data, function(index, record) {
+                            if($.isNumeric(index)) {
+                                aux = record.id;
+                                row = $("<option value='" + record.id + "'/>");
+                                row.text(aux);
+                                row.appendTo("#espacio_padre");
+                            }
+                        });
+                        $("#divTieneEspacioPadre").show();
+                    }else{
+                        $("#divTieneEspacioPadre").hide();
+                    }
                 }
             }
+            $("#id_espacio").val("");
+            $("#id_aire_search").empty();
+            $("#id_aire_search").val("").change();
         }
-        $("#id_espacio").val("");
-        $("#id_aire_search").empty();
-        $("#id_aire_search").val("").change();
     });
 
     /**
@@ -4437,7 +4459,7 @@ $(document).ready(function() {
                     alert("ERROR. Seleccione el edificio donde está el aire acondicionado");
                     $("#nombre_edificio").focus();
                 }else if(!validarCadena(espacio)){
-                    alert("ERROR. Seleccione el espacio donde está el aire acondicionado");
+                    alert("ERROR. Ingrese el espacio donde está el aire acondicionado");
                     $("#id_espacio").focus();
                 }if(!validarFechaMenorActual(fechaInstalacion)){
                     alert("ERROR. La fecha de instalación del aire acondicionado es mayor a la fecha actual");
