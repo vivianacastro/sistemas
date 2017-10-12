@@ -33,7 +33,7 @@ class modelo_creacion {
     **/
     public function guardarSede($nombre_sede){
         $nombre_sede = htmlspecialchars(trim($nombre_sede));
-        $sql = "INSERT INTO sede (nombre,usuario_crea) VALUES ('".$nombre_sede."','".$_SESSION["login"]."');";
+        $sql = "INSERT INTO sede (nombre,usuario_crea) VALUES ('".$nombre_sede."','".$_SESSION["user_login"]."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Sede 1)";
@@ -62,7 +62,7 @@ class modelo_creacion {
         $nombre_campus = htmlspecialchars(trim($nombre_campus));
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
-        $sql = "INSERT INTO campus (sede,nombre,lat,lng,usuario_crea) VALUES ('".$nombre_sede."','".$nombre_campus."','".$lat."','".$lng."','".$_SESSION["login"]."');";
+        $sql = "INSERT INTO campus (sede,nombre,lat,lng,usuario_crea) VALUES ('".$nombre_sede."','".$nombre_campus."','".$lat."','".$lng."','".$_SESSION["user_login"]."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Campus 1)";
@@ -110,9 +110,9 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         if (strcasecmp($material_fachada,'') != 0){
-            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,id_material_fachada,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$material_fachada."','".$ancho_fachada."','".$alto_fachada."');";
+            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,id_material_fachada,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["user_login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$material_fachada."','".$ancho_fachada."','".$alto_fachada."');";
         }else{
-            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$ancho_fachada."','".$alto_fachada."');";
+            $sql = "INSERT INTO edificio (id,nombre,id_campus,numero_pisos,usuario_crea,sotano,terraza,id_sede,lat,lng,ancho_fachada,alto_fachada) VALUES ('".$id_edificio."','".$nombre_edificio."','".$nombre_campus."','".$numero_pisos."','".$_SESSION["user_login"]."','".$sotano."','".$terraza."','".$nombre_sede."','".$lat."','".$lng."','".$ancho_fachada."','".$alto_fachada."');";
         }
 
         $l_stmt = $this->conexion->prepare($sql);
@@ -651,7 +651,7 @@ class modelo_creacion {
         $material_piso = htmlspecialchars(trim($material_piso));
         $numero_espacio_padre = htmlspecialchars(trim($numero_espacio_padre));
         $campos = "id,uso_espacio,id_edificio,id_campus,usuario_crea,piso_edificio,id_sede";
-        $valores = "'".$numero_espacio."','".$uso_espacio."','".$nombre_edificio."','".$nombre_campus."','".$_SESSION["login"]."','".$piso."','".$nombre_sede."'";
+        $valores = "'".$numero_espacio."','".$uso_espacio."','".$nombre_edificio."','".$nombre_campus."','".$_SESSION["user_login"]."','".$piso."','".$nombre_sede."'";
         if (strcasecmp($material_pared,'') != 0) {
             $campos = $campos.",ancho_pared,alto_pared,id_material_pared";
             $valores = $valores.",'".$ancho_pared."','".$alto_pared."','".$material_pared."'";
@@ -3054,7 +3054,7 @@ class modelo_creacion {
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
         $responsable = htmlspecialchars(trim($responsable));
         $campos = "numero_inventario,id_sede,id_campus,id_edificio,piso,id_espacio,instalador,ubicacion_condensadora,responsable,usuario_crea";
-        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$piso."','".$espacio."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["login"]."'";
+        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$piso."','".$espacio."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["user_login"]."'";
         if (strcasecmp($capacidad,'') != 0) {
             $campos = $campos.",capacidad" ;
             $valores = $valores.",'".$capacidad."'";
@@ -3205,7 +3205,7 @@ class modelo_creacion {
         $realizado = htmlspecialchars(trim($realizado));
         $revisado = htmlspecialchars(trim($revisado));
         $descripcion = htmlspecialchars(trim($descripcion));
-        $sql = "INSERT INTO mantenimiento_aire (id_aire,numero_orden,fecha,realizado,revisado,descripcion,usuario_crea) VALUES ('".$id_aire."','".$numero_orden."','".$fecha_realizacion."','".$realizado."','".$revisado."','".$descripcion."','".$_SESSION["login"]."');";
+        $sql = "INSERT INTO mantenimiento_aire (id_aire,numero_orden,fecha,realizado,revisado,descripcion,usuario_crea) VALUES ('".$id_aire."','".$numero_orden."','".$fecha_realizacion."','".$realizado."','".$revisado."','".$descripcion."','".$_SESSION["user_login"]."');";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Guardar Mantenimiento Aire Aire 1)";
@@ -3326,7 +3326,7 @@ class modelo_creacion {
         $bodega = htmlspecialchars(trim($bodega));
         $cantidad_minima = htmlspecialchars(trim($cantidad_minima));
         $campos = "nombre,bodega,cantidad_minima,usuario_crea";
-        $valores = "'".$nombre."','".$bodega."','".$cantidad_minima."','".$_SESSION["login"]."'";
+        $valores = "'".$nombre."','".$bodega."','".$cantidad_minima."','".$_SESSION["user_login"]."'";
         if (strcmp($categoria,"")!=0) {
             $campos .= ",id_categoria_articulo";
             $valores .= ",'".$categoria."'";

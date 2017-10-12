@@ -4252,6 +4252,7 @@ class controlador_consultas{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
+            $dataResult = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"electrica");
             while (list($clave, $valor) = each($data)){
@@ -4266,8 +4267,10 @@ class controlador_consultas{
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
+                array_push($dataResult, $arrayAux);
             }
         }
+        $result['data'] = $dataResult;
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
         echo json_encode($result);
@@ -4283,12 +4286,14 @@ class controlador_consultas{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
+            $dataResult = array();
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"hidraulica");
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
                     'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
+                    'cantidad' => $valor['valor_nuevo'] - $valor['valor_antiguo'],
                     'valor_nuevo' => $valor['valor_nuevo'],
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
@@ -4297,8 +4302,10 @@ class controlador_consultas{
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
+                array_push($dataResult, $arrayAux);
             }
         }
+        $result['data'] = $dataResult;
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];
         echo json_encode($result);

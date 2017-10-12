@@ -124,8 +124,8 @@ class controlador_usuario {
                 }
                 $_SESSION["autorizado"] = true;
                 session_regenerate_id();
-                $_SESSION["userid"] = session_id();
-                $_SESSION["login"] = $infoResult["login"];
+                $_SESSION["userID"] = session_id();
+                $_SESSION["user_login"] = $infoResult["login"];
                 $_SESSION["perfil_sistemas"] = $infoResult["perfil"];
                 $_SESSION["correo_sistemas"] = $infoResult["correo"];
                 $_SESSION["telefono_sistemas"] = $infoResult["telefono"];
@@ -142,7 +142,7 @@ class controlador_usuario {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
-                $m->actualizarUltimoAcceso($_SESSION["login"]);
+                $m->actualizarUltimoAcceso($_SESSION["user_login"]);
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
             }else{
                 $data = array(
@@ -152,7 +152,7 @@ class controlador_usuario {
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
             }
         }else{
-            if(isset($_SESSION['userid']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil']) && isset($_SESSION["modulo_planta"])) {
+            if(isset($_SESSION['userID']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil']) && isset($_SESSION["modulo_planta"])) {
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
@@ -379,13 +379,13 @@ class controlador_usuario {
         $GLOBALS['mensaje'] = "";
         $result = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $result['login'] = $_SESSION["login"];
+            $result['login'] = $_SESSION["user_login"];
             $result['nombre_usuario'] = $_SESSION["nombre_usuario_sistemas"];
             $result['telefono'] = $_SESSION["telefono_sistemas"];
             $result['extension'] = $_SESSION["extension_sistemas"];
             $result['correo'] = $_SESSION["correo_sistemas"];
             /*$arrayAux = array(
-                'login' => $_SESSION["login"],
+                'login' => $_SESSION["user_login"],
                 'nombre_usuario' => $_SESSION["nombre_usuario"],
                 'telefono' => $_SESSION["telefono"],
                 'extension' => $_SESSION["extension"],
@@ -435,7 +435,7 @@ class controlador_usuario {
     **/
     public function check() {
         session_start();
-        if(isset($_SESSION['userid'])) {
+        if(isset($_SESSION['userID'])) {
             $fechaGuardada = $_SESSION["ultimoAcceso"];
             $ahora = time();
             $tiempo_transcurrido = $ahora-$fechaGuardada;

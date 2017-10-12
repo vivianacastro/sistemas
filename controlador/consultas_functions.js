@@ -1178,7 +1178,7 @@ $(document).ready(function() {
     function llenarTablaInventarioElectrico(){
         var data = listarInventarioElectrico();
         var dataTabla = data.data;
-        var tabla = $('#tabla_inventario').DataTable( {
+        tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -1207,7 +1207,7 @@ $(document).ready(function() {
     function llenarTablaInventarioHidraulico(){
         var data = listarInventarioHidraulico();
         var dataTabla = data.data;
-        var tabla = $('#tabla_inventario').DataTable( {
+        tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -1236,7 +1236,7 @@ $(document).ready(function() {
     function llenarTablaInventarioAiresAcondicionados(){
         var data = listarInventarioAiresAcondicionados();
         var dataTabla = data.data;
-        var tabla = $('#tabla_inventario').DataTable( {
+        tabla = $('#tabla_inventario').DataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
             },
@@ -13317,28 +13317,42 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#consultarMovimientosInventarioElectrico").click(function (e){
-		for (var i=0;i<articulosCont;i++) {
+		/*for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
-        articulosCont = 0;
+        articulosCont = 0;*/
         var fechaInicio = $("#fecha_inicio").val();
         var fechaFin = $("#fecha_fin").val();
         var informacion = {};
         informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
         informacion["fecha_fin"] = fechaFin + " 23:59:59";
         var data = listarMovimientosInventarioElectrico(informacion);
-        $.each(data, function(index, record) {
-            if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
-				var marca = record.nombre_marca;
-                var categoria = record.nombre_categoria;
-				var fecha = record.fecha;
-                var usuario = record.usuario;
-                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
-				articulosCont++;
-            }
-        });
+        var dataTabla = data.data;
+        if (tabla == undefined) {
+            tabla = $('#tabla_movimientos_inventario').DataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                data: dataTabla,
+                columns: [
+                    { data: "nombre_articulo" },
+                    { data: "cantidad" },
+                    { data: "nombre_marca" },
+                    { data: "nombre_categoria" },
+                    { data: "fecha" },
+                    { data: "usuario" }
+                ]
+            } );
+        }else{
+            tabla.clear();
+            tabla.rows.add(dataTabla);
+            tabla.draw();
+        }
 		$("#divDialogConsulta").modal("show");
     });
 
@@ -13347,28 +13361,38 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#consultarMovimientosInventarioHidraulico").click(function (e){
-		for (var i=0;i<articulosCont;i++) {
-            eliminarComponente("tr_tabla_inventario");
-        }
-        articulosCont = 0;
         var fechaInicio = $("#fecha_inicio").val();
         var fechaFin = $("#fecha_fin").val();
         var informacion = {};
         informacion["fecha_inicio"] = fechaInicio + " 00:00:00";
         informacion["fecha_fin"] = fechaFin + " 23:59:59";
         var data = listarMovimientosInventarioHidraulico(informacion);
-        $.each(data, function(index, record) {
-            if($.isNumeric(index) && !isNaN(record.valor_nuevo) && !isNaN(record.valor_antiguo)) {
-				var nombre = record.nombre_articulo;
-				var cantidad = parseInt(record.valor_nuevo) - parseInt(record.valor_antiguo);
-				var marca = record.nombre_marca;
-                var categoria = record.nombre_categoria;
-				var fecha = record.fecha;
-                var usuario = record.usuario;
-                $("#tabla_movimientos_inventario").append("<tr id='tr_tabla_inventario'><td>"+nombre+"</td><td>"+cantidad+"</td><td>"+marca+"</td><td>"+categoria+"</td><td>"+fecha+"</td><td>"+usuario+"</td></tr>");
-				articulosCont++;
-            }
-        });
+        var dataTabla = data.data;
+        if (tabla == undefined) {
+            tabla = $('#tabla_movimientos_inventario').DataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                data: dataTabla,
+                columns: [
+                    { data: "nombre_articulo" },
+                    { data: "cantidad" },
+                    { data: "nombre_marca" },
+                    { data: "nombre_categoria" },
+                    { data: "fecha" },
+                    { data: "usuario" }
+                ]
+            } );
+        }else{
+            tabla.clear();
+            tabla.rows.add(dataTabla);
+            tabla.draw();
+        }
 		$("#divDialogConsulta").modal("show");
     });
 });

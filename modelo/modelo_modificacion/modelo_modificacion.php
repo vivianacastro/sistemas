@@ -3327,7 +3327,7 @@ class modelo_modificacion {
         $valor_anterior = htmlspecialchars(trim($valor_anterior));
         $valor_nuevo = htmlspecialchars(trim($valor_nuevo));
         if (strcasecmp($valor_anterior,$valor_nuevo) != 0) {
-            $sql = "INSERT INTO modificaciones (tabla_modificacion,id_objeto,columna_modificada,valor_antiguo,valor_nuevo,usuario) VALUES ('".$bd."','".$id_objeto."','".$columna."','".$valor_anterior."','".$valor_nuevo."','".$_SESSION["login"]."');";
+            $sql = "INSERT INTO modificaciones (tabla_modificacion,id_objeto,columna_modificada,valor_antiguo,valor_nuevo,usuario) VALUES ('".$bd."','".$id_objeto."','".$columna."','".$valor_anterior."','".$valor_nuevo."','".$_SESSION["user_login"]."');";
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
                 $GLOBALS['mensaje'] = "Error: SQL (Registrar Modificación 1)";
