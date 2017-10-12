@@ -3087,7 +3087,7 @@ class modelo_creacion {
                 return false;
             }else{
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['mensaje'] = "El aire acondicionado se ha guardado correctamente en el sistema.";
+                $GLOBALS['mensaje'] = $sql;
                 return $result;
             }
         }

@@ -4484,6 +4484,7 @@ $(document).ready(function() {
                     informacion["ubicacion_condensadora"] = ubicacionCondensadora;
                     informacion["responsable"] = responsable;
                     var data = guardarObjeto("aire_acondicionado",informacion);
+                    console.log(data);
                     var id_aire = "";
                     $.each(data.verificar, function(index, record) {
                         if($.isNumeric(index)) {
