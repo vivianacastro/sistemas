@@ -310,7 +310,7 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarAire($info['id_aire'],$info['numero_inventario'],$info['marca_aire'],$info['tipo_aire'],$info['tipo_tecnologia_aire'],$info['capacidad_aire'],$info['fecha_instalacion'],$info['instalador'],$info['tipo_periodicidad_mantenimiento'],$info['ubicacion_condensadora']);
+            $verificar = $m->modificarAire($info['id_aire'],$info['numero_inventario'],$info['marca_aire'],$info['tipo_aire'],$info['tipo_tecnologia_aire'],$info['capacidad_aire'],$info['fecha_instalacion'],$info['instalador'],$info['tipo_periodicidad_mantenimiento'],$info['ubicacion_condensadora'],$info['responsable']);
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

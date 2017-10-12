@@ -2828,9 +2828,10 @@ class modelo_modificacion {
      * @param string $instalador, instalador del aire.
      * @param string $tipo_periodicidad_mantenimiento, periodicidad de mantenimiento del aire.
      * @param string $ubicacion_condensadora, ubicación de la unidad condensadora del aire.
+     * @param string $responsable, persona responsable del aire.
      * @return array
     **/
-    public function modificarAire($id_aire,$numero_inventario,$marca_aire,$tipo_aire,$tipo_tecnologia_aire,$capacidad_aire,$fecha_instalacion,$instalador,$tipo_periodicidad_mantenimiento,$ubicacion_condensadora){
+    public function modificarAire($id_aire,$numero_inventario,$marca_aire,$tipo_aire,$tipo_tecnologia_aire,$capacidad_aire,$fecha_instalacion,$instalador,$tipo_periodicidad_mantenimiento,$ubicacion_condensadora,$responsable){
         $id_aire = htmlspecialchars(trim($id_aire));
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $marca_aire = htmlspecialchars(trim($marca_aire));
@@ -2841,7 +2842,8 @@ class modelo_modificacion {
         $instalador = htmlspecialchars(trim($instalador));
         $tipo_periodicidad_mantenimiento = htmlspecialchars(trim($tipo_periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
-        $campos = "numero_inventario = '".$numero_inventario."', instalador = '".$instalador."', ubicacion_condensadora = '".$ubicacion_condensadora."'";
+        $responsable = htmlspecialchars(trim($responsable));
+        $campos = "numero_inventario = '".$numero_inventario."', instalador = '".$instalador."', ubicacion_condensadora = '".$ubicacion_condensadora."', responsable = '".$responsable."'";
         if (strcasecmp($capacidad_aire,'') != 0) {
             $campos = $campos.",capacidad = '".$capacidad_aire."'";
         }if (strcasecmp($marca_aire,'') != 0) {
@@ -2867,6 +2869,7 @@ class modelo_modificacion {
             $instalador_anterior = $valor['instalador'];
             $tipo_periodicidad_mantenimiento_anterior = $valor['periodicidad_mantenimiento'];
             $ubicacion_condensadora_anterior = $valor['ubicacion_condensadora'];
+            $responsable_anterior = $valor['responsable'];
         }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

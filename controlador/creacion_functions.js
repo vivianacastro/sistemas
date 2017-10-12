@@ -4435,6 +4435,7 @@ $(document).ready(function() {
             var instalador = limpiarCadena($("#instalador").val());
             var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
             var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
+            var responsable = limpiarCadena($("#responsable").val());
             var fotos = document.getElementById("fotos[]");
             if (fotos.files.length <= 20) {
                 var arregloFotos = new FormData();
@@ -4479,6 +4480,7 @@ $(document).ready(function() {
                     informacion["instalador"] = instalador;
                     informacion["periodicidad_mantenimiento"] = periodicidadMantenimiento;
                     informacion["ubicacion_condensadora"] = ubicacionCondensadora;
+                    informacion["responsable"] = responsable;
                     var data = guardarObjeto("aire_acondicionado",informacion);
                     var id_aire = "";
                     $.each(data.verificar, function(index, record) {
@@ -4524,6 +4526,7 @@ $(document).ready(function() {
                         $("#instalador").val("");
                         $("#tipo_periodicidad_mantenimiento").val("");
                         $("#ubicacion_condensadora").val("");
+                        $("#responsable").val("");
                         fotos.value = "";
                         window.scrollTo(0,0);
                     }else{

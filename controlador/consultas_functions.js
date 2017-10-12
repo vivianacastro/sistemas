@@ -5519,6 +5519,8 @@ $(document).ready(function() {
                     $("#tipo_periodicidad_mantenimiento").attr('name',record.periodicidad_mantenimiento);
                     $("#ubicacion_condensadora").val(record.ubicacion_condensadora);
                     $("#ubicacion_condensadora").attr('name',record.ubicacion_condensadora);
+                    $("#responsable").val(record.responsable);
+                    $("#responsable").attr('name',record.responsable);
                     registros++;
                 }
             });
@@ -6219,6 +6221,8 @@ $(document).ready(function() {
                 $("#tipo_periodicidad_mantenimiento").attr('name',record.periodicidad_mantenimiento);
                 $("#ubicacion_condensadora").val(record.ubicacion_condensadora);
                 $("#ubicacion_condensadora").attr('name',record.ubicacion_condensadora);
+                $("#responsable").val(record.responsable);
+                $("#responsable").attr('name',record.responsable);
             }
         });
         informacion['id_aire'] = idAire;
@@ -12366,6 +12370,7 @@ $(document).ready(function() {
             var instalador = limpiarCadena($("#instalador").val());
             var periodicidadMantenimiento = $("#tipo_periodicidad_mantenimiento").val();
             var ubicacionCondensadora = limpiarCadena($("#ubicacion_condensadora").val());
+            var responsable = limpiarCadena($("#responsable").val());
             var fotos = document.getElementById("fotos[]");
             var aux = (numeroFotos-1) + fotos.files.length;
             if (aux <= 20) {
@@ -12408,6 +12413,7 @@ $(document).ready(function() {
                         informacion['instalador'] = instalador;
                         informacion['tipo_periodicidad_mantenimiento'] = periodicidadMantenimiento;
                         informacion['ubicacion_condensadora'] = ubicacionCondensadora;
+                        informacion['responsable'] = responsable;
                         var arregloFotosEliminar = {};
                         arregloFotosEliminar["id_aire"] = idAire;
                         arregloFotosEliminar["nombre"] = fotosEliminar;

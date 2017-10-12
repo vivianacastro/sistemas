@@ -1451,6 +1451,7 @@ class controlador_consultas{
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
+                    'responsable' => $valor['responsable'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -2647,6 +2648,7 @@ class controlador_consultas{
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
+                    'responsable' => $valor['responsable'],
                 );
                 array_push($result, $arrayAux);
                 array_push($dataAires, $arrayAux);
@@ -2690,6 +2692,7 @@ class controlador_consultas{
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
+                    'responsable' => $valor['responsable'],
                 );
                 array_push($result, $arrayAux);
             }
@@ -2731,6 +2734,7 @@ class controlador_consultas{
                     'instalador' => $valor['instalador'],
                     'periodicidad_mantenimiento' => $valor['periodicidad_mantenimiento'],
                     'ubicacion_condensadora' => $valor['ubicacion_condensadora'],
+                    'responsable' => $valor['responsable'],
                 );
                 array_push($result, $arrayAux);
             }

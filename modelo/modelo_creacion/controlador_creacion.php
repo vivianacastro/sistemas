@@ -1488,7 +1488,7 @@ class controlador_creacion
             $info = json_decode($_POST['jObject'], true);
             $verificar = $m->verificarAire($info['numero_inventario']);
             if($verificar){
-                $verificar = $m->guardarAire($info['numero_inventario'],$info['sede'],$info['campus'],$info['edificio'],$info['espacio'],$info['capacidad'],$info['marca'],$info['tipo'],$info['tecnologia_aire'],$info['fecha_instalacion'],$info['instalador'],$info['periodicidad_mantenimiento'],$info['ubicacion_condensadora']);
+                $verificar = $m->guardarAire($info['numero_inventario'],$info['sede'],$info['campus'],$info['edificio'],$info['espacio'],$info['capacidad'],$info['marca'],$info['tipo'],$info['tecnologia_aire'],$info['fecha_instalacion'],$info['instalador'],$info['periodicidad_mantenimiento'],$info['ubicacion_condensadora'],$info['responsable']);
             }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
