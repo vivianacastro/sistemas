@@ -3037,11 +3037,12 @@ class modelo_creacion {
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
     **/
-    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$espacio,$capacidad,$marca,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora,$responsable){
+    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$piso,$espacio,$capacidad,$marca,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora,$responsable){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sede = htmlspecialchars(trim($sede));
         $campus = htmlspecialchars(trim($campus));
         $edificio = htmlspecialchars(trim($edificio));
+        $piso = htmlspecialchars(trim($piso));
         $espacio = htmlspecialchars(trim($espacio));
         $capacidad = htmlspecialchars(trim($capacidad));
         $marca = htmlspecialchars(trim($marca));
@@ -3052,8 +3053,8 @@ class modelo_creacion {
         $periodicidad_mantenimiento = htmlspecialchars(trim($periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
         $responsable = htmlspecialchars(trim($responsable));
-        $campos = "numero_inventario,id_sede,id_campus,id_edificio,id_espacio,instalador,ubicacion_condensadora,responsable,usuario_crea";
-        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$espacio."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["login"]."'";
+        $campos = "numero_inventario,id_sede,id_campus,id_edificio,piso,id_espacio,instalador,ubicacion_condensadora,responsable,usuario_crea";
+        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$piso."','".$espacio."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["login"]."'";
         if (strcasecmp($capacidad,'') != 0) {
             $campos = $campos.",capacidad" ;
             $valores = $valores.",'".$capacidad."'";

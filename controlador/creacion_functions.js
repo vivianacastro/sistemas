@@ -4426,6 +4426,7 @@ $(document).ready(function() {
             var sede = $("#nombre_sede").val();
             var campus = $("#nombre_campus").val();
             var edificio = $("#nombre_edificio").val();
+            var piso = $("#pisos").val();
             var espacio = $("#id_espacio").val();
             var capacidad = $("#capacidad_aire").val();
             var marca = $("#marca_aire").val();
@@ -4471,6 +4472,7 @@ $(document).ready(function() {
                     informacion["sede"] = sede;
                     informacion["campus"] = campus;
                     informacion["edificio"] = edificio;
+                    informacion["piso"] = piso;
                     informacion["espacio"] = espacio;
                     informacion["capacidad"] = capacidad;
                     informacion["marca"] = marca;

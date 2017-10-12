@@ -2518,9 +2518,8 @@ class modelo_consultas
     **/
     public function listarInventarioAiresAcondicionados(){
         $result = array();
-        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, i.capacidad AS capacidad, f.nombre AS marca, g.tipo AS tipo, h.tipo AS tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
-                FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
-                                            JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, a.piso, a.id_espacio, a.id_aire, a.numero_inventario, i.capacidad AS capacidad, f.nombre AS marca, g.tipo AS tipo, h.tipo AS tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
+                FROM aire_acondicionado a   JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
                                             JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
                                             JOIN sede e ON a.id_sede = e.id
                                             LEFT JOIN marca_aire f ON a.marca = f.id
@@ -2552,9 +2551,8 @@ class modelo_consultas
     public function buscarAireNumeroInventario($numero_inventario){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $result = array();
-        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
-                FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
-                                            JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, a.piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
+                FROM aire_acondicionado a   JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
                                             JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
                                             JOIN sede e ON a.id_sede = e.id
                 WHERE numero_inventario = '".$numero_inventario."';";
@@ -2584,9 +2582,8 @@ class modelo_consultas
     **/
     public function buscarAireId($idAire){
         $numero_inventario = htmlspecialchars(trim($idAire));
-        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, b.piso_edificio AS piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
-                FROM aire_acondicionado a   JOIN espacio b ON a.id_sede = b.id_sede AND a.id_campus = b.id_campus AND a.id_espacio = b.id
-                                            JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
+        $sql = "SELECT a.id_sede, e.nombre AS nombre_sede, a.id_campus, d.nombre AS nombre_campus, a.id_edificio, c.nombre AS nombre_edificio, a.piso, a.id_espacio, a.id_aire, a.numero_inventario, a.capacidad, a.marca, a.tipo, a.tecnologia, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
+                FROM aire_acondicionado a   JOIN edificio c ON a.id_sede = c.id_sede AND a.id_campus = c.id_campus AND a.id_edificio = c.id
                                             JOIN campus d ON a.id_sede = d.sede AND a.id_campus = d.id
                                             JOIN sede e ON a.id_sede = e.id
                 WHERE id_aire = '".$idAire."';";
@@ -2620,7 +2617,7 @@ class modelo_consultas
         $id_campus = htmlspecialchars(trim($id_campus));
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $id_espacio = htmlspecialchars(trim($id_espacio));
-        $sql = "SELECT a.id_aire, a.numero_inventario, a.id_sede, a.id_campus, a.id_edificio, a.id_espacio, a.capacidad, a.marca, b.nombre AS marca_aire, a.capacidad, c.capacidad AS numero_capacidad, a.tipo, d.tipo AS tipo_aire, a.tecnologia, e.tipo AS tecnologia_aire, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
+        $sql = "SELECT a.id_aire, a.numero_inventario, a.id_sede, a.id_campus, a.id_edificio, a.piso, a.id_espacio, a.capacidad, a.marca, b.nombre AS marca_aire, a.capacidad, c.capacidad AS numero_capacidad, a.tipo, d.tipo AS tipo_aire, a.tecnologia, e.tipo AS tecnologia_aire, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
                 FROM aire_acondicionado a  JOIN marca_aire b ON a.marca = b.id
                                                     JOIN capacidad_aire c ON a.capacidad = c.id
                                                     JOIN tipo_aire d ON a.tipo = d.id
