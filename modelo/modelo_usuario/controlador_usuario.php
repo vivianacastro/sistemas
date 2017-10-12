@@ -171,7 +171,7 @@ class controlador_usuario {
         //eliminar informacion almacenada de la sesion
         session_unset();
         //finalizar sesion
-        session_destroy ();
+        session_destroy();
         $data = array(
             'mensaje' => 'Bienvenido  '. date('d-m-y  h:i A'),
         );
