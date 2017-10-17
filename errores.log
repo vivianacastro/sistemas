@@ -327,3 +327,55 @@
 [09-Oct-2017 15:21:24 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
 [09-Oct-2017 15:23:24 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
 [09-Oct-2017 15:30:25 America/Bogota] PHP Notice:  Undefined index: jObject in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 2627
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 407
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 409
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 411
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
+[17-Oct-2017 10:39:11 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 419
+[17-Oct-2017 10:39:15 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
+[17-Oct-2017 10:39:49 America/Bogota] PHP Fatal error:  Uncaught Error: Unsupported operand types in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php:4301
+Stack trace:
+#0 C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php(428): controlador_consultas->listar_movimientos_inventario_hidraulico()
+#1 {main}
+  thrown in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4301
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:42:05 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:43:39 America/Bogota] PHP Notice:  Undefined index: numero_orden in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:44:06 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:45:46 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3038
+[17-Oct-2017 10:45:46 America/Bogota] PHP Warning:  A non-numeric value encountered in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3063
+[17-Oct-2017 10:45:46 America/Bogota] PHP Notice:  Array to string conversion in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3065
+[17-Oct-2017 10:47:41 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3038
+[17-Oct-2017 10:47:53 America/Bogota] PHP Notice:  Undefined offset: 1 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4308
+[17-Oct-2017 10:49:45 America/Bogota] PHP Parse error:  syntax error, unexpected '"-"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')' in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3065
+[17-Oct-2017 10:50:30 America/Bogota] PHP Warning:  trim() expects parameter 1 to be string, array given in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\modelo_modificacion.php on line 3038

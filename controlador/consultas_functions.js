@@ -12640,6 +12640,7 @@ $(document).ready(function() {
             var idArticulo = [];
             var cantidad = [];
             var cantidadAnterior = [];
+            var numeroOrden = limpiarCadena($("#numero_orden").val());
             var cantidadValida = true;
             for (var i = 0; i <= anadirArticulosCont; i++) {
                 if (i == 0) {
@@ -12682,6 +12683,7 @@ $(document).ready(function() {
                 informacion["id_articulo"] = idArticulo;
                 informacion["cantidad"] = cantidad;
                 informacion["cantidad_anterior"] = cantidadAnterior;
+                informacion["numero_orden"] = numeroOrden;
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
@@ -13345,6 +13347,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
+                    { data: "numero_orden" },
                     { data: "usuario" }
                 ]
             } );
@@ -13385,6 +13388,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
+                    { data: "numero_orden" },
                     { data: "usuario" }
                 ]
             } );

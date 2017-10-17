@@ -4256,14 +4256,18 @@ class controlador_consultas{
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"electrica");
             while (list($clave, $valor) = each($data)){
+                $valorNuevo = $valor['valor_nuevo'];
+                $valorNuevo = explode("-", $valorNuevo);
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
                     'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
-                    'valor_nuevo' => $valor['valor_nuevo'],
+                    'cantidad' => $valorNuevo[0] - $valor['valor_antiguo'],
+                    'valor_nuevo' => $valorNuevo[0],
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
+                    'numero_orden' => $valor['numero_orden'],
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -4290,15 +4294,18 @@ class controlador_consultas{
             $info = json_decode($_POST['jObject'], true);
             $data = $m->buscarMovimientosInventario($info["fecha_inicio"],$info["fecha_fin"],"hidraulica");
             while (list($clave, $valor) = each($data)){
+                $valorNuevo = $valor['valor_nuevo'];
+                $valorNuevo = explode("-", $valorNuevo);
                 $arrayAux = array(
                     'id_articulo' => $valor['id_articulo'],
                     'nombre_articulo' => mb_convert_case($valor['nombre_articulo'],MB_CASE_TITLE,"UTF-8"),
-                    'cantidad' => $valor['valor_nuevo'] - $valor['valor_antiguo'],
-                    'valor_nuevo' => $valor['valor_nuevo'],
+                    'cantidad' => $valorNuevo[0] - $valor['valor_antiguo'],
+                    'valor_nuevo' => $valorNuevo[0],
                     'valor_antiguo' => $valor['valor_antiguo'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
+                    'numero_orden' => $valorNuevo[1],
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);

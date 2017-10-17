@@ -3029,11 +3029,13 @@ class modelo_modificacion {
      * @param string $id_articulo, id del articulo.
      * @param string $cantidad, nueva cantidad del artículo.
      * @param string $cantidad_anterior, anterior cantidad del artículo.
+     * @param string $numero_orden, número de la orden.
      * @return array
     **/
-    public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior){
+    public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior,$numero_orden){
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $cantidad = htmlspecialchars(trim($cantidad));
+        $numero_orden = htmlspecialchars(trim($numero_orden));
         $cantidad_anterior = "";
         $data = $this->consultarCampoInventario($id_articulo);
         foreach ($data as $clave => $valor) {
@@ -3060,7 +3062,7 @@ class modelo_modificacion {
                     $cantidadNueva = $valor['cantidad'];
                     $cantidadAnterior = $cantidadNueva - $cantidad;
                 }
-                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidadNueva);
+                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidadNueva."-".$numero_orden);
                 $GLOBALS['mensaje'] = "La información del inventario se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;
