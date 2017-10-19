@@ -1806,8 +1806,8 @@ $(document).ready(function() {
                             $("#id_edificio").val("");
                             $("#nombre_edificio").val("");
                             $("#pisos_edificio").val("");
-                            $('input[name=terraza]').attr('checked',false);
-                            $('input[name=sotano]').attr('checked',false);
+                            $('input[name=terraza][value=false]').attr('checked',true);
+                            $('input[name=sotano][value=false]').attr('checked',true);
                             planos.value = "";
                             fotos.value = "";
                             initMap();
