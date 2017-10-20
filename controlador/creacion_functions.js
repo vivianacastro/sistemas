@@ -1032,6 +1032,10 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.capacidad;
+
+                aux = aux.replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+
                 row = $("<option value='" + record.id + "'/>");
                 row.text(aux);
                 row.appendTo("#capacidad_aire");
@@ -4516,11 +4520,11 @@ $(document).ready(function() {
                             alert(mensaje);
                         }
                         $("#numero_inventario").val("");
-                        $("#nombre_sede").val("").change();
+                        /*$("#nombre_sede").val("").change();
                         $("#nombre_campus").empty();
                         $("#nombre_campus").val("");
                         $("#nombre_edificio").val("");
-                        $("#pisos").val("");
+                        $("#pisos").val("");*/
                         $("#id_espacio").val("");
                         $("#marca_aire").val("");
                         $("#modelo_aire").val("");
