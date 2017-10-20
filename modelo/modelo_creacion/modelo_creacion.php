@@ -156,7 +156,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,uso,longitud_demarcacion,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_cancha."','".$uso_cancha."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_cancha."','".$uso_cancha."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         if (strcasecmp($material_piso,'') != 0) {
             $campos = $campos.",id_material_piso";
             $valores = $valores.",'".$material_piso."'";
@@ -214,7 +214,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,ancho_pared,alto_pared,ancho_piso,largo_piso,ancho_techo,largo_techo,tomacorriente,cantidad,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_corredor."','".$ancho_pared."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$largo_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_corredor."','".$ancho_pared."','".$alto_pared."','".$ancho_piso."','".$largo_piso."','".$ancho_techo."','".$largo_techo."','".$tomacorriente."','".$cantidad_tomacorrientes."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         if (strcasecmp($material_pared,'') != 0) {
             $campos = $campos.",id_material_pared";
             $valores = $valores.",'".$material_pared."'";
@@ -274,7 +274,7 @@ class modelo_creacion {
         $ancho_cubierta = htmlspecialchars(trim($ancho_cubierta));
         $largo_cubierta = htmlspecialchars(trim($largo_cubierta));
         $campos = "id_sede,id_campus,id_edificio,piso,largo,ancho,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso."','".$largo_cubierta."','".$ancho_cubierta."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso."','".$largo_cubierta."','".$ancho_cubierta."','".$_SESSION['user_login']."'";
         if (strcasecmp($tipo_cubierta,'') != 0) {
             $campos = $campos.",id_tipo_cubierta";
             $valores = $valores.",'".$tipo_cubierta."'";
@@ -323,7 +323,7 @@ class modelo_creacion {
         $pasamanos = htmlspecialchars(trim($pasamanos));
         $material_pasamanos = htmlspecialchars(trim($material_pasamanos));
         $campos = "id_sede,id_campus,id_edificio,piso_inicio,pasamanos,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso_inicio."','".$pasamanos."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$nombre_edificio."','".$piso_inicio."','".$pasamanos."','".$_SESSION['user_login']."'";
         if (strcasecmp($material_pasamanos,'') != 0) {
             $campos = $campos.",id_material_pasamanos";
             $valores = $valores.",'".$material_pasamanos."'";
@@ -376,7 +376,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,largo,ancho,capacidad,longitud_demarcacion,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$codigo."','".$capacidad."','".$ancho."','".$largo."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$codigo."','".$capacidad."','".$ancho."','".$largo."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         if (strcasecmp($material_piso,'') != 0) {
             $campos = $campos.",id_material_piso";
             $valores = $valores.",'".$material_piso."'";
@@ -427,7 +427,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,cantidad_punto_hidraulico,largo,ancho,alto,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_piscina."','".$cantidad_punto_hidraulico."','".$ancho."','".$largo."','".$alto."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_piscina."','".$cantidad_punto_hidraulico."','".$ancho."','".$largo."','".$alto."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         $sql = "INSERT INTO piscina (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -466,7 +466,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,nombre,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_plazoleta."','".$nombre."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_plazoleta."','".$nombre."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         $sql = "INSERT INTO plazoleta (".$campos.") VALUES (".$valores.");";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -516,7 +516,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,longitud,ancho,cantidad,codigo_poste,ancho_cubierta,largo_cubierta,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_sendero."','".$longitud."','".$ancho."','".$cantidad_iluminacion."','".$codigo_poste."','".$ancho_cubierta."','".$largo_cubierta."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_sendero."','".$longitud."','".$ancho."','".$cantidad_iluminacion."','".$codigo_poste."','".$ancho_cubierta."','".$largo_cubierta."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         if (strcasecmp($material_piso,'') != 0) {
             $campos = $campos.",id_material_piso";
             $valores = $valores.",'".$material_piso."'";
@@ -567,7 +567,7 @@ class modelo_creacion {
         $lat = htmlspecialchars(trim($lat));
         $lng = htmlspecialchars(trim($lng));
         $campos = "id_sede,id_campus,id,longitud_demarcacion,lat,lng,usuario_crea";
-        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_via."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['login']."'";
+        $valores = "'".$nombre_sede."','".$nombre_campus."','".$id_via."','".$longitud_demarcacion."','".$lat."','".$lng."','".$_SESSION['user_login']."'";
         if (strcasecmp($tipo_pintura,'') != 0) {
             $campos = $campos.",id_tipo_pintura_demarcacion";
             $valores = $valores.",'".$tipo_pintura."'";
