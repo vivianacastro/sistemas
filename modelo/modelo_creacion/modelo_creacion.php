@@ -3034,10 +3034,11 @@ class modelo_creacion {
      * @param string $espacio, espacio donde está el aire acondicionado.
      * @param string $capacidad, capacidad del aire acondicionado.
      * @param string $marca, marca del aire acondicionado.
+     * @param string $modelo, modelo del aire acondicionado.
      * @param string $tipo, tipo de aire acondicionado.
      * @return array
     **/
-    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$piso,$espacio,$capacidad,$marca,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora,$responsable){
+    public function guardarAire($numero_inventario,$sede,$campus,$edificio,$piso,$espacio,$capacidad,$marca,$modelo,$tipo,$tecnologia_aire,$fecha_instalacion,$instalador,$periodicidad_mantenimiento,$ubicacion_condensadora,$responsable){
         $numero_inventario = htmlspecialchars(trim($numero_inventario));
         $sede = htmlspecialchars(trim($sede));
         $campus = htmlspecialchars(trim($campus));
@@ -3046,6 +3047,7 @@ class modelo_creacion {
         $espacio = htmlspecialchars(trim($espacio));
         $capacidad = htmlspecialchars(trim($capacidad));
         $marca = htmlspecialchars(trim($marca));
+        $modelo = htmlspecialchars(trim($modelo));
         $tipo = htmlspecialchars(trim($tipo));
         $tecnologia_aire = htmlspecialchars(trim($tecnologia_aire));
         $fecha_instalacion = htmlspecialchars(trim($fecha_instalacion));
@@ -3053,8 +3055,8 @@ class modelo_creacion {
         $periodicidad_mantenimiento = htmlspecialchars(trim($periodicidad_mantenimiento));
         $ubicacion_condensadora = htmlspecialchars(trim($ubicacion_condensadora));
         $responsable = htmlspecialchars(trim($responsable));
-        $campos = "numero_inventario,id_sede,id_campus,id_edificio,piso,id_espacio,instalador,ubicacion_condensadora,responsable,usuario_crea";
-        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$piso."','".$espacio."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["user_login"]."'";
+        $campos = "numero_inventario,id_sede,id_campus,id_edificio,piso,id_espacio,modelo,instalador,ubicacion_condensadora,responsable,usuario_crea";
+        $valores = "'".$numero_inventario."','".$sede."','".$campus."','".$edificio."','".$piso."','".$espacio."','".$modelo."','".$instalador."','".$ubicacion_condensadora."','".$responsable."','".$_SESSION["user_login"]."'";
         if (strcasecmp($capacidad,'') != 0) {
             $campos = $campos.",capacidad" ;
             $valores = $valores.",'".$capacidad."'";

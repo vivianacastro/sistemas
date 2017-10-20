@@ -4018,7 +4018,7 @@ $(document).ready(function() {
         +'<select class="form-control formulario" name="tipo_suministro_energia" id="tipo_suministro_energia'+tomacorrientesCont+'" required></select><br>'
         +'<div class="div_izquierda"><b>Tomacorriente ('+(tomacorrientesCont+1)+'):</b></div>'
         +'<select class="form-control formulario" name="tomacorriente" id="tomacorriente'+tomacorrientesCont+'" required>'
-        +'<option value="seleccionar" selected="selected">--Seleccionar--</option>'
+        +'<option value="" selected="selected">--Seleccionar--</option>'
         +'<option value="regulado">Regulado</option>'
         +'<option value="no regulado">No Regulado</option>'
         +'</select><br>'
@@ -4430,6 +4430,7 @@ $(document).ready(function() {
             var espacio = $("#id_espacio").val();
             var capacidad = $("#capacidad_aire").val();
             var marca = $("#marca_aire").val();
+            var modelo = limpiarCadena($("#modelo_aire").val());
             var tipo = $("#tipo_aire").val();
             var tecnologia = $("#tipo_tecnologia_aire").val();
             var fechaInstalacion = $("#fecha_instalacion").val();
@@ -4476,6 +4477,7 @@ $(document).ready(function() {
                     informacion["espacio"] = espacio;
                     informacion["capacidad"] = capacidad;
                     informacion["marca"] = marca;
+                    informacion["modelo"] = modelo;
                     informacion["tipo"] = tipo;
                     informacion["tecnologia_aire"] = tecnologia;
                     informacion["fecha_instalacion"] = fechaInstalacion;
@@ -4521,6 +4523,7 @@ $(document).ready(function() {
                         $("#pisos").val("");
                         $("#id_espacio").val("");
                         $("#marca_aire").val("");
+                        $("#modelo_aire").val("");
                         $("#tipo_aire").val("");
                         $("#capacidad_aire").val("");
                         $("#tipo_tecnologia_aire").val("");

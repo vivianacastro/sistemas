@@ -5507,6 +5507,8 @@ $(document).ready(function() {
                     $("#capacidad_aire").attr('name',record.capacidad);
                     $("#marca_aire").val(record.marca);
                     $("#marca_aire").attr('name',record.marca);
+                    $("#modelo_aire").val(record.modelo);
+                    $("#modelo_aire").attr('name',record.modelo);
                     $("#tipo_aire").val(record.tipo);
                     $("#tipo_aire").attr('name',record.tipo);
                     $("#tipo_tecnologia_aire").val(record.tecnologia);
@@ -6209,6 +6211,8 @@ $(document).ready(function() {
                 $("#capacidad_aire").attr('name',record.capacidad);
                 $("#marca_aire").val(record.marca);
                 $("#marca_aire").attr('name',record.marca);
+                $("#modelo_aire").val(record.modelo);
+                $("#modelo_aire").attr('name',record.modelo);
                 $("#tipo_aire").val(record.tipo);
                 $("#tipo_aire").attr('name',record.tipo);
                 $("#tipo_tecnologia_aire").val(record.tecnologia);
@@ -6737,6 +6741,7 @@ $(document).ready(function() {
         $("#numero_inventario").attr('disabled',true);
         $("#capacidad_aire").attr('disabled',true);
         $("#marca_aire").attr('disabled',true);
+        $("#modelo_aire").attr('disabled',true);
         $("#tipo_aire").attr('disabled',true);
         $("#capacidad_aire_nueva").attr('disabled',true);
         $("#marca_aire_nueva").attr('disabled',true);
@@ -7449,6 +7454,7 @@ $(document).ready(function() {
     $("#modificar_aire").click(function (e){
         $("#numero_inventario").removeAttr("disabled");
         $("#marca_aire").removeAttr("disabled");
+        $("#modelo_aire").removeAttr("disabled");
         $("#tipo_aire").removeAttr("disabled");
         $("#tipo_tecnologia_aire").removeAttr("disabled");
         $("#capacidad_aire").removeAttr("disabled");
