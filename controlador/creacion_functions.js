@@ -4520,11 +4520,11 @@ $(document).ready(function() {
                             alert(mensaje);
                         }
                         $("#numero_inventario").val("");
-                        /*$("#nombre_sede").val("").change();
+                        $("#nombre_sede").val("").change();
                         $("#nombre_campus").empty();
                         $("#nombre_campus").val("");
                         $("#nombre_edificio").val("");
-                        $("#pisos").val("");*/
+                        $("#pisos").val("");
                         $("#id_espacio").val("");
                         $("#marca_aire").val("");
                         $("#modelo_aire").val("");
