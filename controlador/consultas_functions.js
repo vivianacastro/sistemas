@@ -7462,6 +7462,7 @@ $(document).ready(function() {
         $("#instalador").removeAttr("disabled");
         $("#tipo_periodicidad_mantenimiento").removeAttr("disabled");
         $("#ubicacion_condensadora").removeAttr("disabled");
+        $("#responsable").removeAttr("disabled");
         $("#modificar_aire").hide();
         $("#guardar_modificaciones_aire").show();
         $("#enlace_fotos").show();
