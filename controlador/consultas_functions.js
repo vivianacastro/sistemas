@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var mapaConsulta, mapaModificacion, sedeSeleccionada, campusSeleccionado, codigoSeleccionado, objetoSeleccionado, numeroFotos = 0, numeroPlanos = 0;
-    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0, anadirArticulosCont = 0;
+    var iluminacionCont = 0, cerraduraCont = 0, tomacorrientesCont = 0, puertasCont = 0, ventanasCont = 0, interruptoresCont = 0, puntosSanitariosCont = 0, lavamanosCont = 0, orinalesCont = 0, articulosCont = 0, proveedoresCont = 0, ingresarArticulosCont = 0, extraerArticulosCont = 0;
     var usoEspacioSelect;
     var marcadores = [], marcadoresModificacion = [];
     var URLactual = window.location;
@@ -2820,16 +2820,16 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se modifica el valor del selector nombre_articulo
+     * Se captura el evento cuando se modifica el valor del selector nombre_articulo_extraer
      * y se actualiza el selector de tipo de objeto.
     **/
-    $('#informacionArticuloInventario').on('change', '.nombre_articulo_anadir', function() {
+    $('#informacionArticuloInventario').on('change', '.nombre_articulo_extraer', function() {
         var idArticulo = $(this).val();
         var conteoArticulos = $(this).attr("id");
-        conteoArticulos = conteoArticulos.substring(22);
+        conteoArticulos = conteoArticulos.substring(23);
         if (!validarCadena(idArticulo)) {
-            $("#cantidad"+conteoArticulos).attr('name',"cantidad");
-            $("#cantidad"+conteoArticulos).attr("placeholder","Ej: 10");
+            $("#cantidad_extraer"+conteoArticulos).attr('name',"cantidad_extraer");
+            $("#cantidad_extraer"+conteoArticulos).attr("placeholder","Ej: 10");
         }else{
             var informacion = {};
             informacion["id_articulo"] = idArticulo;
@@ -2837,14 +2837,14 @@ $(document).ready(function() {
             var conteo = 0;
             $.each(data, function(index, record) {
                 if($.isNumeric(index)) {
-                    $("#cantidad"+conteoArticulos).attr('name',record.cantidad);
-                    $("#cantidad"+conteoArticulos).attr("placeholder","Disponibles: "+record.cantidad);
+                    $("#cantidad_extraer"+conteoArticulos).attr('name',record.cantidad);
+                    $("#cantidad_extraer"+conteoArticulos).attr("placeholder","Disponibles: "+record.cantidad);
                     conteo++;
                 }
             });
             if (conteo < 1) {
-                $("#cantidad"+conteoArticulos).attr('name',"cantidad");
-                $("#cantidad"+conteoArticulos).attr("placeholder","Ej: 10");
+                $("#cantidad_extraer"+conteoArticulos).attr('name',"cantidad_extraer");
+                $("#cantidad_extraer"+conteoArticulos).attr("placeholder","Ej: 10");
             }
         }
     });
@@ -6889,15 +6889,31 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se cierra el modal divDialogModificarArticulo.
+     * Se captura el evento cuando se cierra el modal divDialogIngresarArticulo.
     **/
-    $('#divDialogModificarArticulo').on('hidden.bs.modal', function () {
-        while(anadirArticulosCont > 0){
-            eliminarComponente("articulo"+anadirArticulosCont);
+    $('#divDialogIngresarArticulo').on('hidden.bs.modal', function () {
+        while(ingresarArticulosCont > 0){
+            eliminarComponente("articulo_ingresar"+ingresarArticulosCont);
+            ingresarArticulosCont--;
         }
-        $("#cantidad").attr("placeholder","Ej: 10");
-        $("#cantidad").attr("name","cantidad");
-        $("#eliminar_articulo").attr('disabled',true);
+        $("#cantidad_ingresar").attr("placeholder","Ej: 10");
+        $("#cantidad_ingresar").attr("name","cantidad_ingresar");
+        $("#cantidad_ingresar").val("");
+        $("#eliminar_articulo_ingresar").attr('disabled',true);
+    });
+
+    /**
+     * Se captura el evento cuando se cierra el modal divDialogExtraerArticulo.
+    **/
+    $('#divDialogExtraerArticulo').on('hidden.bs.modal', function () {
+        while(extraerArticulosCont > 0){
+            eliminarComponente("articulo_extraer"+extraerArticulosCont);
+            extraerArticulosCont--;
+        }
+        $("#cantidad_extraer").attr("placeholder","Ej: 10");
+        $("#cantidad_extraer").attr("name","cantidad_extraer");
+        $("#cantidad_extraer").val("");
+        $("#eliminar_articulo_extraer").attr('disabled',true);
     });
 
     /**
@@ -7554,12 +7570,21 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón modificar_cantidad_articulos y se
+     * Se captura el evento cuando se da click en el botón ingresar_articulos y se
      * realiza la operacion correspondiente.
     **/
-    $("#modificar_cantidad_articulos").click(function (e){
-        actualizarSelectArticulo(anadirArticulosCont,"nombre_articulo_anadir");
-        $("#divDialogModificarArticulo").modal('show');
+    $("#ingresar_articulos").click(function (e){
+        actualizarSelectArticulo(ingresarArticulosCont,"nombre_articulo_ingresar");
+        $("#divDialogIngresarArticulo").modal('show');
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón ingresar_articulos y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#extraer_articulos").click(function (e){
+        actualizarSelectArticulo(extraerArticulosCont,"nombre_articulo_extraer");
+        $("#divDialogExtraerArticulo").modal('show');
     });
 
     /**
@@ -9754,31 +9779,60 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón añadir_articulo y se
+     * Se captura el evento cuando se da click en el botón añadir_articulo_ingresar y se
      * realiza la operacion correspondiente.
     */
-    $("#añadir_articulo").click(function (e){
-        anadirArticulosCont++;
-        var componente = '<div id="articulo'+anadirArticulosCont+'">'
-        +'<br><div class="div_izquierda"><b>Nombre del Art&iacute;culo ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<select class="form-control formulario nombre_articulo_anadir" name="nombre_articulo_anadir" id="nombre_articulo_anadir'+anadirArticulosCont+'" required></select><br>'
-        +'<div class="div_izquierda"><b>Art&iacute;culos a A&ntilde;adir o Eliminar ('+(anadirArticulosCont+1)+')<font color="red">*</font>:</b></div>'
-        +'<input class="form-control formulario" type="number" name="cantidad" id="cantidad'+anadirArticulosCont+'" value="" placeholder="Ej: 10" required/>'
+    $("#añadir_articulo_ingresar").click(function (e){
+        ingresarArticulosCont++;
+        var componente = '<div id="articulo_ingresar'+ingresarArticulosCont+'">'
+        +'<br><div class="div_izquierda"><b>Nombre del Art&iacute;culo ('+(ingresarArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario nombre_articulo_ingresar" name="nombre_articulo_ingresar" id="nombre_articulo_ingresar'+ingresarArticulosCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Art&iacute;culos a A&ntilde;adir o Eliminar ('+(ingresarArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" name="cantidad_ingresar" id="cantidad_ingresar'+ingresarArticulosCont+'" value="" placeholder="Ej: 10" required/>'
         +'</div>';
-        añadirComponente("articulo",componente);
-        actualizarSelectArticulo(anadirArticulosCont,"nombre_articulo_anadir");
-        $('#eliminar_articulo').removeAttr("disabled");
+        añadirComponente("articulo_ingresar",componente);
+        actualizarSelectArticulo(ingresarArticulosCont,"nombre_articulo_ingresar");
+        $('#eliminar_articulo_ingresar').removeAttr("disabled");
     });
 
     /**
-     * Se captura el evento cuando se da click en el botón eliminar_articulo y se
+     * Se captura el evento cuando se da click en el botón añadir_articulo_extraer y se
      * realiza la operacion correspondiente.
     */
-    $("#eliminar_articulo").click(function (e){
-        eliminarComponente("articulo"+anadirArticulosCont);
-        anadirArticulosCont--;
-        if(anadirArticulosCont == 0){
-            $("#eliminar_articulo").attr('disabled',true);
+    $("#añadir_articulo_extraer").click(function (e){
+        extraerArticulosCont++;
+        var componente = '<div id="articulo_extraer'+extraerArticulosCont+'">'
+        +'<br><div class="div_izquierda"><b>Nombre del Art&iacute;culo ('+(extraerArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<select class="form-control formulario nombre_articulo_extraer" name="nombre_articulo_extraer" id="nombre_articulo_extraer'+extraerArticulosCont+'" required></select><br>'
+        +'<div class="div_izquierda"><b>Art&iacute;culos a A&ntilde;adir o Eliminar ('+(extraerArticulosCont+1)+')<font color="red">*</font>:</b></div>'
+        +'<input class="form-control formulario" type="number" name="cantidad_extraer" id="cantidad_extraer'+extraerArticulosCont+'" value="" placeholder="Ej: 10" required/>'
+        +'</div>';
+        añadirComponente("articulo_extraer",componente);
+        actualizarSelectArticulo(extraerArticulosCont,"nombre_articulo_extraer");
+        $('#eliminar_articulo_extraer').removeAttr("disabled");
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón eliminar_articulo_ingresar y se
+     * realiza la operacion correspondiente.
+    */
+    $("#eliminar_articulo_ingresar").click(function (e){
+        eliminarComponente("articulo_ingresar"+ingresarArticulosCont);
+        ingresarArticulosCont--;
+        if(ingresarArticulosCont == 0){
+            $("#eliminar_articulo_ingresar").attr('disabled',true);
+        }
+    });
+
+    /**
+     * Se captura el evento cuando se da click en el botón eliminar_articulo_extraer y se
+     * realiza la operacion correspondiente.
+    */
+    $("#eliminar_articulo_extraer").click(function (e){
+        eliminarComponente("articulo_extraer"+extraerArticulosCont);
+        extraerArticulosCont--;
+        if(extraerArticulosCont == 0){
+            $("#eliminar_articulo_extraer").attr('disabled',true);
         }
     });
 
@@ -12637,29 +12691,29 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el botón guardar_articulos y se
+     * Se captura el evento cuando de dar click en el botón guardar_añadir_articulos y se
      * realiza la operacion correspondiente.
     **/
-    $("#guardar_articulos").click(function (e){
-        var confirmacion = window.confirm("¿Añadir ó eliminar la cantidad de artículos ingresada?");
+    $("#guardar_ingresar_articulos").click(function (e){
+        var confirmacion = window.confirm("¿Añadir la cantidad de artículos ingresada?");
         if (confirmacion) {
             var informacion = {};
             var idArticulo = [];
             var cantidad = [];
             var cantidadAnterior = [];
-            var numeroOrden = limpiarCadena($("#numero_orden").val());
+            var comentario = limpiarCadena($("#comentario_ingresar").val());
             var cantidadValida = true;
-            for (var i = 0; i <= anadirArticulosCont; i++) {
+            for (var i = 0; i <= ingresarArticulosCont; i++) {
                 if (i == 0) {
-                    var aux = parseInt($("#cantidad").val());
-                    var aux2 = parseInt($("#cantidad").attr("name"));
-                    if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
-                        alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
+                    var aux = parseInt($("#cantidad_ingresar").val());
+                    var aux2 = parseInt($("#cantidad_ingresar").attr("name"));
+                    if (aux < 0) {
+                        alert("ERROR. Se ingresó una cantidad negativa");
                         cantidadValida = false;
-                        $("#cantidad").focus();
+                        $("#cantidad_ingresar").focus();
                         break;
-                    }else{
-                        idArticulo[i] = $("#nombre_articulo_anadir").val();
+                    }else {
+                        idArticulo[i] = $("#nombre_articulo_ingresar").val();
                         cantidad[i] = aux;
                         if (isNaN(aux2)) {
                             cantidadAnterior[i] = "nuevo";
@@ -12668,12 +12722,98 @@ $(document).ready(function() {
                         }
                     }
                 }else{
-                    var aux = parseInt($("#cantidad"+i).val());
-                    var aux2 = parseInt($("#cantidad"+i).attr("name"));
-                    if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
+                    var aux = parseInt($("#cantidad_ingresar"+i).val());
+                    var aux2 = parseInt($("#cantidad_ingresar"+i).attr("name"));
+                    if (aux < 0) {
+                        alert("ERROR. Se ingresó una cantidad negativa");
+                        cantidadValida = false;
+                        $("#cantidad_ingresar"+i).focus();
+                        break;
+                    }else {
+                        idArticulo[i] = $("#nombre_articulo_ingresar"+i).val();
+                        cantidad[i] = aux;
+                        if (isNaN(aux2)) {
+                            cantidadAnterior[i] = "nuevo";
+                        }else{
+                            cantidadAnterior[i] = aux2;
+                        }
+                    }
+                }
+            }
+            if (cantidadValida) {
+                informacion["id_articulo"] = idArticulo;
+                informacion["cantidad"] = cantidad;
+                informacion["cantidad_anterior"] = cantidadAnterior;
+                informacion["comentario"] = comentario;
+                var data = modificarObjeto("inventario",informacion);
+                alert(data.mensaje);
+                if (data.verificar) {
+                    /*$("#nombre_articulo_ingresar").val("");
+                    $("#cantidad_ingresar").val("");
+                    while(ingresarArticulosCont > 0){
+                        eliminarComponente("articulo_ingresar"+ingresarArticulosCont);
+                        ingresarArticulosCont--;
+                    }
+                    $("#eliminar_articulo_ingresar").attr('disabled',true);
+                    $("#visualizarArticulo").attr('disabled',true);
+                    $("#divDialogIngresarArticulo").modal('hide');
+                    $("#divDialogExtraerArticulo").modal('hide');*/
+                    location.reload();
+                }
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón guardar_extraer_articulos y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#guardar_extraer_articulos").click(function (e){
+        var confirmacion = window.confirm("¿Extraer la cantidad de artículos ingresada?");
+        if (confirmacion) {
+            var informacion = {};
+            var idArticulo = [];
+            var cantidad = [];
+            var cantidadAnterior = [];
+            var comentario = limpiarCadena($("#comentario_extraer").val());
+            var cantidadValida = true;
+            for (var i = 0; i <= extraerArticulosCont; i++) {
+                if (i == 0) {
+                    var aux = parseInt($("#cantidad_extraer").val());
+                    aux = aux * -1;
+                    var aux2 = parseInt($("#cantidad_extraer").attr("name"));
+                    if (aux > 0) {
+                        alert("ERROR. Se ingresó una cantidad negativa");
+                        cantidadValida = false;
+                        $("#cantidad_extraer").focus();
+                        break;
+                    }else if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
-                        $("#cantidad"+i).focus();
+                        $("#cantidad_extraer").focus();
+                        break;
+                    }else{
+                        idArticulo[i] = $("#nombre_articulo_extraer").val();
+                        cantidad[i] = aux;
+                        if (isNaN(aux2)) {
+                            cantidadAnterior[i] = "nuevo";
+                        }else{
+                            cantidadAnterior[i] = aux2;
+                        }
+                    }
+                }else{
+                    var aux = parseInt($("#cantidad_extraer"+i).val());
+                    aux = aux * -1;
+                    var aux2 = parseInt($("#cantidad_extraer"+i).attr("name"));
+                    if (aux > 0) {
+                        alert("ERROR. Se ingresó una cantidad negativa");
+                        cantidadValida = false;
+                        $("#cantidad_extraer"+i).focus();
+                        break;
+                    }else if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
+                        alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
+                        cantidadValida = false;
+                        $("#cantidad_extraer"+i).focus();
                         break;
                     }else{
                         idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
@@ -12690,19 +12830,20 @@ $(document).ready(function() {
                 informacion["id_articulo"] = idArticulo;
                 informacion["cantidad"] = cantidad;
                 informacion["cantidad_anterior"] = cantidadAnterior;
-                informacion["numero_orden"] = numeroOrden;
+                informacion["comentario"] = comentario;
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
-                    /*$("#nombre_articulo").val("");
+                    /*$("#nombre_articulo_extraer").val("");
                     $("#cantidad").val("");
-                    while(anadirArticulosCont > 0){
-                        eliminarComponente("articulo"+anadirArticulosCont);
-                        anadirArticulosCont--;
+                    while(extraerArticulosCont > 0){
+                        eliminarComponente("articulo"+extraerArticulosCont);
+                        extraerArticulosCont--;
                     }
-                    $("#eliminar_articulo").attr('disabled',true);
+                    $("#eliminar_articulo_ingresar").attr('disabled',true);
                     $("#visualizarArticulo").attr('disabled',true);
-                    $("#divDialogModificarArticulo").modal('hide');*/
+                    $("#divDialogIngresarArticulo").modal('hide');
+                    $("#divDialogExtraerArticulo").modal('hide');*/
                     location.reload();
                 }
             }
@@ -13354,7 +13495,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
-                    { data: "numero_orden" },
+                    { data: "comentario" },
                     { data: "usuario" }
                 ]
             } );
@@ -13395,7 +13536,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
-                    { data: "numero_orden" },
+                    { data: "comentario" },
                     { data: "usuario" }
                 ]
             } );
