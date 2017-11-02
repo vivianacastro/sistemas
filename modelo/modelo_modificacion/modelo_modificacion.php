@@ -3029,12 +3029,14 @@ class modelo_modificacion {
      * @param string $id_articulo, id del articulo.
      * @param string $cantidad, nueva cantidad del artículo.
      * @param string $cantidad_anterior, anterior cantidad del artículo.
-     * @param string $numero_orden, número de la orden.
+     * @param string $entregado, persona a la que se entrega el material.
+     * @param string $comentario, comentario.
      * @return array
     **/
-    public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior,$comentario){
+    public function modificarInventario($id_articulo,$cantidad,$cantidad_anterior,$entregado,$comentario){
         $id_articulo = htmlspecialchars(trim($id_articulo));
         $cantidad = htmlspecialchars(trim($cantidad));
+        $entregado = htmlspecialchars(trim($entregado));
         $comentario = htmlspecialchars(trim($comentario));
         $cantidad_anterior = "";
         $data = $this->consultarCampoInventario($id_articulo);
@@ -3062,7 +3064,7 @@ class modelo_modificacion {
                     $cantidadNueva = $valor['cantidad'];
                     $cantidadAnterior = $cantidadNueva - $cantidad;
                 }
-                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidadNueva."-".$comentario);
+                $this->registrarModificacion("inventario",$id_articulo,"cantidad",$cantidadAnterior,$cantidadNueva."-".$comentario."-".$entregado);
                 $GLOBALS['mensaje'] = "La información del inventario se modificó correctamente";
                 $GLOBALS['sql'] = $sql;
                 return true;

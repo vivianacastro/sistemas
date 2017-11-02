@@ -402,3 +402,19 @@ Stack trace:
 [02-Nov-2017 09:12:30 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
 [02-Nov-2017 09:53:15 America/Bogota] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 174
 [02-Nov-2017 09:53:21 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 407
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 409
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 411
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
+[02-Nov-2017 13:51:02 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 419
+[02-Nov-2017 13:53:30 America/Bogota] PHP Notice:  Undefined index: nombre_usuario in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_usuario\controlador_usuario.php on line 143
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
+[02-Nov-2017 14:22:50 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275

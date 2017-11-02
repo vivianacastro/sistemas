@@ -2344,7 +2344,7 @@ $(document).ready(function() {
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
-                if (fechaInicio > fechaFin) {
+                if (fechaInicio < fechaFin) {
                     $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
                     $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
@@ -2368,7 +2368,7 @@ $(document).ready(function() {
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
-                if (fechaInicio > fechaFin) {
+                if (fechaInicio < fechaFin) {
                     $('#visualizarAiresMasMantenimientos').attr('disabled',true);
                     $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
                 }else{
@@ -2408,7 +2408,7 @@ $(document).ready(function() {
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaInicio) && validarCadena(fechaFin)) {
-                if (fechaInicio > fechaFin) {
+                if (fechaInicio < fechaFin) {
                     $('#consultarMovimientosInventarioElectrico').attr('disabled',true);
                     $('#consultarMovimientosInventarioHidraulico').attr('disabled',true);
                     $('#visualizarArticulosMasUsados').attr('disabled',true);
@@ -2432,7 +2432,7 @@ $(document).ready(function() {
             var fechaInicio = $("#fecha_inicio").val();
             var fechaFin = $("#fecha_fin").val();
             if (validarCadena(fechaFin)) {
-                if (fechaInicio > fechaFin) {
+                if (fechaInicio < fechaFin) {
                     $('#visualizarAiresMasMantenimientos').attr('disabled',true);
                     $('#visualizarMarcasMasMantenimientos').attr('disabled',true);
                 }else{
@@ -12750,6 +12750,7 @@ $(document).ready(function() {
                 if (data.verificar) {
                     /*$("#nombre_articulo_ingresar").val("");
                     $("#cantidad_ingresar").val("");
+                    $("#comentario").val("");
                     while(ingresarArticulosCont > 0){
                         eliminarComponente("articulo_ingresar"+ingresarArticulosCont);
                         ingresarArticulosCont--;
@@ -12775,6 +12776,7 @@ $(document).ready(function() {
             var idArticulo = [];
             var cantidad = [];
             var cantidadAnterior = [];
+            var entregado = limpiarCadena($("#entregado").val());
             var comentario = limpiarCadena($("#comentario_extraer").val());
             var cantidadValida = true;
             for (var i = 0; i <= extraerArticulosCont; i++) {
@@ -12830,12 +12832,15 @@ $(document).ready(function() {
                 informacion["id_articulo"] = idArticulo;
                 informacion["cantidad"] = cantidad;
                 informacion["cantidad_anterior"] = cantidadAnterior;
+                informacion["entregado"] = entregado;
                 informacion["comentario"] = comentario;
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
                     /*$("#nombre_articulo_extraer").val("");
                     $("#cantidad").val("");
+                    $("#entregado").val("");
+                    $("#comentario").val("");
                     while(extraerArticulosCont > 0){
                         eliminarComponente("articulo"+extraerArticulosCont);
                         extraerArticulosCont--;
@@ -13495,6 +13500,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
+                    { data: "entregado" },
                     { data: "comentario" },
                     { data: "usuario" }
                 ]
@@ -13536,6 +13542,7 @@ $(document).ready(function() {
                     { data: "nombre_marca" },
                     { data: "nombre_categoria" },
                     { data: "fecha" },
+                    { data: "entregado" },
                     { data: "comentario" },
                     { data: "usuario" }
                 ]

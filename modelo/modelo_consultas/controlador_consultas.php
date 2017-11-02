@@ -4272,6 +4272,7 @@ class controlador_consultas{
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
                     'comentario' => mb_convert_case($valorNuevo[1],MB_CASE_TITLE,"UTF-8"),
+                    'entregado' => mb_convert_case($valorNuevo[2],MB_CASE_TITLE,"UTF-8"),
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
@@ -4310,6 +4311,7 @@ class controlador_consultas{
                     'nombre_categoria' => mb_convert_case($valor['nombre_categoria'],MB_CASE_TITLE,"UTF-8"),
                     'fecha' => substr($valor['fecha'],0,16),
                     'comentario' => mb_convert_case($valorNuevo[1],MB_CASE_TITLE,"UTF-8"),
+                    'entregado' => mb_convert_case($valorNuevo[2],MB_CASE_TITLE,"UTF-8"),
                     'usuario' => mb_convert_case($valor['usuario'],MB_CASE_TITLE,"UTF-8"),
                 );
                 array_push($result, $arrayAux);
