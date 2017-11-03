@@ -6535,39 +6535,52 @@ $(document).ready(function() {
     **/
     $("#visualizarArticulosMasUsados").click(function (e){
         var informacion =  {};
+        var nombreBodega;
+        var bodega = $("#bodega_estadisticas").val();
         var fechaInicio = $("#fecha_inicio").val();
         var fechaFin = $("#fecha_fin").val();
+        informacion['bodega'] = bodega;
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
-        var data = buscarObjetos("articulos_mas_usados",informacion);
-        var total = 0;
-        var tipo = "Artículos Más Usados";
-        var tituloX = "Artículos";
-        var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
-        label = [], informacion = [];
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                label.push(record.nombre);
-                informacion.push(record.suma);
+        if (!validarCadena(bodega)) {
+            alert("ERROR. Seleccione una bodega");
+            $("#bodega_estadisticas").focus();
+        }else {
+            var data = buscarObjetos("articulos_mas_usados",informacion);
+            var total = 0;
+            if (bodega == 'electrica') {
+                nombreBodega = 'Eléctrica';
+            }else{
+                nombreBodega = 'Hidráulica'
             }
-        });
-        if(data != null){
-            var aux;
-            var categorias = [], info = [];
-            for (var i = 0; i < informacion.length; i++) {
-                if (!isNaN(informacion[i])) {
-                    aux = parseInt(informacion[i]);
-                    total += aux;
-                    categorias.push(label[i]);
-                    info.push(parseInt(informacion[i]));
+            var tipo = "Artículos Más Usados de la Bodega "+nombreBodega;
+            var tituloX = "Artículos";
+            var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
+            label = [], informacion = [];
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    label.push(record.nombre);
+                    informacion.push(record.suma);
                 }
+            });
+            if(data != null){
+                var aux;
+                var categorias = [], info = [];
+                for (var i = 0; i < informacion.length; i++) {
+                    if (!isNaN(informacion[i])) {
+                        aux = parseInt(informacion[i]);
+                        total += aux;
+                        categorias.push(label[i]);
+                        info.push(parseInt(informacion[i]));
+                    }
+                }
+                var titulo = tipo;
+                var subtitulo = subTipo;
+                var xTitulo = tituloX;
+                var yTitulo = 'Número de Artículos (Total: '+total+')';
+                generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+                $("#divDialogConsulta").modal('show');
             }
-            var titulo = tipo;
-            var subtitulo = subTipo;
-            var xTitulo = tituloX;
-            var yTitulo = 'Número de Artículos (Total: '+total+')';
-            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
-            $("#divDialogConsulta").modal('show');
         }
     });
 
@@ -6577,39 +6590,51 @@ $(document).ready(function() {
     **/
     $("#visualizarArticulosMenosUsados").click(function (e){
         var informacion =  {};
+        var nombreBodega;
+        var bodega = $("#bodega_estadisticas").val();
         var fechaInicio = $("#fecha_inicio").val();
         var fechaFin = $("#fecha_fin").val();
         informacion['fecha_inicio'] = fechaInicio + "  00:00:00";
         informacion['fecha_fin'] = fechaFin + "  23:59:59";
-        var data = buscarObjetos("articulos_menos_usados",informacion);
-        var total = 0;
-        var tipo = "Artículos Menos Usados";
-        var tituloX = "Artículos";
-        var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
-        label = [], informacion = [];
-        $.each(data, function(index, record) {
-            if($.isNumeric(index)) {
-                label.push(record.nombre);
-                informacion.push(record.suma);
+        if (!validarCadena(bodega)) {
+            alert("ERROR. Seleccione una bodega");
+            $("#bodega_estadisticas").focus();
+        }else {
+            var data = buscarObjetos("articulos_menos_usados",informacion);
+            var total = 0;
+            if (bodega == 'electrica') {
+                nombreBodega = 'Eléctrica';
+            }else{
+                nombreBodega = 'Hidráulica'
             }
-        });
-        if(data != null){
-            var aux;
-            var categorias = [], info = [];
-            for (var i = 0; i < informacion.length; i++) {
-                if (!isNaN(informacion[i])) {
-                    aux = parseInt(informacion[i]);
-                    total += aux;
-                    categorias.push(label[i]);
-                    info.push(parseInt(informacion[i]));
+            var tipo = "Artículos Menos Usados de la Bodega "+nombreBodega;
+            var tituloX = "Artículos";
+            var subTipo = "Entre el "+fechaInicio+" y el "+fechaFin;
+            label = [], informacion = [];
+            $.each(data, function(index, record) {
+                if($.isNumeric(index)) {
+                    label.push(record.nombre);
+                    informacion.push(record.suma);
                 }
+            });
+            if(data != null){
+                var aux;
+                var categorias = [], info = [];
+                for (var i = 0; i < informacion.length; i++) {
+                    if (!isNaN(informacion[i])) {
+                        aux = parseInt(informacion[i]);
+                        total += aux;
+                        categorias.push(label[i]);
+                        info.push(parseInt(informacion[i]));
+                    }
+                }
+                var titulo = tipo;
+                var subtitulo = subTipo;
+                var xTitulo = tituloX;
+                var yTitulo = 'Número de Artículos (Total: '+total+')';
+                generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
+                $("#divDialogConsulta").modal('show');
             }
-            var titulo = tipo;
-            var subtitulo = subTipo;
-            var xTitulo = tituloX;
-            var yTitulo = 'Número de Artículos (Total: '+total+')';
-            generarGrafico(titulo,subtitulo,categorias,xTitulo,yTitulo,info);
-            $("#divDialogConsulta").modal('show');
         }
     });
 

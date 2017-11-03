@@ -3017,16 +3017,18 @@ class modelo_consultas
 
     /**
      * Función que permite consultar las artículos con más usados entre dos fechas.
+     * @param string $bodega, bodega a consultar.
      * @param string $fechaInicio, fecha inicio.
      * @param string $fechaFin, fecha fin.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarArticulosMasUsados($fechaInicio,$fechaFin){
+    public function buscarArticulosMasUsados($bodega,$fechaInicio,$fechaFin){
+        $bodega = htmlspecialchars(trim($bodega));
         $fechaInicio = htmlspecialchars(trim($fechaInicio));
         $fechaFin = htmlspecialchars(trim($fechaFin));
-        $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
+        $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(split_part(a.valor_nuevo, '-', 1) AS INT)) AS suma
                 FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
-                WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
+                WHERE b.bodega = '".$bodega."' AND CAST(a.valor_antiguo AS INT) > CAST(split_part(a.valor_nuevo, '-', 1) AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
                 GROUP BY b.nombre ORDER BY suma DESC LIMIT 10;";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
@@ -3048,33 +3050,35 @@ class modelo_consultas
 
     /**
      * Función que permite consultar las artículos con menos usados entre dos fechas.
+     * @param string $bodega, bodega a consultar.
      * @param string $fechaInicio, fecha inicio.
      * @param string $fechaFin, fecha fin.
      * @return metadata con el resultado de la búsqueda.
     **/
-    public function buscarArticulosMenosUsados($fechaInicio,$fechaFin){
-            $fechaInicio = htmlspecialchars(trim($fechaInicio));
-            $fechaFin = htmlspecialchars(trim($fechaFin));
-            $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(a.valor_nuevo AS INT)) AS suma
-                    FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
-                    WHERE CAST(a.valor_antiguo AS INT) > CAST(a.valor_nuevo AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
-                    GROUP BY b.nombre ORDER BY suma ASC LIMIT 10;";
-            $l_stmt = $this->conexion->prepare($sql);
-            if(!$l_stmt){
-                $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 1)";
+    public function buscarArticulosMenosUsados($bodega,$fechaInicio,$fechaFin){
+        $bodega = htmlspecialchars(trim($bodega));
+        $fechaInicio = htmlspecialchars(trim($fechaInicio));
+        $fechaFin = htmlspecialchars(trim($fechaFin));
+        $sql = "SELECT b.nombre, SUM(CAST(a.valor_antiguo AS INT) - CAST(split_part(a.valor_nuevo, '-', 1) AS INT)) AS suma
+                FROM modificaciones a JOIN articulo b ON a.id_objeto = b.id_articulo
+                WHERE b.bodega = '".$bodega."' AND CAST(a.valor_antiguo AS INT) > CAST(split_part(a.valor_nuevo, '-', 1) AS INT) AND a.tabla_modificacion = 'inventario' AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."' AND a.valor_antiguo <> '' AND a.valor_nuevo <> ''
+                GROUP BY b.nombre ORDER BY suma ASC LIMIT 10;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 2)";
                 $GLOBALS['sql'] = $sql;
             }
-            else{
-                if(!$l_stmt->execute()){
-                    $GLOBALS['mensaje'] = "Error: SQL (Buscar Artículos Menos Usados 2)";
-                    $GLOBALS['sql'] = $sql;
-                }
-                if($l_stmt->rowCount() >= 0){
-                    $result = $l_stmt->fetchAll();
-                    $GLOBALS['sql'] = $sql;
-                }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['sql'] = $sql;
             }
-            return $result;
+        }
+        return $result;
     }
 
     /**

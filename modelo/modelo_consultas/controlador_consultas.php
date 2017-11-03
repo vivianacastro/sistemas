@@ -4510,7 +4510,7 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArticulosMasUsados($info["fecha_inicio"],$info["fecha_fin"]);
+            $data = $m->buscarArticulosMasUsados($info["bodega"],$info["fecha_inicio"],$info["fecha_fin"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
@@ -4536,7 +4536,7 @@ class controlador_consultas{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = array();
             $info = json_decode($_POST['jObject'], true);
-            $data = $m->buscarArticulosMenosUsados($info["fecha_inicio"],$info["fecha_fin"]);
+            $data = $m->buscarArticulosMenosUsados($info["bodega"],$info["fecha_inicio"],$info["fecha_fin"]);
             while (list($clave, $valor) = each($data)){
                 $arrayAux = array(
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
