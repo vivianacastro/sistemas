@@ -34,9 +34,9 @@ class modelo_usuario {
      * @param string $l, Login del usuario a consultar.
      * @return boolean
      **/
-    function retornarContrasena($l) {
+    function retornarContrasena($l, $table) {
         $l = htmlspecialchars($l);
-        $sql = "SELECT password FROM usuarios WHERE login = '".$l."';";
+        $sql = "SELECT password FROM ".$table." WHERE login = '".$l."';";
         $l_stmt = $this->conexion->prepare($sql);
         $result = array();
         if (!$l_stmt) {
@@ -70,8 +70,8 @@ class modelo_usuario {
      * @param string $cinput, password que digito el usuario.
      * @return boolean
      **/
-    public function verificarContrasena($linput, $cinput) {
-        $passwdBd = $this->retornarContrasena($linput);
+    public function verificarContrasena($linput, $cinput, $table) {
+        $passwdBd = $this->retornarContrasena($linput, $table);
         if (md5($cinput) == $passwdBd) {
             return true;
         }
@@ -86,15 +86,15 @@ class modelo_usuario {
      * @param string $login, Cadena que hace referencia al login del usuario.
      * @param string $password, Cadena que hace referencia al login del usuario.
     **/
-    public function comprobarAcceso($login, $password) {
+    public function comprobarAcceso($login, $password, $table) {
         $login = htmlspecialchars($login);
         $login = strtolower($login);
-        if(!$this->verificarContrasena($login, $password)){
+        if(!$this->verificarContrasena($login, $password, $table)){
             $GLOBALS['mensaje'] = "Contraseña incorrecta";
             return;
         }
-        $password = $this->retornarContrasena($login);
-        $sql = "SELECT * FROM usuarios WHERE login = '".$login."' AND password = '".$password."' AND estado = 'ACTIVO';";
+        $password = $this->retornarContrasena($login, $table);
+        $sql = "SELECT * FROM ".$table." WHERE login = '".$login."' AND password = '".$password."' AND estado = 'ACTIVO';";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Comprobar Acceso 1)";

@@ -116,9 +116,12 @@ class controlador_usuario {
         //instanciar el objeto de la clase Modelo
         $m = new modelo_usuario(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $n = new modelo_usuario(Config::$mvc_bd_ordenes_mantenimiento, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+
         $v = new Controlador_vista();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'])){
+            if ($infoResult = $m->comprobarAcceso($_POST['login'], $_POST['password'], 'usuarios')){
                 if (session_status() == PHP_SESSION_NONE) { //Añadido
                     session_start();
                 }
@@ -139,6 +142,13 @@ class controlador_usuario {
                 $_SESSION["creacion_aires"] = $infoResult["creacion_aires"];
                 $_SESSION["id_db_user"] = $infoResult["id"];
                 $_SESSION["ultimoAcceso"] = time();
+
+                if ($infoResultSolicitudes = $n->comprobarAcceso($_POST['login'], $_POST['password'], 'usuarios_autorizados_sistema')){
+                    $_SESSION["perfil"] = $infoResultSolicitudes["perfil"];
+                    $_SESSION["login"] = $infoResultSolicitudes["login"];
+                    $_SESSION["nombre_usuario"] = $infoResultSolicitudes["nombre_usuario"];
+                }
+
                 $data = array(
                     'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
                 );
@@ -152,9 +162,9 @@ class controlador_usuario {
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, INICIAR_SESION, $data);
             }
         }else{
-            if(isset($_SESSION['userID']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil']) && isset($_SESSION["modulo_planta"])) {
+            if(isset($_SESSION['userID']) && isset($_SESSION['autorizado']) && isset($_SESSION['perfil_sistemas']) && isset($_SESSION["modulo_planta"])) {
                 $data = array(
-                    'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario"],
+                    'mensaje' => 'Bienvenido/a al sistema '. $_SESSION["nombre_usuario_sistemas"],
                 );
                 $v->retornar_vista(MENU_PRINCIPAL, USUARIO, MENU_PRINCIPAL, $data);
             }else {
