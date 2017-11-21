@@ -12843,7 +12843,7 @@ $(document).ready(function() {
                         $("#cantidad_extraer"+i).focus();
                         break;
                     }else{
-                        idArticulo[i] = $("#nombre_articulo_anadir"+i).val();
+                        idArticulo[i] = $("#nombre_articulo_extraer"+i).val();
                         cantidad[i] = aux;
                         if (isNaN(aux2)) {
                             cantidadAnterior[i] = "nuevo";
@@ -12859,6 +12859,7 @@ $(document).ready(function() {
                 informacion["cantidad_anterior"] = cantidadAnterior;
                 informacion["entregado"] = entregado;
                 informacion["comentario"] = comentario;
+                console.log(informacion);
                 var data = modificarObjeto("inventario",informacion);
                 alert(data.mensaje);
                 if (data.verificar) {
