@@ -456,3 +456,7 @@ Stack trace:
 [21-Nov-2017 14:02:57 America/Bogota] PHP Notice:  Undefined index: entregado in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\controlador_modificacion.php on line 434
 [21-Nov-2017 14:11:27 America/Bogota] PHP Notice:  Undefined index: entregado in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\controlador_modificacion.php on line 434
 [21-Nov-2017 14:12:45 America/Bogota] PHP Notice:  Undefined index: entregado in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_modificacion\controlador_modificacion.php on line 434
+[21-Nov-2017 14:23:10 America/Bogota] PHP Warning:  A non-numeric value encountered in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4307
+[21-Nov-2017 14:23:10 America/Bogota] PHP Warning:  A non-numeric value encountered in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4307
+[21-Nov-2017 14:23:10 America/Bogota] PHP Warning:  A non-numeric value encountered in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4307
+[21-Nov-2017 14:23:10 America/Bogota] PHP Warning:  A non-numeric value encountered in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4307
