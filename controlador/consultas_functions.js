@@ -12814,7 +12814,7 @@ $(document).ready(function() {
                         cantidadValida = false;
                         $("#cantidad_extraer").focus();
                         break;
-                    }else if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
+                    }else if ((isNaN(aux2)) || (aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad_extraer").focus();
@@ -12837,7 +12837,7 @@ $(document).ready(function() {
                         cantidadValida = false;
                         $("#cantidad_extraer"+i).focus();
                         break;
-                    }else if ((isNaN(aux2)) && (aux < 0) || (aux < 0) && ((aux2 + aux) < 0)) {
+                    }else if ((isNaN(aux2)) || (aux < 0) && ((aux2 + aux) < 0)) {
                         alert("ERROR. La cantidad a extraer es mayor que la cantidad disponible en el inventario");
                         cantidadValida = false;
                         $("#cantidad_extraer"+i).focus();
