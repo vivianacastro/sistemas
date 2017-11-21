@@ -344,7 +344,7 @@ html, body {
 }
 
 .modal-dialog{
-    width: 60%;
+    width: 95%;
 }
 
 .modal-footer{
@@ -611,7 +611,7 @@ html, body {
     }
 
     .modal-dialog{
-        width: 80%;
+        width: 90%;
     }
 
 	#divTimeOut{
