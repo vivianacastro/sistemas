@@ -12716,7 +12716,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Se captura el evento cuando de dar click en el botón guardar_añadir_articulos y se
+     * Se captura el evento cuando de dar click en el botón guardar_ingresar_articulos y se
      * realiza la operacion correspondiente.
     **/
     $("#guardar_ingresar_articulos").click(function (e){

@@ -444,3 +444,10 @@ Stack trace:
 [03-Nov-2017 10:53:20 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
 [03-Nov-2017 10:53:20 America/Bogota] PHP Notice:  Undefined offset: 2 in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4275
 [03-Nov-2017 11:00:18 America/Bogota] PHP Notice:  Undefined index: bodega in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\modelo\modelo_consultas\controlador_consultas.php on line 4513
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 407
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 409
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 411
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 413
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 415
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 417
+[21-Nov-2017 13:54:19 America/Bogota] PHP Notice:  Undefined index: action in C:\Users\juanc_000\Google Drive\Trabajo\sistemas\index.php on line 419
