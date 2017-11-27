@@ -13022,6 +13022,10 @@ $(document).ready(function() {
                                     }*/
                                     location.reload();
                                 }
+                            }else{
+                                if (data.mensaje.includes("El artículo ya se encuentra registrado en el sistema")) {
+                                    $("#nombre_articulo").focus();
+                                }
                             }
                         }
                     }
