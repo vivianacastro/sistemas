@@ -1507,9 +1507,10 @@ $(document).ready(function() {
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
         row.appendTo("#"+selector+id);
+        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
-                aux = record.nombre+" - "+record.nombre_marca;
+                aux = record.nombre+" - "+record.categoria_articulo+" - "+record.nombre_marca;
                 row = $("<option value='" + record.id_articulo + "'/>");
                 row.text(aux);
                 row.appendTo("#"+selector+id);

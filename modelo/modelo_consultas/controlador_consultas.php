@@ -4088,6 +4088,7 @@ class controlador_consultas{
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'id_marca' => $valor['id_marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'categoria_articulo' => mb_convert_case($valor['categoria_articulo'],MB_CASE_TITLE,"UTF-8"),
                     'cantidad_minima' => $valor['cantidad_minima'],
                     'cantidad' => $valor['cantidad'],
                 );
@@ -4116,6 +4117,7 @@ class controlador_consultas{
                     'nombre' => mb_convert_case($valor['nombre'],MB_CASE_TITLE,"UTF-8"),
                     'id_marca' => $valor['id_marca'],
                     'nombre_marca' => mb_convert_case($valor['nombre_marca'],MB_CASE_TITLE,"UTF-8"),
+                    'categoria_articulo' => mb_convert_case($valor['categoria_articulo'],MB_CASE_TITLE,"UTF-8"),
                     'cantidad_minima' => $valor['cantidad_minima'],
                     'cantidad' => $valor['cantidad'],
                 );
