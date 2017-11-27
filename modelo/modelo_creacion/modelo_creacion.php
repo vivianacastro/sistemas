@@ -1874,7 +1874,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -1921,7 +1921,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -1970,7 +1970,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2019,7 +2019,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2068,7 +2068,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2117,7 +2117,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2166,7 +2166,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2215,7 +2215,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2266,7 +2266,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2317,7 +2317,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2368,7 +2368,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2418,7 +2418,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2467,7 +2467,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2516,7 +2516,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2565,7 +2565,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2614,7 +2614,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2663,7 +2663,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2712,7 +2712,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2761,7 +2761,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2810,7 +2810,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2859,7 +2859,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2908,7 +2908,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -2959,7 +2959,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
@@ -3010,13 +3010,13 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
                 }
             }else{
-                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto['name'].'" ya existe.';
+                $GLOBALS['mensaje'] = 'ERROR. El archivo "'.$foto["name"].'" ya existe.';
                 return false;
             }
         }else{
@@ -4000,7 +4000,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                         return true;
                     }
@@ -4045,7 +4045,7 @@ class modelo_creacion {
                         $GLOBALS['sql'] = $sql;
                         return false;
                     }else{
-                        $GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
+                        //$GLOBALS['mensaje'] = 'El archivo se ha guardado correctamente';
                         $GLOBALS['sql'] = $sql;
                 return true;
                     }
