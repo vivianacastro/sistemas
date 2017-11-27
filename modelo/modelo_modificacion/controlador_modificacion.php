@@ -455,7 +455,9 @@ class controlador_modificacion{
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->modificarArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima'],$info['proveedor'],$info['proveedor_anterior']);
+            if ($m->verificarNombreArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['categoria'],$info['bodega'])) {
+                $verificar = $m->modificarArticulo($info['id_articulo'],$info['nombre'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima'],$info['proveedor'],$info['proveedor_anterior']);
+            }
         }
         $result['mensaje'] = $GLOBALS['mensaje'];
         $result['sql'] = $GLOBALS['sql'];

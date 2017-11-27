@@ -7575,7 +7575,7 @@ $(document).ready(function() {
      * realiza la operacion correspondiente.
     **/
     $("#modificar_articulo").click(function (e){
-        //$("#nombre_articulo").removeAttr("disabled");
+        $("#nombre_articulo").removeAttr("disabled");
         $("#marca").removeAttr("disabled");
         $("#categoria").removeAttr("disabled");
         //$("#bodega").removeAttr("disabled");
@@ -12902,7 +12902,7 @@ $(document).ready(function() {
             var error = false;
             if (aux <= 20) {
                 if (!validarCadena(nombre)) {
-                    alert("ERROR. Ingrese el nuevo nombre del artículo");
+                    alert("ERROR. Ingrese el nombre del artículo");
                     $("#nombre_articulo").focus();
                 }else if (!validarCadena(marca)) {
                     alert("ERROR. Seleccione la marca del artículo");

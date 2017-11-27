@@ -3143,6 +3143,46 @@ class modelo_modificacion {
     /**
      * Función que permite modificar la información del artículo.
      * @param string $id_articulo, id del articulo.
+     * @param string $nombre, nombre del artículo.
+     * @param string $marca, marca del artículo.
+     * @param string $categoria, $categoria del artículo.
+     * @param string $bodega, $bodega donde está el artículo.
+     * @param string $cantidad_minima, cantidad mínima del artículo.
+     * @param string $proveedor, arreglo con los proveedores del artículo.
+     * @param string $proveedor, arreglo con los anteriores proveedores del artículo.
+     * @return array
+    **/
+    public function verificarNombreArticulo($id_articulo,$nombre,$marca,$categoria,$bodega){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $nombre = htmlspecialchars(trim($nombre));
+        $marca = htmlspecialchars(trim($marca));
+        $categoria = htmlspecialchars(trim($categoria));
+        $bodega = htmlspecialchars(trim($bodega));
+        $sql = "SELECT * FROM articulo WHERE id_articulo != '".$id_articulo."' AND nombre = '".$nombre."' AND marca = '".$marca."' AND id_categoria_articulo = '".$categoria."' AND bodega = '".$bodega."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Verificar Nombre Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Verificar Nombre Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }elseif($l_stmt->rowCount() > 0){
+                $GLOBALS['mensaje'] = "ERROR. El artículo ya se encuentra registrado en el sistema";
+                return false;
+            }
+            else{
+                $GLOBALS['sql'] = $sql;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite modificar la información del artículo.
+     * @param string $id_articulo, id del articulo.
      * @param string $proveedor, nuevo proveedor.
      * @param string $proveedor_anterior, anterior proveedor.
      * @return array
