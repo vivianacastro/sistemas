@@ -520,6 +520,39 @@ class modelo_consultas
     }
 
     /**
+     * Función que permite buscar los espacios de un piso de un edificio que se han creado en el sistema.
+     * @param string $nombre_sede, id de la sede al que pertenecen los espacios.
+     * @param string $nombre_campus, id del campus donde están los espacios..
+     * @param string $nombre_edificio, id del edificio donde están los espacios a buscar.
+     * @param string $piso, piso del edificio donde están los espacios.
+     * @return metadata con el resultado de la búsqueda.
+    **/
+    public function buscarEspaciosAiresAcondicionados($nombre_sede,$nombre_campus,$nombre_edificio,$piso){
+        $nombre_sede = htmlspecialchars(trim($nombre_sede));
+        $nombre_campus = htmlspecialchars(trim($nombre_campus));
+        $nombre_edificio = htmlspecialchars(trim($nombre_edificio));
+        $piso = htmlspecialchars(trim($piso));
+        $sql = "SELECT id_espacio FROM aire_acondicionado WHERE id_sede = '".$nombre_sede."' AND id_campus = '".$nombre_campus."' AND id_edificio = '".$nombre_edificio."' AND piso = '".$piso."' GROUP BY id_espacio ORDER BY id_espacio;";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 1)";
+            $GLOBALS['sql'] = $sql;
+        }
+        else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Buscar Espacios 2)";
+                $GLOBALS['sql'] = $sql;
+            }
+            if($l_stmt->rowCount() >= 0){
+                $result = $l_stmt->fetchAll();
+                $GLOBALS['mensaje'] = "Espacios del edificio presentes en el sistema";
+                $GLOBALS['sql'] = $sql;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Función que permite buscar la información de una sede en el sistema.
      * @param string $nombre_sede, id de la sede.
      * @return metadata con el resultado de la búsqueda.
@@ -2619,10 +2652,10 @@ class modelo_consultas
         $id_edificio = htmlspecialchars(trim($id_edificio));
         $id_espacio = htmlspecialchars(trim($id_espacio));
         $sql = "SELECT a.id_aire, a.numero_inventario, a.id_sede, a.id_campus, a.id_edificio, a.piso, a.id_espacio, a.capacidad, a.marca, b.nombre AS marca_aire, a.modelo, a.capacidad, c.capacidad AS numero_capacidad, a.tipo, d.tipo AS tipo_aire, a.tecnologia, e.tipo AS tecnologia_aire, a.fecha_instalacion, a.instalador, a.periodicidad_mantenimiento, a.ubicacion_condensadora, a.responsable
-                FROM aire_acondicionado a  JOIN marca_aire b ON a.marca = b.id
-                                                    JOIN capacidad_aire c ON a.capacidad = c.id
-                                                    JOIN tipo_aire d ON a.tipo = d.id
-                                                    JOIN tipo_tecnologia_aire e ON a.tecnologia = e.id
+                FROM aire_acondicionado a  LEFT JOIN marca_aire b ON a.marca = b.id
+                                                    LEFT JOIN capacidad_aire c ON a.capacidad = c.id
+                                                    LEFT JOIN tipo_aire d ON a.tipo = d.id
+                                                    LEFT JOIN tipo_tecnologia_aire e ON a.tecnologia = e.id
                 WHERE id_sede = '".$id_sede."' AND id_campus = '".$id_campus."' AND id_edificio = '".$id_edificio."' AND id_espacio = '".$id_espacio."' ORDER BY cast(a.id_aire AS int);";
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){

@@ -1291,6 +1291,31 @@ class controlador_consultas{
     }
 
     /**
+     * Función que permite consultar los espacios de un edificio
+     * almacenados en el sistema.
+    **/
+    public function consultar_espacios_aires_acondicionados() {
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $m = new Modelo_consultas(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $result = array();
+            $info = json_decode($_POST['jObject'], true);
+            $data = $m->buscarEspaciosAiresAcondicionados($info["nombre_sede"],$info["nombre_campus"],$info["nombre_edificio"],$info["piso"]);
+            while (list($clave, $valor) = each($data)){
+                $arrayAux = array(
+                    'id' => mb_convert_case($valor['id_espacio'],MB_CASE_TITLE,"UTF-8"),
+                );
+                array_push($result, $arrayAux);
+            }
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        echo json_encode($result);
+    }
+
+    /**
      * Función que permite consultar el número de pisos de un edificio
      * almacenado en el sistema.
     **/

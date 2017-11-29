@@ -419,6 +419,38 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que permite consultar los espacios existentes en un piso de un edificio.
+     * @param {array} informacion, información del tipo de material.
+     * @returns {data}
+    */
+    function buscarEspaciosAiresAcondicionados(informacion){
+        var dataResult;
+        var jObject = JSON.stringify(informacion);
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_espacios_aires_acondicionados",
+                data: {jObject:jObject},
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //mostrarMensaje(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que permite crear un tipo de material.
      * @param {array} informacion, información del tipo de material.
      * @returns {data}
@@ -1409,8 +1441,8 @@ $(document).ready(function() {
                 informacion["nombre_campus"] = nombreCampus;
                 informacion["nombre_edificio"] = nombreEdificio;
                 informacion["piso"] = piso;
-                var data = buscarEspacios(informacion);
                 if(URLactual['href'].indexOf('crear_aire') >= 0 || URLactual['href'].indexOf('registrar_mantenimiento_aire') >= 0){
+                    var data = buscarEspaciosAiresAcondicionados(informacion);
                     $("#id_espacio").empty();
                     var row = $("<option value=''/>");
                     row.text("--Seleccionar--");
@@ -1424,6 +1456,7 @@ $(document).ready(function() {
                         }
                     });
                 }else{
+                    var data = buscarEspacios(informacion);
                     if (data.mensaje != null) {
                         $("#espacio_padre").empty();
                         var row = $("<option value=''/>");
@@ -1452,7 +1485,7 @@ $(document).ready(function() {
     /**
      * Se captura el evento cuando se modifica el valor del selector de espacio.
     */
-    /*$("#id_espacio").change(function (e) {
+    $("#id_espacio").change(function (e) {
         for (var i=0;i<numeroAires;i++) {
             eliminarComponente("tr_tabla_aires");
         }
@@ -1505,7 +1538,7 @@ $(document).ready(function() {
                 $("#id_aire_search").val("").change();
             }
         }
-    });*/
+    });
 
     /**
      * Se captura el evento cuando se modifica el valor del selector de aire acondicionado.

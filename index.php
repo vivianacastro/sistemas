@@ -146,6 +146,7 @@ $map = array(
         'consultar_vias' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_vias'),
         'consultar_edificios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_edificios'),
         'consultar_espacios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_espacios'),
+        'consultar_espacios_aires_acondicionados' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_espacios_aires_acondicionados'),
         'consultar_pisos_edificio' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_pisos_edificio'),
         'consultar_usos_espacios' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_usos_espacios'),
         'consultar_materiales' => array('controlador' =>'controlador_consultas', 'action' =>'consultar_materiales'),
