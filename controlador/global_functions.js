@@ -130,10 +130,14 @@ $(document).ready(function () {
 			$('#option_consultar_inventario_electrico').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario_hidraulico') >= 0)) {
 			$('#option_consultar_inventario_hidraulico').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_consultar_inventario_sanfernando') >= 0)) {
+			$('#option_consultar_inventario_sanfernando').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_movimientos_inventario_electrico') >= 0)) {
 			$('#option_movimientos_inventario_electrico').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_movimientos_inventario_hidraulico') >= 0)) {
 			$('#option_movimientos_inventario_hidraulico').addClass("opcion_activa_seleccion");
+		}else if ((URLactual['href'].indexOf('inventario_movimientos_inventario_sanfernando') >= 0)) {
+			$('#option_movimientos_inventario_sanfernando').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_articulo') >= 0)) {
 			$('#option_consultar_articulo').addClass("opcion_activa_seleccion");
 		}else if ((URLactual['href'].indexOf('inventario_consultar_categoria') >= 0)) {

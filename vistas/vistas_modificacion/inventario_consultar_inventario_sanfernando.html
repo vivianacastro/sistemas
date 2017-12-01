@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<div>
+    <div class='form-group'>
+        <div><b><h2>Gestionar Inventario - Bodega San Fernando</h2></b><br></div>
+        <div><h4><b>Artículos</b></h4></div>
+        <div class="table-responsive">
+            <table id="tabla_inventario" class="display table table-bordered" width="100%">
+                <thead align="center">
+                    <tr>
+                        <th>Id Art&iacute;culo</th>
+                        <th>Art&iacute;culo</th>
+                        <th>Cantidad</th>
+                        <th>Marca</th>
+                        <th>Categor&iacute;a</th>
+                        <th>Cantidad M&iacute;nima</th>
+                    </tr>
+                </thead>
+                <tbody id="tBody" class="bodyTabla">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class='form_button'>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='ingresar_articulos' id='ingresar_articulos' value='Ingresar Artículos' title='Ingresar articulos del inventario'/>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='extraer_articulos' id='extraer_articulos' value='Extraer Artículos' title='Extraer articulos del inventario'/>
+        <input type='button' class='btn btn-primary btn-lg btn-formulario' name='visualizarArticulo' id='visualizarArticulo' value='Ver Informaci&oacute;n Artículo' title='Ver información del artículo seleccionado' disabled/>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogIngresarArticulo'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Ingresar Art&iacute;culos del Inventario</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div>
+                        <div id="articulo_ingresar">
+                            <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                            <select class='form-control formulario nombre_articulo_anadir' name='nombre_articulo_ingresar' id='nombre_articulo_ingresar' required></select><br>
+                            <div class='div_izquierda'><b>Cantidad de Art&iacute;culos a Ingresar<font color='red'>*</font>:</b></div>
+                            <input class='form-control formulario' type='number' name='cantidad_ingresar' id='cantidad_ingresar' min="1" value='' placeholder='Ej: 10' required/>
+                        </div><br>
+                        <div class='div_izquierda'><b>Comentario:</b></div>
+                        <textarea class="form-control formulario" rows="5" maxlength='200' name="comentario_ingresar" id="comentario_ingresar"></textarea>
+                        <div>
+                            <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_articulo_ingresar' id='añadir_articulo_ingresar' value='Añadir Art&iacute;culo' title='Añadir Art&iacute;culo'/>
+                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_articulo_ingresar' id='eliminar_articulo_ingresar' value='Eliminar Art&iacute;culo' title='Eliminar Art&iacute;culo' disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_ingresar_articulos' id='guardar_ingresar_articulos' value='Guardar Cambios' title='Guardar Modificaciones'/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogExtraerArticulo'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Extraer Art&iacute;culos del Inventario</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionArticuloInventario'>
+                        <div id="articulo_extraer">
+                            <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                            <select class='form-control formulario nombre_articulo_extraer' name='nombre_articulo_extraer' id='nombre_articulo_extraer' required></select><br>
+                            <div class='div_izquierda'><b>Cantidad de Art&iacute;culos a Extraer<font color='red'>*</font>:</b></div>
+                            <input class='form-control formulario' type='number' name='cantidad_extraer' id='cantidad_extraer' min="1" value='' placeholder='Ej: 10' required/>
+                        </div><br>
+                        <div class='div_izquierda'><b>Entregado A:</b></div>
+                        <input class='form-control formulario' type='text' name='entregado' id='entregado' value='' maxlength='200' placeholder='' required/><br>
+                        <div class='div_izquierda'><b>Comentario:</b></div>
+                        <textarea class="form-control formulario" rows="5" maxlength='200' name='comentario_extraer' id='comentario_extraer'></textarea>
+                        <div>
+                            <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_articulo_extraer' id='añadir_articulo_extraer' value='Añadir Art&iacute;culo' title='Añadir Art&iacute;culo'/>
+                            <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_articulo_extraer' id='eliminar_articulo_extraer' value='Eliminar Art&iacute;culo' title='Eliminar Art&iacute;culo' disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='guardar_extraer_articulos' id='guardar_extraer_articulos' value='Guardar Cambios' title='Guardar Modificaciones'/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogPocosArticulos'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Artículos con Cantidades por Debajo de la Cantidad Mínima</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div class="table-responsive">
+                        <table id="tabla_pocos_articulos" class="table table-bordered">
+                            <thead align="center">
+                                <tr>
+                                    <th>Id Art&iacute;culo</th>
+                                    <th>Art&iacute;culo</th>
+                                    <th>Cantidad</th>
+                                    <th>Marca</th>
+                                    <th>Categor&iacute;a</th>
+                                    <th>Bodega</th>
+                                    <th>Cantidad M&iacute;nima</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tBody" class="bodyTablaPocosArticulos">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal fade' role='dialog' id='divDialogConsulta'>
+    <div class='modal-dialog' id='divConsulta'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+              <h4 class='modal-title'>Informaci&oacute;n del Artículo Seleccionado</h4>
+            </div>
+            <div class='modal-body'>
+                <div class='form-group'>
+                    <div id='informacionInventario'>
+                        <div class='div_izquierda'><b>Nombre del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='text' name='nombre_articulo' id='nombre_articulo' maxlength="100" value='' placeholder='Ej: Tubo PVC' onkeypress="return validaCaractaer(event)" disabled required/><br>
+                        <div class='div_izquierda'><b>Bodega<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='bodega' id='bodega' disabled required>
+                            <option value="">--Seleccionar--</option>
+                            <option value="electrica">El&eacute;ctrica</option>
+                            <option value="hidraulica">Hidr&aacute;ulica</option>
+                            <option value="sanfernando">San Fernando</option>
+                        </select><br>
+                        <div class='div_izquierda'><b>Marca del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='marca' id='marca' disabled required></select><br>
+                        <div class='div_izquierda'><b>Categor&iacute;a del Art&iacute;culo<font color='red'>*</font>:</b></div>
+                        <select class='form-control formulario' name='categoria' id='categoria' disabled required></select><br>
+                        <div class='div_izquierda'><b>Cantidad M&iacute;nima<font color='red'>*</font>:</b></div>
+                        <input class='form-control formulario' type='number' name='cantidad_minima' id='cantidad_minima' min="1" value='' placeholder='Ej: 10' disabled required/><br>
+                        <div>
+                            <div id='proveedor'>
+                                <div class='div_izquierda'><b>Proveedor del Art&iacute;culo:</b></div>
+                                <select class='form-control formulario' name='proveedor_articulo' id='proveedor_articulo' disabled required></select>
+                            </div>
+                            <div id="botones_proveedor" style="display:none">
+                                <br><input type='submit' class='btn btn-primary btn-lg btn-agregar' name='añadir_proveedor' id='añadir_proveedor' value='Añadir Proveedor' title='Añadir Proveedor'/>
+                                <input type='submit' class='btn btn-primary btn-lg btn-agregar' name='eliminar_proveedor' id='eliminar_proveedor' value='Eliminar Proveedor' title='Eliminar Proveedor' disabled/>
+                            </div>
+                        </div><br>
+                        <div class='div_izquierda'><b>Fotos del Art&iacute;culo:</b></div>
+                        <div id='fotos'>
+                          <div class="div_carousel">
+                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators" id="indicadores_carrusel">
+                                    <li id="slide_carrusel_eliminar" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" id="fotos_carrusel" role="listbox">
+                                    <div id="item_carrusel_eliminar" class="item active carouselImg">
+                                        <img class="carouselImg" src="archivos/images/index/admin.jpg"/>
+                                    </div>
+                                </div>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                          </div>
+                        </div>
+                        <div id='enlace_fotos' style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+            <div class='form_button modal-footer'>
+                <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_fotos' id='guardar_fotos' value='Guardar Fotos Seleccionadas' title='Guardar las fotos seleccionados'/>
+                <input type='submit' class='btn btn-primary btn-lg btn-formulario' name='modificar_articulo' id='modificar_articulo' value='Modificar Artículo' title='Modificar informaci&oacute;n del Artículo'/>
+                <input type='submit' style='display:none' class='btn btn-primary btn-lg btn-formulario' name='guardar_modificaciones_articulo' id='guardar_modificaciones_articulo' value='Guardar Cambios' title='Guardar informaci&oacute;n del Artículo'/>
+            </div>
+        </div>
+    </div>
+</div>

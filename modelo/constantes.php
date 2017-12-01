@@ -100,8 +100,10 @@ const OPERATION_CONSULTAR_MARCA = 'inventario_consultar_marca';
 const OPERATION_CONSULTAR_PROVEEDOR = 'inventario_consultar_proveedor';
 const OPERATION_CONSULTAR_INVENTARIO_ELECTRICO = 'inventario_consultar_inventario_electrico';
 const OPERATION_CONSULTAR_INVENTARIO_HIDRAULICO = 'inventario_consultar_inventario_hidraulico';
+const OPERATION_CONSULTAR_INVENTARIO_SANFERNANDO = 'inventario_consultar_inventario_sanfernando';
 const OPERATION_MOVIMIENTOS_INVENTARIO_ELECTRICO = 'inventario_movimientos_inventario_electrico';
 const OPERATION_MOVIMIENTOS_INVENTARIO_HIDRAULICO = 'inventario_movimientos_inventario_hidraulico';
+const OPERATION_MOVIMIENTOS_INVENTARIO_SANFERNANDO = 'inventario_movimientos_inventario_sanfernando';
 const OPERATION_ARTICULOS_MAS_USADOS = 'inventario_articulos_mas_usados';
 const OPERATION_ARTICULOS_MENOS_USADOS = 'inventario_articulos_menos_usados';
 ?>

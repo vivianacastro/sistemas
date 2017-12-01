@@ -2202,7 +2202,11 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarMarcas($bodega){
-        $sql = "SELECT * FROM marca_inventario WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        if ($bodega == "sanfernando") {
+            $sql = "SELECT * FROM marca_inventario ORDER BY nombre;";
+        }else{
+            $sql = "SELECT * FROM marca_inventario WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Marcas 1)";
@@ -2226,7 +2230,11 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarCategorias($bodega){
-        $sql = "SELECT * FROM categoria_articulo WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        if ($bodega == "sanfernando") {
+            $sql = "SELECT * FROM categoria_articulo ORDER BY nombre;";
+        }else{
+            $sql = "SELECT * FROM categoria_articulo WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Categorías 1)";
@@ -2250,7 +2258,11 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarProveedores($bodega){
-        $sql = "SELECT * FROM proveedor WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        if ($bodega == 'sanfernando') {
+            $sql = "SELECT * FROM proveedor ORDER BY nombre;";
+        }else{
+            $sql = "SELECT * FROM proveedor WHERE bodega = '".$bodega."' ORDER BY nombre;";
+        }
         $l_stmt = $this->conexion->prepare($sql);
         if(!$l_stmt){
             $GLOBALS['mensaje'] = "Error: SQL (Buscar Proveedores 1)";
