@@ -4306,14 +4306,15 @@ class modelo_creacion {
      * @param string $marca, marca del artículo.
      * @return array
     **/
-    public function verificarArticulo($nombre,$marca){
+    public function verificarArticulo($nombre,$marca,$categoria,$bodega){
         $nombre = htmlspecialchars(trim($nombre));
         $marca = htmlspecialchars(trim($marca));
         $categoria = htmlspecialchars(trim($categoria));
+        $bodega = htmlspecialchars(trim($bodega));
         if (strcmp($nombre,"") == 0 && strcmp($marca,"") == 0 && strcmp($categoria,"") == 0) {
             return true;
         }else{
-            $sql = "SELECT * FROM articulo WHERE nombre = '".$nombre."' AND marca = '".$marca."' AND id_categoria_articulo = '".$categoria."';";
+            $sql = "SELECT * FROM articulo WHERE nombre = '".$nombre."' AND marca = '".$marca."' AND bodega = '".$bodega."' AND id_categoria_articulo = '".$categoria."';";
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
                 $GLOBALS['mensaje'] = "Error: SQL (Verificar Artículo 1)";

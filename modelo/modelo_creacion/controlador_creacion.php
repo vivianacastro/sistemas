@@ -1822,7 +1822,7 @@ class controlador_creacion
                     Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $info = json_decode($_POST['jObject'], true);
-            $verificar = $m->verificarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria']);
+            $verificar = $m->verificarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria'],$info['bodega']);
             if($verificar){
                 $verificar = $m->guardarArticulo($info['nombre_articulo'],$info['marca'],$info['categoria'],$info['bodega'],$info['cantidad_minima']);
 				while (list($clave, $valor) = each($verificar)){
