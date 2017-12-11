@@ -449,7 +449,7 @@ html, body {
     text-decoration:line-through;
 }
 
-#agregar_espacio, #eliminar_espacio{
+.btn_agregar_eliminar_espacio{
     margin-top: 0em !important;
 }
 
