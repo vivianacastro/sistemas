@@ -292,6 +292,10 @@ html, body {
     margin-right: auto;
 }
 
+.input-group-btn{
+    margin-top: 0em !important;
+}
+
 .input-lg{
     width: 100%;
     margin-left: auto;
