@@ -1507,7 +1507,6 @@ $(document).ready(function() {
         var row = $("<option value=''/>");
         row.text("--Seleccionar--");
         row.appendTo("#"+selector+id);
-        console.log(data);
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 aux = record.nombre+" - "+record.categoria_articulo+" - "+record.nombre_marca;
@@ -7601,6 +7600,17 @@ $(document).ready(function() {
     **/
     $("#ingresar_articulos").click(function (e){
         actualizarSelectArticulo(ingresarArticulosCont,"nombre_articulo_ingresar");
+
+        var element = $("#tabla_inventario").find(".filaSeleccionada");
+		var articulo = element.html();
+        if (articulo != undefined) {
+            articulo = articulo.split("</td>");
+            articulo = articulo[0];
+            var n = articulo.indexOf(">");
+    		articulo = articulo.substring(n+1);
+            $("#nombre_articulo_ingresar").val(articulo);
+        }
+
         $("#divDialogIngresarArticulo").modal('show');
     });
 
@@ -7610,6 +7620,17 @@ $(document).ready(function() {
     **/
     $("#extraer_articulos").click(function (e){
         actualizarSelectArticulo(extraerArticulosCont,"nombre_articulo_extraer");
+
+        var element = $("#tabla_inventario").find(".filaSeleccionada");
+		var articulo = element.html();
+        if (articulo != undefined) {
+            articulo = articulo.split("</td>");
+            articulo = articulo[0];
+            var n = articulo.indexOf(">");
+    		articulo = articulo.substring(n+1);
+            $("#nombre_articulo_extraer").val(articulo);
+        }
+
         $("#divDialogExtraerArticulo").modal('show');
     });
 

@@ -119,7 +119,7 @@ class controlador_vista
     *@param $operacion. Hace referencia la modulo que se carga una vez ejecutada una ruta
     **/
     function crear_enlace_libreria($operacion){
-        $link = "<script type='text/javascript' src='controlador/".$operacion."_functions.js?version=1.436'></script>";
+        $link = "<script type='text/javascript' src='controlador/".$operacion."_functions.js?version=1.437'></script>";
         return $link;
     }
 
