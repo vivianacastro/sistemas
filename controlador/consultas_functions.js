@@ -7625,10 +7625,15 @@ $(document).ready(function() {
 		var articulo = element.html();
         if (articulo != undefined) {
             articulo = articulo.split("</td>");
+            var cantidad = articulo[2];
             articulo = articulo[0];
             var n = articulo.indexOf(">");
+            var m = cantidad.indexOf(">");
     		articulo = articulo.substring(n+1);
+            cantidad = cantidad.substring(m+1);
             $("#nombre_articulo_extraer").val(articulo);
+            $("#cantidad_extraer").attr('name',cantidad);
+            $("#cantidad_extraer").attr("placeholder","Disponibles: "+cantidad);
         }
 
         $("#divDialogExtraerArticulo").modal('show');
