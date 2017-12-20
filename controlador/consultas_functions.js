@@ -6125,7 +6125,7 @@ $(document).ready(function() {
                     }else{
                         componente = '<li id="slide_carrusel" data-target="#myCarousel" data-slide-to="'+numeroFotos+'"></li>'
                         componente2 = '<div id="item_carrusel" class="item carouselImg">'
-                        +'<img class="carouselImg" src="archivos/images/articulo/'+idAire+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
+                        +'<img class="carouselImg" src="archivos/images/articulo/'+idArticulo+'/'+record.nombre+'" alt="'+record.nombre+'"/>'
                         +'</div>';
                     }
                     añadirComponente("indicadores_carrusel",componente);
