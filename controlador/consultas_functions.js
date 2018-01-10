@@ -1013,163 +1013,163 @@ $(document).ready(function() {
     }
 
     /**
-	 * Función que permite consultar el inventario eléctrico.
-	 * @returns {data}
-	**/
-	function listarInventarioElectrico(){
-		var dataResult;
-		try {
-			$.ajax({
-				type: "POST",
-				url: "index.php?action=listar_inventario_electrico",
-				dataType: "json",
-				async: false,
-				error: function(xhr, status, error) {
-					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-					//location.reload(true);
-					var err = eval("(" + xhr.responseText + ")");
-					console.log(err.Message);
-				},
-				success: function(data) {
-					//alert(data.mensaje);
-					dataResult = data;
-				}
-			});
-			return dataResult;
-		}
-		catch(ex) {
-			console.log(ex);
-			alert("Ocurrió un error, por favor inténtelo nuevamente");
-		}
-	}
+     * Función que permite consultar el inventario eléctrico.
+     * @returns {data}
+    **/
+    function listarInventarioElectrico(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_inventario_electrico",
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
     /**
-	 * Función que permite consultar el inventario hidráulico.
-	 * @returns {data}
-	**/
-	function listarInventarioHidraulico(){
-		var dataResult;
-		try {
-			$.ajax({
-				type: "POST",
-				url: "index.php?action=listar_inventario_hidraulico",
-				dataType: "json",
-				async: false,
-				error: function(xhr, status, error) {
-					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-					//location.reload(true);
-					var err = eval("(" + xhr.responseText + ")");
-					console.log(err.Message);
-				},
-				success: function(data) {
-					//alert(data.mensaje);
-					dataResult = data;
-				}
-			});
-			return dataResult;
-		}
-		catch(ex) {
-			console.log(ex);
-			alert("Ocurrió un error, por favor inténtelo nuevamente");
-		}
-	}
+     * Función que permite consultar el inventario hidráulico.
+     * @returns {data}
+    **/
+    function listarInventarioHidraulico(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_inventario_hidraulico",
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
     /**
-	 * Función que permite consultar el inventario de aires acondicionados.
-	 * @returns {data}
-	**/
-	function listarInventarioAiresAcondicionados(){
-		var dataResult;
-		try {
-			$.ajax({
-				type: "POST",
-				url: "index.php?action=listar_inventario_aires_acondicionados",
-				dataType: "json",
-				async: false,
-				error: function(xhr, status, error) {
-					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-					//location.reload(true);
-					var err = eval("(" + xhr.responseText + ")");
-					console.log(err.Message);
-				},
-				success: function(data) {
-					//alert(data.mensaje);
-					dataResult = data;
-				}
-			});
-			return dataResult;
-		}
-		catch(ex) {
-			console.log(ex);
-			alert("Ocurrió un error, por favor inténtelo nuevamente");
-		}
-	}
+     * Función que permite consultar el inventario de aires acondicionados.
+     * @returns {data}
+    **/
+    function listarInventarioAiresAcondicionados(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_inventario_aires_acondicionados",
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
     /**
-	 * Función que permite consultar el inventario de la bodega eléctrica.
-	 * @returns {data}
-	**/
-	function listarMovimientosInventarioElectrico(informacion){
-		var dataResult;
+     * Función que permite consultar el inventario de la bodega eléctrica.
+     * @returns {data}
+    **/
+    function listarMovimientosInventarioElectrico(informacion){
+        var dataResult;
         var jObject = JSON.stringify(informacion);
-		try {
-			$.ajax({
-				type: "POST",
-				url: "index.php?action=listar_movimientos_inventario_electrico",
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_movimientos_inventario_electrico",
                 data: {jObject:jObject},
-				dataType: "json",
-				async: false,
-				error: function(xhr, status, error) {
-					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-					//location.reload(true);
-					var err = eval("(" + xhr.responseText + ")");
-					console.log(err.Message);
-				},
-				success: function(data) {
-					//alert(data.mensaje);
-					dataResult = data;
-				}
-			});
-			return dataResult;
-		}
-		catch(ex) {
-			console.log(ex);
-			alert("Ocurrió un error, por favor inténtelo nuevamente");
-		}
-	}
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
     /**
-	 * Función que permite consultar el inventario de la bodega hidráulica.
-	 * @returns {data}
-	**/
-	function listarMovimientosInventarioHidraulico(informacion){
-		var dataResult;
+     * Función que permite consultar el inventario de la bodega hidráulica.
+     * @returns {data}
+    **/
+    function listarMovimientosInventarioHidraulico(informacion){
+        var dataResult;
         var jObject = JSON.stringify(informacion);
-		try {
-			$.ajax({
-				type: "POST",
-				url: "index.php?action=listar_movimientos_inventario_hidraulico",
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_movimientos_inventario_hidraulico",
                 data: {jObject:jObject},
-				dataType: "json",
-				async: false,
-				error: function(xhr, status, error) {
-					//alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
-					//location.reload(true);
-					var err = eval("(" + xhr.responseText + ")");
-					console.log(err.Message);
-				},
-				success: function(data) {
-					//alert(data.mensaje);
-					dataResult = data;
-				}
-			});
-			return dataResult;
-		}
-		catch(ex) {
-			console.log(ex);
-			alert("Ocurrió un error, por favor inténtelo nuevamente");
-		}
-	}
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
 
     /**
      * Función que llena la tabla inventario eléctrico.
@@ -6053,28 +6053,28 @@ $(document).ready(function() {
     **/
     $("#visualizarArticulo").click(function (e){
         var element = $("#tabla_inventario").find(".filaSeleccionada");
-		var articulo = element.html();
-		articulo = articulo.split("</td>");
+        var articulo = element.html();
+        articulo = articulo.split("</td>");
         articulo = articulo[0];
         var n = articulo.indexOf(">");
-		articulo = articulo.substring(n+1);
+        articulo = articulo.substring(n+1);
         var informacion = {};
         var bodega;
-		informacion["id_articulo"] = articulo;
+        informacion["id_articulo"] = articulo;
         var data = consultarInformacionObjeto("articulo",informacion);
         var idArticulo;
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
-				$("#nombre_articulo").val(record.nombre);
+                $("#nombre_articulo").val(record.nombre);
                 $("#nombre_articulo").attr('name',idArticulo);
-				$("#marca").val(record.id_marca);
+                $("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
                 $("#categoria").val(record.id_categoria);
                 $("#categoria").attr('name',record.id_categoria);
                 bodega = record.bodega;
                 $("#bodega").val(record.bodega);
-				$("#cantidad_minima").val(record.cantidad_minima);
+                $("#cantidad_minima").val(record.cantidad_minima);
             }
         });
         var archivos = consultarArchivosObjeto("articulo",informacion);
@@ -6173,7 +6173,7 @@ $(document).ready(function() {
         añadirComponente("indicadores_carrusel",componente);
         añadirComponente("fotos_carrusel",componente2);
         $("#myCarousel").show();
-		$("#divDialogConsulta").modal('show');
+        $("#divDialogConsulta").modal('show');
     });
 
     /**
@@ -6182,11 +6182,11 @@ $(document).ready(function() {
     **/
     $("#visualizarAireAcondicionado").click(function (e){
         var element = $("#tabla_inventario").find(".filaSeleccionada");
-		var articulo = element.html();
-		articulo = articulo.split("</td>");
+        var articulo = element.html();
+        articulo = articulo.split("</td>");
         articulo = articulo[0];
         var n = articulo.indexOf(">");
-		articulo = articulo.substring(n+1);
+        articulo = articulo.substring(n+1);
         var informacion = {};
         informacion['id_aire'] = articulo;
         var data = consultarInformacionObjeto("aire_id",informacion);
@@ -6326,15 +6326,15 @@ $(document).ready(function() {
         $.each(data, function(index, record) {
             if($.isNumeric(index)) {
                 idArticulo = record.id_articulo;
-				$("#nombre_articulo").val(record.nombre);
+                $("#nombre_articulo").val(record.nombre);
                 $("#nombre_articulo").attr('name',idArticulo);
-				$("#marca").val(record.id_marca);
+                $("#marca").val(record.id_marca);
                 $("#marca").attr('name',record.id_marca);
                 $("#categoria").val(record.id_categoria_articulo);
                 $("#categoria").attr('name',record.id_categoria_articulo);
                 $("#bodega").val(record.bodega);
                 $("#bodega").attr('name',record.bodega);
-				$("#cantidad_minima").val(record.cantidad_minima);
+                $("#cantidad_minima").val(record.cantidad_minima);
                 numeroArticulos++;
             }
         });
@@ -6438,7 +6438,7 @@ $(document).ready(function() {
             añadirComponente("indicadores_carrusel",componente);
             añadirComponente("fotos_carrusel",componente2);
             $("#myCarousel").show();
-    		$("#divDialogConsulta").modal('show');
+            $("#divDialogConsulta").modal('show');
         }else{
             alert("No se encontró ningún artículo con el nombre dado");
             $("#nombre_articulo_search").focus();
@@ -6451,13 +6451,13 @@ $(document).ready(function() {
     **/
     $("#visualizarMarcaInventario").click(function (e){
         var nombreMarca = limpiarCadena($("#nombre_marca_search").val());
-		var informacion = {};
-		informacion["nombre"] = nombreMarca;
+        var informacion = {};
+        informacion["nombre"] = nombreMarca;
         var data = consultarInformacionObjeto("marca",informacion);
         marcasCont = 0;
-		$.each(data, function(index, record) {
+        $.each(data, function(index, record) {
             if($.isNumeric(index)) {
-				$("#nombre_marca").val(record.nombre);
+                $("#nombre_marca").val(record.nombre);
                 $("#nombre_marca").attr('name',record.nombre);
                 $("#bodega").val(record.bodega);
                 $("#bodega").attr('name',record.bodega);
@@ -6478,13 +6478,13 @@ $(document).ready(function() {
     **/
     $("#visualizarCategoria").click(function (e){
         var nombreCategoria = limpiarCadena($("#nombre_categoria_search").val());
-		var informacion = {};
-		informacion["nombre"] = nombreCategoria;
+        var informacion = {};
+        informacion["nombre"] = nombreCategoria;
         var data = consultarInformacionObjeto("categoria",informacion);
         categoriasCont = 0;
-		$.each(data, function(index, record) {
+        $.each(data, function(index, record) {
             if($.isNumeric(index)) {
-				$("#nombre_categoria").val(record.nombre);
+                $("#nombre_categoria").val(record.nombre);
                 $("#nombre_categoria").attr('name',record.nombre);
                 $("#bodega").val(record.bodega);
                 $("#bodega").attr('name',record.bodega);
@@ -6505,13 +6505,13 @@ $(document).ready(function() {
     **/
     $("#visualizarProveedor").click(function (e){
         var nombreProveedor = limpiarCadena($("#nombre_proveedor_search").val());
-		var informacion = {};
-		informacion["nombre"] = nombreProveedor;
+        var informacion = {};
+        informacion["nombre"] = nombreProveedor;
         var data = consultarInformacionObjeto("proveedor",informacion);
         proveedorCont = 0;
-		$.each(data, function(index, record) {
+        $.each(data, function(index, record) {
             if($.isNumeric(index)) {
-				$("#nombre_proveedor").val(record.nombre);
+                $("#nombre_proveedor").val(record.nombre);
                 $("#nombre_proveedor").attr('name',record.nombre);
                 $("#direccion").val(record.direccion);
                 $("#telefono").val(record.telefono);
@@ -7602,12 +7602,12 @@ $(document).ready(function() {
         actualizarSelectArticulo(ingresarArticulosCont,"nombre_articulo_ingresar");
 
         var element = $("#tabla_inventario").find(".filaSeleccionada");
-		var articulo = element.html();
+        var articulo = element.html();
         if (articulo != undefined) {
             articulo = articulo.split("</td>");
             articulo = articulo[0];
             var n = articulo.indexOf(">");
-    		articulo = articulo.substring(n+1);
+            articulo = articulo.substring(n+1);
             $("#nombre_articulo_ingresar").val(articulo);
         }
 
@@ -7622,14 +7622,14 @@ $(document).ready(function() {
         actualizarSelectArticulo(extraerArticulosCont,"nombre_articulo_extraer");
 
         var element = $("#tabla_inventario").find(".filaSeleccionada");
-		var articulo = element.html();
+        var articulo = element.html();
         if (articulo != undefined) {
             articulo = articulo.split("</td>");
             var cantidad = articulo[2];
             articulo = articulo[0];
             var n = articulo.indexOf(">");
             var m = cantidad.indexOf(">");
-    		articulo = articulo.substring(n+1);
+            articulo = articulo.substring(n+1);
             cantidad = cantidad.substring(m+1);
             $("#nombre_articulo_extraer").val(articulo);
             $("#cantidad_extraer").attr('name',cantidad);
@@ -13019,14 +13019,14 @@ $(document).ready(function() {
                                     articulo = articulo.split("</td>");
                                     articulo = articulo[0].substring(4);
                                     var informacion = {};
-                            		informacion["id_articulo"] = articulo;
+                                    informacion["id_articulo"] = articulo;
                                     var data = consultarInformacionObjeto("articulo",informacion);
                                     var dataArticuloInventario = consultarArticuloInventario(informacion);
                                     var id_articulo, nombre, marca, categoria, bodega, cantidad_minima, cantidad;
                                     $.each(data, function(index, record) {
                                         if($.isNumeric(index)) {
                                             id_articulo = record.id_articulo;
-                            				nombre = record.nombre
+                                            nombre = record.nombre
                                             marca = record.nombre_marca;
                                             categoria = record.nombre_categoria;
                                             bodega = record.bodega;
@@ -13059,6 +13059,25 @@ $(document).ready(function() {
             }else{
                 alert("ERROR. El número máximo de fotos es 20");
                 fotos.focus();
+            }
+        }
+    });
+
+    /**
+     * Se captura el evento cuando de dar click en el botón eliminar_articulo y se
+     * realiza la operacion correspondiente.
+    **/
+    $("#eliminar_articulo").click(function (e){
+        var confirmacion = window.confirm("¿Eliminar la información del artículo?");
+        if (confirmacion) {
+            var informacion = {};
+            var idArticulo = $("#nombre_articulo").attr("name");
+            informacion["id_articulo"] = idArticulo;
+            var data = eliminarObjeto("articulo",informacion);
+            console.log(data);
+            alert(data.mensaje);
+            if (data.verificar) {
+                location.reload();
             }
         }
     });
@@ -13509,27 +13528,27 @@ $(document).ready(function() {
     });
 
     /**
-	 * Se captura el evento cuando de dar click en un fila de la tabla inventario.
-	**/
-	$('#tabla_inventario').on('click', 'tbody>tr', function() {
-		if ($(this).hasClass("filaSeleccionada")) {
-			$(this).removeClass("filaSeleccionada");
-			$("#visualizarArticulo").attr("disabled",true);
+     * Se captura el evento cuando de dar click en un fila de la tabla inventario.
+    **/
+    $('#tabla_inventario').on('click', 'tbody>tr', function() {
+        if ($(this).hasClass("filaSeleccionada")) {
+            $(this).removeClass("filaSeleccionada");
+            $("#visualizarArticulo").attr("disabled",true);
             $("#visualizarAireAcondicionado").attr("disabled",true);
-		}else{
-			$("#tBody tr").removeClass("filaSeleccionada");
-	    	$(this).addClass("filaSeleccionada");
-			$("#visualizarArticulo").removeAttr("disabled");
+        }else{
+            $("#tBody tr").removeClass("filaSeleccionada");
+            $(this).addClass("filaSeleccionada");
+            $("#visualizarArticulo").removeAttr("disabled");
             $("#visualizarAireAcondicionado").removeAttr("disabled");
-		}
-	});
+        }
+    });
 
     /**
      * Se captura el evento cuando de dar click en el botón consultarMovimientosInventarioElectrico y se
      * realiza la operacion correspondiente.
     **/
     $("#consultarMovimientosInventarioElectrico").click(function (e){
-		/*for (var i=0;i<articulosCont;i++) {
+        /*for (var i=0;i<articulosCont;i++) {
             eliminarComponente("tr_tabla_inventario");
         }
         articulosCont = 0;*/
@@ -13567,7 +13586,7 @@ $(document).ready(function() {
             tabla.rows.add(dataTabla);
             tabla.draw();
         }
-		$("#divDialogConsulta").modal("show");
+        $("#divDialogConsulta").modal("show");
     });
 
     /**
@@ -13609,6 +13628,6 @@ $(document).ready(function() {
             tabla.rows.add(dataTabla);
             tabla.draw();
         }
-		$("#divDialogConsulta").modal("show");
+        $("#divDialogConsulta").modal("show");
     });
 });

@@ -7956,6 +7956,113 @@ class modelo_modificacion {
     }
 
     /**
+     * Función que permite eliminar un artículo.
+     * @param string $id_articulo, id del artículo.
+     * @return array
+    **/
+    public function eliminarArticulo($id_articulo){
+        $id_articulo = htmlspecialchars(trim($id_articulo));
+        $resp = $this->eliminarArticuloInventario($id_articulo);
+        $respArchivos = $this->eliminarArchivosArticulo($id_articulo);
+        $respProveedor = $this->eliminarProveedorArticulo($id_articulo);
+        if ($resp AND $respArchivos AND $respProveedor) {
+            $sql = "DELETE FROM inventario WHERE id_articulo = '".$id_articulo."';";
+            $l_stmt = $this->conexion->prepare($sql);
+            if(!$l_stmt){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Artículo 1)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                if(!$l_stmt->execute()){
+                    $GLOBALS['mensaje'] = "Error: SQL (Eliminar Artículo 2)";
+                    $GLOBALS['sql'] = $sql;
+                    return false;
+                }else{
+                    $result = $l_stmt->fetchAll();
+                    $this->registrarModificacion("articulo_inventario",$id_articulo,"id_articulo",$id_articulo,"eliminado");
+                    $GLOBALS['mensaje'] = "El artículo ha sido eliminado";
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un artículo.
+     * @param string $id_articulo, id del artículo.
+     * @return array
+    **/
+    public function eliminarArticuloInventario($id_articulo){
+        $sql = "DELETE FROM inventario WHERE id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Artículo Inventario 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Artículo Inventario 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                //$this->registrarModificacion("articulo_inventario",$id_articulo,"id_articulo",$id_articulo,"eliminado");
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un artículo.
+     * @param string $id_articulo, id del artículo.
+     * @return array
+    **/
+    public function eliminarArchivosArticulo($id_articulo){
+        $sql = "DELETE FROM articulo_archivos WHERE id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Archivos Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                //$this->registrarModificacion("articulo_inventario",$id_articulo,"id_articulo",$id_articulo,"eliminado");
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Función que permite eliminar un artículo.
+     * @param string $id_articulo, id del artículo.
+     * @return array
+    **/
+    public function eliminarProveedorArticulo($id_articulo){
+        $sql = "DELETE FROM articulo_proveedor WHERE id_articulo = '".$id_articulo."';";
+        $l_stmt = $this->conexion->prepare($sql);
+        if(!$l_stmt){
+            $GLOBALS['mensaje'] = "Error: SQL (Eliminar Proveedor Artículo 1)";
+            $GLOBALS['sql'] = $sql;
+            return false;
+        }else{
+            if(!$l_stmt->execute()){
+                $GLOBALS['mensaje'] = "Error: SQL (Eliminar Proveedor Artículo 2)";
+                $GLOBALS['sql'] = $sql;
+                return false;
+            }else{
+                $result = $l_stmt->fetchAll();
+                //$this->registrarModificacion("articulo_inventario",$id_articulo,"id_articulo",$id_articulo,"eliminado");
+                return true;
+            }
+        }
+    }
+
+    /**
      * Función que permite eliminar un proveedor de un artículo.
      * @param string $id_articulo, id del artículo.
      * @param string $proveedor, id del proveedor.
