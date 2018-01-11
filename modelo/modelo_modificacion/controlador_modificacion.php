@@ -809,6 +809,26 @@ class controlador_modificacion{
      * Funcion que permite eliminar un proveedor de un artículo.
      * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
     **/
+    public function eliminar_articulo(){
+        $GLOBALS['mensaje'] = "";
+        $GLOBALS['sql'] = "";
+        $result = array();
+        $m = new modelo_modificacion(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
+                    Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $info = json_decode($_POST['jObject'], true);
+            $verificar = $m->eliminarArticulo($info['id_articulo']);
+        }
+        $result['mensaje'] = $GLOBALS['mensaje'];
+        $result['sql'] = $GLOBALS['sql'];
+        $result['verificar'] = $verificar;
+        echo json_encode($result);
+    }
+
+    /**
+     * Funcion que permite eliminar un proveedor de un artículo.
+     * @return array $result. Arreglo que contiene la respuesta del servidor a la petición.
+    **/
     public function eliminar_articulo_proveedor(){
         $GLOBALS['mensaje'] = "";
         $GLOBALS['sql'] = "";

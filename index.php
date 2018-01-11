@@ -326,6 +326,7 @@ $map = array(
         'modificar_categoria' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_categoria'),
         'modificar_subcategoria' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_subcategoria'),
         'modificar_proveedor' => array('controlador' =>'controlador_modificacion', 'action' =>'modificar_proveedor'),
+        'eliminar_articulo' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_articulo'),
         'eliminar_articulo_proveedor' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_articulo_proveedor'),
         'eliminar_foto_articulo' => array('controlador' =>'controlador_modificacion', 'action' =>'eliminar_foto_articulo'),
 
