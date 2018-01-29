@@ -1794,6 +1794,7 @@ class modelo_consultas
      * @return metadata con el resultado de la búsqueda.
     **/
     public function buscarArticulos($bodega){
+        $bodega = htmlspecialchars(trim($bodega));
         $sql = "SELECT a.id_articulo, a.nombre, a.marca AS id_marca, b.nombre AS nombre_marca, a.cantidad_minima, c.cantidad, d.nombre AS categoria_articulo
                 FROM articulo a RIGHT JOIN marca_inventario b ON a.marca = b.id
                                 LEFT JOIN inventario c ON a.id_articulo = c.id_articulo
@@ -1812,7 +1813,6 @@ class modelo_consultas
             }
             if($l_stmt->rowCount() >= 0){
                 $result = $l_stmt->fetchAll();
-                $GLOBALS['sql'] = $sql;
             }
         }
         return $result;

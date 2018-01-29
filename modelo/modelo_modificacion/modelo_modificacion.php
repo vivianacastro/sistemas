@@ -7966,7 +7966,7 @@ class modelo_modificacion {
         $respArchivos = $this->eliminarArchivosArticulo($id_articulo);
         $respProveedor = $this->eliminarProveedorArticulo($id_articulo);
         if ($resp AND $respArchivos AND $respProveedor) {
-            $sql = "DELETE FROM inventario WHERE id_articulo = '".$id_articulo."';";
+            $sql = "DELETE FROM articulo WHERE id_articulo = '".$id_articulo."';";
             $l_stmt = $this->conexion->prepare($sql);
             if(!$l_stmt){
                 $GLOBALS['mensaje'] = "Error: SQL (Eliminar Artículo 1)";

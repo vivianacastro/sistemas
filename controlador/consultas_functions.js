@@ -148,6 +148,11 @@ $(document).ready(function() {
             actualizarSelectMarcas("marca","hidraulica");
             actualizarSelectCategorias("categoria","hidraulica");
             actualizarSelectProveedores(proveedoresCont,"hidraulica");
+        }else if (URLactual['href'].indexOf('consultar_inventario_sanfernando') >= 0 ) {
+            llenarTablaInventarioSanFernando();
+            actualizarSelectMarcas("marca","sanfernando");
+            actualizarSelectCategorias("categoria","sanfernando");
+            actualizarSelectProveedores(proveedoresCont,"sanfernando");
         }else if (URLactual['href'].indexOf('consultar_articulo') >= 0 ) {
             //llenarTablaInventario();
             /*actualizarSelectMarcas("marca_search");
@@ -1075,6 +1080,37 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que permite consultar el inventario hidráulico.
+     * @returns {data}
+    **/
+    function listarInventarioSanFernando(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=listar_inventario_sanfernando",
+                dataType: "json",
+                async: false,
+                error: function(xhr, status, error) {
+                    //alert("La sesión ha expirado, por favor ingrese nuevamente al sistema");
+                    //location.reload(true);
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                },
+                success: function(data) {
+                    //alert(data.mensaje);
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que permite consultar el inventario de aires acondicionados.
      * @returns {data}
     **/
@@ -1206,6 +1242,35 @@ $(document).ready(function() {
     **/
     function llenarTablaInventarioHidraulico(){
         var data = listarInventarioHidraulico();
+        var dataTabla = data.data;
+        tabla = $('#tabla_inventario').DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            responsive: true,
+            data: dataTabla,
+            columns: [
+                { data: "id_articulo" },
+                { data: "nombre_articulo" },
+                { data: "cantidad" },
+                { data: "nombre_marca" },
+                { data: "nombre_categoria" },
+                { data: "cantidad_minima" }
+            ],
+            'rowCallback': function(row, data, index){
+                if(parseInt(data.cantidad) <= parseInt(data.cantidad_minima)){
+                    $(row).addClass('filaPocosArticulos');
+                }
+            }
+        } );
+    }
+
+    /**
+     * Función que llena la tabla inventario San Fernando.
+     * @returns {undefined}
+    **/
+    function llenarTablaInventarioSanFernando(){
+        var data = listarInventarioSanFernando();
         var dataTabla = data.data;
         tabla = $('#tabla_inventario').DataTable( {
             "language": {
@@ -1396,6 +1461,34 @@ $(document).ready(function() {
     }
 
     /**
+     * Función que realiza una consulta de los artículos de la bodega San Fernando.
+     * @returns {data} object json.
+    **/
+    function buscarArticulosSanFernando(){
+        var dataResult;
+        try {
+            $.ajax({
+                type: "POST",
+                url: "index.php?action=consultar_articulos_sanfernando",
+                dataType: "json",
+                async: false,
+                error: function (request, status, error) {
+                    console.log(error.toString());
+                    location.reload(true);
+                },
+                success: function(data){
+                    dataResult = data;
+                }
+            });
+            return dataResult;
+        }
+        catch(ex) {
+            console.log(ex);
+            alert("Ocurrió un error, por favor inténtelo nuevamente");
+        }
+    }
+
+    /**
      * Función que realiza una consulta de un articulo en el inventario.
      * @returns {data} object json.
     **/
@@ -1500,8 +1593,10 @@ $(document).ready(function() {
         }
         if (URLactual['href'].indexOf('consultar_inventario_electrico') >= 0 ) {
             var data = buscarArticulosElectrico();
-        }else{
+        }else if(URLactual['href'].indexOf('consultar_inventario_hidraulico') >= 0 ){
             var data = buscarArticulosHidraulico();
+        }else{
+            var data = buscarArticulosSanFernando();
         }
         $("#"+selector+id).empty();
         var row = $("<option value=''/>");
